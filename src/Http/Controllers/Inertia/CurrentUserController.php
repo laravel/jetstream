@@ -5,7 +5,6 @@ namespace Laravel\Jetstream\Http\Controllers\Inertia;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Auth;
 use Laravel\Jetstream\Contracts\DeletesUsers;
 
 class CurrentUserController extends Controller
