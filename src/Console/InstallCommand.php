@@ -116,7 +116,7 @@ class InstallCommand extends Command
     protected function installLivewireStack()
     {
         // Install Livewire...
-        (new Process(['composer', 'require', 'livewire/livewire', 'laravel/sanctum:dev-develop'], base_path()))
+        (new Process(['composer', 'require', 'livewire/livewire', 'laravel/sanctum:^2.6'], base_path()))
                 ->run(function ($type, $output) {
                     $this->output->write($output);
                 });
@@ -248,7 +248,7 @@ EOF;
     protected function installInertiaStack()
     {
         // Install Inertia...
-        (new Process(['composer', 'require', 'inertiajs/inertia-laravel', 'laravel/sanctum:dev-develop'], base_path()))
+        (new Process(['composer', 'require', 'inertiajs/inertia-laravel', 'laravel/sanctum:^2.6'], base_path()))
                 ->run(function ($type, $output) {
                     $this->output->write($output);
                 });
