@@ -47,6 +47,8 @@ class DeleteTeamTest extends OrchestraTestCase
         $action = new ValidateTeamDeletion;
 
         $action->validate($team->owner, $team);
+
+        $this->assertTrue(true);
     }
 
     public function test_personal_team_cant_be_deleted()
