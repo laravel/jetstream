@@ -2,6 +2,7 @@
 
 namespace Laravel\Jetstream\Http\Livewire;
 
+use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Jetstream\Contracts\DeletesUsers;
 use Livewire\Component;
@@ -19,13 +20,14 @@ class DeleteUserForm extends Component
      * Delete the current user.
      *
      * @param  \Laravel\Jetstream\Contracts\DeletesUsers  $deleter
+     * @param  \Illuminate\Contracts\Auth\StatefulGuard  $auth
      * @return void
      */
-    public function deleteUser(DeletesUsers $deleter)
+    public function deleteUser(DeletesUsers $deleter, StatefulGuard $auth)
     {
         $deleter->delete(Auth::user()->fresh());
 
-        Auth::logout();
+        $auth->logout();
 
         return redirect('/');
     }
