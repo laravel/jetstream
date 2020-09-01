@@ -4,9 +4,9 @@
             <slot></slot>
         </button>
 
-        <a :href="href" :class="classes" v-else>
+        <inertia-link :href="href" :class="classes" v-else>
             <slot></slot>
-        </a>
+        </inertia-link>
     </div>
 </template>
 

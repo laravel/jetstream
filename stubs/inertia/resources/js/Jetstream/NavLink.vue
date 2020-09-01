@@ -1,12 +1,12 @@
 <template>
-    <a :class="classes">
+    <inertia-link :href="href" :class="classes">
         <slot></slot>
-    </a>
+    </inertia-link>
 </template>
 
 <script>
     export default {
-        props: ['active'],
+        props: ['href', 'active'],
 
         computed: {
             classes() {
