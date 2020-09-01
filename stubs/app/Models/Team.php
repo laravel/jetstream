@@ -21,7 +21,7 @@ class Team extends JetstreamTeam
     ];
 
     /**
-     * The attributes that aren't mass assignable.
+     * The attributes that are mass assignable.
      *
      * @var array
      */
