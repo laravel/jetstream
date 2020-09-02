@@ -20,12 +20,12 @@
 
                 <div class="mt-4" x-show="! recovery">
                     <x-jet-label value="Code" />
-                    <x-jet-input class="block mt-1 w-full" type="text" name="code" autofocus x-ref="code" />
+                    <x-jet-input class="block mt-1 w-full" type="text" name="code" autofocus x-ref="code" autocomplete="one-time-code" />
                 </div>
 
                 <div class="mt-4" x-show="recovery">
                     <x-jet-label value="Recovery Code" />
-                    <x-jet-input class="block mt-1 w-full" type="text" name="recovery_code" x-ref="recovery_code" />
+                    <x-jet-input class="block mt-1 w-full" type="text" name="recovery_code" x-ref="recovery_code" autocomplete="one-time-code" />
                 </div>
 
                 <div class="flex items-center justify-end mt-4">
