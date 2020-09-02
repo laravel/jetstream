@@ -3,7 +3,6 @@
 namespace Laravel\Jetstream\Tests\Fixtures;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Str;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 
