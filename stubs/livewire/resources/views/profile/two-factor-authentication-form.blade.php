@@ -57,7 +57,7 @@
                 </x-jet-button>
             @else
                 @if ($showingRecoveryCodes)
-                    <x-jet-secondary-button class="mr-3" wire:click="confirmRegenerate">
+                    <x-jet-secondary-button class="mr-3" wire:click="confirmRegenerate" wire:loading.attr="disabled">
                         Regenerate Recovery Codes
                     </x-jet-secondary-button>
                 @else
