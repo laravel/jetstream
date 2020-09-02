@@ -103,14 +103,6 @@ class InstallCommand extends Command
         $this->replaceInFile("'SESSION_DRIVER', 'file'", "'SESSION_DRIVER', 'database'", config_path('session.php'));
         $this->replaceInFile('SESSION_DRIVER=file', 'SESSION_DRIVER=database', base_path('.env'));
         $this->replaceInFile('SESSION_DRIVER=file', 'SESSION_DRIVER=database', base_path('.env.example'));
-
-        foreach ((new Filesystem)->files(database_path('migrations')) as $file) {
-            if (Str::contains($file->getRealPath(), 'create_sessions_table')) {
-                $this->replaceInFile("foreignId('user_id')", "uuid('user_id')", $file->getRealPath());
-
-                break;
-            }
-        }
     }
 
     /**
@@ -131,8 +123,6 @@ class InstallCommand extends Command
                 ->run(function ($type, $output) {
                     $this->output->write($output);
                 });
-
-        $this->replaceInFile('morphs', 'uuidMorphs', database_path('migrations/2019_12_14_000001_create_personal_access_tokens_table.php'));
 
         // Update Configuration...
         $this->replaceInFile('inertia', 'livewire', config_path('jetstream.php'));
@@ -278,8 +268,6 @@ EOF;
                 ->run(function ($type, $output) {
                     $this->output->write($output);
                 });
-
-        $this->replaceInFile('morphs', 'uuidMorphs', database_path('migrations/2019_12_14_000001_create_personal_access_tokens_table.php'));
 
         // Update Configuration...
         $this->replaceInFile("'guard' => 'web'", "'guard' => 'sanctum'", config_path('auth.php'));

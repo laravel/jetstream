@@ -15,7 +15,7 @@ class CreateTeamsTable extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('user_id')->index();
+            $table->foreignId('user_id')->index();
             $table->string('name');
             $table->boolean('personal_team');
             $table->timestamps();
