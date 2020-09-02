@@ -2,25 +2,25 @@
 
 namespace Laravel\Jetstream;
 
+use Inertia\Inertia;
+use Livewire\Livewire;
+use Laravel\Fortify\Fortify;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
-use Inertia\Inertia;
-use Laravel\Fortify\Fortify;
-use Laravel\Jetstream\Http\Livewire\ApiTokenManager;
 use Laravel\Jetstream\Http\Livewire\CreateTeamForm;
 use Laravel\Jetstream\Http\Livewire\DeleteTeamForm;
 use Laravel\Jetstream\Http\Livewire\DeleteUserForm;
-use Laravel\Jetstream\Http\Livewire\LogoutOtherBrowserSessionsForm;
+use Laravel\Jetstream\Http\Livewire\ApiTokenManager;
 use Laravel\Jetstream\Http\Livewire\TeamMemberManager;
-use Laravel\Jetstream\Http\Livewire\TwoFactorAuthenticationForm;
 use Laravel\Jetstream\Http\Livewire\UpdatePasswordForm;
-use Laravel\Jetstream\Http\Livewire\UpdateProfileInformationForm;
 use Laravel\Jetstream\Http\Livewire\UpdateTeamNameForm;
 use Laravel\Jetstream\Http\Middleware\ShareInertiaData;
-use Livewire\Livewire;
+use Laravel\Jetstream\Http\Livewire\TwoFactorAuthenticationForm;
+use Laravel\Jetstream\Http\Livewire\UpdateProfileInformationForm;
+use Laravel\Jetstream\Http\Livewire\LogoutOtherBrowserSessionsForm;
 
 class JetstreamServiceProvider extends ServiceProvider
 {
@@ -31,8 +31,8 @@ class JetstreamServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if (! $this->app->configurationIsCached()) {
-            $this->mergeConfigFrom(__DIR__.'/../config/jetstream.php', 'jetstream');
+        if (!$this->app->configurationIsCached()) {
+            $this->mergeConfigFrom(__DIR__ . '/../config/jetstream.php', 'jetstream');
         }
 
         $this->app->afterResolving(BladeCompiler::class, function () {
@@ -64,7 +64,7 @@ class JetstreamServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'jetstream');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'jetstream');
 
         Fortify::viewPrefix('auth.');
 
@@ -123,7 +123,7 @@ class JetstreamServiceProvider extends ServiceProvider
      */
     protected function registerComponent(string $component)
     {
-        Blade::component('jetstream::components.'.$component, 'jet-'.$component);
+        Blade::component('jetstream::components.' . $component, 'jet-' . $component);
     }
 
     /**
@@ -133,25 +133,25 @@ class JetstreamServiceProvider extends ServiceProvider
      */
     protected function configurePublishing()
     {
-        if (! $this->app->runningInConsole()) {
+        if (!$this->app->runningInConsole()) {
             return;
         }
 
         $this->publishes([
-            __DIR__.'/../config/jetstream.php' => config_path('jetstream.php'),
+            __DIR__ . '/../config/jetstream.php' => config_path('jetstream.php'),
         ], 'jetstream-config');
 
         $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/jetstream'),
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/jetstream'),
         ], 'jetstream-views');
 
         $this->publishes([
-            __DIR__.'/../database/migrations/2014_10_12_000000_create_users_table.php' => database_path('migrations/2014_10_12_000000_create_users_table.php'),
+            __DIR__ . '/../database/migrations/2014_10_12_000000_create_users_table.php' => database_path('migrations/2014_10_12_000000_create_users_table.php'),
         ], 'jetstream-migrations');
 
         $this->publishes([
-            __DIR__.'/../database/migrations/2020_05_21_100000_create_teams_table.php' => database_path('migrations/2020_05_21_100000_create_teams_table.php'),
-            __DIR__.'/../database/migrations/2020_05_21_200000_create_team_user_table.php' => database_path('migrations/2020_05_21_200000_create_team_user_table.php'),
+            __DIR__ . '/../database/migrations/2020_05_21_100000_create_teams_table.php' => database_path('migrations/2020_05_21_100000_create_teams_table.php'),
+            __DIR__ . '/../database/migrations/2020_05_21_200000_create_team_user_table.php' => database_path('migrations/2020_05_21_200000_create_team_user_table.php'),
         ], 'jetstream-team-migrations');
     }
 
@@ -162,11 +162,15 @@ class JetstreamServiceProvider extends ServiceProvider
      */
     protected function configureRoutes()
     {
+        if ($this->stackIsNotSupported()) {
+            return;
+        }
+
         Route::group([
             'namespace' => 'Laravel\Jetstream\Http\Controllers',
             'domain' => config('jetstream.domain', null),
         ], function () {
-            $this->loadRoutesFrom(__DIR__.'/../routes/'.config('jetstream.stack').'.php');
+            $this->loadRoutesFrom(__DIR__ . '/../routes/' . config('jetstream.stack') . '.php');
         });
     }
 
@@ -177,7 +181,7 @@ class JetstreamServiceProvider extends ServiceProvider
      */
     protected function configureCommands()
     {
-        if (! $this->app->runningInConsole()) {
+        if (!$this->app->runningInConsole()) {
             return;
         }
 
@@ -197,5 +201,15 @@ class JetstreamServiceProvider extends ServiceProvider
 
         $kernel->appendMiddlewareToGroup('web', ShareInertiaData::class);
         $kernel->appendToMiddlewarePriority(ShareInertiaData::class);
+    }
+
+    /**
+     * Determines if the current stack is supported.
+     *
+     * @return bool
+     */
+    protected function stackIsNotSupported()
+    {
+        return !in_array(config('jetstream.stack'), ['livewire', 'inertia']);
     }
 }
