@@ -29,23 +29,23 @@
                 </div>
 
                 <div class="flex items-center justify-end mt-4">
-                    <div class="text-sm text-gray-600 hover:text-gray-900 underline cursor-pointer"
+                    <button type="button" class="text-sm text-gray-600 hover:text-gray-900 underline cursor-pointer"
                                     x-show="! recovery"
                                     x-on:click="
                                         recovery = true;
                                         $nextTick(() => { $refs.recovery_code.focus() })
                                     ">
                         Use a recovery code
-                    </div>
+                    </button>
 
-                    <div class="text-sm text-gray-600 hover:text-gray-900 underline cursor-pointer"
+                    <button type="button" class="text-sm text-gray-600 hover:text-gray-900 underline cursor-pointer"
                                     x-show="recovery"
                                     x-on:click="
                                         recovery = false;
                                         $nextTick(() => { $refs.code.focus() })
                                     ">
                         Use an authentication code
-                    </div>
+                    </button>
 
                     <x-jet-button class="ml-4">
                         Login
