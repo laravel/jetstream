@@ -23,7 +23,7 @@ Jetstream is designed using [Tailwind CSS](https://tailwindcss.com) and offers y
 
 ## Official Documentation
 
-Documentation for Jetstream can be found on the [Laravel website](https://laravel.com/docs/jetstream).
+Documentation for Jetstream can be found on the [Laravel website](https://laravel.com/docs/master).
 
 ## Contributing
 
