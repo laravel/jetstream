@@ -37,7 +37,7 @@ class TeamMemberController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  string  $teamId
-     * @param  string  $userId
+     * @param  int  $userId
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $teamId, $userId)
@@ -57,7 +57,7 @@ class TeamMemberController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  string  $teamId
-     * @param  string  $userId
+     * @param  int  $userId
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Request $request, $teamId, $userId)

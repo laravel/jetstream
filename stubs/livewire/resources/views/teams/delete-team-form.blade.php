@@ -13,13 +13,13 @@
         </div>
 
         <div class="mt-5">
-            <x-jet-danger-button wire:click="$toggle('confirmingTeamDeletion')" wire:loading.class="opacity-25" wire:loading.attr="disabled">
+            <x-jet-danger-button wire:click="$toggle('confirmingTeamDeletion')" wire:loading.attr="disabled">
                 Delete Team
             </x-jet-danger-button>
         </div>
 
         <!-- Delete Team Confirmation Modal -->
-        <x-jet-confirmation-modal show="confirmingTeamDeletion">
+        <x-jet-confirmation-modal wire:model="confirmingTeamDeletion">
             <x-slot name="title">
                 Delete Team
             </x-slot>
@@ -29,11 +29,11 @@
             </x-slot>
 
             <x-slot name="footer">
-                <x-jet-secondary-button wire:click="$toggle('confirmingTeamDeletion')" wire:loading.class="opacity-25" wire:loading.attr="disabled">
+                <x-jet-secondary-button wire:click="$toggle('confirmingTeamDeletion')" wire:loading.attr="disabled">
                     Nevermind
                 </x-jet-secondary-button>
 
-                <x-jet-danger-button class="ml-2" wire:click="deleteTeam" wire:loading.class="opacity-25" wire:loading.attr="disabled">
+                <x-jet-danger-button class="ml-2" wire:click="deleteTeam" wire:loading.attr="disabled">
                     Delete Team
                 </x-jet-danger-button>
             </x-slot>

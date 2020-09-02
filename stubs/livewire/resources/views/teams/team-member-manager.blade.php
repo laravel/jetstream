@@ -23,7 +23,7 @@
                     <!-- Member Email -->
                     <div class="col-span-6 sm:col-span-4">
                         <x-jet-label for="email" value="Email" />
-                        <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model="addTeamMemberForm.email" />
+                        <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="addTeamMemberForm.email" />
                         <x-jet-input-error for="email" class="mt-2" />
                     </div>
 
@@ -66,7 +66,7 @@
                         Added.
                     </x-jet-action-message>
 
-                    <x-jet-button wire:loading.class="opacity-25" wire:loading.attr="disabled">
+                    <x-jet-button>
                         Add
                     </x-jet-button>
                 </x-slot>
@@ -132,7 +132,7 @@
     @endif
 
     <!-- Role Management Modal -->
-    <x-jet-dialog-modal show="currentlyManagingRole">
+    <x-jet-dialog-modal wire:model="currentlyManagingRole">
         <x-slot name="title">
             Manage Role
         </x-slot>
@@ -165,18 +165,18 @@
         </x-slot>
 
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="stopManagingRole" wire:loading.class="opacity-25" wire:loading.attr="disabled">
+            <x-jet-secondary-button wire:click="stopManagingRole" wire:loading.attr="disabled">
                 Nevermind
             </x-jet-secondary-button>
 
-            <x-jet-button class="ml-2" wire:click="updateRole" wire:loading.class="opacity-25" wire:loading.attr="disabled">
+            <x-jet-button class="ml-2" wire:click="updateRole" wire:loading.attr="disabled">
                 Save
             </x-jet-button>
         </x-slot>
     </x-jet-dialog-modal>
 
     <!-- Leave Team Confirmation Modal -->
-    <x-jet-confirmation-modal show="confirmingLeavingTeam">
+    <x-jet-confirmation-modal wire:model="confirmingLeavingTeam">
         <x-slot name="title">
             Leave Team
         </x-slot>
@@ -186,18 +186,18 @@
         </x-slot>
 
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('confirmingLeavingTeam')" wire:loading.class="opacity-25" wire:loading.attr="disabled">
+            <x-jet-secondary-button wire:click="$toggle('confirmingLeavingTeam')" wire:loading.attr="disabled">
                 Nevermind
             </x-jet-secondary-button>
 
-            <x-jet-danger-button class="ml-2" wire:click="leaveTeam" wire:loading.class="opacity-25" wire:loading.attr="disabled">
+            <x-jet-danger-button class="ml-2" wire:click="leaveTeam" wire:loading.attr="disabled">
                 Leave
             </x-jet-danger-button>
         </x-slot>
     </x-jet-confirmation-modal>
 
     <!-- Remove Team Member Confirmation Modal -->
-    <x-jet-confirmation-modal show="confirmingTeamMemberRemoval">
+    <x-jet-confirmation-modal wire:model="confirmingTeamMemberRemoval">
         <x-slot name="title">
             Remove Team Member
         </x-slot>
@@ -207,11 +207,11 @@
         </x-slot>
 
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('confirmingTeamMemberRemoval')" wire:loading.class="opacity-25" wire:loading.attr="disabled">
+            <x-jet-secondary-button wire:click="$toggle('confirmingTeamMemberRemoval')" wire:loading.attr="disabled">
                 Nevermind
             </x-jet-secondary-button>
 
-            <x-jet-danger-button class="ml-2" wire:click="removeTeamMember" wire:loading.class="opacity-25" wire:loading.attr="disabled">
+            <x-jet-danger-button class="ml-2" wire:click="removeTeamMember" wire:loading.attr="disabled">
                 Remove
             </x-jet-danger-button>
         </x-slot>

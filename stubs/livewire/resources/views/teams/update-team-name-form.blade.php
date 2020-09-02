@@ -29,7 +29,7 @@
             <x-jet-input id="name"
                         type="text"
                         class="mt-1 block w-full"
-                        wire:model="state.name"
+                        wire:model.defer="state.name"
                         :disabled="! Gate::check('update', $team)" />
 
             <x-jet-input-error for="name" class="mt-2" />
@@ -42,7 +42,7 @@
                 Saved.
             </x-jet-action-message>
 
-            <x-jet-button wire:loading.class="opacity-25" wire:loading.attr="disabled">
+            <x-jet-button>
                 Save
             </x-jet-button>
         </x-slot>

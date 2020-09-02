@@ -160,9 +160,9 @@ class Jetstream
     /**
      * Find a user instance by the given ID.
      *
-     * @param  string  $id
+     * @param  int  $id
      */
-    public static function findUserByIdOrFail(string $id)
+    public static function findUserByIdOrFail($id)
     {
         return static::newUserModel()->where('id', $id)->firstOrFail();
     }
