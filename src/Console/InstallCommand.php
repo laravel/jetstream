@@ -113,7 +113,7 @@ class InstallCommand extends Command
     protected function installLivewireStack()
     {
         // Install Livewire...
-        (new Process(['composer', 'require', 'livewire/livewire', 'laravel/sanctum:^2.6'], base_path()))
+        (new Process(['composer', 'require', 'livewire/livewire:^2.0', 'laravel/sanctum:^2.6'], base_path()))
                 ->run(function ($type, $output) {
                     $this->output->write($output);
                 });
