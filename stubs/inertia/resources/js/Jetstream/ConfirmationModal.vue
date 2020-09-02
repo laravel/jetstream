@@ -47,10 +47,6 @@
             },
         },
 
-        mounted() {
-            console.log('Mounted')
-        },
-
         methods: {
             close() {
                 this.$emit('close')
