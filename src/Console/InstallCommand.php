@@ -42,6 +42,8 @@ class InstallCommand extends Command
 
         // "Home" Route...
         $this->replaceInFile('/home', '/dashboard', app_path('Providers/RouteServiceProvider.php'));
+        $this->replaceInFile('/home', '/dashboard', resource_path('views/welcome.blade.php'));
+        $this->replaceInFile('Home', 'Dashboard', resource_path('views/welcome.blade.php'));
 
         // Fortify Provider...
         $this->installFortifyServiceProvider();
