@@ -52,7 +52,7 @@
         @endif
 
         <div class="flex items-center mt-5">
-            <x-jet-button wire:click="confirmLogout" wire:loading.class="opacity-25" wire:loading.attr="disabled">
+            <x-jet-button wire:click="confirmLogout" wire:loading.attr="disabled">
                 Logout Other Browser Sessions
             </x-jet-button>
 
@@ -62,7 +62,7 @@
         </div>
 
         <!-- Logout Other Devices Confirmation Modal -->
-        <x-jet-dialog-modal show="confirmingLogout">
+        <x-jet-dialog-modal wire:model="confirmingLogout">
             <x-slot name="title">
                 Logout Other Browser Sessions
             </x-slot>
@@ -73,7 +73,7 @@
                 <div class="mt-4" x-data="{}" x-on:confirming-logout-other-browser-sessions.window="setTimeout(() => $refs.password.focus(), 250)">
                     <x-jet-input type="password" class="mt-1 block w-3/4" placeholder="Password"
                                 x-ref="password"
-                                wire:model="password"
+                                wire:model.defer="password"
                                 wire:keydown.enter="logoutOtherBrowserSessions" />
 
                     <x-jet-input-error for="password" class="mt-2" />
@@ -81,11 +81,11 @@
             </x-slot>
 
             <x-slot name="footer">
-                <x-jet-secondary-button wire:click="$toggle('confirmingLogout')" wire:loading.class="opacity-25" wire:loading.attr="disabled">
+                <x-jet-secondary-button wire:click="$toggle('confirmingLogout')" wire:loading.attr="disabled">
                     Nevermind
                 </x-jet-secondary-button>
 
-                <x-jet-button class="ml-2" wire:click="logoutOtherBrowserSessions" wire:loading.class="opacity-25" wire:loading.attr="disabled">
+                <x-jet-button class="ml-2" wire:click="logoutOtherBrowserSessions" wire:loading.attr="disabled">
                     Logout Other Browser Sessions
                 </x-jet-button>
             </x-slot>

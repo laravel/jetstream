@@ -1,15 +1,7 @@
-@props(['id' => null, 'show', 'maxWidth'])
+@props(['id', 'maxWidth'])
 
 @php
-if (is_null($id)) {
-    $id = md5($show);
-}
-
-if (is_bool($_instance->{$show})) {
-    $shouldShow = $_instance->{$show};
-} else {
-    $shouldShow = ! is_null($_instance->{$show});
-}
+$id = $id ?? md5($attributes->wire('model'));
 
 switch ($maxWidth ?? '2xl') {
     case 'sm':
@@ -31,13 +23,13 @@ switch ($maxWidth ?? '2xl') {
 }
 @endphp
 
-<div id="{{ $id }}" x-data="{ show: {{ var_export($shouldShow ?? false, true) }} }"
+<div id="{{ $id }}" x-data="{ show: @entangle($attributes->wire('model')) }"
         x-show="show"
-        x-on:close.stop="@this.set('{{ $show }}', false)"
-        x-on:keydown.escape.window="if (! show) { return; } @this.set('{{ $show }}', false)"
+        x-on:close.stop="show = false"
+        x-on:keydown.escape.window="show = false"
         class="fixed top-0 inset-x-0 px-4 pt-6 sm:px-0 sm:flex sm:items-top sm:justify-center"
         style="display: none;">
-    <div x-show="show" class="fixed inset-0 transform transition-all" x-on:click="@this.set('{{ $show }}', false)" x-transition:enter="ease-out duration-300"
+    <div x-show="show" class="fixed inset-0 transform transition-all" x-on:click="show = false" x-transition:enter="ease-out duration-300"
                     x-transition:enter-start="opacity-0"
                     x-transition:enter-end="opacity-100"
                     x-transition:leave="ease-in duration-200"
