@@ -143,7 +143,7 @@ class InstallCommand extends Command
         });
 
         // Tailwind Configuration...
-        copy(__DIR__.'/../../stubs/tailwind.config.js', base_path('tailwind.config.js'));
+        copy(__DIR__.'/../../stubs/livewire/tailwind.config.js', base_path('tailwind.config.js'));
         copy(__DIR__.'/../../stubs/webpack.mix.js', base_path('webpack.mix.js'));
 
         // Directories...
@@ -280,7 +280,7 @@ EOF;
         $this->replaceInFile("'guard' => 'web'", "'guard' => 'sanctum'", config_path('auth.php'));
 
         // Tailwind Configuration...
-        copy(__DIR__.'/../../stubs/tailwind.config.js', base_path('tailwind.config.js'));
+        copy(__DIR__.'/../../stubs/inertia/tailwind.config.js', base_path('tailwind.config.js'));
         copy(__DIR__.'/../../stubs/webpack.mix.js', base_path('webpack.mix.js'));
 
         // Directories...
