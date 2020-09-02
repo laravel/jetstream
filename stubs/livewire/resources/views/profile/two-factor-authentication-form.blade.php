@@ -52,7 +52,7 @@
 
         <div class="mt-5">
             @if (! $this->enabled)
-                <x-jet-button type="button" wire:click="enableTwoFactorAuthentication" wire:loading.class="opacity-25" wire:loading.attr="disabled">
+                <x-jet-button type="button" wire:click="enableTwoFactorAuthentication" wire:loading.attr="disabled">
                     Enable
                 </x-jet-button>
             @else
@@ -66,7 +66,7 @@
                     </x-jet-secondary-button>
                 @endif
 
-                <x-jet-danger-button wire:click="disableTwoFactorAuthentication" wire:loading.class="opacity-25" wire:loading.attr="disabled">
+                <x-jet-danger-button wire:click="disableTwoFactorAuthentication" wire:loading.attr="disabled">
                     Disable
                 </x-jet-danger-button>
             @endif

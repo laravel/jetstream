@@ -13,7 +13,7 @@
             <!-- Token Name -->
             <div class="col-span-6 sm:col-span-4">
                 <x-jet-label for="name" value="Token Name" />
-                <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model="createApiTokenForm.name" autofocus />
+                <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="createApiTokenForm.name" autofocus />
                 <x-jet-input-error for="name" class="mt-2" />
             </div>
 
@@ -39,7 +39,7 @@
                 Created.
             </x-jet-action-message>
 
-            <x-jet-button wire:loading.class="opacity-25" wire:loading.attr="disabled">
+            <x-jet-button>
                 Create
             </x-jet-button>
         </x-slot>
@@ -94,7 +94,7 @@
     @endif
 
     <!-- Token Value Modal -->
-    <x-jet-dialog-modal show="displayingToken">
+    <x-jet-dialog-modal wire:model="displayingToken">
         <x-slot name="title">
             API Token
         </x-slot>
@@ -110,14 +110,14 @@
         </x-slot>
 
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$set('displayingToken', false)" wire:loading.class="opacity-25" wire:loading.attr="disabled">
+            <x-jet-secondary-button wire:click="$set('displayingToken', false)" wire:loading.attr="disabled">
                 Close
             </x-jet-secondary-button>
         </x-slot>
     </x-jet-dialog-modal>
 
     <!-- API Token Permissions Modal -->
-    <x-jet-dialog-modal show="managingApiTokenPermissions">
+    <x-jet-dialog-modal wire:model="managingApiTokenPermissions">
         <x-slot name="title">
             API Token Permissions
         </x-slot>
@@ -134,18 +134,18 @@
         </x-slot>
 
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$set('managingApiTokenPermissions', false)" wire:loading.class="opacity-25" wire:loading.attr="disabled">
+            <x-jet-secondary-button wire:click="$set('managingApiTokenPermissions', false)" wire:loading.attr="disabled">
                 Nevermind
             </x-jet-secondary-button>
 
-            <x-jet-button class="ml-2" wire:click="updateApiToken" wire:loading.class="opacity-25" wire:loading.attr="disabled">
+            <x-jet-button class="ml-2" wire:click="updateApiToken" wire:loading.attr="disabled">
                 Save
             </x-jet-button>
         </x-slot>
     </x-jet-dialog-modal>
 
     <!-- Delete Token Confirmation Modal -->
-    <x-jet-confirmation-modal show="confirmingApiTokenDeletion">
+    <x-jet-confirmation-modal wire:model="confirmingApiTokenDeletion">
         <x-slot name="title">
             Delete API Token
         </x-slot>
@@ -155,11 +155,11 @@
         </x-slot>
 
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$toggle('confirmingApiTokenDeletion')" wire:loading.class="opacity-25" wire:loading.attr="disabled">
+            <x-jet-secondary-button wire:click="$toggle('confirmingApiTokenDeletion')" wire:loading.attr="disabled">
                 Nevermind
             </x-jet-secondary-button>
 
-            <x-jet-danger-button class="ml-2" wire:click="deleteApiToken" wire:loading.class="opacity-25" wire:loading.attr="disabled">
+            <x-jet-danger-button class="ml-2" wire:click="deleteApiToken" wire:loading.attr="disabled">
                 Delete
             </x-jet-danger-button>
         </x-slot>
