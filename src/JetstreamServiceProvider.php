@@ -162,6 +162,10 @@ class JetstreamServiceProvider extends ServiceProvider
      */
     protected function configureRoutes()
     {
+        if ($this->stackIsNotSupported()) {
+            return;
+        }
+
         Route::group([
             'namespace' => 'Laravel\Jetstream\Http\Controllers',
             'domain' => config('jetstream.domain', null),
@@ -197,5 +201,15 @@ class JetstreamServiceProvider extends ServiceProvider
 
         $kernel->appendMiddlewareToGroup('web', ShareInertiaData::class);
         $kernel->appendToMiddlewarePriority(ShareInertiaData::class);
+    }
+
+    /**
+     * Determines if the current stack is supported.
+     *
+     * @return bool
+     */
+    protected function stackIsNotSupported()
+    {
+        return !in_array(config('jetstream.stack'), ['livewire', 'inertia']);
     }
 }

@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
+use InvalidArgumentException;
 use Symfony\Component\Process\Process;
 
 class InstallCommand extends Command
@@ -60,6 +61,15 @@ class InstallCommand extends Command
             '\Laravel\Jetstream\Http\Middleware\AuthenticateSession::class',
             app_path('Http/Kernel.php')
         );
+
+        // Install custom Stack
+        if (static::hasMacro($this->argument('stack'))) {
+            return static::{$this->argument('stack')}();
+        }
+
+        if (!in_array($this->argument('stack'), ['livewire', 'inertia'])) {
+            throw new InvalidArgumentException('Invalid stack.');
+        }
 
         // Install Stack...
         if ($this->argument('stack') === 'livewire') {
