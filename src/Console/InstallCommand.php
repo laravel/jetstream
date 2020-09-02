@@ -201,6 +201,7 @@ class InstallCommand extends Command
 
         $this->line('');
         $this->info('Livewire scaffolding installed successfully.');
+        $this->comment('Please execute the "npm install && npm run dev" command to build your assets.');
     }
 
     /**
