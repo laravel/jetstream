@@ -44,6 +44,11 @@ class InstallCommand extends Command
         // "Home" Route...
         $this->replaceInFile('/home', '/dashboard', app_path('Providers/RouteServiceProvider.php'));
 
+        if (file_exists(resource_path('views/welcome.blade.php'))) {
+            $this->replaceInFile('/home', '/dashboard', resource_path('views/welcome.blade.php'));
+            $this->replaceInFile('Home', 'Dashboard', resource_path('views/welcome.blade.php'));
+        }
+
         // Fortify Provider...
         $this->installFortifyServiceProvider();
 
@@ -108,14 +113,6 @@ class InstallCommand extends Command
         $this->replaceInFile("'SESSION_DRIVER', 'file'", "'SESSION_DRIVER', 'database'", config_path('session.php'));
         $this->replaceInFile('SESSION_DRIVER=file', 'SESSION_DRIVER=database', base_path('.env'));
         $this->replaceInFile('SESSION_DRIVER=file', 'SESSION_DRIVER=database', base_path('.env.example'));
-
-        foreach ((new Filesystem)->files(database_path('migrations')) as $file) {
-            if (Str::contains($file->getRealPath(), 'create_sessions_table')) {
-                $this->replaceInFile("foreignId('user_id')", "uuid('user_id')", $file->getRealPath());
-
-                break;
-            }
-        }
     }
 
     /**
@@ -137,8 +134,6 @@ class InstallCommand extends Command
                     $this->output->write($output);
                 });
 
-        $this->replaceInFile('morphs', 'uuidMorphs', database_path('migrations/2019_12_14_000001_create_personal_access_tokens_table.php'));
-
         // Update Configuration...
         $this->replaceInFile('inertia', 'livewire', config_path('jetstream.php'));
         $this->replaceInFile("'guard' => 'web'", "'guard' => 'sanctum'", config_path('auth.php'));
@@ -153,8 +148,8 @@ class InstallCommand extends Command
         });
 
         // Tailwind Configuration...
-        copy(__DIR__ . '/../../stubs/tailwind.config.js', base_path('tailwind.config.js'));
-        copy(__DIR__ . '/../../stubs/webpack.mix.js', base_path('webpack.mix.js'));
+        copy(__DIR__.'/../../stubs/livewire/tailwind.config.js', base_path('tailwind.config.js'));
+        copy(__DIR__.'/../../stubs/webpack.mix.js', base_path('webpack.mix.js'));
 
         // Directories...
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Fortify'));
@@ -284,14 +279,12 @@ EOF;
                     $this->output->write($output);
                 });
 
-        $this->replaceInFile('morphs', 'uuidMorphs', database_path('migrations/2019_12_14_000001_create_personal_access_tokens_table.php'));
-
         // Update Configuration...
         $this->replaceInFile("'guard' => 'web'", "'guard' => 'sanctum'", config_path('auth.php'));
 
         // Tailwind Configuration...
-        copy(__DIR__ . '/../../stubs/tailwind.config.js', base_path('tailwind.config.js'));
-        copy(__DIR__ . '/../../stubs/webpack.mix.js', base_path('webpack.mix.js'));
+        copy(__DIR__.'/../../stubs/inertia/tailwind.config.js', base_path('tailwind.config.js'));
+        copy(__DIR__.'/../../stubs/webpack.mix.js', base_path('webpack.mix.js'));
 
         // Directories...
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Fortify'));
