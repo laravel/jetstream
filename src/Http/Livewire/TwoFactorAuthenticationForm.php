@@ -128,7 +128,6 @@ class TwoFactorAuthenticationForm extends Component
      */
     public function regenerateRecoveryCodes(GenerateNewRecoveryCodes $generate)
     {
-
         $this->resetErrorBag();
 
         if (! Hash::check($this->password, Auth::user()->password)) {
