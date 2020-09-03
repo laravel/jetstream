@@ -93,7 +93,6 @@ class TwoFactorAuthenticationForm extends Component
         $this->confirmingDisable = true;
     }
 
-
     /**
      * Confirm that the user would like to regenerate codes.
      *
