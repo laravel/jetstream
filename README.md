@@ -22,6 +22,7 @@
 - [Basic Jetstream Features](#jetstream-features)
     - [Profile Management](#profile-management)
     - [Security Features](#security-features)
+    - [Email Verification](#email-verification)
     - [Account Deletion](#account-deletion)
 - [API Support](#api-support)
     - [Defining Permissions](#defining-permissions)
@@ -112,6 +113,13 @@ Profile photo support for users is made available via the `Laravel\Jetstream\Has
 ### Security Features
 
 Jetstream includes forms for the user to update their password, enable two-factor authentication, and logout other authenticated browser sessions for their account. Typically, these features will not need customization. However, password reset / update and password validation logic may be customized by modifying the relevant action classes within your application's `app/Actions/Fortify` directory.
+
+<a name="email-verification"></a>
+### Email Verification
+
+Jetstream includes support for email verification. After a user registers for your application, they will be redirected to a screen instructing them to click the email verification link that has been sent to their registered email address.
+
+To enable email verification, you should uncomment the `emailVerification` feature in the `features` option of your `fortify` configuration file. In addition, you should ensure your `User` model implements the `MustVerifyEmail` interface.
 
 <a name="account-deletion"></a>
 ### Account Deletion
