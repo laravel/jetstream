@@ -15,6 +15,12 @@
     </a>
 </p>
 
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Jetstream Features](#jetstream-features)
+    - [Profile Management](#profile-management)
+
+<a name="introduction"></a>
 ## Introduction
 
 Laravel Jetstream is a beautifully designed application scaffolding for Laravel. Jetstream provides the perfect starting point for your next Laravel application and includes login, registration, email verification, two-factor authentication, session management, API support via [Laravel Sanctum](https://github.com/laravel/sanctum), and optional team management.
@@ -49,6 +55,7 @@ If the [Laravel installer](https://github.com/laravel/installer) is installed on
 
 Various Jetstream features may be enabled / disabled via the `features` option within your application's `jetstream` configuration file.
 
+<a name="profile-management"></a>
 ### Profile Management
 
 Jetstream includes forms that allow the user to update their name and email address, as well as upload a profile photo. The backend logic for this feature may be customized by modifying the `App\Actions\Fortify\UpdateUserProfileInformation` class installed by Jetstream. The action receives the currently authenticated user as well as an array containing all of the incoming request's input.
