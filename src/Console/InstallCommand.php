@@ -15,8 +15,8 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'jetstream:install {stack : The development stack that should be installed}
-                                              {--teams : Indicates if team support should be installed}';
+    protected $signature = 'jetstream:install {stack? : The development stack that should be installed}
+                                              {teams? : Indicates if team support should be installed}';
 
     /**
      * The console command description.
@@ -26,12 +26,45 @@ class InstallCommand extends Command
     protected $description = 'Install the Jetstream components and resources';
 
     /**
+     * stack list
+     *
+     * @var string[]
+     */
+    private $stacks = ['livewire', 'inertia'];
+
+    /**
+     * The stack name which you prefer.
+     *
+     * @var string
+     */
+    private $stack = null;
+
+    /**
+     * The teams option.
+     *
+     * @var bool
+     */
+    private $teams = false;
+
+    /**
      * Execute the console command.
      *
      * @return void
      */
     public function handle()
     {
+        if ($this->hasArgument('stack') && in_array($this->argument('stack'), $this->stacks)) {
+            $this->stack = $this->argument('stack');
+        } else {
+            $this->stack = $this->choice('Which Jetstream stack do you prefer?', $this->stacks);
+        }
+
+        if ($this->hasArgument('teams') && $this->argument('teams')) {
+            $this->teams = true;
+        } else {
+            $this->teams = $this->confirm('Will your application use teams?', false);
+        }
+
         // Publish...
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-config', '--force' => true]);
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-migrations', '--force' => true]);
@@ -62,9 +95,9 @@ class InstallCommand extends Command
         );
 
         // Install Stack...
-        if ($this->argument('stack') === 'livewire') {
+        if ($this->stack === 'livewire') {
             $this->installLivewireStack();
-        } elseif ($this->argument('stack') === 'inertia') {
+        } elseif ($this->stack === 'inertia') {
             $this->installInertiaStack();
         }
     }
@@ -195,7 +228,7 @@ class InstallCommand extends Command
         copy(__DIR__.'/../../stubs/resources/css/app.css', resource_path('css/app.css'));
 
         // Teams...
-        if ($this->option('teams')) {
+        if ($this->teams) {
             $this->installLivewireTeamStack();
         }
 
@@ -339,7 +372,7 @@ EOF;
         // static::flushNodeModules();
 
         // Teams...
-        if ($this->option('teams')) {
+        if ($this->teams) {
             $this->installInertiaTeamStack();
         }
 
