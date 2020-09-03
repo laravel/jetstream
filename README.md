@@ -29,6 +29,13 @@
     - [Member Management](#member-management)
     - [Roles / Permissions](#team-roles-and-permissions)
     - [Authorization](#team-authorization)
+- [Livewire Features](#livewire-features)
+    - [Components](#livewire-components)
+    - [Modals](#livewire-modals)
+- [Inertia Features](#inertia-features)
+    - [Components](#inertia-components)
+    - [Form / Validation Helpers](#inertia-form-validation-helpers)
+    - [Modals](#inertia-modals)
 
 <a name="introduction"></a>
 ## Introduction
@@ -44,7 +51,7 @@ You may use Composer to install Jetstream into your new Laravel project:
 
     composer require laravel/jetstream
 
-After installing Jetstream, you should run the `jetstream:install` Artisan command. This command accepts the name of the stack you prefer (`livewire` or `inertia`). In addition, you may use the `teams` switch to enable team support:
+After installing Jetstream, you should run the `jetstream:install` Artisan command. This command accepts the name of the stack you prefer (`livewire` or `inertia`). You are highly encouraged to read through the entire documentation of [Livewire](https://laravel-livewire.com) or [Inertia](https://inertiajs.com) before beginning your Jetstream project. In addition, you may use the `teams` switch to enable team support:
 
     php artisan jetstream:install livewire
 
@@ -244,6 +251,143 @@ public function view(User $user, Flight $flight)
            $user->tokenCan('flight:view');
 }
 ```
+
+<a name="livewire-features"></a>
+## Livewire Features
+
+When using the Livewire stack, Jetstream has some unique features that you should be aware of. We will discuss each of these features below.
+
+<a name="livewire-components"></a>
+### Components
+
+While building the Jetstream Livewire stack, a variety of Blade components (buttons, panels, inputs, modals) were created to assist in creating UI consistency and ease of use. You are free to use or not use these components. However, if you would like to use them, you may publish them using the Artisan `vendor:publish` command:
+
+    php artisan vendor:publish --tag=jetstream-views
+
+You may gain insight into how to use these components by reviewing their usage within Jetstream's existing views located within your `resources/views` directory.
+
+<a name="livewire-modals"></a>
+### Modals
+
+Most of the the Jetstream Livewire stack's components have no communication with your backend. However, the Livewire modal components included with Jetstream do interact with your Livewire backend to determine their open / closed state. In addition, Jetstream includes two types of modals: `dialog-modal` and `confirmation-modal`. The `confirmation-modal` may be used when confirming destructive actions such as deletions, while the `dialog-modal` is a more generic modal window that may be used at any time.
+
+To illustrate the use of modals, consider the following modal that confirms a user would like to delete their account:
+
+```html
+<x-jet-confirmation-modal wire:model="confirmingUserDeletion">
+    <x-slot name="title">
+        Delete Account
+    </x-slot>
+
+    <x-slot name="content">
+        Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted.
+    </x-slot>
+
+    <x-slot name="footer">
+        <x-jet-secondary-button wire:click="$toggle('confirmingUserDeletion')" wire:loading.attr="disabled">
+            Nevermind
+        </x-jet-secondary-button>
+
+        <x-jet-danger-button class="ml-2" wire:click="deleteUser" wire:loading.attr="disabled">
+            Delete Account
+        </x-jet-danger-button>
+    </x-slot>
+</x-jet-confirmation-modal>
+```
+
+As you can see, the modal's open / close state is determined by a `wire:model` property that is declared on the component. This property name should correspond to a boolean property on your Livewire component's corresponding PHP class. The modal's contents may be specified by hydrating three slots: `title`, `content`, and `footer`.
+
+<a name="inertia-features"></a>
+## Inertia Features
+
+When using the Inertia stack, Jetstream has some unique features that you should be aware of. We will discuss each of these features below.
+
+<a name="inertia-components"></a>
+### Components
+
+While building the Jetstream Inertia stack, a variety of Vue components (buttons, panels, inputs, modals) were created to assist in creating UI consistency and ease of use. You are free to use or not use these components. All of these components are located within your application's `resources/js/Jetstream` directory.
+
+You may gain insight into how to use these components by reviewing their usage within Jetstream's existing pages located within your `resources/js/Pages` directory.
+
+<a name="inertia-form-validation-helpers"></a>
+### Form / Validation Helpers
+
+In order to make working with forms and validation errors more convenient, we have created a `laravel-jetstream` NPM package. This package is automatically installed when using the Jetstream Inertia stack.
+
+This package adds a new `form` method to the `$inertia` object that may be accessed via your Vue components. The `form` method is used to create a new form object that will provide convenient access to error messages, as well as conveniences such as resetting the form state on a successful form submission:
+
+```js
+data() {
+    return {
+        form: this.$inertia.form({
+            name: this.name,
+            email: this.email,
+        }, {
+            bag: 'updateProfileInformation',
+            resetOnSuccess: true,
+        }),
+    }
+}
+```
+
+A form may be submitted using the `post`, `put`, or `delete` methods. All of the data specified during the form's creation will be automatically included in the request. In addition, Inertia request options may also be specified:
+
+```js
+this.form.post('/user/profile-information', {
+    preserveScroll: true
+})
+```
+
+Form error messages may be access using the `form.error` method:
+
+```html
+<jet-input-error :message="form.error('email')" class="mt-2" />
+```
+
+Additional information about the form's current state is available via the `recentlySuccessful` and `processing` methods:
+
+```html
+<jet-action-message :on="form.recentlySuccessful" class="mr-3">
+    Saved.
+</jet-action-message>
+
+<jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+    Save
+</jet-button>
+```
+
+To learn more about using Jetstream's Inertia form helpers, you are free to review the Inertia pages created during Jetstream's installation. These pages are located within your application's `resources/js/Pages` directory.
+
+<a name="inertia-modals"></a>
+### Modals
+
+Jetstream's Inertia stack also includes two modal components: `DialogModal` and `ConfirmationModal`. The `ConfirmationModal` may be used when confirming destructive actions such as deletions, while the `DialogModal` is a more generic modal window that may be used at any time.
+
+To illustrate the use of modals, consider the following modal that confirms a user would like to delete their account:
+
+```html
+<jet-confirmation-modal :show="confirmingUserDeletion" @close="confirmingUserDeletion = false">
+    <template #title>
+        Delete Account
+    </template>
+
+    <template #content>
+        Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted.
+    </template>
+
+    <template #footer>
+        <jet-secondary-button @click.native="confirmingUserDeletion = false">
+            Nevermind
+        </jet-secondary-button>
+
+        <jet-danger-button class="ml-2" @click.native="deleteTeam" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            Delete Account
+        </jet-danger-button>
+    </template>
+</jet-confirmation-modal>
+```
+
+As you can see, the modal's open / close state is determined by a `show` property that is declared on the component. The modal's contents may be specified by hydrating three slots: `title`, `content`, and `footer`.
 
 ## Contributing
 
