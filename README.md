@@ -45,6 +45,8 @@ Laravel Jetstream is a beautifully designed application scaffolding for Laravel.
 
 Jetstream is designed using [Tailwind CSS](https://tailwindcss.com) and offers your choice of [Livewire](https://laravel-livewire.com) or [Inertia](https://inertiajs.com) scaffolding.
 
+<p align="center"><img src="https://laravel.com/img/jetstream-preview.png"></p>
+
 <a name="installation"></a>
 ## Installation
 
