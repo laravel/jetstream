@@ -52,23 +52,113 @@
 
         <div class="mt-5">
             @if (! $this->enabled)
-                <x-jet-button type="button" wire:click="enableTwoFactorAuthentication" wire:loading.attr="disabled">
-                    Enable
+                <x-jet-button type="button" wire:click="confirmEnable"  wire:loading.attr="disabled">
+                    Enabled Two Factor Authentication
                 </x-jet-button>
+
+                <!-- Enable Two Factor Authentication Confirmation Modal -->
+                <x-jet-dialog-modal wire:model="confirmingEnable">
+                    <x-slot name="title">
+                        Enable Two Factor Authentication
+                    </x-slot>
+
+                    <x-slot name="content">
+                        Please enter your password to confirm you would like to enable two factor authentication.
+
+                        <div class="mt-4" x-data="{}" x-on:confirming-enable-two-factor-authentication.window="setTimeout(() => $refs.password.focus(), 250)">
+                            <x-jet-input type="password" class="mt-1 block w-3/4" placeholder="Password"
+                                         x-ref="password"
+                                         wire:model.defer="password"
+                                         wire:keydown.enter="enableTwoFactorAuthentication" />
+
+                            <x-jet-input-error for="password" class="mt-2" />
+                        </div>
+                    </x-slot>
+
+                    <x-slot name="footer">
+                        <x-jet-secondary-button wire:click="$toggle('confirmingEnable')" wire:loading.attr="disabled">
+                            Nevermind
+                        </x-jet-secondary-button>
+
+                        <x-jet-button class="ml-2" wire:click="enableTwoFactorAuthentication" wire:loading.attr="disabled">
+                            Enable Two Factor Authentication
+                        </x-jet-button>
+                    </x-slot>
+                </x-jet-dialog-modal>
             @else
                 @if ($showingRecoveryCodes)
-                    <x-jet-secondary-button class="mr-3" wire:click="regenerateRecoveryCodes">
+                    <x-jet-secondary-button class="mr-3" wire:click="confirmRegenerate">
                         Regenerate Recovery Codes
                     </x-jet-secondary-button>
+
+                    <!-- Regenerate Recovery Codes Confirmation Modal -->
+                    <x-jet-dialog-modal wire:model="confirmingRegenerate">
+                        <x-slot name="title">
+                            Regenerate Recovery Codes
+                        </x-slot>
+
+                        <x-slot name="content">
+                            Please enter your password to confirm you would like to regenerate recovery codes.
+
+                            <div class="mt-4" x-data="{}" x-on:confirming-regenerate-codes.window="setTimeout(() => $refs.password.focus(), 250)">
+                                <x-jet-input type="password" class="mt-1 block w-3/4" placeholder="Password"
+                                             x-ref="password"
+                                             wire:model.defer="regenerate_password"
+                                             wire:keydown.enter="regenerateRecoveryCodes" />
+
+                                <x-jet-input-error for="password" class="mt-2" />
+                            </div>
+                        </x-slot>
+
+                        <x-slot name="footer">
+                            <x-jet-secondary-button wire:click="$toggle('confirmingRegenerate')" wire:loading.attr="disabled">
+                                Nevermind
+                            </x-jet-secondary-button>
+
+                            <x-jet-button class="ml-2" wire:click="regenerateRecoveryCodes" wire:loading.attr="disabled">
+                                Regenerate Recovery Codes
+                            </x-jet-button>
+                        </x-slot>
+                    </x-jet-dialog-modal>
                 @else
                     <x-jet-secondary-button class="mr-3" wire:click="$toggle('showingRecoveryCodes')">
                         Show Recovery Codes
                     </x-jet-secondary-button>
                 @endif
 
-                <x-jet-danger-button wire:click="disableTwoFactorAuthentication" wire:loading.attr="disabled">
-                    Disable
+                <x-jet-danger-button  wire:click="confirmDisable" wire:loading.attr="disabled">
+                    Disable Two Factor Authentication
                 </x-jet-danger-button>
+
+                <!-- Disable Two Factor Authentication Confirmation Modal -->
+                <x-jet-dialog-modal wire:model="confirmingDisable">
+                    <x-slot name="title">
+                        Disable Two Factor Authentication
+                    </x-slot>
+
+                    <x-slot name="content">
+                        Please enter your password to confirm you would like to disable two factor authentication.
+
+                        <div class="mt-4" x-data="{}" x-on:confirming-disable-two-factor-authentication.window="setTimeout(() => $refs.password.focus(), 250)">
+                            <x-jet-input type="password" class="mt-1 block w-3/4" placeholder="Password"
+                                         x-ref="password"
+                                         wire:model.defer="password"
+                                         wire:keydown.enter="disableTwoFactorAuthentication" />
+
+                            <x-jet-input-error for="password" class="mt-2" />
+                        </div>
+                    </x-slot>
+
+                    <x-slot name="footer">
+                        <x-jet-secondary-button wire:click="$toggle('confirmingDisable')" wire:loading.attr="disabled">
+                            Nevermind
+                        </x-jet-secondary-button>
+
+                        <x-jet-danger-button class="ml-2" wire:click="disableTwoFactorAuthentication" wire:loading.attr="disabled">
+                            Disable Two Factor Authentication
+                        </x-jet-danger-button>
+                    </x-slot>
+                </x-jet-dialog-modal>
             @endif
         </div>
     </x-slot>
