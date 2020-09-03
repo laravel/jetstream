@@ -114,12 +114,14 @@ class InstallCommand extends Command
     {
         // Install Livewire...
         (new Process(['composer', 'require', 'livewire/livewire:^2.0', 'laravel/sanctum:^2.6'], base_path()))
+                ->setTimeout(null)
                 ->run(function ($type, $output) {
                     $this->output->write($output);
                 });
 
         // Sanctum...
         (new Process(['php', 'artisan', 'vendor:publish', '--provider=Laravel\Sanctum\SanctumServiceProvider', '--force'], base_path()))
+                ->setTimeout(null)
                 ->run(function ($type, $output) {
                     $this->output->write($output);
                 });
@@ -245,6 +247,7 @@ EOF;
     {
         // Install Inertia...
         (new Process(['composer', 'require', 'inertiajs/inertia-laravel', 'laravel/sanctum:^2.6'], base_path()))
+                ->setTimeout(null)
                 ->run(function ($type, $output) {
                     $this->output->write($output);
                 });
@@ -266,6 +269,7 @@ EOF;
 
         // Sanctum...
         (new Process(['php', 'artisan', 'vendor:publish', '--provider=Laravel\Sanctum\SanctumServiceProvider', '--force'], base_path()))
+                ->setTimeout(null)
                 ->run(function ($type, $output) {
                     $this->output->write($output);
                 });
