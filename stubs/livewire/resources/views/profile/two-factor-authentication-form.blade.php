@@ -53,7 +53,7 @@
         <div class="mt-5">
             @if (! $this->enabled)
                 <x-jet-button type="button" wire:click="confirmEnable"  wire:loading.attr="disabled">
-                    Enabled Two Factor Authentication
+                    Enable Two Factor Authentication
                 </x-jet-button>
 
                 <!-- Enable Two Factor Authentication Confirmation Modal -->
