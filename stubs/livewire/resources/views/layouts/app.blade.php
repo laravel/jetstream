@@ -18,7 +18,7 @@
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.6.0/dist/alpine.js" defer></script>
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased overflow-y-scroll">
         <div class="min-h-screen bg-gray-100">
             <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
