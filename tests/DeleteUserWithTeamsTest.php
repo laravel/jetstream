@@ -28,8 +28,8 @@ class DeleteUserWithTeamsTest extends OrchestraTestCase
 
         $otherTeam->users()->attach($team->owner, ['role' => null]);
 
-        $this->assertEquals(2, DB::table('teams')->count());
-        $this->assertEquals(1, DB::table('team_user')->count());
+        $this->assertSame(2, DB::table('teams')->count());
+        $this->assertSame(1, DB::table('team_user')->count());
 
         copy(__DIR__.'/../stubs/app/Actions/Jetstream/DeleteUserWithTeams.php', $fixture = __DIR__.'/Fixtures/DeleteUser.php');
 
@@ -40,8 +40,8 @@ class DeleteUserWithTeamsTest extends OrchestraTestCase
         $action->delete($team->owner);
 
         $this->assertNull($team->owner->fresh());
-        $this->assertEquals(1, DB::table('teams')->count());
-        $this->assertEquals(0, DB::table('team_user')->count());
+        $this->assertSame(1, DB::table('teams')->count());
+        $this->assertSame(0, DB::table('team_user')->count());
 
         @unlink($fixture);
     }

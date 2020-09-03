@@ -31,7 +31,7 @@ class UpdateTeamTest extends OrchestraTestCase
 
         $action->update($team->owner, $team, ['name' => 'Test Team Updated']);
 
-        $this->assertEquals('Test Team Updated', $team->fresh()->name);
+        $this->assertSame('Test Team Updated', $team->fresh()->name);
     }
 
     public function test_name_is_required()
