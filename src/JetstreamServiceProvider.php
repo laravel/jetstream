@@ -31,9 +31,7 @@ class JetstreamServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if (! $this->app->configurationIsCached()) {
-            $this->mergeConfigFrom(__DIR__.'/../config/jetstream.php', 'jetstream');
-        }
+        $this->mergeConfigFrom(__DIR__.'/../config/jetstream.php', 'jetstream');
 
         $this->app->afterResolving(BladeCompiler::class, function () {
             if (config('jetstream.stack') === 'livewire' && class_exists(Livewire::class)) {
