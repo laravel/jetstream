@@ -18,6 +18,7 @@
 - [Introduction](#introduction)
 - [Installation](#installation)
     - [What Is Installed](#what-is-installed)
+    - [Tailwind](#tailwind)
 - [Basic Jetstream Features](#jetstream-features)
     - [Profile Management](#profile-management)
     - [Security Features](#security-features)
@@ -84,8 +85,15 @@ If the [Laravel installer](https://github.com/laravel/installer) is installed on
 
     laravel new project-name --jet
 
+<a name="tailwind"></a>
+### Tailwind
+
+During installation, Jetstream will scaffold your application's integration with the Tailwind CSS framework. Specifically, a `webpack.mix.js` file and `tailwind.config.js` file will be created. These two files are used to build your compiled application CSS output. You are free to modify these files as needed for your application.
+
+In addition, your `tailwind.config.js` file has been preconfigured to support PurgeCSS with the relevant directories properly specified depending on your chosen Jetstream stack.
+
 <a name="jetstream-features"></a>
-## Jetstream Features
+## Basic Jetstream Features
 
 Various Jetstream features may be enabled / disabled via the `features` option within your application's `jetstream` configuration file.
 
