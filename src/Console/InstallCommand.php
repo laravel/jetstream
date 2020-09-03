@@ -26,7 +26,7 @@ class InstallCommand extends Command
     protected $description = 'Install the Jetstream components and resources';
 
     /**
-     * stack list
+     * stack list.
      *
      * @var string[]
      */
