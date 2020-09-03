@@ -229,19 +229,21 @@ if ($request->user()->hasTeamPermission($team, 'read')) {
 
 When building a Jetstream application that utilizes API support and team support, you should verify an incoming request's team permissions and API token permissions within your authorization policies. This important because an API token may have the theoretical ability to perform an action while a user does not actually have that action granted to them via their team permissions:
 
-    /**
-     * Determine whether the user can view a flight.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Flight  $flight
-     * @return bool
-     */
-    public function view(User $user, Flight $flight)
-    {
-        return $user->belongsToTeam($flight->team) &&
-               $user->hasTeamPermission($flight->team, 'flight:view') &&
-               $user->tokenCan('flight:view');
-    }
+```php
+/**
+ * Determine whether the user can view a flight.
+ *
+ * @param  \App\Models\User  $user
+ * @param  \App\Models\Flight  $flight
+ * @return bool
+ */
+public function view(User $user, Flight $flight)
+{
+    return $user->belongsToTeam($flight->team) &&
+           $user->hasTeamPermission($flight->team, 'flight:view') &&
+           $user->tokenCan('flight:view');
+}
+```
 
 ## Contributing
 
