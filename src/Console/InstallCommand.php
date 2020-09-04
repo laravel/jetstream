@@ -434,7 +434,7 @@ EOF;
         if (! Str::contains($appConfig = file_get_contents(config_path('app.php')), 'App\\Providers\\JetstreamServiceProvider::class')) {
             file_put_contents(config_path('app.php'), str_replace(
                 "App\\Providers\FortifyServiceProvider::class,",
-                "App\\Providers\FortifyServiceProvider::class,".PHP_EOL."        App\Providers\JetstreamServiceProvider::class,".PHP_EOL,
+                "App\\Providers\FortifyServiceProvider::class,".PHP_EOL."        App\Providers\JetstreamServiceProvider::class,",
                 $appConfig
             ));
         }
