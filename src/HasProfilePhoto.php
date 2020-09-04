@@ -17,7 +17,7 @@ trait HasProfilePhoto
     {
         tap($this->profile_photo_path, function ($previous) use ($photo) {
             $this->forceFill([
-                'profile_photo_path' => $photo->store(
+                'profile_photo_path' => $photo->storePublicly(
                     'profile-photos', $this->profilePhotoDisk()
                 ),
             ])->save();
@@ -57,6 +57,6 @@ trait HasProfilePhoto
      */
     protected function profilePhotoDisk()
     {
-        return 'public';
+        return isset($_ENV['VAPOR_ARTIFACT_NAME']) ? 's3' : 'public';
     }
 }
