@@ -362,6 +362,14 @@ Form error messages may be access using the `form.error` method:
 <jet-input-error :message="form.error('email')" class="mt-2" />
 ```
 
+A flattened list of all validation errors may be accessed using the `errors` method:
+
+```html
+<li v-for="error in form.errors()">
+    {{ error }}
+</li>
+```
+
 Additional information about the form's current state is available via the `recentlySuccessful` and `processing` methods:
 
 ```html
