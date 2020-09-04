@@ -11,6 +11,13 @@ use Laravel\Jetstream\Contracts\UpdatesTeamNames;
 class Jetstream
 {
     /**
+     * Indicates if Jetstream routes will be registered.
+     *
+     * @var bool
+     */
+    public static $registersRoutes = true;
+
+    /**
      * The roles that are available to assign to users.
      *
      * @var array
@@ -125,6 +132,18 @@ class Jetstream
     public static function validPermissions(array $permissions)
     {
         return array_values(array_intersect($permissions, static::$permissions));
+    }
+
+    /**
+     * Configure Cashier to not register its routes.
+     *
+     * @return static
+     */
+    public static function ignoreRoutes()
+    {
+        static::$registersRoutes = false;
+
+        return new static;
     }
 
     /**
