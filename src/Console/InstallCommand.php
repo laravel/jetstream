@@ -128,7 +128,7 @@ class InstallCommand extends Command
 
         // Update Configuration...
         $this->replaceInFile('inertia', 'livewire', config_path('jetstream.php'));
-        $this->replaceInFile("'guard' => 'web'", "'guard' => 'sanctum'", config_path('auth.php'));
+        // $this->replaceInFile("'guard' => 'web'", "'guard' => 'sanctum'", config_path('auth.php'));
 
         // NPM Packages...
         $this->updateNodePackages(function ($packages) {
@@ -231,7 +231,7 @@ class InstallCommand extends Command
     {
         return <<<'EOF'
 
-Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
@@ -275,7 +275,7 @@ EOF;
                 });
 
         // Update Configuration...
-        $this->replaceInFile("'guard' => 'web'", "'guard' => 'sanctum'", config_path('auth.php'));
+        // $this->replaceInFile("'guard' => 'web'", "'guard' => 'sanctum'", config_path('auth.php'));
 
         // Tailwind Configuration...
         copy(__DIR__.'/../../stubs/inertia/tailwind.config.js', base_path('tailwind.config.js'));
@@ -377,7 +377,7 @@ EOF;
     {
         return <<<EOF
 
-Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');
 })->name('dashboard');
 
