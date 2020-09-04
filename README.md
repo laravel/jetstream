@@ -330,7 +330,7 @@ You may gain insight into how to use these components by reviewing their usage w
 <a name="inertia-form-validation-helpers"></a>
 ### Form / Validation Helpers
 
-In order to make working with forms and validation errors more convenient, we have created a `laravel-jetstream` NPM package. This package is automatically installed when using the Jetstream Inertia stack.
+In order to make working with forms and validation errors more convenient, we have created a [laravel-jetstream](https://github.com/laravel/jetstream-js) NPM package. This package is automatically installed when using the Jetstream Inertia stack.
 
 This package adds a new `form` method to the `$inertia` object that may be accessed via your Vue components. The `form` method is used to create a new form object that will provide convenient access to error messages, as well as conveniences such as resetting the form state on a successful form submission:
 
