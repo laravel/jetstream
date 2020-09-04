@@ -30,6 +30,10 @@ class ShareInertiaData
                 ];
             },
             'user' => function () use ($request) {
+                if (! $request->user()) {
+                    return;
+                }
+
                 if (Jetstream::hasTeamFeatures() && $request->user()) {
                     $request->user()->currentTeam;
                 }
