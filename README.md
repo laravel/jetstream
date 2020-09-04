@@ -59,7 +59,7 @@ After installing Jetstream, you should run the `jetstream:install` Artisan comma
 
     php artisan jetstream:install livewire
 
-    php artisan jetstream inertia --teams
+    php artisan jetstream:install inertia --teams
 
 After installing your Jetstream stack, you should compile your frontend assets:
 
