@@ -27,14 +27,14 @@
                         <div class="flex">
                             <!-- Logo -->
                             <div class="flex-shrink-0 flex items-center">
-                                <a href="/dashboard">
+                                <a href="{{ url('dashboard') }}">
                                     <x-jet-application-mark class="block h-9 w-auto" />
                                 </a>
                             </div>
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <x-jet-nav-link href="/dashboard" :active="request()->routeIs('dashboard')">
+                                <x-jet-nav-link href="{{ url('dashboard') }}" :active="request()->routeIs('dashboard')">
                                     Dashboard
                                 </x-jet-nav-link>
                             </div>
@@ -55,12 +55,12 @@
                                         Manage Account
                                     </div>
 
-                                    <x-jet-dropdown-link href="/user/profile">
+                                    <x-jet-dropdown-link href="{{ route('profile.show') }}">
                                         Profile
                                     </x-jet-dropdown-link>
 
                                     @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                                        <x-jet-dropdown-link href="/user/api-tokens">
+                                        <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
                                             API Tokens
                                         </x-jet-dropdown-link>
                                     @endif
@@ -74,11 +74,11 @@
                                         </div>
 
                                         <!-- Team Settings -->
-                                        <x-jet-dropdown-link href="/teams/{{ Auth::user()->currentTeam->id }}">
+                                        <x-jet-dropdown-link href="{{ route('teams.show',['team' => Auth::user()->currentTeam->id]) }}">
                                             Team Settings
                                         </x-jet-dropdown-link>
 
-                                        <x-jet-dropdown-link href="/teams/create">
+                                        <x-jet-dropdown-link href="{{ route('teams.create') }}">
                                             Create New Team
                                         </x-jet-dropdown-link>
 
@@ -125,7 +125,7 @@
                 <!-- Responsive Navigation Menu -->
                 <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
                     <div class="pt-2 pb-3 space-y-1">
-                        <x-jet-responsive-nav-link href="/dashboard" :active="request()->routeIs('dashboard')">
+                        <x-jet-responsive-nav-link href="{{ url('dashboard') }}" :active="request()->routeIs('dashboard')">
                             Dashboard
                         </x-jet-responsive-nav-link>
                     </div>
@@ -145,12 +145,12 @@
 
                         <div class="mt-3 space-y-1">
                             <!-- Account Management -->
-                            <x-jet-responsive-nav-link href="/user/profile" :active="request()->routeIs('profile.show')">
+                            <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                                 Profile
                             </x-jet-responsive-nav-link>
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                                <x-jet-responsive-nav-link href="/user/api-tokens" :active="request()->routeIs('api-tokens.index')">
+                                <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
                                     API Tokens
                                 </x-jet-responsive-nav-link>
                             @endif
@@ -175,11 +175,11 @@
                                 </div>
 
                                 <!-- Team Settings -->
-                                <x-jet-responsive-nav-link href="/teams/{{ Auth::user()->currentTeam->id }}" :active="request()->routeIs('teams.show')">
+                                <x-jet-responsive-nav-link href="{{ route('teams.show',['team' => Auth::user()->currentTeam->id]) }}" :active="request()->routeIs('teams.show')">
                                     Team Settings
                                 </x-jet-responsive-nav-link>
 
-                                <x-jet-responsive-nav-link href="/teams/create" :active="request()->routeIs('teams.create')">
+                                <x-jet-responsive-nav-link href="{{ route('teams.create') }}" :active="request()->routeIs('teams.create')">
                                     Create New Team
                                 </x-jet-responsive-nav-link>
 
