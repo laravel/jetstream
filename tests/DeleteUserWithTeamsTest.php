@@ -4,7 +4,7 @@ namespace Laravel\Jetstream\Tests;
 
 use App\Actions\Jetstream\CreateTeam;
 use App\Actions\Jetstream\DeleteTeam;
-use App\Actions\Jetstream\DeleteUser;
+use App\Actions\Jetstream\DeleteUserWithTeam;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Jetstream;
