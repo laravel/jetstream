@@ -160,6 +160,12 @@ class JetstreamServiceProvider extends ServiceProvider
      */
     protected function configureRoutes()
     {
+        if ($path = config('jetstream.routes', null)) {
+            $this->loadRoutesFrom($path);
+
+            return;
+        }
+
         Route::group([
             'namespace' => 'Laravel\Jetstream\Http\Controllers',
             'domain' => config('jetstream.domain', null),
