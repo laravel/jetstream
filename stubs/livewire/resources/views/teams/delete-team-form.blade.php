@@ -9,7 +9,7 @@
 
     <x-slot name="content">
         <div class="max-w-xl text-sm text-gray-600">
-            Once a team is deleted, all of its resources and data will be permanently deleted. Before deleting this team, please download any data or information regrading this team that you wish to retain.
+            Once a team is deleted, all of its resources and data will be permanently deleted. Before deleting this team, please download any data or information regarding this team that you wish to retain.
         </div>
 
         <div class="mt-5">
