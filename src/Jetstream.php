@@ -11,6 +11,13 @@ use Laravel\Jetstream\Contracts\UpdatesTeamNames;
 class Jetstream
 {
     /**
+     * Indicates if Jetstream routes will be registered.
+     *
+     * @var bool
+     */
+    public static $registersRoutes = true;
+
+    /**
      * The roles that are available to assign to users.
      *
      * @var array
@@ -298,5 +305,17 @@ class Jetstream
     public static function deleteUsersUsing(string $class)
     {
         return app()->singleton(DeletesUsers::class, $class);
+    }
+
+    /**
+     * Configure Jetstream to not register its routes.
+     *
+     * @return static
+     */
+    public static function ignoreRoutes()
+    {
+        static::$registersRoutes = false;
+
+        return new static;
     }
 }
