@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Laravel\Jetstream\Contracts\DeletesTeams;
 use Laravel\Jetstream\Contracts\DeletesUsers;
 
-class DeleteUser implements DeletesUsers
+class DeleteUserWithTeams implements DeletesUsers
 {
     /**
      * The team deleter implementation.
