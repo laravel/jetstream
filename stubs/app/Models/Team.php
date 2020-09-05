@@ -40,16 +40,4 @@ class Team extends JetstreamTeam
         'updated' => TeamUpdated::class,
         'deleted' => TeamDeleted::class,
     ];
-
-    /**
-     * Handle the model "booted" event.
-     *
-     * @return void
-     */
-    public static function booted()
-    {
-        static::creating(function ($model) {
-            $model->id = $model->id ?: (string) Str::orderedUuid();
-        });
-    }
 }

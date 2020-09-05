@@ -12,10 +12,10 @@ class TeamController extends Controller
      * Show the team management screen.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  string  $teamId
+     * @param  mixed  $teamId
      * @return \Illuminate\View\View
      */
-    public function show(Request $request, string $teamId)
+    public function show(Request $request, $teamId)
     {
         $team = Jetstream::newTeamModel()->findOrFail($teamId);
 

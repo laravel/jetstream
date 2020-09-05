@@ -15,7 +15,7 @@ class CreateTeamUserTable extends Migration
     {
         Schema::create('team_user', function (Blueprint $table) {
             $table->id();
-            $table->uuid('team_id');
+            $table->foreignId('team_id');
             $table->foreignId('user_id');
             $table->string('role')->nullable();
             $table->timestamps();
