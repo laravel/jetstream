@@ -5,6 +5,7 @@ namespace Laravel\Jetstream\Tests;
 use App\Actions\Jetstream\CreateTeam;
 use App\Actions\Jetstream\DeleteTeam;
 use App\Actions\Jetstream\DeleteUserWithTeam;
+use App\Actions\Jetstream\DeleteUserWithTeams;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Jetstream;
@@ -35,7 +36,7 @@ class DeleteUserWithTeamsTest extends OrchestraTestCase
 
         require $fixture;
 
-        $action = new DeleteUser(new DeleteTeam);
+        $action = new DeleteUserWithTeams(new DeleteTeam);
 
         $action->delete($team->owner);
 
