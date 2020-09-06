@@ -45,7 +45,7 @@ class ApiTokenManager extends Component
      *
      * @var \Laravel\Sanctum\PersonalAccessToken|null
      */
-    public $managingPermissionsFor;
+    protected $managingPermissionsFor;
 
     /**
      * The update API token form state.
