@@ -12,7 +12,7 @@ class TeamController extends Controller
      * Show the team management screen.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  mixed  $teamId
+     * @param  int  $teamId
      * @return \Illuminate\View\View
      */
     public function show(Request $request, $teamId)

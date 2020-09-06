@@ -18,7 +18,7 @@ class TeamController extends Controller
      * Show the team management screen.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  mixed  $teamId
+     * @param  int  $teamId
      * @return \Inertia\Response
      */
     public function show(Request $request, $teamId)
@@ -71,7 +71,7 @@ class TeamController extends Controller
      * Update the given team's name.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  mixed  $teamId
+     * @param  int  $teamId
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $teamId)
@@ -87,7 +87,7 @@ class TeamController extends Controller
      * Delete the given team.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  mixed  $teamId
+     * @param  int  $teamId
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Request $request, $teamId)
