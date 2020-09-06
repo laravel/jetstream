@@ -48,6 +48,10 @@ class InstallCommand extends Command
             $this->replaceInFile('Home', 'Dashboard', resource_path('views/welcome.blade.php'));
         }
 
+        if (! is_dir(app_path('Models'))) {
+            mkdir(app_path('Models'));
+        }
+
         // Fortify Provider...
         $this->installFortifyServiceProvider();
 
