@@ -57,7 +57,7 @@
                                             Team Settings
                                         </jet-dropdown-link>
 
-                                        <jet-dropdown-link href="/teams/create">
+                                        <jet-dropdown-link href="/teams/create" v-if="$page.user.can.create_team">
                                             Create New Team
                                         </jet-dropdown-link>
 

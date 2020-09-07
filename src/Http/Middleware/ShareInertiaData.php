@@ -2,6 +2,7 @@
 
 namespace Laravel\Jetstream\Http\Middleware;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
@@ -42,6 +43,9 @@ class ShareInertiaData
                     'all_teams' => Jetstream::hasTeamFeatures() ? $request->user()->allTeams() : null,
                 ]), [
                     'two_factor_enabled' => ! is_null($request->user()->two_factor_secret),
+                    'can' => [
+                        'create_team' => Jetstream::hasTeamFeatures() && Gate::forUser($user)->authorize('create', Jetstream::newTeamModel()),
+                    ],
                 ]);
             },
             'errorBags' => function () {

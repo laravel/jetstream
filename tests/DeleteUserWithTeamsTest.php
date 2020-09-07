@@ -5,9 +5,12 @@ namespace Laravel\Jetstream\Tests;
 use App\Actions\Jetstream\CreateTeam;
 use App\Actions\Jetstream\DeleteTeam;
 use App\Actions\Jetstream\DeleteUser;
+use App\Models\Team;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Jetstream;
+use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
 
 class DeleteUserWithTeamsTest extends OrchestraTestCase
@@ -16,6 +19,7 @@ class DeleteUserWithTeamsTest extends OrchestraTestCase
     {
         parent::setUp();
 
+        Gate::policy(Team::class, TeamPolicy::class);
         Jetstream::useUserModel(User::class);
     }
 

@@ -3,10 +3,22 @@
 namespace Laravel\Jetstream\Tests;
 
 use App\Actions\Jetstream\CreateTeam;
+use App\Models\Team;
+use Illuminate\Support\Facades\Gate;
+use Laravel\Jetstream\Jetstream;
+use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
 
 class CurrentTeamControllerTest extends OrchestraTestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        Gate::policy(Team::class, TeamPolicy::class);
+        Jetstream::useUserModel(User::class);
+    }
+
     public function test_can_switch_to_team_the_user_belongs_to()
     {
         $this->migrate();
