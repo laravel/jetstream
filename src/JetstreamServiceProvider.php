@@ -151,6 +151,10 @@ class JetstreamServiceProvider extends ServiceProvider
             __DIR__.'/../database/migrations/2020_05_21_100000_create_teams_table.php' => database_path('migrations/2020_05_21_100000_create_teams_table.php'),
             __DIR__.'/../database/migrations/2020_05_21_200000_create_team_user_table.php' => database_path('migrations/2020_05_21_200000_create_team_user_table.php'),
         ], 'jetstream-team-migrations');
+
+        $this->publishes([
+            __DIR__.'/../routes/'.config('jetstream.stack').'.php' => base_path('routes/jetstream'),
+        ], 'jetstream-routes');
     }
 
     /**
@@ -160,12 +164,14 @@ class JetstreamServiceProvider extends ServiceProvider
      */
     protected function configureRoutes()
     {
-        Route::group([
-            'namespace' => 'Laravel\Jetstream\Http\Controllers',
-            'domain' => config('jetstream.domain', null),
-        ], function () {
-            $this->loadRoutesFrom(__DIR__.'/../routes/'.config('jetstream.stack').'.php');
-        });
+        if (Jetstream::$registersRoutes) {
+            Route::group([
+                'namespace' => 'Laravel\Jetstream\Http\Controllers',
+                'domain' => config('jetstream.domain', null),
+            ], function () {
+                $this->loadRoutesFrom(__DIR__.'/../routes/'.config('jetstream.stack').'.php');
+            });
+        }
     }
 
     /**
