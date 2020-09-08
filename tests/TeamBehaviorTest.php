@@ -6,8 +6,8 @@ use App\Actions\Jetstream\CreateTeam;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Team;
 use Laravel\Jetstream\Tests\Fixtures\User;
-use Laravel\Sanctum\TransientToken;
 use Laravel\Sanctum\Sanctum;
+use Laravel\Sanctum\TransientToken;
 
 class TeamBehaviorTest extends OrchestraTestCase
 {
