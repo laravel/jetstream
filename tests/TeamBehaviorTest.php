@@ -104,7 +104,7 @@ class TeamBehaviorTest extends OrchestraTestCase
         $team->users()->attach($adam, ['role' => 'admin']);
 
         $this->assertFalse($adam->hasTeamPermission($team, 'foo'));
-        
+
         $john = User::forceCreate([
             'name' => 'John Doe',
             'email' => 'john@doe.com',
