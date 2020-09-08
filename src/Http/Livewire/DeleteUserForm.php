@@ -26,7 +26,7 @@ class DeleteUserForm extends Component
     public $password = '';
 
     /**
-     * Confirm that the user would like to logout from other browser sessions.
+     * Confirm that the user would like to delete their account.
      *
      * @return void
      */
