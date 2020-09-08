@@ -23,6 +23,9 @@ class ShareInertiaData
         Inertia::share(array_filter([
             'jetstream' => function () use ($request) {
                 return [
+                    'canCreateTeams' => $request->user() &&
+                                        Jetstream::hasTeamFeatures() &&
+                                        Gate::forUser($request->user())->authorize('create', Jetstream::newTeamModel()),
                     'canManageTwoFactorAuthentication' => Features::canManageTwoFactorAuthentication(),
                     'flash' => $request->session()->get('flash', []),
                     'hasApiFeatures' => Jetstream::hasApiFeatures(),
@@ -43,9 +46,6 @@ class ShareInertiaData
                     'all_teams' => Jetstream::hasTeamFeatures() ? $request->user()->allTeams() : null,
                 ]), [
                     'two_factor_enabled' => ! is_null($request->user()->two_factor_secret),
-                    'can' => [
-                        'create_team' => Jetstream::hasTeamFeatures() && Gate::forUser($user)->authorize('create', Jetstream::newTeamModel()),
-                    ],
                 ]);
             },
             'errorBags' => function () {
