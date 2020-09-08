@@ -6,6 +6,7 @@ use App\Actions\Jetstream\CreateTeam;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Team;
 use Laravel\Jetstream\Tests\Fixtures\User;
+use Laravel\Sanctum\Sanctum;
 use Laravel\Sanctum\TransientToken;
 
 class TeamBehaviorTest extends OrchestraTestCase
@@ -54,6 +55,15 @@ class TeamBehaviorTest extends OrchestraTestCase
         $otherUser->teams()->attach($team, ['role' => 'editor']);
         $otherUser = $otherUser->fresh();
 
+        $this->assertTrue($otherUser->belongsToTeam($team));
+        $this->assertFalse($otherUser->ownsTeam($team));
+
+        $this->assertTrue($otherUser->hasTeamPermission($team, 'foo'));
+        $this->assertFalse($otherUser->hasTeamPermission($team, 'bar'));
+
+        $this->assertTrue($team->userHasPermission($otherUser, 'foo'));
+        $this->assertFalse($team->userHasPermission($otherUser, 'bar'));
+
         $otherUser->withAccessToken(new TransientToken);
 
         $this->assertTrue($otherUser->belongsToTeam($team));
@@ -88,9 +98,25 @@ class TeamBehaviorTest extends OrchestraTestCase
             'password' => 'secret',
         ]);
 
+        $authToken = new Sanctum;
+        $adam = $authToken->actingAs($adam, ['bar'], []);
+
         $team->users()->attach($adam, ['role' => 'admin']);
 
         $this->assertFalse($adam->hasTeamPermission($team, 'foo'));
+
+        $john = User::forceCreate([
+            'name' => 'John Doe',
+            'email' => 'john@doe.com',
+            'password' => 'secret',
+        ]);
+
+        $authToken = new Sanctum;
+        $john = $authToken->actingAs($john, ['foo'], []);
+
+        $team->users()->attach($john, ['role' => 'admin']);
+
+        $this->assertTrue($john->hasTeamPermission($team, 'foo'));
     }
 
     protected function migrate()
