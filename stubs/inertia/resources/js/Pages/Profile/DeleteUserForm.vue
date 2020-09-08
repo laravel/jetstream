@@ -88,7 +88,13 @@
 
         methods: {
             confirmUserDeletion() {
-                this.confirmingUserDeletion = true
+                this.form.password = '';
+
+                this.confirmingUserDeletion = true;
+
+                setTimeout(() => {
+                    this.$refs.password.focus()
+                }, 250)
             },
 
             deleteUser() {
@@ -96,7 +102,7 @@
                     preserveScroll: true
                 }).then(response => {
                     if (! this.form.hasErrors()) {
-                        this.confirmingUserDeletion = false
+                        this.confirmingUserDeletion = false;
                     }
                 })
             },
