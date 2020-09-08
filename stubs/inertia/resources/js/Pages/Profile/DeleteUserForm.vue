@@ -26,7 +26,16 @@
                 </template>
 
                 <template #content>
-                    Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted.
+                    Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.
+
+                    <div class="mt-4">
+                        <jet-input type="password" class="mt-1 block w-3/4" placeholder="Password"
+                                    ref="password"
+                                    v-model="form.password"
+                                    @keyup.enter.native="deleteUser" />
+
+                        <jet-input-error :message="form.error('password')" class="mt-2" />
+                    </div>
                 </template>
 
                 <template #footer>
@@ -34,7 +43,7 @@
                         Nevermind
                     </jet-secondary-button>
 
-                    <jet-danger-button class="ml-2" @click.native="deleteTeam" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    <jet-danger-button class="ml-2" @click.native="deleteUser" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         Delete Account
                     </jet-danger-button>
                 </template>
@@ -48,6 +57,8 @@
     import JetButton from './../../Jetstream/Button'
     import JetConfirmationModal from './../../Jetstream/ConfirmationModal'
     import JetDangerButton from './../../Jetstream/DangerButton'
+    import JetInput from './../../Jetstream/Input'
+    import JetInputError from './../../Jetstream/InputError'
     import JetSecondaryButton from './../../Jetstream/SecondaryButton'
 
     export default {
@@ -56,6 +67,8 @@
             JetButton,
             JetConfirmationModal,
             JetDangerButton,
+            JetInput,
+            JetInputError,
             JetSecondaryButton,
         },
 
@@ -65,7 +78,8 @@
                 deleting: false,
 
                 form: this.$inertia.form({
-                    //
+                    '_method': 'DELETE',
+                    password: '',
                 }, {
                     bag: 'deleteUser'
                 })
@@ -77,10 +91,14 @@
                 this.confirmingUserDeletion = true
             },
 
-            deleteTeam() {
-                this.form.delete('/user', {
+            deleteUser() {
+                this.form.post('/user', {
                     preserveScroll: true
-                });
+                }).then(response => {
+                    if (! this.form.hasErrors()) {
+                        this.confirmingUserDeletion = false
+                    }
+                })
             },
         },
     }
