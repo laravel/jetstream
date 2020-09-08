@@ -242,7 +242,7 @@ Jetstream::role('editor', 'Editor', [
 <a name="team-authorization"></a>
 ### Authorization
 
-A user's team permissions may be determine using the `hasTeamPermission` method available via the `Laravel\Jetstream\HasTeams` trait:
+A user's team permissions may be determined using the `hasTeamPermission` method available via the `Laravel\Jetstream\HasTeams` trait:
 
 ```php
 if ($request->user()->hasTeamPermission($team, 'read')) {
