@@ -153,7 +153,7 @@ class JetstreamServiceProvider extends ServiceProvider
         ], 'jetstream-team-migrations');
 
         $this->publishes([
-            __DIR__.'/../routes/'.config('jetstream.stack').'.php' => base_path('routes/jetstream.php'),
+            __DIR__.'/../routes/'.config('jetstream.stack').'.php' => base_path('routes/jetstream'),
         ], 'jetstream-routes');
     }
 
