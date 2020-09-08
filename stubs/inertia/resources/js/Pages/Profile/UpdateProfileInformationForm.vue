@@ -33,6 +33,10 @@
                 <jet-secondary-button class="mt-2" type="button" @click.native.prevent="selectNewPhoto">
                     Select A New Photo
                 </jet-secondary-button>
+                
+                <jet-button type="button" v-if="$page.user.profile_photo_path">
+                    Delete Photo
+                </jet-button>
 
                 <jet-input-error :message="form.error('photo')" class="mt-2" />
             </div>
