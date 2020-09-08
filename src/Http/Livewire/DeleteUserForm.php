@@ -30,7 +30,7 @@ class DeleteUserForm extends Component
      *
      * @return void
      */
-    public function confirmDelete()
+    public function confirmUserDeletion()
     {
         $this->password = '';
 

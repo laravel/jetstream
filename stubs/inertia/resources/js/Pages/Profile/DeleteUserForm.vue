@@ -14,7 +14,7 @@
             </div>
 
             <div class="mt-5">
-                <jet-danger-button @click.native="confirmTeamDeletion">
+                <jet-danger-button @click.native="confirmUserDeletion">
                     Delete Account
                 </jet-danger-button>
             </div>
@@ -87,7 +87,7 @@
         },
 
         methods: {
-            confirmTeamDeletion() {
+            confirmUserDeletion() {
                 this.confirmingUserDeletion = true
             },
 

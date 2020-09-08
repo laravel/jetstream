@@ -13,7 +13,7 @@
         </div>
 
         <div class="mt-5">
-            <x-jet-danger-button wire:click="$toggle('confirmingUserDeletion')" wire:loading.attr="disabled">
+            <x-jet-danger-button wire:click="confirmUserDeletion" wire:loading.attr="disabled">
                 Delete Account
             </x-jet-danger-button>
         </div>
