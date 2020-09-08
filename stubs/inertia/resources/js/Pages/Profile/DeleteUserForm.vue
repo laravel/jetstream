@@ -20,7 +20,7 @@
             </div>
 
             <!-- Delete Account Confirmation Modal -->
-            <jet-confirmation-modal :show="confirmingUserDeletion" @close="confirmingUserDeletion = false">
+            <jet-dialog-modal :show="confirmingUserDeletion" @close="confirmingUserDeletion = false">
                 <template #title>
                     Delete Account
                 </template>
@@ -47,7 +47,7 @@
                         Delete Account
                     </jet-danger-button>
                 </template>
-            </jet-confirmation-modal>
+            </jet-dialog-modal>
         </template>
     </jet-action-section>
 </template>
@@ -55,7 +55,7 @@
 <script>
     import JetActionSection from './../../Jetstream/ActionSection'
     import JetButton from './../../Jetstream/Button'
-    import JetConfirmationModal from './../../Jetstream/ConfirmationModal'
+    import JetDialogModal from './../../Jetstream/DialogModal'
     import JetDangerButton from './../../Jetstream/DangerButton'
     import JetInput from './../../Jetstream/Input'
     import JetInputError from './../../Jetstream/InputError'
@@ -65,8 +65,8 @@
         components: {
             JetActionSection,
             JetButton,
-            JetConfirmationModal,
             JetDangerButton,
+            JetDialogModal,
             JetInput,
             JetInputError,
             JetSecondaryButton,
