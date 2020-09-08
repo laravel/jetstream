@@ -78,8 +78,8 @@ class InstallCommand extends Command
     {
         if (! Str::contains($appConfig = file_get_contents(config_path('app.php')), 'App\\Providers\\FortifyServiceProvider::class')) {
             file_put_contents(config_path('app.php'), str_replace(
-                "App\\Providers\RouteServiceProvider::class,".PHP_EOL,
-                "App\\Providers\RouteServiceProvider::class,".PHP_EOL."        App\Providers\FortifyServiceProvider::class,".PHP_EOL,
+                "App\\Providers\RouteServiceProvider::class,",
+                "App\\Providers\RouteServiceProvider::class,".PHP_EOL."        App\Providers\FortifyServiceProvider::class,",
                 $appConfig
             ));
         }
@@ -433,8 +433,8 @@ EOF;
     {
         if (! Str::contains($appConfig = file_get_contents(config_path('app.php')), 'App\\Providers\\JetstreamServiceProvider::class')) {
             file_put_contents(config_path('app.php'), str_replace(
-                "App\\Providers\FortifyServiceProvider::class,".PHP_EOL,
-                "App\\Providers\FortifyServiceProvider::class,".PHP_EOL."        App\Providers\JetstreamServiceProvider::class,".PHP_EOL,
+                "App\\Providers\FortifyServiceProvider::class,",
+                "App\\Providers\FortifyServiceProvider::class,".PHP_EOL."        App\Providers\JetstreamServiceProvider::class,",
                 $appConfig
             ));
         }
