@@ -3,14 +3,24 @@
 namespace Laravel\Jetstream\Tests;
 
 use App\Actions\Jetstream\CreateTeam;
+use Illuminate\Support\Facades\Gate;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Team;
+use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
 use Laravel\Sanctum\Sanctum;
 use Laravel\Sanctum\TransientToken;
 
 class TeamBehaviorTest extends OrchestraTestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        Gate::policy(\App\Models\Team::class, TeamPolicy::class);
+        Jetstream::useUserModel(User::class);
+    }
+
     public function test_team_relationship_methods()
     {
         $this->migrate();
