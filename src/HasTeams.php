@@ -69,6 +69,13 @@ trait HasTeams
      */
     public function personalTeam()
     {
+        if ($this->ownedTeams->isEmpty()) {
+            return $this->ownedTeams()->create([
+                'name' => explode(' ', $this->name, 2)[0]."'s Team",
+                'personal_team' => true,
+            ]);
+        }
+
         return $this->ownedTeams->where('personal_team', true)->first();
     }
 
