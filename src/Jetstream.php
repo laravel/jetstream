@@ -46,6 +46,20 @@ class Jetstream
     public static $userModel = 'App\\Models\\User';
 
     /**
+     * The team model that should be used by Jetstream.
+     *
+     * @var string
+     */
+    public static $teamModel = 'App\\Models\\Team';
+
+    /**
+     * The membership model that should be used by Jetstream.
+     *
+     * @var string
+     */
+    public static $membershipModel = 'App\\Models\\Membership';
+
+    /**
      * Determine if Jetstream has registered roles.
      *
      * @return bool
@@ -227,7 +241,7 @@ class Jetstream
      */
     public static function teamModel()
     {
-        return 'App\\Models\\Team';
+        return static::$teamModel;
     }
 
     /**
@@ -249,7 +263,7 @@ class Jetstream
      */
     public static function membershipModel()
     {
-        return 'App\\Models\\Membership';
+        return static::$membershipModel;
     }
 
     /**
