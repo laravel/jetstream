@@ -45,7 +45,7 @@ class OtherBrowserSessionsController extends Controller
             return;
         }
 
-        DB::table('sessions')
+        DB::table(config('session.table', 'sessions'))
             ->where('user_id', $request->user()->getKey())
             ->where('id', '!=', $request->session()->getId())
             ->delete();
