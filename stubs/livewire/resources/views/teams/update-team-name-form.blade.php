@@ -13,7 +13,7 @@
             <x-jet-label value="Team Owner" />
 
             <div class="flex items-center mt-2">
-                <img class="w-12 h-12 rounded-full" src="{{ $team->owner->profile_photo_url }}">
+                <img class="w-12 h-12 rounded-full" src="{{ $team->owner->profile_photo_url }}" alt="{{ $team->owner->name }}">
 
                 <div class="ml-4 leading-tight">
                     <div>{{ $team->owner->name }}</div>
