@@ -42,6 +42,12 @@
                     Select A New Photo
                 </x-jet-secondary-button>
 
+                @if($this->user->profile_photo_path)
+                    <x-jet-button type="button" wire:click="deleteProfilePhoto">
+                        Delete Photo
+                    </x-jet-button>
+                @endif
+
                 <x-jet-input-error for="photo" class="mt-2" />
             </div>
         @endif

@@ -60,6 +60,20 @@ class UpdateProfileInformationForm extends Component
     }
 
     /**
+     * Delete user's profile photo.
+     *
+     * @param \Laravel\Fortify\Contracts\UpdatesUserProfileInformation $updater
+     *
+     * @return void
+     */
+    public function deleteProfilePhoto(UpdatesUserProfileInformation $updater)
+    {
+        Auth::user()->deleteProfilePhoto();
+
+        return redirect()->route('profile.show');
+    }
+
+    /**
      * Get the current user of the application.
      *
      * @return mixed

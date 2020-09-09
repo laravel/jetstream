@@ -22,6 +22,9 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
         Route::delete('/user', [CurrentUserController::class, 'destroy'])
                     ->name('current-user.destroy');
 
+        Route::delete('/user/profile-photo', [CurrentUserController::class, 'deleteProfilePhoto'])
+                    ->name('current-user-photo.destroy');
+
         // API...
         if (Jetstream::hasApiFeatures()) {
             Route::get('/user/api-tokens', [ApiTokenController::class, 'index'])->name('api-tokens.index');
