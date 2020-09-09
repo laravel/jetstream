@@ -12,6 +12,19 @@ use Laravel\Jetstream\Contracts\DeletesUsers;
 class CurrentUserController extends Controller
 {
     /**
+     * Delete the current user profile photo.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteProfilePhoto(Request $request)
+    {
+        $request->user()->deleteProfilePhoto();
+
+        return response('', 200)->header('X-Inertia-Location', url('/user/profile'));
+    }
+    
+    /**
      * Delete the current user.
      *
      * @param  \Illuminate\Http\Request  $request
