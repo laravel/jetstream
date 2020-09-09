@@ -34,7 +34,7 @@
                     Select A New Photo
                 </jet-secondary-button>
                 
-                <jet-button type="button" v-if="$page.user.profile_photo_path">
+                <jet-button type="button" @click.native.prevent="deleteProfilePhoto" v-if="$page.user.profile_photo_path">
                     Delete Photo
                 </jet-button>
 
@@ -107,6 +107,16 @@
         },
 
         methods: {
+            deleteProfilePhoto() {
+                var form = this.$inertia.form({
+                    '_method': 'DELETE',
+                });
+
+                form.post('/user/profile-photo', {
+                    preserveScroll: true
+                });
+            },
+            
             updateProfileInformation() {
                 if (this.$refs.photo) {
                     this.form.photo = this.$refs.photo.files[0]
