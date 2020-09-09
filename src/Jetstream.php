@@ -257,6 +257,19 @@ class Jetstream
     }
 
     /**
+     * Specify the team model that should be used by Jetstream.
+     *
+     * @param  string  $model
+     * @return static
+     */
+    public static function useTeamModel(string $model)
+    {
+        static::$teamModel = $model;
+
+        return new static;
+    }
+
+    /**
      * Get the name of the team model used by the application.
      *
      * @return string
@@ -264,6 +277,19 @@ class Jetstream
     public static function membershipModel()
     {
         return static::$membershipModel;
+    }
+
+    /**
+     * Specify the membership model that should be used by Jetstream.
+     *
+     * @param  string  $model
+     * @return static
+     */
+    public static function useMembershipModel(string $model)
+    {
+        static::$membershipModel = $model;
+
+        return new static;
     }
 
     /**
