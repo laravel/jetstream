@@ -108,12 +108,10 @@
 
         methods: {
             deleteProfilePhoto() {
-                var form = this.$inertia.form({
-                    '_method': 'DELETE',
-                });
-
-                form.post('/user/profile-photo', {
-                    preserveScroll: true
+                this.$inertia.delete('/user/profile-photo', {
+                    preserveScroll: true,
+                }).then(() => {
+                    this.photoPreview = null
                 });
             },
             
