@@ -80,7 +80,7 @@ trait HasTeams
      */
     public function ownsTeam($team)
     {
-        return (int) $this->id === (int) $team->user_id;
+        return $this->id == $team->user_id;
     }
 
     /**
