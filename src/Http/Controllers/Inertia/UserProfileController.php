@@ -37,7 +37,7 @@ class UserProfileController extends Controller
         }
 
         return collect(
-            DB::table(config('session.table'))
+            DB::table('sessions')
                     ->where('user_id', $request->user()->getKey())
                     ->orderBy('last_activity', 'desc')
                     ->get()
