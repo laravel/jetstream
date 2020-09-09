@@ -21,7 +21,7 @@ class CurrentUserController extends Controller
     {
         $request->user()->deleteProfilePhoto();
 
-        return response('', 200)->header('X-Inertia-Location', url('/user/profile'));
+        return back()->with('status', 'profile-photo-deleted');
     }
     
     /**
