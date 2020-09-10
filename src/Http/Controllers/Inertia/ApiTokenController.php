@@ -17,7 +17,7 @@ class ApiTokenController extends Controller
      */
     public function index(Request $request)
     {
-        return Jetstream::inertia()->render($request,'API/Index', [
+        return Jetstream::inertia()->render($request, 'API/Index', [
             'tokens' => $request->user()->tokens,
             'availablePermissions' => Jetstream::$permissions,
             'defaultPermissions' => Jetstream::$defaultPermissions,
