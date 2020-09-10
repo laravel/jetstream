@@ -57,6 +57,8 @@ class UpdateProfileInformationForm extends Component
         }
 
         $this->emit('saved');
+
+        $this->emit('refresh-navigation-dropdown');
     }
 
     /**
