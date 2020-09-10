@@ -56,6 +56,10 @@ class UpdateProfileInformationForm extends Component
             return redirect()->route('profile.show');
         }
 
+        $this->dispatchBrowserEvent('profile-updated', [
+            'infos' => Auth::user()->withoutRelations()->toArray(),
+        ]);
+
         $this->emit('saved');
     }
 

@@ -44,8 +44,16 @@
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
                             <x-jet-dropdown align="right" width="48">
                                 <x-slot name="trigger">
-                                    <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
-                                        <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                                    <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out"
+                                            x-data="{ image: '{{ Auth::user()->profile_photo_url }}', name: '{{ Auth::user()->name }}' }"
+                                            x-cloak
+                                            @profile-updated.window="image = event.detail.infos.profile_photo_url; name = event.detail.infos.name;"
+
+                                    >
+                                        <img class="h-8 w-8 rounded-full object-cover"
+                                             x-bind:src="image"
+                                             x-bind:alt="name"
+                                             alt="" />
                                     </button>
                                 </x-slot>
 
