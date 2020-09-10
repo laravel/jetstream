@@ -5,7 +5,6 @@ namespace Laravel\Jetstream\Http\Controllers\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
-use Inertia\Inertia;
 use Laravel\Jetstream\Jetstream;
 
 class ApiTokenController extends Controller
