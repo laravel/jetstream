@@ -5,7 +5,6 @@ namespace Laravel\Jetstream\Http\Controllers\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
-use Inertia\Inertia;
 use Laravel\Jetstream\Jetstream;
 
 class ApiTokenController extends Controller
@@ -18,7 +17,7 @@ class ApiTokenController extends Controller
      */
     public function index(Request $request)
     {
-        return Inertia::render('API/Index', [
+        return Jetstream::inertia()->render('API/Index', [
             'tokens' => $request->user()->tokens,
             'availablePermissions' => Jetstream::$permissions,
             'defaultPermissions' => Jetstream::$defaultPermissions,
