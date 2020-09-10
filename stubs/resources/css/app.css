@@ -3,4 +3,6 @@
 @import 'tailwindcss/utilities';
 
 /* See : https://github.com/alpinejs/alpine#x-cloak */
-[x-cloak] { display: none; }
+[x-cloak] {
+    display: none;
+}
