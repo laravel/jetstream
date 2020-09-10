@@ -162,7 +162,7 @@ class InstallCommand extends Command
         $this->installJetstreamServiceProvider();
 
         // Models...
-        copy(__DIR__.'/../../stubs/app/Models/User.php', $this->getUserModel());
+        copy(__DIR__.'/../../stubs/app/Models/User.php', $this->getUserModelFileName());
 
         // Actions...
         copy(__DIR__.'/../../stubs/app/Actions/Fortify/CreateNewUser.php', app_path('Actions/Fortify/CreateNewUser.php'));
