@@ -16,7 +16,7 @@
 
         <x-jet-validation-errors class="mb-4" />
 
-        <form method="POST" action="/forgot-password">
+        <form method="POST" action="{{ route('password.request') }}">
             @csrf
 
             <div class="block">
