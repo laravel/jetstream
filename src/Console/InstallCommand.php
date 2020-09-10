@@ -58,7 +58,7 @@ class InstallCommand extends Command
         $this->replaceInFile(
             '// \Illuminate\Session\Middleware\AuthenticateSession::class',
             '\Laravel\Jetstream\Http\Middleware\AuthenticateSession::class',
-            app_path('Http/Kernel.php')
+            $this->getHttpKernelFileName()
         );
 
         // Install Stack...
@@ -496,5 +496,16 @@ EOF;
     protected function replaceInFile($search, $replace, $path)
     {
         file_put_contents($path, str_replace($search, $replace, file_get_contents($path)));
+    }
+
+    /**
+     * Get Http kernel file name
+     *
+     * @return  false|string
+     * @throws \ReflectionException
+     */
+    protected function getHttpKernelFileName()
+    {
+        return (new \ReflectionClass(resolve(\Illuminate\Contracts\Http\Kernel::class)))->getFileName();
     }
 }
