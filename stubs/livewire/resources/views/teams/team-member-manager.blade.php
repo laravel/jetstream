@@ -16,7 +16,7 @@
                 <x-slot name="form">
                     <div class="col-span-6">
                         <div class="max-w-xl text-sm text-gray-600">
-                            {{ __('Please provide the email address of the person you would like to add to this team. The email address must be associated with an existing account.' }}
+                            {{ __('Please provide the email address of the person you would like to add to this team. The email address must be associated with an existing account.') }}
                         </div>
                     </div>
 
