@@ -162,7 +162,7 @@ class InstallCommand extends Command
         $this->installJetstreamServiceProvider();
 
         // Models...
-        copy(__DIR__.'/../../stubs/app/Models/User.php', app_path('Models/User.php'));
+        copy(__DIR__.'/../../stubs/app/Models/User.php', $this->getUserModel());
 
         // Actions...
         copy(__DIR__.'/../../stubs/app/Actions/Fortify/CreateNewUser.php', app_path('Actions/Fortify/CreateNewUser.php'));
@@ -501,11 +501,22 @@ EOF;
     /**
      * Get Http kernel file name.
      *
-     * @return  false|string
+     * @return  string
      * @throws \ReflectionException
      */
     protected function getHttpKernelFileName()
     {
         return (new \ReflectionClass(resolve(\Illuminate\Contracts\Http\Kernel::class)))->getFileName();
+    }
+
+    /**
+     * Get User model file name.
+     *
+     * @return  string
+     * @throws \ReflectionException
+     */
+    protected function getUserModelFileName()
+    {
+        return (new \ReflectionClass(config('auth.providers.users.model')))->getFileName();
     }
 }
