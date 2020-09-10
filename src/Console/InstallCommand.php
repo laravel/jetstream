@@ -499,7 +499,7 @@ EOF;
     }
 
     /**
-     * Get Http kernel file name
+     * Get Http kernel file name.
      *
      * @return  false|string
      * @throws \ReflectionException
