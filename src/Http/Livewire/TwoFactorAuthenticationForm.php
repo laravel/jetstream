@@ -35,6 +35,8 @@ class TwoFactorAuthenticationForm extends Component
      */
     public function enableTwoFactorAuthentication(EnableTwoFactorAuthentication $enable)
     {
+        $this->ensurePasswordIsConfirmed();
+
         $enable(Auth::user());
 
         $this->showingQrCode = true;
