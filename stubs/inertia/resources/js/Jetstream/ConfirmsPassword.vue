@@ -52,10 +52,7 @@
             },
             button: {
                 default: 'Confirm',
-            },
-            within: {
-                default: null
-            },
+            }
         },
 
         components: {
@@ -83,9 +80,7 @@
             startConfirmingPassword() {
                 this.form.error = '';
 
-                let within = this.within
-                            ? this.within
-                            : this.$page.jetstream.configuration.auth.passwordTimeout;
+                let within = 900;
 
                 axios.get('/user/confirmed-password-status?seconds=' + within).then(response => {
                     if (response.data.confirmed) {
