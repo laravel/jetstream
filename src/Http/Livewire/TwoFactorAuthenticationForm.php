@@ -6,10 +6,13 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\Actions\DisableTwoFactorAuthentication;
 use Laravel\Fortify\Actions\EnableTwoFactorAuthentication;
 use Laravel\Fortify\Actions\GenerateNewRecoveryCodes;
+use Laravel\Jetstream\ConfirmsPasswords;
 use Livewire\Component;
 
 class TwoFactorAuthenticationForm extends Component
 {
+    use ConfirmsPasswords;
+
     /**
      * Indicates if two factor authentication QR code is being displayed.
      *
@@ -39,6 +42,18 @@ class TwoFactorAuthenticationForm extends Component
     }
 
     /**
+     * Display the user's recovery codes.
+     *
+     * @return void
+     */
+    public function showRecoveryCodes()
+    {
+        $this->ensurePasswordIsConfirmed();
+
+        $this->showingRecoveryCodes = true;
+    }
+
+    /**
      * Generate new recovery codes for the user.
      *
      * @param  \Laravel\Fortify\Actions\GenerateNewRecoveryCodes  $generate
@@ -46,6 +61,8 @@ class TwoFactorAuthenticationForm extends Component
      */
     public function regenerateRecoveryCodes(GenerateNewRecoveryCodes $generate)
     {
+        $this->ensurePasswordIsConfirmed();
+
         $generate(Auth::user());
 
         $this->showingRecoveryCodes = true;
