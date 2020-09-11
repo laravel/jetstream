@@ -54,7 +54,7 @@
                 default: 'Confirm',
             },
             within: {
-                default: 900
+                default: null
             },
         },
 
@@ -83,7 +83,11 @@
             startConfirmingPassword() {
                 this.form.error = '';
 
-                axios.get('/user/confirmed-password-status?seconds=' + this.within).then(response => {
+                let within = this.within
+                            ? this.within
+                            : this.$page.jetstream.configuration.auth.passwordTimeout;
+
+                axios.get('/user/confirmed-password-status?seconds=' + within).then(response => {
                     if (response.data.confirmed) {
                         this.$emit('confirmed');
                     } else {
