@@ -76,6 +76,8 @@ class TwoFactorAuthenticationForm extends Component
      */
     public function disableTwoFactorAuthentication(DisableTwoFactorAuthentication $disable)
     {
+        $this->ensurePasswordIsConfirmed();
+
         $disable(Auth::user());
     }
 

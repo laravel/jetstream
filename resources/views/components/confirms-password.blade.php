@@ -1,3 +1,5 @@
+@props(['title' => 'Confirm Password', 'content' => __('For your security, please enter your password to continue.')])
+
 @php
     $confirmableId = md5($attributes->wire('then'));
 @endphp
@@ -15,11 +17,11 @@
 @once
 <x-jet-dialog-modal wire:model="confirmingPassword">
     <x-slot name="title">
-        Confirm Password
+        {{ $title }}
     </x-slot>
 
     <x-slot name="content">
-        {{ __('For your security, please enter your password to continue.') }}
+        {{ $content }}
 
         <div class="mt-4" x-data="{}" x-on:confirming-password.window="setTimeout(() => $refs.confirmable_password.focus(), 250)">
             <x-jet-input type="password" class="mt-1 block w-3/4" placeholder="Password"

@@ -70,9 +70,11 @@
                     </x-jet-confirms-password>
                 @endif
 
-                <x-jet-danger-button wire:click="disableTwoFactorAuthentication" wire:loading.attr="disabled">
-                    {{ __('Disable') }}
-                </x-jet-danger-button>
+                <x-jet-confirms-password wire:then="disableTwoFactorAuthentication">
+                    <x-jet-danger-button wire:loading.attr="disabled">
+                        {{ __('Disable') }}
+                    </x-jet-danger-button>
+                </x-jet-confirms-password>
             @endif
         </div>
     </x-slot>
