@@ -27,11 +27,6 @@ class ShareInertiaData
                                         Jetstream::hasTeamFeatures() &&
                                         Gate::forUser($request->user())->check('create', Jetstream::newTeamModel()),
                     'canManageTwoFactorAuthentication' => Features::canManageTwoFactorAuthentication(),
-                    'configuration' => [
-                        'auth' => [
-                            'passwordTimeout' => config('auth.password_timeout', 900),
-                        ],
-                    ],
                     'flash' => $request->session()->get('flash', []),
                     'hasApiFeatures' => Jetstream::hasApiFeatures(),
                     'hasTeamFeatures' => Jetstream::hasTeamFeatures(),

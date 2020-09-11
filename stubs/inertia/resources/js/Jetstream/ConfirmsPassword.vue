@@ -80,9 +80,7 @@
             startConfirmingPassword() {
                 this.form.error = '';
 
-                let within = 900;
-
-                axios.get('/user/confirmed-password-status?seconds=' + within).then(response => {
+                axios.get('/user/confirmed-password-status').then(response => {
                     if (response.data.confirmed) {
                         this.$emit('confirmed');
                     } else {
