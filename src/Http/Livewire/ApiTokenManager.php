@@ -175,6 +175,8 @@ class ApiTokenManager extends Component
         $this->user->load('tokens');
 
         $this->confirmingApiTokenDeletion = false;
+
+        $this->managingPermissionsFor = null;
     }
 
     /**
