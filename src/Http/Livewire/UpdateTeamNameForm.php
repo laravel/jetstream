@@ -48,6 +48,8 @@ class UpdateTeamNameForm extends Component
         $updater->update($this->user, $this->team, $this->state);
 
         $this->emit('saved');
+
+        $this->emit('refresh-navigation-dropdown');
     }
 
     /**
