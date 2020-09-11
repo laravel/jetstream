@@ -35,7 +35,7 @@ class ApiTokenController extends Controller
         Validator::make([
             'name' => $request->name,
         ], [
-            'name' => 'required|string|max:255',
+            'name' => ['required', 'string', 'max:255'],
         ])->validateWithBag('createApiToken');
 
         $token = $request->user()->createToken(
