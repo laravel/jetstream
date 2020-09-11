@@ -29,7 +29,7 @@ class ShareInertiaData
                     'canManageTwoFactorAuthentication' => Features::canManageTwoFactorAuthentication(),
                     'configuration' => [
                         'auth' => [
-                            'passwordTimeout' => config('auth.password_timeout', 900)
+                            'passwordTimeout' => config('auth.password_timeout', 900),
                         ],
                     ],
                     'flash' => $request->session()->get('flash', []),
