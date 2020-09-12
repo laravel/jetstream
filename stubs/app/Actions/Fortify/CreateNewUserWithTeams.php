@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Fortify\Rules\Password;
 
-class CreateNewUser implements CreatesNewUsers
+class CreateNewUserWithTeams implements CreatesNewUsers
 {
     /**
      * Create a newly registered user.
