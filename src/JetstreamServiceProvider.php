@@ -146,7 +146,7 @@ class JetstreamServiceProvider extends ServiceProvider
         ], 'jetstream-views');
 
         $this->publishes([
-            __DIR__.'/../database/migrations/2014_10_12_000000_create_users_table.php' => database_path('migrations/2014_10_12_000000_create_users_table.php'),
+            __DIR__.'/../database/migrations/2020_09_12_000000_update_users_table.php' => database_path('migrations/2020_09_12_000000_update_users_table.php'),
         ], 'jetstream-migrations');
 
         $this->publishes([
