@@ -13,7 +13,7 @@
                 <jet-label value="Team Owner" />
 
                 <div class="flex items-center mt-2">
-                    <img class="w-12 h-12 rounded-full" :src="$page.user.profile_photo_url" :alt="$page.user.name">
+                    <img class="w-12 h-12 rounded-full object-cover" :src="$page.user.profile_photo_url" :alt="$page.user.name">
 
                     <div class="ml-4 leading-tight">
                         <div>{{ $page.user.name }}</div>
