@@ -5,6 +5,7 @@ namespace Laravel\Jetstream\Console;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Symfony\Component\Process\Process;
 
@@ -101,8 +102,11 @@ class InstallCommand extends Command
         }
 
         $this->replaceInFile("'SESSION_DRIVER', 'file'", "'SESSION_DRIVER', 'database'", config_path('session.php'));
-        $this->replaceInFile('SESSION_DRIVER=file', 'SESSION_DRIVER=database', base_path('.env'));
         $this->replaceInFile('SESSION_DRIVER=file', 'SESSION_DRIVER=database', base_path('.env.example'));
+
+        if ($this->isDatabaseConnectionConfigured()) {
+            $this->replaceInFile('SESSION_DRIVER=file', 'SESSION_DRIVER=database', base_path('.env'));
+        }
     }
 
     /**
@@ -497,5 +501,21 @@ EOF;
     protected function replaceInFile($search, $replace, $path)
     {
         file_put_contents($path, str_replace($search, $replace, file_get_contents($path)));
+    }
+
+    /**
+     * Check if a database connection is currently configured.
+     *
+     * @return bool
+     */
+    protected function isDatabaseConnectionConfigured()
+    {
+        try {
+            DB::connection()->getPdo();
+        } catch (Exception $e) {
+            return false;
+        }
+
+        return true;
     }
 }
