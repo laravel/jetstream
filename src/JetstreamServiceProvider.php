@@ -164,14 +164,16 @@ class JetstreamServiceProvider extends ServiceProvider
      */
     protected function configureRoutes()
     {
-        if (Jetstream::$registersRoutes) {
-            Route::group([
-                'namespace' => 'Laravel\Jetstream\Http\Controllers',
-                'domain' => config('jetstream.domain', null),
-            ], function () {
-                $this->loadRoutesFrom(__DIR__.'/../routes/'.config('jetstream.stack').'.php');
-            });
+        if ($this->app->routesAreCached() || config('jetstream.routes') === false) {
+            return;
         }
+
+        Route::group([
+            'namespace' => 'Laravel\Jetstream\Http\Controllers',
+            'domain' => config('jetstream.domain', null),
+        ], function () {
+            $this->loadRoutesFrom(__DIR__.'/../routes/'.config('jetstream.stack').'.php');
+        });
     }
 
     /**
