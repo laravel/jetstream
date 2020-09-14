@@ -34,9 +34,9 @@
                     Select A New Photo
                 </jet-secondary-button>
 
-                <jet-button type="button" @click.native.prevent="deleteProfilePhoto" v-if="$page.user.profile_photo_path">
-                    Delete Photo
-                </jet-button>
+                <jet-secondary-button type="button" class="ml-2" @click.native.prevent="deletePhoto" v-if="$page.user.profile_photo_path">
+                    Remove Photo
+                </jet-secondary-button>
 
                 <jet-input-error :message="form.error('photo')" class="mt-2" />
             </div>
@@ -107,14 +107,6 @@
         },
 
         methods: {
-            deleteProfilePhoto() {
-                this.$inertia.delete('/user/profile-photo', {
-                    preserveScroll: true,
-                }).then(() => {
-                    this.photoPreview = null
-                });
-            },
-            
             updateProfileInformation() {
                 if (this.$refs.photo) {
                     this.form.photo = this.$refs.photo.files[0]
@@ -137,7 +129,15 @@
                 };
 
                 reader.readAsDataURL(this.$refs.photo.files[0]);
-            }
+            },
+
+            deletePhoto() {
+                this.$inertia.delete('/user/profile-photo', {
+                    preserveScroll: true,
+                }).then(() => {
+                    this.photoPreview = null
+                });
+            },
         },
     }
 </script>
