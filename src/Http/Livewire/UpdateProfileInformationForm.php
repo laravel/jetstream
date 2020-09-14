@@ -69,6 +69,8 @@ class UpdateProfileInformationForm extends Component
     public function deleteProfilePhoto()
     {
         Auth::user()->deleteProfilePhoto();
+
+        $this->emit('refresh-navigation-dropdown');
     }
 
     /**

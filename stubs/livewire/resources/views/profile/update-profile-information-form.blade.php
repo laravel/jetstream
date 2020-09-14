@@ -44,7 +44,7 @@
 
                 @if ($this->user->profile_photo_path)
                     <x-jet-secondary-button type="button" class="ml-2" wire:click="deleteProfilePhoto">
-                        Remove Photo
+                        {{ __('Remove Photo') }}
                     </x-jet-secondary-button>
                 @endif
 
