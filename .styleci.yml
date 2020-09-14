@@ -1,5 +1,7 @@
 php:
   preset: laravel
+  disabled:
+    - no_unused_imports
 js:
   finder:
     not-name:
