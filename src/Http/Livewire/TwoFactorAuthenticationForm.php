@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\Actions\DisableTwoFactorAuthentication;
 use Laravel\Fortify\Actions\EnableTwoFactorAuthentication;
 use Laravel\Fortify\Actions\GenerateNewRecoveryCodes;
+use Laravel\Fortify\Features;
 use Laravel\Jetstream\ConfirmsPasswords;
 use Livewire\Component;
 
@@ -35,7 +36,9 @@ class TwoFactorAuthenticationForm extends Component
      */
     public function enableTwoFactorAuthentication(EnableTwoFactorAuthentication $enable)
     {
-        $this->ensurePasswordIsConfirmed();
+        if (Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword')) {
+            $this->ensurePasswordIsConfirmed();
+        }
 
         $enable(Auth::user());
 
@@ -50,7 +53,9 @@ class TwoFactorAuthenticationForm extends Component
      */
     public function showRecoveryCodes()
     {
-        $this->ensurePasswordIsConfirmed();
+        if (Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword')) {
+            $this->ensurePasswordIsConfirmed();
+        }
 
         $this->showingRecoveryCodes = true;
     }
@@ -63,7 +68,9 @@ class TwoFactorAuthenticationForm extends Component
      */
     public function regenerateRecoveryCodes(GenerateNewRecoveryCodes $generate)
     {
-        $this->ensurePasswordIsConfirmed();
+        if (Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword')) {
+            $this->ensurePasswordIsConfirmed();
+        }
 
         $generate(Auth::user());
 
@@ -78,7 +85,9 @@ class TwoFactorAuthenticationForm extends Component
      */
     public function disableTwoFactorAuthentication(DisableTwoFactorAuthentication $disable)
     {
-        $this->ensurePasswordIsConfirmed();
+        if (Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword')) {
+            $this->ensurePasswordIsConfirmed();
+        }
 
         $disable(Auth::user());
     }
