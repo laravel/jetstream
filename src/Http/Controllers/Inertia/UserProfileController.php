@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
-use Inertia\Inertia;
 use Jenssegers\Agent\Agent;
+use Laravel\Jetstream\Jetstream;
 
 class UserProfileController extends Controller
 {
@@ -19,7 +19,7 @@ class UserProfileController extends Controller
      */
     public function show(Request $request)
     {
-        return Inertia::render('Profile/Show', [
+        return Jetstream::inertia()->render($request, 'Profile/Show', [
             'sessions' => $this->sessions($request)->all(),
         ]);
     }

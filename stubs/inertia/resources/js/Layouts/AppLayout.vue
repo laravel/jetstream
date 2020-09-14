@@ -26,7 +26,7 @@
                             <jet-dropdown align="right" width="48">
                                 <template #trigger>
                                     <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
-                                        <img class="h-8 w-8 rounded-full" :src="$page.user.profile_photo_url" alt="" />
+                                        <img class="h-8 w-8 rounded-full object-cover" :src="$page.user.profile_photo_url" :alt="$page.user.name" />
                                     </button>
                                 </template>
 
@@ -117,7 +117,7 @@
                 <div class="pt-4 pb-1 border-t border-gray-200">
                     <div class="flex items-center px-4">
                         <div class="flex-shrink-0">
-                            <img class="h-10 w-10 rounded-full" :src="$page.user.profile_photo_url" alt="" />
+                            <img class="h-10 w-10 rounded-full" :src="$page.user.profile_photo_url" :alt="$page.user.name" />
                         </div>
 
                         <div class="ml-3">

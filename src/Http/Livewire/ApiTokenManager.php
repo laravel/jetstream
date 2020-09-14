@@ -92,7 +92,7 @@ class ApiTokenManager extends Component
         Validator::make([
             'name' => $this->createApiTokenForm['name'],
         ], [
-            'name' => 'required|string|max:255',
+            'name' => ['required', 'string', 'max:255'],
         ])->validateWithBag('createApiToken');
 
         $this->displayTokenValue($this->user->createToken(
@@ -175,6 +175,8 @@ class ApiTokenManager extends Component
         $this->user->load('tokens');
 
         $this->confirmingApiTokenDeletion = false;
+
+        $this->managingPermissionsFor = null;
     }
 
     /**

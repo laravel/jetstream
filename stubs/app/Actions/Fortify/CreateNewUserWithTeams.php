@@ -8,10 +8,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
-use Laravel\Fortify\Rules\Password;
 
 class CreateNewUser implements CreatesNewUsers
 {
+    use PasswordValidationRules;
+
     /**
      * Create a newly registered user.
      *
@@ -23,7 +24,7 @@ class CreateNewUser implements CreatesNewUsers
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', new Password, 'confirmed'],
+            'password' => $this->passwordRules(),
         ])->validate();
 
         return DB::transaction(function () use ($input) {

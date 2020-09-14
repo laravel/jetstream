@@ -23,7 +23,7 @@ trait HasTeams
      */
     public function currentTeam()
     {
-        if (is_null($this->current_team_id)) {
+        if (is_null($this->current_team_id) && $this->id) {
             $this->forceFill([
                 'current_team_id' => $this->personalTeam()->id,
             ])->save();

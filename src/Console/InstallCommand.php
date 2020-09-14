@@ -179,6 +179,7 @@ class InstallCommand extends Command
 
         // Single Blade Views...
         copy(__DIR__.'/../../stubs/livewire/resources/views/dashboard.blade.php', resource_path('views/dashboard.blade.php'));
+        copy(__DIR__.'/../../stubs/livewire/resources/views/navigation-dropdown.blade.php', resource_path('views/navigation-dropdown.blade.php'));
 
         // Other Views...
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/api', resource_path('views/api'));

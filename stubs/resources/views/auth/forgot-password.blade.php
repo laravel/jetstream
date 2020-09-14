@@ -16,11 +16,11 @@
 
         <x-jet-validation-errors class="mb-4" />
 
-        <form method="POST" action="/forgot-password">
+        <form method="POST" action="{{ route('password.email') }}">
             @csrf
 
             <div class="block">
-                <x-jet-label value="Email" />
+                <x-jet-label value="{{ __('Email') }}" />
                 <x-jet-input class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
             </div>
 

@@ -6,10 +6,14 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\Actions\DisableTwoFactorAuthentication;
 use Laravel\Fortify\Actions\EnableTwoFactorAuthentication;
 use Laravel\Fortify\Actions\GenerateNewRecoveryCodes;
+use Laravel\Fortify\Features;
+use Laravel\Jetstream\ConfirmsPasswords;
 use Livewire\Component;
 
 class TwoFactorAuthenticationForm extends Component
 {
+    use ConfirmsPasswords;
+
     /**
      * Indicates if two factor authentication QR code is being displayed.
      *
@@ -32,9 +36,27 @@ class TwoFactorAuthenticationForm extends Component
      */
     public function enableTwoFactorAuthentication(EnableTwoFactorAuthentication $enable)
     {
+        if (Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword')) {
+            $this->ensurePasswordIsConfirmed();
+        }
+
         $enable(Auth::user());
 
         $this->showingQrCode = true;
+        $this->showingRecoveryCodes = true;
+    }
+
+    /**
+     * Display the user's recovery codes.
+     *
+     * @return void
+     */
+    public function showRecoveryCodes()
+    {
+        if (Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword')) {
+            $this->ensurePasswordIsConfirmed();
+        }
+
         $this->showingRecoveryCodes = true;
     }
 
@@ -46,6 +68,10 @@ class TwoFactorAuthenticationForm extends Component
      */
     public function regenerateRecoveryCodes(GenerateNewRecoveryCodes $generate)
     {
+        if (Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword')) {
+            $this->ensurePasswordIsConfirmed();
+        }
+
         $generate(Auth::user());
 
         $this->showingRecoveryCodes = true;
@@ -59,6 +85,10 @@ class TwoFactorAuthenticationForm extends Component
      */
     public function disableTwoFactorAuthentication(DisableTwoFactorAuthentication $disable)
     {
+        if (Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword')) {
+            $this->ensurePasswordIsConfirmed();
+        }
+
         $disable(Auth::user());
     }
 
