@@ -71,7 +71,7 @@
                                 <div class="flex items-center">
                                     @if ($token->last_used_at)
                                         <div class="text-sm text-gray-400">
-                                            Last used {{ $token->last_used_at->diffForHumans() }}
+                                            {{ __('Last used') }} {{ $token->last_used_at->diffForHumans() }}
                                         </div>
                                     @endif
 
