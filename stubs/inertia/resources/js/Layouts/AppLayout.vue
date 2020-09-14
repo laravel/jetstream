@@ -226,11 +226,13 @@
 
         methods: {
             switchToTeam(team) {
+                const currentUrl = window.location.href
                 this.$inertia.put('/current-team', {
                     'team_id': team.id
                 }, {
                     preserveState: false
                 })
+                window.location = currentUrl
             },
 
             logout() {
