@@ -146,6 +146,7 @@ class InstallCommand extends Command
         // Directories...
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Fortify'));
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Jetstream'));
+        (new Filesystem)->ensureDirectoryExists(app_path('Models'));
         (new Filesystem)->ensureDirectoryExists(app_path('View/Components'));
         (new Filesystem)->ensureDirectoryExists(public_path('css'));
         (new Filesystem)->ensureDirectoryExists(resource_path('css'));
@@ -285,6 +286,7 @@ EOF;
         // Directories...
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Fortify'));
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Jetstream'));
+        (new Filesystem)->ensureDirectoryExists(app_path('Models'));
         (new Filesystem)->ensureDirectoryExists(app_path('View/Components'));
         (new Filesystem)->ensureDirectoryExists(public_path('css'));
         (new Filesystem)->ensureDirectoryExists(resource_path('css'));
