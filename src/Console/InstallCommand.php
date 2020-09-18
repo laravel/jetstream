@@ -116,7 +116,7 @@ class InstallCommand extends Command
         // Install Livewire...
         $install = ! $this->option('no-install');
 
-        if ($install){
+        if ($install) {
             (new Process(['composer', 'require', 'livewire/livewire:^2.0', 'laravel/sanctum:^2.6'], base_path()))
                 ->setTimeout(null)
                 ->run(function ($type, $output) {
