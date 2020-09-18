@@ -114,9 +114,9 @@ class InstallCommand extends Command
     protected function installLivewireStack()
     {
         // Install Livewire...
-        $install = !$this->option('no-install');
+        $install = ! $this->option('no-install');
 
-        if($install){
+        if ($install){
             (new Process(['composer', 'require', 'livewire/livewire:^2.0', 'laravel/sanctum:^2.6'], base_path()))
                 ->setTimeout(null)
                 ->run(function ($type, $output) {
@@ -136,13 +136,13 @@ class InstallCommand extends Command
         // $this->replaceInFile("'guard' => 'web'", "'guard' => 'sanctum'", config_path('auth.php'));
 
         // NPM Packages...
-        if($install) {
+        if ($install) {
             $this->updateNodePackages(function ($packages) {
                 return [
-                        '@tailwindcss/ui' => '^0.5.0',
-                        'postcss-import'  => '^12.0.1',
-                        'tailwindcss'     => '^1.3.0',
-                    ] + $packages;
+                    '@tailwindcss/ui' => '^0.5.0',
+                    'postcss-import'  => '^12.0.1',
+                    'tailwindcss'     => '^1.3.0',
+                ] + $packages;
             });
         }
 
@@ -253,7 +253,7 @@ EOF;
      */
     protected function installInertiaStack()
     {
-        $install = !$this->option('no-install');
+        $install = ! $this->option('no-install');
 
         if ($install) {
             // Install Inertia...
