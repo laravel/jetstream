@@ -18,8 +18,20 @@
                 </div>
             </div>
 
-            <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
+                <!-- Current Active Team -->
+                @if (count(Auth::user()->allTeams()) > 1)
+                    <div class="text-sm pr-4">
+                        <span class="text-gray-400">
+                            {{ __('Current Team') }}:
+                        </span>
+                        <span class="text-gray-600">
+                            {{ Auth::user()->currentTeam->name }}
+                        </span>
+                    </div>
+                @endif
+
+                <!-- Settings Dropdown -->
                 <x-jet-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
