@@ -47,7 +47,13 @@ trait HasProfilePhoto
      */
     protected function defaultProfilePhotoUrl()
     {
-        return 'https://ui-avatars.com/api/?name='.urlencode($this->name).'&color=7F9CF5&background=EBF4FF';
+        $params = config('jetstream.default-profile-photo');
+
+        // Make sure it is backwards compatible for users that already published jetstream config.
+        $params['color'] = config('jetstream.default-profile-photo.color', '7F9CF5');
+        $params['background'] = config('jetstream.default-profile-photo.background', 'EBF4FF');
+
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&' . http_build_query($params);
     }
 
     /**
