@@ -47,7 +47,7 @@ trait HasProfilePhoto
      */
     protected function defaultProfilePhotoUrl()
     {
-        $params = config('jetstream.default-profile-photo');
+        $params = config('jetstream.default-profile-photo', []);
 
         // Make sure it is backwards compatible for users that already published jetstream config.
         $params['color'] = config('jetstream.default-profile-photo.color', '7F9CF5');
