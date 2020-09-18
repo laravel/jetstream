@@ -16,7 +16,8 @@ class InstallCommand extends Command
      * @var string
      */
     protected $signature = 'jetstream:install {stack : The development stack that should be installed}
-                                              {--teams : Indicates if team support should be installed}';
+                                              {--teams : Indicates if team support should be installed}
+                                              {--no-install : Indiciates if stack is already installed so we can only update the assets}';
 
     /**
      * The console command description.
@@ -113,11 +114,15 @@ class InstallCommand extends Command
     protected function installLivewireStack()
     {
         // Install Livewire...
-        (new Process(['composer', 'require', 'livewire/livewire:^2.0', 'laravel/sanctum:^2.6'], base_path()))
+        $install = !$this->option('no-install');
+
+        if($install){
+            (new Process(['composer', 'require', 'livewire/livewire:^2.0', 'laravel/sanctum:^2.6'], base_path()))
                 ->setTimeout(null)
                 ->run(function ($type, $output) {
                     $this->output->write($output);
                 });
+        }
 
         // Sanctum...
         (new Process(['php', 'artisan', 'vendor:publish', '--provider=Laravel\Sanctum\SanctumServiceProvider', '--force'], base_path()))
@@ -131,13 +136,15 @@ class InstallCommand extends Command
         // $this->replaceInFile("'guard' => 'web'", "'guard' => 'sanctum'", config_path('auth.php'));
 
         // NPM Packages...
-        $this->updateNodePackages(function ($packages) {
-            return [
-                '@tailwindcss/ui' => '^0.5.0',
-                'postcss-import' => '^12.0.1',
-                'tailwindcss' => '^1.3.0',
-            ] + $packages;
-        });
+        if($install) {
+            $this->updateNodePackages(function ($packages) {
+                return [
+                        '@tailwindcss/ui' => '^0.5.0',
+                        'postcss-import'  => '^12.0.1',
+                        'tailwindcss'     => '^1.3.0',
+                    ] + $packages;
+            });
+        }
 
         // Tailwind Configuration...
         copy(__DIR__.'/../../stubs/livewire/tailwind.config.js', base_path('tailwind.config.js'));
@@ -246,27 +253,31 @@ EOF;
      */
     protected function installInertiaStack()
     {
-        // Install Inertia...
-        (new Process(['composer', 'require', 'inertiajs/inertia-laravel', 'laravel/sanctum:^2.6'], base_path()))
+        $install = !$this->option('no-install');
+
+        if ($install) {
+            // Install Inertia...
+            (new Process(['composer', 'require', 'inertiajs/inertia-laravel', 'laravel/sanctum:^2.6'], base_path()))
                 ->setTimeout(null)
                 ->run(function ($type, $output) {
                     $this->output->write($output);
                 });
 
-        // Install NPM packages...
-        $this->updateNodePackages(function ($packages) {
-            return [
-                '@inertiajs/inertia' => '^0.1.7',
-                '@inertiajs/inertia-vue' => '^0.1.2',
-                '@tailwindcss/ui' => '^0.1.3',
-                'laravel-jetstream' => '^0.0.3',
-                'portal-vue' => '^2.1.7',
-                'postcss-import' => '^12.0.1',
-                'tailwindcss' => '^1.3.0',
-                'vue' => '^2.5.17',
-                'vue-template-compiler' => '^2.6.10',
-            ] + $packages;
-        });
+            // Install NPM packages...
+            $this->updateNodePackages(function ($packages) {
+                return [
+                    '@inertiajs/inertia' => '^0.1.7',
+                    '@inertiajs/inertia-vue' => '^0.1.2',
+                    '@tailwindcss/ui' => '^0.1.3',
+                    'laravel-jetstream' => '^0.0.3',
+                    'portal-vue' => '^2.1.7',
+                    'postcss-import' => '^12.0.1',
+                    'tailwindcss' => '^1.3.0',
+                    'vue' => '^2.5.17',
+                    'vue-template-compiler' => '^2.6.10',
+                ] + $packages;
+            });
+        }
 
         // Sanctum...
         (new Process(['php', 'artisan', 'vendor:publish', '--provider=Laravel\Sanctum\SanctumServiceProvider', '--force'], base_path()))
