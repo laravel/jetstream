@@ -34,4 +34,9 @@ return [
         // Features::teams(),
     ],
 
+    
+    'default-profile-photo' => [
+        'color'      => 'f2ff2f',
+        'background' => 'aaaaaa',
+    ],
 ];
