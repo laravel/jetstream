@@ -5,7 +5,9 @@
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
-
+        
+        <x-jet-validation-errors-bag class="mb-4" :bag="'updatePassword'" />
+        
         <form method="POST" action="{{ route('password.update') }}">
             @csrf
 
