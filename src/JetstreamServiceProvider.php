@@ -112,6 +112,7 @@ class JetstreamServiceProvider extends ServiceProvider
             $this->registerComponent('section-title');
             $this->registerComponent('switchable-team');
             $this->registerComponent('validation-errors');
+            $this->registerComponent('validation-errors-bag');
             $this->registerComponent('welcome');
         });
     }
