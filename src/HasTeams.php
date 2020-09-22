@@ -116,7 +116,7 @@ trait HasTeams
             'id', $this->id
         )->first()->membership->role);
     }
-   
+
     /**
      * Determine if the user has the given role on the given team.
      *
