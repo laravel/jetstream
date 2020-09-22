@@ -2,14 +2,25 @@
 
 ## [Unreleased](https://github.com/laravel/jetstream/compare/v1.2.1...1.x)
 
+
+## [v1.3.0 (2020-09-22)](https://github.com/laravel/jetstream/compare/v1.2.1...v1.3.0)
+
+### Added
+- Added hasTeamRole check on the HasTeams trait ([#251](https://github.com/laravel/jetstream/pull/251), [87b4bf3](https://github.com/laravel/jetstream/commit/87b4bf356387a66f87a90712f0aa4a1ce3c13126))
+
 ### Changed
 - More translation support ([#211](https://github.com/laravel/jetstream/pull/211), [#216](https://github.com/laravel/jetstream/pull/216))
 - Use `mix()` instead of `asset()` for hot-reload support ([#217](https://github.com/laravel/jetstream/pull/217))
 - Remove Hard Coded Livewire Routes ([#226](https://github.com/laravel/jetstream/pull/226))
+- Update `UpdateUserProfileInformation.php` ([#247](https://github.com/laravel/jetstream/pull/247))
 
 ### Fixed
 - Fixed attribute order inside views ([#207](https://github.com/laravel/jetstream/pull/207))
 - Update modal z-index ([#212](https://github.com/laravel/jetstream/pull/212))
+- Add key of v-for teams ([#239](https://github.com/laravel/jetstream/pull/239))
+- Correct ID value for email field ([#240](https://github.com/laravel/jetstream/pull/240))
+- Fix purging of CSS classes on production builds ([#249](https://github.com/laravel/jetstream/pull/249))
+- Fix migration ([1883071](https://github.com/laravel/jetstream/commit/1883071d771193e59ef7ed4509576e9b853dac43))
 
 
 ## [v1.2.1 (2020-09-15)](https://github.com/laravel/jetstream/compare/v1.2.0...v1.2.1)
