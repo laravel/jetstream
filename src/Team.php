@@ -29,10 +29,9 @@ abstract class Team extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(Jetstream::userModel())
+        return $this->belongsToMany(Jetstream::userModel(), Jetstream::membershipModel())
                         ->withPivot('role')
                         ->withTimestamps()
-                        ->using(Jetstream::membershipModel())
                         ->as('membership');
     }
 
