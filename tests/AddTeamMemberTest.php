@@ -46,6 +46,8 @@ class AddTeamMemberTest extends OrchestraTestCase
         $this->assertCount(1, $team->users);
 
         $this->assertTrue($otherUser->hasTeamRole($team, 'admin'));
+        $this->assertFalse($otherUser->hasTeamRole($team, 'editor'));
+        $this->assertFalse($otherUser->hasTeamRole($team, 'foobar'));
 
         $team->users->first()->withAccessToken(new TransientToken);
 
