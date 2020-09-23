@@ -79,6 +79,7 @@ class JetstreamTest extends OrchestraTestCase
 
         Jetstream::usePermissionModel(Permission::class);
 
+        $this->assertTrue(Jetstream::hasPermissions());
         $this->assertInstanceOf(Permission::class, Jetstream::newPermissionModel());
     }
 
@@ -92,7 +93,10 @@ class JetstreamTest extends OrchestraTestCase
 
         Jetstream::useTeamRoleModel(TeamRole::class);
 
+        $this->assertTrue(Jetstream::hasRoles());
         $this->assertInstanceOf(TeamRole::class, Jetstream::newTeamRoleModel());
+        $this->assertInstanceOf(TeamRole::class, Jetstream::findRole('editor'));
+        $this->assertInstanceOf(TeamRole::class, Jetstream::findRole('admin'));
     }
 
     protected function migrate()

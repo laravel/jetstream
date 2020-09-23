@@ -97,7 +97,7 @@ class Jetstream
     public static function hasRoles()
     {
         if (static::hasTeamRolesModel()) {
-            return static::newUserModel()->count() > 0;
+            return static::newTeamRoleModel()->count() > 0;
         }
 
         return count(static::$roles) > 0;
@@ -157,7 +157,7 @@ class Jetstream
     public static function hasPermissions()
     {
         if (static::hasPermissionsModel()) {
-            return static::newUserModel()->count() > 0;
+            return static::newPermissionModel()->all()->count() > 0;
         }
 
         return count(static::$permissions) > 0;
