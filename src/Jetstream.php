@@ -2,6 +2,8 @@
 
 namespace Laravel\Jetstream;
 
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Collection;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
 use Laravel\Jetstream\Contracts\CreatesTeams;
 use Laravel\Jetstream\Contracts\DeletesTeams;
@@ -60,6 +62,27 @@ class Jetstream
     public static $membershipModel = 'App\\Models\\Membership';
 
     /**
+     * The permission model that should be used by Jetstream.
+     *
+     * @var string
+     */
+    public static $permissionModel = null;
+
+    /**
+     * The role model that should be used by Jetstream.
+     *
+     * @var string
+     */
+    public static $teamRoleModel = null;
+
+    /**
+     * The key identifier field that should be used on the role model when supplied to Jetstream.
+     *
+     * @var string
+     */
+    public static $teamRoleKeyField = 'key';
+
+    /**
      * The Inertia manager instance.
      *
      * @var \Laravel\Jetstream\InertiaManager
@@ -73,7 +96,21 @@ class Jetstream
      */
     public static function hasRoles()
     {
+        if (static::hasTeamRolesModel()) {
+            return static::newUserModel()->count() > 0;
+        }
+
         return count(static::$roles) > 0;
+    }
+
+    /**
+     * Determine if a model has been provided to Jetstream for roles.
+     *
+     * @return bool
+     */
+    public static function hasTeamRolesModel()
+    {
+        return static::$teamRoleModel !== null;
     }
 
     /**
@@ -84,6 +121,10 @@ class Jetstream
      */
     public static function findRole(string $key)
     {
+        if (static::hasTeamRolesModel()) {
+            return static::newTeamRoleModel()->where(static::teamRoleKeyField(), $key)->first();
+        }
+
         return static::$roles[$key] ?? null;
     }
 
@@ -115,7 +156,21 @@ class Jetstream
      */
     public static function hasPermissions()
     {
+        if (static::hasPermissionsModel()) {
+            return static::newUserModel()->count() > 0;
+        }
+
         return count(static::$permissions) > 0;
+    }
+
+    /**
+     * Determine if a model has been provided to Jetstream for permissions.
+     *
+     * @return bool
+     */
+    public static function hasPermissionsModel()
+    {
+        return static::$permissionModel !== null;
     }
 
     /**
@@ -295,6 +350,95 @@ class Jetstream
     public static function useMembershipModel(string $model)
     {
         static::$membershipModel = $model;
+
+        return new static;
+    }
+
+    /**
+     * Get the name of the permission model used by the application.
+     *
+     * @return string
+     */
+    public static function permissionModel()
+    {
+        return static::$permissionModel;
+    }
+
+    /**
+     * Get a new instance of the permission model.
+     *
+     * @return mixed
+     */
+    public static function newPermissionModel()
+    {
+        $model = static::permissionModel();
+
+        return new $model;
+    }
+
+    /**
+     * Specify the permission model that should be used by Jetstream.
+     *
+     * @param  string  $model
+     * @return static
+     */
+    public static function usePermissionModel(string $model)
+    {
+        static::$permissionModel = $model;
+
+        return new static;
+    }
+
+    /**
+     * Get the name of the team role model used by the application.
+     *
+     * @return string
+     */
+    public static function teamRoleModel()
+    {
+        return static::$teamRoleModel;
+    }
+
+    /**
+     * Get the key identifier field of the role model used by the application.
+     *
+     * @return string
+     */
+    public static function teamRoleKeyField()
+    {
+        return static::$teamRoleKeyField;
+    }
+
+    /**
+     * Get a new instance of the team role model.
+     *
+     * @return mixed
+     */
+    public static function newTeamRoleModel()
+    {
+        $model = static::teamRoleModel();
+
+        return new $model;
+    }
+
+    /**
+     * Specify the team role model that should be used by Jetstream.
+     *
+     * @param  string  $model
+     * @return static
+     */
+    public static function useTeamRoleModel(string $model)
+    {
+        static::$teamRoleModel = $model;
+
+        if (!static::newTeamRoleModel()->permissions instanceof Collection) {
+            throw new \Exception('TeamRole model supplied must have a permissions relationship.');
+        }
+
+//        @TODO - Check for existence of name field here
+//        if (!static::newTeamRoleModel()->offsetExists('name')) {
+//            throw new \Exception('TeamRole model supplied must have a name field');
+//        }
 
         return new static;
     }
