@@ -382,7 +382,7 @@ class Jetstream
      * @param  string  $model
      * @return static
      */
-    public static function usePermissionModel(string $model)
+    public static function usePermissionModel(string $model = null)
     {
         static::$permissionModel = $model;
 
@@ -427,18 +427,20 @@ class Jetstream
      * @param  string  $model
      * @return static
      */
-    public static function useTeamRoleModel(string $model)
+    public static function useTeamRoleModel(string $model = null)
     {
         static::$teamRoleModel = $model;
 
-        if (! static::newTeamRoleModel()->permissions instanceof Collection) {
-            throw new \Exception('TeamRole model supplied must have a permissions relationship.');
-        }
+        if ($model) {
+            if (! static::newTeamRoleModel()->permissions instanceof Collection) {
+                throw new \Exception('TeamRole model supplied must have a permissions relationship.');
+            }
 
-//        @TODO - Check for existence of name field here
-//        if (! static::newTeamRoleModel()->offsetExists('name')) {
-//            throw new \Exception('TeamRole model supplied must have a name field');
-//        }
+//            @TODO - Check for existence of name field here
+//            if (! static::newTeamRoleModel()->offsetExists('name')) {
+//                throw new \Exception('TeamRole model supplied must have a name field');
+//            }
+        }
 
         return new static;
     }
