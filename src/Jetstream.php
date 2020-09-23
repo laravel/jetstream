@@ -431,12 +431,12 @@ class Jetstream
     {
         static::$teamRoleModel = $model;
 
-        if (!static::newTeamRoleModel()->permissions instanceof Collection) {
+        if (! static::newTeamRoleModel()->permissions instanceof Collection) {
             throw new \Exception('TeamRole model supplied must have a permissions relationship.');
         }
 
 //        @TODO - Check for existence of name field here
-//        if (!static::newTeamRoleModel()->offsetExists('name')) {
+//        if (! static::newTeamRoleModel()->offsetExists('name')) {
 //            throw new \Exception('TeamRole model supplied must have a name field');
 //        }
 

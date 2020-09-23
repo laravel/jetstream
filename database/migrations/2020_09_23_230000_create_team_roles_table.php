@@ -15,7 +15,7 @@ class CreateTeamRolesTable extends Migration
     {
         Schema::create('team_roles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId( 'team_id');
+            $table->foreignId('team_id');
             $table->string('key');
             $table->string('label');
             $table->text('description')->nullable();
