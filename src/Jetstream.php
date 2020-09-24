@@ -53,6 +53,13 @@ class Jetstream
     public static $teamModel = 'App\\Models\\Team';
 
     /**
+     * The prefix used in the URI to describe teams.
+     *
+     * @var string
+     */
+    public static $teamsPrefix = 'teams';
+
+    /**
      * The membership model that should be used by Jetstream.
      *
      * @var string
@@ -341,6 +348,27 @@ class Jetstream
     public static function deleteTeamsUsing(string $class)
     {
         return app()->singleton(DeletesTeams::class, $class);
+    }
+
+    /**
+     * Get the string used to describe teams.
+     *
+     * @return string
+     */
+    public static function teamsPrefix()
+    {
+        return static::$teamsPrefix;
+    }
+
+    /**
+     * Set the string used to describe teams.
+     *
+     * @param  string  $string
+     * @return void
+     */
+    public static function prefixTeamsAs($string)
+    {
+        static::$teamsPrefix = $string;
     }
 
     /**

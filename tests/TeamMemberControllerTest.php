@@ -37,7 +37,7 @@ class TeamMemberControllerTest extends OrchestraTestCase
 
         $team->users()->attach($adam, ['role' => 'admin']);
 
-        $response = $this->actingAs($team->owner)->put('/teams/'.$team->id.'/members/'.$adam->id, [
+        $response = $this->actingAs($team->owner)->put('/'.Jetstream::teamsPrefix().'/'.$team->id.'/members/'.$adam->id, [
             'role' => 'editor',
         ]);
 
@@ -65,7 +65,7 @@ class TeamMemberControllerTest extends OrchestraTestCase
 
         $team->users()->attach($adam, ['role' => 'admin']);
 
-        $response = $this->actingAs($adam)->put('/teams/'.$team->id.'/members/'.$adam->id, [
+        $response = $this->actingAs($adam)->put('/'.Jetstream::teamsPrefix().'/'.$team->id.'/members/'.$adam->id, [
             'role' => 'admin',
         ]);
 
