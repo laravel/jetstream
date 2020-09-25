@@ -77,7 +77,7 @@ class LogoutOtherBrowserSessionsForm extends Component
             return;
         }
 
-        DB::table('sessions')
+        DB::table(config('session.table', 'sessions'))
             ->where('user_id', Auth::user()->getKey())
             ->where('id', '!=', request()->session()->getId())
             ->delete();
