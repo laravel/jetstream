@@ -1,6 +1,18 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v1.3.0...1.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v1.3.1...1.x)
+
+
+## [v1.3.1 (2020-09-29)](https://github.com/laravel/jetstream/compare/v1.3.0...v1.3.1)
+
+### Changed
+- Bump Alpine.js version up to 2.7.0 ([#262](https://github.com/laravel/jetstream/pull/262))
+
+### Fixed
+- Use session table from the config ([#265](https://github.com/laravel/jetstream/pull/265))
+- Add `:key` buildings for list (for) rendering to `TeamMemberManager.vue` ([#270](https://github.com/laravel/jetstream/pull/270))
+- Add Submenu Style For When Profile Photos Are Unmanaged ([#275](https://github.com/laravel/jetstream/pull/275), [e717c9e](https://github.com/laravel/jetstream/commit/e717c9e89d5757e12167fa0b729657ecae12fd61))
+- Disable save button while profile pic is uploading ([#266](https://github.com/laravel/jetstream/pull/266))
 
 
 ## [v1.3.0 (2020-09-22)](https://github.com/laravel/jetstream/compare/v1.2.1...v1.3.0)
