@@ -5,7 +5,6 @@ namespace Laravel\Jetstream\Http\Controllers\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
-use Inertia\Inertia;
 use Laravel\Jetstream\Jetstream;
 
 class ApiTokenController extends Controller
@@ -18,7 +17,7 @@ class ApiTokenController extends Controller
      */
     public function index(Request $request)
     {
-        return Inertia::render('API/Index', [
+        return Jetstream::inertia()->render($request, 'API/Index', [
             'tokens' => $request->user()->tokens,
             'availablePermissions' => Jetstream::$permissions,
             'defaultPermissions' => Jetstream::$defaultPermissions,
@@ -36,7 +35,7 @@ class ApiTokenController extends Controller
         Validator::make([
             'name' => $request->name,
         ], [
-            'name' => 'required|string|max:255',
+            'name' => ['required', 'string', 'max:255'],
         ])->validateWithBag('createApiToken');
 
         $token = $request->user()->createToken(

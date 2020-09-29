@@ -5,6 +5,7 @@ use Laravel\Jetstream\Http\Controllers\CurrentTeamController;
 use Laravel\Jetstream\Http\Controllers\Inertia\ApiTokenController;
 use Laravel\Jetstream\Http\Controllers\Inertia\CurrentUserController;
 use Laravel\Jetstream\Http\Controllers\Inertia\OtherBrowserSessionsController;
+use Laravel\Jetstream\Http\Controllers\Inertia\ProfilePhotoController;
 use Laravel\Jetstream\Http\Controllers\Inertia\TeamController;
 use Laravel\Jetstream\Http\Controllers\Inertia\TeamMemberController;
 use Laravel\Jetstream\Http\Controllers\Inertia\UserProfileController;
@@ -21,6 +22,9 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
 
         Route::delete('/user', [CurrentUserController::class, 'destroy'])
                     ->name('current-user.destroy');
+
+        Route::delete('/user/profile-photo', [ProfilePhotoController::class, 'destroy'])
+                    ->name('current-user-photo.destroy');
 
         // API...
         if (Jetstream::hasApiFeatures()) {

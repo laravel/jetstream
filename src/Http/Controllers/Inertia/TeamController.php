@@ -29,7 +29,7 @@ class TeamController extends Controller
             abort(403);
         }
 
-        return Inertia::render('Teams/Show', [
+        return Jetstream::inertia()->render($request, 'Teams/Show', [
             'team' => $team->load('owner', 'users'),
             'availableRoles' => array_values(Jetstream::$roles),
             'availablePermissions' => Jetstream::$permissions,

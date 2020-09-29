@@ -23,7 +23,7 @@
                     <!-- Member Email -->
                     <div class="col-span-6 sm:col-span-4">
                         <jet-label for="email" value="Email" />
-                        <jet-input id="name" type="text" class="mt-1 block w-full" v-model="addTeamMemberForm.email" />
+                        <jet-input id="email" type="text" class="mt-1 block w-full" v-model="addTeamMemberForm.email" />
                         <jet-input-error :message="addTeamMemberForm.error('email')" class="mt-2" />
                     </div>
 
@@ -36,7 +36,9 @@
                             <div class="px-4 py-3"
                                             :class="{'border-t border-gray-200': i > 0}"
                                             @click="addTeamMemberForm.role = role.key"
-                                            v-for="(role, i) in availableRoles">
+                                            v-for="(role, i) in availableRoles"
+                                            :key="i"
+                                            >
                                 <div :class="{'opacity-50': addTeamMemberForm.role && addTeamMemberForm.role != role.key}">
                                     <!-- Role Name -->
                                     <div class="flex items-center">
@@ -85,21 +87,21 @@
                 <!-- Team Member List -->
                 <template #content>
                     <div class="space-y-6">
-                        <div class="flex items-center justify-between" v-for="user in team.users">
+                        <div class="flex items-center justify-between" v-for="user in team.users" :key="user.id">
                             <div class="flex items-center">
-                                <img class="w-8 h-8 rounded-full" :src="user.profile_photo_url">
+                                <img class="w-8 h-8 rounded-full" :src="user.profile_photo_url" :alt="user.name">
                                 <div class="ml-4">{{ user.name }}</div>
                             </div>
 
                             <div class="flex items-center">
                                 <!-- Manage Team Member Role -->
                                 <button class="ml-2 text-sm text-gray-400 underline"
-                                        v-if="userPermissions.canAddTeamMembers && availableRoles.length > 0"
+                                        v-if="userPermissions.canAddTeamMembers && availableRoles.length"
                                         @click="manageRole(user)">
                                     {{ displayableRole(user.membership.role) }}
                                 </button>
 
-                                <div class="ml-2 text-sm text-gray-400" v-else-if="availableRoles.length > 0">
+                                <div class="ml-2 text-sm text-gray-400" v-else-if="availableRoles.length">
                                     {{ displayableRole(user.membership.role) }}
                                 </div>
 
@@ -135,7 +137,9 @@
                         <div class="px-4 py-3"
                                         :class="{'border-t border-gray-200': i > 0}"
                                         @click="updateRoleForm.role = role.key"
-                                        v-for="(role, i) in availableRoles">
+                                        v-for="(role, i) in availableRoles" 
+                                        :key="i"
+                                        >
                             <div :class="{'opacity-50': updateRoleForm.role && updateRoleForm.role != role.key}">
                                 <!-- Role Name -->
                                 <div class="flex items-center">

@@ -29,6 +29,20 @@ trait HasProfilePhoto
     }
 
     /**
+     * Delete the user's profile photo.
+     *
+     * @return void
+     */
+    public function deleteProfilePhoto()
+    {
+        Storage::disk($this->profilePhotoDisk())->delete($this->profile_photo_path);
+
+        $this->forceFill([
+            'profile_photo_path' => null,
+        ])->save();
+    }
+
+    /**
      * Get the URL to the user's profile photo.
      *
      * @return string

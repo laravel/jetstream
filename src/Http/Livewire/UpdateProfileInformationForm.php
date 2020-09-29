@@ -57,6 +57,20 @@ class UpdateProfileInformationForm extends Component
         }
 
         $this->emit('saved');
+
+        $this->emit('refresh-navigation-dropdown');
+    }
+
+    /**
+     * Delete user's profile photo.
+     *
+     * @return void
+     */
+    public function deleteProfilePhoto()
+    {
+        Auth::user()->deleteProfilePhoto();
+
+        $this->emit('refresh-navigation-dropdown');
     }
 
     /**

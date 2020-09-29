@@ -46,6 +46,27 @@ class Jetstream
     public static $userModel = 'App\\Models\\User';
 
     /**
+     * The team model that should be used by Jetstream.
+     *
+     * @var string
+     */
+    public static $teamModel = 'App\\Models\\Team';
+
+    /**
+     * The membership model that should be used by Jetstream.
+     *
+     * @var string
+     */
+    public static $membershipModel = 'App\\Models\\Membership';
+
+    /**
+     * The Inertia manager instance.
+     *
+     * @var \Laravel\Jetstream\InertiaManager
+     */
+    public static $inertiaManager;
+
+    /**
      * Determine if Jetstream has registered roles.
      *
      * @return bool
@@ -227,7 +248,7 @@ class Jetstream
      */
     public static function teamModel()
     {
-        return 'App\\Models\\Team';
+        return static::$teamModel;
     }
 
     /**
@@ -243,13 +264,39 @@ class Jetstream
     }
 
     /**
+     * Specify the team model that should be used by Jetstream.
+     *
+     * @param  string  $model
+     * @return static
+     */
+    public static function useTeamModel(string $model)
+    {
+        static::$teamModel = $model;
+
+        return new static;
+    }
+
+    /**
      * Get the name of the team model used by the application.
      *
      * @return string
      */
     public static function membershipModel()
     {
-        return 'App\\Models\\Membership';
+        return static::$membershipModel;
+    }
+
+    /**
+     * Specify the membership model that should be used by Jetstream.
+     *
+     * @param  string  $model
+     * @return static
+     */
+    public static function useMembershipModel(string $model)
+    {
+        static::$membershipModel = $model;
+
+        return new static;
     }
 
     /**
@@ -305,6 +352,20 @@ class Jetstream
     public static function deleteUsersUsing(string $class)
     {
         return app()->singleton(DeletesUsers::class, $class);
+    }
+
+    /**
+     * Manage Jetstream's Inertia settings.
+     *
+     * @return \Laravel\Jetstream\InertiaManager
+     */
+    public static function inertia()
+    {
+        if (is_null(static::$inertiaManager)) {
+            static::$inertiaManager = new InertiaManager;
+        }
+
+        return static::$inertiaManager;
     }
 
     /**

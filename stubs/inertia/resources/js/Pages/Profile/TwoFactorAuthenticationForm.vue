@@ -52,31 +52,34 @@
 
             <div class="mt-5">
                 <div v-if="! twoFactorEnabled">
-                    <jet-button type="button" @click.native="enableTwoFactorAuthentication"
-                                        :class="{ 'opacity-25': enabling }"
-                                        :disabled="enabling">
-                        Enable
-                    </jet-button>
+                    <jet-confirms-password @confirmed="enableTwoFactorAuthentication">
+                        <jet-button type="button" :class="{ 'opacity-25': enabling }" :disabled="enabling">
+                            Enable
+                        </jet-button>
+                    </jet-confirms-password>
                 </div>
 
                 <div v-else>
-                    <jet-secondary-button class="mr-3"
-                                    @click.native="regenerateRecoveryCodes"
-                                    v-if="recoveryCodes.length > 0">
-                        Regenerate Recovery Codes
-                    </jet-secondary-button>
+                    <jet-confirms-password @confirmed="regenerateRecoveryCodes">
+                        <jet-secondary-button class="mr-3"
+                                        v-if="recoveryCodes.length > 0">
+                            Regenerate Recovery Codes
+                        </jet-secondary-button>
+                    </jet-confirms-password>
 
-                    <jet-secondary-button class="mr-3"
-                                @click.native="showRecoveryCodes"
-                                v-else>
-                        Show Recovery Codes
-                    </jet-secondary-button>
+                    <jet-confirms-password @confirmed="showRecoveryCodes">
+                        <jet-secondary-button class="mr-3" v-if="recoveryCodes.length == 0">
+                            Show Recovery Codes
+                        </jet-secondary-button>
+                    </jet-confirms-password>
 
-                    <jet-danger-button @click.native="disableTwoFactorAuthentication"
-                                    :class="{ 'opacity-25': disabling }"
-                                    :disabled="disabling">
-                        Disable
-                    </jet-danger-button>
+                    <jet-confirms-password @confirmed="disableTwoFactorAuthentication">
+                        <jet-danger-button
+                                        :class="{ 'opacity-25': disabling }"
+                                        :disabled="disabling">
+                            Disable
+                        </jet-danger-button>
+                    </jet-confirms-password>
                 </div>
             </div>
         </template>
@@ -86,6 +89,7 @@
 <script>
     import JetActionSection from './../../Jetstream/ActionSection'
     import JetButton from './../../Jetstream/Button'
+    import JetConfirmsPassword from './../../Jetstream/ConfirmsPassword'
     import JetDangerButton from './../../Jetstream/DangerButton'
     import JetSecondaryButton from './../../Jetstream/SecondaryButton'
 
@@ -93,6 +97,7 @@
         components: {
             JetActionSection,
             JetButton,
+            JetConfirmsPassword,
             JetDangerButton,
             JetSecondaryButton,
         },
