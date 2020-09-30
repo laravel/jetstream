@@ -17,6 +17,7 @@
 
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/alpinejs-focus-modal@0.0.3/dist/alpinejs-focus-modal.min.js" defer></script>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
