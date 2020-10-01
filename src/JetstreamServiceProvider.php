@@ -107,6 +107,7 @@ class JetstreamServiceProvider extends ServiceProvider
             $this->registerComponent('nav-link');
             $this->registerComponent('responsive-nav-link');
             $this->registerComponent('responsive-switchable-team');
+            $this->registerComponent('revealable-password');
             $this->registerComponent('secondary-button');
             $this->registerComponent('section-border');
             $this->registerComponent('section-title');
