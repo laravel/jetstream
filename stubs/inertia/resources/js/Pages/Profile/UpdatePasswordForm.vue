@@ -11,7 +11,7 @@
         <template #form>
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="current_password" value="Current Password" />
-                <jet-input id="current_password" type="password" class="mt-1 block w-full" v-model="form.current_password" ref="current_password" autocomplete="current-password" />
+                <jet-revealable-password id="current_password" class="mt-1 block w-full" v-model="form.current_password" ref="current_password" autocomplete="current-password" />
                 <jet-input-error :message="form.error('current_password')" class="mt-2" />
             </div>
 
@@ -47,6 +47,7 @@
     import JetInput from './../../Jetstream/Input'
     import JetInputError from './../../Jetstream/InputError'
     import JetLabel from './../../Jetstream/Label'
+    import JetRevealablePassword from "./../../Jetstream/RevealablePassword";
 
     export default {
         components: {
@@ -56,6 +57,7 @@
             JetInput,
             JetInputError,
             JetLabel,
+            JetRevealablePassword,
         },
 
         data() {

@@ -29,7 +29,7 @@
                     Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.
 
                     <div class="mt-4">
-                        <jet-input type="password" class="mt-1 block w-3/4" placeholder="Password"
+                        <jet-revealable-password class="mt-1 block w-3/4" placeholder="Password"
                                     ref="password"
                                     v-model="form.password"
                                     @keyup.enter.native="deleteUser" />
@@ -57,7 +57,7 @@
     import JetButton from './../../Jetstream/Button'
     import JetDialogModal from './../../Jetstream/DialogModal'
     import JetDangerButton from './../../Jetstream/DangerButton'
-    import JetInput from './../../Jetstream/Input'
+    import JetRevealablePassword from './../../Jetstream/RevealablePassword'
     import JetInputError from './../../Jetstream/InputError'
     import JetSecondaryButton from './../../Jetstream/SecondaryButton'
 
@@ -67,7 +67,7 @@
             JetButton,
             JetDangerButton,
             JetDialogModal,
-            JetInput,
+            JetRevealablePassword,
             JetInputError,
             JetSecondaryButton,
         },

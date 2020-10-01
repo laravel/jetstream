@@ -63,7 +63,7 @@
                     Please enter your password to confirm you would like to logout of your other browser sessions across all of your devices.
 
                     <div class="mt-4">
-                        <jet-input type="password" class="mt-1 block w-3/4" placeholder="Password"
+                        <jet-revealable-password class="mt-1 block w-3/4" placeholder="Password"
                                     ref="password"
                                     v-model="form.password"
                                     @keyup.enter.native="logoutOtherBrowserSessions" />
@@ -91,7 +91,7 @@
     import JetActionSection from './../../Jetstream/ActionSection'
     import JetButton from './../../Jetstream/Button'
     import JetDialogModal from './../../Jetstream/DialogModal'
-    import JetInput from './../../Jetstream/Input'
+    import JetRevealablePassword from "./../../Jetstream/RevealablePassword";
     import JetInputError from './../../Jetstream/InputError'
     import JetSecondaryButton from './../../Jetstream/SecondaryButton'
 
@@ -103,7 +103,7 @@
             JetActionSection,
             JetButton,
             JetDialogModal,
-            JetInput,
+            JetRevealablePassword,
             JetInputError,
             JetSecondaryButton,
         },

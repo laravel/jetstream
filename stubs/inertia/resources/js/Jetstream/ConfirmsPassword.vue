@@ -13,7 +13,7 @@
                 {{ content }}
 
                 <div class="mt-4">
-                    <jet-input type="password" class="mt-1 block w-3/4" placeholder="Password"
+                    <jet-revealable-password class="mt-1 block w-3/4" placeholder="Password"
                                 ref="password"
                                 v-model="form.password"
                                 @keyup.enter.native="confirmPassword" />
@@ -38,7 +38,7 @@
 <script>
     import JetButton from './Button'
     import JetDialogModal from './DialogModal'
-    import JetInput from './Input'
+    import JetRevealablePassword from './RevealablePassword'
     import JetInputError from './InputError'
     import JetSecondaryButton from './SecondaryButton'
 
@@ -58,7 +58,7 @@
         components: {
             JetButton,
             JetDialogModal,
-            JetInput,
+            JetRevealablePassword,
             JetInputError,
             JetSecondaryButton,
         },
