@@ -229,5 +229,11 @@ class JetstreamServiceProvider extends ServiceProvider
         Fortify::registerView(function (Request $request) {
             return Inertia::render('Auth/Register')->toResponse($request);
         });
+
+        Fortify::verifyEmailView(function (Request $request) {
+            return Inertia::render('Auth/VerifyEmail', [
+                'status' => session('status'),
+            ])->toResponse($request);
+        });
     }
 }
