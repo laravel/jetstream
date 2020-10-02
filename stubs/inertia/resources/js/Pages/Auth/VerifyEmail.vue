@@ -35,8 +35,7 @@
             JetButton,
         },
         props: {
-            status: String,
-            canResetPassword: Boolean
+            status: String
         },
         data() {
             return {

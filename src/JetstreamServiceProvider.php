@@ -221,8 +221,8 @@ class JetstreamServiceProvider extends ServiceProvider
 
         Fortify::resetPasswordView(function (Request $request) {
             return Inertia::render('Auth/ResetPassword', [
-                'token' => $request->route('token'),
                 'email' => $request->input('email'),
+                'token' => $request->route('token'),
             ])->toResponse($request);
         });
 

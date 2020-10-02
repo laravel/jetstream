@@ -48,8 +48,8 @@
             JetValidationErrors
         },
         props: {
-            token: String,
             email: String,
+            token: String,
         },
         data() {
             return {

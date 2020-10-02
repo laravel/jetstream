@@ -58,8 +58,8 @@
             JetValidationErrors
         },
         props: {
-            status: String,
-            canResetPassword: Boolean
+            canResetPassword: Boolean,
+            status: String
         },
         data() {
             return {
