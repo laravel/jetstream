@@ -212,5 +212,11 @@ class JetstreamServiceProvider extends ServiceProvider
                 'status' => session('status'),
             ])->toResponse($request);
         });
+
+        Fortify::requestPasswordResetLinkView(function (Request $request) {
+            return Inertia::render('Auth/ForgotPassword', [
+                'status' => session('status'),
+            ])->toResponse($request);
+        });
     }
 }
