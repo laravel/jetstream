@@ -3,6 +3,7 @@
 namespace Laravel\Jetstream;
 
 use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -204,5 +205,12 @@ class JetstreamServiceProvider extends ServiceProvider
 
         $kernel->appendMiddlewareToGroup('web', ShareInertiaData::class);
         $kernel->appendToMiddlewarePriority(ShareInertiaData::class);
+
+        Fortify::loginView(function (Request $request) {
+            return Inertia::render('Auth/Login', [
+                'canResetPassword' => Route::has('password.request'),
+                'status' => session('status'),
+            ])->toResponse($request);
+        });
     }
 }
