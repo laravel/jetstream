@@ -32,7 +32,6 @@ export default {
     components: {
         ApiTokenManager,
         AppLayout,
-        JetSectionBorder,
     },
 }
 </script>

@@ -69,7 +69,6 @@
 
 <script>
 import JetActionSection from './../../Jetstream/ActionSection'
-import JetButton from './../../Jetstream/Button'
 import JetDialogModal from './../../Jetstream/DialogModal'
 import JetDangerButton from './../../Jetstream/DangerButton'
 import JetInput from './../../Jetstream/Input'
@@ -79,7 +78,6 @@ import JetSecondaryButton from './../../Jetstream/SecondaryButton'
 export default {
     components: {
         JetActionSection,
-        JetButton,
         JetDangerButton,
         JetDialogModal,
         JetInput,

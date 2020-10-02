@@ -109,7 +109,10 @@
                                         </div>
 
                                         <template v-for="team in $page.user.all_teams">
-                                            <form @submit.prevent="switchToTeam(team)">
+                                            <form
+                                                @submit.prevent="switchToTeam(team)"
+                                                :key="team.id"
+                                            >
                                                 <jet-dropdown-link as="button">
                                                     <div class="flex items-center">
                                                         <svg
@@ -314,7 +317,6 @@
 </template>
 
 <script>
-import JetApplicationLogo from './../Jetstream/ApplicationLogo'
 import JetApplicationMark from './../Jetstream/ApplicationMark'
 import JetDropdown from './../Jetstream/Dropdown'
 import JetDropdownLink from './../Jetstream/DropdownLink'
@@ -323,7 +325,6 @@ import JetResponsiveNavLink from './../Jetstream/ResponsiveNavLink'
 
 export default {
     components: {
-        JetApplicationLogo,
         JetApplicationMark,
         JetDropdown,
         JetDropdownLink,

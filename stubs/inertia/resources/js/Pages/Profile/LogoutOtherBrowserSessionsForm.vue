@@ -20,7 +20,8 @@
             >
                 <div
                     class="flex items-center"
-                    v-for="session in sessions"
+                    v-for="(session, index) in sessions"
+                    :key="index"
                 >
                     <div>
                         <svg

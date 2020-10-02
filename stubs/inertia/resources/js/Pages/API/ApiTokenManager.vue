@@ -41,7 +41,10 @@
                     />
 
                     <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div v-for="permission in availablePermissions">
+                        <div
+                            v-for="permission in availablePermissions"
+                            :key="permission"
+                        >
                             <label class="flex items-center">
                                 <input
                                     type="checkbox"
@@ -93,6 +96,7 @@
                             <div
                                 class="flex items-center justify-between"
                                 v-for="token in tokens"
+                                :key="token.name"
                             >
                                 <div>
                                     {{ token.name }}
@@ -168,7 +172,10 @@
 
             <template #content>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div v-for="permission in availablePermissions">
+                    <div
+                        v-for="permission in availablePermissions"
+                        :key="permission"
+                    >
                         <label class="flex items-center">
                             <input
                                 type="checkbox"
