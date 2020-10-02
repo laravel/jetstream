@@ -235,5 +235,9 @@ class JetstreamServiceProvider extends ServiceProvider
                 'status' => session('status'),
             ])->toResponse($request);
         });
+
+        Fortify::twoFactorChallengeView(function (Request $request) {
+            return Inertia::render('Auth/TwoFactorChallenge')->toResponse($request);
+        });
     }
 }
