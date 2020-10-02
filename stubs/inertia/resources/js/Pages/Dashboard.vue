@@ -17,13 +17,13 @@
 </template>
 
 <script>
-    import AppLayout from './../Layouts/AppLayout'
-    import Welcome from './../Jetstream/Welcome'
+import AppLayout from './../Layouts/AppLayout'
+import Welcome from './../Jetstream/Welcome'
 
-    export default {
-        components: {
-            AppLayout,
-            Welcome,
-        },
-    }
+export default {
+    components: {
+        AppLayout,
+        Welcome,
+    },
+}
 </script>

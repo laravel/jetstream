@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    export default {
-        props: ['message']
-    }
+export default {
+    props: ['message']
+}
 </script>

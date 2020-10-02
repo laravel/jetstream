@@ -20,7 +20,10 @@
             </div>
 
             <!-- Delete Team Confirmation Modal -->
-            <jet-confirmation-modal :show="confirmingTeamDeletion" @close="confirmingTeamDeletion = false">
+            <jet-confirmation-modal
+                :show="confirmingTeamDeletion"
+                @close="confirmingTeamDeletion = false"
+            >
                 <template #title>
                     Delete Team
                 </template>
@@ -34,7 +37,12 @@
                         Nevermind
                     </jet-secondary-button>
 
-                    <jet-danger-button class="ml-2" @click.native="deleteTeam" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    <jet-danger-button
+                        class="ml-2"
+                        @click.native="deleteTeam"
+                        :class="{ 'opacity-25': form.processing }"
+                        :disabled="form.processing"
+                    >
                         Delete Team
                     </jet-danger-button>
                 </template>
@@ -44,46 +52,46 @@
 </template>
 
 <script>
-    import JetActionSection from './../../Jetstream/ActionSection'
-    import JetButton from './../../Jetstream/Button'
-    import JetConfirmationModal from './../../Jetstream/ConfirmationModal'
-    import JetDangerButton from './../../Jetstream/DangerButton'
-    import JetSecondaryButton from './../../Jetstream/SecondaryButton'
+import JetActionSection from './../../Jetstream/ActionSection'
+import JetButton from './../../Jetstream/Button'
+import JetConfirmationModal from './../../Jetstream/ConfirmationModal'
+import JetDangerButton from './../../Jetstream/DangerButton'
+import JetSecondaryButton from './../../Jetstream/SecondaryButton'
 
-    export default {
-        props: ['team'],
+export default {
+    props: ['team'],
 
-        components: {
-            JetActionSection,
-            JetButton,
-            JetConfirmationModal,
-            JetDangerButton,
-            JetSecondaryButton,
+    components: {
+        JetActionSection,
+        JetButton,
+        JetConfirmationModal,
+        JetDangerButton,
+        JetSecondaryButton,
+    },
+
+    data() {
+        return {
+            confirmingTeamDeletion: false,
+            deleting: false,
+
+            form: this.$inertia.form({
+                //
+            }, {
+                bag: 'deleteTeam'
+            })
+        }
+    },
+
+    methods: {
+        confirmTeamDeletion() {
+            this.confirmingTeamDeletion = true
         },
 
-        data() {
-            return {
-                confirmingTeamDeletion: false,
-                deleting: false,
-
-                form: this.$inertia.form({
-                    //
-                }, {
-                    bag: 'deleteTeam'
-                })
-            }
+        deleteTeam() {
+            this.form.delete('/teams/' + this.team.id, {
+                preserveScroll: true
+            });
         },
-
-        methods: {
-            confirmTeamDeletion() {
-                this.confirmingTeamDeletion = true
-            },
-
-            deleteTeam() {
-                this.form.delete('/teams/' + this.team.id, {
-                    preserveScroll: true
-                });
-            },
-        },
-    }
+    },
+}
 </script>

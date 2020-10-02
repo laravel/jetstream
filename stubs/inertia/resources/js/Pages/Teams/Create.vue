@@ -15,17 +15,17 @@
 </template>
 
 <script>
-    import AppLayout from './../../Layouts/AppLayout'
-    import CreateTeamForm from './CreateTeamForm'
-    import JetSectionBorder from './../../Jetstream/SectionBorder'
+import AppLayout from './../../Layouts/AppLayout'
+import CreateTeamForm from './CreateTeamForm'
+import JetSectionBorder from './../../Jetstream/SectionBorder'
 
-    export default {
-        props: ['team'],
+export default {
+    props: ['team'],
 
-        components: {
-            AppLayout,
-            CreateTeamForm,
-            JetSectionBorder,
-        },
-    }
+    components: {
+        AppLayout,
+        CreateTeamForm,
+        JetSectionBorder,
+    },
+}
 </script>

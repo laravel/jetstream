@@ -1,0 +1,11 @@
+{
+    "private": true,
+    "scripts": {
+        "fix": "eslint --ext .js,.vue stubs/ --fix"
+    },
+    "devDependencies": {
+        "eslint": "^7.10.0",
+        "eslint-plugin-vue": "^7.0.0",
+        "vue-eslint-parser": "^7.1.0"
+    }
+}
