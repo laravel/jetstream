@@ -43,7 +43,7 @@ trait HasTeams
     }
 
     /**
-     * Get all of the teams the user belongs to.
+     * Get all of the teams the user owns.
      */
     public function ownedTeams()
     {
