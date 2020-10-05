@@ -33,12 +33,6 @@ class JetstreamServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/../config/jetstream.php', 'jetstream');
-
-        $this->app->afterResolving(BladeCompiler::class, function () {
-            if (config('jetstream.stack') === 'livewire' && class_exists(Livewire::class)) {
-                //
-            }
-        });
     }
 
     /**
