@@ -206,38 +206,38 @@ class JetstreamServiceProvider extends ServiceProvider
         $kernel->appendMiddlewareToGroup('web', ShareInertiaData::class);
         $kernel->appendToMiddlewarePriority(ShareInertiaData::class);
 
-        Fortify::loginView(function (Request $request) {
+        Fortify::loginView(function () {
             return Inertia::render('Auth/Login', [
                 'canResetPassword' => Route::has('password.request'),
                 'status' => session('status'),
-            ])->toResponse($request);
+            ]);
         });
 
-        Fortify::requestPasswordResetLinkView(function (Request $request) {
+        Fortify::requestPasswordResetLinkView(function () {
             return Inertia::render('Auth/ForgotPassword', [
                 'status' => session('status'),
-            ])->toResponse($request);
+            ]);
         });
 
         Fortify::resetPasswordView(function (Request $request) {
             return Inertia::render('Auth/ResetPassword', [
                 'email' => $request->input('email'),
                 'token' => $request->route('token'),
-            ])->toResponse($request);
+            ]);
         });
 
-        Fortify::registerView(function (Request $request) {
-            return Inertia::render('Auth/Register')->toResponse($request);
+        Fortify::registerView(function () {
+            return Inertia::render('Auth/Register');
         });
 
-        Fortify::verifyEmailView(function (Request $request) {
+        Fortify::verifyEmailView(function () {
             return Inertia::render('Auth/VerifyEmail', [
                 'status' => session('status'),
-            ])->toResponse($request);
+            ]);
         });
 
-        Fortify::twoFactorChallengeView(function (Request $request) {
-            return Inertia::render('Auth/TwoFactorChallenge')->toResponse($request);
+        Fortify::twoFactorChallengeView(function () {
+            return Inertia::render('Auth/TwoFactorChallenge');
         });
     }
 }

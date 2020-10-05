@@ -18,7 +18,7 @@
         "ext-json": "*",
         "illuminate/support": "^8.0",
         "jenssegers/agent": "^2.6",
-        "laravel/fortify": "^1.0"
+        "laravel/fortify": "^1.6.1"
     },
     "require-dev": {
         "inertiajs/inertia-laravel": "^0.2.4",
