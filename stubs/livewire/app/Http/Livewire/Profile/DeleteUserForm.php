@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Jetstream\Http\Livewire;
+namespace App\Http\Livewire\Profile;
 
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Support\Facades\Auth;
@@ -70,6 +70,6 @@ class DeleteUserForm extends Component
      */
     public function render()
     {
-        return view('profile.delete-user-form');
+        return view('livewire.profile.delete-user-form');
     }
 }

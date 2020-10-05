@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Jetstream\Http\Livewire;
+namespace App\Http\Livewire;
 
 use Livewire\Component;
 
@@ -22,6 +22,6 @@ class NavigationDropdown extends Component
      */
     public function render()
     {
-        return view('navigation-dropdown');
+        return view('livewire.navigation-dropdown');
     }
 }

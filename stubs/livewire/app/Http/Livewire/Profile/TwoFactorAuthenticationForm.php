@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Jetstream\Http\Livewire;
+namespace App\Http\Livewire\Profile;
 
 use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\Actions\DisableTwoFactorAuthentication;
@@ -119,6 +119,6 @@ class TwoFactorAuthenticationForm extends Component
      */
     public function render()
     {
-        return view('profile.two-factor-authentication-form');
+        return view('livewire.profile.two-factor-authentication-form');
     }
 }

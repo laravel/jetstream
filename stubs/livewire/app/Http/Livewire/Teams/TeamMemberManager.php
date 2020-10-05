@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Jetstream\Http\Livewire;
+namespace App\Http\Livewire\Teams;
 
 use Illuminate\Support\Facades\Auth;
 use Laravel\Jetstream\Actions\RemoveTeamMember;
@@ -231,6 +231,6 @@ class TeamMemberManager extends Component
      */
     public function render()
     {
-        return view('teams.team-member-manager');
+        return view('livewire.teams.team-member-manager');
     }
 }

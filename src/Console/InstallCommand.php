@@ -147,8 +147,14 @@ class InstallCommand extends Command
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Fortify'));
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Jetstream'));
         (new Filesystem)->ensureDirectoryExists(app_path('View/Components'));
+        (new Filesystem)->ensureDirectoryExists(app_path('Http/Livewire/Api'));
+        (new Filesystem)->ensureDirectoryExists(app_path('Http/Livewire/Profile'));
+        (new Filesystem)->ensureDirectoryExists(app_path('Http/Livewire/Teams'));
         (new Filesystem)->ensureDirectoryExists(public_path('css'));
         (new Filesystem)->ensureDirectoryExists(resource_path('css'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/livewire/api'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/livewire/profile'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/livewire/teams'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/api'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/auth'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/layouts'));
@@ -173,13 +179,29 @@ class InstallCommand extends Command
         copy(__DIR__.'/../../stubs/livewire/app/View/Components/AppLayout.php', app_path('View/Components/AppLayout.php'));
         copy(__DIR__.'/../../stubs/app/View/Components/GuestLayout.php', app_path('View/Components/GuestLayout.php'));
 
+        // Single Livewire Component Classes...
+        copy(__DIR__.'/../../stubs/livewire/app/Http/Livewire/NavigationDropdown.php', app_path('Http/Livewire/NavigationDropdown.php'));
+
+        // Other Livewire Component Classes...
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/app/Http/Livewire/Api', app_path('Http/Livewire/Api'));
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/app/Http/Livewire/Profile', app_path('Http/Livewire/Profile'));
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/app/Http/Livewire/Teams', app_path('Http/Livewire/Teams'));
+
+        // Single Livewire Component Views...
+        copy(__DIR__.'/../../stubs/livewire/resources/views/livewire/navigation-dropdown.blade.php', resource_path('views/livewire/navigation-dropdown.blade.php'));
+
+        // Other Livewire Component Views...
+        copy(__DIR__.'/../../stubs/livewire/resources/views/livewire/navigation-dropdown.blade.php', resource_path('views/livewire/navigation-dropdown.blade.php'));
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/livewire/api', resource_path('views/livewire/api'));
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/livewire/profile', resource_path('views/livewire/profile'));
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/livewire/teams', resource_path('views/livewire/teams'));
+
         // Layouts...
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/layouts', resource_path('views/layouts'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/resources/views/layouts', resource_path('views/layouts'));
 
         // Single Blade Views...
         copy(__DIR__.'/../../stubs/livewire/resources/views/dashboard.blade.php', resource_path('views/dashboard.blade.php'));
-        copy(__DIR__.'/../../stubs/livewire/resources/views/navigation-dropdown.blade.php', resource_path('views/navigation-dropdown.blade.php'));
 
         // Other Views...
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/api', resource_path('views/api'));

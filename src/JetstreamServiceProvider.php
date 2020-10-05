@@ -36,23 +36,7 @@ class JetstreamServiceProvider extends ServiceProvider
 
         $this->app->afterResolving(BladeCompiler::class, function () {
             if (config('jetstream.stack') === 'livewire' && class_exists(Livewire::class)) {
-                Livewire::component('navigation-dropdown', NavigationDropdown::class);
-                Livewire::component('profile.update-profile-information-form', UpdateProfileInformationForm::class);
-                Livewire::component('profile.update-password-form', UpdatePasswordForm::class);
-                Livewire::component('profile.two-factor-authentication-form', TwoFactorAuthenticationForm::class);
-                Livewire::component('profile.logout-other-browser-sessions-form', LogoutOtherBrowserSessionsForm::class);
-                Livewire::component('profile.delete-user-form', DeleteUserForm::class);
-
-                if (Features::hasApiFeatures()) {
-                    Livewire::component('api.api-token-manager', ApiTokenManager::class);
-                }
-
-                if (Features::hasTeamFeatures()) {
-                    Livewire::component('teams.create-team-form', CreateTeamForm::class);
-                    Livewire::component('teams.update-team-name-form', UpdateTeamNameForm::class);
-                    Livewire::component('teams.team-member-manager', TeamMemberManager::class);
-                    Livewire::component('teams.delete-team-form', DeleteTeamForm::class);
-                }
+                //
             }
         });
     }

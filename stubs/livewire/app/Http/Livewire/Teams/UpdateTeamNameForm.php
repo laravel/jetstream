@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Jetstream\Http\Livewire;
+namespace App\Http\Livewire\Teams;
 
 use Illuminate\Support\Facades\Auth;
 use Laravel\Jetstream\Contracts\UpdatesTeamNames;
@@ -69,6 +69,6 @@ class UpdateTeamNameForm extends Component
      */
     public function render()
     {
-        return view('teams.update-team-name-form');
+        return view('livewire.teams.update-team-name-form');
     }
 }

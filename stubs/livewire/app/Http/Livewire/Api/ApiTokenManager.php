@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Jetstream\Http\Livewire;
+namespace App\Http\Livewire\Api;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -196,6 +196,6 @@ class ApiTokenManager extends Component
      */
     public function render()
     {
-        return view('api.api-token-manager');
+        return view('livewire.api.api-token-manager');
     }
 }

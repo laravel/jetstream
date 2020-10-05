@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Jetstream\Http\Livewire;
+namespace App\Http\Livewire\Teams;
 
 use Illuminate\Support\Facades\Auth;
 use Laravel\Jetstream\Contracts\CreatesTeams;
@@ -47,6 +47,6 @@ class CreateTeamForm extends Component
      */
     public function render()
     {
-        return view('teams.create-team-form');
+        return view('livewire.teams.create-team-form');
     }
 }
