@@ -27,11 +27,11 @@ switch ($maxWidth ?? '2xl') {
     x-data="{
         show: @entangle($attributes->wire('model')),
         focusables() {
-            // All focusable element types...
+            // All focusable element types.
             let selector = 'a, button, input, textarea, select, details, [tabindex]:not([tabindex=\'-1\'])'
 
             return [...$el.querySelectorAll(selector)]
-                // All non-disabled elements...
+                // All non-disabled elements.
                 .filter(el => ! el.hasAttribute('disabled'))
         },
         firstFocusable() { return this.focusables()[0] },
@@ -41,6 +41,13 @@ switch ($maxWidth ?? '2xl') {
         nextFocusableIndex() { return (this.focusables().indexOf(document.activeElement) + 1) % (this.focusables().length + 1) },
         prevFocusableIndex() { return Math.max(0, this.focusables().indexOf(document.activeElement)) -1 },
     }"
+    x-init="$watch('show', value => {
+        if (value) {
+            document.body.classList.add('overflow-y-hidden');
+        } else {
+            document.body.classList.remove('overflow-y-hidden');
+        }
+    })"
     x-on:close.stop="show = false"
     x-on:keydown.escape.window="show = false"
     x-on:keydown.tab.prevent="$event.shiftKey || nextFocusable().focus()"
