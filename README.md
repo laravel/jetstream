@@ -5,13 +5,13 @@
         <img src="https://github.com/laravel/jetstream/workflows/tests/badge.svg" alt="Build Status">
     </a>
     <a href="https://packagist.org/packages/laravel/jetstream">
-        <img src="https://poser.pugx.org/laravel/jetstream/d/total.svg" alt="Total Downloads">
+        <img src="https://img.shields.io/packagist/dt/laravel/jetstream" alt="Total Downloads">
     </a>
     <a href="https://packagist.org/packages/laravel/jetstream">
-        <img src="https://poser.pugx.org/laravel/jetstream/v/stable.svg" alt="Latest Stable Version">
+        <img src="https://img.shields.io/packagist/v/laravel/jetstream" alt="Latest Stable Version">
     </a>
     <a href="https://packagist.org/packages/laravel/jetstream">
-        <img src="https://poser.pugx.org/laravel/jetstream/license.svg" alt="License">
+        <img src="https://img.shields.io/packagist/l/laravel/jetstream" alt="License">
     </a>
 </p>
 
