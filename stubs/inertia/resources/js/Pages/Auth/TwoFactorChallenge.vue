@@ -82,7 +82,7 @@
                 })
             },
             submit() {
-                this.form.post('/two-factor-challenge')
+                this.form.post(this.route('two-factor.login'))
             }
         }
     }

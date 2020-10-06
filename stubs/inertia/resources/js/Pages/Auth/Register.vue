@@ -28,7 +28,7 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <inertia-link href="/login" class="underline text-sm text-gray-600 hover:text-gray-900">
+                <inertia-link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
                     Already registered?
                 </inertia-link>
 
@@ -68,7 +68,7 @@
         },
         methods: {
             submit() {
-                this.form.post('/register').then(() => {
+                this.form.post(this.route('register')).then(() => {
                     this.form.password = ''
                     this.form.password_confirmation = ''
                 })

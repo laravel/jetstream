@@ -63,7 +63,7 @@
         },
         methods: {
             submit() {
-                this.form.post('/reset-password').then(() => {
+                this.form.post(this.route('password.update')).then(() => {
                     this.form.password = ''
                     this.form.password_confirmation = ''
                 })

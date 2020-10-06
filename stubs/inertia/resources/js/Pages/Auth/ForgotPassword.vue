@@ -57,7 +57,7 @@
         },
         methods: {
             submit() {
-                this.form.post('/forgot-password')
+                this.form.post(this.route('password.email'))
             }
         }
     }
