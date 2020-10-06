@@ -133,9 +133,9 @@ class InstallCommand extends Command
         // NPM Packages...
         $this->updateNodePackages(function ($packages) {
             return [
-                '@tailwindcss/ui' => '^0.5.0',
+                '@tailwindcss/ui' => '^0.6.0',
                 'postcss-import' => '^12.0.1',
-                'tailwindcss' => '^1.3.0',
+                'tailwindcss' => '^1.8.0',
             ] + $packages;
         });
 
@@ -256,13 +256,13 @@ EOF;
         // Install NPM packages...
         $this->updateNodePackages(function ($packages) {
             return [
-                '@inertiajs/inertia' => '^0.1.7',
-                '@inertiajs/inertia-vue' => '^0.1.2',
-                '@tailwindcss/ui' => '^0.1.3',
+                '@inertiajs/inertia' => '^0.3.0',
+                '@inertiajs/inertia-vue' => '^0.2.0',
+                '@tailwindcss/ui' => '^0.6.0',
                 'laravel-jetstream' => '^0.0.3',
                 'portal-vue' => '^2.1.7',
                 'postcss-import' => '^12.0.1',
-                'tailwindcss' => '^1.3.0',
+                'tailwindcss' => '^1.8.0',
                 'vue' => '^2.5.17',
                 'vue-template-compiler' => '^2.6.10',
             ] + $packages;
