@@ -1,6 +1,24 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v1.3.1...1.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v1.3.2...1.x)
+
+### Changed
+- Extract switch team logic into HasTeams trait ([#312](https://github.com/laravel/jetstream/pull/312))
+- Use named routes on Inertia with Ziggy ([#314](https://github.com/laravel/jetstream/pull/314), [#316](https://github.com/laravel/jetstream/pull/316))
+- Bump Tailwind & Inertia ([#315](https://github.com/laravel/jetstream/pull/315))
+
+
+## [v1.3.2 (2020-10-05)](https://github.com/laravel/jetstream/compare/v1.3.1...v1.3.2)
+
+### Changed
+- Add dependency-less modal focus trapping ([#294](https://github.com/laravel/jetstream/pull/294))
+- Use `getAuthIdentifier` instead of `getKey` ([#283](https://github.com/laravel/jetstream/pull/283))
+- Ensure text remains visible during webfont load ([#290](https://github.com/laravel/jetstream/pull/290))
+- Make terms translatable ([#300](https://github.com/laravel/jetstream/pull/300))
+- Disable profile photo and api by default ([096d7dd](https://github.com/laravel/jetstream/commit/096d7dd6e4cbbfb67206ce8c03befbdfbec0595e))
+
+### Fixed
+- a11y(auth): associate inputs with labels ([#285](https://github.com/laravel/jetstream/pull/285))
 
 
 ## [v1.3.1 (2020-09-29)](https://github.com/laravel/jetstream/compare/v1.3.0...v1.3.1)
