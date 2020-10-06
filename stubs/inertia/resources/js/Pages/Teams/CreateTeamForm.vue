@@ -72,7 +72,7 @@
 
         methods: {
             createTeam() {
-                this.form.post('/teams', {
+                this.form.post(route('teams.store'), {
                     preserveScroll: true
                 });
             },

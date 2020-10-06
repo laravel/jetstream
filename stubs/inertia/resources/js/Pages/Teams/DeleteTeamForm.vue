@@ -80,7 +80,7 @@
             },
 
             deleteTeam() {
-                this.form.delete('/teams/' + this.team.id, {
+                this.form.delete(route('teams.destroy', this.team), {
                     preserveScroll: true
                 });
             },

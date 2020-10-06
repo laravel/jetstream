@@ -137,7 +137,7 @@
                         <div class="px-4 py-3"
                                         :class="{'border-t border-gray-200': i > 0}"
                                         @click="updateRoleForm.role = role.key"
-                                        v-for="(role, i) in availableRoles" 
+                                        v-for="(role, i) in availableRoles"
                                         :key="i"
                                         >
                             <div :class="{'opacity-50': updateRoleForm.role && updateRoleForm.role != role.key}">
@@ -289,7 +289,7 @@
 
         methods: {
             addTeamMember() {
-                this.addTeamMemberForm.post('/teams/' + this.team.id + '/members', {
+                this.addTeamMemberForm.post(route('team-members.store', this.team), {
                     preserveScroll: true
                 });
             },
@@ -301,7 +301,7 @@
             },
 
             updateRole() {
-                this.updateRoleForm.put('/teams/' + this.team.id + '/members/' + this.managingRoleFor.id, {
+                this.updateRoleForm.put(route('team-members.update', [this.team, this.managingRoleFor]), {
                     preserveScroll: true,
                 }).then(() => {
                     this.currentlyManagingRole = false
@@ -313,7 +313,7 @@
             },
 
             leaveTeam() {
-                this.leaveTeamForm.delete('/teams/' + this.team.id + '/members/' + this.$page.user.id)
+                this.leaveTeamForm.delete(route('team-members.destroy', [this.team, this.$page.user]))
             },
 
             confirmTeamMemberRemoval(teamMember) {
@@ -321,7 +321,7 @@
             },
 
             removeTeamMember() {
-                this.removeTeamMemberForm.delete('/teams/' + this.team.id + '/members/' + this.teamMemberBeingRemoved.id, {
+                this.removeTeamMemberForm.delete(route('team-members.destroy', [this.team, this.teamMemberBeingRemoved]), {
                     preserveScroll: true,
                     preserveState: true,
                 }).then(() => {

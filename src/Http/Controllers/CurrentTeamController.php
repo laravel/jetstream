@@ -18,13 +18,9 @@ class CurrentTeamController extends Controller
     {
         $team = Jetstream::newTeamModel()->findOrFail($request->team_id);
 
-        if (! $request->user()->belongsToTeam($team)) {
+        if (! $request->user()->switchTeam($team)) {
             abort(403);
         }
-
-        $request->user()->forceFill([
-            'current_team_id' => $team->id,
-        ])->save();
 
         return redirect(config('fortify.home'), 303);
     }

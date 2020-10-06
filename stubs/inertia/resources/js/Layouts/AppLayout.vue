@@ -7,14 +7,14 @@
                     <div class="flex">
                         <!-- Logo -->
                         <div class="flex-shrink-0 flex items-center">
-                            <a href="/dashboard">
+                            <inertia-link :href="route('dashboard')">
                                 <jet-application-mark class="block h-9 w-auto" />
-                            </a>
+                            </inertia-link>
                         </div>
 
                         <!-- Navigation Links -->
                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            <jet-nav-link href="/dashboard" :active="$page.currentRouteName == 'dashboard'">
+                            <jet-nav-link :href="route('dashboard')" :active="$page.currentRouteName == 'dashboard'">
                                 Dashboard
                             </jet-nav-link>
                         </div>
@@ -46,11 +46,11 @@
                                         Manage Account
                                     </div>
 
-                                    <jet-dropdown-link href="/user/profile">
+                                    <jet-dropdown-link :href="route('profile.show')">
                                         Profile
                                     </jet-dropdown-link>
 
-                                    <jet-dropdown-link href="/user/api-tokens" v-if="$page.jetstream.hasApiFeatures">
+                                    <jet-dropdown-link :href="route('api-tokens.index')" v-if="$page.jetstream.hasApiFeatures">
                                         API Tokens
                                     </jet-dropdown-link>
 
@@ -63,11 +63,11 @@
                                         </div>
 
                                         <!-- Team Settings -->
-                                        <jet-dropdown-link :href="'/teams/' + $page.user.current_team.id">
+                                        <jet-dropdown-link :href="route('teams.show', $page.user.current_team)">
                                             Team Settings
                                         </jet-dropdown-link>
 
-                                        <jet-dropdown-link href="/teams/create" v-if="$page.jetstream.canCreateTeams">
+                                        <jet-dropdown-link :href="route('teams.create')" v-if="$page.jetstream.canCreateTeams">
                                             Create New Team
                                         </jet-dropdown-link>
 
@@ -118,7 +118,7 @@
             <!-- Responsive Navigation Menu -->
             <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                 <div class="pt-2 pb-3 space-y-1">
-                    <jet-responsive-nav-link href="/dashboard" :active="$page.currentRouteName == 'dashboard'">
+                    <jet-responsive-nav-link :href="route('dashboard')" :active="$page.currentRouteName == 'dashboard'">
                         Dashboard
                     </jet-responsive-nav-link>
                 </div>
@@ -137,11 +137,11 @@
                     </div>
 
                     <div class="mt-3 space-y-1">
-                        <jet-responsive-nav-link href="/user/profile" :active="$page.currentRouteName == 'profile.show'">
+                        <jet-responsive-nav-link :href="route('profile.show')" :active="$page.currentRouteName == 'profile.show'">
                             Profile
                         </jet-responsive-nav-link>
 
-                        <jet-responsive-nav-link href="/user/api-tokens" :active="$page.currentRouteName == 'api-tokens.index'" v-if="$page.jetstream.hasApiFeatures">
+                        <jet-responsive-nav-link :href="route('api-tokens.index')" :active="$page.currentRouteName == 'api-tokens.index'" v-if="$page.jetstream.hasApiFeatures">
                             API Tokens
                         </jet-responsive-nav-link>
 
@@ -161,11 +161,11 @@
                             </div>
 
                             <!-- Team Settings -->
-                            <jet-responsive-nav-link :href="'/teams/' + $page.user.current_team.id" :active="$page.currentRouteName == 'teams.show'">
+                            <jet-responsive-nav-link :href="route('teams.show', $page.user.current_team)" :active="$page.currentRouteName == 'teams.show'">
                                 Team Settings
                             </jet-responsive-nav-link>
 
-                            <jet-responsive-nav-link href="/teams/create" :active="$page.currentRouteName == 'teams.create'">
+                            <jet-responsive-nav-link :href="route('teams.create')" :active="$page.currentRouteName == 'teams.create'">
                                 Create New Team
                             </jet-responsive-nav-link>
 
@@ -236,7 +236,7 @@
 
         methods: {
             switchToTeam(team) {
-                this.$inertia.put('/current-team', {
+                this.$inertia.put(route('current-team.update'), {
                     'team_id': team.id
                 }, {
                     preserveState: false
@@ -244,7 +244,7 @@
             },
 
             logout() {
-                axios.post('/logout').then(response => {
+                axios.post(route('logout').url()).then(response => {
                     window.location = '/';
                 })
             },

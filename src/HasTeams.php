@@ -24,12 +24,28 @@ trait HasTeams
     public function currentTeam()
     {
         if (is_null($this->current_team_id) && $this->id) {
-            $this->forceFill([
-                'current_team_id' => $this->personalTeam()->id,
-            ])->save();
+            $this->switchTeam($this->personalTeam());
         }
 
         return $this->belongsTo(Jetstream::teamModel(), 'current_team_id');
+    }
+
+    /**
+     * Switch the user's context to the given team.
+     *
+     * @return bool
+     */
+    public function switchTeam($team)
+    {
+        if (! $this->belongsToTeam($team)) {
+            return false;
+        }
+
+        $this->forceFill([
+            'current_team_id' => $team->id,
+        ])->save();
+
+        return true;
     }
 
     /**
@@ -43,7 +59,7 @@ trait HasTeams
     }
 
     /**
-     * Get all of the teams the user belongs to.
+     * Get all of the teams the user owns.
      */
     public function ownedTeams()
     {
