@@ -41,6 +41,7 @@
         </form>
     </jet-authentication-card>
 </template>
+
 <script>
     import JetAuthenticationCard from '../../Jetstream/AuthenticationCard'
     import JetAuthenticationCardLogo from '../../Jetstream/AuthenticationCardLogo'
@@ -58,6 +59,7 @@
             JetLabel,
             JetValidationErrors,
         },
+
         data() {
             return {
                 recovery: false,
@@ -67,6 +69,7 @@
                 })
             }
         },
+
         methods: {
             toggleRecovery() {
                 this.recovery ^= true
@@ -81,6 +84,7 @@
                     }
                 })
             },
+
             submit() {
                 this.form.post(this.route('two-factor.login'))
             }

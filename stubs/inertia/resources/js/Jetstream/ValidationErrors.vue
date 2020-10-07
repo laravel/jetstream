@@ -7,6 +7,7 @@
         </ul>
     </div>
 </template>
+
 <script>
     export default {
         props: {
@@ -15,13 +16,16 @@
                 default: 'default',
             },
         },
+
         computed: {
             errorBag() {
                 return this.$page.errorBags[this.bag] || {}
             },
+
             hasErrors() {
                 return Object.keys(this.errorBag).length > 0;
             },
+
             flattenedErrors() {
                 return Object.keys(this.errorBag).reduce((carry, key) => carry.concat(this.errorBag[key]), [])
             }

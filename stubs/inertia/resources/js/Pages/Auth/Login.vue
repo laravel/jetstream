@@ -40,6 +40,7 @@
         </form>
     </jet-authentication-card>
 </template>
+
 <script>
     import JetAuthenticationCard from '../../Jetstream/AuthenticationCard'
     import JetAuthenticationCardLogo from '../../Jetstream/AuthenticationCardLogo'
@@ -57,10 +58,12 @@
             JetLabel,
             JetValidationErrors
         },
+
         props: {
             canResetPassword: Boolean,
             status: String
         },
+
         data() {
             return {
                 remember: false,
@@ -71,11 +74,13 @@
                 })
             }
         },
+
         watch: {
             remember(value) {
                 this.form.remember = value ? 'on' : ''
             }
         },
+
         methods: {
             submit() {
                 this.form.post(this.route('login')).then(() => {

@@ -30,6 +30,7 @@
         </form>
     </jet-authentication-card>
 </template>
+
 <script>
     import JetAuthenticationCard from '../../Jetstream/AuthenticationCard'
     import JetAuthenticationCardLogo from '../../Jetstream/AuthenticationCardLogo'
@@ -47,10 +48,12 @@
             JetLabel,
             JetValidationErrors
         },
+
         props: {
             email: String,
             token: String,
         },
+
         data() {
             return {
                 form: this.$inertia.form({
@@ -61,6 +64,7 @@
                 })
             }
         },
+
         methods: {
             submit() {
                 this.form.post(this.route('password.update')).then(() => {

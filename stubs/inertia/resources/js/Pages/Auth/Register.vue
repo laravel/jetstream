@@ -39,6 +39,7 @@
         </form>
     </jet-authentication-card>
 </template>
+
 <script>
     import JetAuthenticationCard from '../../Jetstream/AuthenticationCard'
     import JetAuthenticationCardLogo from '../../Jetstream/AuthenticationCardLogo'
@@ -56,6 +57,7 @@
             JetLabel,
             JetValidationErrors
         },
+
         data() {
             return {
                 form: this.$inertia.form({
@@ -66,6 +68,7 @@
                 })
             }
         },
+
         methods: {
             submit() {
                 this.form.post(this.route('register')).then(() => {

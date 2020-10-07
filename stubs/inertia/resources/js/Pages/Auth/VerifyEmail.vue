@@ -23,6 +23,7 @@
         </form>
     </jet-authentication-card>
 </template>
+
 <script>
     import JetAuthenticationCard from '../../Jetstream/AuthenticationCard'
     import JetAuthenticationCardLogo from '../../Jetstream/AuthenticationCardLogo'
@@ -34,9 +35,11 @@
             JetAuthenticationCardLogo,
             JetButton,
         },
+
         props: {
             status: String
         },
+
         data() {
             return {
                 form: this.$inertia.form({
@@ -46,16 +49,19 @@
                 })
             }
         },
+
         methods: {
             submit() {
                 this.form.post(this.route('verification.send'))
             },
+
             logout() {
-                axios.post(this.route('logout')).then(response => {
+                axios.post(this.route('logout').url()).then(response => {
                     window.location = '/';
                 })
             }
         },
+
         computed: {
             verificationLinkSent() {
                 return this.status === 'verification-link-sent';
