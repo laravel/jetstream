@@ -88,9 +88,7 @@
             JetSecondaryButton,
         },
 
-        props: {
-            user: Object,
-        },
+        props: ['user'],
 
         data() {
             return {
