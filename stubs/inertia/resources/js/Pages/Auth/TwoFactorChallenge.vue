@@ -5,9 +5,10 @@
         </template>
 
         <div class="mb-4 text-sm text-gray-600">
-            <template v-if="!recovery">
+            <template v-if="! recovery">
                 Please confirm access to your account by entering the authentication code provided by your authenticator application.
             </template>
+
             <template v-else>
                 Please confirm access to your account by entering one of your emergency recovery codes.
             </template>
@@ -16,24 +17,27 @@
         <jet-validation-errors class="mb-4" />
 
         <form @submit.prevent="submit">
-            <div v-if="!recovery">
+            <div v-if="! recovery">
                 <jet-label for="code" value="Code" />
                 <jet-input ref="code" id="code" type="text" class="mt-1 block w-full" v-model="form.code" autofocus autocomplete="one-time-code" />
             </div>
+
             <div v-else>
                 <jet-label for="recovery_code" value="Recovery Code" />
                 <jet-input ref="recovery_code" id="recovery_code" type="text" class="mt-1 block w-full" v-model="form.recovery_code" autocomplete="one-time-code" />
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <button @click.prevent="toggleRecovery" class="text-sm text-gray-600 hover:text-gray-900 underline cursor-pointer">
-                    <template v-if="!recovery">
+                <button type="button" class="text-sm text-gray-600 hover:text-gray-900 underline cursor-pointer" @click.prevent="toggleRecovery">
+                    <template v-if="! recovery">
                         Use a recovery code
                     </template>
+
                     <template v-else>
                         Use an authentication code
                     </template>
                 </button>
+
                 <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Login
                 </jet-button>
