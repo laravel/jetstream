@@ -162,7 +162,7 @@
 
         computed: {
             twoFactorEnabled() {
-                return ! this.enabling && this.$page.user.two_factor_enabled
+                return ! this.enabling && this.$page.auth.user.two_factor_enabled
             }
         }
     }
