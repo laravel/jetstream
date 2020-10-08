@@ -25,9 +25,9 @@ class InertiaServiceProvider extends ServiceProvider
     protected function configureVersioning()
     {
         Inertia::version(function () {
-            // When we are running on Laravel Vapor, asset URLs are automatically generated
-            // for us whenever an asset gets deployed. Because of this, there is no need
-            // to retrieve the whole file for hashing, as we can use the URL instead.
+            // When we are running on Laravel Vapor, asset URLs are automatically updated
+            // when the application is being deployed. Because of this, we do not need
+            // to use any files for hashing, as we can simply use this URL instead.
             if (config('app.asset_url')) {
                 return md5(config('app.asset_url'));
             }
