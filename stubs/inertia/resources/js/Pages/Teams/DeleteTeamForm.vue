@@ -44,11 +44,11 @@
 </template>
 
 <script>
-    import JetActionSection from './../../Jetstream/ActionSection'
-    import JetButton from './../../Jetstream/Button'
-    import JetConfirmationModal from './../../Jetstream/ConfirmationModal'
-    import JetDangerButton from './../../Jetstream/DangerButton'
-    import JetSecondaryButton from './../../Jetstream/SecondaryButton'
+    import JetActionSection from '@/Jetstream/ActionSection'
+    import JetButton from '@/Jetstream/Button'
+    import JetConfirmationModal from '@/Jetstream/ConfirmationModal'
+    import JetDangerButton from '@/Jetstream/DangerButton'
+    import JetSecondaryButton from '@/Jetstream/SecondaryButton'
 
     export default {
         props: ['team'],
