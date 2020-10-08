@@ -1,16 +1,12 @@
-{!! '<?php' !!}
+<?php
 
 namespace App\Providers;
 
-@if ($withTeams)
 use App\Actions\Jetstream\AddTeamMember;
 use App\Actions\Jetstream\CreateTeam;
 use App\Actions\Jetstream\DeleteTeam;
 use App\Actions\Jetstream\DeleteUser;
 use App\Actions\Jetstream\UpdateTeamName;
-@else
-use App\Actions\Jetstream\DeleteUser;
-@endif
 use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;
 
@@ -35,12 +31,10 @@ class JetstreamServiceProvider extends ServiceProvider
     {
         $this->configurePermissions();
 
-@if ($withTeams)
         Jetstream::createTeamsUsing(CreateTeam::class);
         Jetstream::updateTeamNamesUsing(UpdateTeamName::class);
         Jetstream::addTeamMembersUsing(AddTeamMember::class);
         Jetstream::deleteTeamsUsing(DeleteTeam::class);
-@endif
         Jetstream::deleteUsersUsing(DeleteUser::class);
     }
 
@@ -53,7 +47,6 @@ class JetstreamServiceProvider extends ServiceProvider
     {
         Jetstream::defaultApiTokenPermissions(['read']);
 
-@if ($withTeams)
         Jetstream::role('admin', __('Administrator'), [
             'create',
             'read',
@@ -66,13 +59,5 @@ class JetstreamServiceProvider extends ServiceProvider
             'create',
             'update',
         ])->description(__('Editor users have the ability to read, create, and update.'));
-@else
-        Jetstream::permissions([
-            'create',
-            'read',
-            'update',
-            'delete',
-        ]);
-@endif
     }
 }
