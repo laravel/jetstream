@@ -20,6 +20,10 @@ class ShareInertiaData
      */
     public function handle($request, $next)
     {
+        Inertia::version(function () {
+            return md5_file(public_path('mix-manifest.json'));
+        });
+
         Inertia::share(array_filter([
             'jetstream' => function () use ($request) {
                 return [
