@@ -2,13 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
-use Laravel\Fortify\Features;
-use Laravel\Jetstream\Jetstream;
 
 class InertiaServiceProvider extends ServiceProvider
 {
@@ -20,7 +15,6 @@ class InertiaServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->configureVersioning();
-        $this->configurePageData();
     }
 
     /**
@@ -46,49 +40,5 @@ class InertiaServiceProvider extends ServiceProvider
 
             return null;
         });
-    }
-
-    /**
-     * Configures Inertia for use with Jetstream.
-     *
-     * @return void
-     */
-    protected function configurePageData()
-    {
-        Inertia::share(array_filter([
-            'jetstream' => function () {
-                return [
-                    'canCreateTeams' => request()->user() &&
-                        Jetstream::hasTeamFeatures() &&
-                        Gate::forUser(request()->user())->check('create', Jetstream::newTeamModel()),
-                    'canManageTwoFactorAuthentication' => Features::canManageTwoFactorAuthentication(),
-                    'flash' => request()->session()->get('flash', []),
-                    'hasApiFeatures' => Jetstream::hasApiFeatures(),
-                    'hasTeamFeatures' => Jetstream::hasTeamFeatures(),
-                    'managesProfilePhotos' => Jetstream::managesProfilePhotos(),
-                ];
-            },
-            'user' => function () {
-                if (! request()->user()) {
-                    return;
-                }
-
-                if (Jetstream::hasTeamFeatures() && request()->user()) {
-                    request()->user()->currentTeam;
-                }
-
-                return array_merge(request()->user()->toArray(), array_filter([
-                    'all_teams' => Jetstream::hasTeamFeatures() ? request()->user()->allTeams() : null,
-                ]), [
-                    'two_factor_enabled' => ! is_null(request()->user()->two_factor_secret),
-                ]);
-            },
-            'errorBags' => function () {
-                return collect(optional(Session::get('errors'))->getBags() ?: [])->mapWithKeys(function ($bag, $key) {
-                    return [$key => $bag->messages()];
-                })->all();
-            },
-            'currentRouteName' => Route::currentRouteName(),
-        ]));
     }
 }

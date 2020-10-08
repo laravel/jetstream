@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
-use Inertia\Inertia;
 use Laravel\Fortify\Fortify;
 use Laravel\Jetstream\Http\Livewire\ApiTokenManager;
 use Laravel\Jetstream\Http\Livewire\CreateTeamForm;
@@ -20,6 +19,7 @@ use Laravel\Jetstream\Http\Livewire\TwoFactorAuthenticationForm;
 use Laravel\Jetstream\Http\Livewire\UpdatePasswordForm;
 use Laravel\Jetstream\Http\Livewire\UpdateProfileInformationForm;
 use Laravel\Jetstream\Http\Livewire\UpdateTeamNameForm;
+use Laravel\Jetstream\Http\Middleware\ShareInertiaData;
 use Livewire\Livewire;
 
 class JetstreamServiceProvider extends ServiceProvider
@@ -71,6 +71,10 @@ class JetstreamServiceProvider extends ServiceProvider
         $this->configurePublishing();
         $this->configureRoutes();
         $this->configureCommands();
+
+        if (config('jetstream.stack') === 'inertia') {
+            $this->bootInertia();
+        }
     }
 
     /**
@@ -186,5 +190,18 @@ class JetstreamServiceProvider extends ServiceProvider
         $this->commands([
             Console\InstallCommand::class,
         ]);
+    }
+
+    /**
+     * Boot any Inertia related services.
+     *
+     * @return void
+     */
+    protected function bootInertia()
+    {
+        $kernel = $this->app->make(Kernel::class);
+
+        $kernel->appendMiddlewareToGroup('web', ShareInertiaData::class);
+        $kernel->appendToMiddlewarePriority(ShareInertiaData::class);
     }
 }

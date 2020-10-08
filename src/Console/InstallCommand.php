@@ -5,6 +5,7 @@ namespace Laravel\Jetstream\Console;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use Symfony\Component\Process\Process;
 
@@ -32,6 +33,9 @@ class InstallCommand extends Command
      */
     public function handle()
     {
+        // Configure Template Stubs...
+        View::addNamespace('jetstream-stubs', __DIR__.'/../../stubs/templates');
+
         // Publish...
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-config', '--force' => true]);
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-migrations', '--force' => true]);
@@ -141,9 +145,7 @@ class InstallCommand extends Command
         (new Filesystem)->deleteDirectory(resource_path('sass'));
 
         // Service Providers...
-        copy(__DIR__.'/../../stubs/app/Providers/JetstreamServiceProvider.php', app_path('Providers/JetstreamServiceProvider.php'));
-
-        $this->installServiceProvider('JetstreamServiceProvider', 'FortifyServiceProvider');
+        $this->installJetstreamServiceProvider();
 
         // Models...
         copy(__DIR__.'/../../stubs/app/Models/User.php', app_path('Models/User.php'));
@@ -283,10 +285,9 @@ EOF;
         (new Filesystem)->deleteDirectory(resource_path('sass'));
 
         // Service Providers...
-        copy(__DIR__.'/../../stubs/app/Providers/JetstreamServiceProvider.php', app_path('Providers/JetstreamServiceProvider.php'));
         copy(__DIR__.'/../../stubs/inertia/app/Providers/InertiaServiceProvider.php', app_path('Providers/InertiaServiceProvider.php'));
 
-        $this->installServiceProvider('JetstreamServiceProvider', 'FortifyServiceProvider');
+        $this->installJetstreamServiceProvider();
         $this->installServiceProvider('InertiaServiceProvider', 'JetstreamServiceProvider');
 
         // Models...
@@ -391,7 +392,6 @@ EOF;
 
         // Service Providers...
         copy(__DIR__.'/../../stubs/app/Providers/AuthServiceProvider.php', app_path('Providers/AuthServiceProvider.php'));
-        copy(__DIR__.'/../../stubs/app/Providers/JetstreamWithTeamsServiceProvider.php', app_path('Providers/JetstreamServiceProvider.php'));
 
         // Models...
         copy(__DIR__.'/../../stubs/app/Models/Membership.php', app_path('Models/Membership.php'));
@@ -409,6 +409,20 @@ EOF;
 
         // Policies...
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/app/Policies', app_path('Policies'));
+    }
+
+    /**
+     * Install the Jetstream service provider in the application configuration file.
+     *
+     * @return void
+     */
+    protected function installJetstreamServiceProvider()
+    {
+        $this->compileTemplate('JetstreamServiceProvider', app_path('Providers/JetstreamServiceProvider.php'), [
+            'withTeams' => $this->option('teams'),
+        ]);
+
+        $this->installServiceProvider('JetstreamServiceProvider', 'FortifyServiceProvider');
     }
 
     /**
@@ -485,5 +499,18 @@ EOF;
     protected function replaceInFile($search, $replace, $path)
     {
         file_put_contents($path, str_replace($search, $replace, file_get_contents($path)));
+    }
+
+    /**
+     * Compiles a stub template and saves it to the provided path.
+     *
+     * @param string $template
+     * @param string $path
+     * @param array $data
+     * @return void
+     */
+    protected function compileTemplate($template, $path, $data)
+    {
+        file_put_contents($path, view('jetstream-stubs::'.$template, $data)->render());
     }
 }
