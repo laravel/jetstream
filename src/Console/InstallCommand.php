@@ -49,7 +49,7 @@ class InstallCommand extends Command
         }
 
         // Fortify Provider...
-        $this->installFortifyServiceProvider();
+        $this->installServiceProvider('FortifyServiceProvider', 'RouteServiceProvider');
 
         // Configure Session...
         $this->configureSession();
@@ -66,22 +66,6 @@ class InstallCommand extends Command
             $this->installLivewireStack();
         } elseif ($this->argument('stack') === 'inertia') {
             $this->installInertiaStack();
-        }
-    }
-
-    /**
-     * Install the Fortify service providers in the application configuration file.
-     *
-     * @return void
-     */
-    protected function installFortifyServiceProvider()
-    {
-        if (! Str::contains($appConfig = file_get_contents(config_path('app.php')), 'App\\Providers\\FortifyServiceProvider::class')) {
-            file_put_contents(config_path('app.php'), str_replace(
-                "App\\Providers\RouteServiceProvider::class,",
-                "App\\Providers\RouteServiceProvider::class,".PHP_EOL."        App\Providers\FortifyServiceProvider::class,",
-                $appConfig
-            ));
         }
     }
 
@@ -159,7 +143,7 @@ class InstallCommand extends Command
         // Service Providers...
         copy(__DIR__.'/../../stubs/app/Providers/JetstreamServiceProvider.php', app_path('Providers/JetstreamServiceProvider.php'));
 
-        $this->installJetstreamServiceProvider();
+        $this->installServiceProvider('JetstreamServiceProvider', 'FortifyServiceProvider');
 
         // Models...
         copy(__DIR__.'/../../stubs/app/Models/User.php', app_path('Models/User.php'));
@@ -300,8 +284,10 @@ EOF;
 
         // Service Providers...
         copy(__DIR__.'/../../stubs/app/Providers/JetstreamServiceProvider.php', app_path('Providers/JetstreamServiceProvider.php'));
+        copy(__DIR__.'/../../stubs/inertia/app/Providers/InertiaServiceProvider.php', app_path('Providers/InertiaServiceProvider.php'));
 
-        $this->installJetstreamServiceProvider();
+        $this->installServiceProvider('JetstreamServiceProvider', 'FortifyServiceProvider');
+        $this->installServiceProvider('InertiaServiceProvider', 'JetstreamServiceProvider');
 
         // Models...
         copy(__DIR__.'/../../stubs/app/Models/User.php', app_path('Models/User.php'));
@@ -426,16 +412,18 @@ EOF;
     }
 
     /**
-     * Install the Jetstream service providers in the application configuration file.
+     * Install the Service Provider in the application configuration file.
      *
+     * @param  string $name
+     * @param  string $after
      * @return void
      */
-    protected function installJetstreamServiceProvider()
+    protected function installServiceProvider($name, $after)
     {
-        if (! Str::contains($appConfig = file_get_contents(config_path('app.php')), 'App\\Providers\\JetstreamServiceProvider::class')) {
+        if (! Str::contains($appConfig = file_get_contents(config_path('app.php')), 'App\\Providers\\'.$name.'::class')) {
             file_put_contents(config_path('app.php'), str_replace(
-                "App\\Providers\FortifyServiceProvider::class,",
-                "App\\Providers\FortifyServiceProvider::class,".PHP_EOL."        App\Providers\JetstreamServiceProvider::class,",
+                'App\\Providers\\'.$after.'::class,',
+                'App\\Providers\\'.$after.'::class,'.PHP_EOL.'        App\\Providers\\'.$name.'::class,',
                 $appConfig
             ));
         }

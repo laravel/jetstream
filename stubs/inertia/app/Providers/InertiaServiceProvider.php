@@ -1,24 +1,34 @@
 <?php
 
-namespace Laravel\Jetstream\Http\Middleware;
+namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
 use Laravel\Jetstream\Jetstream;
 
-class ShareInertiaData
+class InertiaServiceProvider extends ServiceProvider
 {
     /**
-     * Handle the incoming request.
+     * Register any authentication / authorization services.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  callable  $next
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    public function handle($request, $next)
+    public function boot()
+    {
+        $this->configureVersioning();
+        $this->configurePageData();
+    }
+
+    /**
+     * Enables Inertia automatic asset cache busting.
+     *
+     * @return void
+     */
+    protected function configureVersioning()
     {
         Inertia::version(function () {
             // When we are running on Laravel Vapor, asset URLs are automatically generated
@@ -36,33 +46,41 @@ class ShareInertiaData
 
             return null;
         });
+    }
 
+    /**
+     * Configures Inertia for use with Jetstream.
+     *
+     * @return void
+     */
+    protected function configurePageData()
+    {
         Inertia::share(array_filter([
-            'jetstream' => function () use ($request) {
+            'jetstream' => function () {
                 return [
-                    'canCreateTeams' => $request->user() &&
-                                        Jetstream::hasTeamFeatures() &&
-                                        Gate::forUser($request->user())->check('create', Jetstream::newTeamModel()),
+                    'canCreateTeams' => request()->user() &&
+                        Jetstream::hasTeamFeatures() &&
+                        Gate::forUser(request()->user())->check('create', Jetstream::newTeamModel()),
                     'canManageTwoFactorAuthentication' => Features::canManageTwoFactorAuthentication(),
-                    'flash' => $request->session()->get('flash', []),
+                    'flash' => request()->session()->get('flash', []),
                     'hasApiFeatures' => Jetstream::hasApiFeatures(),
                     'hasTeamFeatures' => Jetstream::hasTeamFeatures(),
                     'managesProfilePhotos' => Jetstream::managesProfilePhotos(),
                 ];
             },
-            'user' => function () use ($request) {
-                if (! $request->user()) {
+            'user' => function () {
+                if (! request()->user()) {
                     return;
                 }
 
-                if (Jetstream::hasTeamFeatures() && $request->user()) {
-                    $request->user()->currentTeam;
+                if (Jetstream::hasTeamFeatures() && request()->user()) {
+                    request()->user()->currentTeam;
                 }
 
-                return array_merge($request->user()->toArray(), array_filter([
-                    'all_teams' => Jetstream::hasTeamFeatures() ? $request->user()->allTeams() : null,
+                return array_merge(request()->user()->toArray(), array_filter([
+                    'all_teams' => Jetstream::hasTeamFeatures() ? request()->user()->allTeams() : null,
                 ]), [
-                    'two_factor_enabled' => ! is_null($request->user()->two_factor_secret),
+                    'two_factor_enabled' => ! is_null(request()->user()->two_factor_secret),
                 ]);
             },
             'errorBags' => function () {
@@ -72,7 +90,5 @@ class ShareInertiaData
             },
             'currentRouteName' => Route::currentRouteName(),
         ]));
-
-        return $next($request);
     }
 }
