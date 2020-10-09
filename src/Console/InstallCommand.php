@@ -49,7 +49,7 @@ class InstallCommand extends Command
         }
 
         // Fortify Provider...
-        $this->installServiceProviderAfter('FortifyServiceProvider', 'RouteServiceProvider');
+        $this->installServiceProviderAfter('RouteServiceProvider', 'FortifyServiceProvider');
 
         // Configure Session...
         $this->configureSession();
@@ -142,7 +142,7 @@ class InstallCommand extends Command
 
         // Service Providers...
         copy(__DIR__.'/../../stubs/app/Providers/JetstreamServiceProvider.php', app_path('Providers/JetstreamServiceProvider.php'));
-        $this->installServiceProviderAfter('JetstreamServiceProvider', 'FortifyServiceProvider');
+        $this->installServiceProviderAfter('FortifyServiceProvider', 'JetstreamServiceProvider');
 
         // Models...
         copy(__DIR__.'/../../stubs/app/Models/User.php', app_path('Models/User.php'));
@@ -285,8 +285,8 @@ EOF;
         copy(__DIR__.'/../../stubs/app/Providers/JetstreamServiceProvider.php', app_path('Providers/JetstreamServiceProvider.php'));
         copy(__DIR__.'/../../stubs/app/Providers/InertiaServiceProvider.php', app_path('Providers/InertiaServiceProvider.php'));
 
-        $this->installServiceProviderAfter('JetstreamServiceProvider', 'FortifyServiceProvider');
-        $this->installServiceProviderAfter('InertiaServiceProvider', 'JetstreamServiceProvider');
+        $this->installServiceProviderAfter('FortifyServiceProvider', 'JetstreamServiceProvider');
+        $this->installServiceProviderAfter('JetstreamServiceProvider', 'InertiaServiceProvider');
 
         // Models...
         copy(__DIR__.'/../../stubs/app/Models/User.php', app_path('Models/User.php'));
@@ -411,13 +411,13 @@ EOF;
     }
 
     /**
-     * Install the Service Provider in the application configuration file.
+     * Install the service provider in the application configuration file.
      *
-     * @param  string $name
      * @param  string $after
+     * @param  string $name
      * @return void
      */
-    protected function installServiceProviderAfter($name, $after)
+    protected function installServiceProviderAfter($after, $name)
     {
         if (! Str::contains($appConfig = file_get_contents(config_path('app.php')), 'App\\Providers\\'.$name.'::class')) {
             file_put_contents(config_path('app.php'), str_replace(
