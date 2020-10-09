@@ -2,6 +2,7 @@
 
 namespace Laravel\Jetstream;
 
+use App\Http\Middleware\PrepareInertia;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
@@ -204,5 +205,9 @@ class JetstreamServiceProvider extends ServiceProvider
 
         $kernel->appendMiddlewareToGroup('web', ShareInertiaData::class);
         $kernel->appendToMiddlewarePriority(ShareInertiaData::class);
+
+        if (class_exists(PrepareInertia::class)) {
+            $kernel->appendToMiddlewarePriority(PrepareInertia::class);
+        }
     }
 }

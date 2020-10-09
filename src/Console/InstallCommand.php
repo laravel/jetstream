@@ -283,10 +283,13 @@ EOF;
 
         // Service Providers...
         copy(__DIR__.'/../../stubs/app/Providers/JetstreamServiceProvider.php', app_path('Providers/JetstreamServiceProvider.php'));
-        copy(__DIR__.'/../../stubs/app/Providers/InertiaServiceProvider.php', app_path('Providers/InertiaServiceProvider.php'));
 
         $this->installServiceProviderAfter('FortifyServiceProvider', 'JetstreamServiceProvider');
-        $this->installServiceProviderAfter('JetstreamServiceProvider', 'InertiaServiceProvider');
+
+        // Middleware
+        copy(__DIR__.'/../../stubs/app/Http/Middleware/PrepareInertia.php', app_path('Http/Middleware/PrepareInertia.php'));
+
+        $this->installMiddlewareAfter('SubstituteBindings::class', '\App\Http\Middleware\PrepareInertia::class');
 
         // Models...
         copy(__DIR__.'/../../stubs/app/Models/User.php', app_path('Models/User.php'));
@@ -424,6 +427,35 @@ EOF;
                 'App\\Providers\\'.$after.'::class,',
                 'App\\Providers\\'.$after.'::class,'.PHP_EOL.'        App\\Providers\\'.$name.'::class,',
                 $appConfig
+            ));
+        }
+    }
+
+    /**
+     * Install the middleware to a group in the application Http Kernel.
+     *
+     * @param  string $after
+     * @param  string $name
+     * @param  string $group
+     * @return void
+     */
+    protected function installMiddlewareAfter($after, $name, $group = 'web')
+    {
+        $httpKernel = file_get_contents(app_path('Http/Kernel.php'));
+        $middlewareGroups = Str::before(Str::after($httpKernel, '$middlewareGroups = ['.PHP_EOL), '];'.PHP_EOL);
+        $middlewareGroup = Str::before(Str::after($middlewareGroups, "'$group' => [".PHP_EOL), '],'.PHP_EOL);
+
+        if (! Str::contains($middlewareGroup, $name)) {
+            $modifiedMiddlewareGroup = str_replace(
+                $after.',',
+                $after.','.PHP_EOL.'            '.$name.',',
+                $middlewareGroup,
+            );
+
+            file_put_contents(app_path('Http/Kernel.php'), str_replace(
+                $middlewareGroups,
+                str_replace($middlewareGroup, $modifiedMiddlewareGroup, $middlewareGroups),
+                $httpKernel
             ));
         }
     }

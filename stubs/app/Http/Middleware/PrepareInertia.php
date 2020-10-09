@@ -1,28 +1,19 @@
 <?php
 
-namespace App\Providers;
+namespace App\Http\Middleware;
 
-use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
 
-class InertiaServiceProvider extends ServiceProvider
+class PrepareInertia
 {
     /**
-     * Register any authentication / authorization services.
+     * Handle the incoming request.
      *
-     * @return void
+     * @param  \Illuminate\Http\Request  $request
+     * @param  callable  $next
+     * @return \Illuminate\Http\Response
      */
-    public function boot()
-    {
-        $this->configureVersioning();
-    }
-
-    /**
-     * Enables Inertia automatic asset cache busting.
-     *
-     * @return void
-     */
-    protected function configureVersioning()
+    public function handle($request, $next)
     {
         Inertia::version(function () {
             // When we are running on Laravel Vapor, asset URLs are automatically updated
@@ -37,8 +28,8 @@ class InertiaServiceProvider extends ServiceProvider
             if (file_exists($manifest = public_path('mix-manifest.json'))) {
                 return md5_file($manifest);
             }
-
-            return null;
         });
+
+        return $next($request);
     }
 }
