@@ -10,7 +10,7 @@
 
         <template #content>
             <div class="max-w-xl text-sm text-gray-600">
-                If necessary, you may logout of all of your other browser sessions across all of your devices. If you feel your account has been compromised, you should also update your password.
+                If necessary, you may logout of all of your other browser sessions across all of your devices. If you feel your account has been compromised, you should also update your password. Note that this will not log you out on sessions where you have enabled "remember me".
             </div>
 
             <!-- Other Browser Sessions -->
