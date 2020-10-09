@@ -129,6 +129,31 @@ class TeamBehaviorTest extends OrchestraTestCase
         $this->assertTrue($john->hasTeamPermission($team, 'foo'));
     }
 
+    public function test_user_does_not_need_to_refresh_after_switching_teams()
+    {
+        $this->migrate();
+
+        $action = new CreateTeam;
+
+        $user = User::forceCreate([
+            'name' => 'Taylor Otwell',
+            'email' => 'taylor@laravel.com',
+            'password' => 'secret',
+        ]);
+
+        $personalTeam = $action->create($user, ['name' => 'Personal Team']);
+
+        $personalTeam->forceFill(['personal_team' => true])->save();
+
+        $anotherTeam = $action->create($user, ['name' => 'Test Team']);
+
+        $this->assertTrue($user->isCurrentTeam($personalTeam));
+
+        $user->switchTeam($anotherTeam);
+
+        $this->assertTrue($user->isCurrentTeam($anotherTeam));
+    }
+
     protected function migrate()
     {
         $this->artisan('migrate', ['--database' => 'testbench'])->run();

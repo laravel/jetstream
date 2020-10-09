@@ -45,6 +45,8 @@ trait HasTeams
             'current_team_id' => $team->id,
         ])->save();
 
+        $this->setRelation('currentTeam', $team);
+
         return true;
     }
 
