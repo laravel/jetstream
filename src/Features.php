@@ -123,6 +123,16 @@ class Features
     }
 
     /**
+     * Enabled the socialite feature.
+     *
+     * @return string
+     */
+    public static function socialite()
+    {
+        return 'socialite';
+    }
+
+    /**
      * Enable the account deletion feature.
      *
      * @return string
