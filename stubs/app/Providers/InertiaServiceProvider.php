@@ -34,7 +34,7 @@ class InertiaServiceProvider extends ServiceProvider
 
             // Alternatively, when we are running in a regular (non-serverless) environment
             // we'll attempt to use the Laravel Mix asset manifest to generate our hash.
-            if (file_exists($manifest = public_path('js/mix-manifest.json'))) {
+            if (file_exists($manifest = public_path('mix-manifest.json'))) {
                 return md5_file($manifest);
             }
 

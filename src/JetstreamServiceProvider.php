@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
+use Inertia\Inertia;
 use Laravel\Fortify\Fortify;
 use Laravel\Jetstream\Http\Livewire\ApiTokenManager;
 use Laravel\Jetstream\Http\Livewire\CreateTeamForm;
