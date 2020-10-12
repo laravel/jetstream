@@ -429,7 +429,9 @@ EOF;
         }
 
         // Configuration...
-        $this->replaceInFile('// Features::socialite()', 'Features::socialite())', config_path('jetstream.php'));
+        $this->replaceInFile('// Features::socialite()', 'Features::socialite()', config_path('jetstream.php'));
+        $this->replaceInFile('// TwitterProvider::class', 'TwitterProvider::class', config_path('jetstream.php'));
+        $this->replaceInFile('// GithubProvider::class', 'GithubProvider::class', config_path('jetstream.php'));
     }
 
     /**

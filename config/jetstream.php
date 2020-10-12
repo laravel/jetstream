@@ -1,6 +1,8 @@
 <?php
 
 use Laravel\Jetstream\Features;
+use Laravel\Socialite\One\TwitterProvider;
+use Laravel\Socialite\Two\GithubProvider;
 
 return [
 
@@ -54,11 +56,11 @@ return [
 
     'socialite_providers' => [
         'oauth1' => [
-            // \Laravel\Socialite\One\TwitterProvider::class,
+            // TwitterProvider::class,
         ],
 
         'oauth2' => [
-            // \Laravel\Socialite\Two\GithubProvider::class,
+            // GithubProvider::class,
         ],
     ]
 ];
