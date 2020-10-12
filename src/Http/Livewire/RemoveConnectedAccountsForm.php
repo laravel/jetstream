@@ -41,7 +41,7 @@ class RemoveConnectedAccountsForm extends Component
      *
      * @return void
      */
-    public function removeOAuthProvider($id)
+    public function removeConnectedAccount($id)
     {
         if (! Hash::check($this->password, Auth::user()->password)) {
             throw ValidationException::withMessages([
@@ -49,7 +49,7 @@ class RemoveConnectedAccountsForm extends Component
             ]);
         }
 
-        DB::table('social_providers')
+        DB::table('connected_accounts')
             ->where('user_id', Auth::user()->getKey())
             ->where('id', $id)
             ->delete();
@@ -64,7 +64,7 @@ class RemoveConnectedAccountsForm extends Component
      */
     public function getProvidersProperty()
     {
-        return DB::table('social_providers')
+        return DB::table('connected_accounts')
                 ->where('user_id', Auth::user()->getKey())
                 ->orderBy('created_at', 'desc')
                 ->get();
@@ -77,6 +77,6 @@ class RemoveConnectedAccountsForm extends Component
      */
     public function render()
     {
-        return view('profile.remove-oauth-providers-form');
+        return view('profile.remove-connected-accounts-form');
     }
 }

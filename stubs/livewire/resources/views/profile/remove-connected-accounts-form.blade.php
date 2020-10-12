@@ -58,7 +58,7 @@
                     <x-jet-input type="password" class="mt-1 block w-3/4" placeholder="{{ __('Password') }}"
                                  x-ref="password"
                                  wire:model.defer="password"
-                                 wire:keydown.enter="removeOAuthProvider({{ $provider->id }})" />
+                                 wire:keydown.enter="removeConnectedAccount({{ $provider->id }})" />
 
                     <x-jet-input-error for="password" class="mt-2" />
                 </div>
@@ -69,7 +69,7 @@
                     {{ __('Nevermind') }}
                 </x-jet-secondary-button>
 
-                <x-jet-button class="ml-2 bg-red-600 hover:bg-red-500" wire:click="removeOAuthProvider({{ $provider->id }})" wire:loading.attr="disabled">
+                <x-jet-button class="ml-2 bg-red-600 hover:bg-red-500" wire:click="removeConnectedAccount({{ $provider->id }})" wire:loading.attr="disabled">
                     {{ __('Remove Connected Account') }}
                 </x-jet-button>
             </x-slot>
