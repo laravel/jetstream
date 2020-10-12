@@ -2,12 +2,11 @@
 
 namespace Laravel\Jetstream\Http\Livewire;
 
-use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-use Illuminate\View\Component;
+use Livewire\Component;
 
 class RemoveConnectedAccountsForm extends Component
 {
@@ -26,13 +25,21 @@ class RemoveConnectedAccountsForm extends Component
     public $password = '';
 
     /**
+     * @var mixed
+     */
+    public $selectedAccountId;
+
+    /**
      * Confirm that the user actually wants to remove the selected connected account.
      *
+     * @param  mixed  $accountId
      * @return void
      */
-    public function confirmRemove()
+    public function confirmRemove($accountId)
     {
         $this->password = '';
+
+        $this->selectedAccountId = $accountId;
 
         $this->dispatchBrowserEvent('confirming-remove-oauth-provider');
 
@@ -42,10 +49,10 @@ class RemoveConnectedAccountsForm extends Component
     /**
      * Remove an OAuth Provider.
      *
-     * @param  mixed  $id
+     * @param  mixed  $accountId
      * @return void
      */
-    public function removeConnectedAccount($id)
+    public function removeConnectedAccount($accountId)
     {
         if (! Hash::check($this->password, Auth::user()->password)) {
             throw ValidationException::withMessages([
@@ -55,18 +62,18 @@ class RemoveConnectedAccountsForm extends Component
 
         DB::table('connected_accounts')
             ->where('user_id', Auth::user()->getKey())
-            ->where('id', $id)
+            ->where('id', $accountId)
             ->delete();
 
         $this->confirmingRemove = false;
     }
 
     /**
-     * Get the users connected providers.
+     * Get the users connected accounts.
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getProvidersProperty()
+    public function getAccountsProperty()
     {
         return DB::table('connected_accounts')
                 ->where('user_id', Auth::user()->getKey())

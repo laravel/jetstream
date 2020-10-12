@@ -12,9 +12,9 @@
             {{ __('You may disconnect any of your connected accounts below. If you feel any of your connected accounts have been compromised, you should disconnect them immediately.') }}
         </div>
 
-        @if (count($this->providers) > 0)
+        @if (count($this->accounts) > 0)
             <div class="mt-5 space-y-6 grid grid-cols-3">
-                @foreach($this->providers as $provider)
+                @foreach($this->accounts as $account)
                     <div class="p-3 flex items-center justify-between col-span-1">
                         <!-- Provider Info -->
                         <div>
@@ -26,26 +26,26 @@
                             <!-- Provider details -->
                             <div>
                                 <div class="text-sm font-semibold text-gray-600">
-                                    {{ IlluminateSupportStr::ucfirst($provider->provider_name) }}
+                                    {{ IlluminateSupportStr::ucfirst($account->provider_name) }}
                                 </div>
 
                                 <div>
                                     <div class="text-xs text-gray-500">
-                                        {{ __('Added on') }} {{ $provider->created_at->format('d/m/Y') }}
+                                        {{ __('Added on') }} {{ $account->created_at->format('d/m/Y') }}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <x-jet-button wire:click="confirmRemove" wire:loading.attr="disabled" class="bg-red-600 hover:bg-red-500">
+                        <x-jet-button wire:click="confirmRemove({{ $account-id }})" wire:loading.attr="disabled" class="bg-red-600 hover:bg-red-500">
                             {{ __('Remove') }}
                         </x-jet-button>
                     </div>
                 @endforeach
             </div>
-    @else
-    @endif
+        @else
+        @endif
 
-    <!-- Logout Other Devices Confirmation Modal -->
+        <!-- Logout Other Devices Confirmation Modal -->
         <x-jet-dialog-modal wire:model="confirmingRemove">
             <x-slot name="title">
                 {{ __('Remove Connected Account') }}
@@ -58,7 +58,7 @@
                     <x-jet-input type="password" class="mt-1 block w-3/4" placeholder="{{ __('Password') }}"
                                  x-ref="password"
                                  wire:model.defer="password"
-                                 wire:keydown.enter="removeConnectedAccount({{ $provider->id }})" />
+                                 wire:keydown.enter="removeConnectedAccount({{ $this->selectedAccountId }})" />
 
                     <x-jet-input-error for="password" class="mt-2" />
                 </div>
@@ -69,7 +69,7 @@
                     {{ __('Nevermind') }}
                 </x-jet-secondary-button>
 
-                <x-jet-button class="ml-2 bg-red-600 hover:bg-red-500" wire:click="removeConnectedAccount({{ $provider->id }})" wire:loading.attr="disabled">
+                <x-jet-button class="ml-2 bg-red-600 hover:bg-red-500" wire:click="removeConnectedAccount({{ $this->selectedAccountId }})" wire:loading.attr="disabled">
                     {{ __('Remove Connected Account') }}
                 </x-jet-button>
             </x-slot>
