@@ -177,6 +177,10 @@ class JetstreamServiceProvider extends ServiceProvider
         ], 'jetstream-team-migrations');
 
         $this->publishes([
+            __DIR__.'/../database/migrations/2020_05_21_300000_create_connected_accounts_table.php' => database_path('migrations/2020_05_21_300000_create_connected_accounts_table.php'),
+        ], 'jetstream-socialite-migrations');
+
+        $this->publishes([
             __DIR__.'/../routes/'.config('jetstream.stack').'.php' => base_path('routes/jetstream.php'),
         ], 'jetstream-routes');
     }
