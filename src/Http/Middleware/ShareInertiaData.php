@@ -31,6 +31,7 @@ class ShareInertiaData
                     'hasApiFeatures' => Jetstream::hasApiFeatures(),
                     'hasTeamFeatures' => Jetstream::hasTeamFeatures(),
                     'managesProfilePhotos' => Jetstream::managesProfilePhotos(),
+                    'hasSocialiteFeatures' => Jetstream::hasSocialiteFeatures(),
                     'hasAccountDeletionFeatures' => Jetstream::hasAccountDeletionFeatures(),
                 ];
             },
