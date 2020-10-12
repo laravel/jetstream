@@ -125,7 +125,7 @@ export default {
         },
 
         removeConnectedAccount(id) {
-            this.form.post(`/user/remove-connected-account/${id}`, {
+            this.form.post(`/user/connected-account/${id}`, {
                 preserveScroll: true
             }).then(response => {
                 if (!this.form.hasErrors()) {
