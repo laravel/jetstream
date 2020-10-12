@@ -20,6 +20,12 @@
                     <two-factor-authentication-form class="mt-10 sm:mt-0" />
                 </div>
 
+                <div v-if="$page.jetstream.hasSocialiteFeatures">
+                    <jet-section-border />
+
+                    <remove-connected-accounts-form :accounts="accounts" class="mt-10 sm:mt-0" />
+                </div>
+
                 <jet-section-border />
 
                 <logout-other-browser-sessions-form :sessions="sessions" class="mt-10 sm:mt-0" />
@@ -42,11 +48,13 @@
     import TwoFactorAuthenticationForm from './TwoFactorAuthenticationForm'
     import UpdatePasswordForm from './UpdatePasswordForm'
     import UpdateProfileInformationForm from './UpdateProfileInformationForm'
+    import RemoveConnectedAccountsForm from './RemoveConnectedAccountsForm';
 
     export default {
-        props: ['sessions'],
+        props: ['sessions', 'connectedAccounts'],
 
         components: {
+            RemoveConnectedAccountsForm,
             AppLayout,
             DeleteUserForm,
             JetSectionBorder,

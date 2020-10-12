@@ -21,6 +21,7 @@ class UserProfileController extends Controller
     {
         return Jetstream::inertia()->render($request, 'Profile/Show', [
             'sessions' => $this->sessions($request)->all(),
+            'connectedAccounts' => $request->user()->connectedAccounts
         ]);
     }
 
