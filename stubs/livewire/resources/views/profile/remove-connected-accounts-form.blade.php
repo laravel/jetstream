@@ -11,6 +11,8 @@
         <h3 class="text-lg font-medium text-gray-900">
             @if (count($this->accounts) == 0)
                 {{ __('You have no connected accounts.') }}
+            @else
+                {{ __('Your connected accounts.') }}
             @endif
         </h3>
 

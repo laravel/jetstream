@@ -9,9 +9,21 @@
         </template>
 
         <template #content>
-            <div class="max-w-xl text-sm text-gray-600">
-                You may disconnect any of your connected accounts below. If you feel any of your connected accounts have
-                been compromised, you should disconnect them immediately.
+            <h3 class="text-lg font-medium text-gray-900" v-if="providers.length === 0">
+                You have no connected accounts.
+            </h3>
+            <h3 class="text-lg font-medium text-gray-900" v-else>
+                Your connected accounts.
+            </h3>
+
+            <div class="mt-3 ax-w-xl text-sm text-gray-600" v-if="providers.length === 0">
+                When you have one or more connected accounts, they will appear below. You may disconnect any of your
+                connected accounts at any time. If you feel any of your connected accounts have been compromised, you
+                should disconnect them immediately and change your password.
+            </div>
+            <div class="mt-3 ax-w-xl text-sm text-gray-600" v-else>
+                You may disconnect any of your connected accounts below at any time. If you feel any of your connected
+                accounts have been compromised, you should disconnect them immediately and change your password.
             </div>
 
             <div class="mt-5 space-y-6 grid grid-cols-3" v-if="providers.length > 0">
@@ -36,7 +48,8 @@
                             </div>
                         </div>
                     </div>
-                    <jet-button @click="confirmRemove(provider.id)" loading.attr="disabled" class="bg-red-600 hover:bg-red-500" />
+                    <jet-button @click="confirmRemove(provider.id)" loading.attr="disabled"
+                                class="bg-red-600 hover:bg-red-500"/>
                 </div>
             </div>
 
@@ -65,7 +78,8 @@
                         Nevermind
                     </jet-secondary-button>
 
-                    <jet-button class="ml-2 bg-red-600 hover:bg-red-500" @click.native="removeConnectedAccount(providerId)"
+                    <jet-button class="ml-2 bg-red-600 hover:bg-red-500"
+                                @click.native="removeConnectedAccount(providerId)"
                                 :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         Remove Connected Account
                     </jet-button>
@@ -85,7 +99,12 @@ import JetInputError from './../../Jetstream/InputError';
 import JetSecondaryButton from './../../Jetstream/SecondaryButton';
 
 export default {
-    props: ['providers'],
+    props: {
+        providers: {
+            type: Array,
+            default: [],
+        },
+    },
 
     components: {
         JetActionMessage,
@@ -125,7 +144,7 @@ export default {
         },
 
         removeConnectedAccount(id) {
-            this.form.post(`/user/connected-account/${id}`, {
+            this.form.post(`/user/connected-account/${ id }`, {
                 preserveScroll: true
             }).then(response => {
                 if (!this.form.hasErrors()) {
