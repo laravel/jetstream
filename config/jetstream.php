@@ -1,6 +1,8 @@
 <?php
 
 use Laravel\Jetstream\Features;
+use Laravel\Socialite\One\TwitterProvider;
+use Laravel\Socialite\Two\GithubProvider;
 
 return [
 
@@ -36,4 +38,29 @@ return [
         Features::accountDeletion(),
     ],
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Providers
+    |--------------------------------------------------------------------------
+    |
+    | If you've opted into using Socialite, you may define the providers you
+    | wish to use for OAuth1 and OAuth 2 here. You're free to extend this
+    | functionality by writing your own provider.
+    |
+    | OAuth 1 Supported: Twitter
+    |
+    | OAuth 2 Supported: Bitbucket, Facebook, Github, Gitlab, Google, LinkedIn
+    |
+    */
+
+    'providers' => [
+        'oauth1' => [
+            // TwitterProvider::class,
+        ],
+
+        'oauth2' => [
+            // GithubProvider::class,
+        ],
+    ]
 ];
