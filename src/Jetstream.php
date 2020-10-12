@@ -61,6 +61,13 @@ class Jetstream
     public static $membershipModel = 'App\\Models\\Membership';
 
     /**
+     * The social provider model that should be used by Jetstream.
+     *
+     * @var string
+     */
+    public static $socialProviderModel = 'App\\Models\\SocialProvider';
+
+    /**
      * The Inertia manager instance.
      *
      * @var \Laravel\Jetstream\InertiaManager
@@ -298,7 +305,7 @@ class Jetstream
     }
 
     /**
-     * Get the name of the team model used by the application.
+     * Get the name of the membership model used by the application.
      *
      * @return string
      */
@@ -316,6 +323,28 @@ class Jetstream
     public static function useMembershipModel(string $model)
     {
         static::$membershipModel = $model;
+
+        return new static;
+    }
+
+    /**
+     * Get the name of the social provider model used by the application.
+     *
+     * @return string
+     */
+    public static function socialProviderModel()
+    {
+        return static::$socialProviderModel;
+    }
+
+    /**
+     * Specify the social provider model that should be used by Jetstream.
+     * @param  string  $model
+     * @return static
+     */
+    public static function useSocialProviderModel(string $model)
+    {
+        static::$socialProviderModel = $model;
 
         return new static;
     }
