@@ -1,13 +1,17 @@
 <x-jet-action-section>
     <x-slot name="title">
-        {{ __('OAuth Providers') }}
+        {{ __('Connected Accounts') }}
     </x-slot>
 
     <x-slot name="description">
-        {{ __('Manage and remove your connect OAuth accounts.') }}
+        {{ __('Manage and remove your connect accounts.') }}
     </x-slot>
 
     <x-slot name="content">
+        <div class="max-w-xl text-sm text-gray-600">
+            {{ __('You may disconnect any of your connected accounts below. If you feel any of your connected accounts have been compromised, you should disconnect them immediately.') }}
+        </div>
+
         @if (count($this->providers) > 0)
             <div class="mt-5 space-y-6 grid grid-cols-3">
                 @foreach($this->providers as $provider)
@@ -20,35 +24,35 @@
                             </div>
 
                             <!-- Provider details -->
-                            <div class="ml-3">
-                                <div class="text-sm text-gray-600">
-                                    {{ \Illuminate\Support\Str::ucfirst($provider->provider_name) }}
+                            <div>
+                                <div class="text-sm font-semibold text-gray-600">
+                                    {{ IlluminateSupportStr::ucfirst($provider->provider_name) }}
                                 </div>
 
                                 <div>
                                     <div class="text-xs text-gray-500">
-                                        {{ __('Connected on') }} {{ $provider->created_at->format('d/m/Y') }}
+                                        {{ __('Added on') }} {{ $provider->created_at->format('d/m/Y') }}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <x-jet-button wire:click="confirmRemove" wire:loading.attr="disabled">
+                        <x-jet-button wire:click="confirmRemove" wire:loading.attr="disabled" class="bg-red-600 hover:bg-red-500">
                             {{ __('Remove') }}
                         </x-jet-button>
                     </div>
                 @endforeach
             </div>
-        @else
-        @endif
+    @else
+    @endif
 
-        <!-- Logout Other Devices Confirmation Modal -->
+    <!-- Logout Other Devices Confirmation Modal -->
         <x-jet-dialog-modal wire:model="confirmingRemove">
             <x-slot name="title">
-                {{ __('Remove OAuth Provider') }}
+                {{ __('Remove Connected Account') }}
             </x-slot>
 
             <x-slot name="content">
-                {{ __('Please enter your password to confirm you would like to remove this OAuth Provider.') }}
+                {{ __('Please enter your password to confirm you would like to remove this connected account.') }}
 
                 <div class="mt-4" x-data="{}" x-on:confirming-remove-oauth-provider.window="setTimeout(() => $refs.password.focus(), 250)">
                     <x-jet-input type="password" class="mt-1 block w-3/4" placeholder="{{ __('Password') }}"
@@ -65,8 +69,8 @@
                     {{ __('Nevermind') }}
                 </x-jet-secondary-button>
 
-                <x-jet-button class="ml-2" wire:click="removeOAuthProvider({{ $provider->id }})" wire:loading.attr="disabled">
-                    {{ __('Remove OAuth Provider') }}
+                <x-jet-button class="ml-2 bg-red-600 hover:bg-red-500" wire:click="removeOAuthProvider({{ $provider->id }})" wire:loading.attr="disabled">
+                    {{ __('Remove Connected Account') }}
                 </x-jet-button>
             </x-slot>
         </x-jet-dialog-modal>
