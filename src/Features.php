@@ -68,6 +68,7 @@ class Features
     }
 
     /**
+<<<<<<< HEAD
      * Determine if invitations are sent to team members.
      *
      * @return bool
@@ -75,6 +76,16 @@ class Features
     public static function sendsTeamInvitations()
     {
         return static::optionEnabled(static::teams(), 'invitations');
+    }
+
+    /**
+     * Determine if the applications is using any Socialite features.
+     *
+     * @return bool
+     */
+    public static function hasSocialiteFeatures()
+    {
+        return static::enabled(static::socialite());
     }
 
     /**

@@ -187,6 +187,16 @@ class Jetstream
     }
 
     /**
+     * Determine if Jetstream is supporting Socialite features.
+     *
+     * @return bool
+     */
+    public static function hasSocialiteFeatures()
+    {
+        return Features::hasApiFeatures();
+    }
+
+    /**
      * Determine if the application is using any account deletion features.
      *
      * @return bool
