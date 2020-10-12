@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Laravel\Jetstream\Events\SocialProviderCreated;
 use Laravel\Jetstream\Events\SocialProviderDeleted;
 use Laravel\Jetstream\Events\SocialProviderUpdated;
 use Laravel\Jetstream\Jetstream;
+use Laravel\Jetstream\SocialProvider as JetstreamSocialProvider;
 
-class SocialProvider extends Model
+class SocialProvider extends JetstreamSocialProvider
 {
 
     /**
