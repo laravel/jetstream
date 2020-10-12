@@ -13,7 +13,7 @@ class CreateSocialProvidersTable extends Migration
      */
     public function up()
     {
-        Schema::create('social_providers', function (Blueprint $table) {
+        Schema::create('connected_accounts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
             $table->string('provider_name');
@@ -33,6 +33,6 @@ class CreateSocialProvidersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('social_providers');
+        Schema::drop('connected_accounts');
     }
 }

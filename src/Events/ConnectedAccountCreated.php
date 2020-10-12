@@ -2,7 +2,7 @@
 
 namespace Laravel\Jetstream\Events;
 
-class SocialProviderCreated extends TeamEvent
+class ConnectedAccountCreated extends TeamEvent
 {
     //
 }

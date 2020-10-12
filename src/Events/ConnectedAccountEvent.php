@@ -6,7 +6,7 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-abstract class SocialProviderEvent
+abstract class ConnectedAccountEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 

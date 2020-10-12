@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use Laravel\Jetstream\Events\SocialProviderCreated;
-use Laravel\Jetstream\Events\SocialProviderDeleted;
-use Laravel\Jetstream\Events\SocialProviderUpdated;
+use Laravel\Jetstream\Events\ConnectedAccountCreated;
+use Laravel\Jetstream\Events\ConnectedAccountDeleted;
+use Laravel\Jetstream\Events\ConnectedAccountUpdated;
 use Laravel\Jetstream\Jetstream;
-use Laravel\Jetstream\SocialProvider as JetstreamSocialProvider;
+use Laravel\Jetstream\ConnectedAccount as JetstreamSocialProvider;
 
-class SocialProvider extends JetstreamSocialProvider
+class ConnectedAccount extends JetstreamSocialProvider
 {
 
     /**
@@ -30,9 +30,9 @@ class SocialProvider extends JetstreamSocialProvider
      * @var array
      */
     protected $dispatchesEvents = [
-        'created' => SocialProviderCreated::class,
-        'updated' => SocialProviderUpdated::class,
-        'deleted' => SocialProviderDeleted::class,
+        'created' => ConnectedAccount::class,
+        'updated' => ConnectedAccountUpdated::class,
+        'deleted' => ConnectedAccountDeleted::class,
     ];
 
     /**
