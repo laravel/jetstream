@@ -21,6 +21,12 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
         Route::delete('/user/other-browser-sessions', [OtherBrowserSessionsController::class, 'destroy'])
                     ->name('other-browser-sessions.destroy');
 
+        Route::delete('/user/remove-connected-account/{providerId}', [OtherBrowserSessionsController::class, 'destroy'])
+            ->name('other-browser-sessions.destroy');
+
+        Route::delete('/user', [CurrentUserController::class, 'destroy'])
+                    ->name('current-user.destroy');
+
         Route::delete('/user/profile-photo', [ProfilePhotoController::class, 'destroy'])
                     ->name('current-user-photo.destroy');
 
