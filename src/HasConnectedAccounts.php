@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 trait HasConnectedAccounts
 {
     /**
-     * Determine if the user has a specific provider type.
+     * Determine if the user has a specific account type.
      *
      * @param  string  $accountType
      *
@@ -19,7 +19,7 @@ trait HasConnectedAccounts
     }
 
     /**
-     * Get all of the social providers belonging to the user.
+     * Get all of the connected accounts belonging to the user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

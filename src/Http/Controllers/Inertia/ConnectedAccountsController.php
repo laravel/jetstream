@@ -45,7 +45,7 @@ class ConnectedAccountsController extends Controller
             return;
         }
 
-        DB::table('social_providers')
+        DB::table('connected_accounts')
             ->where('user_id', $request->user()->getKey())
             ->where('id', $id)
             ->delete();

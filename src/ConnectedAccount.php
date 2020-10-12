@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 abstract class ConnectedAccount extends Model
 {
     /**
-     * Get user of the social provider.
+     * Get user of the connected account.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

@@ -61,11 +61,11 @@ class Jetstream
     public static $membershipModel = 'App\\Models\\Membership';
 
     /**
-     * The social provider model that should be used by Jetstream.
+     * The connected account model that should be used by Jetstream.
      *
      * @var string
      */
-    public static $connectedAccountModel = 'App\\Models\\SocialProvider';
+    public static $connectedAccountModel = 'App\\Models\\ConnectedAccount';
 
     /**
      * The Inertia manager instance.

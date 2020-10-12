@@ -11,20 +11,20 @@ abstract class ConnectedAccountEvent
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
-     * The social provider instance.
+     * The connected account  instance.
      *
-     * @var \App\SocialProvider
+     * @var mixed
      */
-    public $provider;
+    public $model;
 
     /**
      * Create a new event instance.
      *
-     * @param  \App\SocialProvider  $provider
+     * @param  mixed  $model
      * @return void
      */
-    public function __construct($provider)
+    public function __construct($model)
     {
-        $this->provider = $provider;
+        $this->model = $model;
     }
 }
