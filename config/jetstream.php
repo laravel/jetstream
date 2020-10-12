@@ -52,13 +52,13 @@ return [
     |
     */
 
-    'providers' => [
+    'socialite_providers' => [
         'oauth1' => [
-            \Laravel\Socialite\One\TwitterProvider::class,
+            // \Laravel\Socialite\One\TwitterProvider::class,
         ],
 
         'oauth2' => [
-            \Laravel\Socialite\Two\GithubProvider::class,
+            // \Laravel\Socialite\Two\GithubProvider::class,
         ],
     ]
 ];
