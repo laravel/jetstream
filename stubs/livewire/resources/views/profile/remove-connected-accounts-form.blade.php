@@ -8,44 +8,47 @@
     </x-slot>
 
     <x-slot name="content">
-        <div class="max-w-xl text-sm text-gray-600">
-            {{ __('You may disconnect any of your connected accounts below. If you feel any of your connected accounts have been compromised, you should disconnect them immediately.') }}
+        <h3 class="text-lg font-medium text-gray-900">
+            @if (count($this->accounts) == 0)
+                {{ __('You have no connected accounts.') }}
+            @endif
+        </h3>
+
+        <div class="mt-3 max-w-xl text-sm text-gray-600">
+            @if (count($this->accounts) == 0)
+                {{ __('When you have one or more connected accounts, they will appear below. You may disconnect any of your connected accounts at any time. If you feel any of your connected accounts have been compromised, you should disconnect them immediately and change your password.') }}
+            @else
+                {{ __('You may disconnect any of your connected accounts below at any time. If you feel any of your connected accounts have been compromised, you should disconnect them immediately and change your password.') }}
+            @endif
         </div>
 
         @if (count($this->accounts) > 0)
             <div class="mt-5 space-y-6 grid grid-cols-3">
                 @foreach($this->accounts as $account)
                     <div class="p-3 flex items-center justify-between col-span-1">
-                        <!-- Provider Info -->
+                        <!-- Provider details -->
                         <div>
-                            <!-- Provider SVG Logo -->
-                            <div>
-
+                            <div class="text-sm font-semibold text-gray-600">
+                                {{ IlluminateSupportStr::ucfirst($account->provider_name) }}
                             </div>
 
-                            <!-- Provider details -->
                             <div>
-                                <div class="text-sm font-semibold text-gray-600">
-                                    {{ IlluminateSupportStr::ucfirst($account->provider_name) }}
-                                </div>
-
-                                <div>
-                                    <div class="text-xs text-gray-500">
-                                        {{ __('Added on') }} {{ $account->created_at->format('d/m/Y') }}
-                                    </div>
+                                <div class="text-xs text-gray-500">
+                                    {{ __('Added on') }} {{ $account->created_at->format('d/m/Y') }}
                                 </div>
                             </div>
                         </div>
+                        <!-- Remove Action -->
                         <x-jet-button wire:click="confirmRemove({{ $account-id }})" wire:loading.attr="disabled" class="bg-red-600 hover:bg-red-500">
                             {{ __('Remove') }}
                         </x-jet-button>
                     </div>
                 @endforeach
             </div>
-        @else
-        @endif
+    @else
+    @endif
 
-        <!-- Logout Other Devices Confirmation Modal -->
+    <!-- Logout Other Devices Confirmation Modal -->
         <x-jet-dialog-modal wire:model="confirmingRemove">
             <x-slot name="title">
                 {{ __('Remove Connected Account') }}
