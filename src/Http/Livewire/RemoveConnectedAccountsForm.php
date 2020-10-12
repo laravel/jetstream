@@ -25,6 +25,11 @@ class RemoveConnectedAccountsForm extends Component
      */
     public $password = '';
 
+    /**
+     * Confirm that the user actually wants to remove the selected connected account.
+     *
+     * @return void
+     */
     public function confirmRemove()
     {
         $this->password = '';
@@ -38,7 +43,6 @@ class RemoveConnectedAccountsForm extends Component
      * Remove an OAuth Provider.
      *
      * @param  mixed  $id
-     *
      * @return void
      */
     public function removeConnectedAccount($id)
@@ -73,7 +77,7 @@ class RemoveConnectedAccountsForm extends Component
     /**
      * Render the component.
      *
-     * @return IlluminateViewView
+     * @return Illuminate\View\View
      */
     public function render()
     {
