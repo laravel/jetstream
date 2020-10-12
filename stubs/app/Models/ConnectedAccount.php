@@ -6,9 +6,9 @@ use Laravel\Jetstream\Events\ConnectedAccountCreated;
 use Laravel\Jetstream\Events\ConnectedAccountDeleted;
 use Laravel\Jetstream\Events\ConnectedAccountUpdated;
 use Laravel\Jetstream\Jetstream;
-use Laravel\Jetstream\ConnectedAccount as JetstreamSocialProvider;
+use Laravel\Jetstream\ConnectedAccount as JetstreamConnectedAccount;
 
-class ConnectedAccount extends JetstreamSocialProvider
+class ConnectedAccount extends JetstreamConnectedAccount
 {
 
     /**

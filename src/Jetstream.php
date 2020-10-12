@@ -65,7 +65,7 @@ class Jetstream
      *
      * @var string
      */
-    public static $socialProviderModel = 'App\\Models\\SocialProvider';
+    public static $connectedAccountModel = 'App\\Models\\SocialProvider';
 
     /**
      * The Inertia manager instance.
@@ -328,23 +328,23 @@ class Jetstream
     }
 
     /**
-     * Get the name of the social provider model used by the application.
+     * Get the name of the connected accounts  model used by the application.
      *
      * @return string
      */
-    public static function socialProviderModel()
+    public static function connectedAccountModel()
     {
-        return static::$socialProviderModel;
+        return static::$connectedAccountModel;
     }
 
     /**
-     * Specify the social provider model that should be used by Jetstream.
+     * Specify the connected account model that should be used by Jetstream.
      * @param  string  $model
      * @return static
      */
-    public static function useSocialProviderModel(string $model)
+    public static function useConnectedAccountModel(string $model)
     {
-        static::$socialProviderModel = $model;
+        static::$connectedAccountModel = $model;
 
         return new static;
     }

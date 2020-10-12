@@ -16,10 +16,10 @@ class ConnectedAccountsController extends Controller
      * Logout from other browser sessions.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  mixed                     $providerId
+     * @param  mixed                     $connectedAccountId
      * @return \Inertia\Response
      */
-    public function destroy(Request $request, $providerId)
+    public function destroy(Request $request, $connectedAccountId)
     {
         if (! Hash::check($request->password, $request->user()->password)) {
             throw ValidationException::withMessages([
@@ -27,13 +27,13 @@ class ConnectedAccountsController extends Controller
             ])->errorBag('logoutOtherBrowserSessions');
         }
 
-        $this->removeConnectedAccount($request, $providerId);
+        $this->removeConnectedAccount($request, $connectedAccountId);
 
         return back(303);
     }
 
     /**
-     * Remove an OAuth Provider.
+     * Remove a connected account.
      *
      * @param  Request  $request
      * @param  mixed    $id

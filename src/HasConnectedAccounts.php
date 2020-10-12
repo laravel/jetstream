@@ -4,17 +4,18 @@ namespace Laravel\Jetstream;
 
 use Illuminate\Support\Str;
 
-trait HasSocialProviders
+trait HasConnectedAccounts
 {
     /**
      * Determine if the user has a specific provider type.
      *
-     * @param  string  $providerName
+     * @param  string  $accountType
+     *
      * @return bool
      */
-    public function hasSocialProviderType(string $providerName)
+    public function hasAccountType(string $accountType)
     {
-        return $this->socialProviders->contains('provider_name', Str::lower($providerName));
+        return $this->connectedAccounts->contains('provider_name', Str::lower($accountType));
     }
 
     /**
@@ -22,8 +23,8 @@ trait HasSocialProviders
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function socialProviders()
+    public function connectedAccounts()
     {
-        return $this->hasMany(Jetstream::socialProviderModel(), 'user_id');
+        return $this->hasMany(Jetstream::connectedAccountModel(), 'user_id');
     }
 }
