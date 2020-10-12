@@ -30,7 +30,7 @@ class ConnectedAccount extends JetstreamSocialProvider
      * @var array
      */
     protected $dispatchesEvents = [
-        'created' => ConnectedAccount::class,
+        'created' => ConnectedAccountCreated::class,
         'updated' => ConnectedAccountUpdated::class,
         'deleted' => ConnectedAccountDeleted::class,
     ];
