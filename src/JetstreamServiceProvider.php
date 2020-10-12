@@ -18,6 +18,7 @@ use Laravel\Jetstream\Http\Livewire\DeleteTeamForm;
 use Laravel\Jetstream\Http\Livewire\DeleteUserForm;
 use Laravel\Jetstream\Http\Livewire\LogoutOtherBrowserSessionsForm;
 use Laravel\Jetstream\Http\Livewire\NavigationDropdown;
+use Laravel\Jetstream\Http\Livewire\RemoveConnectedAccountsForm;
 use Laravel\Jetstream\Http\Livewire\TeamMemberManager;
 use Laravel\Jetstream\Http\Livewire\TwoFactorAuthenticationForm;
 use Laravel\Jetstream\Http\Livewire\UpdatePasswordForm;
@@ -43,6 +44,7 @@ class JetstreamServiceProvider extends ServiceProvider
                 Livewire::component('profile.update-profile-information-form', UpdateProfileInformationForm::class);
                 Livewire::component('profile.update-password-form', UpdatePasswordForm::class);
                 Livewire::component('profile.two-factor-authentication-form', TwoFactorAuthenticationForm::class);
+                Livewire::component('profile.remove-connected-accounts-form', RemoveConnectedAccountsForm::class);
                 Livewire::component('profile.logout-other-browser-sessions-form', LogoutOtherBrowserSessionsForm::class);
                 Livewire::component('profile.delete-user-form', DeleteUserForm::class);
 

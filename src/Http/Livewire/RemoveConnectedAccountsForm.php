@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\Component;
 
-class RemoveOAuthProvidersForm extends Component
+class RemoveConnectedAccountsForm extends Component
 {
     /**
      * Indicates whether or not removal of a provider is being confirmed.

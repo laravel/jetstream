@@ -31,7 +31,7 @@
 
             @if (Laravel\Jetstream\Jetstream::hasSocialiteFeatures())
                 <div class="mt-10 sm:mt-0">
-                    @livewire('profile.remove-oauth-providers-form')
+                    @livewire('profile.remove-connected-accounts-form')
                 </div>
 
                     <x-jet-section-border />
