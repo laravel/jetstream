@@ -2,22 +2,49 @@
 
 namespace Laravel\Jetstream\Http\Controllers\Inertia;
 
-use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Laravel\Jetstream\Http\AuthenticatesConnectedAccounts;
+use Laravel\Socialite\Facades\Socialite;
 
 class ConnectedAccountsController extends Controller
 {
+    use AuthenticatesConnectedAccounts;
+
     /**
-     * Logout from other browser sessions.
+     * Get the redirect for the given Socialite provider.
+     *
+     * @param  string  $provider
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function show(string $provider)
+    {
+        return Socialite::driver($provider)->redirect();
+    }
+
+    /**
+     * Attempt to log the user in via the provider user returned from Socialite.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  mixed                     $connectedAccountId
-     * @return \Inertia\Response
+     * @param  string  $provider
+     * @return \Illuminate\Routing\Pipeline
+     */
+    public function store(Request $request, string $provider)
+    {
+        return $this->authenticate(
+            $request, $provider, Socialite::driver($provider)->user()
+        );
+    }
+
+    /**
+     * Delete a connected account.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $connectedAccountId
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Request $request, $connectedAccountId)
     {
@@ -35,8 +62,8 @@ class ConnectedAccountsController extends Controller
     /**
      * Remove a connected account.
      *
-     * @param  Request  $request
-     * @param  mixed    $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $id
      * @return void
      */
     public function removeConnectedAccount(Request $request, $id)
