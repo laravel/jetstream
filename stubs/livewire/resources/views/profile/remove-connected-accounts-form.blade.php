@@ -25,23 +25,26 @@
         </div>
 
         @if (count($this->accounts) > 0)
-            <div class="mt-5 space-y-6 grid grid-cols-3">
+            <div class="mt-5 space-y-6">
                 @foreach($this->accounts as $account)
-                    <div class="p-3 flex items-center justify-between col-span-1">
+                    @if ($index > 0)
+                        <div class="border-t border-gray-200" />
+                    @endif
+                    <div class="p-3 flex items-center justify-between">
                         <!-- Provider details -->
                         <div>
                             <div class="text-sm font-semibold text-gray-600">
-                                {{ IlluminateSupportStr::ucfirst($account->provider_name) }}
+                                {{ Illuminate\Support\Str::ucfirst($account->provider_name) }}
                             </div>
 
                             <div>
                                 <div class="text-xs text-gray-500">
-                                    {{ __('Added on') }} {{ $account->created_at->format('d/m/Y') }}
+                                    {{ __('Added on') }} {{ $account->created_at }}
                                 </div>
                             </div>
                         </div>
                         <!-- Remove Action -->
-                        <x-jet-button wire:click="confirmRemove({{ $account-id }})" wire:loading.attr="disabled" class="bg-red-600 hover:bg-red-500">
+                        <x-jet-button wire:click="confirmRemove({{ $account->id }})" wire:loading.attr="disabled" class="bg-red-600 hover:bg-red-500">
                             {{ __('Remove') }}
                         </x-jet-button>
                     </div>

@@ -26,8 +26,9 @@
                 accounts have been compromised, you should disconnect them immediately and change your password.
             </div>
 
-            <div class="mt-5 space-y-6 grid grid-cols-3" v-if="accounts.length > 0">
-                <div class="p-3 flex items-center justify-between col-span-1" v-for="account in accounts">
+            <div class="mt-5 space-y-6" v-if="accounts.length > 0">
+                <div class="p-3 flex items-center justify-between " v-for="(account, index) in accounts">
+                    <div class="border-t border-gray-200" v-if="index > 0"/>
                     <!-- Provider Info -->
                     <div>
                         <!-- Provider SVG Logo -->
