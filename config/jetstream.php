@@ -43,12 +43,16 @@ return [
     |--------------------------------------------------------------------------
     |
     | If you've opted into using Socialite, you may define the providers you
-    | wish to use for OAuth1 and OAuth 2 here. You're free to extend this
+    | wish to use for OAuth1 and OAuth 2 here. You will need to ensure that the
+    | the services you've added, have the appropriate configuration required for
+    | Socialite functionality in 'services.php'. You're free to extend this
     | functionality by writing your own provider.
     |
-    | OAuth 1 Supported: "twitter"
+    | For more information, consult the Socialite documentation:
+    | https://laravel.com/docs/8.x/socialite
     |
-    | OAuth 2 Supported: "bitbucket", "facebook", "github", "gitlab", "google", "linkedin"
+    | Supported OAuth1 providers: "twitter"
+    | Supported OAuth2 providers: "bitbucket", "facebook", "github", "gitlab", "google", "linkedin"
     |
     */
 
