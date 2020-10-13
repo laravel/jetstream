@@ -19,6 +19,22 @@ trait HasConnectedAccounts
     }
 
     /**
+     * Attempt to find a connected account that belongs to the user,
+     * for the given provider and provider id.
+     *
+     * @param  string  $provider
+     * @param  string  $providerId
+     * @return \Laravel\Jetstream\ConnectedAccount
+     */
+    public function connectedAccountForProvider(string $provider, string $providerId)
+    {
+        return $this->connectedAccounts
+            ->where('provider_name', $provider)
+            ->where('provider_id', $providerId)
+            ->first();
+    }
+
+    /**
      * Get all of the connected accounts belonging to the user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
