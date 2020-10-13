@@ -1,8 +1,6 @@
 <?php
 
 use Laravel\Jetstream\Features;
-use Laravel\Socialite\One\TwitterProvider;
-use Laravel\Socialite\Two\GithubProvider;
 
 return [
 
@@ -48,19 +46,20 @@ return [
     | wish to use for OAuth1 and OAuth 2 here. You're free to extend this
     | functionality by writing your own provider.
     |
-    | OAuth 1 Supported: Twitter
+    | OAuth 1 Supported: "twitter"
     |
-    | OAuth 2 Supported: Bitbucket, Facebook, Github, Gitlab, Google, LinkedIn
+    | OAuth 2 Supported: "bitbucket", "facebook", "github", "gitlab", "google", "linkedin"
     |
     */
 
     'socialite_providers' => [
         'oauth1' => [
-            // TwitterProvider::class,
+            // 'twitter',
         ],
 
         'oauth2' => [
-            // GithubProvider::class,
+            // 'facebook',
+            // 'google',
         ],
     ]
 ];
