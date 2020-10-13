@@ -2,10 +2,12 @@
 
 namespace Laravel\Jetstream\Http\Livewire;
 
+use App\Models\ConnectedAccount;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Laravel\Jetstream\Jetstream;
 use Livewire\Component;
 
 class RemoveConnectedAccountsForm extends Component
@@ -78,7 +80,14 @@ class RemoveConnectedAccountsForm extends Component
         return DB::table('connected_accounts')
                 ->where('user_id', Auth::user()->getKey())
                 ->orderBy('created_at', 'desc')
-                ->get();
+                ->get()
+            ->map(function ($account) {
+                return (object) [
+                    'id' => $account->id,
+                    'provider_name' => $account->provider_name,
+                    'created_at' => (new \DateTime($account->created_at))->format('d/m/Y H:i')
+                ];
+            });
     }
 
     /**
