@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasTimestamps;
 use Laravel\Jetstream\Events\ConnectedAccountCreated;
 use Laravel\Jetstream\Events\ConnectedAccountDeleted;
 use Laravel\Jetstream\Events\ConnectedAccountUpdated;
@@ -10,6 +11,7 @@ use Laravel\Jetstream\ConnectedAccount as JetstreamConnectedAccount;
 
 class ConnectedAccount extends JetstreamConnectedAccount
 {
+    use HasTimestamps;
 
     /**
      * The attributes that are mass assignable.
