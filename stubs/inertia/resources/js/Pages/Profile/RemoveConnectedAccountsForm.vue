@@ -49,8 +49,7 @@
                             </div>
                         </div>
                     </div>
-                    <jet-button @click="confirmRemove(account.id)" loading.attr="disabled"
-                                class="bg-red-600 hover:bg-red-500"/>
+                    <jet-button @click="confirmRemove(account.id)" loading.attr="disabled" />
                 </div>
             </div>
 
@@ -78,7 +77,7 @@
                         Nevermind
                     </jet-secondary-button>
 
-                    <jet-button class="ml-2 bg-red-600 hover:bg-red-500"
+                    <jet-button class="ml-2"
                                 @click.native="removeConnectedAccount(accountId)"
                                 :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         Remove Connected Account

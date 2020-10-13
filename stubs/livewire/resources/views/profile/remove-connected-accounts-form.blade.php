@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         <!-- Remove Action -->
-                        <x-jet-button wire:click="confirmRemove({{ $account->id }})" wire:loading.attr="disabled" class="bg-red-600 hover:bg-red-500">
+                        <x-jet-button wire:click="confirmRemove({{ $account->id }})" wire:loading.attr="disabled">
                             {{ __('Remove') }}
                         </x-jet-button>
                     </div>
@@ -77,7 +77,7 @@
                     {{ __('Nevermind') }}
                 </x-jet-secondary-button>
 
-                <x-jet-button class="ml-2 bg-red-600 hover:bg-red-500" wire:click="removeConnectedAccount({{ $this->selectedAccountId }})" wire:loading.attr="disabled">
+                <x-jet-button class="ml-2" wire:click="removeConnectedAccount({{ $this->selectedAccountId }})" wire:loading.attr="disabled">
                     {{ __('Remove Connected Account') }}
                 </x-jet-button>
             </x-slot>
