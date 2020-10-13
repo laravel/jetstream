@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Laravel\Jetstream\Http\Controllers\ConnectedAccountsController;
 use Laravel\Jetstream\Http\Controllers\CurrentTeamController;
 use Laravel\Jetstream\Http\Controllers\Inertia\ApiTokenController;
-use Laravel\Jetstream\Http\Controllers\Inertia\ConnectedAccountsController;
+use Laravel\Jetstream\Http\Controllers\Inertia\RemoveConnectedAccountsController;
 use Laravel\Jetstream\Http\Controllers\Inertia\CurrentUserController;
 use Laravel\Jetstream\Http\Controllers\Inertia\OtherBrowserSessionsController;
 use Laravel\Jetstream\Http\Controllers\Inertia\ProfilePhotoController;
@@ -22,7 +23,7 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
         Route::delete('/user/other-browser-sessions', [OtherBrowserSessionsController::class, 'destroy'])
                     ->name('other-browser-sessions.destroy');
 
-        Route::delete('/user/connected-account/{id}', [ConnectedAccountsController::class, 'destroy'])
+        Route::delete('/user/connected-account/{id}', [RemoveConnectedAccountsController::class, 'destroy'])
             ->name('connected-accounts.destroy');
 
         Route::delete('/user', [CurrentUserController::class, 'destroy'])
@@ -62,6 +63,12 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
 
             Route::delete('/team-invitations/{invitation}', [TeamInvitationController::class, 'destroy'])
                         ->name('team-invitations.destroy');
+        }
+
+        // Socialite...
+        if (Jetstream::hasSocialiteFeatures()) {
+            Route::get('/connected-accounts/{provider}', [ConnectedAccountsController::class, 'show']); // Redirect to provider
+            Route::post('/connected-accounts/{provider}', [ConnectedAccountsController::class, 'store']); // Callback URL for provider
         }
     });
 });
