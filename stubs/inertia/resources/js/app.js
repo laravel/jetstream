@@ -2,7 +2,7 @@ require('./bootstrap');
 
 import Vue from 'vue';
 
-import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue';
+import { InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue';
 import { InertiaForm } from 'laravel-jetstream';
 import PortalVue from 'portal-vue';
 
