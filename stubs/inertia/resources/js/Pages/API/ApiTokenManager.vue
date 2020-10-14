@@ -99,8 +99,8 @@
                     Please copy your new API token. For your security, it won't be shown again.
                 </div>
 
-                <div class="mt-4 bg-gray-100 px-4 py-2 rounded font-mono text-sm text-gray-500" v-if="$page.jetstream.flash.token">
-                    {{ $page.jetstream.flash.token }}
+                <div class="mt-4 bg-gray-100 px-4 py-2 rounded font-mono text-sm text-gray-500" v-if="$page.props.jetstream.flash.token">
+                    {{ $page.props.jetstream.flash.token }}
                 </div>
             </template>
 
