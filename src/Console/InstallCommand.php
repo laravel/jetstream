@@ -256,10 +256,10 @@ EOF;
         // Install NPM packages...
         $this->updateNodePackages(function ($packages) {
             return [
-                '@inertiajs/inertia' => '^0.3.0',
-                '@inertiajs/inertia-vue' => '^0.2.0',
+                '@inertiajs/inertia' => '^0.4.0',
+                '@inertiajs/inertia-vue' => '^0.3.0',
                 '@tailwindcss/ui' => '^0.6.0',
-                'laravel-jetstream' => '^0.0.3',
+                'laravel-jetstream' => '^1.0.0',
                 'portal-vue' => '^2.1.7',
                 'postcss-import' => '^12.0.1',
                 'tailwindcss' => '^1.8.0',

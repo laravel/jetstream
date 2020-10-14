@@ -83,8 +83,10 @@
 
         methods: {
             submit() {
-                this.form.post(this.route('login')).then(() => {
-                    this.remember = false
+                this.form.post(this.route('login'), {
+                    onSuccess: () => {
+                        this.remember = false
+                    }
                 })
             }
         }
