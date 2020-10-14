@@ -134,8 +134,9 @@
             deletePhoto() {
                 this.$inertia.delete(route('current-user-photo.destroy'), {
                     preserveScroll: true,
-                }).then(() => {
-                    this.photoPreview = null
+                    onSuccess: () => {
+                        this.photoPreview = null
+                    }
                 });
             },
         },

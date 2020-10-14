@@ -227,9 +227,10 @@
             createApiToken() {
                 this.createApiTokenForm.post(route('api-tokens.store'), {
                     preserveScroll: true,
-                }).then(response => {
-                    if (! this.createApiTokenForm.hasErrors()) {
-                        this.displayingToken = true
+                    onSuccess: () => {
+                        if (! this.createApiTokenForm.hasErrors()) {
+                            this.displayingToken = true
+                        }
                     }
                 })
             },
@@ -244,8 +245,9 @@
                 this.updateApiTokenForm.put(route('api-tokens.update', this.managingPermissionsFor), {
                     preserveScroll: true,
                     preserveState: true,
-                }).then(response => {
-                    this.managingPermissionsFor = null
+                    onSuccess: () => {
+                        this.managingPermissionsFor = null
+                    }
                 })
             },
 
@@ -257,8 +259,9 @@
                 this.deleteApiTokenForm.delete(route('api-tokens.destroy', this.apiTokenBeingDeleted), {
                     preserveScroll: true,
                     preserveState: true,
-                }).then(() => {
-                    this.apiTokenBeingDeleted = null
+                    onSuccess: () => {
+                        this.apiTokenBeingDeleted = null
+                    }
                 })
             },
 

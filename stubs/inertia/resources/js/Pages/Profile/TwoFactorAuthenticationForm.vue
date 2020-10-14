@@ -118,13 +118,13 @@
 
                 this.$inertia.post('/user/two-factor-authentication', {}, {
                     preserveScroll: true,
-                }).then(() => {
-                    return Promise.all([
+                    onSuccess: () => Promise.all([
                         this.showQrCode(),
-                        this.showRecoveryCodes()
-                    ])
-                }).then(() => {
-                    this.enabling = false
+                        this.showRecoveryCodes(),
+                    ]),
+                    onFinish: () => {
+                        this.enabling = false
+                    }
                 })
             },
 
@@ -154,8 +154,9 @@
 
                 this.$inertia.delete('/user/two-factor-authentication', {
                     preserveScroll: true,
-                }).then(() => {
-                    this.disabling = false
+                    onSuccess: () => {
+                        this.disabling = false
+                    }
                 })
             },
         },
