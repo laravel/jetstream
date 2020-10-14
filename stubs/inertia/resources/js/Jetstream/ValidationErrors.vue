@@ -19,7 +19,7 @@
 
         computed: {
             errorBag() {
-                return this.$page.errorBags[this.bag] || {}
+                return this.$page.props.errorBags[this.bag] || {}
             },
 
             hasErrors() {

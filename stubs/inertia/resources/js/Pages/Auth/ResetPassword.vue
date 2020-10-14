@@ -67,9 +67,11 @@
 
         methods: {
             submit() {
-                this.form.post(this.route('password.update')).then(() => {
-                    this.form.password = ''
-                    this.form.password_confirmation = ''
+                this.form.post(this.route('password.update'), {
+                    onSuccess: () => {
+                        this.form.password = ''
+                        this.form.password_confirmation = ''
+                    }
                 })
             }
         }

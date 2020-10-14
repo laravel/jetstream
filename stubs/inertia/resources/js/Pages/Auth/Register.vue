@@ -71,9 +71,11 @@
 
         methods: {
             submit() {
-                this.form.post(this.route('register')).then(() => {
-                    this.form.password = ''
-                    this.form.password_confirmation = ''
+                this.form.post(this.route('register'), {
+                    onSuccess: () => {
+                        this.form.password = ''
+                        this.form.password_confirmation = ''
+                    }
                 })
             }
         }
