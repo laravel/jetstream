@@ -5,6 +5,7 @@ namespace Laravel\Jetstream\Console;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 use Symfony\Component\Process\Process;
 
@@ -230,7 +231,7 @@ EOF;
     protected function installInertiaStack()
     {
         // Install Inertia...
-        (new Process(['composer', 'require', 'inertiajs/inertia-laravel', 'laravel/sanctum:^2.6', 'tightenco/ziggy'], base_path()))
+        (new Process(['composer', 'require', 'inertiajs/inertia-laravel:^0.3', 'laravel/sanctum:^2.6', 'tightenco/ziggy'], base_path()))
                 ->setTimeout(null)
                 ->run(function ($type, $output) {
                     $this->output->write($output);
@@ -287,9 +288,8 @@ EOF;
         $this->installServiceProviderAfter('FortifyServiceProvider', 'JetstreamServiceProvider');
 
         // Middleware
-        copy(__DIR__.'/../../stubs/app/Http/Middleware/PrepareInertia.php', app_path('Http/Middleware/PrepareInertia.php'));
-
-        $this->installMiddlewareAfter('SubstituteBindings::class', '\App\Http\Middleware\PrepareInertia::class');
+        Artisan::call('inertia:middleware', ['name' => 'HandleInertiaRequests', '--force' => true], $this->output);
+        $this->installMiddlewareAfter('SubstituteBindings::class', '\App\Http\Middleware\HandleInertiaRequests::class');
 
         // Models...
         copy(__DIR__.'/../../stubs/app/Models/User.php', app_path('Models/User.php'));
