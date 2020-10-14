@@ -5,7 +5,11 @@ export default {
         },
 
         errorFor(key, bag = 'default') {
-            if (!this.hasErrors(bag) || !this.$page.props.errorBags[bag][key] || this.$page.props.errorBags[bag][key].length == 0) {
+            if (
+                !this.hasErrors(bag) ||
+                !this.$page.props.errorBags[bag][key] ||
+                this.$page.props.errorBags[bag][key].length == 0
+            ) {
                 return;
             }
 
