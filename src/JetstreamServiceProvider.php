@@ -168,7 +168,7 @@ class JetstreamServiceProvider extends ServiceProvider
      */
     protected function configureRoutes()
     {
-        if (Jetstream::$registersRoutes) {
+        if (Jetstream::registersRoutes()) {
             Route::group([
                 'namespace' => 'Laravel\Jetstream\Http\Controllers',
                 'domain' => config('jetstream.domain', null),

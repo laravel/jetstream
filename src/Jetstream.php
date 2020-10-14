@@ -379,4 +379,14 @@ class Jetstream
 
         return new static;
     }
+
+    /**
+     * Determines if Jetstream's routes should be registered.
+     *
+     * @return bool
+     */
+    public static function registersRoutes()
+    {
+        return static::$registersRoutes;
+    }
 }
