@@ -285,7 +285,6 @@ EOF;
         // Directories...
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Fortify'));
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Jetstream'));
-        (new Filesystem)->ensureDirectoryExists(app_path('View/Components'));
         (new Filesystem)->ensureDirectoryExists(public_path('css'));
         (new Filesystem)->ensureDirectoryExists(resource_path('css'));
         (new Filesystem)->ensureDirectoryExists(resource_path('js/Jetstream'));
@@ -293,8 +292,9 @@ EOF;
         (new Filesystem)->ensureDirectoryExists(resource_path('js/Mixins'));
         (new Filesystem)->ensureDirectoryExists(resource_path('js/Pages'));
         (new Filesystem)->ensureDirectoryExists(resource_path('js/Pages/API'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('js/Pages/Auth'));
         (new Filesystem)->ensureDirectoryExists(resource_path('js/Pages/Profile'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/layouts'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('views'));
 
         (new Filesystem)->deleteDirectory(resource_path('sass'));
 
@@ -311,13 +311,8 @@ EOF;
         copy(__DIR__.'/../../stubs/app/Actions/Fortify/UpdateUserProfileInformation.php', app_path('Actions/Fortify/UpdateUserProfileInformation.php'));
         copy(__DIR__.'/../../stubs/app/Actions/Jetstream/DeleteUser.php', app_path('Actions/Jetstream/DeleteUser.php'));
 
-        // View Components...
-        copy(__DIR__.'/../../stubs/app/View/Components/GuestLayout.php', app_path('View/Components/GuestLayout.php'));
-
         // Blade Views...
         copy(__DIR__.'/../../stubs/inertia/resources/views/app.blade.php', resource_path('views/app.blade.php'));
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/resources/views/auth', resource_path('views/auth'));
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/resources/views/layouts', resource_path('views/layouts'));
 
         // Inertia Pages...
         copy(__DIR__.'/../../stubs/inertia/resources/js/Pages/Dashboard.vue', resource_path('js/Pages/Dashboard.vue'));
@@ -326,6 +321,7 @@ EOF;
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Layouts', resource_path('js/Layouts'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Mixins', resource_path('js/Mixins'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/API', resource_path('js/Pages/API'));
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Auth', resource_path('js/Pages/Auth'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Profile', resource_path('js/Pages/Profile'));
 
         // Routes...
