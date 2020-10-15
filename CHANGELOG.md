@@ -1,6 +1,9 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v1.3.2...1.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v1.4.0...1.x)
+
+
+## [v1.4.0 (2020-10-06)](https://github.com/laravel/jetstream/compare/v1.3.2...v1.4.0)
 
 ### Changed
 - Extract switch team logic into HasTeams trait ([#312](https://github.com/laravel/jetstream/pull/312))
