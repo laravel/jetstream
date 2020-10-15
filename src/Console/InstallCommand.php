@@ -288,8 +288,12 @@ EOF;
 
         $this->installServiceProviderAfter('FortifyServiceProvider', 'JetstreamServiceProvider');
 
-        // Middleware
-        Artisan::call('inertia:middleware', ['name' => 'HandleInertiaRequests', '--force' => true], $this->output);
+        // Middleware...
+        Artisan::call('inertia:middleware', [
+            'name' => 'HandleInertiaRequests',
+            '--force' => true
+        ], $this->output);
+
         $this->installMiddlewareAfter('SubstituteBindings::class', '\App\Http\Middleware\HandleInertiaRequests::class');
 
         // Models...
@@ -413,8 +417,8 @@ EOF;
     /**
      * Install the service provider in the application configuration file.
      *
-     * @param  string $after
-     * @param  string $name
+     * @param  string  $after
+     * @param  string  $name
      * @return void
      */
     protected function installServiceProviderAfter($after, $name)
@@ -431,14 +435,15 @@ EOF;
     /**
      * Install the middleware to a group in the application Http Kernel.
      *
-     * @param  string $after
-     * @param  string $name
-     * @param  string $group
+     * @param  string  $after
+     * @param  string  $name
+     * @param  string  $group
      * @return void
      */
     protected function installMiddlewareAfter($after, $name, $group = 'web')
     {
         $httpKernel = file_get_contents(app_path('Http/Kernel.php'));
+
         $middlewareGroups = Str::before(Str::after($httpKernel, '$middlewareGroups = ['), '];');
         $middlewareGroup = Str::before(Str::after($middlewareGroups, "'$group' => ["), '],');
 
