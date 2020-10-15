@@ -130,7 +130,7 @@
                             <img class="h-10 w-10 rounded-full" :src="$page.user.profile_photo_url" :alt="$page.user.name" />
                         </div>
 
-                        <div class="ml-3">
+                        <div class="ml-3" :class="{ 'pl-1': !$page.jetstream.managesProfilePhotos }">
                             <div class="font-medium text-base text-gray-800">{{ $page.user.name }}</div>
                             <div class="font-medium text-sm text-gray-500">{{ $page.user.email }}</div>
                         </div>
