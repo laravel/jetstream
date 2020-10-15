@@ -127,7 +127,6 @@ class InstallCommand extends Command
         // Tailwind Configuration...
         copy(__DIR__.'/../../stubs/livewire/tailwind.config.js', base_path('tailwind.config.js'));
         copy(__DIR__.'/../../stubs/livewire/webpack.mix.js', base_path('webpack.mix.js'));
-        copy(__DIR__.'/../../stubs/webpack.config.js', base_path('webpack.config.js'));
 
         // Directories...
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Fortify'));
@@ -266,7 +265,7 @@ EOF;
         // Tailwind Configuration...
         copy(__DIR__.'/../../stubs/inertia/tailwind.config.js', base_path('tailwind.config.js'));
         copy(__DIR__.'/../../stubs/inertia/webpack.mix.js', base_path('webpack.mix.js'));
-        copy(__DIR__.'/../../stubs/webpack.mix.js', base_path('webpack.mix.js'));
+        copy(__DIR__.'/../../stubs/inertia/webpack.config.js', base_path('webpack.config.js'));
 
         // Directories...
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Fortify'));
