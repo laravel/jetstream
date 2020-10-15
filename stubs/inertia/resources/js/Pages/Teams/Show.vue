@@ -27,9 +27,9 @@
 
 <script>
     import TeamMemberManager from './TeamMemberManager'
-    import AppLayout from './../../Layouts/AppLayout'
+    import AppLayout from '@/Layouts/AppLayout'
     import DeleteTeamForm from './DeleteTeamForm'
-    import JetSectionBorder from './../../Jetstream/SectionBorder'
+    import JetSectionBorder from '@/Jetstream/SectionBorder'
     import UpdateTeamNameForm from './UpdateTeamNameForm'
 
     export default {

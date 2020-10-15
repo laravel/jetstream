@@ -141,6 +141,7 @@ class InstallCommand extends Command
 
         // Tailwind Configuration...
         copy(__DIR__.'/../../stubs/livewire/tailwind.config.js', base_path('tailwind.config.js'));
+        copy(__DIR__.'/../../stubs/webpack.config.js', base_path('webpack.config.js'));
         copy(__DIR__.'/../../stubs/webpack.mix.js', base_path('webpack.mix.js'));
 
         // Directories...
@@ -280,6 +281,7 @@ EOF;
 
         // Tailwind Configuration...
         copy(__DIR__.'/../../stubs/inertia/tailwind.config.js', base_path('tailwind.config.js'));
+        copy(__DIR__.'/../../stubs/webpack.config.js', base_path('webpack.config.js'));
         copy(__DIR__.'/../../stubs/webpack.mix.js', base_path('webpack.mix.js'));
 
         // Directories...
