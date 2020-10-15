@@ -5,7 +5,6 @@ namespace Laravel\Jetstream\Console;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 use Symfony\Component\Process\Process;
 
@@ -289,10 +288,11 @@ EOF;
         $this->installServiceProviderAfter('FortifyServiceProvider', 'JetstreamServiceProvider');
 
         // Middleware...
-        Artisan::call('inertia:middleware', [
-            'name' => 'HandleInertiaRequests',
-            '--force' => true
-        ], $this->output);
+        (new Process(['php', 'artisan', 'inertia:middleware', 'HandleInertiaRequests', '--force'], base_path()))
+            ->setTimeout(null)
+            ->run(function ($type, $output) {
+                $this->output->write($output);
+            });
 
         $this->installMiddlewareAfter('SubstituteBindings::class', '\App\Http\Middleware\HandleInertiaRequests::class');
 
