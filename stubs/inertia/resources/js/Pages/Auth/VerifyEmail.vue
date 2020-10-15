@@ -18,7 +18,7 @@
                     Resend Verification Email
                 </jet-button>
 
-                <a :href="route('logout')" @click.prevent="logout" class="underline text-sm text-gray-600 hover:text-gray-900">Logout</a>
+                <inertia-link :href="route('logout')" method="post" class="underline text-sm text-gray-600 hover:text-gray-900">Logout</inertia-link>
             </div>
         </form>
     </jet-authentication-card>
@@ -54,12 +54,6 @@
             submit() {
                 this.form.post(this.route('verification.send'))
             },
-
-            logout() {
-                axios.post(this.route('logout').url()).then(response => {
-                    window.location = '/';
-                })
-            }
         },
 
         computed: {

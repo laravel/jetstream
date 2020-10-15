@@ -306,9 +306,13 @@ EOF;
 
         // Blade Views...
         copy(__DIR__.'/../../stubs/inertia/resources/views/app.blade.php', resource_path('views/app.blade.php'));
+        if (file_exists(resource_path('views/welcome.blade.php'))) {
+            unlink(resource_path('views/welcome.blade.php'));
+        }
 
         // Inertia Pages...
         copy(__DIR__.'/../../stubs/inertia/resources/js/Pages/Dashboard.vue', resource_path('js/Pages/Dashboard.vue'));
+        copy(__DIR__.'/../../stubs/inertia/resources/js/Pages/Welcome.vue', resource_path('js/Pages/Welcome.vue'));
 
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Jetstream', resource_path('js/Jetstream'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Layouts', resource_path('js/Layouts'));
@@ -319,10 +323,7 @@ EOF;
 
         // Routes...
         $this->replaceInFile('auth:api', 'auth:sanctum', base_path('routes/api.php'));
-
-        if (! Str::contains(file_get_contents(base_path('routes/web.php')), "'/dashboard'")) {
-            (new Filesystem)->append(base_path('routes/web.php'), $this->inertiaRouteDefinition());
-        }
+        copy(__DIR__.'/../../stubs/inertia/routes/web.php', base_path('routes/web.php'));
 
         // Assets...
         copy(__DIR__.'/../../stubs/public/css/app.css', public_path('css/app.css'));
@@ -356,22 +357,6 @@ EOF;
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Teams', resource_path('js/Pages/Teams'));
 
         $this->ensureApplicationIsTeamCompatible();
-    }
-
-    /**
-     * Get the route definition(s) that should be installed for Inertia.
-     *
-     * @return string
-     */
-    protected function inertiaRouteDefinition()
-    {
-        return <<<EOF
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia\Inertia::render('Dashboard');
-})->name('dashboard');
-
-EOF;
     }
 
     /**
