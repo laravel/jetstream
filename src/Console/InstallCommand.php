@@ -439,8 +439,8 @@ EOF;
     protected function installMiddlewareAfter($after, $name, $group = 'web')
     {
         $httpKernel = file_get_contents(app_path('Http/Kernel.php'));
-        $middlewareGroups = Str::before(Str::after($httpKernel, '$middlewareGroups = ['.PHP_EOL), '];'.PHP_EOL);
-        $middlewareGroup = Str::before(Str::after($middlewareGroups, "'$group' => [".PHP_EOL), '],'.PHP_EOL);
+        $middlewareGroups = Str::before(Str::after($httpKernel, '$middlewareGroups = ['), '];');
+        $middlewareGroup = Str::before(Str::after($middlewareGroups, "'$group' => ["), '],');
 
         if (! Str::contains($middlewareGroup, $name)) {
             $modifiedMiddlewareGroup = str_replace(
