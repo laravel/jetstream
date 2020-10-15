@@ -25,9 +25,9 @@
 </template>
 
 <script>
-    import JetAuthenticationCard from '../../Jetstream/AuthenticationCard'
-    import JetAuthenticationCardLogo from '../../Jetstream/AuthenticationCardLogo'
-    import JetButton from '../../Jetstream/Button'
+    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
+    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
+    import JetButton from '@/Jetstream/Button'
 
     export default {
         components: {
