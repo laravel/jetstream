@@ -4,6 +4,7 @@ namespace Laravel\Jetstream;
 
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -209,5 +210,39 @@ class JetstreamServiceProvider extends ServiceProvider
         if (class_exists(HandleInertiaRequests::class)) {
             $kernel->appendToMiddlewarePriority(HandleInertiaRequests::class);
         }
+
+        Fortify::loginView(function () {
+            return Inertia::render('Auth/Login', [
+                'canResetPassword' => Route::has('password.request'),
+                'status' => session('status'),
+            ]);
+        });
+
+        Fortify::requestPasswordResetLinkView(function () {
+            return Inertia::render('Auth/ForgotPassword', [
+                'status' => session('status'),
+            ]);
+        });
+
+        Fortify::resetPasswordView(function (Request $request) {
+            return Inertia::render('Auth/ResetPassword', [
+                'email' => $request->input('email'),
+                'token' => $request->route('token'),
+            ]);
+        });
+
+        Fortify::registerView(function () {
+            return Inertia::render('Auth/Register');
+        });
+
+        Fortify::verifyEmailView(function () {
+            return Inertia::render('Auth/VerifyEmail', [
+                'status' => session('status'),
+            ]);
+        });
+
+        Fortify::twoFactorChallengeView(function () {
+            return Inertia::render('Auth/TwoFactorChallenge');
+        });
     }
 }

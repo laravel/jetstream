@@ -134,10 +134,11 @@
 
             logoutOtherBrowserSessions() {
                 this.form.post(route('other-browser-sessions.destroy'), {
-                    preserveScroll: true
-                }).then(response => {
-                    if (! this.form.hasErrors()) {
-                        this.confirmingLogout = false
+                    preserveScroll: true,
+                    onSuccess: () => {
+                        if (! this.form.hasErrors()) {
+                            this.confirmingLogout = false
+                        }
                     }
                 })
             },

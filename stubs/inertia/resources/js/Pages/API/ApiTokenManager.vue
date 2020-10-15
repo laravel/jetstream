@@ -99,8 +99,8 @@
                     Please copy your new API token. For your security, it won't be shown again.
                 </div>
 
-                <div class="mt-4 bg-gray-100 px-4 py-2 rounded font-mono text-sm text-gray-500" v-if="$page.jetstream.flash.token">
-                    {{ $page.jetstream.flash.token }}
+                <div class="mt-4 bg-gray-100 px-4 py-2 rounded font-mono text-sm text-gray-500" v-if="$page.props.jetstream.flash.token">
+                    {{ $page.props.jetstream.flash.token }}
                 </div>
             </template>
 
@@ -227,9 +227,10 @@
             createApiToken() {
                 this.createApiTokenForm.post(route('api-tokens.store'), {
                     preserveScroll: true,
-                }).then(response => {
-                    if (! this.createApiTokenForm.hasErrors()) {
-                        this.displayingToken = true
+                    onSuccess: () => {
+                        if (! this.createApiTokenForm.hasErrors()) {
+                            this.displayingToken = true
+                        }
                     }
                 })
             },
@@ -244,8 +245,9 @@
                 this.updateApiTokenForm.put(route('api-tokens.update', this.managingPermissionsFor), {
                     preserveScroll: true,
                     preserveState: true,
-                }).then(response => {
-                    this.managingPermissionsFor = null
+                    onSuccess: () => {
+                        this.managingPermissionsFor = null
+                    }
                 })
             },
 
@@ -257,8 +259,9 @@
                 this.deleteApiTokenForm.delete(route('api-tokens.destroy', this.apiTokenBeingDeleted), {
                     preserveScroll: true,
                     preserveState: true,
-                }).then(() => {
-                    this.apiTokenBeingDeleted = null
+                    onSuccess: () => {
+                        this.apiTokenBeingDeleted = null
+                    }
                 })
             },
 

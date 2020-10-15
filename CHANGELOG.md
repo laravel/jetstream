@@ -1,6 +1,6 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v1.4.0...1.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v1.4.0...master)
 
 
 ## [v1.4.0 (2020-10-06)](https://github.com/laravel/jetstream/compare/v1.3.2...v1.4.0)
