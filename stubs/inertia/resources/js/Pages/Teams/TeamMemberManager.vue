@@ -294,10 +294,6 @@
                     resetOnSuccess: true,
                 }),
 
-                cancelInvitationForm: this.$inertia.form({}, {
-                    bag: 'cancelTeamInvitation',
-                }),
-
                 updateRoleForm: this.$inertia.form({
                     role: null,
                 }, {
@@ -332,7 +328,7 @@
             },
 
             cancelTeamInvitation(invitation) {
-                this.cancelInvitationForm.delete(route('team-invitations.destroy', invitation), {
+                this.$inertia.delete(route('team-invitations.destroy', invitation), {
                     preserveScroll: true
                 });
             },
