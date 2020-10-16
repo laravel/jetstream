@@ -71,8 +71,37 @@
             </jet-form-section>
         </div>
 
-        <div v-if="team.team_invitations.length > 0">
-            Has invitations...
+        <div v-if="team.team_invitations.length > 0 && userPermissions.canAddTeamMembers">
+            <jet-section-border />
+
+            <!-- Team Member Invitations -->
+            <jet-action-section class="mt-10 sm:mt-0">
+                <template #title>
+                    Pending Team Invitations
+                </template>
+
+                <template #description>
+                    These people have been invited to your team and have been sent an invitation email. They may join the team by accepting the email invitation.
+                </template>
+
+                <!-- Pending Team Member Invitation List -->
+                <template #content>
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between" v-for="invitation in team.team_invitations" :key="invitation.id">
+                            <div class="text-gray-600">{{ invitation.email }}</div>
+
+                            <div class="flex items-center">
+                                <!-- Cancel Team Invitation -->
+                                <button class="cursor-pointer ml-6 text-sm text-red-500 focus:outline-none"
+                                                    @click="cancelTeamInvitation(invitation)"
+                                                    v-if="userPermissions.canRemoveTeamMembers">
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </jet-action-section>
         </div>
 
         <div v-if="team.users.length > 0">
@@ -265,6 +294,10 @@
                     resetOnSuccess: true,
                 }),
 
+                cancelInvitationForm: this.$inertia.form({}, {
+                    bag: 'cancelTeamInvitation',
+                }),
+
                 updateRoleForm: this.$inertia.form({
                     role: null,
                 }, {
@@ -294,6 +327,12 @@
         methods: {
             addTeamMember() {
                 this.addTeamMemberForm.post(route('team-members.store', this.team), {
+                    preserveScroll: true
+                });
+            },
+
+            cancelTeamInvitation(invitation) {
+                this.cancelInvitationForm.delete(route('team-invitations.destroy', invitation), {
                     preserveScroll: true
                 });
             },

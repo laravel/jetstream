@@ -50,6 +50,9 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
             Route::get('/team-invitations/{invitation}', [TeamInvitationController::class, 'accept'])
                         ->middleware(['signed'])
                         ->name('team-invitations.accept');
+
+            Route::delete('/team-invitations/{invitation}', [TeamInvitationController::class, 'destroy'])
+                        ->name('team-invitations.destroy');
         }
     });
 });
