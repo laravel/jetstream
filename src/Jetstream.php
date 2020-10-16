@@ -6,6 +6,7 @@ use Laravel\Jetstream\Contracts\AddsTeamMembers;
 use Laravel\Jetstream\Contracts\CreatesTeams;
 use Laravel\Jetstream\Contracts\DeletesTeams;
 use Laravel\Jetstream\Contracts\DeletesUsers;
+use Laravel\Jetstream\Contracts\InvitesTeamMembers;
 use Laravel\Jetstream\Contracts\UpdatesTeamNames;
 
 class Jetstream
@@ -330,6 +331,17 @@ class Jetstream
     public static function addTeamMembersUsing(string $class)
     {
         return app()->singleton(AddsTeamMembers::class, $class);
+    }
+
+    /**
+     * Register a class / callback that should be used to add team members.
+     *
+     * @param  string  $class
+     * @return void
+     */
+    public static function inviteTeamMembersUsing(string $class)
+    {
+        return app()->singleton(InvitesTeamMembers::class, $class);
     }
 
     /**

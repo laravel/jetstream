@@ -7,6 +7,8 @@ use Illuminate\Routing\Controller;
 use Laravel\Jetstream\Actions\RemoveTeamMember;
 use Laravel\Jetstream\Actions\UpdateTeamMemberRole;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
+use Laravel\Jetstream\Contracts\InvitesTeamMembers;
+use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Jetstream;
 
 class TeamMemberController extends Controller
@@ -22,12 +24,21 @@ class TeamMemberController extends Controller
     {
         $team = Jetstream::newTeamModel()->findOrFail($teamId);
 
-        app(AddsTeamMembers::class)->add(
-            $request->user(),
-            $team,
-            $request->email ?: '',
-            $request->role
-        );
+        if (Features::sendsTeamInvitations()) {
+            app(InvitesTeamMembers::class)->invite(
+                $request->user(),
+                $team,
+                $request->email ?: '',
+                $request->role
+            );
+        } else {
+            app(AddsTeamMembers::class)->add(
+                $request->user(),
+                $team,
+                $request->email ?: '',
+                $request->role
+            );
+        }
 
         return back(303);
     }
