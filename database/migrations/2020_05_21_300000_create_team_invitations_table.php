@@ -15,7 +15,7 @@ class CreateTeamInvitationsTable extends Migration
     {
         Schema::create('team_invitations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('team_id')->index();
+            $table->foreignId('team_id')->constrained()->cascadeOnDelete();
             $table->string('email')->unique();
             $table->string('role');
             $table->timestamps();
