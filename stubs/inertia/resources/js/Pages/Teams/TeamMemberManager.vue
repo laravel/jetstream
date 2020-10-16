@@ -71,6 +71,10 @@
             </jet-form-section>
         </div>
 
+        <div v-if="team.team_invitations.length > 0">
+            Has invitations...
+        </div>
+
         <div v-if="team.users.length > 0">
             <jet-section-border />
 
