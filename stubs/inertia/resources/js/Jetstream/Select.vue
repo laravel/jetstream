@@ -1,6 +1,6 @@
 <template>
     <select class="form-select rounded-md shadow-sm" :value="value" @input="$emit('input', $event.target.value)" ref="select">
-        <option v-if='placeholder' :value='null' disabled>{{ placeholder }}</option>
+        <option v-if="placeholder" :value="null" disabled>{{ placeholder }}</option>
         <slot></slot>
     </select>
 </template>
