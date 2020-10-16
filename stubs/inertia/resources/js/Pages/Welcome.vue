@@ -1,11 +1,18 @@
 <template>
     <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
         <div v-if="canLogin" class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-            <inertia-link v-if="$page.props.user" href="/dashboard" class="text-sm text-gray-700 underline">Dashboard</inertia-link>
-            <template v-else>
-                <inertia-link :href="route('login')" class="text-sm text-gray-700 underline">Login</inertia-link>
+            <inertia-link v-if="$page.props.user" href="/dashboard" class="text-sm text-gray-700 underline">
+                Dashboard
+            </inertia-link>
 
-                <inertia-link v-if="canRegister" :href="route('register')" class="ml-4 text-sm text-gray-700 underline">Register</inertia-link>
+            <template v-else>
+                <inertia-link :href="route('login')" class="text-sm text-gray-700 underline">
+                    Login
+                </inertia-link>
+
+                <inertia-link v-if="canRegister" :href="route('register')" class="ml-4 text-sm text-gray-700 underline">
+                    Register
+                </inertia-link>
             </template>
         </div>
 
@@ -107,22 +114,27 @@
         background-color: #f7fafc;
         background-color: rgba(247, 250, 252, var(--bg-opacity));
     }
+
     .border-gray-200 {
         border-color: #edf2f7;
         border-color: rgba(237, 242, 247, var(--border-opacity));
     }
+
     .text-gray-400 {
         color: #cbd5e0;
         color: rgba(203, 213, 224, var(--text-opacity));
     }
+
     .text-gray-500 {
         color: #a0aec0;
         color: rgba(160, 174, 192, var(--text-opacity));
     }
+
     .text-gray-600 {
         color: #718096;
         color: rgba(113, 128, 150, var(--text-opacity));
     }
+
     .text-gray-700 {
         color: #4a5568;
         color: rgba(74, 85, 104, var(--text-opacity));
@@ -131,29 +143,35 @@
         color: #1a202c;
         color: rgba(26, 32, 44, var(--text-opacity));
     }
+
     @media (prefers-color-scheme: dark) {
         .dark\:bg-gray-800 {
             background-color: #2d3748;
             background-color: rgba(45, 55, 72, var(--bg-opacity));
         }
+
         .dark\:bg-gray-900 {
             background-color: #1a202c;
             background-color: rgba(26, 32, 44, var(--bg-opacity));
         }
+
         .dark\:border-gray-700 {
             border-color: #4a5568;
             border-color: rgba(74, 85, 104, var(--border-opacity));
         }
+
         .dark\:text-white {
             color: #fff;
             color: rgba(255, 255, 255, var(--text-opacity));
         }
+
         .dark\:text-gray-400 {
             color: #cbd5e0;
             color: rgba(203, 213, 224, var(--text-opacity));
         }
     }
 </style>
+
 <script>
     export default {
         props: {

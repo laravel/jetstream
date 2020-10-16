@@ -306,6 +306,7 @@ EOF;
 
         // Blade Views...
         copy(__DIR__.'/../../stubs/inertia/resources/views/app.blade.php', resource_path('views/app.blade.php'));
+
         if (file_exists(resource_path('views/welcome.blade.php'))) {
             unlink(resource_path('views/welcome.blade.php'));
         }
@@ -323,6 +324,7 @@ EOF;
 
         // Routes...
         $this->replaceInFile('auth:api', 'auth:sanctum', base_path('routes/api.php'));
+
         copy(__DIR__.'/../../stubs/inertia/routes/web.php', base_path('routes/web.php'));
 
         // Assets...
