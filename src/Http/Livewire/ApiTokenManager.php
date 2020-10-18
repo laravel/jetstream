@@ -39,7 +39,6 @@ class ApiTokenManager extends Component
      */
     public $plainTextToken;
 
-
     /**
      * The QRCode representation of token value.
      *
