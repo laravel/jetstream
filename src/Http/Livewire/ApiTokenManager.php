@@ -6,6 +6,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Jetstream\Jetstream;
 use Livewire\Component;
+use BaconQrCode\Renderer\Color\Rgb;
+use BaconQrCode\Renderer\Image\SvgImageBackEnd;
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\RendererStyle\Fill;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Writer;
 
 class ApiTokenManager extends Component
 {
@@ -32,6 +38,14 @@ class ApiTokenManager extends Component
      * @var string|null
      */
     public $plainTextToken;
+
+
+    /**
+     * The QRCode representation of token value.
+     *
+     * @var string|null
+     */
+    public $qrCodeToken;
 
     /**
      * Indicates if the user is currently managing an API token's permissions.
@@ -117,6 +131,8 @@ class ApiTokenManager extends Component
         $this->displayingToken = true;
 
         $this->plainTextToken = explode('|', $token->plainTextToken, 2)[1];
+
+        $this->qrCodeToken = $this->tokenQrCodeSvg();
     }
 
     /**
@@ -187,6 +203,23 @@ class ApiTokenManager extends Component
     public function getUserProperty()
     {
         return Auth::user();
+    }
+
+    /**
+     * Get the QR code SVG of the user's API Token Plain Text.
+     *
+     * @return string
+     */
+    protected function tokenQrCodeSvg()
+    {
+        $svg = (new Writer(
+            new ImageRenderer(
+                new RendererStyle(192, 0, null, null, Fill::uniformColor(new Rgb(255, 255, 255), new Rgb(45, 55, 72))),
+                new SvgImageBackEnd
+            )
+        ))->writeString($this->plainTextToken);
+
+        return trim(substr($svg, strpos($svg, "\n") + 1));
     }
 
     /**

@@ -107,6 +107,16 @@
             <div class="mt-4 bg-gray-100 px-4 py-2 rounded font-mono text-sm text-gray-500">
                 {{ $plainTextToken }}
             </div>
+
+            <div class="mt-4 max-w-xl text-sm text-gray-600">
+                <p class="font-semibold">
+                    {{ __('You can also Scan the following QR code using your mobile application.') }}
+                </p>
+            </div>
+
+            <div class="mt-4">
+                {!! $qrCodeToken !!}
+            </div>
         </x-slot>
 
         <x-slot name="footer">
