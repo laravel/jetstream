@@ -9,7 +9,7 @@ Create Account
 
 {{ __('If you already have an account, you may accept this invitation by clicking the button below:') }}
 
-@component('mail::button', ['url' => URL::signedRoute('team-invitations.accept', ['invitation' => $invitation])])
+@component('mail::button', ['url' => $acceptUrl])
 Accept Invitation
 @endcomponent
 

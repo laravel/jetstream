@@ -5,6 +5,7 @@ namespace Laravel\Jetstream\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\URL;
 use Laravel\Jetstream\TeamInvitation as TeamInvitationModel;
 
 class TeamInvitation extends Mailable
@@ -36,6 +37,8 @@ class TeamInvitation extends Mailable
      */
     public function build()
     {
-        return $this->markdown('jetstream::mail.team-invitation');
+        return $this->markdown('jetstream::mail.team-invitation', ['acceptUrl' => URL::signedRoute('team-invitations.accept', [
+            'invitation' => $this->invitation
+        ])]);
     }
 }
