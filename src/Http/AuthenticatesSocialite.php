@@ -12,9 +12,9 @@ use Laravel\Fortify\Actions\RedirectIfTwoFactorAuthenticatable;
 use Laravel\Fortify\Fortify;
 use Laravel\Jetstream\Contracts\CreatesConnectedAccounts;
 use Laravel\Jetstream\Jetstream;
-use Laravel\Socialite\Contracts\User as UserContract;
+use Laravel\Socialite\Contracts\User as SocialiteUserContract;
 
-trait AuthenticatesConnectedAccounts
+trait AuthenticatesSocialite
 {
     /**
      * Authenticate the user via Socialite.
@@ -24,7 +24,7 @@ trait AuthenticatesConnectedAccounts
      * @param  \Laravel\Socialite\Contracts\User  $providerUser
      * @return Pipeline
      */
-    protected function authenticate(Request $request, string $provider, UserContract $providerUser)
+    protected function authenticate(Request $request, string $provider, SocialiteUserContract $providerUser)
     {
         // Register the callback to be used for resolving and authenticating the user.
         Fortify::authenticateUsing(function () use ($provider, $providerUser) {
@@ -48,7 +48,7 @@ trait AuthenticatesConnectedAccounts
      * @param  \Laravel\Socialite\Contracts\User  $providerUser
      * @return \Illuminate\Contracts\Auth\Authenticatable
      */
-    protected function getUser(UserContract $providerUser)
+    protected function getUser(SocialiteUserContract $providerUser)
     {
         return Jetstream::userModel()::where('email', $providerUser->getEmail())->first() ?? Jetstream::userModel()::create([
                 'name' => $providerUser->getName(),
@@ -64,7 +64,7 @@ trait AuthenticatesConnectedAccounts
      * @param  \Laravel\Socialite\Contracts\User  $providerUser
      * @return \Illuminate\Contracts\Auth\Authenticatable
      */
-    protected function connectAccount(Authenticatable $user, string $provider, UserContract $providerUser)
+    protected function connectAccount(Authenticatable $user, string $provider, SocialiteUserContract $providerUser)
     {
         if (! $connectedAccount = $user->connectedAccountForProvider($provider, $providerUser->getId())) {
             // Create the connected account...

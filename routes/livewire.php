@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Laravel\Jetstream\Http\Controllers\ConnectedAccountsController;
+use Laravel\Jetstream\Http\Controllers\SocialiteController;
 use Laravel\Jetstream\Http\Controllers\CurrentTeamController;
 use Laravel\Jetstream\Http\Controllers\Livewire\ApiTokenController;
 use Laravel\Jetstream\Http\Controllers\Livewire\TeamController;
@@ -33,8 +33,8 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
 
         // Socialite...
         if (Jetstream::hasSocialiteFeatures()) {
-            Route::get('/connected-accounts/{provider}', [ConnectedAccountsController::class, 'show']); // Redirect to provider
-            Route::post('/connected-accounts/{provider}', [ConnectedAccountsController::class, 'store']); // Callback URL for provider
+            Route::get('/socialite/{provider}', [SocialiteController::class, 'show']); // Redirect to provider
+            Route::post('/socialite/{provider}', [SocialiteController::class, 'store']); // Callback URL for provider
         }
     });
 });

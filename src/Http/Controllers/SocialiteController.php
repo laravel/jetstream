@@ -4,12 +4,12 @@ namespace Laravel\Jetstream\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Laravel\Jetstream\Http\AuthenticatesConnectedAccounts;
+use Laravel\Jetstream\Http\AuthenticatesSocialite;
 use Laravel\Socialite\Facades\Socialite;
 
-class ConnectedAccountsController extends Controller
+class SocialiteController extends Controller
 {
-    use AuthenticatesConnectedAccounts;
+    use AuthenticatesSocialite;
 
     /**
      * Get the redirect for the given Socialite provider.
