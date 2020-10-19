@@ -3,11 +3,11 @@
 namespace App\Actions\Jetstream;
 
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Jetstream\Contracts\InvitesTeamMembers;
 use Laravel\Jetstream\Jetstream;
-use Laravel\Jetstream\Notifications\TeamInvitation;
+use Laravel\Jetstream\Mail\TeamInvitation;
 use Laravel\Jetstream\Rules\Role;
 
 class InviteTeamMember implements InvitesTeamMembers
@@ -32,9 +32,7 @@ class InviteTeamMember implements InvitesTeamMembers
             'role' => $role,
         ]);
 
-        Notification::route('mail', $email)->notify(
-            new TeamInvitation($invitation)
-        );
+        Mail::to($email)->send(new TeamInvitation($invitation));
     }
 
     /**
