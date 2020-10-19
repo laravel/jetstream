@@ -52,7 +52,7 @@ class TeamInvitation extends Notification
         return (new MailMessage)
                     ->line('The introduction to the notification.')
                     ->action(__('Accept Invitation'), URL::signedRoute('team-invitations.accept', [
-                        'invitation' => $this->invitation
+                        'invitation' => $this->invitation,
                     ]))
                     ->line('Thank you for using our application!');
     }
