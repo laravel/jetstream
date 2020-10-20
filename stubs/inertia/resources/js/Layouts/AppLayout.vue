@@ -193,7 +193,7 @@
         </nav>
 
         <!-- Page Heading -->
-        <header class="bg-white shadow">
+        <header v-if="hasHeader" class="bg-white shadow">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 <slot name="header"></slot>
             </div>
@@ -251,6 +251,10 @@
         computed: {
             path() {
                 return window.location.pathname
+            },
+            
+            hasHeader() {
+                return !!this.$slots.header;
             }
         }
     }
