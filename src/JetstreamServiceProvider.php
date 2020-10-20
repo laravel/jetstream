@@ -94,6 +94,7 @@ class JetstreamServiceProvider extends ServiceProvider
             $this->registerComponent('application-mark');
             $this->registerComponent('authentication-card');
             $this->registerComponent('authentication-card-logo');
+            $this->registerComponent('banner');
             $this->registerComponent('button');
             $this->registerComponent('confirmation-modal');
             $this->registerComponent('confirms-password');
