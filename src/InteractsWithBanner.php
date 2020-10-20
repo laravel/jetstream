@@ -12,6 +12,23 @@ trait InteractsWithBanner
      */
     protected function banner($message)
     {
-        $this->dispatchBrowserEvent('banner-message', ['message' => $message]);
+        $this->dispatchBrowserEvent('banner-message', [
+            'style' => 'success',
+            'message' => $message,
+        ]);
+    }
+
+    /**
+     * Update the banner message with an danger / error message.
+     *
+     * @param  string  $message
+     * @return void
+     */
+    protected function dangerBanner($message)
+    {
+        $this->dispatchBrowserEvent('banner-message', [
+            'style' => 'danger',
+            'message' => $message,
+        ]);
     }
 }
