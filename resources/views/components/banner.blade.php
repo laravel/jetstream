@@ -1,4 +1,4 @@
-@props(['style' => session('flash.banner', 'success'), 'message' => session('flash.banner')])
+@props(['style' => session('flash.bannerStyle', 'success'), 'message' => session('flash.banner')])
 
 <div class="{{ $style == 'success' ? 'bg-indigo-500' : 'bg-red-700' }}" x-data="{{ json_encode(['show' => true, 'message' => $message]) }}"
             x-show="show && message"
