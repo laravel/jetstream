@@ -4,6 +4,7 @@ namespace Laravel\Jetstream;
 
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
@@ -74,6 +75,10 @@ class JetstreamServiceProvider extends ServiceProvider
         $this->configurePublishing();
         $this->configureRoutes();
         $this->configureCommands();
+
+        RedirectResponse::macro('banner', function ($message) {
+            return $this->with('flash', ['banner' => $message]);
+        });
 
         if (config('jetstream.stack') === 'inertia') {
             $this->bootInertia();
