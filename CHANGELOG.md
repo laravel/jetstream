@@ -1,6 +1,27 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v1.4.0...master)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v1.5.0...master)
+
+
+## [v1.5.0 (2020-10-20)](https://github.com/laravel/jetstream/compare/v1.4.1...v1.5.0)
+
+### Added
+- Add Jetstream route prefix config ([#362](https://github.com/laravel/jetstream/pull/362))
+
+### Changed
+- Added js directory path alias ([#328](https://github.com/laravel/jetstream/pull/328), [412e748](https://github.com/laravel/jetstream/commit/412e748649805ac32a50c01273bf073ef4b2aa6f))
+- Update wording ([055be85](https://github.com/laravel/jetstream/commit/055be8529b4fb45897e9d5ef42eee0b2a45c8bde))
+
+
+## [v1.4.1 (2020-10-13)](https://github.com/laravel/jetstream/compare/v1.4.0...v1.4.1)
+
+### Changed
+- Give user object to update profile information form ([#324](https://github.com/laravel/jetstream/pull/324), [d818b31](https://github.com/laravel/jetstream/commit/d818b31784bb29faaab6abefd3e7aab9a5d4dce1))
+- Numeric keyboard in Two Factor Challenge ([#336](https://github.com/laravel/jetstream/pull/336))
+
+### Fixed
+- Correct visibility of Fortify features in profile view ([#322](https://github.com/laravel/jetstream/pull/322))
+- Fix incorrect variable ([afc89ad](https://github.com/laravel/jetstream/commit/afc89ad834d179dd39a0b86815b48dac8f039f69))
 
 
 ## [v1.4.0 (2020-10-06)](https://github.com/laravel/jetstream/compare/v1.3.2...v1.4.0)
