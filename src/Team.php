@@ -72,6 +72,14 @@ abstract class Team extends Model
     }
 
     /**
+     * Get all of the pending user invitations for the team.
+     */
+    public function teamInvitations()
+    {
+        return $this->hasMany(TeamInvitation::class);
+    }
+
+    /**
      * Remove the given user from the team.
      *
      * @param  \App\Models\User  $user

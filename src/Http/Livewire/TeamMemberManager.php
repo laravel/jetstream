@@ -6,7 +6,10 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Jetstream\Actions\RemoveTeamMember;
 use Laravel\Jetstream\Actions\UpdateTeamMemberRole;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
+use Laravel\Jetstream\Contracts\InvitesTeamMembers;
+use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Jetstream;
+use Laravel\Jetstream\TeamInvitation;
 use Livewire\Component;
 
 class TeamMemberManager extends Component
@@ -84,19 +87,29 @@ class TeamMemberManager extends Component
     /**
      * Add a new team member to a team.
      *
-     * @param  \Laravel\Jetstream\Contracts\AddsTeamMembers
+     * @param  \Laravel\Jetstream\Contracts\InvitesTeamMembers  $inviter
+     * @param  \Laravel\Jetstream\Contracts\AddsTeamMembers  $adder
      * @return void
      */
-    public function addTeamMember(AddsTeamMembers $adder)
+    public function addTeamMember(InvitesTeamMembers $inviter, AddsTeamMembers $adder)
     {
         $this->resetErrorBag();
 
-        $adder->add(
-            $this->user,
-            $this->team,
-            $this->addTeamMemberForm['email'],
-            $this->addTeamMemberForm['role']
-        );
+        if (Features::sendsTeamInvitations()) {
+            $inviter->invite(
+                $this->user,
+                $this->team,
+                $this->addTeamMemberForm['email'],
+                $this->addTeamMemberForm['role']
+            );
+        } else {
+            $adder->add(
+                $this->user,
+                $this->team,
+                $this->addTeamMemberForm['email'],
+                $this->addTeamMemberForm['role']
+            );
+        }
 
         $this->addTeamMemberForm = [
             'email' => '',
@@ -106,6 +119,21 @@ class TeamMemberManager extends Component
         $this->team = $this->team->fresh();
 
         $this->emit('saved');
+    }
+
+    /**
+     * Cancel a pending team member invitation.
+     *
+     * @param  int  $invitationId
+     * @return void
+     */
+    public function cancelTeamInvitation($invitationId)
+    {
+        if (! empty($invitationId)) {
+            TeamInvitation::whereKey($invitationId)->delete();
+        }
+
+        $this->team = $this->team->fresh();
     }
 
     /**

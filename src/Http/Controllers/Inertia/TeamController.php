@@ -30,7 +30,7 @@ class TeamController extends Controller
         }
 
         return Jetstream::inertia()->render($request, 'Teams/Show', [
-            'team' => $team->load('owner', 'users'),
+            'team' => $team->load('owner', 'users', 'teamInvitations'),
             'availableRoles' => array_values(Jetstream::$roles),
             'availablePermissions' => Jetstream::$permissions,
             'defaultPermissions' => Jetstream::$defaultPermissions,

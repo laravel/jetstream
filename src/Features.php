@@ -2,8 +2,17 @@
 
 namespace Laravel\Jetstream;
 
+use Illuminate\Support\Arr;
+
 class Features
 {
+    /**
+     * The options enabled for a given feature.
+     *
+     * @var array
+     */
+    protected static $featureOptions = [];
+
     /**
      * Determine if the given feature is enabled.
      *
@@ -13,6 +22,19 @@ class Features
     public static function enabled(string $feature)
     {
         return in_array($feature, config('jetstream.features', []));
+    }
+
+    /**
+     * Determine if the feature is enabled and has a given option enabled.
+     *
+     * @param  string  $feature
+     * @param  string  $option
+     * @return bool
+     */
+    public static function optionEnabled(string $feature, string $option)
+    {
+        return static::enabled($feature) &&
+               Arr::get(static::$featureOptions, $feature.'.'.$option) === true;
     }
 
     /**
@@ -46,6 +68,16 @@ class Features
     }
 
     /**
+     * Determine if invitations are sent to team members.
+     *
+     * @return bool
+     */
+    public static function sendsTeamInvitations()
+    {
+        return static::optionEnabled(static::teams(), 'invitations');
+    }
+
+    /**
      * Enable the profile photo upload feature.
      *
      * @return string
@@ -68,10 +100,15 @@ class Features
     /**
      * Enable the teams feature.
      *
+     * @param  array  $options
      * @return string
      */
-    public static function teams()
+    public static function teams(array $options = [])
     {
+        if (! empty($options)) {
+            static::$featureOptions['teams'] = $options;
+        }
+
         return 'teams';
     }
 }
