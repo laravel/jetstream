@@ -47,10 +47,18 @@
     export default {
         data() {
             return {
-                style: this.$page.props.jetstream.flash?.bannerStyle || 'success',
                 show: true,
-                message: this.$page.props.jetstream.flash?.banner || '',
             }
+        },
+
+        computed: {
+            style() {
+                return this.$page.props.jetstream.flash?.bannerStyle || 'success'
+            },
+
+            message() {
+                return this.$page.props.jetstream.flash?.banner || ''
+            },
         }
     }
 </script>
