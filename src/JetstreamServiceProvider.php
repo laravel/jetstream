@@ -262,5 +262,9 @@ class JetstreamServiceProvider extends ServiceProvider
         Fortify::twoFactorChallengeView(function () {
             return Inertia::render('Auth/TwoFactorChallenge');
         });
+
+        Fortify::confirmPasswordView(function () {
+            return Inertia::render('Auth/ConfirmPassword');
+        });
     }
 }
