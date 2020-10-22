@@ -25,7 +25,7 @@ class TeamController extends Controller
     {
         $team = Jetstream::newTeamModel()->findOrFail($teamId);
 
-        if (Gate::denies('show', $team )) {
+        if (Gate::denies('show', $team)) {
             abort(403);
         }
 
