@@ -4,6 +4,7 @@ namespace Laravel\Jetstream\Http\Controllers\Livewire;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Gate;
 use Laravel\Jetstream\Jetstream;
 
 class TeamController extends Controller
@@ -19,7 +20,7 @@ class TeamController extends Controller
     {
         $team = Jetstream::newTeamModel()->findOrFail($teamId);
 
-        if (! $request->user()->belongsToTeam($team)) {
+        if (Gate::denies('view', $team)) {
             abort(403);
         }
 
