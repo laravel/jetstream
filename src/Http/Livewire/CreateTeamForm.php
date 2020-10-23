@@ -4,10 +4,13 @@ namespace Laravel\Jetstream\Http\Livewire;
 
 use Illuminate\Support\Facades\Auth;
 use Laravel\Jetstream\Contracts\CreatesTeams;
+use Laravel\Jetstream\RedirectsActions;
 use Livewire\Component;
 
 class CreateTeamForm extends Component
 {
+    use RedirectsActions;
+
     /**
      * The component's state.
      *
@@ -27,7 +30,7 @@ class CreateTeamForm extends Component
 
         $creator->create(Auth::user(), $this->state);
 
-        return redirect(config('fortify.home'));
+        return $this->redirectPath($creator);
     }
 
     /**

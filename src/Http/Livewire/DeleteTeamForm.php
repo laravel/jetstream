@@ -47,7 +47,7 @@ class DeleteTeamForm extends Component
 
         $deleter->delete($this->team);
 
-        return redirect(config('fortify.home'));
+        return $this->redirectPath($deleter);
     }
 
     /**
