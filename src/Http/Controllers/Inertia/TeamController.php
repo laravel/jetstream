@@ -69,7 +69,7 @@ class TeamController extends Controller
 
         $creator->create($request->user(), $request->all());
 
-        return redirect($this->redirectPath($creator));
+        return $this->redirectPath($creator);
     }
 
     /**
@@ -105,6 +105,6 @@ class TeamController extends Controller
 
         $deleter->delete($team);
 
-        return redirect($this->redirectPath($deleter));
+        return $this->redirectPath($deleter);
     }
 }

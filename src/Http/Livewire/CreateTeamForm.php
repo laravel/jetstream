@@ -30,7 +30,7 @@ class CreateTeamForm extends Component
 
         $creator->create(Auth::user(), $this->state);
 
-        return redirect($this->redirectPath($creator));
+        return $this->redirectPath($creator);
     }
 
     /**

@@ -47,7 +47,7 @@ class DeleteTeamForm extends Component
 
         $deleter->delete($this->team);
 
-        return redirect($this->redirectPath($deleter));
+        return $this->redirectPath($deleter);
     }
 
     /**
