@@ -11,9 +11,12 @@ use Laravel\Jetstream\Contracts\CreatesTeams;
 use Laravel\Jetstream\Contracts\DeletesTeams;
 use Laravel\Jetstream\Contracts\UpdatesTeamNames;
 use Laravel\Jetstream\Jetstream;
+use Laravel\Jetstream\RedirectsActions;
 
 class TeamController extends Controller
 {
+    use RedirectsActions;
+
     /**
      * Show the team management screen.
      *
@@ -62,9 +65,11 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        app(CreatesTeams::class)->create($request->user(), $request->all());
+        $creator = app(CreatesTeams::class);
 
-        return redirect(config('fortify.home'));
+        $creator->create($request->user(), $request->all());
+
+        return redirect($this->redirectPath($creator));
     }
 
     /**
@@ -96,8 +101,10 @@ class TeamController extends Controller
 
         app(ValidateTeamDeletion::class)->validate($request->user(), $team);
 
-        app(DeletesTeams::class)->delete($team);
+        $deleter = app(DeletesTeams::class);
 
-        return redirect(config('fortify.home'));
+        $deleter->delete($team);
+
+        return redirect($this->redirectPath($deleter));
     }
 }
