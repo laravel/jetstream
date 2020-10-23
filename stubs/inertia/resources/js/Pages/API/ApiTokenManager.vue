@@ -23,7 +23,7 @@
                     <jet-label for="permissions" value="Permissions" />
 
                     <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div v-for="permission in availablePermissions">
+                        <div v-for="permission in availablePermissions" :key="permission">
                             <label class="flex items-center">
                                 <input type="checkbox" class="form-checkbox" :value="permission" v-model="createApiTokenForm.permissions">
                                 <span class="ml-2 text-sm text-gray-600">{{ permission }}</span>
@@ -61,7 +61,7 @@
                     <!-- API Token List -->
                     <template #content>
                         <div class="space-y-6">
-                            <div class="flex items-center justify-between" v-for="token in tokens">
+                            <div class="flex items-center justify-between" v-for="token in tokens" :key="token.id">
                                 <div>
                                     {{ token.name }}
                                 </div>
@@ -119,7 +119,7 @@
 
             <template #content>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div v-for="permission in availablePermissions">
+                    <div v-for="permission in availablePermissions" :key="permission">
                         <label class="flex items-center">
                             <input type="checkbox" class="form-checkbox" :value="permission" v-model="updateApiTokenForm.permissions">
                             <span class="ml-2 text-sm text-gray-600">{{ permission }}</span>
