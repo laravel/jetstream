@@ -15,13 +15,7 @@
                         </span>
 
                         <p class="ml-3 font-medium text-sm text-white truncate">
-                            <span class="md:hidden">
-                                {{ message }}
-                            </span>
-
-                            <span class="hidden md:inline">
-                                {{ message }}
-                            </span>
+                            {{ message }}
                         </p>
                     </div>
 
