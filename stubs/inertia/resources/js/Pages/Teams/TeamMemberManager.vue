@@ -37,7 +37,7 @@
                                             :class="{'border-t border-gray-200': i > 0}"
                                             @click="addTeamMemberForm.role = role.key"
                                             v-for="(role, i) in availableRoles"
-                                            :key="i"
+                                            :key="role.key"
                                             >
                                 <div :class="{'opacity-50': addTeamMemberForm.role && addTeamMemberForm.role != role.key}">
                                     <!-- Role Name -->
@@ -138,7 +138,7 @@
                                         :class="{'border-t border-gray-200': i > 0}"
                                         @click="updateRoleForm.role = role.key"
                                         v-for="(role, i) in availableRoles"
-                                        :key="i"
+                                        :key="role.key"
                                         >
                             <div :class="{'opacity-50': updateRoleForm.role && updateRoleForm.role != role.key}">
                                 <!-- Role Name -->
