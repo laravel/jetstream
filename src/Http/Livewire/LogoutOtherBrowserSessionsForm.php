@@ -44,7 +44,7 @@ class LogoutOtherBrowserSessionsForm extends Component
     /**
      * Logout from other browser sessions.
      *
-     * @param  \Illuminate\Contracts\Auth\StatefulGuard $guard
+     * @param  \Illuminate\Contracts\Auth\StatefulGuard  $guard
      * @return void
      */
     public function logoutOtherBrowserSessions(StatefulGuard $guard)
