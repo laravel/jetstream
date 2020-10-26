@@ -230,7 +230,7 @@ EOF;
     protected function installInertiaStack()
     {
         // Install Inertia...
-        (new Process(['composer', 'require', 'inertiajs/inertia-laravel:^0.3', 'laravel/sanctum:^2.6', 'tightenco/ziggy'], base_path()))
+        (new Process(['composer', 'require', 'inertiajs/inertia-laravel:^0.3', 'laravel/sanctum:^2.6', 'tightenco/ziggy:^1.0'], base_path()))
                 ->setTimeout(null)
                 ->run(function ($type, $output) {
                     $this->output->write($output);
