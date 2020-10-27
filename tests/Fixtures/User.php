@@ -3,9 +3,9 @@
 namespace Laravel\Jetstream\Tests\Fixtures;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
-use Laravel\Jetstream\HasProfilePhoto;
 
 class User extends Authenticatable
 {
