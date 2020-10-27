@@ -37,6 +37,7 @@ class DeleteUser implements DeletesUsers
     {
         DB::transaction(function () use ($user) {
             $this->deleteTeams($user);
+
             if (Features::managesProfilePhotos()) {
                 $user->deleteProfilePhoto();
             }
