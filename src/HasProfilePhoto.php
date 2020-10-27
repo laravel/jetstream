@@ -4,6 +4,7 @@ namespace Laravel\Jetstream;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Laravel\Jetstream\Features;
 
 trait HasProfilePhoto
 {
@@ -35,11 +36,13 @@ trait HasProfilePhoto
      */
     public function deleteProfilePhoto()
     {
-        Storage::disk($this->profilePhotoDisk())->delete($this->profile_photo_path);
+        if (Features::managesProfilePhotos()) {
+            Storage::disk($this->profilePhotoDisk())->delete($this->profile_photo_path);
 
-        $this->forceFill([
-            'profile_photo_path' => null,
-        ])->save();
+            $this->forceFill([
+                'profile_photo_path' => null,
+            ])->save();
+        }
     }
 
     /**
