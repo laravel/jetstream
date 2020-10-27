@@ -5,6 +5,7 @@ namespace App\Actions\Jetstream;
 use Illuminate\Support\Facades\DB;
 use Laravel\Jetstream\Contracts\DeletesTeams;
 use Laravel\Jetstream\Contracts\DeletesUsers;
+use Laravel\Jetstream\Features;
 
 class DeleteUser implements DeletesUsers
 {
@@ -36,7 +37,9 @@ class DeleteUser implements DeletesUsers
     {
         DB::transaction(function () use ($user) {
             $this->deleteTeams($user);
-            $user->deleteProfilePhoto();
+            if (Features::managesProfilePhotos()) {
+                $user->deleteProfilePhoto();
+            }
             $user->delete();
         });
     }
