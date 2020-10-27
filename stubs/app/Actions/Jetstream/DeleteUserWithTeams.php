@@ -40,6 +40,7 @@ class DeleteUser implements DeletesUsers
             if (Features::managesProfilePhotos()) {
                 $user->deleteProfilePhoto();
             }
+
             $user->delete();
         });
     }
