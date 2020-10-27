@@ -36,13 +36,15 @@ trait HasProfilePhoto
      */
     public function deleteProfilePhoto()
     {
-        if (Features::managesProfilePhotos()) {
-            Storage::disk($this->profilePhotoDisk())->delete($this->profile_photo_path);
-
-            $this->forceFill([
-                'profile_photo_path' => null,
-            ])->save();
+        if (! Features::managesProfilePhotos()) {
+            return;
         }
+
+        Storage::disk($this->profilePhotoDisk())->delete($this->profile_photo_path);
+
+        $this->forceFill([
+            'profile_photo_path' => null,
+        ])->save();
     }
 
     /**
