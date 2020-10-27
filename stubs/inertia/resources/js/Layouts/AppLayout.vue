@@ -248,12 +248,6 @@
                     window.location = '/';
                 })
             },
-        },
-
-        computed: {
-            path() {
-                return window.location.pathname
-            }
         }
     }
 </script>
