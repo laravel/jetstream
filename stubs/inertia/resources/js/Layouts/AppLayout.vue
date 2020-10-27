@@ -215,7 +215,6 @@
 </template>
 
 <script>
-    import JetApplicationLogo from '@/Jetstream/ApplicationLogo'
     import JetApplicationMark from '@/Jetstream/ApplicationMark'
     import JetBanner from '@/Jetstream/Banner'
     import JetDropdown from '@/Jetstream/Dropdown'
@@ -225,7 +224,6 @@
 
     export default {
         components: {
-            JetApplicationLogo,
             JetApplicationMark,
             JetBanner,
             JetDropdown,
