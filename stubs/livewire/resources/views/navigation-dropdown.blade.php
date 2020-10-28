@@ -49,6 +49,12 @@
                             {{ __('Profile') }}
                         </x-jet-dropdown-link>
 
+                        @if (!is_null(config('spark.billables.user')))
+                            <x-jet-dropdown-link href="{{ route('spark.portal') }}">
+                                {{ __('Manage Billing') }}
+                            </x-jet-dropdown-link>
+                        @endif
+
                         @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                             <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
                                 {{ __('API Tokens') }}
@@ -67,6 +73,12 @@
                             <x-jet-dropdown-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}">
                                 {{ __('Team Settings') }}
                             </x-jet-dropdown-link>
+
+                            @if (!is_null(config('spark.billables.team')))
+                                <x-jet-dropdown-link href="{{ route('spark.portal', ['type' => 'team', 'id' => Auth::user()->currentTeam->id]) }}">
+                                    {{ __('Manage Billing') }}
+                                </x-jet-dropdown-link>
+                            @endif
 
                             @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
                                 <x-jet-dropdown-link href="{{ route('teams.create') }}">
