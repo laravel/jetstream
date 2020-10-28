@@ -111,6 +111,7 @@ class JetstreamServiceProvider extends ServiceProvider
             $this->registerComponent('section-border');
             $this->registerComponent('section-title');
             $this->registerComponent('switchable-team');
+            $this->registerComponent('textarea');
             $this->registerComponent('validation-errors');
             $this->registerComponent('welcome');
         });
