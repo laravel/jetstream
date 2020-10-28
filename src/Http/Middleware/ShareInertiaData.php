@@ -31,8 +31,8 @@ class ShareInertiaData
                     'hasApiFeatures' => Jetstream::hasApiFeatures(),
                     'hasTeamFeatures' => Jetstream::hasTeamFeatures(),
                     'managesProfilePhotos' => Jetstream::managesProfilePhotos(),
-                    'billsUsers' => !is_null(config('spark.billables.user')),
-                    'billsTeams' => !is_null(config('spark.billables.team')),
+                    'billsUsers' => ! is_null(config('spark.billables.user')),
+                    'billsTeams' => ! is_null(config('spark.billables.team')),
                 ];
             },
             'user' => function () use ($request) {
