@@ -113,11 +113,7 @@ class InstallCommand extends Command
     protected function installLivewireStack()
     {
         // Install Livewire...
-        (new Process(['composer', 'require', 'livewire/livewire:^2.0', 'laravel/sanctum:^2.6'], base_path()))
-                ->setTimeout(null)
-                ->run(function ($type, $output) {
-                    $this->output->write($output);
-                });
+        $this->requireComposerPackages('livewire/livewire:^2.0', 'laravel/sanctum:^2.6');
 
         // Sanctum...
         (new Process(['php', 'artisan', 'vendor:publish', '--provider=Laravel\Sanctum\SanctumServiceProvider', '--force'], base_path()))
@@ -248,11 +244,7 @@ EOF;
     protected function installInertiaStack()
     {
         // Install Inertia...
-        (new Process(['composer', 'require', 'inertiajs/inertia-laravel:^0.2.4', 'laravel/sanctum:^2.6', 'tightenco/ziggy:^0.9.4'], base_path()))
-                ->setTimeout(null)
-                ->run(function ($type, $output) {
-                    $this->output->write($output);
-                });
+        $this->requireComposerPackages('inertiajs/inertia-laravel:^0.2.4', 'laravel/sanctum:^2.6', 'tightenco/ziggy:^0.9.4');
 
         // Install NPM packages...
         $this->updateNodePackages(function ($packages) {
@@ -441,6 +433,26 @@ EOF;
                 $appConfig
             ));
         }
+    }
+
+    /**
+     * Installs the given Composer Packages into the application.
+     *
+     * @param  mixed  $packages
+     * @return void
+     */
+    protected function requireComposerPackages($packages)
+    {
+        $command = array_merge(
+            ['composer', 'require'],
+            is_array($packages) ? $packages : func_get_args()
+        );
+
+        (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))
+            ->setTimeout(null)
+            ->run(function ($type, $output) {
+                $this->output->write($output);
+            });
     }
 
     /**
