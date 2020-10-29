@@ -438,14 +438,14 @@ EOF;
     /**
      * Installs the given Composer Packages into the application.
      *
-     * @param  mixed  $package
+     * @param  mixed  $packages
      * @return void
      */
-    protected function requireComposerPackages($package)
+    protected function requireComposerPackages($packages)
     {
         $command = array_merge(
             ['composer', 'require'],
-            is_array($package) ? $package : func_get_args()
+            is_array($packages) ? $packages : func_get_args()
         );
 
         (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))
