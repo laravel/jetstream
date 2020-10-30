@@ -30,9 +30,11 @@
                     </p>
                 </div>
 
-                <div class="mt-4">
-                    {!! $this->user->twoFactorQrCodeSvg() !!}
-                </div>
+                <div class="mt-4 max-w-xl">
+                    <div class="p-2 w-52 bg-white mx-auto">
+                        {!! $this->user->twoFactorQrCodeSvg() !!}
+                    </div>
+                </div>                  
             @endif
 
             @if ($showingRecoveryCodes)
