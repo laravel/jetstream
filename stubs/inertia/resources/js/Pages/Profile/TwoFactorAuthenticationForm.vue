@@ -31,7 +31,7 @@
                         </p>
                     </div>
 
-                    <div class="mt-4" v-html="qrCode">
+                    <div class="mt-4 p-4 w-56 bg-white" v-html="qrCode">
                     </div>
                 </div>
 
