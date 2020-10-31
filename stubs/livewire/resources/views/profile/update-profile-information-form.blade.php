@@ -28,7 +28,13 @@
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" x-show="! photoPreview">
-                    <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}" class="rounded-full h-20 w-20 object-cover">
+                    @if ($this->user->has_profile_photo)
+                        <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}" class="rounded-full h-20 w-20 object-cover">
+                    @else
+                        <div class="h-20 w-20 rounded-full object-center text-center relative bg-blue-100 text-indigo-700 text-2xl">
+                            <span class="absolute inset-0 flex items-center justify-center">{{ $this->user->profile_tag }}</span>
+                        </div>
+                    @endif
                 </div>
 
                 <!-- New Profile Photo Preview -->
