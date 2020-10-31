@@ -97,8 +97,9 @@ trait HasProfilePhoto
         $tag = '';
 
         for ($i = 0; $i < 2; $i++) {
-            if (count($segments) >= $i + 1)
+            if (count($segments) >= $i + 1) {
                 $tag .= Str::of($segments[$i])->ucfirst()->substr(0, 1);
+            }
         }
 
         return $tag;
