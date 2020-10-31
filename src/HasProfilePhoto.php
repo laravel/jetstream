@@ -4,6 +4,7 @@ namespace Laravel\Jetstream;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
 
 trait HasProfilePhoto
@@ -56,17 +57,51 @@ trait HasProfilePhoto
     {
         return $this->profile_photo_path
                     ? Storage::disk($this->profilePhotoDisk())->url($this->profile_photo_path)
-                    : $this->defaultProfilePhotoUrl();
+                    : '';
     }
 
     /**
      * Get the default profile photo URL if no profile photo has been uploaded.
+     * Only return the default profile photo url if Jetstream is configured to manage profile photos.
+     * This reduces unnecessary web requests.
      *
      * @return string
      */
     protected function defaultProfilePhotoUrl()
     {
+        if (! Features::managesProfilePhotos()) {
+            return '';
+        }
         return 'https://ui-avatars.com/api/?name='.urlencode($this->name).'&color=7F9CF5&background=EBF4FF';
+    }
+
+    /**
+     * Checks if there is a profile photo.
+     *
+     * @return bool
+     */
+    public function getHasProfilePhotoAttribute()
+    {
+        return $this->profile_photo_path ? true : false;
+    }
+
+    /**
+     * Returns the profile tag, created out of the first letter of the first two words in the users name.
+     *
+     * @return string
+     */
+    public function getProfileTagAttribute()
+    {
+        $segments = Str::of($this->name)->split('/[\s ]+/');
+
+        $tag = '';
+
+        for ($i = 0; $i < 2; $i++) {
+            if (count($segments) >= $i+1)
+                $tag .= Str::of($segments[$i])->ucfirst()->substr(0,1);
+        }
+
+        return $tag;
     }
 
     /**

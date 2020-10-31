@@ -26,7 +26,10 @@
                             <jet-dropdown align="right" width="48">
                                 <template #trigger>
                                     <button v-if="$page.jetstream.managesProfilePhotos" class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
-                                        <img class="h-8 w-8 rounded-full object-cover" :src="$page.user.profile_photo_url" :alt="$page.user.name" />
+                                        <img class="h-8 w-8 rounded-full object-cover" v-if="$page.user.has_profile_photo" :src="$page.user.profile_photo_url" :alt="$page.user.name" />
+                                        <div class="h-8 w-8 rounded-full object-center text-center bg-blue-100 text-indigo-700" v-else>
+                                            <span class="absolute inset-0 flex items-center justify-center">{{ $page.user.profile_tag }}</span>
+                                        </div>
                                     </button>
 
                                     <button v-else class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">

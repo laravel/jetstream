@@ -20,7 +20,10 @@
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" v-show="! photoPreview">
-                    <img :src="user.profile_photo_url" alt="Current Profile Photo" class="rounded-full h-20 w-20 object-cover">
+                    <img v-if="user.has_profile_photo" :src="user.profile_photo_url" alt="Current Profile Photo" class="rounded-full h-20 w-20 object-cover">
+                    <div class="h-20 w-20 rounded-full object-center text-center relative bg-blue-100 text-indigo-700 text-2xl" v-else>
+                        <span class="absolute inset-0 flex items-center justify-center">{{ user.profile_tag }}</span>
+                    </div>
                 </div>
 
                 <!-- New Profile Photo Preview -->

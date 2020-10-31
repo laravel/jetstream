@@ -57,5 +57,7 @@ class User extends Authenticatable
      */
     protected $appends = [
         'profile_photo_url',
+        'profile_tag',
+        'has_profile_photo',
     ];
 }
