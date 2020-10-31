@@ -33,9 +33,9 @@
                             <x-jet-label for="role" value="{{ __('Role') }}" />
                             <x-jet-input-error for="role" class="mt-2" />
 
-                            <div class="mt-1 border border-gray-200 rounded-lg cursor-pointer relative z-0">
+                            <div class="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer">
                                 @foreach ($this->roles as $index => $role)
-                                    <button type="button" class="px-4 py-3 relative inline-flex rounded-lg w-full focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue {{ $index > 0 ? 'border-t border-gray-200 rounded-t-none' : '' }} {{ !$loop->last ? 'rounded-b-none' : '' }}"
+                                    <button type="button" class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue {{ $index > 0 ? 'border-t border-gray-200 rounded-t-none' : '' }} {{ ! $loop->last ? 'rounded-b-none' : '' }}"
                                                     wire:click="$set('addTeamMemberForm.role', '{{ $role->key }}')">
                                         <div class="{{ isset($addTeamMemberForm['role']) && $addTeamMemberForm['role'] !== $role->key ? 'opacity-50' : '' }}">
                                             <!-- Role Name -->

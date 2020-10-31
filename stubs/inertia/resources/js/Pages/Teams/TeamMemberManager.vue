@@ -32,13 +32,12 @@
                         <jet-label for="roles" value="Role" />
                         <jet-input-error :message="addTeamMemberForm.error('role')" class="mt-2" />
 
-                        <div class="mt-1 border border-gray-200 rounded-lg cursor-pointer relative z-0">
-                            <button type="button" class="px-4 py-3 relative inline-flex rounded-lg w-full focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue"
+                        <div class="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer">
+                            <button type="button" class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue"
                                             :class="{'border-t border-gray-200 rounded-t-none': i > 0, 'rounded-b-none': i != Object.keys(availableRoles).length - 1}"
                                             @click="addTeamMemberForm.role = role.key"
                                             v-for="(role, i) in availableRoles"
-                                            :key="role.key"
-                                            >
+                                            :key="role.key">
                                 <div :class="{'opacity-50': addTeamMemberForm.role && addTeamMemberForm.role != role.key}">
                                     <!-- Role Name -->
                                     <div class="flex items-center">
