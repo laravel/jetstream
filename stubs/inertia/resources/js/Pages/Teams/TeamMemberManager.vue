@@ -165,9 +165,9 @@
 
             <template #content>
                 <div v-if="managingRoleFor">
-                    <div class="mt-1 border border-gray-200 rounded-lg cursor-pointer">
-                        <div class="px-4 py-3"
-                                        :class="{'border-t border-gray-200': i > 0}"
+                    <div class="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer">
+                        <button type="button" class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue"
+                                        :class="{'border-t border-gray-200 rounded-t-none': i > 0, 'rounded-b-none': i != Object.keys(availableRoles).length - 1}"
                                         @click="updateRoleForm.role = role.key"
                                         v-for="(role, i) in availableRoles"
                                         :key="role.key"
@@ -187,11 +187,11 @@
                                     {{ role.description }}
                                 </div>
                             </div>
-                        </div>
+                        </button>
                     </div>
                 </div>
             </template>
-
+            
             <template #footer>
                 <jet-secondary-button @click.native="currentlyManagingRole = false">
                     Nevermind

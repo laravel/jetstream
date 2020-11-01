@@ -23,7 +23,7 @@
                     <!-- Member Email -->
                     <div class="col-span-6 sm:col-span-4">
                         <x-jet-label for="email" value="{{ __('Email') }}" />
-                        <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="addTeamMemberForm.email" />
+                        <x-jet-input id="email" type="text" class="mt-1 block w-full" wire:model.defer="addTeamMemberForm.email" />
                         <x-jet-input-error for="email" class="mt-2" />
                     </div>
 
@@ -175,28 +175,28 @@
         </x-slot>
 
         <x-slot name="content">
-                <div class="mt-1 border border-gray-200 rounded-lg cursor-pointer">
-                    @foreach ($this->roles as $index => $role)
-                        <div class="px-4 py-3 {{ $index > 0 ? 'border-t border-gray-200' : '' }}"
-                                        wire:click="$set('currentRole', '{{ $role->key }}')">
-                            <div class="{{ $currentRole !== $role->key ? 'opacity-50' : '' }}">
-                                <!-- Role Name -->
-                                <div class="flex items-center">
-                                    <div class="text-sm text-gray-600 {{ $currentRole == $role->key ? 'font-semibold' : '' }}">
-                                        {{ $role->name }}
-                                    </div>
-
-                                    @if ($currentRole == $role->key)
-                                        <svg class="ml-2 h-5 w-5 text-green-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    @endif
+            <div class="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer">
+                @foreach ($this->roles as $index => $role)
+                    <button type="button" class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue {{ $index > 0 ? 'border-t border-gray-200 rounded-t-none' : '' }} {{ ! $loop->last ? 'rounded-b-none' : '' }}"
+                                    wire:click="$set('currentRole', '{{ $role->key }}')">
+                        <div class="{{ $currentRole !== $role->key ? 'opacity-50' : '' }}">
+                            <!-- Role Name -->
+                            <div class="flex items-center">
+                                <div class="text-sm text-gray-600 {{ $currentRole == $role->key ? 'font-semibold' : '' }}">
+                                    {{ $role->name }}
                                 </div>
 
-                                <!-- Role Description -->
-                                <div class="mt-2 text-xs text-gray-600">
-                                    {{ $role->description }}
-                                </div>
+                                @if ($currentRole == $role->key)
+                                    <svg class="ml-2 h-5 w-5 text-green-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                @endif
+                            </div>
+
+                            <!-- Role Description -->
+                            <div class="mt-2 text-xs text-gray-600">
+                                {{ $role->description }}
                             </div>
                         </div>
+                    </button>
                 @endforeach
             </div>
         </x-slot>
