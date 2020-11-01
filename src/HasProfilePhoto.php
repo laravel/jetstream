@@ -57,7 +57,7 @@ trait HasProfilePhoto
     {
         return $this->profile_photo_path
                     ? Storage::disk($this->profilePhotoDisk())->url($this->profile_photo_path)
-                    : '';
+                    : $this->defaultProfilePhotoUrl();
     }
 
     /**
@@ -69,10 +69,6 @@ trait HasProfilePhoto
      */
     protected function defaultProfilePhotoUrl()
     {
-        if (! Features::managesProfilePhotos()) {
-            return '';
-        }
-
         return 'https://ui-avatars.com/api/?name='.urlencode($this->name).'&color=7F9CF5&background=EBF4FF';
     }
 
@@ -94,11 +90,12 @@ trait HasProfilePhoto
     public function getProfileTagAttribute()
     {
         $segments = Str::of($this->name)->split('/[\s ]+/');
+        $segmentNumber = count($segments);
 
         $tag = '';
 
         for ($i = 0; $i < 2; $i++) {
-            if (count($segments) >= $i + 1) {
+            if ($segmentNumber >= $i + 1) {
                 $tag .= Str::of($segments[$i])->ucfirst()->substr(0, 1);
             }
         }
