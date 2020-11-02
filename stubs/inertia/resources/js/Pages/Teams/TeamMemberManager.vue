@@ -138,14 +138,14 @@
                                 </div>
 
                                 <!-- Leave Team -->
-                                <button class="cursor-pointer ml-6 text-sm text-red-500 focus:outline-none"
+                                <button class="cursor-pointer ml-6 text-sm text-red-500"
                                                     @click="confirmLeavingTeam"
                                                     v-if="$page.props.user.id === user.id">
                                     Leave
                                 </button>
 
                                 <!-- Remove Team Member -->
-                                <button class="cursor-pointer ml-6 text-sm text-red-500 focus:outline-none"
+                                <button class="cursor-pointer ml-6 text-sm text-red-500"
                                                     @click="confirmTeamMemberRemoval(user)"
                                                     v-if="userPermissions.canRemoveTeamMembers">
                                     Remove

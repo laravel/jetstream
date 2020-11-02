@@ -71,13 +71,13 @@
                                         Last used {{ fromNow(token.last_used_at) }}
                                     </div>
 
-                                    <button class="cursor-pointer ml-6 text-sm text-gray-400 underline focus:outline-none"
+                                    <button class="cursor-pointer ml-6 text-sm text-gray-400 underline"
                                                 @click="manageApiTokenPermissions(token)"
                                                 v-if="availablePermissions.length > 0">
                                         Permissions
                                     </button>
 
-                                    <button class="cursor-pointer ml-6 text-sm text-red-500 focus:outline-none" @click="confirmApiTokenDeletion(token)">
+                                    <button class="cursor-pointer ml-6 text-sm text-red-500" @click="confirmApiTokenDeletion(token)">
                                         Delete
                                     </button>
                                 </div>
