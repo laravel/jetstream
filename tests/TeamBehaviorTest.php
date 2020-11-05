@@ -155,7 +155,6 @@ class TeamBehaviorTest extends OrchestraTestCase
         $this->assertFalse($team->owner->hasTeamrole($team, 'editor'));
     }
 
-
     public function test_user_does_not_need_to_refresh_after_switching_teams()
     {
         $this->migrate();
