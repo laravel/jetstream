@@ -78,7 +78,7 @@ class Features
     }
      
     /** Determine if the application is using any account deletion features.
-     * 
+     *
      * @return bool
      */
     public static function hasAccountDeletionFeatures()
@@ -123,7 +123,7 @@ class Features
 
     /**
      * Enable the account deletion feature.
-     * 
+     *
      * @return string
      */
     public static function accountDeletion()
