@@ -129,6 +129,33 @@ class TeamBehaviorTest extends OrchestraTestCase
         $this->assertTrue($john->hasTeamPermission($team, 'foo'));
     }
 
+    public function test_has_team_role_check()
+    {
+        Jetstream::role('admin', 'Administrator', ['foo']);
+        Jetstream::role('editor', 'Editor', ['foo']);
+
+        $this->migrate();
+
+        $action = new CreateTeam;
+
+        $user = User::forceCreate([
+            'name' => 'Taylor Otwell',
+            'email' => 'taylor@laravel.com',
+            'password' => 'secret',
+        ]);
+
+        $team = $action->create($user, ['name' => 'Test Team']);
+
+        $authToken = new Sanctum;
+        $owner = $authToken->actingAs($team->owner, ['bar'], []);
+
+        $team->users()->attach($owner, ['role' => 'admin']);
+
+        $this->assertTrue($team->owner->hasTeamrole($team, 'admin'));
+        $this->assertFalse($team->owner->hasTeamrole($team, 'editor'));
+    }
+
+
     public function test_user_does_not_need_to_refresh_after_switching_teams()
     {
         $this->migrate();
