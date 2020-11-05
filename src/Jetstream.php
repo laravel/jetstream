@@ -187,6 +187,16 @@ class Jetstream
     }
 
     /**
+     * Determine if the application is using any account deletion features.
+     * 
+     * @return bool
+     */
+    public function hasAccountDeletionFeatures()
+    {
+        return Features::hasAccountDeletionFeatures();
+    }
+
+    /**
      * Find a user instance by the given ID.
      *
      * @param  int  $id
