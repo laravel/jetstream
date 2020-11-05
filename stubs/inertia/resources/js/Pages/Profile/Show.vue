@@ -24,9 +24,11 @@
 
                 <logout-other-browser-sessions-form :sessions="sessions" class="mt-10 sm:mt-0" />
 
-                <jet-section-border />
+                <template v-if="$page.props.jetsteam.hasAccountDeletionFeatures">
+                    <jet-section-border />
 
-                <delete-user-form class="mt-10 sm:mt-0" />
+                    <delete-user-form class="mt-10 sm:mt-0" />
+                </template>
             </div>
         </div>
     </app-layout>

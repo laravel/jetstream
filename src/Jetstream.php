@@ -191,7 +191,7 @@ class Jetstream
      * 
      * @return bool
      */
-    public function hasAccountDeletionFeatures()
+    public static function hasAccountDeletionFeatures()
     {
         return Features::hasAccountDeletionFeatures();
     }
