@@ -76,7 +76,7 @@ class Features
     {
         return static::optionEnabled(static::teams(), 'invitations');
     }
-     
+
     /** Determine if the application is using any account deletion features.
      *
      * @return bool

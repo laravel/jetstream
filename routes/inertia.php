@@ -24,7 +24,7 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
         Route::delete('/user/profile-photo', [ProfilePhotoController::class, 'destroy'])
                     ->name('current-user-photo.destroy');
 
-        if(Jetstream::hasAccountDeletionFeatures()){
+        if (Jetstream::hasAccountDeletionFeatures()) {
             Route::delete('/user', [CurrentUserController::class, 'destroy'])
                         ->name('current-user.destroy');
         }
