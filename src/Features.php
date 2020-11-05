@@ -128,6 +128,6 @@ class Features
      */
     public static function accountDeletion()
     {
-        return 'accountDeletion';
+        return 'account-deletion';
     }
 }
