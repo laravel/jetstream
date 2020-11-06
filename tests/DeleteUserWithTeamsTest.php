@@ -8,6 +8,7 @@ use App\Actions\Jetstream\DeleteUser;
 use App\Models\Team;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
@@ -66,5 +67,11 @@ class DeleteUserWithTeamsTest extends OrchestraTestCase
     protected function migrate()
     {
         $this->artisan('migrate', ['--database' => 'testbench'])->run();
+
+        Schema::create('personal_access_tokens', function ($table) {
+            $table->id();
+            $table->foreignId('tokenable_id');
+            $table->string('tokenable_type');
+        });
     }
 }

@@ -78,6 +78,16 @@ class Features
     }
 
     /**
+     * Determine if the application is using any account deletion features.
+     *
+     * @return bool
+     */
+    public static function hasAccountDeletionFeatures()
+    {
+        return static::enabled(static::accountDeletion());
+    }
+
+    /**
      * Enable the profile photo upload feature.
      *
      * @return string
@@ -110,5 +120,15 @@ class Features
         }
 
         return 'teams';
+    }
+
+    /**
+     * Enable the account deletion feature.
+     *
+     * @return string
+     */
+    public static function accountDeletion()
+    {
+        return 'account-deletion';
     }
 }

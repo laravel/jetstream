@@ -32,6 +32,7 @@ return [
         // Features::profilePhotos(),
         // Features::api(),
         // Features::teams(),
+        Features::accountDeletion(),
     ],
 
 ];

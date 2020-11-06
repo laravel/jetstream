@@ -44,7 +44,7 @@ class LogoutOtherBrowserSessionsForm extends Component
     /**
      * Logout from other browser sessions.
      *
-     * @param  \Laravel\Jetstream\Contracts\DeletesUsers  $deleter
+     * @param  \Illuminate\Contracts\Auth\StatefulGuard  $guard
      * @return void
      */
     public function logoutOtherBrowserSessions(StatefulGuard $guard)

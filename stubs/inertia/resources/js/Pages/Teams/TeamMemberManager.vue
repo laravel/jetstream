@@ -32,13 +32,12 @@
                         <jet-label for="roles" value="Role" />
                         <jet-input-error :message="addTeamMemberForm.error('role')" class="mt-2" />
 
-                        <div class="mt-1 border border-gray-200 rounded-lg cursor-pointer">
-                            <div class="px-4 py-3"
-                                            :class="{'border-t border-gray-200': i > 0}"
+                        <div class="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer">
+                            <button type="button" class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue"
+                                            :class="{'border-t border-gray-200 rounded-t-none': i > 0, 'rounded-b-none': i != Object.keys(availableRoles).length - 1}"
                                             @click="addTeamMemberForm.role = role.key"
                                             v-for="(role, i) in availableRoles"
-                                            :key="role.key"
-                                            >
+                                            :key="role.key">
                                 <div :class="{'opacity-50': addTeamMemberForm.role && addTeamMemberForm.role != role.key}">
                                     <!-- Role Name -->
                                     <div class="flex items-center">
@@ -54,7 +53,7 @@
                                         {{ role.description }}
                                     </div>
                                 </div>
-                            </div>
+                            </button>
                         </div>
                     </div>
                 </template>
@@ -139,14 +138,14 @@
                                 </div>
 
                                 <!-- Leave Team -->
-                                <button class="cursor-pointer ml-6 text-sm text-red-500 focus:outline-none"
+                                <button class="cursor-pointer ml-6 text-sm text-red-500"
                                                     @click="confirmLeavingTeam"
                                                     v-if="$page.props.user.id === user.id">
                                     Leave
                                 </button>
 
                                 <!-- Remove Team Member -->
-                                <button class="cursor-pointer ml-6 text-sm text-red-500 focus:outline-none"
+                                <button class="cursor-pointer ml-6 text-sm text-red-500"
                                                     @click="confirmTeamMemberRemoval(user)"
                                                     v-if="userPermissions.canRemoveTeamMembers">
                                     Remove
@@ -166,9 +165,9 @@
 
             <template #content>
                 <div v-if="managingRoleFor">
-                    <div class="mt-1 border border-gray-200 rounded-lg cursor-pointer">
-                        <div class="px-4 py-3"
-                                        :class="{'border-t border-gray-200': i > 0}"
+                    <div class="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer">
+                        <button type="button" class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue"
+                                        :class="{'border-t border-gray-200 rounded-t-none': i > 0, 'rounded-b-none': i != Object.keys(availableRoles).length - 1}"
                                         @click="updateRoleForm.role = role.key"
                                         v-for="(role, i) in availableRoles"
                                         :key="role.key"
@@ -188,11 +187,11 @@
                                     {{ role.description }}
                                 </div>
                             </div>
-                        </div>
+                        </button>
                     </div>
                 </div>
             </template>
-
+            
             <template #footer>
                 <jet-secondary-button @click.native="currentlyManagingRole = false">
                     Nevermind
