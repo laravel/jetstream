@@ -57,13 +57,6 @@ return [
     */
 
     'socialite_providers' => [
-        'oauth1' => [
-            // 'twitter',
-        ],
-
-        'oauth2' => [
-            // 'facebook',
-            // 'google',
-        ],
+        // 'facebook',
     ]
 ];
