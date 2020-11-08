@@ -130,6 +130,7 @@ class JetstreamServiceProvider extends ServiceProvider
             $this->registerComponent('secondary-button');
             $this->registerComponent('section-border');
             $this->registerComponent('section-title');
+            $this->registerComponent('social-button');
             $this->registerComponent('switchable-team');
             $this->registerComponent('validation-errors');
             $this->registerComponent('welcome');
