@@ -179,7 +179,8 @@ class JetstreamServiceProvider extends ServiceProvider
         ], 'jetstream-team-migrations');
 
         $this->publishes([
-            __DIR__.'/../database/migrations/2020_05_21_300000_create_connected_accounts_table.php' => database_path('migrations/2020_05_21_300000_create_connected_accounts_table.php'),
+            __DIR__.'/../database/migrations/2020_05_21_400000_create_connected_accounts_table.php' => database_path('migrations/2020_05_21_400000_create_connected_accounts_table.php'),
+            __DIR__.'/../database/migrations/2020_05_21_400000_make_password_nullble_on_users_table.php' => database_path('migrations/2020_05_21_400000_make_password_nullble_on_users_table.php'),
         ], 'jetstream-socialite-migrations');
 
         $this->publishes([
