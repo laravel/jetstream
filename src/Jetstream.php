@@ -200,7 +200,7 @@ class Jetstream
      */
     public static function hasSocialiteFeatures()
     {
-        return Features::hasApiFeatures();
+        return Features::hasSocialiteFeatures();
     }
 
     /**
