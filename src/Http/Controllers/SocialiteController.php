@@ -17,7 +17,7 @@ class SocialiteController extends Controller
      * @param  string  $provider
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function show(string $provider)
+    public function redirectToProvider(string $provider)
     {
         return Socialite::driver($provider)->redirect();
     }
@@ -29,7 +29,7 @@ class SocialiteController extends Controller
      * @param  string  $provider
      * @return \Illuminate\Routing\Pipeline
      */
-    public function store(Request $request, string $provider)
+    public function handleProviderCallback(Request $request, string $provider)
     {
         return $this->authenticate(
             $request, $provider, Socialite::driver($provider)->user()
