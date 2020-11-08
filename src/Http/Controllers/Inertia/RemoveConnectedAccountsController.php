@@ -19,12 +19,6 @@ class RemoveConnectedAccountsController extends Controller
      */
     public function destroy(Request $request, $connectedAccountId)
     {
-        if (! Hash::check($request->password, $request->user()->password)) {
-            throw ValidationException::withMessages([
-                'password' => [__('This password does not match our records.')],
-            ])->errorBag('logoutOtherBrowserSessions');
-        }
-
         $this->removeConnectedAccount($request, $connectedAccountId);
 
         return back(303);
