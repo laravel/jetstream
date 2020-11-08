@@ -46,13 +46,13 @@
 </template>
 
 <script>
-import JetFacebookIcon from '@/Jetstream/Socialite/FacebookIcon';
-import JetGoogleIcon from '@/Jetstream/Socialite/GoogleIcon';
-import JetTwitterIcon from '@/Jetstream/Socialite/TwitterIcon';
-import JetLinkedInIcon from '@/Jetstream/Socialite/LinkedInIcon';
-import JetGithubIcon from '@/Jetstream/Socialite/GithubIcon';
-import JetGitLabIcon from '@/Jetstream/Socialite/GitLabIcon';
-import JetBitbucketIcon from '@/Jetstream/Socialite/BitbucketIcon';
+import JetFacebookIcon from '@/Socialite/FacebookIcon';
+import JetGoogleIcon from '@/Socialite/GoogleIcon';
+import JetTwitterIcon from '@/Socialite/TwitterIcon';
+import JetLinkedInIcon from '@/Socialite/LinkedInIcon';
+import JetGithubIcon from '@/Socialite/GithubIcon';
+import JetGitLabIcon from '@/Socialite/GitLabIcon';
+import JetBitbucketIcon from '@/Socialite/BitbucketIcon';
 
     export default {
         props: {

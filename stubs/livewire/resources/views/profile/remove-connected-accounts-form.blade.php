@@ -39,21 +39,22 @@
 
                             <div>
                                 <div class="text-xs text-gray-500">
-                                    {{ __('Added on') }} {{ $account->created_at }}
+                                    {{ __('Added on') }} {{ $account->created_at->format('') }}
                                 </div>
                             </div>
                         </div>
                         <!-- Remove Action -->
-                        <x-jet-button wire:click="confirmRemove({{ $account->id }})" wire:loading.attr="disabled">
-                            {{ __('Remove') }}
-                        </x-jet-button>
+                        @if(count($this->accounts) > 1)
+                            <x-jet-button wire:click="confirmRemove({{ $account->id }})" wire:loading.attr="disabled">
+                                {{ __('Remove') }}
+                            </x-jet-button>
+                        @endif
                     </div>
                 @endforeach
             </div>
-    @else
-    @endif
+        @endif
 
-    <!-- Logout Other Devices Confirmation Modal -->
+        <!-- Logout Other Devices Confirmation Modal -->
         <x-jet-dialog-modal wire:model="confirmingRemove">
             <x-slot name="title">
                 {{ __('Remove Connected Account') }}
