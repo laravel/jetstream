@@ -18,7 +18,7 @@ class CreateConnectedAccountsTable extends Migration
             $table->foreignId('user_id');
             $table->string('provider_name');
             $table->string('provider_id');
-            $table->string('access_token');
+            $table->string('token');
             $table->string('secret')->nullable(); // OAuth1
             $table->string('refresh_token')->nullable(); // OAuth2
             $table->dateTime('expires_at')->nullable(); // OAuth2
