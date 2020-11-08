@@ -64,11 +64,11 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
             Route::delete('/team-invitations/{invitation}', [TeamInvitationController::class, 'destroy'])
                         ->name('team-invitations.destroy');
         }
-
-        // Socialite...
-        if (Jetstream::hasSocialiteFeatures()) {
-            Route::get('/socialite/{provider}', [SocialiteController::class, 'show'])->name('socialite.show');
-            Route::post('/socialite/{provider}', [SocialiteController::class, 'store'])->name('socialite.store');
-        }
     });
+
+    // Socialite...
+    if (Jetstream::hasSocialiteFeatures()) {
+        Route::get('/socialite/{provider}', [SocialiteController::class, 'show'])->name('socialite.show');
+        Route::post('/socialite/{provider}', [SocialiteController::class, 'store'])->name('socialite.store');
+    }
 });
