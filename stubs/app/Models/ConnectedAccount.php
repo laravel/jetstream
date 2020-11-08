@@ -23,7 +23,7 @@ class ConnectedAccount extends JetstreamConnectedAccount
     protected $fillable = [
         'provider_name',
         'provider_id',
-        'access_token',
+        'token',
         'refresh_token',
         'expires_at',
     ];
