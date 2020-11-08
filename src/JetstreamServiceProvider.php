@@ -240,6 +240,7 @@ class JetstreamServiceProvider extends ServiceProvider
         Fortify::loginView(function () {
             return Inertia::render('Auth/Login', [
                 'canResetPassword' => Route::has('password.request'),
+                'socialiteProviders' => config('jetstream.socialite_providers'),
                 'status' => session('status'),
             ]);
         });
@@ -258,7 +259,9 @@ class JetstreamServiceProvider extends ServiceProvider
         });
 
         Fortify::registerView(function () {
-            return Inertia::render('Auth/Register');
+            return Inertia::render('Auth/Register', [
+                'socialiteProviders' => config('jetstream.socialite_providers'),
+            ]);
         });
 
         Fortify::verifyEmailView(function () {
