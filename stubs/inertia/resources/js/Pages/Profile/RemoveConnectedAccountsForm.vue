@@ -27,29 +27,30 @@
             </div>
 
             <div class="mt-5 space-y-6" v-if="accounts.length > 0">
-                <div class="p-3 flex items-center justify-between " v-for="(account, index) in accounts">
-                    <div class="border-t border-gray-200" v-if="index > 0"/>
-                    <!-- Provider Info -->
-                    <div>
-                        <!-- Provider SVG Logo -->
-                        <div>
+                <div class="p-3 flex items-center justify-between " v-for="account in accounts" :key="account.id">
+                    <div class="flex items-center">
 
-                        </div>
+                        <jet-facebook-icon class="mr-4" v-if="account.provider_name === 'facebook'"/>
+                        <jet-google-icon class="mr-4" v-if="account.provider_name === 'google'"/>
+                        <jet-twitter-icon class="mr-4" v-if="account.provider_name === 'twitter'"/>
+                        <jet-linked-in-icon class="mr-4" v-if="account.provider_name === 'linkedin'"/>
+                        <jet-github-icon class="mr-4" v-if="account.provider_name === 'github'"/>
+                        <jet-git-lab-icon class="mr-4" v-if="account.provider_name === 'gitlab'"/>
+                        <jet-bitbucket-icon class="mr-4" v-if="account.provider_name === 'bitbucket'"/>
 
-                        <!-- Provider details -->
                         <div>
                             <div class="text-sm font-semibold text-gray-600">
                                 {{ account.provider_name }}
                             </div>
 
-                            <div>
-                                <div class="text-xs text-gray-500">
-                                    Added on {{ account.created_at }}
-                                </div>
+                            <div class="text-xs text-gray-500">
+                                Added on {{ `${new Date(account.created_at).toDateString()} ${new Date(account.created_at).toLocaleTimeString()}` }}
                             </div>
                         </div>
                     </div>
-                    <jet-button @click="confirmRemove(account.id)" loading.attr="disabled" />
+                    <jet-button @click.native="confirmRemove(account.id)" v-if="accounts.length > 1">
+                        Remove
+                    </jet-button>
                 </div>
             </div>
 
@@ -60,16 +61,7 @@
                 </template>
 
                 <template #content>
-                    Please enter your password to confirm you would like to remove this connected account.
-
-                    <div class="mt-4">
-                        <jet-input type="password" class="mt-1 block w-3/4" placeholder="Password"
-                                   ref="password"
-                                   v-model="form.password"
-                                   @keyup.enter.native="removeConnectedAccount(accountId)"/>
-
-                        <jet-input-error :message="form.error('password')" class="mt-2"/>
-                    </div>
+                    This action cannot be undone.
                 </template>
 
                 <template #footer>
@@ -96,6 +88,13 @@ import JetDialogModal from './../../Jetstream/DialogModal';
 import JetInput from './../../Jetstream/Input';
 import JetInputError from './../../Jetstream/InputError';
 import JetSecondaryButton from './../../Jetstream/SecondaryButton';
+import JetFacebookIcon from '@/Jetstream/Socialite/FacebookIcon';
+import JetGoogleIcon from '@/Jetstream/Socialite/GoogleIcon';
+import JetTwitterIcon from '@/Jetstream/Socialite/TwitterIcon';
+import JetLinkedInIcon from '@/Jetstream/Socialite/LinkedInIcon';
+import JetGithubIcon from '@/Jetstream/Socialite/GithubIcon';
+import JetGitLabIcon from '@/Jetstream/Socialite/GitLabIcon';
+import JetBitbucketIcon from '@/Jetstream/Socialite/BitbucketIcon';
 
 export default {
     props: ['accounts'],
@@ -108,6 +107,13 @@ export default {
         JetInput,
         JetInputError,
         JetSecondaryButton,
+        JetFacebookIcon,
+        JetGoogleIcon,
+        JetTwitterIcon,
+        JetLinkedInIcon,
+        JetGithubIcon,
+        JetGitLabIcon,
+        JetBitbucketIcon
     },
 
     data() {
@@ -117,7 +123,6 @@ export default {
 
             form: this.$inertia.form({
                 '_method': 'DELETE',
-                password: '',
             }, {
                 bag: 'removeConnectedAccount'
             })
