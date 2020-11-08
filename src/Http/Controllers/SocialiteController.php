@@ -4,6 +4,7 @@ namespace Laravel\Jetstream\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Laravel\Fortify\Contracts\LoginResponse;
 use Laravel\Jetstream\Http\AuthenticatesSocialite;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -33,6 +34,8 @@ class SocialiteController extends Controller
     {
         return $this->authenticate(
             $request, $provider, Socialite::driver($provider)->user()
-        );
+        )->then(function ($request) {
+            return app(LoginResponse::class);
+        });
     }
 }
