@@ -204,6 +204,16 @@ class Jetstream
     }
 
     /**
+     * Deteremine if Jetstream supports a specific Socialite service.
+     *
+     * @return bool
+     */
+    public static function hasSocialiteSupportFor(string $service)
+    {
+        return in_array($service, config('jetstream.socialite_providers'));
+    }
+
+    /**
      * Determine if the application is using any account deletion features.
      *
      * @return bool
