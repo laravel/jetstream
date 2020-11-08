@@ -130,11 +130,19 @@ class JetstreamServiceProvider extends ServiceProvider
             $this->registerComponent('secondary-button');
             $this->registerComponent('section-border');
             $this->registerComponent('section-title');
-            $this->registerComponent('socialite');
-            $this->registerComponent('social-button');
             $this->registerComponent('switchable-team');
             $this->registerComponent('validation-errors');
             $this->registerComponent('welcome');
+
+            // Sociliate components
+            $this->registerComponent('socialite');
+            $this->registerComponent('facebook-icon');
+            $this->registerComponent('google-icom');
+            $this->registerComponent('twitter-icom');
+            $this->registerComponent('github-icom');
+            $this->registerComponent('gitlab-icom');
+            $this->registerComponent('linkedin-icom');
+            $this->registerComponent('bitbucket-icon');
         });
     }
 
