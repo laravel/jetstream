@@ -35,7 +35,7 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
 
     // Socialite...
     if (Jetstream::hasSocialiteFeatures()) {
-        Route::get('/socialite/{provider}', [SocialiteController::class, 'show'])->name('socialite.show');
-        Route::post('/socialite/{provider}', [SocialiteController::class, 'store'])->name('socialite.store');
+        Route::get('/socialite/{provider}', [SocialiteController::class, 'redirectToProvider'])->name('socialite.redirect');
+        Route::get('/socialite/{provider}/callback', [SocialiteController::class, 'handleProviderCallback'])->name('socialite.callback');
     }
 });
