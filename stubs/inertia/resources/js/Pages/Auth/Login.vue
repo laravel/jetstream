@@ -38,6 +38,8 @@
                 </jet-button>
             </div>
         </form>
+
+        <x-jet-socialite v-if="$page.props.jetstream.hasSocialiteFeatures"/>
     </jet-authentication-card>
 </template>
 
