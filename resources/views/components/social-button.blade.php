@@ -1,5 +1,5 @@
-@props(['color' => null])
+@props(['href', 'color' => null])
 
-<a href="" @if(! is_null($color)) style="color: {{ $color }};" @endif>
+<a href="{{ $href }}" @if(! is_null($color)) style="color: {{ $color }};" @endif>
     {{ $slot }}
 </a>
