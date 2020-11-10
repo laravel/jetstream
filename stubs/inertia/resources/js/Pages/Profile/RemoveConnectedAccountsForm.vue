@@ -61,7 +61,7 @@
                 </template>
 
                 <template #content>
-                    This action cannot be undone.
+                    Please confirm your removal of this account - this action cannot be undone.
                 </template>
 
                 <template #footer>

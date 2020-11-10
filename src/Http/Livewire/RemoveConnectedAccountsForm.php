@@ -20,13 +20,6 @@ class RemoveConnectedAccountsForm extends Component
     public $confirmingRemove = false;
 
     /**
-     * The user's current password.
-     *
-     * @var string
-     */
-    public $password = '';
-
-    /**
      * @var mixed
      */
     public $selectedAccountId;
@@ -39,8 +32,6 @@ class RemoveConnectedAccountsForm extends Component
      */
     public function confirmRemove($accountId)
     {
-        $this->password = '';
-
         $this->selectedAccountId = $accountId;
 
         $this->dispatchBrowserEvent('confirming-remove-oauth-provider');
@@ -56,14 +47,8 @@ class RemoveConnectedAccountsForm extends Component
      */
     public function removeConnectedAccount($accountId)
     {
-        if (! Hash::check($this->password, Auth::user()->password)) {
-            throw ValidationException::withMessages([
-                'password' => [__('This password does not match our records.')],
-            ]);
-        }
-
         DB::table('connected_accounts')
-            ->where('user_id', Auth::user()->getKey())
+            ->where('user_id', Auth::user()->getAuthIdentifier())
             ->where('id', $accountId)
             ->delete();
 
@@ -78,7 +63,7 @@ class RemoveConnectedAccountsForm extends Component
     public function getAccountsProperty()
     {
         return DB::table('connected_accounts')
-                ->where('user_id', Auth::user()->getKey())
+                ->where('user_id', Auth::user()->getAuthIdentifier())
                 ->orderBy('created_at', 'desc')
                 ->get()
             ->map(function ($account) {

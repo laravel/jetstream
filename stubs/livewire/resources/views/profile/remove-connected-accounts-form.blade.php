@@ -84,16 +84,7 @@
             </x-slot>
 
             <x-slot name="content">
-                {{ __('Please enter your password to confirm you would like to remove this connected account.') }}
-
-                <div class="mt-4" x-data="{}" x-on:confirming-remove-oauth-provider.window="setTimeout(() => $refs.password.focus(), 250)">
-                    <x-jet-input type="password" class="mt-1 block w-3/4" placeholder="{{ __('Password') }}"
-                                 x-ref="password"
-                                 wire:model.defer="password"
-                                 wire:keydown.enter="removeConnectedAccount({{ $this->selectedAccountId }})" />
-
-                    <x-jet-input-error for="password" class="mt-2" />
-                </div>
+                {{ __('Please confirm your removal of this account - this action cannot be undone.') }}
             </x-slot>
 
             <x-slot name="footer">
