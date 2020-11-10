@@ -7,39 +7,32 @@
         </div>
 
         <div class="flex items-center justify-center">
-            <!-- Facebook -->
             <a v-if="socialiteProviders.includes('facebook')" :href="route('socialite.redirect', {'provider': 'facebook'})">
-                <jet-facebook-icon />
+                <jet-facebook-icon class="h-6 w-6 mx-2" />
             </a>
 
-            <!-- Google -->
             <a v-if="socialiteProviders.includes('google')" :href="route('socialite.redirect', {'provider': 'google'})" >
-                <jet-google-icon />
+                <jet-google-icon class="h-6 w-6 mx-2" />
             </a>
 
-            <!-- Twitter -->
             <a v-if="socialiteProviders.includes('twitter')" :href="route('socialite.redirect', {'provider': 'twitter'})">
-                <jet-twitter-icon />
+                <jet-twitter-icon class="h-6 w-6 mx-2" />
             </a>
 
-            <!-- LinkedIn -->
             <a v-if="socialiteProviders.includes('linkedin')" :href="route('socialite.redirect', {'provider': 'linkedin'})">
-                <jet-linked-in-icon />
+                <jet-linkedin-icon class="h-6 w-6 mx-2" />
             </a>
 
-            <!-- GitHub -->
             <a v-if="socialiteProviders.includes('github')" :href="route('socialite.redirect', {'provider': 'github'})">
-                <jet-github-icon />
+                <jet-github-icon class="h-6 w-6 mx-2" />
             </a>
 
-            <!-- GitLab -->
             <a v-if="socialiteProviders.includes('gitlab')" :href="route('socialite.redirect', {'provider': 'gitlab'})">
-                <jet-git-lab-icon />
+                <jet-git-lab-icon class="h-6 w-6 mx-2" />
             </a>
 
-            <!-- Bitbucket -->
             <a v-if="socialiteProviders.includes('bitbucket')" :href="route('socialite.redirect', {'provider': 'bitbucket'})">
-                <jet-bitbucket-icon />
+                <jet-bitbucket-icon class="h-6 w-6 mx-2" />
             </a>
         </div>
     </div>
@@ -49,7 +42,7 @@
 import JetFacebookIcon from '@/Socialite/FacebookIcon';
 import JetGoogleIcon from '@/Socialite/GoogleIcon';
 import JetTwitterIcon from '@/Socialite/TwitterIcon';
-import JetLinkedInIcon from '@/Socialite/LinkedInIcon';
+import JetLinkedinIcon from '@/Socialite/LinkedinIcon';
 import JetGithubIcon from '@/Socialite/GithubIcon';
 import JetGitLabIcon from '@/Socialite/GitLabIcon';
 import JetBitbucketIcon from '@/Socialite/BitbucketIcon';
@@ -66,7 +59,7 @@ import JetBitbucketIcon from '@/Socialite/BitbucketIcon';
             JetFacebookIcon,
             JetGoogleIcon,
             JetTwitterIcon,
-            JetLinkedInIcon,
+            JetLinkedinIcon,
             JetGithubIcon,
             JetGitLabIcon,
             JetBitbucketIcon,

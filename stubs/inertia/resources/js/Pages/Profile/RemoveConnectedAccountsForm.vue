@@ -33,7 +33,7 @@
                         <jet-facebook-icon class="mr-4" v-if="account.provider_name === 'facebook'"/>
                         <jet-google-icon class="mr-4" v-if="account.provider_name === 'google'"/>
                         <jet-twitter-icon class="mr-4" v-if="account.provider_name === 'twitter'"/>
-                        <jet-linked-in-icon class="mr-4" v-if="account.provider_name === 'linkedin'"/>
+                        <jet-linkedin-icon class="mr-4" v-if="account.provider_name === 'linkedin'"/>
                         <jet-github-icon class="mr-4" v-if="account.provider_name === 'github'"/>
                         <jet-git-lab-icon class="mr-4" v-if="account.provider_name === 'gitlab'"/>
                         <jet-bitbucket-icon class="mr-4" v-if="account.provider_name === 'bitbucket'"/>
@@ -91,7 +91,7 @@ import JetSecondaryButton from './../../Jetstream/SecondaryButton';
 import JetFacebookIcon from '@/Jetstream/Socialite/FacebookIcon';
 import JetGoogleIcon from '@/Jetstream/Socialite/GoogleIcon';
 import JetTwitterIcon from '@/Jetstream/Socialite/TwitterIcon';
-import JetLinkedInIcon from '@/Jetstream/Socialite/LinkedInIcon';
+import JetLinkedinIcon from '@/Jetstream/Socialite/LinkedinIcon';
 import JetGithubIcon from '@/Jetstream/Socialite/GithubIcon';
 import JetGitLabIcon from '@/Jetstream/Socialite/GitLabIcon';
 import JetBitbucketIcon from '@/Jetstream/Socialite/BitbucketIcon';
@@ -110,7 +110,7 @@ export default {
         JetFacebookIcon,
         JetGoogleIcon,
         JetTwitterIcon,
-        JetLinkedInIcon,
+        JetLinkedinIcon,
         JetGithubIcon,
         JetGitLabIcon,
         JetBitbucketIcon
