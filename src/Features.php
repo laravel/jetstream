@@ -68,7 +68,6 @@ class Features
     }
 
     /**
-<<<<<<< HEAD
      * Determine if invitations are sent to team members.
      *
      * @return bool
