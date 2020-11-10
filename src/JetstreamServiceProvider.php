@@ -137,11 +137,11 @@ class JetstreamServiceProvider extends ServiceProvider
             // Sociliate components
             $this->registerComponent('socialite');
             $this->registerComponent('facebook-icon');
-            $this->registerComponent('google-icom');
-            $this->registerComponent('twitter-icom');
-            $this->registerComponent('github-icom');
-            $this->registerComponent('gitlab-icom');
-            $this->registerComponent('linkedin-icom');
+            $this->registerComponent('google-icon');
+            $this->registerComponent('twitter-icon');
+            $this->registerComponent('github-icon');
+            $this->registerComponent('gitlab-icon');
+            $this->registerComponent('linkedin-icon');
             $this->registerComponent('bitbucket-icon');
         });
     }
