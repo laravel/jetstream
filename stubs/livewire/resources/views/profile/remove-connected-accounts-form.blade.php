@@ -27,22 +27,45 @@
         @if (count($this->accounts) > 0)
             <div class="mt-5 space-y-6">
                 @foreach($this->accounts as $account)
-                    @if ($index > 0)
-                        <div class="border-t border-gray-200" />
-                    @endif
                     <div class="p-3 flex items-center justify-between">
-                        <!-- Provider details -->
-                        <div>
-                            <div class="text-sm font-semibold text-gray-600">
-                                {{ Illuminate\Support\Str::ucfirst($account->provider_name) }}
-                            </div>
+                        <div class="flex items-center">
+
+                            @switch($account->provider_name)
+                                @case('facebook')
+                                    <x-jet-facebook-icon class="mr-4" />
+                                    @break
+                                @case('google')
+                                    <x-jet-google-icon class="mr-4"/>
+                                    @break
+                                @case('twitter')
+                                    <x-jet-twitter-icon class="mr-4"/>
+                                    @break
+                                @case('linkedin')
+                                    <x-jet-linkedin-icon class="mr-4"/>
+                                    @break
+                                @case('github')
+                                    <x-jet-github-icon class="mr-4"/>
+                                    @break
+                                @case('gitlab')
+                                    <x-jet-gitlab-icon class="mr-4"/>
+                                    @break
+                                @case('bitbucket')
+                                    <x-jet-bitbucket-icon class="mr-4"/>
+                                    @break
+                                @default
+                            @endswitch
 
                             <div>
+                                <div class="text-sm font-semibold text-gray-600">
+                                    {{ ucfirst($account->provider_name) }}
+                                </div>
+
                                 <div class="text-xs text-gray-500">
-                                    {{ __('Added on') }} {{ $account->created_at->format('') }}
+                                    Added on {{ $account->created_at) }}
                                 </div>
                             </div>
                         </div>
+
                         <!-- Remove Action -->
                         @if(count($this->accounts) > 1)
                             <x-jet-button wire:click="confirmRemove({{ $account->id }})" wire:loading.attr="disabled">
