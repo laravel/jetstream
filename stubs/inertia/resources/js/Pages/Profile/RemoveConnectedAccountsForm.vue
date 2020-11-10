@@ -40,11 +40,11 @@
 
                         <div>
                             <div class="text-sm font-semibold text-gray-600">
-                                {{ account.provider_name }}
+                                {{ account.provider_name.charAt(0).toUpperCase() + account.provider_name.slice(1)  }}
                             </div>
 
                             <div class="text-xs text-gray-500">
-                                Added on {{ `${new Date(account.created_at).toDateString()} ${new Date(account.created_at).toLocaleTimeString()}` }}
+                                Added on {{ account.created_at }}
                             </div>
                         </div>
                     </div>
