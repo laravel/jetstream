@@ -32,25 +32,25 @@
 
                             @switch($account->provider_name)
                                 @case('facebook')
-                                    <x-jet-facebook-icon class="mr-4" />
+                                    <x-jet-facebook-icon class="h-6 w-6 mr-2" />
                                     @break
                                 @case('google')
-                                    <x-jet-google-icon class="mr-4"/>
+                                    <x-jet-google-icon class="h-6 w-6 mr-2" />
                                     @break
                                 @case('twitter')
-                                    <x-jet-twitter-icon class="mr-4"/>
+                                    <x-jet-twitter-icon class="h-6 w-6 mr-2" />
                                     @break
                                 @case('linkedin')
-                                    <x-jet-linkedin-icon class="mr-4"/>
+                                    <x-jet-linkedin-icon class="h-6 w-6 mr-2" />
                                     @break
                                 @case('github')
-                                    <x-jet-github-icon class="mr-4"/>
+                                    <x-jet-github-icon class="h-6 w-6 mr-2" />
                                     @break
                                 @case('gitlab')
-                                    <x-jet-gitlab-icon class="mr-4"/>
+                                    <x-jet-gitlab-icon class="h-6 w-6 mr-2" />
                                     @break
                                 @case('bitbucket')
-                                    <x-jet-bitbucket-icon class="mr-4"/>
+                                    <x-jet-bitbucket-icon class="h-6 w-6 mr-2" />
                                     @break
                                 @default
                             @endswitch

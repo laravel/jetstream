@@ -8,42 +8,42 @@
     <!-- Facebook -->
     @if(\Laravel\Jetstream\JetStream::hasSocialiteSupportFor('facebook'))
         <a href="{{ route('socialite.redirect', ['provider' => 'facebook']) }}">
-            <x-jet-facebook-icon />
+            <x-jet-facebook-icon class="h-6 w-6 mx-2" />
         </a>
     @endif
 
     <!-- Google -->
     @if(\Laravel\Jetstream\JetStream::hasSocialiteSupportFor('google'))
         <a href="{{ route('socialite.redirect', ['provider' => 'google']) }}" >
-            <x-jet-google-icon />
+            <x-jet-google-icon class="h-6 w-6 mx-2" />
         </a>
     @endif
 
     <!-- Twitter -->
     @if(\Laravel\Jetstream\JetStream::hasSocialiteSupportFor('twitter'))
         <a href="{{ route('socialite.redirect', ['provider' => 'twitter']) }}">
-            <x-jet-twitter-icon />
+            <x-jet-twitter-icon class="h-6 w-6 mx-2" />
         </a>
     @endif
 
     <!-- LinkedIn -->
     @if(\Laravel\Jetstream\JetStream::hasSocialiteSupportFor('linkedin'))
         <a href="{{ route('socialite.redirect', ['provider' => 'linkedin']) }}">
-            <x-jet-linkedin-icon />
+            <x-jet-linkedin-icon class="h-6 w-6 mx-2" />
         </a>
     @endif
 
     <!-- GitHub -->
     @if(\Laravel\Jetstream\JetStream::hasSocialiteSupportFor('github'))
         <a href="{{ route('socialite.redirect', ['provider' => 'github']) }}">
-            <x-jet-github-icon />
+            <x-jet-github-icon class="h-6 w-6 mx-2" />
         </a>
     @endif
 
     <!-- GitLab -->
     @if(\Laravel\Jetstream\JetStream::hasSocialiteSupportFor('gitlab'))
         <a href="{{ route('socialite.redirect', ['provider' => 'gitlab']) }}">
-            <x-jet-gitlab-icon />
+            <x-jet-gitlab-icon class="h-6 w-6 mx-2" />
         </a>
     @endif
 
