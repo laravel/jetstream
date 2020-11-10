@@ -38,12 +38,4 @@ class ConnectedAccount extends JetstreamConnectedAccount
         'updated' => ConnectedAccountUpdated::class,
         'deleted' => ConnectedAccountDeleted::class,
     ];
-
-    /**
-     * Get the owner of the provider.
-     */
-    public function user()
-    {
-        return $this->belongsTo(Jetstream::userModel(), 'user_id');
-    }
 }
