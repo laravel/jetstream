@@ -61,7 +61,7 @@
                                 </div>
 
                                 <div class="text-xs text-gray-500">
-                                    Added on {{ $account->created_at) }}
+                                    Added on {{ $account->created_at }}
                                 </div>
                             </div>
                         </div>
