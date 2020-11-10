@@ -62,7 +62,11 @@
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="email" value="{{ __('Email') }}" />
-            <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" />
+            @if (\Laravel\Jetstream\Features::hasSocialiteFeatures())
+                <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" disabled />
+            @else
+                <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" />
+            @endif
             <x-jet-input-error for="email" class="mt-2" />
         </div>
     </x-slot>
