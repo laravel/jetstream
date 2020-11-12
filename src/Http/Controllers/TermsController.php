@@ -22,7 +22,7 @@ class TermsController extends Controller
             : base_path('terms.md');
 
         return view('terms', [
-            'terms' => (new Parsedown)->text(file_get_contents($termsFile))
+            'terms' => (new Parsedown)->text(file_get_contents($termsFile)),
         ]);
     }
 }

@@ -22,7 +22,7 @@ class PolicyController extends Controller
             : base_path('policy.md');
 
         return view('policy', [
-            'policy' => (new Parsedown)->text(file_get_contents($policyFile))
+            'policy' => (new Parsedown)->text(file_get_contents($policyFile)),
         ]);
     }
 }
