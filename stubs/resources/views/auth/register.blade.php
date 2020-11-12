@@ -29,10 +29,11 @@
                 <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
 
-            @if(\Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
+            @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
-                    <x-jet-label for="password_confirmation">
-                        <input class="mr-2 leading-tight" type="checkbox">
+                    <x-jet-label for="terms">
+                        <input class="mr-2 leading-tight" type="checkbox" name="terms">
+
                         <span class="mt-1">
                             {!! __('I agree to the :tlo Terms of Service :lc and :plo Privacy Policy :lc', [
                                     'tlo' => '<a target="_blank" href="/terms" class="underline text-sm text-gray-600 hover:text-gray-900">',

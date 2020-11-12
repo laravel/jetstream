@@ -5,14 +5,16 @@ use Laravel\Jetstream\Http\Controllers\CurrentTeamController;
 use Laravel\Jetstream\Http\Controllers\Livewire\ApiTokenController;
 use Laravel\Jetstream\Http\Controllers\Livewire\TeamController;
 use Laravel\Jetstream\Http\Controllers\Livewire\UserProfileController;
-use Laravel\Jetstream\Http\Controllers\PolicyController;
+use Laravel\Jetstream\Http\Controllers\PrivacyPolicyController;
 use Laravel\Jetstream\Http\Controllers\TeamInvitationController;
-use Laravel\Jetstream\Http\Controllers\TermsController;
+use Laravel\Jetstream\Http\Controllers\TermsOfServiceController;
 use Laravel\Jetstream\Jetstream;
 
 Route::group(['middleware' => config('jetstream.middleware', ['web'])], function () {
-    Route::get('/terms', [TermsController::class, 'show'])->name('terms.show');
-    Route::get('/policy', [PolicyController::class, 'show'])->name('policy.show');
+    if (Jetstream::hasTermsAndPrivacyPolicyFeature()) {
+        Route::get('/terms-of-service', [TermsOfServiceController::class, 'show'])->name('terms.show');
+        Route::get('/privacy-policy', [PrivacyPolicyController::class, 'show'])->name('policy.show');
+    }
 
     Route::group(['middleware' => ['auth', 'verified']], function () {
         // User & Profile...

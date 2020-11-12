@@ -78,6 +78,16 @@ class Features
     }
 
     /**
+     * Determine if the application has terms of service / privacy policy confirmation enabled.
+     *
+     * @return bool
+     */
+    public static function hasTermsAndPrivacyPolicyFeature()
+    {
+        return static::enabled(static::termsAndPrivacyPolicy());
+    }
+
+    /**
      * Determine if the application is using any account deletion features.
      *
      * @return bool
@@ -85,16 +95,6 @@ class Features
     public static function hasAccountDeletionFeatures()
     {
         return static::enabled(static::accountDeletion());
-    }
-
-    /**
-     * Determine if the application has terms confirmation enabled.
-     *
-     * @return bool
-     */
-    public static function hasTermsAndPrivacyPolicyFeature()
-    {
-        return static::enabled(static::termsAndPrivacy());
     }
 
     /**
@@ -118,16 +118,6 @@ class Features
     }
 
     /**
-     * Enable the terms and conditions feature.
-     *
-     * @return string
-     */
-    public static function termsAndPrivacy()
-    {
-        return 'terms';
-    }
-
-    /**
      * Enable the teams feature.
      *
      * @param  array  $options
@@ -140,6 +130,16 @@ class Features
         }
 
         return 'teams';
+    }
+
+    /**
+     * Enable the terms of service and privacy policy feature.
+     *
+     * @return string
+     */
+    public static function termsAndPrivacyPolicy()
+    {
+        return 'terms';
     }
 
     /**
