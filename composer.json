@@ -18,7 +18,6 @@
         "ext-json": "*",
         "illuminate/support": "^8.0",
         "jenssegers/agent": "^2.6",
-        "erusev/parsedown": "~1.0",
         "laravel/fortify": "^1.6.1"
     },
     "require-dev": {

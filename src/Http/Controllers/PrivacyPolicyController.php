@@ -4,7 +4,7 @@ namespace Laravel\Jetstream\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Parsedown;
+use League\CommonMark\CommonMarkConverter;
 
 class PrivacyPolicyController extends Controller
 {
@@ -20,8 +20,8 @@ class PrivacyPolicyController extends Controller
                             ? base_path('policy.'.app()->getLocale().'.md')
                             : base_path('policy.md');
 
-        return view('policy', [
-            'policy' => (new Parsedown)->text(file_get_contents($policyFile)),
+        return view('terms', [
+            'terms' => (new CommonMarkConverter())->convertToHtml(file_get_contents($policyFile)),
         ]);
     }
 }

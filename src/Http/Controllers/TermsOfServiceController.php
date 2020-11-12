@@ -4,7 +4,7 @@ namespace Laravel\Jetstream\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Parsedown;
+use League\CommonMark\CommonMarkConverter;
 
 class TermsOfServiceController extends Controller
 {
@@ -21,7 +21,7 @@ class TermsOfServiceController extends Controller
                             : base_path('terms.md');
 
         return view('terms', [
-            'terms' => (new Parsedown)->text(file_get_contents($termsFile)),
+            'terms' => (new CommonMarkConverter())->convertToHtml(file_get_contents($termsFile)),
         ]);
     }
 }
