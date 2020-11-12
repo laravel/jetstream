@@ -113,6 +113,7 @@ class InstallCommand extends Command
         // NPM Packages...
         $this->updateNodePackages(function ($packages) {
             return [
+                'alpinejs' => '^2.7.3',
                 '@tailwindcss/ui' => '^0.6.0',
                 'postcss-import' => '^12.0.1',
                 'tailwindcss' => '^1.8.0',
@@ -175,6 +176,7 @@ class InstallCommand extends Command
         // Assets...
         copy(__DIR__.'/../../stubs/public/css/app.css', public_path('css/app.css'));
         copy(__DIR__.'/../../stubs/resources/css/app.css', resource_path('css/app.css'));
+        copy(__DIR__.'/../../stubs/resources/js/app.js', resource_path('js/app.js'));
 
         // Teams...
         if ($this->option('teams')) {
@@ -235,6 +237,7 @@ EOF;
                 '@inertiajs/inertia-vue' => '^0.3.0',
                 '@tailwindcss/ui' => '^0.6.0',
                 'laravel-jetstream' => '^1.0.0',
+                'moment' => '^2.26.0',
                 'portal-vue' => '^2.1.7',
                 'postcss-import' => '^12.0.1',
                 'tailwindcss' => '^1.8.0',
