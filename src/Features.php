@@ -88,6 +88,16 @@ class Features
     }
 
     /**
+     * Determine if the application has terms confirmation enabled.
+     *
+     * @return bool
+     */
+    public static function hasTermsAndPrivacyPolicyFeature()
+    {
+        return static::enabled(static::termsAndPrivacy());
+    }
+
+    /**
      * Enable the profile photo upload feature.
      *
      * @return string
@@ -105,6 +115,16 @@ class Features
     public static function api()
     {
         return 'api';
+    }
+
+    /**
+     * Enable the terms and conditions feature.
+     *
+     * @return string
+     */
+    public static function termsAndPrivacy()
+    {
+        return 'terms';
     }
 
     /**
