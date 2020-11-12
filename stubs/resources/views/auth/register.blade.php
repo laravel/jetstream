@@ -32,7 +32,7 @@
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
                     <x-jet-label for="terms">
-                        <input class="mr-2 leading-tight" type="checkbox" name="terms">
+                        <input class="mr-2 leading-tight" type="checkbox" name="terms" id="terms">
 
                         <span class="mt-1">
                             {!! __('I agree to the :tlo Terms of Service :lc and :plo Privacy Policy :lc', [
