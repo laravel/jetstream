@@ -18,8 +18,9 @@
         "ext-json": "*",
         "illuminate/support": "^8.0",
         "jenssegers/agent": "^2.6",
-        "league/commonmark": "^1.3",
-        "laravel/fortify": "^1.6.1"
+        "laravel/fortify": "^1.6.1",
+        "laravel/socialite": "^5.0",
+        "league/commonmark": "^1.3"
     },
     "require-dev": {
         "inertiajs/inertia-laravel": "^0.3",

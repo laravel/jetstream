@@ -55,6 +55,8 @@
                 </jet-button>
             </div>
         </form>
+
+        <jet-socialite v-if="$page.props.jetstream.hasSocialiteFeatures" :socialiteProviders="socialiteProviders" />
     </jet-authentication-card>
 </template>
 
@@ -66,6 +68,7 @@
     import JetCheckbox from "@/Jetstream/Checkbox";
     import JetLabel from '@/Jetstream/Label'
     import JetValidationErrors from '@/Jetstream/ValidationErrors'
+    import JetSocialite from '@/Jetstream/Socialite'
 
     export default {
         components: {
@@ -75,7 +78,12 @@
             JetInput,
             JetCheckbox,
             JetLabel,
-            JetValidationErrors
+            JetValidationErrors,
+            JetSocialite,
+        },
+
+        props: {
+            socialiteProviders: Object,
         },
 
         data() {

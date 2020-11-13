@@ -81,6 +81,16 @@ class Features
     }
 
     /**
+     * Determine if the applications is using any Socialite features.
+     *
+     * @return bool
+     */
+    public static function hasSocialiteFeatures()
+    {
+        return static::enabled(static::socialite());
+    }
+
+    /**
      * Determine if the application is using any account deletion features.
      *
      * @return bool
@@ -133,6 +143,21 @@ class Features
     public static function termsAndPrivacyPolicy()
     {
         return 'terms';
+    }
+
+    /**
+     * Enabled the socialite feature.
+     *
+     * @param  array  $options
+     * @return string
+     */
+    public static function socialite(array $options = [])
+    {
+        if (! empty($options)) {
+            static::$featureOptions['socialite'] = $options;
+        }
+
+        return 'socialite';
     }
 
     /**

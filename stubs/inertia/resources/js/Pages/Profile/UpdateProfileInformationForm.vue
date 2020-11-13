@@ -50,8 +50,8 @@
 
             <!-- Email -->
             <div class="col-span-6 sm:col-span-4">
-                <jet-label for="email" :value="$t('Email')" />
-                <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" />
+                <jet-label for="email" value="Email" />
+                <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" :disabled="emailDisabled"/>
                 <jet-input-error :message="form.error('email')" class="mt-2" />
             </div>
         </template>
@@ -88,7 +88,7 @@
             JetSecondaryButton,
         },
 
-        props: ['user'],
+        props: ['user', 'emailDisabled'],
 
         data() {
             return {

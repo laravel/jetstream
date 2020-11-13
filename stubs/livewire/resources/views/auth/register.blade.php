@@ -56,5 +56,9 @@
                 </x-jet-button>
             </div>
         </form>
+
+        @if (Laravel\Jetstream\Jetstream::hasSocialiteFeatures())
+            <x-jet-socialite />
+        @endif
     </x-jet-authentication-card>
 </x-guest-layout>

@@ -21,6 +21,23 @@ class UserProfileController extends Controller
     {
         return Jetstream::inertia()->render($request, 'Profile/Show', [
             'sessions' => $this->sessions($request)->all(),
+            'connectedAccounts' => $request->user()->connectedAccounts
+                ->map(function ($account) {
+                    return (object) [
+                        'id' => $account->id,
+                        'provider_name' => $account->provider_name,
+                        'created_at' => (new \DateTime($account->created_at))->format('d/m/Y H:i'),
+                    ];
+                }),
+            'socialiteProviders' => [
+                'facebook' => Jetstream::hasSocialiteSupportFor('facebook'),
+                'google' => Jetstream::hasSocialiteSupportFor('google'),
+                'twitter' => Jetstream::hasSocialiteSupportFor('twitter'),
+                'linkedin' => Jetstream::hasSocialiteSupportFor('linkedin'),
+                'github' => Jetstream::hasSocialiteSupportFor('github'),
+                'gitlab' => Jetstream::hasSocialiteSupportFor('gitlab'),
+                'bitbucket' => Jetstream::hasSocialiteSupportFor('bitbucket'),
+            ],
         ]);
     }
 

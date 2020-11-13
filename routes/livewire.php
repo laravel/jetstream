@@ -7,6 +7,7 @@ use Laravel\Jetstream\Http\Controllers\Livewire\PrivacyPolicyController;
 use Laravel\Jetstream\Http\Controllers\Livewire\TeamController;
 use Laravel\Jetstream\Http\Controllers\Livewire\TermsOfServiceController;
 use Laravel\Jetstream\Http\Controllers\Livewire\UserProfileController;
+use Laravel\Jetstream\Http\Controllers\SocialiteController;
 use Laravel\Jetstream\Http\Controllers\TeamInvitationController;
 use Laravel\Jetstream\Jetstream;
 
@@ -37,4 +38,10 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
                         ->name('team-invitations.accept');
         }
     });
+
+    // Socialite...
+    if (Jetstream::hasSocialiteFeatures()) {
+        Route::get('/socialite/{provider}', [SocialiteController::class, 'redirectToProvider'])->name('socialite.redirect');
+        Route::get('/socialite/{provider}/callback', [SocialiteController::class, 'handleProviderCallback'])->name('socialite.callback');
+    }
 });

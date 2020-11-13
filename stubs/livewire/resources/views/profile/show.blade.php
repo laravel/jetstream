@@ -13,20 +13,52 @@
                 <x-jet-section-border />
             @endif
 
-            @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
+            @if (Laravel\Jetstream\Jetstream::hasSocialiteFeatures())
+                @if(! is_null($user->password))
+                    @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
+                        <div class="mt-10 sm:mt-0">
+                            @livewire('profile.update-password-form')
+                        </div>
+
+                        <x-jet-section-border />
+                    @endif
+
+                    @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
+                        <div class="mt-10 sm:mt-0">
+                            @livewire('profile.two-factor-authentication-form')
+                        </div>
+
+                        <x-jet-section-border />
+                    @endif
+                @else
+                    <div class="mt-10 sm:mt-0">
+                        @livewire('profile.set-password-form')
+                    </div>
+
+                    <x-jet-section-border />
+                @endif
+
                 <div class="mt-10 sm:mt-0">
-                    @livewire('profile.update-password-form')
+                    @livewire('profile.connected-accounts-form')
                 </div>
 
                 <x-jet-section-border />
-            @endif
+            @else
+                @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
+                    <div class="mt-10 sm:mt-0">
+                        @livewire('profile.update-password-form')
+                    </div>
 
-            @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.two-factor-authentication-form')
-                </div>
+                    <x-jet-section-border />
+                @endif
 
-                <x-jet-section-border />
+                @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
+                    <div class="mt-10 sm:mt-0">
+                        @livewire('profile.two-factor-authentication-form')
+                    </div>
+
+                    <x-jet-section-border />
+                @endif
             @endif
 
             <div class="mt-10 sm:mt-0">

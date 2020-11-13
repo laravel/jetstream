@@ -3,6 +3,7 @@
 namespace Laravel\Jetstream\Http\Livewire;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -33,6 +34,18 @@ class UpdateProfileInformationForm extends Component
     public function mount()
     {
         $this->state = Auth::user()->withoutRelations()->toArray();
+    }
+
+    /**
+     * Determines if the email input should be disabled for the user.
+     *
+     * @return bool
+     */
+    public function emailDisabled()
+    {
+        return DB::table('connected_accounts')
+            ->where('user_id', Auth::user()->getAuthIdentifier())
+            ->exists();
     }
 
     /**
@@ -90,6 +103,8 @@ class UpdateProfileInformationForm extends Component
      */
     public function render()
     {
-        return view('profile.update-profile-information-form');
+        return view('profile.update-profile-information-form', [
+            'emailDisabled' => $this->emailDisabled(),
+        ]);
     }
 }
