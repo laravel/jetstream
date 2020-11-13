@@ -154,7 +154,7 @@ class Features
     public static function socialite(array $options = [])
     {
         if (! empty($options)) {
-            static::$featureOptions['socialite'] = $options;
+            config(['jetstream-options.socialite' => $options]);
         }
 
         return 'socialite';
