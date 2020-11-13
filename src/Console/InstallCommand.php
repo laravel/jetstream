@@ -124,6 +124,10 @@ class InstallCommand extends Command
         copy(__DIR__.'/../../stubs/livewire/tailwind.config.js', base_path('tailwind.config.js'));
         copy(__DIR__.'/../../stubs/livewire/webpack.mix.js', base_path('webpack.mix.js'));
 
+        // Terms Of Service / Privacy Policy...
+        copy(__DIR__.'/../../stubs/terms.md', base_path('terms.md'));
+        copy(__DIR__.'/../../stubs/policy.md', base_path('policy.md'));
+
         // Directories...
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Fortify'));
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Jetstream'));
@@ -160,6 +164,8 @@ class InstallCommand extends Command
         // Single Blade Views...
         copy(__DIR__.'/../../stubs/livewire/resources/views/dashboard.blade.php', resource_path('views/dashboard.blade.php'));
         copy(__DIR__.'/../../stubs/livewire/resources/views/navigation-dropdown.blade.php', resource_path('views/navigation-dropdown.blade.php'));
+        copy(__DIR__.'/../../stubs/resources/views/terms.blade.php', resource_path('views/terms.blade.php'));
+        copy(__DIR__.'/../../stubs/resources/views/policy.blade.php', resource_path('views/policy.blade.php'));
 
         // Other Views...
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/api', resource_path('views/api'));
@@ -253,13 +259,14 @@ EOF;
                     $this->output->write($output);
                 });
 
-        // Update Configuration...
-        // $this->replaceInFile("'guard' => 'web'", "'guard' => 'sanctum'", config_path('auth.php'));
-
         // Tailwind Configuration...
         copy(__DIR__.'/../../stubs/inertia/tailwind.config.js', base_path('tailwind.config.js'));
         copy(__DIR__.'/../../stubs/inertia/webpack.mix.js', base_path('webpack.mix.js'));
         copy(__DIR__.'/../../stubs/inertia/webpack.config.js', base_path('webpack.config.js'));
+
+        // Terms Of Service / Privacy Policy...
+        copy(__DIR__.'/../../stubs/terms.md', base_path('terms.md'));
+        copy(__DIR__.'/../../stubs/policy.md', base_path('policy.md'));
 
         // Directories...
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Fortify'));
@@ -301,6 +308,8 @@ EOF;
 
         // Blade Views...
         copy(__DIR__.'/../../stubs/inertia/resources/views/app.blade.php', resource_path('views/app.blade.php'));
+        copy(__DIR__.'/../../stubs/resources/views/terms.blade.php', resource_path('views/terms.blade.php'));
+        copy(__DIR__.'/../../stubs/resources/views/policy.blade.php', resource_path('views/policy.blade.php'));
 
         if (file_exists(resource_path('views/welcome.blade.php'))) {
             unlink(resource_path('views/welcome.blade.php'));

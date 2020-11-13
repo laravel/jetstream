@@ -29,6 +29,22 @@
                 <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
 
+            @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
+                <div class="mt-4">
+                    <x-jet-label for="terms">
+                        <input class="mr-2 leading-tight" type="checkbox" name="terms" id="terms">
+
+                        <span class="mt-1">
+                            {!! __('I agree to the :tlo Terms of Service :lc and :plo Privacy Policy :lc', [
+                                    'tlo' => '<a target="_blank" href="/terms" class="underline text-sm text-gray-600 hover:text-gray-900">',
+                                    'plo' => '<a target="_blank" href="/policy" class="underline text-sm text-gray-600 hover:text-gray-900">',
+                                    'lc' => '</a>'
+                            ]) !!}
+                        </span>
+                    </x-jet-label>
+                </div>
+            @endif
+
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
                     {{ __('Already registered?') }}

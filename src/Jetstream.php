@@ -187,6 +187,16 @@ class Jetstream
     }
 
     /**
+     * Determine if the application is using the terms confirmation feature.
+     *
+     * @return bool
+     */
+    public static function hasTermsAndPrivacyPolicyFeature()
+    {
+        return Features::hasTermsAndPrivacyPolicyFeature();
+    }
+
+    /**
      * Determine if the application is using any account deletion features.
      *
      * @return bool
