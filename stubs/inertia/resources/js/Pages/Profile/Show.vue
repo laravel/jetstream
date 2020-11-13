@@ -8,13 +8,13 @@
 
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-                <div v-if="$page.jetstream.canManageUpdateProfileInformation">
+                <div v-if="$page.jetstream.canUpdateProfileInformation">
                     <update-profile-information-form :user="$page.user" />
 
                     <jet-section-border />
                 </div>
 
-                <div v-if="$page.jetstream.canManageUpdatePassword">
+                <div v-if="$page.jetstream.canUpdatePassword">
                     <update-password-form class="mt-10 sm:mt-0" />
 
                     <jet-section-border />
