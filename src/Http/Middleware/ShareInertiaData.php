@@ -26,9 +26,9 @@ class ShareInertiaData
                     'canCreateTeams' => $request->user() &&
                                         Jetstream::hasTeamFeatures() &&
                                         Gate::forUser($request->user())->check('create', Jetstream::newTeamModel()),
-                    'canUpdateProfileInformation' => Features::canUpdateProfileInformation(),
-                    'canUpdatePassword' => Features::enabled(Features::updatePasswords()),
                     'canManageTwoFactorAuthentication' => Features::canManageTwoFactorAuthentication(),
+                    'canUpdatePassword' => Features::enabled(Features::updatePasswords()),
+                    'canUpdateProfileInformation' => Features::canUpdateProfileInformation(),
                     'flash' => $request->session()->get('flash', []),
                     'hasApiFeatures' => Jetstream::hasApiFeatures(),
                     'hasTeamFeatures' => Jetstream::hasTeamFeatures(),
