@@ -35,10 +35,9 @@
                         <input class="mr-2 leading-tight" type="checkbox" name="terms" id="terms">
 
                         <span class="mt-1">
-                            {!! __('I agree to the :tlo Terms of Service :lc and :plo Privacy Policy :lc', [
-                                    'tlo' => '<a target="_blank" href="/terms" class="underline text-sm text-gray-600 hover:text-gray-900">',
-                                    'plo' => '<a target="_blank" href="/policy" class="underline text-sm text-gray-600 hover:text-gray-900">',
-                                    'lc' => '</a>'
+                            {!! __('I agree to the :terms_of_service and :privacy_policy', [
+                                    'terms_of_service' => '<a target="_blank" href="/terms" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Terms of Service').'</a>',
+                                    'privacy_policy' => '<a target="_blank" href="/policy" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Privacy Policy').'</a>',
                             ]) !!}
                         </span>
                     </x-jet-label>
