@@ -42,11 +42,7 @@
 
         data() {
             return {
-                form: this.$inertia.form({
-                    email: '',
-                    password: '',
-                    remember: false,
-                })
+                form: this.$inertia.form()
             }
         },
 
