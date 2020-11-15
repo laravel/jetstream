@@ -57,7 +57,6 @@ class ShareInertiaData
                     return [$key => $bag->messages()];
                 })->all();
             },
-            'currentRouteName' => Route::currentRouteName(),
         ]));
 
         return $next($request);
