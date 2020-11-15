@@ -21,15 +21,16 @@
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="password">
-                    <div class="flex justify-between">
+                <x-jet-label for="password" class="flex justify-between">
+                    <span>
                         {{ __('Password') }}
-                        @if (Route::has('password.request'))
-                            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                                {{ __('Forgot your password?') }}
-                            </a>
-                        @endif
-                    </div>
+                    </span>
+
+                    @if (Route::has('password.request'))
+                        <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                            {{ __('Forgot your password?') }}
+                        </a>
+                    @endif
                 </x-jet-label>
                 <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
             </div>
