@@ -29,10 +29,10 @@
 
             <div class="mt-4" v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature">
                 <jet-label for="terms">
-                    <input class="mr-2 leading-tight" type="checkbox" name="terms" id="terms" v-model="form.terms">
+                    <input class="form-checkbox h-4 w-4 mr-2 text-gray-800 transition duration-150 ease-in-out" type="checkbox" name="terms" id="terms" v-model="form.terms">
 
-                    <span class="mt-1">
-                        I agree to the <a target="_blank" href="/terms-of-service" class="underline text-sm text-gray-600 hover:text-gray-900">Terms of Service</a> and <a target="_blank" href="/privacy-policy" class="underline text-sm text-gray-600 hover:text-gray-900">Privacy Policy</a>
+                    <span>
+                        I agree to the <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Terms of Service</a> and <a target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Privacy Policy</a>
                     </span>
                 </jet-label>
             </div>

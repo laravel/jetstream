@@ -20,8 +20,8 @@ class PrivacyPolicyController extends Controller
                             ? base_path('policy.'.app()->getLocale().'.md')
                             : base_path('policy.md');
 
-        return view('terms', [
-            'terms' => (new CommonMarkConverter())->convertToHtml(file_get_contents($policyFile)),
+        return view('policy', [
+            'policy' => (new CommonMarkConverter())->convertToHtml(file_get_contents($policyFile)),
         ]);
     }
 }
