@@ -56,7 +56,7 @@ class ShareInertiaData
                 return collect(optional(Session::get('errors'))->getBags() ?: [])->mapWithKeys(function ($bag, $key) {
                     return [$key => $bag->messages()];
                 })->all();
-            }
+            },
         ]));
 
         return $next($request);
