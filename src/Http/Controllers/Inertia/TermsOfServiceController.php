@@ -22,7 +22,7 @@ class TermsOfServiceController extends Controller
                             : base_path('terms.md');
 
         return Inertia::render('Terms', [
-            'terms' => (new CommonMarkConverter())->convertToHtml(file_get_contents($policyFile)),
+            'terms' => (new CommonMarkConverter())->convertToHtml(file_get_contents($termsFile)),
         ]);
     }
 }
