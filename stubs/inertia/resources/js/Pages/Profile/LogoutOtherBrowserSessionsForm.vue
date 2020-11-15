@@ -133,7 +133,7 @@
             },
 
             logoutOtherBrowserSessions() {
-                this.form.post(route('other-browser-sessions.destroy'), {
+                this.form.post(this.route('other-browser-sessions.destroy'), {
                     preserveScroll: true
                 }).then(response => {
                     if (! this.form.hasErrors()) {

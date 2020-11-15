@@ -112,7 +112,7 @@
                     this.form.photo = this.$refs.photo.files[0]
                 }
 
-                this.form.post(route('user-profile-information.update'), {
+                this.form.post(this.route('user-profile-information.update'), {
                     preserveScroll: true
                 });
             },
@@ -132,7 +132,7 @@
             },
 
             deletePhoto() {
-                this.$inertia.delete(route('current-user-photo.destroy'), {
+                this.$inertia.delete(this.route('current-user-photo.destroy'), {
                     preserveScroll: true,
                 }).then(() => {
                     this.photoPreview = null

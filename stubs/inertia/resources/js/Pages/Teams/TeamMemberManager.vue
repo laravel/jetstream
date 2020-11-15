@@ -289,7 +289,7 @@
 
         methods: {
             addTeamMember() {
-                this.addTeamMemberForm.post(route('team-members.store', this.team), {
+                this.addTeamMemberForm.post(this.route('team-members.store', this.team), {
                     preserveScroll: true
                 });
             },
@@ -301,7 +301,7 @@
             },
 
             updateRole() {
-                this.updateRoleForm.put(route('team-members.update', [this.team, this.managingRoleFor]), {
+                this.updateRoleForm.put(this.route('team-members.update', [this.team, this.managingRoleFor]), {
                     preserveScroll: true,
                 }).then(() => {
                     this.currentlyManagingRole = false
@@ -313,7 +313,7 @@
             },
 
             leaveTeam() {
-                this.leaveTeamForm.delete(route('team-members.destroy', [this.team, this.$page.user]))
+                this.leaveTeamForm.delete(this.route('team-members.destroy', [this.team, this.$page.user]))
             },
 
             confirmTeamMemberRemoval(teamMember) {
@@ -321,7 +321,7 @@
             },
 
             removeTeamMember() {
-                this.removeTeamMemberForm.delete(route('team-members.destroy', [this.team, this.teamMemberBeingRemoved]), {
+                this.removeTeamMemberForm.delete(this.route('team-members.destroy', [this.team, this.teamMemberBeingRemoved]), {
                     preserveScroll: true,
                     preserveState: true,
                 }).then(() => {

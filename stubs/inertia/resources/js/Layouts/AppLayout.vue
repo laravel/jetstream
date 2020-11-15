@@ -234,7 +234,7 @@
 
         methods: {
             switchToTeam(team) {
-                this.$inertia.put(route('current-team.update'), {
+                this.$inertia.put(this.route('current-team.update'), {
                     'team_id': team.id
                 }, {
                     preserveState: false
@@ -242,7 +242,7 @@
             },
 
             logout() {
-                axios.post(route('logout').url()).then(response => {
+                axios.post(this.route('logout').url()).then(response => {
                     window.location = '/';
                 })
             },
