@@ -32,7 +32,7 @@
                     <input class="mr-2 leading-tight" type="checkbox" name="terms" id="terms" v-model="form.terms">
 
                     <span class="mt-1">
-                        I agree to the <a target="_blank" href="/terms-of-service" class="underline text-sm text-gray-600 hover:text-gray-900">Terms of Service</a> and <a target="_blank" href="/privacy-policy" class="underline text-sm text-gray-600 hover:text-gray-900">Privacy Policy</a>
+                        I agree to the <inertia-link target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Terms of Service</inertia-link> and <inertia-link target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Privacy Policy</inertia-link>
                     </span>
                 </jet-label>
             </div>

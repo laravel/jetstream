@@ -1,9 +1,10 @@
 <?php
 
-namespace Laravel\Jetstream\Http\Controllers;
+namespace Laravel\Jetstream\Http\Controllers\Inertia;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Inertia\Inertia;
 use League\CommonMark\CommonMarkConverter;
 
 class TermsOfServiceController extends Controller
@@ -12,7 +13,7 @@ class TermsOfServiceController extends Controller
      * Show the terms of service for the application.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\View\View
+     * @return \Inertia\Response
      */
     public function show(Request $request)
     {
@@ -20,8 +21,8 @@ class TermsOfServiceController extends Controller
                             ? base_path('terms.'.app()->getLocale().'.md')
                             : base_path('terms.md');
 
-        return view('terms', [
-            'terms' => (new CommonMarkConverter())->convertToHtml(file_get_contents($termsFile)),
+        return Inertia::render('Terms', [
+            'terms' => (new CommonMarkConverter())->convertToHtml(file_get_contents($policyFile)),
         ]);
     }
 }
