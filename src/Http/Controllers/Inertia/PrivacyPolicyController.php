@@ -21,7 +21,7 @@ class PrivacyPolicyController extends Controller
                             ? base_path('policy.'.app()->getLocale().'.md')
                             : base_path('policy.md');
 
-        return Inertia::render('Policy', [
+        return Inertia::render('PrivacyPolicy', [
             'policy' => (new CommonMarkConverter())->convertToHtml(file_get_contents($policyFile)),
         ]);
     }

@@ -315,8 +315,8 @@ EOF;
 
         // Inertia Pages...
         copy(__DIR__.'/../../stubs/inertia/resources/js/Pages/Dashboard.vue', resource_path('js/Pages/Dashboard.vue'));
-        copy(__DIR__.'/../../stubs/inertia/resources/js/Pages/Policy.vue', resource_path('js/Pages/Policy.vue'));
-        copy(__DIR__.'/../../stubs/inertia/resources/js/Pages/Terms.vue', resource_path('js/Pages/Terms.vue'));
+        copy(__DIR__.'/../../stubs/inertia/resources/js/Pages/PrivacyPolicy.vue', resource_path('js/Pages/PrivacyPolicy.vue'));
+        copy(__DIR__.'/../../stubs/inertia/resources/js/Pages/TermsOfService.vue', resource_path('js/Pages/TermsOfService.vue'));
         copy(__DIR__.'/../../stubs/inertia/resources/js/Pages/Welcome.vue', resource_path('js/Pages/Welcome.vue'));
 
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Jetstream', resource_path('js/Jetstream'));

@@ -21,7 +21,7 @@ class TermsOfServiceController extends Controller
                             ? base_path('terms.'.app()->getLocale().'.md')
                             : base_path('terms.md');
 
-        return Inertia::render('Terms', [
+        return Inertia::render('TermsOfService', [
             'terms' => (new CommonMarkConverter())->convertToHtml(file_get_contents($termsFile)),
         ]);
     }
