@@ -62,7 +62,7 @@ class ApiTokenController extends Controller
             'abilities' => Jetstream::validPermissions($request->input('permissions', [])),
         ])->save();
 
-        return back();
+        return back(303);
     }
 
     /**
@@ -76,6 +76,6 @@ class ApiTokenController extends Controller
     {
         $request->user()->tokens()->where('id', $tokenId)->delete();
 
-        return back();
+        return back(303);
     }
 }
