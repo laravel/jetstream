@@ -13,7 +13,7 @@
                 {{ content }}
 
                 <div class="mt-4">
-                    <jet-input type="password" class="mt-1 block w-3/4" placeholder="Password"
+                    <jet-input type="password" class="mt-1 block w-3/4" :placeholder="$t('Password')"
                                 ref="password"
                                 v-model="form.password"
                                 @keyup.enter.native="confirmPassword" />
@@ -24,7 +24,7 @@
 
             <template #footer>
                 <jet-secondary-button @click.native="confirmingPassword = false">
-                    Nevermind
+                    {{ $t('Nevermind') }}
                 </jet-secondary-button>
 
                 <jet-button class="ml-2" @click.native="confirmPassword" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
@@ -45,13 +45,19 @@
     export default {
         props: {
             title: {
-                default: 'Confirm Password',
+                default: function () {
+                    return this.$t('Confirm Password')
+                },
             },
             content: {
-                default: 'For your security, please confirm your password to continue.',
+                default: function () {
+                    return this.$t('For your security, please confirm your password to continue.')
+                },
             },
             button: {
-                default: 'Confirm',
+                default: function () {
+                    return this.$t('Confirm')
+                },
             }
         },
 

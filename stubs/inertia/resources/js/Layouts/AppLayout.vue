@@ -18,7 +18,7 @@
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
+                                    {{ $t('Dashboard') }}
                                 </jet-nav-link>
                             </div>
                         </div>
@@ -46,15 +46,15 @@
                                     <template #content>
                                         <!-- Account Management -->
                                         <div class="block px-4 py-2 text-xs text-gray-400">
-                                            Manage Account
+                                            {{ $t('Manage Account') }}
                                         </div>
 
                                         <jet-dropdown-link :href="route('profile.show')">
-                                            Profile
+                                            {{ $t('Profile') }}
                                         </jet-dropdown-link>
 
                                         <jet-dropdown-link :href="route('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
-                                            API Tokens
+                                            {{ $t('API Tokens') }}
                                         </jet-dropdown-link>
 
                                         <div class="border-t border-gray-100"></div>
@@ -62,23 +62,23 @@
                                         <!-- Team Management -->
                                         <template v-if="$page.props.jetstream.hasTeamFeatures">
                                             <div class="block px-4 py-2 text-xs text-gray-400">
-                                                Manage Team
+                                                {{ $t('Manage Team') }}
                                             </div>
 
                                             <!-- Team Settings -->
                                             <jet-dropdown-link :href="route('teams.show', $page.props.user.current_team)">
-                                                Team Settings
+                                                {{ $t('Team Settings') }}
                                             </jet-dropdown-link>
 
                                             <jet-dropdown-link :href="route('teams.create')" v-if="$page.props.jetstream.canCreateTeams">
-                                                Create New Team
+                                                {{ $t('Create New Team') }}
                                             </jet-dropdown-link>
 
                                             <div class="border-t border-gray-100"></div>
 
                                             <!-- Team Switcher -->
                                             <div class="block px-4 py-2 text-xs text-gray-400">
-                                                Switch Teams
+                                                {{ $t('Switch Teams') }}
                                             </div>
 
                                             <template v-for="team in $page.props.user.all_teams">
@@ -98,7 +98,7 @@
                                         <!-- Authentication -->
                                         <form @submit.prevent="logout">
                                             <jet-dropdown-link as="button">
-                                                Logout
+                                                {{ $t('Logout') }}
                                             </jet-dropdown-link>
                                         </form>
                                     </template>
@@ -122,7 +122,7 @@
                 <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                     <div class="pt-2 pb-3 space-y-1">
                         <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
-                            Dashboard
+                            {{ $t('Dashboard') }}
                         </jet-responsive-nav-link>
                     </div>
 
@@ -141,17 +141,17 @@
 
                         <div class="mt-3 space-y-1">
                             <jet-responsive-nav-link :href="route('profile.show')" :active="route().current('profile.show')">
-                                Profile
+                                {{ $t('Profile') }}
                             </jet-responsive-nav-link>
 
                             <jet-responsive-nav-link :href="route('api-tokens.index')" :active="route().current('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
-                                API Tokens
+                                {{ $t('API Tokens') }}
                             </jet-responsive-nav-link>
 
                             <!-- Authentication -->
                             <form method="POST" @submit.prevent="logout">
                                 <jet-responsive-nav-link as="button">
-                                    Logout
+                                    {{ $t('Logout') }}
                                 </jet-responsive-nav-link>
                             </form>
 
@@ -160,23 +160,23 @@
                                 <div class="border-t border-gray-200"></div>
 
                                 <div class="block px-4 py-2 text-xs text-gray-400">
-                                    Manage Team
+                                    {{ $t('Manage Team') }}
                                 </div>
 
                                 <!-- Team Settings -->
                                 <jet-responsive-nav-link :href="route('teams.show', $page.props.user.current_team)" :active="route().current('teams.show')">
-                                    Team Settings
+                                    {{ $t('Team Settings') }}
                                 </jet-responsive-nav-link>
 
                                 <jet-responsive-nav-link :href="route('teams.create')" :active="route().current('teams.create')">
-                                    Create New Team
+                                    {{ $t('Create New Team') }}
                                 </jet-responsive-nav-link>
 
                                 <div class="border-t border-gray-200"></div>
 
                                 <!-- Team Switcher -->
                                 <div class="block px-4 py-2 text-xs text-gray-400">
-                                    Switch Teams
+                                    {{ $t('Switch Teams') }}
                                 </div>
 
                                 <template v-for="team in $page.props.user.all_teams">
