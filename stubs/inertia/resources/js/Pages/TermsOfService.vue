@@ -14,14 +14,12 @@
 </template>
 
 <script>
-import GuestLayout from '@/Layouts/GuestLayout'
 import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
 
 export default {
     props: ['terms'],
 
     components: {
-        GuestLayout,
         JetAuthenticationCardLogo,
     },
 }
