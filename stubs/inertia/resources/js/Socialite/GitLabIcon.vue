@@ -1,5 +1,5 @@
 <template>
-    <svg xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" viewBox="0 0 24 24">
+    <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path d="M12,23.1l4.4-13.6H7.6L12,23.1z" fill="#E24329"/>
         <path d="M12,23.1L7.6,9.4H1.4L12,23.1z" fill="#FC6D26"/>
         <path d="M1.4,9.4L0,13.6c-0.1,0.4,0,0.8,0.3,1L12,23.1L1.4,9.4z" fill="#FCA326"/>
