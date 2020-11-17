@@ -28,11 +28,10 @@
                             <div class="ml-3 relative">
                                 <jet-dropdown align="right" width="60" v-if="$page.props.jetstream.hasTeamFeatures">
                                     <template #trigger>
-                                        <!-- Dropdown menu toggle, controlling the show/hide state of dropdown menu. -->
                                         <span class="inline-flex rounded-md">
                                             <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
                                                 {{ $page.props.user.current_team.name }}
-                                                <!-- Heroicon name: selector -->
+
                                                 <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                                     <path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
                                                 </svg>
@@ -75,7 +74,6 @@
                                                     </form>
                                                 </template>
                                             </template>
-
                                         </div>
                                     </template>
                                 </jet-dropdown>
@@ -91,7 +89,7 @@
                                         <span v-else class="inline-flex rounded-md">
                                             <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                                                 {{ $page.props.user.name }}
-                                                <!-- Heroicon name: chevron-down -->
+
                                                 <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                                 </svg>
@@ -235,41 +233,41 @@
 </template>
 
 <script>
-import JetApplicationMark from '@/Jetstream/ApplicationMark'
-import JetBanner from '@/Jetstream/Banner'
-import JetDropdown from '@/Jetstream/Dropdown'
-import JetDropdownLink from '@/Jetstream/DropdownLink'
-import JetNavLink from '@/Jetstream/NavLink'
-import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink'
+    import JetApplicationMark from '@/Jetstream/ApplicationMark'
+    import JetBanner from '@/Jetstream/Banner'
+    import JetDropdown from '@/Jetstream/Dropdown'
+    import JetDropdownLink from '@/Jetstream/DropdownLink'
+    import JetNavLink from '@/Jetstream/NavLink'
+    import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink'
 
-export default {
-    components: {
-        JetApplicationMark,
-        JetBanner,
-        JetDropdown,
-        JetDropdownLink,
-        JetNavLink,
-        JetResponsiveNavLink,
-    },
+    export default {
+        components: {
+            JetApplicationMark,
+            JetBanner,
+            JetDropdown,
+            JetDropdownLink,
+            JetNavLink,
+            JetResponsiveNavLink,
+        },
 
-    data() {
-        return {
-            showingNavigationDropdown: false,
+        data() {
+            return {
+                showingNavigationDropdown: false,
+            }
+        },
+
+        methods: {
+            switchToTeam(team) {
+                this.$inertia.put(route('current-team.update'), {
+                    'team_id': team.id
+                }, {
+                    preserveState: false
+                })
+            },
+
+            logout() {
+                this.$inertia.post(route('logout'));
+            },
         }
-    },
-
-    methods: {
-        switchToTeam(team) {
-            this.$inertia.put(route('current-team.update'), {
-                'team_id': team.id
-            }, {
-                preserveState: false
-            })
-        },
-
-        logout() {
-            this.$inertia.post(route('logout'));
-        },
     }
-}
 </script>
