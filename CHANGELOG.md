@@ -1,6 +1,16 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v1.6.0...1.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v1.6.1...1.x)
+
+
+## [v1.6.1 (2020-11-17)](https://github.com/laravel/jetstream/compare/v1.6.0...v1.6.1)
+
+### Changed
+- Use mix helper and remove CDNs  ([#450](https://github.com/laravel/jetstream/pull/450), [ca94bd5](https://github.com/laravel/jetstream/commit/ca94bd599f9874cf02b9e92ae4d91605fdc1441b))
+
+### Fixed
+- Fix feature toggles in Inertia ([#451](https://github.com/laravel/jetstream/pull/451), [#454](https://github.com/laravel/jetstream/pull/454))
+- Update response status code to prevent method not allowed ([#456](https://github.com/laravel/jetstream/pull/456))
 
 
 ## [v1.6.0 (2020-11-03)](https://github.com/laravel/jetstream/compare/v1.5.3...v1.6.0)
