@@ -27,7 +27,8 @@ class UserFactory extends Factory
             Team::factory()
                 ->state(function (array $attributes, User $user) {
                     return ['name' => $user->name.'\'s Team', 'user_id' => $user->id, 'personal_team' => true];
-                })
+                }),
+            'ownedTeams'
         );
     }
 
