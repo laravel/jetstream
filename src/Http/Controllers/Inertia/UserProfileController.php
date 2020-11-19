@@ -29,6 +29,7 @@ class UserProfileController extends Controller
                         'created_at' => (new \DateTime($account->created_at))->format('d/m/Y H:i'),
                     ];
                 }),
+            'hasPassword' => ! is_null($request->user()->password),
             'socialiteProviders' => [
                 'facebook' => Jetstream::hasSocialiteSupportFor('facebook'),
                 'google' => Jetstream::hasSocialiteSupportFor('google'),

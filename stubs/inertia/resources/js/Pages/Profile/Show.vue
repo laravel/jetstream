@@ -14,53 +14,37 @@
                     <jet-section-border />
                 </div>
 
-                <div v-if="$page.props.jetstream.hasSocialiteFeatures">
-                    <div v-if="$page.props.user.password != null">
-                        <div v-if="$page.props.jetstream.canUpdatePassword">
-                            <update-password-form class="mt-10 sm:mt-0" />
-
-                            <jet-section-border />
-                        </div>
-
-                        <div v-if="$page.props.jetstream.canManageTwoFactorAuthentication">
-                            <two-factor-authentication-form class="mt-10 sm:mt-0" />
-
-                            <jet-section-border />
-                        </div>
-                    </div>
-
-                    <div v-else>
-                        <set-password-form class="mt-10 sm:mt-0" />
-
-                        <jet-section-border />
-                    </div>
-
-                    <connected-accounts-form :accounts="connectedAccounts" :providers="socialiteProviders" class="mt-10 sm:mt-0" />
+                <div v-if="$page.props.jetstream.canUpdatePassword && hasPassword">
+                    <update-password-form class="mt-10 sm:mt-0" />
 
                     <jet-section-border />
                 </div>
 
                 <div v-else>
-                    <div v-if="$page.props.jetstream.canUpdatePassword">
-                        <update-password-form class="mt-10 sm:mt-0" />
+                    <set-password-form class="mt-10 sm:mt-0" />
 
-                        <jet-section-border />
-                    </div>
-
-                    <div v-if="$page.props.jetstream.canManageTwoFactorAuthentication">
-                        <two-factor-authentication-form class="mt-10 sm:mt-0" />
-
-                        <jet-section-border />
-                    </div>
+                    <jet-section-border />
                 </div>
 
-                <logout-other-browser-sessions-form :sessions="sessions" class="mt-10 sm:mt-0" />
+                <div v-if="$page.props.jetstream.canManageTwoFactorAuthentication && hasPassword">
+                    <two-factor-authentication-form class="mt-10 sm:mt-0" />
 
-                <template v-if="$page.props.jetstream.hasAccountDeletionFeatures && $page.props.user.password != null">
                     <jet-section-border />
+                </div>
 
-                    <delete-user-form class="mt-10 sm:mt-0" />
-                </template>
+                <div v-if="$page.props.jetstream.hasSocialiteFeatures">
+                    <connected-accounts-form :accounts="connectedAccounts" :providers="socialiteProviders" class="mt-10 sm:mt-0" />
+
+                    <jet-section-border />
+                </div>
+
+                <div v-if="hasPassword">
+                    <logout-other-browser-sessions-form :sessions="sessions" class="mt-10 sm:mt-0" />
+
+                    <jet-section-border />
+                </div>
+
+                <delete-user-form v-if="$page.props.jetstream.hasAccountDeletionFeatures && hasPassword != null" class="mt-10 sm:mt-0" />
             </div>
         </div>
     </app-layout>
