@@ -29,14 +29,14 @@ class ShareInertiaData
                     'canManageTwoFactorAuthentication' => Features::canManageTwoFactorAuthentication(),
                     'canUpdatePassword' => Features::enabled(Features::updatePasswords()),
                     'canUpdateProfileInformation' => Features::canUpdateProfileInformation(),
+                    'fallbackLocale' => app()->getFallbackLocale(),
                     'flash' => $request->session()->get('flash', []),
+                    'hasAccountDeletionFeatures' => Jetstream::hasAccountDeletionFeatures(),
                     'hasApiFeatures' => Jetstream::hasApiFeatures(),
                     'hasTeamFeatures' => Jetstream::hasTeamFeatures(),
                     'hasTermsAndPrivacyPolicyFeature' => Jetstream::hasTermsAndPrivacyPolicyFeature(),
-                    'managesProfilePhotos' => Jetstream::managesProfilePhotos(),
-                    'hasAccountDeletionFeatures' => Jetstream::hasAccountDeletionFeatures(),
                     'locale' => app()->getLocale(),
-                    'fallbackLocale' => app()->getFallbackLocale(),
+                    'managesProfilePhotos' => Jetstream::managesProfilePhotos(),
                 ];
             },
             'user' => function () use ($request) {
