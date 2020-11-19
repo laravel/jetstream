@@ -147,11 +147,11 @@
                     <!-- Responsive Settings Options -->
                     <div class="pt-4 pb-1 border-t border-gray-200">
                         <div class="flex items-center px-4">
-                            <div class="flex-shrink-0">
+                            <div v-if="$page.props.jetstream.managesProfilePhotos" class="flex-shrink-0 mr-3" >
                                 <img class="h-10 w-10 rounded-full" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name" />
                             </div>
 
-                            <div class="ml-3">
+                            <div>
                                 <div class="font-medium text-base text-gray-800">{{ $page.props.user.name }}</div>
                                 <div class="font-medium text-sm text-gray-500">{{ $page.props.user.email }}</div>
                             </div>
