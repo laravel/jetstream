@@ -56,7 +56,7 @@
 
                 <logout-other-browser-sessions-form :sessions="sessions" class="mt-10 sm:mt-0" />
 
-                <template v-if="$page.props.jetstream.hasAccountDeletionFeatures">
+                <template v-if="$page.props.jetstream.hasAccountDeletionFeatures && $page.props.user.password != null">
                     <jet-section-border />
 
                     <delete-user-form class="mt-10 sm:mt-0" />
