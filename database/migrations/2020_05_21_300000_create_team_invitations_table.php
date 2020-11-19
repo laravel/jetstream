@@ -29,6 +29,6 @@ class CreateTeamInvitationsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('team_invitations');
+        Schema::dropIfExists('team_invitations');
     }
 }
