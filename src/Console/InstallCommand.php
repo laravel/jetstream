@@ -518,7 +518,7 @@ EOF;
         }
 
         // Configuration...
-        $this->replaceInFile("// Features::socialite(['providers' => ['facebook', 'github']]),", "Features::socialite(['providers' => ['facebook', 'github']]),", config_path('jetstream.php'));
+        $this->replaceInFile("// Features::socialite(['facebook' => true, 'github' => true]),", "Features::socialite(['facebook' => true, 'github' => true]),", config_path('jetstream.php'));
 
         // Set user password...
         $this->replaceInFile('// Jetstream::setUserPasswordsUsing(SetUserPassword::class);', 'Jetstream::setUserPasswordsUsing(SetUserPassword::class);', app_path('Providers/JetstreamServiceProvider.php'));

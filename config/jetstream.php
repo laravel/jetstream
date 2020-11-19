@@ -30,7 +30,7 @@ return [
 
     'features' => [
         // Features::termsAndPrivacyPolicy(),
-        // Features::socialite(['providers' => ['facebook', 'github']]),
+        // Features::socialite(['facebook' => true, 'github' => true]),
         // Features::profilePhotos(),
         // Features::api(),
         // Features::teams(['invitations' => true]),
