@@ -241,6 +241,7 @@ EOF;
             return [
                 '@inertiajs/inertia' => '^0.4.0',
                 '@inertiajs/inertia-vue' => '^0.3.0',
+                '@intlify/vue-i18n-loader' => '^1.0.0',
                 '@tailwindcss/ui' => '^0.6.0',
                 'laravel-jetstream' => '^1.0.0',
                 'moment' => '^2.26.0',
@@ -248,6 +249,7 @@ EOF;
                 'postcss-import' => '^12.0.1',
                 'tailwindcss' => '^1.8.0',
                 'vue' => '^2.5.17',
+                'vue-i18n' => '^8.22.1',
                 'vue-template-compiler' => '^2.6.10',
             ] + $packages;
         });
