@@ -28,8 +28,10 @@ trait AuthenticatesSocialite
     {
         // Register the callback to be used for resolving and authenticating the user.
         Fortify::authenticateUsing(function () use ($provider, $providerUser) {
+            $user = $this->getUser($providerUser);
+
             return $this->connectAccount(
-                $this->getUser($providerUser), $provider, $providerUser
+                $user, $provider, $providerUser
             );
         });
 
@@ -72,7 +74,7 @@ trait AuthenticatesSocialite
     {
         if (! $connectedAccount = $user->getConnectedAccountFor($provider, $providerUser->getId())) {
             // Create the connected account...
-            return $user->connectedAccounts()->create([
+            $connectedAccount = $user->connectedAccounts()->create([
                 'provider_name' => strtolower($provider),
                 'provider_id' => $providerUser->getId(),
                 'token' => $providerUser->token,
