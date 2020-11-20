@@ -79,6 +79,11 @@ class SocialiteController extends Controller
      */
     public function handleProviderCallback(Request $request, string $provider)
     {
+        if ($request->has('error')) {
+            return redirect()->intended(route('login'))
+                ->withErrors([$request->error_description]);
+        }
+
         $user = $this->connectToProvider($provider, Socialite::driver($provider)->user());
 
         if (! Auth::check()) {

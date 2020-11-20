@@ -14,7 +14,7 @@ trait ConnectsToSocialProvider
      *
      * @param  string  $provider
      * @param  \Laravel\Socialite\Contracts\User  $providerUser
-     * @return Pipeline
+     * @return \Illuminate\Contracts\Auth\Authenticatable
      */
     protected function connectToProvider(string $provider, SocialiteUserContract $providerUser)
     {
