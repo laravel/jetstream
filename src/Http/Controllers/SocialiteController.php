@@ -4,15 +4,16 @@ namespace Laravel\Jetstream\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Pipeline\Pipeline;
 use Illuminate\Routing\Controller;
 use Laravel\Fortify\Contracts\LoginResponse;
+use Laravel\Jetstream\ConnectsToSocialProvider;
 use Laravel\Jetstream\Contracts\SetsUserPasswords;
-use Laravel\Jetstream\Http\AuthenticatesSocialite;
 use Laravel\Socialite\Facades\Socialite;
 
 class SocialiteController extends Controller
 {
-    use AuthenticatesSocialite;
+    use ConnectsToSocialProvider;
 
     /**
      * Sets the user's password.
@@ -57,18 +58,46 @@ class SocialiteController extends Controller
      */
     public function handleProviderCallback(Request $request, string $provider)
     {
-        return $this->authenticate(
-            $request, $provider, Socialite::driver($provider)->user()
-        )->then(function ($request) use ($provider) {
-            if (session('connectAccount')) {
-                session()->forget('connectAccount');
+        $this->connectToProvider($provider, Socialite::driver($provider)->user());
 
-                return redirect(config('fortify.home'))->banner(
-                    __('You have successfully connected '.ucfirst($provider).' to your account.')
-                );
-            }
-
-            return app(LoginResponse::class);
+        return $this->loginPipeline($request)->then(function ($request) use ($provider) {
+            return $this->getRedirect($request, $provider);
         });
+    }
+
+    /**
+     * Get the authentication pipeline instance.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Pipeline\Pipeline
+     */
+    protected function loginPipeline(Request $request)
+    {
+        return (new Pipeline(app()))->send($request)->through(array_filter([
+            config('fortify.limiters.login') ? null : EnsureLoginIsNotThrottled::class,
+            RedirectIfTwoFactorAuthenticatable::class,
+            AttemptToAuthenticate::class,
+            PrepareAuthenticatedSession::class,
+        ]));
+    }
+
+    /**
+     * Determine the redirect that should be used after connecting to a social provider.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string $string
+     * @return Illuminate\Contracts\Support\Responsable;
+     */
+    protected function getRedirect(Request $request, string $provider)
+    {
+        if (session('connectAccount')) {
+            session()->forget('connectAccount');
+
+            return redirect(config('fortify.home'))->banner(
+                __('You have successfully connected '.ucfirst($provider).' to your account.')
+            );
+        }
+
+        return app(LoginResponse::class);
     }
 }
