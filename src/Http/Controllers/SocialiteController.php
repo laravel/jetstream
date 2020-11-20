@@ -2,10 +2,13 @@
 
 namespace Laravel\Jetstream\Http\Controllers;
 
+use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Fortify\Actions\PrepareAuthenticatedSession;
 use Laravel\Fortify\Contracts\LoginResponse;
 use Laravel\Jetstream\ConnectsToSocialProvider;
 use Laravel\Jetstream\Contracts\SetsUserPasswords;
@@ -14,6 +17,24 @@ use Laravel\Socialite\Facades\Socialite;
 class SocialiteController extends Controller
 {
     use ConnectsToSocialProvider;
+
+    /**
+     * The guard implementation.
+     *
+     * @var \Illuminate\Contracts\Auth\StatefulGuard
+     */
+    protected $guard;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @param  \Illuminate\Contracts\Auth\StatefulGuard  $guard
+     * @return void
+     */
+    public function __construct(StatefulGuard $guard)
+    {
+        $this->guard = $guard;
+    }
 
     /**
      * Sets the user's password.
@@ -58,27 +79,17 @@ class SocialiteController extends Controller
      */
     public function handleProviderCallback(Request $request, string $provider)
     {
-        $this->connectToProvider($provider, Socialite::driver($provider)->user());
+        $user = $this->connectToProvider($provider, Socialite::driver($provider)->user());
 
-        return $this->loginPipeline($request)->then(function ($request) use ($provider) {
+        if (! Auth::check()) {
+            $this->guard->login($user, $request->filled('remember'));
+        }
+
+        return (new Pipeline(app()))->send($request)->through(array_filter([
+            PrepareAuthenticatedSession::class,
+        ]))->then(function ($request) use ($provider) {
             return $this->getRedirect($request, $provider);
         });
-    }
-
-    /**
-     * Get the authentication pipeline instance.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Pipeline\Pipeline
-     */
-    protected function loginPipeline(Request $request)
-    {
-        return (new Pipeline(app()))->send($request)->through(array_filter([
-            config('fortify.limiters.login') ? null : EnsureLoginIsNotThrottled::class,
-            RedirectIfTwoFactorAuthenticatable::class,
-            AttemptToAuthenticate::class,
-            PrepareAuthenticatedSession::class,
-        ]));
     }
 
     /**
