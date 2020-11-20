@@ -124,10 +124,6 @@ class InstallCommand extends Command
         copy(__DIR__.'/../../stubs/livewire/tailwind.config.js', base_path('tailwind.config.js'));
         copy(__DIR__.'/../../stubs/livewire/webpack.mix.js', base_path('webpack.mix.js'));
 
-        // Terms Of Service / Privacy Policy...
-        copy(__DIR__.'/../../stubs/terms.md', base_path('terms.md'));
-        copy(__DIR__.'/../../stubs/policy.md', base_path('policy.md'));
-
         // Directories...
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Fortify'));
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Jetstream'));
@@ -138,8 +134,13 @@ class InstallCommand extends Command
         (new Filesystem)->ensureDirectoryExists(resource_path('views/auth'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/layouts'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/profile'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('markdown'));
 
         (new Filesystem)->deleteDirectory(resource_path('sass'));
+
+        // Terms Of Service / Privacy Policy...
+        copy(__DIR__.'/../../stubs/resources/markdown/terms.md', resource_path('markdown/terms.md'));
+        copy(__DIR__.'/../../stubs/resources/markdown/policy.md', resource_path('markdown/policy.md'));
 
         // Service Providers...
         copy(__DIR__.'/../../stubs/app/Providers/JetstreamServiceProvider.php', app_path('Providers/JetstreamServiceProvider.php'));
@@ -266,10 +267,6 @@ EOF;
         copy(__DIR__.'/../../stubs/inertia/webpack.mix.js', base_path('webpack.mix.js'));
         copy(__DIR__.'/../../stubs/inertia/webpack.config.js', base_path('webpack.config.js'));
 
-        // Terms Of Service / Privacy Policy...
-        copy(__DIR__.'/../../stubs/terms.md', base_path('terms.md'));
-        copy(__DIR__.'/../../stubs/policy.md', base_path('policy.md'));
-
         // Directories...
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Fortify'));
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Jetstream'));
@@ -282,8 +279,13 @@ EOF;
         (new Filesystem)->ensureDirectoryExists(resource_path('js/Pages/Auth'));
         (new Filesystem)->ensureDirectoryExists(resource_path('js/Pages/Profile'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('markdown'));
 
         (new Filesystem)->deleteDirectory(resource_path('sass'));
+
+        // Terms Of Service / Privacy Policy...
+        copy(__DIR__.'/../../stubs/resources/markdown/terms.md', resource_path('markdown/terms.md'));
+        copy(__DIR__.'/../../stubs/resources/markdown/policy.md', resource_path('markdown/policy.md'));
 
         // Service Providers...
         copy(__DIR__.'/../../stubs/app/Providers/JetstreamServiceProvider.php', app_path('Providers/JetstreamServiceProvider.php'));

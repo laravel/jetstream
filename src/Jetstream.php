@@ -2,6 +2,7 @@
 
 namespace Laravel\Jetstream;
 
+use Illuminate\Support\Arr;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
 use Laravel\Jetstream\Contracts\CreatesTeams;
 use Laravel\Jetstream\Contracts\DeletesTeams;
@@ -410,5 +411,25 @@ class Jetstream
         static::$registersRoutes = false;
 
         return new static;
+    }
+
+    /**
+     * Get the path of the localized markdown template.
+     *
+     * @param  string  $name
+     * @return string|null
+     */
+    public static function localizedMarkdownPath($name)
+    {
+        $localName = preg_replace('#(\.md)$#i', '.'.app()->getLocale().'$1', $name);
+
+        return Arr::first([
+            resource_path('markdown/'.$localName),
+            resource_path('markdown/'.$name),
+            base_path($localName),
+            base_path($name),
+        ], function ($path) {
+            return file_exists($path);
+        });
     }
 }
