@@ -80,7 +80,13 @@ class SocialiteController extends Controller
     public function handleProviderCallback(Request $request, string $provider)
     {
         if ($request->has('error')) {
-            return redirect()->intended(route('login'))
+            if (Auth::check()) {
+                return redirect(config('fortify.home'))->dangerBanner(
+                    $request->error_description
+                );
+            }
+
+            return redirect(config('register'))
                 ->withErrors([$request->error_description]);
         }
 
