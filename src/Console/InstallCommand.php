@@ -130,11 +130,11 @@ class InstallCommand extends Command
         (new Filesystem)->ensureDirectoryExists(app_path('View/Components'));
         (new Filesystem)->ensureDirectoryExists(public_path('css'));
         (new Filesystem)->ensureDirectoryExists(resource_path('css'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('markdown'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/api'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/auth'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/layouts'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/profile'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('markdown'));
 
         (new Filesystem)->deleteDirectory(resource_path('sass'));
 

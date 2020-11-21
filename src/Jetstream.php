@@ -402,19 +402,7 @@ class Jetstream
     }
 
     /**
-     * Configure Jetstream to not register its routes.
-     *
-     * @return static
-     */
-    public static function ignoreRoutes()
-    {
-        static::$registersRoutes = false;
-
-        return new static;
-    }
-
-    /**
-     * Get the path of the localized markdown template.
+     * Find the path to a localized Markdown resource.
      *
      * @param  string  $name
      * @return string|null
@@ -426,10 +414,20 @@ class Jetstream
         return Arr::first([
             resource_path('markdown/'.$localName),
             resource_path('markdown/'.$name),
-            base_path($localName),
-            base_path($name),
         ], function ($path) {
             return file_exists($path);
         });
+    }
+
+    /**
+     * Configure Jetstream to not register its routes.
+     *
+     * @return static
+     */
+    public static function ignoreRoutes()
+    {
+        static::$registersRoutes = false;
+
+        return new static;
     }
 }
