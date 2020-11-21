@@ -33,6 +33,6 @@ class CreateConnectedAccountsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('connected_accounts');
+        Schema::dropIfExists('connected_accounts');
     }
 }
