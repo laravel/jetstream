@@ -26,7 +26,7 @@
                     <x-jet-connected-account provider="{{ $account->provider_name }}" created-at="{{ $account->created_at }}">
 
                         <x-slot name="action">
-                            @if ($this->accounts->count() > 1)
+                            @if ($this->accounts->count() > 1 || ! is_null($this->user->password))
                                 <x-jet-button wire:click="confirmRemove({{ $account->id }})" wire:loading.attr="disabled">
                                     {{ __('Remove') }}
                                 </x-jet-button>

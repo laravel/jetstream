@@ -24,7 +24,7 @@
                 <div v-for="(enabled, provider) in providers" :key="provider">
                     <jet-connected-account v-if="hasAccountForProvider(provider)" :provider="getAccountForProvider(provider).provider_name" :created-at="getAccountForProvider(provider).created_at">
                         <template #action>
-                            <jet-button @click.native="confirmRemove(getAccountForProvider(provider).id)" v-if="accounts.length > 1">
+                            <jet-button @click.native="confirmRemove(getAccountForProvider(provider).id)" v-if="accounts.length > 1 || hasPassword">
                                 Remove
                             </jet-button>
                         </template>
@@ -78,7 +78,7 @@
     import JetSecondaryButton from '@/Jetstream/SecondaryButton';
 
     export default {
-        props: ['accounts', 'providers'],
+        props: ['accounts', 'providers', 'hasPassword'],
 
         components: {
             JetActionLink,

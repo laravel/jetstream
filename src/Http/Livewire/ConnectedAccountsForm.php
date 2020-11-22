@@ -41,6 +41,16 @@ class ConnectedAccountsForm extends Component
     }
 
     /**
+     * Get the current user of the application.
+     *
+     * @return mixed
+     */
+    public function getUserProperty()
+    {
+        return Auth::user();
+    }
+
+    /**
      * Confirm that the user actually wants to remove the selected connected account.
      *
      * @param  mixed  $accountId

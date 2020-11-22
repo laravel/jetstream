@@ -33,7 +33,7 @@
                 </div>
 
                 <div v-if="$page.props.jetstream.hasSocialiteFeatures">
-                    <connected-accounts-form :accounts="connectedAccounts" :providers="socialiteProviders" class="mt-10 sm:mt-0" />
+                    <connected-accounts-form :accounts="connectedAccounts" :providers="socialiteProviders" :has-password="hasPassword" class="mt-10 sm:mt-0" />
 
                     <jet-section-border />
                 </div>
