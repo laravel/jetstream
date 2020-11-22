@@ -114,7 +114,6 @@ class SocialiteController extends Controller
             }
         }
 
-
         $this->connectToProvider($user, $provider, $providerUser);
 
         if (! Auth::check()) {
