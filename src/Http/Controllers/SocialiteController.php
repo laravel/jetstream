@@ -106,9 +106,14 @@ class SocialiteController extends Controller
             );
         }
 
-        if (! $user = $this->getUser($providerUser)) {
-            $user = $this->createsUser->create($provider, $providerUser);
+        if ($existing) {
+            $user = $existing->user;
+        } else {
+            if (! $user = $this->getUser($providerUser)) {
+                $user = $this->createsUser->create($provider, $providerUser);
+            }
         }
+
 
         $this->connectToProvider($user, $provider, $providerUser);
 
