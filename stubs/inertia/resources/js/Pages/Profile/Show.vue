@@ -34,11 +34,13 @@
 
                 <div v-if="$page.props.jetstream.hasSocialiteFeatures">
                     <connected-accounts-form :accounts="connectedAccounts" :providers="socialiteProviders" :has-password="hasPassword" class="mt-10 sm:mt-0" />
-
-                    <jet-section-border />
                 </div>
 
-                <logout-other-browser-sessions-form v-if="hasPassword" :sessions="sessions" class="mt-10 sm:mt-0" />
+                <div v-if="hasPassword">
+                    <jet-section-border />
+
+                    <logout-other-browser-sessions-form  :sessions="sessions" class="mt-10 sm:mt-0" />
+                </div>
 
                 <div  v-if="$page.props.jetstream.hasAccountDeletionFeatures && hasPassword != null">
                     <jet-section-border />

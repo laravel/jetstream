@@ -31,8 +31,6 @@
                 <div class="mt-10 sm:mt-0">
                     @livewire('profile.two-factor-authentication-form')
                 </div>
-
-                <x-jet-section-border />
             @endif
 
             @if (Laravel\Jetstream\Jetstream::hasSocialiteFeatures())
@@ -43,6 +41,8 @@
 
 
             @if ( ! is_null($user->password))
+                <x-jet-section-border />
+
                 <div class="mt-10 sm:mt-0">
                     @livewire('profile.logout-other-browser-sessions-form')
                 </div>
