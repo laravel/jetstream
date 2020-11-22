@@ -83,14 +83,9 @@ class SocialiteController extends Controller
     public function handleProviderCallback(Request $request, string $provider)
     {
         if ($request->has('error')) {
-            if (Auth::check()) {
-                return redirect(config('fortify.home'))->dangerBanner(
-                    $request->error_description
-                );
-            }
-
-            return redirect(config('register'))
-                ->withErrors([$request->error_description]);
+            return Auth::check()
+                ? redirect(config('fortify.home'))->dangerBanner($request->error_description)
+                : redirect()->route('register')->withErrors($request->error_description);
         }
 
         $providerUser = Socialite::driver($provider)->user();
@@ -106,13 +101,9 @@ class SocialiteController extends Controller
             );
         }
 
-        if ($existing) {
-            $user = $existing->user;
-        } else {
-            if (! $user = $this->getUser($providerUser)) {
-                $user = $this->createsUser->create($provider, $providerUser);
-            }
-        }
+        $user = $existing
+            ? $existing->user
+            : ($this->getUser($providerUser) ?? $this->createsUser->create($provider, $providerUser));
 
         $this->connectToProvider($user, $provider, $providerUser);
 
