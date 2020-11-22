@@ -95,17 +95,19 @@ class SocialiteController extends Controller
 
         $providerUser = Socialite::driver($provider)->user();
 
-        if (! $user = $this->getUser($providerUser)) {
-            $user = $this->createsUser->create($provider, $providerUser);
-        }
-
         $existing = ConnectedAccount::firstWhere([
             'provider_id' => $providerUser->getId(),
             'provider_name' => $provider,
         ]);
 
-        if($existing && Auth::check() && Auth::user()->id != $existing->user_id) {
-            //  do not pass go, do not collect $200
+        if ($existing && Auth::check() && Auth::user()->id != $existing->user_id) {
+            return redirect(config('fortify.home'))->banner(
+                __('That account is already associated with a user. Please use a different account.')
+            );
+        }
+
+        if (! $user = $this->getUser($providerUser)) {
+            $user = $this->createsUser->create($provider, $providerUser);
         }
 
         $this->connectToProvider($user, $provider, $providerUser);
