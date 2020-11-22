@@ -505,16 +505,20 @@ EOF;
         // Publish Socialite Migrations...
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-socialite-migrations', '--force' => true]);
 
-        // Models...
-        copy(__DIR__.'/../../stubs/app/Models/ConnectedAccount.php', app_path('Models/ConnectedAccount.php'));
-
-        // User model exists amd has with teams support, so we will replace this
-        // with one that supports both teams and Socialite connected accounts.
-        // Otherwise, we'll just publish a user model that supports the latter.
-        if ((new Filesystem)->exists(app_path('Models/User.php')) && Str::contains(file_get_contents(app_path('Models/User.php')), 'use HasTeams;')) {
+        if ($this->option('teams')) {
+            // Models...
+            copy(__DIR__.'/../../stubs/app/Models/ConnectedAccount.php', app_path('Models/ConnectedAccount.php'));
             copy(__DIR__.'/../../stubs/app/Models/UserWithTeamsAndConnectedAccounts.php', app_path('Models/User.php'));
+
+            // Actions...
+            copy(__DIR__.'/../../stubs/app/Actions/Jetstream/CreateUserWithTeamsFromProvider.php', app_path('Actions/Jetstream/CreateUserFromProvider.php'));
         } else {
+            // Models...
+            copy(__DIR__.'/../../stubs/app/Models/ConnectedAccount.php', app_path('Models/ConnectedAccount.php'));
             copy(__DIR__.'/../../stubs/app/Models/UserWithConnectedAccounts.php', app_path('Models/User.php'));
+
+            // Actions
+            copy(__DIR__.'/../../stubs/app/Actions/Jetstream/CreateUserFromProvider.php', app_path('Actions/Jetstream/CreateUserFromProvider.php'));
         }
 
         // Configuration...
@@ -522,6 +526,7 @@ EOF;
 
         // Set user password...
         $this->replaceInFile('// Jetstream::setUserPasswordsUsing(SetUserPassword::class);', 'Jetstream::setUserPasswordsUsing(SetUserPassword::class);', app_path('Providers/JetstreamServiceProvider.php'));
+        $this->replaceInFile('// Jetstream::createUsersFromProviderUsing(CreateUserFromProvider::class);', 'Jetstream::createUsersFromProviderUsing(CreateUserFromProvider::class);', app_path('Providers/JetstreamServiceProvider.php'));
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Actions\Jetstream\AddTeamMember;
 use App\Actions\Jetstream\CreateTeam;
+use App\Actions\Jetstream\CreateUserFromProvider;
 use App\Actions\Jetstream\DeleteTeam;
 use App\Actions\Jetstream\DeleteUser;
 use App\Actions\Jetstream\InviteTeamMember;
@@ -41,7 +42,10 @@ class JetstreamServiceProvider extends ServiceProvider
         Jetstream::removeTeamMembersUsing(RemoveTeamMember::class);
         Jetstream::deleteTeamsUsing(DeleteTeam::class);
         Jetstream::deleteUsersUsing(DeleteUser::class);
+
+        // Socialite...
         // Jetstream::setUserPasswordsUsing(SetUserPassword::class);
+        // Jetstream::createUsersFromProviderUsing(CreateUserFromProvider::class);
     }
 
     /**

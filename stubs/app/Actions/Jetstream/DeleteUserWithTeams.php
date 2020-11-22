@@ -3,6 +3,7 @@
 namespace App\Actions\Jetstream;
 
 use Illuminate\Support\Facades\DB;
+use Laravel\Jetstream\Contracts\DeletesConnectedAccounts;
 use Laravel\Jetstream\Contracts\DeletesTeams;
 use Laravel\Jetstream\Contracts\DeletesUsers;
 
@@ -36,6 +37,7 @@ class DeleteUser implements DeletesUsers
     {
         DB::transaction(function () use ($user) {
             $this->deleteTeams($user);
+            $this->deleteConnectedAccounts($user);
             $user->deleteProfilePhoto();
             $user->tokens->each->delete();
             $user->delete();
@@ -55,5 +57,18 @@ class DeleteUser implements DeletesUsers
         $user->ownedTeams->each(function ($team) {
             $this->deletesTeams->delete($team);
         });
+    }
+
+    /**
+     * Delete the connected accounts and account associations attached to the user.
+     *
+     * @param  mixed  $user
+     * @return void
+     */
+    protected function deleteConnectedAccounts($user)
+    {
+        if (method_exists($user, 'connectedAccounts')) {
+            $user->connectedAccounts->each->delete();
+        }
     }
 }

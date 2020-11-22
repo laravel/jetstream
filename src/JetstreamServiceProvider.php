@@ -2,6 +2,7 @@
 
 namespace Laravel\Jetstream;
 
+use App\Actions\Jetstream\CreateUserFromProvider;
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\RedirectResponse;
@@ -12,6 +13,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
 use Inertia\Inertia;
 use Laravel\Fortify\Fortify;
+use Laravel\Jetstream\Contracts\CreatesUserFromProvider;
 use Laravel\Jetstream\Http\Livewire\ApiTokenManager;
 use Laravel\Jetstream\Http\Livewire\ConnectedAccountsForm;
 use Laravel\Jetstream\Http\Livewire\CreateTeamForm;
@@ -96,6 +98,10 @@ class JetstreamServiceProvider extends ServiceProvider
 
         if (config('jetstream.stack') === 'inertia') {
             $this->bootInertia();
+        }
+
+        if (Jetstream::hasSocialiteFeatures()) {
+            $this->app->singleton(CreatesUserFromProvider::class, CreateUserFromProvider::class);
         }
     }
 

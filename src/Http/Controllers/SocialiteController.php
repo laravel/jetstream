@@ -2,16 +2,17 @@
 
 namespace Laravel\Jetstream\Http\Controllers;
 
+use App\Models\ConnectedAccount;
+use App\Models\User;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Pipeline\Pipeline;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Fortify\Actions\PrepareAuthenticatedSession;
-use Laravel\Fortify\Contracts\LoginResponse;
 use Laravel\Jetstream\ConnectsToSocialProvider;
+use Laravel\Jetstream\Contracts\CreatesUserFromProvider;
 use Laravel\Jetstream\Contracts\SetsUserPasswords;
+use Laravel\Socialite\Contracts\User as SocialiteUserContract;
 use Laravel\Socialite\Facades\Socialite;
 
 class SocialiteController extends Controller
@@ -26,14 +27,22 @@ class SocialiteController extends Controller
     protected $guard;
 
     /**
+     * The creates user implementation.
+     *
+     * @var  \Laravel\Jetstream\Contracts\CreatesUserFromProvider;
+     */
+    protected $createsUser;
+
+    /**
      * Create a new controller instance.
      *
      * @param  \Illuminate\Contracts\Auth\StatefulGuard  $guard
      * @return void
      */
-    public function __construct(StatefulGuard $guard)
+    public function __construct(StatefulGuard $guard, CreatesUserFromProvider $createsUser)
     {
         $this->guard = $guard;
+        $this->createsUser = $createsUser;
     }
 
     /**
@@ -61,12 +70,6 @@ class SocialiteController extends Controller
      */
     public function redirectToProvider(Request $request, string $provider)
     {
-        // Indentifies whether the user is already logged in
-        // and choosing to connect with a social account - used to show success banner.
-        if (! is_null($request->user())) {
-            session(['connectAccount' => true]);
-        }
-
         return Socialite::driver($provider)->redirect();
     }
 
@@ -90,36 +93,47 @@ class SocialiteController extends Controller
                 ->withErrors([$request->error_description]);
         }
 
-        $user = $this->connectToProvider($provider, Socialite::driver($provider)->user());
+        $providerUser = Socialite::driver($provider)->user();
 
-        if (! Auth::check()) {
-            $this->guard->login($user, $request->filled('remember'));
+        if (! $user = $this->getUser($providerUser)) {
+            $user = $this->createsUser->create($provider, $providerUser);
         }
 
-        return (new Pipeline(app()))->send($request)->through(array_filter([
-            PrepareAuthenticatedSession::class,
-        ]))->then(function ($request) use ($provider) {
-            return $this->getRedirect($request, $provider);
-        });
+        $existing = ConnectedAccount::firstWhere([
+            'provider_id' => $providerUser->getId(),
+            'provider_name' => $provider,
+        ]);
+
+        if($existing && Auth::check() && Auth::user()->id != $existing->user_id) {
+            //  do not pass go, do not collect $200
+        }
+
+        $this->connectToProvider($user, $provider, $providerUser);
+
+        if (! Auth::check()) {
+            $this->guard->login($user);
+
+            return redirect(config('fortify.home'));
+        }
+
+        return redirect(config('fortify.home'))->banner(
+            __('You have successfully connected '.ucfirst($provider).' to your account.')
+        );
     }
 
     /**
-     * Determine the redirect that should be used after connecting to a social provider.
+     * Find a user from a given Socialite provided user, or create a new
+     * one from the details given by the provider.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string $string
-     * @return Illuminate\Contracts\Support\Responsable;
+     * @param  \Laravel\Socialite\Contracts\User  $providerUser
+     * @return \Illuminate\Contracts\Auth\Authenticatable
      */
-    protected function getRedirect(Request $request, string $provider)
+    protected function getUser(SocialiteUserContract $providerUser)
     {
-        if (session('connectAccount')) {
-            session()->forget('connectAccount');
-
-            return redirect(config('fortify.home'))->banner(
-                __('You have successfully connected '.ucfirst($provider).' to your account.')
-            );
+        if (Auth::check()) {
+            return Auth::user();
         }
 
-        return app(LoginResponse::class);
+        return User::where('email', $providerUser->getEmail())->first();
     }
 }

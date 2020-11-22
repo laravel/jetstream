@@ -5,6 +5,7 @@ namespace Laravel\Jetstream;
 use Illuminate\Support\Arr;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
 use Laravel\Jetstream\Contracts\CreatesTeams;
+use Laravel\Jetstream\Contracts\CreatesUserFromProvider;
 use Laravel\Jetstream\Contracts\DeletesTeams;
 use Laravel\Jetstream\Contracts\DeletesUsers;
 use Laravel\Jetstream\Contracts\InvitesTeamMembers;
@@ -410,6 +411,17 @@ class Jetstream
     public static function createTeamsUsing(string $class)
     {
         return app()->singleton(CreatesTeams::class, $class);
+    }
+
+    /**
+     * Register a class / callback that should be used to create users from social providers.
+     *
+     * @param  string  $class
+     * @return void
+     */
+    public static function createUsersFromProviderUsing(string $class)
+    {
+        return app()->singleton(CreatesUserFromProvider::class, $class);
     }
 
     /**

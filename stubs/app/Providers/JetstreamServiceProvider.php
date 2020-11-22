@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Actions\Jetstream\CreateUserFromProvider;
 use App\Actions\Jetstream\DeleteUser;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;
@@ -28,7 +29,10 @@ class JetstreamServiceProvider extends ServiceProvider
         $this->configurePermissions();
 
         Jetstream::deleteUsersUsing(DeleteUser::class);
+
+        // Socialite...
         // Jetstream::setUserPasswordsUsing(SetUserPassword::class);
+        // Jetstream::createUsersFromProviderUsing(CreateUserFromProvider::class);
     }
 
     /**
