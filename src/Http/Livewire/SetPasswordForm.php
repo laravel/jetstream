@@ -35,7 +35,11 @@ class SetPasswordForm extends Component
             'password_confirmation' => '',
         ];
 
-        $this->emit('saved');
+        // Show banner notification.
+        session()->put('flash.bannerStyle', 'success');
+        session()->put('flash.banner', 'Password saved.');
+
+        return redirect(route('profile.show'));
     }
 
     /**

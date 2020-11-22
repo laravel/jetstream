@@ -38,13 +38,13 @@
                     <jet-section-border />
                 </div>
 
-                <div v-if="hasPassword">
-                    <logout-other-browser-sessions-form :sessions="sessions" class="mt-10 sm:mt-0" />
+                <logout-other-browser-sessions-form v-if="hasPassword" :sessions="sessions" class="mt-10 sm:mt-0" />
 
+                <div  v-if="$page.props.jetstream.hasAccountDeletionFeatures && hasPassword != null">
                     <jet-section-border />
-                </div>
 
-                <delete-user-form v-if="$page.props.jetstream.hasAccountDeletionFeatures && hasPassword != null" class="mt-10 sm:mt-0" />
+                    <delete-user-form class="mt-10 sm:mt-0" />
+                </div>
             </div>
         </div>
     </app-layout>
