@@ -101,7 +101,7 @@ class SocialiteController extends Controller
         ]);
 
         if ($existing && Auth::check() && Auth::user()->id != $existing->user_id) {
-            return redirect(config('fortify.home'))->banner(
+            return redirect(config('fortify.home'))->dangerBanner(
                 __('That account is already associated with a user. Please use a different account.')
             );
         }
