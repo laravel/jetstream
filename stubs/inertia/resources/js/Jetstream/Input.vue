@@ -1,5 +1,5 @@
 <template>
-    <input class="form-input rounded-md shadow-sm" :value="value" @input="$emit('input', $event.target.value)" ref="input">
+    <input class="rounded-md shadow-sm border-gray-300" :value="value" @input="$emit('input', $event.target.value)" ref="input">
 </template>
 
 <script>
