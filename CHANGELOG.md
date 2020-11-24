@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v1.6.1...1.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v1.6.2...1.x)
+
+
+## [v1.6.2 (2020-11-24)](https://github.com/laravel/jetstream/compare/v1.6.1...v1.6.2)
+
+### Fixed
+- Use Alpine directly for guest layout ([#485](https://github.com/laravel/jetstream/pull/485))
 
 
 ## [v1.6.1 (2020-11-17)](https://github.com/laravel/jetstream/compare/v1.6.0...v1.6.1)
