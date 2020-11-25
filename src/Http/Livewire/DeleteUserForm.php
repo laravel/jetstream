@@ -32,6 +32,8 @@ class DeleteUserForm extends Component
      */
     public function confirmUserDeletion()
     {
+        $this->resetErrorBag();
+
         $this->password = '';
 
         $this->dispatchBrowserEvent('confirming-delete-user');
