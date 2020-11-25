@@ -4,9 +4,9 @@ namespace Laravel\Jetstream\Http\Controllers\Inertia;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Laravel\Jetstream\Actions\RemoveTeamMember;
 use Laravel\Jetstream\Actions\UpdateTeamMemberRole;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
+use Laravel\Jetstream\Contracts\RemovesTeamMembers;
 use Laravel\Jetstream\Jetstream;
 
 class TeamMemberController extends Controller
@@ -64,7 +64,7 @@ class TeamMemberController extends Controller
     {
         $team = Jetstream::newTeamModel()->findOrFail($teamId);
 
-        app(RemoveTeamMember::class)->remove(
+        app(RemovesTeamMembers::class)->remove(
             $request->user(),
             $team,
             $user = Jetstream::findUserByIdOrFail($userId)
