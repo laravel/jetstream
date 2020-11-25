@@ -114,7 +114,6 @@ class InstallCommand extends Command
         $this->updateNodePackages(function ($packages) {
             return [
                 'alpinejs' => '^2.7.3',
-                '@tailwindcss/ui' => '^0.6.0',
                 '@tailwindcss/forms' => '^0.2.1',
                 'tailwindcss' => 'npm:@tailwindcss/postcss7-compat@^2.0.1',
                 'autoprefixer' => '^9.8.6',
