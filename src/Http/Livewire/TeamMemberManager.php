@@ -5,12 +5,9 @@ namespace Laravel\Jetstream\Http\Livewire;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Jetstream\Actions\UpdateTeamMemberRole;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
-<<<<<<< HEAD
 use Laravel\Jetstream\Contracts\InvitesTeamMembers;
-use Laravel\Jetstream\Features;
-=======
 use Laravel\Jetstream\Contracts\RemovesTeamMembers;
->>>>>>> fe7eaf8... Allow remove team member action to be registered and overridden
+use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\TeamInvitation;
 use Livewire\Component;

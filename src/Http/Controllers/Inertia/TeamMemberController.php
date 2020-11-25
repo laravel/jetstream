@@ -7,8 +7,8 @@ use Illuminate\Routing\Controller;
 use Laravel\Jetstream\Actions\UpdateTeamMemberRole;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
 use Laravel\Jetstream\Contracts\InvitesTeamMembers;
-use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Contracts\RemovesTeamMembers;
+use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Jetstream;
 
 class TeamMemberController extends Controller
