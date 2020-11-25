@@ -33,7 +33,7 @@
                 <div class="mt-4">
                     <x-jet-label for="terms">
                         <div class="flex items-center">
-                            <input class="form-checkbox h-4 w-4 mr-2 text-gray-800 transition duration-150 ease-in-out" type="checkbox" name="terms" id="terms">
+                            <input class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 h-4 w-4 mr-2 text-gray-800 transition duration-150 ease-in-out" type="checkbox" name="terms" id="terms">
 
                             <div>
                                 {!! __('I agree to the :terms_of_service and :privacy_policy', [
