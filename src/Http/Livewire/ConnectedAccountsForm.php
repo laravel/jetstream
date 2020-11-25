@@ -4,11 +4,14 @@ namespace Laravel\Jetstream\Http\Livewire;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Laravel\Jetstream\InteractsWithBanner;
 use Laravel\Jetstream\Jetstream;
 use Livewire\Component;
 
 class ConnectedAccountsForm extends Component
 {
+    use InteractsWithBanner;
+
     /**
      * Indicates whether or not removal of a provider is being confirmed.
      *
@@ -60,8 +63,6 @@ class ConnectedAccountsForm extends Component
     {
         $this->selectedAccountId = $accountId;
 
-        $this->dispatchBrowserEvent('confirming-remove-oauth-provider');
-
         $this->confirmingRemove = true;
     }
 
@@ -79,6 +80,8 @@ class ConnectedAccountsForm extends Component
             ->delete();
 
         $this->confirmingRemove = false;
+
+        $this->banner('Account removed');
     }
 
     /**
