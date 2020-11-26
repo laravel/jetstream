@@ -113,10 +113,11 @@ class InstallCommand extends Command
         // NPM Packages...
         $this->updateNodePackages(function ($packages) {
             return [
+                '@tailwindcss/forms' => '^0.2.1',
                 'alpinejs' => '^2.7.3',
-                '@tailwindcss/ui' => '^0.6.0',
+                'autoprefixer' => '^9.8.6',
                 'postcss-import' => '^12.0.1',
-                'tailwindcss' => '^1.8.0',
+                'tailwindcss' => 'npm:@tailwindcss/postcss7-compat@^2.0.1',
             ] + $packages;
         });
 
@@ -192,7 +193,7 @@ class InstallCommand extends Command
 
         $this->line('');
         $this->info('Livewire scaffolding installed successfully.');
-        $this->comment('Please execute the "npm install && npm run dev" command to build your assets.');
+        $this->comment('Please execute "npm install && npm run dev" to build your assets.');
     }
 
     /**
@@ -243,12 +244,13 @@ EOF;
                 '@inertiajs/inertia' => '^0.4.0',
                 '@inertiajs/inertia-vue' => '^0.3.0',
                 '@intlify/vue-i18n-loader' => '^1.0.0',
-                '@tailwindcss/ui' => '^0.6.0',
+                '@tailwindcss/forms' => '^0.2.1',
                 'laravel-jetstream' => '^1.0.0',
                 'moment' => '^2.26.0',
                 'portal-vue' => '^2.1.7',
                 'postcss-import' => '^12.0.1',
-                'tailwindcss' => '^1.8.0',
+                'tailwindcss' => 'npm:@tailwindcss/postcss7-compat@^2.0.1',
+                'autoprefixer' => '^9.8.6',
                 'vue' => '^2.5.17',
                 'vue-i18n' => '^8.22.1',
                 'vue-template-compiler' => '^2.6.10',
@@ -348,7 +350,7 @@ EOF;
 
         $this->line('');
         $this->info('Inertia scaffolding installed successfully.');
-        $this->comment('Please execute the "npm install && npm run dev" command to build your assets.');
+        $this->comment('Please execute "npm install && npm run dev" to build your assets.');
     }
 
     /**

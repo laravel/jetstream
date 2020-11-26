@@ -30,9 +30,9 @@
             <div class="mt-4" v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature">
                 <jet-label for="terms">
                     <div class="flex items-center">
-                        <input class="form-checkbox h-4 w-4 mr-2 text-gray-800 transition duration-150 ease-in-out" type="checkbox" name="terms" id="terms" v-model="form.terms">
+                        <jet-checkbox name="terms" id="terms" v-model="form.terms"/>
 
-                        <i18n path="I agree to the {terms_of_service} and {privacy_policy}" tag="div">
+                        <i18n path="I agree to the {terms_of_service} and {privacy_policy}" tag="div" class="ml-2">
                             <template #terms_of_service>
                                 <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900">{{ $t('Terms of Service') }}</a>
                             </template>
@@ -63,6 +63,7 @@
     import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
     import JetButton from '@/Jetstream/Button'
     import JetInput from '@/Jetstream/Input'
+    import JetCheckbox from "@/Jetstream/Checkbox";
     import JetLabel from '@/Jetstream/Label'
     import JetValidationErrors from '@/Jetstream/ValidationErrors'
 
@@ -72,6 +73,7 @@
             JetAuthenticationCardLogo,
             JetButton,
             JetInput,
+            JetCheckbox,
             JetLabel,
             JetValidationErrors
         },
