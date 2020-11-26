@@ -303,8 +303,9 @@
             updateRole() {
                 this.updateRoleForm.put(route('team-members.update', [this.team, this.managingRoleFor]), {
                     preserveScroll: true,
-                }).then(() => {
-                    this.currentlyManagingRole = false
+                    onSuccess: () => {
+                        this.currentlyManagingRole = false
+                    },
                 })
             },
 
@@ -324,8 +325,9 @@
                 this.removeTeamMemberForm.delete(route('team-members.destroy', [this.team, this.teamMemberBeingRemoved]), {
                     preserveScroll: true,
                     preserveState: true,
-                }).then(() => {
-                    this.teamMemberBeingRemoved = null
+                    onSuccess: () => {
+                        this.teamMemberBeingRemoved = null
+                    },
                 })
             },
 
