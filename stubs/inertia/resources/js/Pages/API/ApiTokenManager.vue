@@ -25,7 +25,7 @@
                     <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div v-for="permission in availablePermissions" :key="permission">
                             <label class="flex items-center">
-                                <input type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" :value="permission" v-model="createApiTokenForm.permissions">
+                                <jet-checkbox :value="permission" v-model="createApiTokenForm.permissions"/>
                                 <span class="ml-2 text-sm text-gray-600">{{ permission }}</span>
                             </label>
                         </div>
@@ -121,7 +121,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div v-for="permission in availablePermissions" :key="permission">
                         <label class="flex items-center">
-                            <input type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" :value="permission" v-model="updateApiTokenForm.permissions">
+                            <jet-checkbox :value="permission" v-model="updateApiTokenForm.permissions"/>
                             <span class="ml-2 text-sm text-gray-600">{{ permission }}</span>
                         </label>
                     </div>
@@ -171,6 +171,7 @@
     import JetDialogModal from '@/Jetstream/DialogModal'
     import JetFormSection from '@/Jetstream/FormSection'
     import JetInput from '@/Jetstream/Input'
+    import JetCheckbox from '@/Jetstream/Checkbox'
     import JetInputError from '@/Jetstream/InputError'
     import JetLabel from '@/Jetstream/Label'
     import JetSecondaryButton from '@/Jetstream/SecondaryButton'
@@ -186,6 +187,7 @@
             JetDialogModal,
             JetFormSection,
             JetInput,
+            JetCheckbox,
             JetInputError,
             JetLabel,
             JetSecondaryButton,

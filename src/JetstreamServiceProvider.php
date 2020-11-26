@@ -119,6 +119,7 @@ class JetstreamServiceProvider extends ServiceProvider
             $this->registerComponent('dropdown-link');
             $this->registerComponent('form-section');
             $this->registerComponent('input');
+            $this->registerComponent('checkbox');
             $this->registerComponent('input-error');
             $this->registerComponent('label');
             $this->registerComponent('modal');
