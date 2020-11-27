@@ -3,13 +3,13 @@
 namespace Laravel\Jetstream\Tests;
 
 use App\Actions\Jetstream\CreateTeam;
+use App\Actions\Jetstream\RemoveTeamMember;
 use App\Models\Team;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\ValidationException;
-use Laravel\Jetstream\Actions\RemoveTeamMember;
 use Laravel\Jetstream\Events\RemovingTeamMember;
 use Laravel\Jetstream\Events\TeamMemberRemoved;
 use Laravel\Jetstream\Jetstream;
