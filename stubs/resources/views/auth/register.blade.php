@@ -33,7 +33,6 @@
                 <div class="mt-4">
                     <x-jet-label for="terms">
                         <div class="flex items-center">
-                            <input  type="checkbox" name="terms" id="terms">
                             <x-jet-checkbox name="terms" id="terms"/>
 
                             <div class="ml-2">
