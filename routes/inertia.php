@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Http\Controllers\CurrentTeamController;
 use Laravel\Jetstream\Http\Controllers\Inertia\ApiTokenController;
 use Laravel\Jetstream\Http\Controllers\Inertia\CurrentUserController;
 use Laravel\Jetstream\Http\Controllers\Inertia\OtherBrowserSessionsController;
+use Laravel\Jetstream\Http\Controllers\Inertia\PasswordController;
 use Laravel\Jetstream\Http\Controllers\Inertia\PrivacyPolicyController;
 use Laravel\Jetstream\Http\Controllers\Inertia\ProfilePhotoController;
 use Laravel\Jetstream\Http\Controllers\Inertia\RemoveConnectedAccountsController;
@@ -77,5 +79,8 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
     if (Jetstream::hasSocialiteFeatures()) {
         Route::get('/socialite/{provider}', [SocialiteController::class, 'redirectToProvider'])->name('socialite.redirect');
         Route::get('/socialite/{provider}/callback', [SocialiteController::class, 'handleProviderCallback'])->name('socialite.callback');
+
+        // Set user password
+        Route::put('/user/set-password', [PasswordController::class, 'store'])->name('user-password.set');
     }
 });
