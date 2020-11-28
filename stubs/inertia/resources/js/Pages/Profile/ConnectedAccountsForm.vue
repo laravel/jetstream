@@ -30,7 +30,7 @@
                         </template>
                     </jet-connected-account>
 
-                    <jet-connected-account v-else-if="enabled === true" :provider="provider" created-at="Not connected">
+                    <jet-connected-account v-else-if="enabled === true" :provider="provider">
                         <template #action>
                             <jet-action-link :href="route('socialite.redirect', {provider})">
                                 Connect

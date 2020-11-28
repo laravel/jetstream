@@ -15,8 +15,12 @@
                     {{ provider.charAt(0).toUpperCase() + provider.slice(1)  }}
                 </div>
 
-                <div class="text-xs text-gray-500">
-                    Added on {{ createdAt }}
+                <div v-if="createdAt !== null" class="text-xs text-gray-500">
+                    Added on {{ createdAt }}.
+                </div>
+
+                <div v-else class="text-xs text-gray-500">
+                    Not connected.
                 </div>
             </div>
         </div>
@@ -35,7 +39,13 @@
     import JetBitbucketIcon from '@/Socialite/BitbucketIcon';
 
     export default {
-        props: ['provider', 'createdAt'],
+        props: {
+            provider: String,
+            createdAt: {
+                type: String,
+                defaut: null,
+            }
+        },
 
         components: {
             JetFacebookIcon,
