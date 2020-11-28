@@ -64,7 +64,7 @@
     import ConnectedAccountsForm from './ConnectedAccountsForm';
 
     export default {
-        props: ['sessions', 'connectedAccounts', 'socialiteProviders'],
+        props: ['sessions', 'connectedAccounts', 'hasPassword', 'socialiteProviders'],
 
         components: {
             ConnectedAccountsForm,
