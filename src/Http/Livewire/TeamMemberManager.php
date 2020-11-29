@@ -214,10 +214,10 @@ class TeamMemberManager extends Component
     /**
      * Remove a team member from the team.
      *
-     * @param  \Laravel\Jetstream\Actions\RemoveTeamMember  $remover
+     * @param  \Laravel\Jetstream\Contracts\RemovesTeamMembers  $remover
      * @return void
      */
-    public function removeTeamMember(RemoveTeamMember $remover)
+    public function removeTeamMember(RemovesTeamMembers $remover)
     {
         $remover->remove(
             $this->user,
