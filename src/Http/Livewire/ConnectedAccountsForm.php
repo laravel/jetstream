@@ -81,7 +81,7 @@ class ConnectedAccountsForm extends Component
 
         $this->confirmingRemove = false;
 
-        $this->banner('Account removed');
+        $this->banner(__('Account removed.'));
     }
 
     /**

@@ -114,7 +114,7 @@ class SocialiteController extends Controller
         }
 
         return redirect(config('fortify.home'))->banner(
-            __('You have successfully connected '.ucfirst($provider).' to your account.')
+            __('You have successfully connected :Provider to your account.', ['provider' => $provider])
         );
     }
 

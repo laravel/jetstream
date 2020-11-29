@@ -37,9 +37,7 @@ class ShareInertiaData
                     'hasTermsAndPrivacyPolicyFeature' => Jetstream::hasTermsAndPrivacyPolicyFeature(),
                     'locale' => app()->getLocale(),
                     'managesProfilePhotos' => Jetstream::managesProfilePhotos(),
-                    'managesProfilePhotos' => Jetstream::managesProfilePhotos(),
                     'hasSocialiteFeatures' => Jetstream::hasSocialiteFeatures(),
-                    'hasAccountDeletionFeatures' => Jetstream::hasAccountDeletionFeatures(),
                 ];
             },
             'user' => function () use ($request) {

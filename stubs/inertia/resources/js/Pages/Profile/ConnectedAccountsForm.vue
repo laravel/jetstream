@@ -1,23 +1,23 @@
 <template>
     <jet-action-section>
         <template #title>
-            Connected Accounts
+            {{ $t('Connected Accounts') }}
         </template>
 
         <template #description>
-            Manage and remove your connect accounts.
+            {{ $t('Manage and remove your connect accounts.') }}
         </template>
 
         <template #content>
             <h3 class="text-lg font-medium text-gray-900" v-if="accounts.length === 0">
-                You have no connected accounts.
+                {{ $t('You have no connected accounts.') }}
             </h3>
             <h3 class="text-lg font-medium text-gray-900" v-else>
-                Your connected accounts.
+                {{ $t('Your connected accounts.') }}
             </h3>
 
             <div class="mt-3 ax-w-xl text-sm text-gray-600">
-                You are free to connect any social accounts to your profile and may remove any connected accounts at any time. If you feel any of your connected accounts have been compromised, you should disconnect them immediately and change your password.
+                {{ $t('You are free to connect any social accounts to your profile and may remove any connected accounts at any time. If you feel any of your connected accounts have been compromised, you should disconnect them immediately and change your password.') }}
             </div>
 
             <div class="mt-5 space-y-6">
@@ -25,7 +25,7 @@
                     <jet-connected-account v-if="hasAccountForProvider(provider)" :provider="getAccountForProvider(provider).provider_name" :created-at="getAccountForProvider(provider).created_at">
                         <template #action>
                             <jet-button @click.native="confirmRemove(getAccountForProvider(provider).id)" v-if="accounts.length > 1 || hasPassword">
-                                Remove
+                                {{ $t('Remove') }}
                             </jet-button>
                         </template>
                     </jet-connected-account>
@@ -33,7 +33,7 @@
                     <jet-connected-account v-else-if="enabled === true" :provider="provider">
                         <template #action>
                             <jet-action-link :href="route('socialite.redirect', {provider})">
-                                Connect
+                                {{ $t('Connect') }}
                             </jet-action-link>
                         </template>
                     </jet-connected-account>
@@ -43,22 +43,22 @@
             <!-- Confirmation Modal -->
             <jet-dialog-modal :show="confirmingRemove" @close="confirmingRemove = false">
                 <template #title>
-                    Remove Connected Account
+                    {{ $t('Remove Connected Account') }}
                 </template>
 
                 <template #content>
-                    Please confirm your removal of this account - this action cannot be undone.
+                    {{ $t('Please confirm your removal of this account - this action cannot be undone.') }}
                 </template>
 
                 <template #footer>
                     <jet-secondary-button @click.native="confirmingRemove = false">
-                        Nevermind
+                        {{ $t('Nevermind') }}
                     </jet-secondary-button>
 
                     <jet-button class="ml-2"
                                 @click.native="removeConnectedAccount(accountId)"
                                 :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                        Remove Connected Account
+                        {{ $t('Remove Connected Account') }}
                     </jet-button>
                 </template>
             </jet-dialog-modal>
@@ -133,10 +133,11 @@
             removeConnectedAccount(id) {
                 this.form.post(`/user/connected-account/${ id }`, {
                     preserveScroll: true
-                }).then(response => {
-                    if (!this.form.hasErrors()) {
-                        this.confirmingRemove = false;
-                    }
+                    onSuccess: () => {
+                        if (! this.form.hasErrors()) {
+                            this.confirmingRemove = false;
+                        }
+                    },
                 });
             },
         }

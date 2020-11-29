@@ -16,11 +16,11 @@
                 </div>
 
                 <div v-if="createdAt !== null" class="text-xs text-gray-500">
-                    Added on {{ createdAt }}.
+                    {{ $t('Added on {added_on}.', { 'added_on': createdAt }) }}
                 </div>
 
                 <div v-else class="text-xs text-gray-500">
-                    Not connected.
+                    {{ $t('Not connected.') }}
                 </div>
             </div>
         </div>

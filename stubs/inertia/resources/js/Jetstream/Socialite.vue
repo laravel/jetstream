@@ -2,7 +2,7 @@
     <div>
         <div class="flex flex-row items-center justify-between py-4 text-gray-500">
             <hr class="w-full mr-2">
-                Or
+                {{ $t('Or') }}
             <hr class="w-full ml-2">
         </div>
 
