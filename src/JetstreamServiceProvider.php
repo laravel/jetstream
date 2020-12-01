@@ -171,7 +171,7 @@ class JetstreamServiceProvider extends ServiceProvider
             Route::group([
                 'namespace' => 'Laravel\Jetstream\Http\Controllers',
                 'domain' => config('jetstream.domain', null),
-                'prefix' => config('jetstream.path', null),
+                'prefix' => config('jetstream.prefix', null),
             ], function () {
                 $this->loadRoutesFrom(__DIR__.'/../routes/'.config('jetstream.stack').'.php');
             });
