@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v1.6.2...master)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v1.6.3...master)
+
+
+## [v1.6.3 (2020-12-01)](https://github.com/laravel/jetstream/compare/v1.6.2...v1.6.3)
+
+### Fixed
+- Clears any validation error message before re-displaying confirmation ([#487](https://github.com/laravel/jetstream/pull/487))
 
 
 ## [v1.6.2 (2020-11-24)](https://github.com/laravel/jetstream/compare/v1.6.1...v1.6.2)
