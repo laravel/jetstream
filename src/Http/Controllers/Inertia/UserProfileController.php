@@ -30,15 +30,7 @@ class UserProfileController extends Controller
                     ];
                 }),
             'hasPassword' => ! is_null($request->user()->password),
-            'socialiteProviders' => [
-                'facebook' => Jetstream::hasSocialiteSupportFor('facebook'),
-                'google' => Jetstream::hasSocialiteSupportFor('google'),
-                'twitter' => Jetstream::hasSocialiteSupportFor('twitter'),
-                'linkedin' => Jetstream::hasSocialiteSupportFor('linkedin'),
-                'github' => Jetstream::hasSocialiteSupportFor('github'),
-                'gitlab' => Jetstream::hasSocialiteSupportFor('gitlab'),
-                'bitbucket' => Jetstream::hasSocialiteSupportFor('bitbucket'),
-            ],
+            'socialiteProviders' => Jetstream::supportedSocialiteProviders(),
         ]);
     }
 

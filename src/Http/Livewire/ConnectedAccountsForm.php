@@ -32,15 +32,7 @@ class ConnectedAccountsForm extends Component
      */
     public function getProvidersProperty()
     {
-        return [
-            'facebook' => Jetstream::hasSocialiteSupportFor('facebook'),
-            'google' => Jetstream::hasSocialiteSupportFor('google'),
-            'twitter' => Jetstream::hasSocialiteSupportFor('twitter'),
-            'linkedin' => Jetstream::hasSocialiteSupportFor('linkedin'),
-            'github' => Jetstream::hasSocialiteSupportFor('github'),
-            'gitlab' => Jetstream::hasSocialiteSupportFor('gitlab'),
-            'bitbucket' => Jetstream::hasSocialiteSupportFor('bitbucket'),
-        ];
+        return Jetstream::supportedSocialiteProviders();
     }
 
     /**

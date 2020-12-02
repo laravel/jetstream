@@ -225,7 +225,25 @@ class Jetstream
     }
 
     /**
-     * Deteremine if Jetstream supports a specific Socialite service.
+     * Determine which socialite providers the application supports.
+     *
+     * @return array
+     */
+    public static function supportedSocialiteProviders()
+    {
+        return [
+            'facebook' => Jetstream::hasSocialiteSupportFor('facebook'),
+            'google' => Jetstream::hasSocialiteSupportFor('google'),
+            'twitter' => Jetstream::hasSocialiteSupportFor('twitter'),
+            'linkedin' => Jetstream::hasSocialiteSupportFor('linkedin'),
+            'github' => Jetstream::hasSocialiteSupportFor('github'),
+            'gitlab' => Jetstream::hasSocialiteSupportFor('gitlab'),
+            'bitbucket' => Jetstream::hasSocialiteSupportFor('bitbucket'),
+        ];
+    }
+
+    /**
+     * Determine if Jetstream supports a specific Socialite service.
      *
      * @return bool
      */

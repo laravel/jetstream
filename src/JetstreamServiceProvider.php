@@ -259,15 +259,7 @@ class JetstreamServiceProvider extends ServiceProvider
         Fortify::loginView(function () {
             return Inertia::render('Auth/Login', [
                 'canResetPassword' => Route::has('password.request'),
-                'socialiteProviders' => [
-                    'facebook' => Jetstream::hasSocialiteSupportFor('facebook'),
-                    'google' => Jetstream::hasSocialiteSupportFor('google'),
-                    'twitter' => Jetstream::hasSocialiteSupportFor('twitter'),
-                    'linkedin' => Jetstream::hasSocialiteSupportFor('linkedin'),
-                    'github' => Jetstream::hasSocialiteSupportFor('github'),
-                    'gitlab' => Jetstream::hasSocialiteSupportFor('gitlab'),
-                    'bitbucket' => Jetstream::hasSocialiteSupportFor('bitbucket'),
-                ],
+                'socialiteProviders' => Jetstream::supportedSocialiteProviders(),
                 'status' => session('status'),
             ]);
         });
@@ -287,15 +279,7 @@ class JetstreamServiceProvider extends ServiceProvider
 
         Fortify::registerView(function () {
             return Inertia::render('Auth/Register', [
-                'socialiteProviders' => [
-                    'facebook' => Jetstream::hasSocialiteSupportFor('facebook'),
-                    'google' => Jetstream::hasSocialiteSupportFor('google'),
-                    'twitter' => Jetstream::hasSocialiteSupportFor('twitter'),
-                    'linkedin' => Jetstream::hasSocialiteSupportFor('linkedin'),
-                    'github' => Jetstream::hasSocialiteSupportFor('github'),
-                    'gitlab' => Jetstream::hasSocialiteSupportFor('gitlab'),
-                    'bitbucket' => Jetstream::hasSocialiteSupportFor('bitbucket'),
-                ],
+                'socialiteProviders' => Jetstream::supportedSocialiteProviders(),
             ]);
         });
 
