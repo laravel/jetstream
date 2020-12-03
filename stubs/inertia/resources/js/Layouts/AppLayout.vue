@@ -242,7 +242,7 @@
             },
 
             logout() {
-                axios.post(route('logout').url()).then(response => {
+                axios.post(route('logout')).then(response => {
                     window.location = '/';
                 })
             },
