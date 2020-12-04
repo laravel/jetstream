@@ -157,22 +157,21 @@ class InstallCommand extends Command
 
         // View Components...
         copy(__DIR__.'/../../stubs/livewire/app/View/Components/AppLayout.php', app_path('View/Components/AppLayout.php'));
-        copy(__DIR__.'/../../stubs/app/View/Components/GuestLayout.php', app_path('View/Components/GuestLayout.php'));
+        copy(__DIR__.'/../../stubs/livewire/app/View/Components/GuestLayout.php', app_path('View/Components/GuestLayout.php'));
 
         // Layouts...
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/layouts', resource_path('views/layouts'));
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/resources/views/layouts', resource_path('views/layouts'));
 
         // Single Blade Views...
         copy(__DIR__.'/../../stubs/livewire/resources/views/dashboard.blade.php', resource_path('views/dashboard.blade.php'));
         copy(__DIR__.'/../../stubs/livewire/resources/views/navigation-dropdown.blade.php', resource_path('views/navigation-dropdown.blade.php'));
-        copy(__DIR__.'/../../stubs/resources/views/terms.blade.php', resource_path('views/terms.blade.php'));
-        copy(__DIR__.'/../../stubs/resources/views/policy.blade.php', resource_path('views/policy.blade.php'));
+        copy(__DIR__.'/../../stubs/livewire/resources/views/terms.blade.php', resource_path('views/terms.blade.php'));
+        copy(__DIR__.'/../../stubs/livewire/resources/views/policy.blade.php', resource_path('views/policy.blade.php'));
 
         // Other Views...
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/api', resource_path('views/api'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/profile', resource_path('views/profile'));
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/resources/views/auth', resource_path('views/auth'));
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/auth', resource_path('views/auth'));
 
         // Routes...
         $this->replaceInFile('auth:api', 'auth:sanctum', base_path('routes/api.php'));
@@ -184,7 +183,7 @@ class InstallCommand extends Command
         // Assets...
         copy(__DIR__.'/../../stubs/public/css/app.css', public_path('css/app.css'));
         copy(__DIR__.'/../../stubs/resources/css/app.css', resource_path('css/app.css'));
-        copy(__DIR__.'/../../stubs/resources/js/app.js', resource_path('js/app.js'));
+        copy(__DIR__.'/../../stubs/livewire/resources/js/app.js', resource_path('js/app.js'));
 
         // Teams...
         if ($this->option('teams')) {
