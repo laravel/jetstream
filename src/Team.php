@@ -76,7 +76,7 @@ abstract class Team extends Model
      */
     public function teamInvitations()
     {
-        return $this->hasMany(TeamInvitation::class);
+        return $this->hasMany(Jetstream::teamInvitationModel());
     }
 
     /**
