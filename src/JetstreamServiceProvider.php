@@ -152,7 +152,7 @@ class JetstreamServiceProvider extends ServiceProvider
             $this->registerComponent('twitter-icon');
             $this->registerComponent('github-icon');
             $this->registerComponent('gitlab-icon');
-            $this->registerComponent('linkedin-icon');
+            $this->registerComponent('linked-in-icon');
             $this->registerComponent('bitbucket-icon');
         });
     }

@@ -20,7 +20,7 @@
             </a>
 
             <a v-if="socialiteProviders.linkedin" :href="route('socialite.redirect', {'provider': 'linkedin'})">
-                <jet-linkedin-icon class="h-6 w-6 mx-2" />
+                <jet-linked-in-icon class="h-6 w-6 mx-2" />
             </a>
 
             <a v-if="socialiteProviders.github" :href="route('socialite.redirect', {'provider': 'github'})">
@@ -42,7 +42,7 @@
 import JetFacebookIcon from '@/Socialite/FacebookIcon';
 import JetGoogleIcon from '@/Socialite/GoogleIcon';
 import JetTwitterIcon from '@/Socialite/TwitterIcon';
-import JetLinkedinIcon from '@/Socialite/LinkedinIcon';
+import JetLinkedInIcon from '@/Socialite/LinkedInIcon';
 import JetGithubIcon from '@/Socialite/GithubIcon';
 import JetGitLabIcon from '@/Socialite/GitLabIcon';
 import JetBitbucketIcon from '@/Socialite/BitbucketIcon';
@@ -56,7 +56,7 @@ import JetBitbucketIcon from '@/Socialite/BitbucketIcon';
             JetFacebookIcon,
             JetGoogleIcon,
             JetTwitterIcon,
-            JetLinkedinIcon,
+            JetLinkedInIcon,
             JetGithubIcon,
             JetGitLabIcon,
             JetBitbucketIcon,

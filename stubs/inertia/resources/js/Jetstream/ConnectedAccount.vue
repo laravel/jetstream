@@ -5,7 +5,7 @@
             <jet-facebook-icon class="h-6 w-6 mr-2" v-if="provider === 'facebook'"/>
             <jet-google-icon class="h-6 w-6 mr-2" v-if="provider === 'google'"/>
             <jet-twitter-icon class="h-6 w-6 mr-2" v-if="provider === 'twitter'"/>
-            <jet-linkedin-icon class="h-6 w-6 mr-2" v-if="provider === 'linkedin'"/>
+            <jet-linked-in-icon class="h-6 w-6 mr-2" v-if="provider === 'linkedin'"/>
             <jet-github-icon class="h-6 w-6 mr-2" v-if="provider === 'github'"/>
             <jet-git-lab-icon class="h-6 w-6 mr-2" v-if="provider === 'gitlab'"/>
             <jet-bitbucket-icon class="h-6 w-6 mr-2" v-if="provider === 'bitbucket'"/>
@@ -33,7 +33,7 @@
     import JetFacebookIcon from '@/Socialite/FacebookIcon';
     import JetGoogleIcon from '@/Socialite/GoogleIcon';
     import JetTwitterIcon from '@/Socialite/TwitterIcon';
-    import JetLinkedinIcon from '@/Socialite/LinkedinIcon';
+    import JetLinkedInIcon from '@/Socialite/LinkedInIcon';
     import JetGithubIcon from '@/Socialite/GithubIcon';
     import JetGitLabIcon from '@/Socialite/GitLabIcon';
     import JetBitbucketIcon from '@/Socialite/BitbucketIcon';
@@ -51,7 +51,7 @@
             JetFacebookIcon,
             JetGoogleIcon,
             JetTwitterIcon,
-            JetLinkedinIcon,
+            JetLinkedInIcon,
             JetGithubIcon,
             JetGitLabIcon,
             JetBitbucketIcon

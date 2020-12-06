@@ -25,7 +25,7 @@
 
     @if (Laravel\Jetstream\JetStream::hasSocialiteSupportFor('linkedin'))
         <a href="{{ route('socialite.redirect', ['provider' => 'linkedin']) }}">
-            <x-jet-linkedin-icon class="h-6 w-6 mx-2" />
+            <x-jet-linked-in-icon class="h-6 w-6 mx-2" />
         </a>
     @endif
 

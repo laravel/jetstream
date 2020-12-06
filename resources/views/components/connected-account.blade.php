@@ -13,7 +13,7 @@
                 <x-jet-twitter-icon class="h-6 w-6 mr-2" />
                 @break
             @case('linkedin')
-                <x-jet-linkedin-icon class="h-6 w-6 mr-2" />
+                <x-jet-linked-in-icon class="h-6 w-6 mr-2" />
                 @break
             @case('github')
                 <x-jet-github-icon class="h-6 w-6 mr-2" />
