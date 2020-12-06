@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Laravel\Jetstream\TeamInvitation as JetstreamTeamInvitation;
 use Laravel\Jetstream\Jetstream;
+use Laravel\Jetstream\TeamInvitation as JetstreamTeamInvitation;
 
 class TeamInvitation extends JetstreamTeamInvitation
 {
