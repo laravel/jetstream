@@ -307,7 +307,7 @@ class Jetstream
     }
 
     /**
-     * Get the name of the team model used by the application.
+     * Get the name of the membership model used by the application.
      *
      * @return string
      */
