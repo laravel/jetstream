@@ -393,6 +393,7 @@ EOF;
         // Models...
         copy(__DIR__.'/../../stubs/app/Models/Membership.php', app_path('Models/Membership.php'));
         copy(__DIR__.'/../../stubs/app/Models/Team.php', app_path('Models/Team.php'));
+        copy(__DIR__.'/../../stubs/app/Models/TeamInvitation.php', app_path('Models/TeamInvitation.php'));
         copy(__DIR__.'/../../stubs/app/Models/UserWithTeams.php', app_path('Models/User.php'));
 
         // Actions...
