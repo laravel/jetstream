@@ -32,7 +32,7 @@
 
                     <jet-connected-account v-else-if="enabled === true" :provider="provider">
                         <template #action>
-                            <jet-action-link :href="route('socialite.redirect', {provider})">
+                            <jet-action-link :href="route('oauth.redirect', {provider})">
                                 {{ $t('Connect') }}
                             </jet-action-link>
                         </template>

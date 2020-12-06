@@ -7,31 +7,31 @@
         </div>
 
         <div class="flex items-center justify-center">
-            <a v-if="socialiteProviders.facebook" :href="route('socialite.redirect', {'provider': 'facebook'})">
+            <a v-if="socialiteProviders.facebook" :href="route('oauth.redirect', {'provider': 'facebook'})">
                 <jet-facebook-icon class="h-6 w-6 mx-2" />
             </a>
 
-            <a v-if="socialiteProviders.google" :href="route('socialite.redirect', {'provider': 'google'})" >
+            <a v-if="socialiteProviders.google" :href="route('oauth.redirect', {'provider': 'google'})" >
                 <jet-google-icon class="h-6 w-6 mx-2" />
             </a>
 
-            <a v-if="socialiteProviders.twitter" :href="route('socialite.redirect', {'provider': 'twitter'})">
+            <a v-if="socialiteProviders.twitter" :href="route('oauth.redirect', {'provider': 'twitter'})">
                 <jet-twitter-icon class="h-6 w-6 mx-2" />
             </a>
 
-            <a v-if="socialiteProviders.linkedin" :href="route('socialite.redirect', {'provider': 'linkedin'})">
+            <a v-if="socialiteProviders.linkedin" :href="route('oauth.redirect', {'provider': 'linkedin'})">
                 <jet-linked-in-icon class="h-6 w-6 mx-2" />
             </a>
 
-            <a v-if="socialiteProviders.github" :href="route('socialite.redirect', {'provider': 'github'})">
+            <a v-if="socialiteProviders.github" :href="route('oauth.redirect', {'provider': 'github'})">
                 <jet-github-icon class="h-6 w-6 mx-2" />
             </a>
 
-            <a v-if="socialiteProviders.gitlab" :href="route('socialite.redirect', {'provider': 'gitlab'})">
+            <a v-if="socialiteProviders.gitlab" :href="route('oauth.redirect', {'provider': 'gitlab'})">
                 <jet-git-lab-icon class="h-6 w-6 mx-2" />
             </a>
 
-            <a v-if="socialiteProviders.bitbucket" :href="route('socialite.redirect', {'provider': 'bitbucket'})">
+            <a v-if="socialiteProviders.bitbucket" :href="route('oauth.redirect', {'provider': 'bitbucket'})">
                 <jet-bitbucket-icon class="h-6 w-6 mx-2" />
             </a>
         </div>

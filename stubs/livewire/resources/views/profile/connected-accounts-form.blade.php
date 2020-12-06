@@ -37,7 +37,7 @@
                 @elseif ($enabled)
                     <x-jet-connected-account provider="{{ $provider }}" created-at="Not connected">
                         <x-slot name="action">
-                            <x-jet-action-link href="{{ route('socialite.redirect', ['provider' => $provider]) }}">
+                            <x-jet-action-link href="{{ route('oauth.redirect', ['provider' => $provider]) }}">
                                 {{ __('Connect') }}
                             </x-jet-action-link>
                         </x-slot>

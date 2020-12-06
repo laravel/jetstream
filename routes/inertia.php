@@ -77,8 +77,8 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
 
     // Socialite...
     if (Jetstream::hasSocialiteFeatures()) {
-        Route::get('/socialite/{provider}', [SocialiteController::class, 'redirectToProvider'])->name('socialite.redirect');
-        Route::get('/socialite/{provider}/callback', [SocialiteController::class, 'handleProviderCallback'])->name('socialite.callback');
+        Route::get('/oauth/{provider}', [SocialiteController::class, 'redirectToProvider'])->name('oauth.redirect');
+        Route::get('/oauth/{provider}/callback', [SocialiteController::class, 'handleProviderCallback'])->name('oauth.callback');
 
         // Set user password
         Route::put('/user/set-password', [PasswordController::class, 'store'])->name('user-password.set');
