@@ -3,24 +3,13 @@
 @php
 $id = $id ?? md5($attributes->wire('model'));
 
-switch ($maxWidth ?? '2xl') {
-    case 'sm':
-        $maxWidth = 'sm:max-w-sm';
-        break;
-    case 'md':
-        $maxWidth = 'sm:max-w-md';
-        break;
-    case 'lg':
-        $maxWidth = 'sm:max-w-lg';
-        break;
-    case 'xl':
-        $maxWidth = 'sm:max-w-xl';
-        break;
-    case '2xl':
-    default:
-        $maxWidth = 'sm:max-w-2xl';
-        break;
-}
+$maxWidth = [
+    'sm' => 'sm:max-w-sm',
+    'md' => 'sm:max-w-md',
+    'lg' => 'sm:max-w-lg',
+    'xl' => 'sm:max-w-xl',
+    '2xl' => 'sm:max-w-2xl',
+][$maxWidth ?? '2xl'];
 @endphp
 
 <div
@@ -54,7 +43,7 @@ switch ($maxWidth ?? '2xl') {
     x-on:keydown.shift.tab.prevent="prevFocusable().focus()"
     x-show="show"
     id="{{ $id }}"
-    class="fixed inset-0 overflow-y-auto px-4 pt-6 z-50 sm:px-0"
+    class="fixed inset-0 overflow-y-auto px-4 py-6 z-50 sm:px-0"
     style="display: none;"
 >
     <div x-show="show" class="fixed inset-0 transform transition-all" x-on:click="show = false" x-transition:enter="ease-out duration-300"
