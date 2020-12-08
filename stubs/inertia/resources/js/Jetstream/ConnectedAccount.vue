@@ -43,7 +43,7 @@
             provider: String,
             createdAt: {
                 type: String,
-                defaut: null,
+                default: null,
             }
         },
 
