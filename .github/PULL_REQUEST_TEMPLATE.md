@@ -7,5 +7,5 @@ Pull requests without a descriptive title, thorough description, or tests will b
 
 In addition, please describe the benefit to end users; the reasons it does not break any existing features; how it makes building web applications easier, etc.
 
-If you change behavior to the Inertia stack you're expected to update the Livewire stack as well and vica versa.
+If you change the behavior of the Inertia stack you're expected to update the Livewire stack as well and vica versa.
 -->
