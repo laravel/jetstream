@@ -35,10 +35,11 @@ new Vue({
     i18n,
 
     created() {
-        this.$inertia.on(
-            'success',
-            (event) => (i18n.locale = event.detail.page.props.jetstream?.locale || i18n.locale)
-        );
+        this.$inertia.on('success', (event) => {
+            const locale = event.detail.page.props.jetstream?.locale || i18n.locale;
+
+            document.documentElement.lang = i18n.locale = locale;
+        });
     },
 
     render: (h) =>
