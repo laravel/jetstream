@@ -129,8 +129,8 @@ class TeamController extends Controller
         $transferrer = app(TransfersTeams::class);
 
         $transferrer->transfer(
-            $team,
             $request->user(),
+            $team,
             Jetstream::findUserByIdOrFail($request->user_id)
         );
 
