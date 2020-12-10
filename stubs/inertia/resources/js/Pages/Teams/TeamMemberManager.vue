@@ -420,7 +420,7 @@
             },
 
             transferTeam() {
-                this.transferTeamForm.post(route('team.transfer', [this.team, this.teamMemberForTransfer]), {
+                this.transferTeamForm.post(route('teams.transfer', [this.team, this.teamMemberForTransfer]), {
                     preserveScroll: true,
                     onSuccess: () => {
                         this.transferTeamForm.password = '';
