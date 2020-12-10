@@ -80,6 +80,37 @@ abstract class Team extends Model
     }
 
     /**
+     * Determine if the team is transferrable.
+     *
+     * @return bool
+     */
+    public function isTransferrable()
+    {
+        return !$this->personal_team && $this->users->isNotEmpty();
+    }
+
+    /**
+     * Transfers the teams ownership to the given user.
+     *
+     * @param  \App\Models\User  $from
+     * @param  \App\Models\User  $to
+     */
+    public function transfer($from, $to)
+    {
+        $this->users()->detach($to);
+
+        if (! is_null(Jetstream::findRole('admin'))) {
+            $this->users()->attach(
+                $from, ['role' => 'admin']
+            );
+        }
+
+        $this->owner()->associate($to);
+
+        $this->save();
+    }
+
+    /**
      * Remove the given user from the team.
      *
      * @param  \App\Models\User  $user

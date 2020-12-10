@@ -154,10 +154,19 @@
                                         </button>
 
                                     <!-- Remove Team Member -->
-                                    @elseif (Gate::check('removeTeamMember', $team))
-                                        <button class="cursor-pointer ml-6 text-sm text-red-500" wire:click="confirmTeamMemberRemoval('{{ $user->id }}')">
-                                            {{ __('Remove') }}
-                                        </button>
+                                    @else
+
+                                        @if (Gate::check('transferTeam', $team))
+                                            <button class="cursor-pointer ml-6 text-sm text-red-500" wire:click="confirmTeamTransfer('{{ $user->id }}')">
+                                                {{ __('Transfer Team') }}
+                                            </button>
+                                        @endif
+
+                                        @if (Gate::check('removeTeamMember', $team))
+                                            <button class="cursor-pointer ml-6 text-sm text-red-500" wire:click="confirmTeamMemberRemoval('{{ $user->id }}')">
+                                                {{ __('Remove') }}
+                                            </button>
+                                        @endif
                                     @endif
                                 </div>
                             </div>
@@ -253,4 +262,34 @@
             </x-jet-danger-button>
         </x-slot>
     </x-jet-confirmation-modal>
+
+    <!-- Delete User Confirmation Modal -->
+    <x-jet-dialog-modal wire:model="confirmingTeamTransfer">
+        <x-slot name="title">
+            {{ __('Transfer Team') }}
+        </x-slot>
+
+        <x-slot name="content">
+            {{ __('Are you sure you want to transfer this team? Once complete, all of this teams resources will be controlled by this user. Please enter your password to confirm you would like to transfer this team.') }}
+
+            <div class="mt-4" x-data="{}" x-on:confirming-transfer-team.window="setTimeout(() => $refs.password.focus(), 250)">
+                <x-jet-input type="password" class="mt-1 block w-3/4" placeholder="{{ __('Password') }}"
+                            x-ref="password"
+                            wire:model.defer="password"
+                            wire:keydown.enter="deleteUser" />
+
+                <x-jet-input-error for="password" class="mt-2" />
+            </div>
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('confirmingTeamTransfer')" wire:loading.attr="disabled">
+                {{ __('Nevermind') }}
+            </x-jet-secondary-button>
+
+            <x-jet-danger-button class="ml-2" wire:click="transferTeam" wire:loading.attr="disabled">
+                {{ __('Transfer Team') }}
+            </x-jet-danger-button>
+        </x-slot>
+    </x-jet-dialog-modal>
 </div>

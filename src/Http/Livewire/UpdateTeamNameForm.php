@@ -9,6 +9,15 @@ use Livewire\Component;
 class UpdateTeamNameForm extends Component
 {
     /**
+     * The component's listeners.
+     *
+     * @var array
+     */
+    protected $listeners = [
+        'refresh-update-team-name-form' => '$refresh',
+    ];
+
+    /**
      * The team instance.
      *
      * @var mixed

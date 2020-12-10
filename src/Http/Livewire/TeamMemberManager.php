@@ -7,13 +7,17 @@ use Laravel\Jetstream\Actions\UpdateTeamMemberRole;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
 use Laravel\Jetstream\Contracts\InvitesTeamMembers;
 use Laravel\Jetstream\Contracts\RemovesTeamMembers;
+use Laravel\Jetstream\Contracts\TransfersTeams;
 use Laravel\Jetstream\Features;
+use Laravel\Jetstream\InteractsWithBanner;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\TeamInvitation;
 use Livewire\Component;
 
 class TeamMemberManager extends Component
 {
+    use InteractsWithBanner;
+
     /**
      * The team instance.
      *
@@ -64,6 +68,20 @@ class TeamMemberManager extends Component
     public $teamMemberIdBeingRemoved = null;
 
     /**
+     * Inidicates if the application is confirming a team transfer to a user.
+     *
+     * @var bool
+     */
+    public $confirmingTeamTransfer = false;
+
+    /**
+     * The ID of the team member the team is being transferred to.
+     *
+     * @var int|null
+     */
+    public $teamMemberIdForTransfer = null;
+
+    /**
      * The "add team member" form state.
      *
      * @var array
@@ -72,6 +90,13 @@ class TeamMemberManager extends Component
         'email' => '',
         'role' => null,
     ];
+
+    /**
+     * The user's current password.
+     *
+     * @var string
+     */
+    public $password = '';
 
     /**
      * Mount the component.
@@ -230,6 +255,50 @@ class TeamMemberManager extends Component
         $this->teamMemberIdBeingRemoved = null;
 
         $this->team = $this->team->fresh();
+    }
+
+    /**
+     * Confirm that the team should be transferred to the give user.
+     *
+     * @param  int  $userId
+     * @return void
+     */
+    public function confirmTeamTransfer($userId)
+    {
+        $this->resetErrorBag();
+
+        $this->password = '';
+
+        $this->dispatchBrowserEvent('confirming-transfer-team');
+
+        $this->confirmingTeamTransfer = true;
+
+        $this->teamMemberIdForTransfer = $userId;
+    }
+
+    /**
+     * Transfer ownership of the team to a different team member.
+     *
+     * @param  \Laravel\Jetstream\Contracts\TransfersTeams  $transferrer
+     * @return void
+     */
+    public function transferTeam(TransfersTeams $transferrer)
+    {
+        $transferrer->transfer(
+            $this->user,
+            $this->team,
+            Jetstream::findUserByIdOrFail($this->teamMemberIdForTransfer)
+        );
+
+        $this->password = '';
+
+        $this->confirmingTeamTransfer = false;
+
+        $this->teamMemberIdForTransfer = null;
+
+        $this->banner('Team transfer successful');
+
+        $this->emit('refresh-update-team-name-form');
     }
 
     /**
