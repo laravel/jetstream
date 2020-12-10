@@ -63,7 +63,7 @@
                     {{ $t('Please enter your password to confirm you would like to logout of your other browser sessions across all of your devices.') }}
 
                     <div class="mt-4">
-                        <jet-input type="password" class="mt-1 block w-3/4" :placeholder="$t('Password')"
+                        <jet-input type="password" class="mt-1 block w-full sm:w-3/4" :placeholder="$t('Password')"
                                     ref="password"
                                     v-model="form.password"
                                     @keyup.enter.native="logoutOtherBrowserSessions" />
@@ -77,7 +77,7 @@
                         {{ $t('Nevermind') }}
                     </jet-secondary-button>
 
-                    <jet-button class="ml-2" @click.native="logoutOtherBrowserSessions" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    <jet-button class="sm:ml-2" @click.native="logoutOtherBrowserSessions" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         {{ $t('Logout Other Browser Sessions') }}
                     </jet-button>
                 </template>

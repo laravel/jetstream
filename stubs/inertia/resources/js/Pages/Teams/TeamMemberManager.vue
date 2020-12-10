@@ -191,13 +191,13 @@
                     </div>
                 </div>
             </template>
-            
+
             <template #footer>
                 <jet-secondary-button @click.native="currentlyManagingRole = false">
                     {{ $t('Nevermind') }}
                 </jet-secondary-button>
 
-                <jet-button class="ml-2" @click.native="updateRole" :class="{ 'opacity-25': updateRoleForm.processing }" :disabled="updateRoleForm.processing">
+                <jet-button class="sm:ml-2" @click.native="updateRole" :class="{ 'opacity-25': updateRoleForm.processing }" :disabled="updateRoleForm.processing">
                     {{ $t('Save') }}
                 </jet-button>
             </template>

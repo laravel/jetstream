@@ -206,7 +206,7 @@
                 {{ __('Nevermind') }}
             </x-jet-secondary-button>
 
-            <x-jet-button class="ml-2" wire:click="updateRole" wire:loading.attr="disabled">
+            <x-jet-button class="sm:ml-2" wire:click="updateRole" wire:loading.attr="disabled">
                 {{ __('Save') }}
             </x-jet-button>
         </x-slot>

@@ -104,7 +104,7 @@
                 {{ __('Please copy your new API token. For your security, it won\'t be shown again.') }}
             </div>
 
-            <div class="mt-4 bg-gray-100 px-4 py-2 rounded font-mono text-sm text-gray-500">
+            <div class="break-all mt-4 bg-gray-100 px-4 py-2 rounded font-mono text-sm text-gray-500">
                 {{ $plainTextToken }}
             </div>
         </x-slot>
@@ -127,7 +127,7 @@
                 @foreach (Laravel\Jetstream\Jetstream::$permissions as $permission)
                     <label class="flex items-center">
                         <x-jet-checkbox wire:model.defer="updateApiTokenForm.permissions" :value="$permission"/>
-                        <span class="ml-2 text-sm text-gray-600">{{ $permission }}</span>
+                        <span class="sm:ml-2 text-sm text-gray-600">{{ $permission }}</span>
                     </label>
                 @endforeach
             </div>

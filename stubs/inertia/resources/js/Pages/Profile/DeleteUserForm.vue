@@ -29,7 +29,7 @@
                     {{ $t('Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
 
                     <div class="mt-4">
-                        <jet-input type="password" class="mt-1 block w-3/4" :placeholder="$t('Password')"
+                        <jet-input type="password" class="mt-1 block w-full sm:w-3/4" :placeholder="$t('Password')"
                                     ref="password"
                                     v-model="form.password"
                                     @keyup.enter.native="deleteUser" />
@@ -43,7 +43,7 @@
                         {{ $t('Nevermind') }}
                     </jet-secondary-button>
 
-                    <jet-danger-button class="ml-2" @click.native="deleteUser" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    <jet-danger-button class="sm:ml-2" @click.native="deleteUser" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         {{ $t('Delete Account') }}
                     </jet-danger-button>
                 </template>

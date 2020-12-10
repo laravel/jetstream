@@ -99,7 +99,7 @@
                     {{ $t('Please copy your new API token. For your security, it won\'t be shown again.') }}
                 </div>
 
-                <div class="mt-4 bg-gray-100 px-4 py-2 rounded font-mono text-sm text-gray-500" v-if="$page.props.jetstream.flash.token">
+                <div class="break-all mt-4 bg-gray-100 px-4 py-2 rounded font-mono text-sm text-gray-500" v-if="$page.props.jetstream.flash.token">
                     {{ $page.props.jetstream.flash.token }}
                 </div>
             </template>
@@ -122,7 +122,7 @@
                     <div v-for="permission in availablePermissions" :key="permission">
                         <label class="flex items-center">
                             <jet-checkbox :value="permission" v-model="updateApiTokenForm.permissions"/>
-                            <span class="ml-2 text-sm text-gray-600">{{ permission }}</span>
+                            <span class="sm:ml-2 text-sm text-gray-600">{{ permission }}</span>
                         </label>
                     </div>
                 </div>

@@ -29,10 +29,10 @@
 
             <div class="mt-4" v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature">
                 <jet-label for="terms">
-                    <div class="flex items-center">
+                    <div class="flex items-start sm:items-center">
                         <jet-checkbox name="terms" id="terms" v-model="form.terms"/>
 
-                        <i18n path="I agree to the {terms_of_service} and {privacy_policy}" tag="div" class="ml-2">
+                        <i18n path="I agree to the {terms_of_service} and {privacy_policy}" tag="div" class="ml-2 -mt-0.5 sm:-mt-0">
                             <template #terms_of_service>
                                 <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900">{{ $t('Terms of Service') }}</a>
                             </template>
