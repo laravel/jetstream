@@ -146,6 +146,13 @@
 
                                 <!-- Remove Team Member -->
                                 <button class="cursor-pointer ml-6 text-sm text-red-500"
+                                                    @click="confirmTeamTransfer(user)"
+                                                    v-if="userPermissions.canTransferTeam">
+                                    {{ $t('Transfer Team') }}
+                                </button>
+
+                                <!-- Remove Team Member -->
+                                <button class="cursor-pointer ml-6 text-sm text-red-500"
                                                     @click="confirmTeamMemberRemoval(user)"
                                                     v-if="userPermissions.canRemoveTeamMembers">
                                     {{ $t('Remove') }}
@@ -191,7 +198,7 @@
                     </div>
                 </div>
             </template>
-            
+
             <template #footer>
                 <jet-secondary-button @click.native="currentlyManagingRole = false">
                     {{ $t('Nevermind') }}
@@ -244,6 +251,36 @@
                 </jet-danger-button>
             </template>
         </jet-confirmation-modal>
+
+        <!-- Transfer Team Confirmation Modal -->
+        <jet-dialog-modal :show="teamMemberForTransfer" @close="teamMemberForTransfer = null">
+            <template #title>
+                {{ $t('Transfer Team') }}
+            </template>
+
+            <template #content>
+                {{ $t('Are you sure you want to transfer this team? Once complete, all of this teams resources will be controlled by this user. Please enter your password to confirm you would like to transfer this team.') }}
+
+                <div class="mt-4">
+                    <jet-input type="password" class="mt-1 block w-3/4" :placeholder="$t('Password')"
+                                ref="password"
+                                v-model="transferTeamForm.password"
+                                @keyup.enter.native="deleteUser" />
+
+                    <jet-input-error :message="transferTeamForm.error('password')" class="mt-2" />
+                </div>
+            </template>
+
+            <template #footer>
+                <jet-secondary-button @click.native="teamMemberForTransfer = null">
+                    {{ $t('Nevermind') }}
+                </jet-secondary-button>
+
+                <jet-danger-button class="ml-2" @click.native="transferTeam" :class="{ 'opacity-25': transferTeamForm.processing }" :disabled="transferTeamForm.processing">
+                    {{ $t('Transfer Team') }}
+                </jet-danger-button>
+            </template>
+        </jet-dialog-modal>
     </div>
 </template>
 
@@ -306,6 +343,12 @@
                     bag: 'leaveTeam',
                 }),
 
+                transferTeamForm: this.$inertia.form({
+                    password: '',
+                }, {
+                    bag: 'transferTeam',
+                }),
+
                 removeTeamMemberForm: this.$inertia.form({
                     //
                 }, {
@@ -316,6 +359,7 @@
                 managingRoleFor: null,
                 confirmingLeavingTeam: false,
                 teamMemberBeingRemoved: null,
+                teamMemberForTransfer: null,
             }
         },
 
@@ -365,6 +409,23 @@
                     preserveState: true,
                     onSuccess: () => {
                         this.teamMemberBeingRemoved = null
+                    }
+                })
+            },
+
+            confirmTeamTransfer(teamMember) {
+                this.transferTeamForm.password = '';
+
+                this.teamMemberForTransfer = teamMember;
+            },
+
+            transferTeam() {
+                this.transferTeamForm.post(route('team.transfer', [this.team, this.teamMemberForTransfer]), {
+                    preserveScroll: true,
+                    onSuccess: () => {
+                        this.transferTeamForm.password = '';
+
+                        this.teamMemberForTransfer = null;
                     }
                 })
             },
