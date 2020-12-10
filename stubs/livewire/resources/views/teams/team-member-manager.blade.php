@@ -263,7 +263,7 @@
         </x-slot>
     </x-jet-confirmation-modal>
 
-    <!-- Delete User Confirmation Modal -->
+    <!-- Transfer Team Confirmation Modal -->
     <x-jet-dialog-modal wire:model="confirmingTeamTransfer">
         <x-slot name="title">
             {{ __('Transfer Team') }}
