@@ -101,7 +101,7 @@ class TeamPolicy
      */
     public function transferTeam(User $user, Team $team)
     {
-        return $user->ownsTeam($team) && !$team->isTransferrable();
+        return $user->ownsTeam($team) && $team->isTransferrable();
     }
 
     /**
