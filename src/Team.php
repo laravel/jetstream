@@ -80,16 +80,6 @@ abstract class Team extends Model
     }
 
     /**
-     * Determine if the team is transferrable.
-     *
-     * @return bool
-     */
-    public function isTransferrable()
-    {
-        return !$this->personal_team && $this->users->isNotEmpty();
-    }
-
-    /**
      * Transfers the teams ownership to the given user.
      *
      * @param  \App\Models\User  $from
