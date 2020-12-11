@@ -15,7 +15,7 @@
 
             <x-jet-validation-errors class="mb-4" />
 
-            <form method="POST" action="/two-factor-challenge">
+            <form method="POST" action="{{ route('two-factor.login') }}">
                 @csrf
 
                 <div class="mt-4" x-show="! recovery">
