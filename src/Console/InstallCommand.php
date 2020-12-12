@@ -114,6 +114,7 @@ class InstallCommand extends Command
         $this->updateNodePackages(function ($packages) {
             return [
                 '@tailwindcss/forms' => '^0.2.1',
+                '@tailwindcss/typography' => '^0.3.0',
                 'alpinejs' => '^2.7.3',
                 'autoprefixer' => '^9.8.6',
                 'postcss-import' => '^12.0.1',
@@ -244,6 +245,7 @@ EOF;
                 '@inertiajs/inertia-vue' => '^0.3.0',
                 '@intlify/vue-i18n-loader' => '^1.0.0',
                 '@tailwindcss/forms' => '^0.2.1',
+                '@tailwindcss/typography' => '^0.3.0',
                 'laravel-jetstream' => '^1.0.0',
                 'moment' => '^2.26.0',
                 'portal-vue' => '^2.1.7',
