@@ -122,7 +122,7 @@
                     <div v-for="permission in availablePermissions" :key="permission">
                         <label class="flex items-center">
                             <jet-checkbox :value="permission" v-model="updateApiTokenForm.permissions"/>
-                            <span class="sm:ml-2 text-sm text-gray-600">{{ permission }}</span>
+                            <span class="ml-2 text-sm text-gray-600">{{ permission }}</span>
                         </label>
                     </div>
                 </div>
@@ -133,7 +133,7 @@
                     {{ $t('Nevermind') }}
                 </jet-secondary-button>
 
-                <jet-button class="ml-2" @click.native="updateApiToken" :class="{ 'opacity-25': updateApiTokenForm.processing }" :disabled="updateApiTokenForm.processing">
+                <jet-button class="sm:ml-2" @click.native="updateApiToken" :class="{ 'opacity-25': updateApiTokenForm.processing }" :disabled="updateApiTokenForm.processing">
                     {{ $t('Save') }}
                 </jet-button>
             </template>
@@ -154,7 +154,7 @@
                     {{ $t('Nevermind') }}
                 </jet-secondary-button>
 
-                <jet-danger-button class="ml-2" @click.native="deleteApiToken" :class="{ 'opacity-25': deleteApiTokenForm.processing }" :disabled="deleteApiTokenForm.processing">
+                <jet-danger-button class="sm:ml-2" @click.native="deleteApiToken" :class="{ 'opacity-25': deleteApiTokenForm.processing }" :disabled="deleteApiTokenForm.processing">
                     {{ $t('Delete') }}
                 </jet-danger-button>
             </template>
