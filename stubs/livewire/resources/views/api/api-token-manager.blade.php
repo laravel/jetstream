@@ -127,7 +127,7 @@
                 @foreach (Laravel\Jetstream\Jetstream::$permissions as $permission)
                     <label class="flex items-center">
                         <x-jet-checkbox wire:model.defer="updateApiTokenForm.permissions" :value="$permission"/>
-                        <span class="sm:ml-2 text-sm text-gray-600">{{ $permission }}</span>
+                        <span class="ml-2 text-sm text-gray-600">{{ $permission }}</span>
                     </label>
                 @endforeach
             </div>
@@ -138,7 +138,7 @@
                 {{ __('Nevermind') }}
             </x-jet-secondary-button>
 
-            <x-jet-button class="ml-2" wire:click="updateApiToken" wire:loading.attr="disabled">
+            <x-jet-button class="sm:ml-2" wire:click="updateApiToken" wire:loading.attr="disabled">
                 {{ __('Save') }}
             </x-jet-button>
         </x-slot>
