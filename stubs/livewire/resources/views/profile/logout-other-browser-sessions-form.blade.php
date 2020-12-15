@@ -74,9 +74,10 @@
                     {{ __('Please enter your password to confirm you would like to logout of your other browser sessions across all of your devices.') }}
 
                     <div class="mt-4" x-data="{}" x-on:confirming-logout-other-browser-sessions.window="setTimeout(() => $refs.password.focus(), 250)">
-                        <x-jet-input type="password" class="mt-1 block w-3/4" placeholder="{{ __('Password') }}"
+                        <x-jet-input type="password" dusk="logout-other-browser-sessions-confirmation-password"
+                                    class="mt-1 block w-3/4"
+                                    placeholder="{{ __('Password') }}"
                                     x-ref="password"
-                                    dusk="logout-other-browser-sessions-confirmation-password"
                                     wire:model.defer="password"
                                     wire:keydown.enter="logoutOtherBrowserSessions" />
 
@@ -89,8 +90,8 @@
                         {{ __('Nevermind') }}
                     </x-jet-secondary-button>
 
-                    <x-jet-button class="ml-2"
-                                    dusk="logout-other-browser-sessions-confirmation-button"
+                    <x-jet-button dusk="logout-other-browser-sessions-confirmation-button"
+                                    class="ml-2"
                                     wire:click="logoutOtherBrowserSessions"
                                     wire:loading.attr="disabled">
                         {{ __('Logout Other Browser Sessions') }}
