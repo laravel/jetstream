@@ -130,7 +130,8 @@
 
                             <div class="flex items-center">
                                 <!-- Manage Team Member Role -->
-                                <button class="ml-2 text-sm text-gray-400 underline"
+                                <button :dusk="'manage-role-button-' + user.id"
+                                        class="ml-2 text-sm text-gray-400 underline"
                                         v-if="userPermissions.canAddTeamMembers && availableRoles.length"
                                         @click="manageRole(user)">
                                     {{ displayableRole(user.membership.role) }}
@@ -169,12 +170,12 @@
             <template #content>
                 <div v-if="managingRoleFor">
                     <div class="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer">
-                        <button type="button" class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue"
+                        <button type="button" :dusk="'update-role-' + role.key"
+                                        class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue"
                                         :class="{'border-t border-gray-200 rounded-t-none': i > 0, 'rounded-b-none': i != Object.keys(availableRoles).length - 1}"
                                         @click="updateRoleForm.role = role.key"
                                         v-for="(role, i) in availableRoles"
-                                        :key="role.key"
-                                        >
+                                        :key="role.key">
                             <div :class="{'opacity-50': updateRoleForm.role && updateRoleForm.role != role.key}">
                                 <!-- Role Name -->
                                 <div class="flex items-center">
@@ -200,7 +201,10 @@
                     {{ $t('Nevermind') }}
                 </jet-secondary-button>
 
-                <jet-button class="ml-2" @click.native="updateRole" :class="{ 'opacity-25': updateRoleForm.processing }" :disabled="updateRoleForm.processing">
+                <jet-button dusk="save-role-button"
+                            class="ml-2"
+                            @click.native="updateRole"
+                            :class="{ 'opacity-25': updateRoleForm.processing }" :disabled="updateRoleForm.processing">
                     {{ $t('Save') }}
                 </jet-button>
             </template>
@@ -242,7 +246,11 @@
                     {{ $t('Nevermind') }}
                 </jet-secondary-button>
 
-                <jet-danger-button class="ml-2" @click.native="removeTeamMember" :class="{ 'opacity-25': removeTeamMemberForm.processing }" :disabled="removeTeamMemberForm.processing">
+                <jet-danger-button dusk="remove-team-member-confirmation-button"
+                                class="ml-2"
+                                :class="{ 'opacity-25': removeTeamMemberForm.processing }"
+                                @click.native="removeTeamMember"
+                                :disabled="removeTeamMemberForm.processing">
                     {{ $t('Remove') }}
                 </jet-danger-button>
             </template>
