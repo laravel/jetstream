@@ -32,7 +32,7 @@
             {{ __('Saved.') }}
         </x-jet-action-message>
 
-        <x-jet-button>
+        <x-jet-button dusk="update-password-button">
             {{ __('Save') }}
         </x-jet-button>
     </x-slot>
