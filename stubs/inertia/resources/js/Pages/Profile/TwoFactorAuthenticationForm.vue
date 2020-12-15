@@ -53,7 +53,10 @@
             <div class="mt-5">
                 <div v-if="! twoFactorEnabled">
                     <jet-confirms-password @confirmed="enableTwoFactorAuthentication">
-                        <jet-button type="button" :class="{ 'opacity-25': enabling }" :disabled="enabling">
+                        <jet-button type="button"
+                                    dusk="enable-two-factor-authentication-button"
+                                    :class="{ 'opacity-25': enabling }"
+                                    :disabled="enabling">
                             {{ $t('Enable') }}
                         </jet-button>
                     </jet-confirms-password>
@@ -62,20 +65,23 @@
                 <div v-else>
                     <jet-confirms-password @confirmed="regenerateRecoveryCodes">
                         <jet-secondary-button class="mr-3"
+                                        dusk="regenerate-recovery-codes-button"
                                         v-if="recoveryCodes.length > 0">
                             {{ $t('Regenerate Recovery Codes') }}
                         </jet-secondary-button>
                     </jet-confirms-password>
 
                     <jet-confirms-password @confirmed="showRecoveryCodes">
-                        <jet-secondary-button class="mr-3" v-if="recoveryCodes.length == 0">
+                        <jet-secondary-button class="mr-3"
+                                        dusk="show-recovery-codes-button"
+                                        v-if="recoveryCodes.length == 0">
                             {{ $t('Show Recovery Codes') }}
                         </jet-secondary-button>
                     </jet-confirms-password>
 
                     <jet-confirms-password @confirmed="disableTwoFactorAuthentication">
-                        <jet-danger-button
-                                        :class="{ 'opacity-25': disabling }"
+                        <jet-danger-button :class="{ 'opacity-25': disabling }"
+                                        dusk="disable-two-factor-authentication-button"
                                         :disabled="disabling">
                             {{ $t('Disable') }}
                         </jet-danger-button>
