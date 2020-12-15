@@ -33,7 +33,8 @@
                         <jet-input-error :message="addTeamMemberForm.error('role')" class="mt-2" />
 
                         <div class="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer">
-                            <button type="button" class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue"
+                            <button type="button" :dusk="'role-' + role.key"
+                                            class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue"
                                             :class="{'border-t border-gray-200 rounded-t-none': i > 0, 'rounded-b-none': i != Object.keys(availableRoles).length - 1}"
                                             @click="addTeamMemberForm.role = role.key"
                                             v-for="(role, i) in availableRoles"
@@ -63,7 +64,9 @@
                         {{ $t('Added.') }}
                     </jet-action-message>
 
-                    <jet-button :class="{ 'opacity-25': addTeamMemberForm.processing }" :disabled="addTeamMemberForm.processing">
+                    <jet-button dusk="add-team-member-button"
+                                :class="{ 'opacity-25': addTeamMemberForm.processing }"
+                                :disabled="addTeamMemberForm.processing">
                         {{ $t('Add') }}
                     </jet-button>
                 </template>
@@ -191,7 +194,7 @@
                     </div>
                 </div>
             </template>
-            
+
             <template #footer>
                 <jet-secondary-button @click.native="currentlyManagingRole = false">
                     {{ $t('Nevermind') }}
