@@ -17,7 +17,7 @@ use Laravel\Jetstream\Http\Livewire\CreateTeamForm;
 use Laravel\Jetstream\Http\Livewire\DeleteTeamForm;
 use Laravel\Jetstream\Http\Livewire\DeleteUserForm;
 use Laravel\Jetstream\Http\Livewire\LogoutOtherBrowserSessionsForm;
-use Laravel\Jetstream\Http\Livewire\NavigationDropdown;
+use Laravel\Jetstream\Http\Livewire\NavigationMenu;
 use Laravel\Jetstream\Http\Livewire\TeamMemberManager;
 use Laravel\Jetstream\Http\Livewire\TwoFactorAuthenticationForm;
 use Laravel\Jetstream\Http\Livewire\UpdatePasswordForm;
@@ -39,7 +39,7 @@ class JetstreamServiceProvider extends ServiceProvider
 
         $this->app->afterResolving(BladeCompiler::class, function () {
             if (config('jetstream.stack') === 'livewire' && class_exists(Livewire::class)) {
-                Livewire::component('navigation-menu', NavigationDropdown::class);
+                Livewire::component('navigation-menu', NavigationMenu::class);
                 Livewire::component('profile.update-profile-information-form', UpdateProfileInformationForm::class);
                 Livewire::component('profile.update-password-form', UpdatePasswordForm::class);
                 Livewire::component('profile.two-factor-authentication-form', TwoFactorAuthenticationForm::class);

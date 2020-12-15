@@ -4,7 +4,7 @@ namespace Laravel\Jetstream\Http\Livewire;
 
 use Livewire\Component;
 
-class NavigationDropdown extends Component
+class NavigationMenu extends Component
 {
     /**
      * The component's listeners.
