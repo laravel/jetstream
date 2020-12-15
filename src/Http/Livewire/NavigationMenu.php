@@ -12,7 +12,7 @@ class NavigationDropdown extends Component
      * @var array
      */
     protected $listeners = [
-        'refresh-navigation-dropdown' => '$refresh',
+        'refresh-navigation-menu' => '$refresh',
     ];
 
     /**
@@ -22,6 +22,6 @@ class NavigationDropdown extends Component
      */
     public function render()
     {
-        return view('navigation-dropdown');
+        return view('navigation-menu');
     }
 }

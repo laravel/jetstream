@@ -39,7 +39,7 @@ class JetstreamServiceProvider extends ServiceProvider
 
         $this->app->afterResolving(BladeCompiler::class, function () {
             if (config('jetstream.stack') === 'livewire' && class_exists(Livewire::class)) {
-                Livewire::component('navigation-dropdown', NavigationDropdown::class);
+                Livewire::component('navigation-menu', NavigationDropdown::class);
                 Livewire::component('profile.update-profile-information-form', UpdateProfileInformationForm::class);
                 Livewire::component('profile.update-password-form', UpdatePasswordForm::class);
                 Livewire::component('profile.two-factor-authentication-form', TwoFactorAuthenticationForm::class);

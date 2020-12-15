@@ -49,7 +49,7 @@ class UpdateTeamNameForm extends Component
 
         $this->emit('saved');
 
-        $this->emit('refresh-navigation-dropdown');
+        $this->emit('refresh-navigation-menu');
     }
 
     /**
