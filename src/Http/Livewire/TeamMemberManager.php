@@ -38,7 +38,7 @@ class TeamMemberManager extends Component
     /**
      * The current role for the user that is having their role managed.
      *
-     * @var array
+     * @var string
      */
     public $currentRole;
 
@@ -171,6 +171,8 @@ class TeamMemberManager extends Component
 
     /**
      * Stop managing the role of a given user.
+     *
+     * @return void
      */
     public function stopManagingRole()
     {

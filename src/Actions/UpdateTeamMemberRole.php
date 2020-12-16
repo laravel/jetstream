@@ -13,7 +13,7 @@ class UpdateTeamMemberRole
      *
      * @param  mixed  $user
      * @param  mixed  $team
-     * @param  string  $teamMemberId
+     * @param  int  $teamMemberId
      * @param  string  $role
      * @return void
      */

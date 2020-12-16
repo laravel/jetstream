@@ -109,7 +109,7 @@ class ApiTokenManager extends Component
     /**
      * Display the token value to the user.
      *
-     * @param  \Laravel\Sanctum\NewAccessToken
+     * @param  \Laravel\Sanctum\NewAccessToken  $token
      * @return void
      */
     protected function displayTokenValue($token)

@@ -465,7 +465,7 @@ EOF;
         }
     }
 
-    /*
+    /**
      * Installs the given Composer Packages into the application.
      *
      * @param  mixed  $packages
