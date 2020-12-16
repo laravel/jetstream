@@ -21,7 +21,7 @@ class ValidateTeamDeletion
         if ($team->personal_team) {
             throw ValidationException::withMessages([
                 'team' => __('You may not delete your personal team.'),
-            ]);
+            ])->errorBag('deleteTeam');
         }
     }
 }
