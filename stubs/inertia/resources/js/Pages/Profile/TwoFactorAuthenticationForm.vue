@@ -53,8 +53,7 @@
             <div class="mt-5">
                 <div v-if="! twoFactorEnabled">
                     <jet-confirms-password @confirmed="enableTwoFactorAuthentication">
-                        <jet-button type="button"
-                                    dusk="enable-two-factor-authentication-button"
+                        <jet-button type="button" dusk="enable-two-factor-authentication-button"
                                     :class="{ 'opacity-25': enabling }"
                                     :disabled="enabling">
                             {{ $t('Enable') }}
