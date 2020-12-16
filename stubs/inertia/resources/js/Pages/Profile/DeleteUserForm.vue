@@ -14,7 +14,7 @@
             </div>
 
             <div class="mt-5">
-                <jet-danger-button dusk="delete-account-button" @click.native="confirmUserDeletion">
+                <jet-danger-button @click.native="confirmUserDeletion">
                     {{ $t('Delete Account') }}
                 </jet-danger-button>
             </div>
@@ -29,8 +29,7 @@
                     {{ $t('Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
 
                     <div class="mt-4">
-                        <jet-input type="password" dusk="delete-account-confirmation-password"
-                                    class="mt-1 block w-3/4"
+                        <jet-input type="password" class="mt-1 block w-3/4"
                                     :placeholder="$t('Password')"
                                     ref="password"
                                     v-model="form.password"
@@ -45,10 +44,9 @@
                         {{ $t('Nevermind') }}
                     </jet-secondary-button>
 
-                    <jet-danger-button dusk="delete-account-confirmation-button"
-                                    class="ml-2"
-                                    @click.native="deleteUser"
-                                    :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    <jet-danger-button class="ml-2"
+                                       @click.native="deleteUser"
+                                       :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         {{ $t('Delete Account') }}
                     </jet-danger-button>
                 </template>

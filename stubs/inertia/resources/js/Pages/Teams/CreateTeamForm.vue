@@ -30,9 +30,7 @@
         </template>
 
         <template #actions>
-            <jet-button dusk="create-team-button"
-                        :class="{ 'opacity-25': form.processing }"
-                        :disabled="form.processing">
+            <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                 {{ $t('Create') }}
             </jet-button>
         </template>

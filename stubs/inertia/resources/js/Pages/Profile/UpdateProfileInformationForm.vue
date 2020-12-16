@@ -61,9 +61,7 @@
                 {{ $t('Saved.') }}
             </jet-action-message>
 
-            <jet-button dusk="update-profile-information-button"
-                        :class="{ 'opacity-25': form.processing }"
-                        :disabled="form.processing">
+            <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                 {{ $t('Save') }}
             </jet-button>
         </template>

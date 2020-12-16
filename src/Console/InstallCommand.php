@@ -67,6 +67,13 @@ class InstallCommand extends Command
         } elseif ($this->argument('stack') === 'inertia') {
             $this->installInertiaStack();
         }
+
+        // Tests...
+        copy(__DIR__.'/../../stubs/tests/AuthenticationTest.php', base_path('tests/Feature/AuthenticationTest.php'));
+        copy(__DIR__.'/../../stubs/tests/EmailVerificationTest.php', base_path('tests/Feature/EmailVerificationTest.php'));
+        copy(__DIR__.'/../../stubs/tests/PasswordConfirmationTest.php', base_path('tests/Feature/PasswordConfirmationTest.php'));
+        copy(__DIR__.'/../../stubs/tests/PasswordResetTest.php', base_path('tests/Feature/PasswordResetTest.php'));
+        copy(__DIR__.'/../../stubs/tests/RegistrationTest.php', base_path('tests/Feature/RegistrationTest.php'));
     }
 
     /**
@@ -186,6 +193,16 @@ class InstallCommand extends Command
         copy(__DIR__.'/../../stubs/resources/css/app.css', resource_path('css/app.css'));
         copy(__DIR__.'/../../stubs/livewire/resources/js/app.js', resource_path('js/app.js'));
 
+        // Tests...
+        copy(__DIR__.'/../../stubs/tests/livewire/ApiTokenPermissionsTest.php', base_path('tests/Feature/ApiTokenPermissionsTest.php'));
+        copy(__DIR__.'/../../stubs/tests/livewire/BrowserSessionsTest.php', base_path('tests/Feature/BrowserSessionsTest.php'));
+        copy(__DIR__.'/../../stubs/tests/livewire/CreateApiTokenTest.php', base_path('tests/Feature/CreateApiTokenTest.php'));
+        copy(__DIR__.'/../../stubs/tests/livewire/DeleteAccountTest.php', base_path('tests/Feature/DeleteAccountTest.php'));
+        copy(__DIR__.'/../../stubs/tests/livewire/DeleteApiTokenTest.php', base_path('tests/Feature/DeleteApiTokenTest.php'));
+        copy(__DIR__.'/../../stubs/tests/livewire/ProfileInformationTest.php', base_path('tests/Feature/ProfileInformationTest.php'));
+        copy(__DIR__.'/../../stubs/tests/livewire/TwoFactorAuthenticationSettingsTest.php', base_path('tests/Feature/TwoFactorAuthenticationSettingsTest.php'));
+        copy(__DIR__.'/../../stubs/tests/livewire/UpdatePasswordTest.php', base_path('tests/Feature/UpdatePasswordTest.php'));
+
         // Teams...
         if ($this->option('teams')) {
             $this->installLivewireTeamStack();
@@ -208,6 +225,15 @@ class InstallCommand extends Command
 
         // Other Views...
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/teams', resource_path('views/teams'));
+
+        // Tests...
+        copy(__DIR__.'/../../stubs/tests/livewire/CreateTeamTest.php', base_path('tests/Feature/CreateTeamTest.php'));
+        copy(__DIR__.'/../../stubs/tests/livewire/DeleteTeamTest.php', base_path('tests/Feature/DeleteTeamTest.php'));
+        copy(__DIR__.'/../../stubs/tests/livewire/InviteTeamMemberTest.php', base_path('tests/Feature/InviteTeamMemberTest.php'));
+        copy(__DIR__.'/../../stubs/tests/livewire/LeaveTeamTest.php', base_path('tests/Feature/LeaveTeamTest.php'));
+        copy(__DIR__.'/../../stubs/tests/livewire/RemoveTeamMemberTest.php', base_path('tests/Feature/RemoveTeamMemberTest.php'));
+        copy(__DIR__.'/../../stubs/tests/livewire/UpdateTeamMemberRoleTest.php', base_path('tests/Feature/UpdateTeamMemberRoleTest.php'));
+        copy(__DIR__.'/../../stubs/tests/livewire/UpdateTeamNameTest.php', base_path('tests/Feature/UpdateTeamNameTest.php'));
 
         $this->ensureApplicationIsTeamCompatible();
     }
@@ -344,6 +370,16 @@ EOF;
         // Flush node_modules...
         // static::flushNodeModules();
 
+        // Tests...
+        copy(__DIR__.'/../../stubs/tests/inertia/ApiTokenPermissionsTest.php', base_path('tests/Feature/ApiTokenPermissionsTest.php'));
+        copy(__DIR__.'/../../stubs/tests/inertia/BrowserSessionsTest.php', base_path('tests/Feature/BrowserSessionsTest.php'));
+        copy(__DIR__.'/../../stubs/tests/inertia/CreateApiTokenTest.php', base_path('tests/Feature/CreateApiTokenTest.php'));
+        copy(__DIR__.'/../../stubs/tests/inertia/DeleteAccountTest.php', base_path('tests/Feature/DeleteAccountTest.php'));
+        copy(__DIR__.'/../../stubs/tests/inertia/DeleteApiTokenTest.php', base_path('tests/Feature/DeleteApiTokenTest.php'));
+        copy(__DIR__.'/../../stubs/tests/inertia/ProfileInformationTest.php', base_path('tests/Feature/ProfileInformationTest.php'));
+        copy(__DIR__.'/../../stubs/tests/inertia/TwoFactorAuthenticationSettingsTest.php', base_path('tests/Feature/TwoFactorAuthenticationSettingsTest.php'));
+        copy(__DIR__.'/../../stubs/tests/inertia/UpdatePasswordTest.php', base_path('tests/Feature/UpdatePasswordTest.php'));
+
         // Teams...
         if ($this->option('teams')) {
             $this->installInertiaTeamStack();
@@ -366,6 +402,15 @@ EOF;
 
         // Pages...
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Teams', resource_path('js/Pages/Teams'));
+
+        // Tests...
+        copy(__DIR__.'/../../stubs/tests/inertia/CreateTeamTest.php', base_path('tests/Feature/CreateTeamTest.php'));
+        copy(__DIR__.'/../../stubs/tests/inertia/DeleteTeamTest.php', base_path('tests/Feature/DeleteTeamTest.php'));
+        copy(__DIR__.'/../../stubs/tests/inertia/InviteTeamMemberTest.php', base_path('tests/Feature/InviteTeamMemberTest.php'));
+        copy(__DIR__.'/../../stubs/tests/inertia/LeaveTeamTest.php', base_path('tests/Feature/LeaveTeamTest.php'));
+        copy(__DIR__.'/../../stubs/tests/inertia/RemoveTeamMemberTest.php', base_path('tests/Feature/RemoveTeamMemberTest.php'));
+        copy(__DIR__.'/../../stubs/tests/inertia/UpdateTeamMemberRoleTest.php', base_path('tests/Feature/UpdateTeamMemberRoleTest.php'));
+        copy(__DIR__.'/../../stubs/tests/inertia/UpdateTeamNameTest.php', base_path('tests/Feature/UpdateTeamNameTest.php'));
 
         $this->ensureApplicationIsTeamCompatible();
     }
