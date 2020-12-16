@@ -16,7 +16,7 @@ class CurrentUserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Illuminate\Contracts\Auth\StatefulGuard  $auth
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, StatefulGuard $auth)
     {

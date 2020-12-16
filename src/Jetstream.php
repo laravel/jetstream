@@ -219,6 +219,7 @@ class Jetstream
      * Find a user instance by the given ID.
      *
      * @param  int  $id
+     * @return mixed
      */
     public static function findUserByIdOrFail($id)
     {

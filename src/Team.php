@@ -8,6 +8,8 @@ abstract class Team extends Model
 {
     /**
      * Get the owner of the team.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function owner()
     {
@@ -26,6 +28,8 @@ abstract class Team extends Model
 
     /**
      * Get all of the users that belong to the team.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function users()
     {
@@ -73,6 +77,8 @@ abstract class Team extends Model
 
     /**
      * Get all of the pending user invitations for the team.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function teamInvitations()
     {

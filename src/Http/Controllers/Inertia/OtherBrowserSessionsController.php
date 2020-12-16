@@ -16,7 +16,7 @@ class OtherBrowserSessionsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Illuminate\Contracts\Auth\StatefulGuard  $guard
-     * @return \Inertia\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Request $request, StatefulGuard $guard)
     {

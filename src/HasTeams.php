@@ -20,6 +20,8 @@ trait HasTeams
 
     /**
      * Get the current team of the user's context.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function currentTeam()
     {
@@ -33,6 +35,7 @@ trait HasTeams
     /**
      * Switch the user's context to the given team.
      *
+     * @param  mixed  $team
      * @return bool
      */
     public function switchTeam($team)
@@ -62,6 +65,8 @@ trait HasTeams
 
     /**
      * Get all of the teams the user owns.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function ownedTeams()
     {
@@ -70,6 +75,8 @@ trait HasTeams
 
     /**
      * Get all of the teams the user belongs to.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function teams()
     {
@@ -82,7 +89,7 @@ trait HasTeams
     /**
      * Get the user's "personal" team.
      *
-     * @return \App\Team
+     * @return \App\Models\Team
      */
     public function personalTeam()
     {
