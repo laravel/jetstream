@@ -42,7 +42,7 @@
                 {{ __('Saved.') }}
             </x-jet-action-message>
 
-            <x-jet-button dusk="save-team-name-button">
+            <x-jet-button>
                 {{ __('Save') }}
             </x-jet-button>
         </x-slot>
