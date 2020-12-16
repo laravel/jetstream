@@ -16,7 +16,7 @@ class DeleteTeamTest extends TestCase
         $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
         $user->ownedTeams()->save($team = Team::factory()->make([
-            'personal_team' => false
+            'personal_team' => false,
         ]));
 
         $otherUser = User::factory()->create();
