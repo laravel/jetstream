@@ -381,7 +381,7 @@ EOF;
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-team-migrations', '--force' => true]);
 
         // Configuration...
-        $this->replaceInFile('// Features::teams()', 'Features::teams()', config_path('jetstream.php'));
+        $this->replaceInFile('// Features::teams([\'invitations\' => true])', 'Features::teams([\'invitations\' => true])', config_path('jetstream.php'));
 
         // Directories...
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Jetstream'));
