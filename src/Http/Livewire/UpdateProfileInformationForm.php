@@ -91,8 +91,6 @@ class UpdateProfileInformationForm extends Component
      */
     public function render()
     {
-        return view('profile.update-profile-information-form', [
-            'emailDisabled' => $this->emailDisabled(),
-        ]);
+        return view('profile.update-profile-information-form');
     }
 }
