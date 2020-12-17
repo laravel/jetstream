@@ -24,6 +24,8 @@ class CreateUserFromProvider implements CreatesUserFromProvider
                 'name' => $providerUser->getName(),
                 'email' => $providerUser->getEmail(),
             ]), function (User $user) {
+                $user->markEmailAsVerified();
+
                 $this->createTeam($user);
             });
         });

@@ -17,9 +17,13 @@ class CreateUserFromProvider implements CreatesUserFromProvider
      */
     public function create(string $provider, ProviderUserContract $providerUser)
     {
-        return User::create([
+        $user = User::create([
             'name' => $providerUser->getName(),
             'email' => $providerUser->getEmail(),
         ]);
+
+        $user->markEmailAsVerified();
+
+        return $user;
     }
 }
