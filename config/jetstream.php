@@ -33,7 +33,6 @@ return [
         // Features::api(),
         // Features::teams(),
     ],
-    
     /*
     |--------------------------------------------------------------------------
     | Jetstream Routes Middleware
