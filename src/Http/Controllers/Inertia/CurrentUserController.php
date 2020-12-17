@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Inertia\Inertia;
 use Laravel\Jetstream\Contracts\DeletesUsers;
 
 class CurrentUserController extends Controller
@@ -16,7 +17,7 @@ class CurrentUserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Illuminate\Contracts\Auth\StatefulGuard  $auth
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, StatefulGuard $auth)
     {
@@ -30,6 +31,6 @@ class CurrentUserController extends Controller
 
         $auth->logout();
 
-        return response('', 409)->header('X-Inertia-Location', url('/'));
+        return Inertia::location(url('/'));
     }
 }
