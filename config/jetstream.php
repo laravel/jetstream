@@ -33,5 +33,18 @@ return [
         // Features::api(),
         // Features::teams(),
     ],
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Jetstream Routes Middleware
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify which middleware Jetstream will assign to the routes
+    | that it registers with the application. If necessary, you may change
+    | these middleware but typically this provided default is preferred.
+    |
+    */
+
+    'middleware' => ['web'],
 
 ];
