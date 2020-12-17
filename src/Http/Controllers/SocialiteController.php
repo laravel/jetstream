@@ -159,6 +159,7 @@ class SocialiteController extends Controller
 
         return redirect(config('fortify.home'));
     }
+
     /**
      * Authenticate the user via Socialite.
      *
