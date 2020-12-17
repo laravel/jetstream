@@ -37,18 +37,6 @@ class UpdateProfileInformationForm extends Component
     }
 
     /**
-     * Determines if the email input should be disabled for the user.
-     *
-     * @return bool
-     */
-    public function emailDisabled()
-    {
-        return DB::table('connected_accounts')
-            ->where('user_id', Auth::user()->getAuthIdentifier())
-            ->exists();
-    }
-
-    /**
      * Update the user's profile information.
      *
      * @param  \Laravel\Fortify\Contracts\UpdatesUserProfileInformation  $updater
