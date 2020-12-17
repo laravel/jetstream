@@ -109,7 +109,6 @@ class SocialiteController extends Controller
                 return redirect()->route('profile.show')->banner(
                     __('You have successfully connected :Provider to your account.', ['provider' => $provider])
                 );
-
             }
 
             return redirect()->route('profile.show')->dangerBanner(
@@ -119,7 +118,6 @@ class SocialiteController extends Controller
 
         // Registration...
         if (session()->get('origin_url') === route('register')) {
-
             if ($account) {
                 return redirect()->route('register')->withErrors(
                     __('An account with that :Provider sign in already exists, please login.', ['provider' => $provider])
