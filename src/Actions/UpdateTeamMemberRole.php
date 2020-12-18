@@ -4,6 +4,8 @@ namespace Laravel\Jetstream\Actions;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
+use Laravel\Jetstream\Events\TeamMemberUpdated;
+use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Rules\Role;
 
 class UpdateTeamMemberRole
@@ -30,5 +32,7 @@ class UpdateTeamMemberRole
         $team->users()->updateExistingPivot($teamMemberId, [
             'role' => $role,
         ]);
+
+        TeamMemberUpdated::dispatch($team->fresh(), Jetstream::findUserByIdOrFail($teamMemberId));
     }
 }
