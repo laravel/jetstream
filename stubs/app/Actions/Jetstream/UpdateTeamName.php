@@ -5,6 +5,7 @@ namespace App\Actions\Jetstream;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Jetstream\Contracts\UpdatesTeamNames;
+use Laravel\Jetstream\Events\TeamUpdated;
 
 class UpdateTeamName implements UpdatesTeamNames
 {
@@ -27,5 +28,9 @@ class UpdateTeamName implements UpdatesTeamNames
         $team->forceFill([
             'name' => $input['name'],
         ])->save();
+
+        TeamUpdated::dispatch($team);
+
+        return $team;
     }
 }
