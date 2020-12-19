@@ -21,9 +21,7 @@ class UpdatePasswordTest extends TestCase
             'password_confirmation' => 'new-password',
         ]);
 
-        $user = $user->fresh();
-
-        $this->assertTrue(Hash::check('new-password', $user->password));
+        $this->assertTrue(Hash::check('new-password', $user->fresh()->password));
     }
 
     public function test_current_password_must_be_correct()
@@ -38,9 +36,7 @@ class UpdatePasswordTest extends TestCase
 
         $response->assertSessionHasErrors();
 
-        $user = $user->fresh();
-
-        $this->assertTrue(Hash::check('password', $user->password));
+        $this->assertTrue(Hash::check('password', $user->fresh()->password));
     }
 
     public function test_new_passwords_must_match()
@@ -55,8 +51,6 @@ class UpdatePasswordTest extends TestCase
 
         $response->assertSessionHasErrors();
 
-        $user = $user->fresh();
-
-        $this->assertTrue(Hash::check('password', $user->password));
+        $this->assertTrue(Hash::check('password', $user->fresh()->password));
     }
 }

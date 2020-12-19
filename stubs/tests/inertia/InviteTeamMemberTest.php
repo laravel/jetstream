@@ -32,8 +32,6 @@ class InviteTeamMemberTest extends TestCase
     {
         $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
-        $otherUser = User::factory()->create();
-
         $invitation = $user->currentTeam->teamInvitations()->create([
             'email' => 'test@example.com',
             'role' => 'admin',
