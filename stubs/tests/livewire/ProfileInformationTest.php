@@ -30,9 +30,7 @@ class ProfileInformationTest extends TestCase
                 ->set('state', ['name' => 'Test Name', 'email' => 'test@example.com'])
                 ->call('updateProfileInformation');
 
-        $user = $user->fresh();
-
-        $this->assertEquals('Test Name', $user->name);
-        $this->assertEquals('test@example.com', $user->email);
+        $this->assertEquals('Test Name', $user->fresh()->name);
+        $this->assertEquals('test@example.com', $user->fresh()->email);
     }
 }

@@ -35,6 +35,7 @@ class InviteTeamMemberTest extends TestCase
     {
         $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
+        // Add the team member...
         $component = Livewire::test(TeamMemberManager::class, ['team' => $user->currentTeam])
                         ->set('addTeamMemberForm', [
                             'email' => 'test@example.com',
@@ -43,6 +44,7 @@ class InviteTeamMemberTest extends TestCase
 
         $invitationId = $user->currentTeam->fresh()->teamInvitations->first()->id;
 
+        // Cancel the team invitation...
         $component->call('cancelTeamInvitation', $invitationId);
 
         $this->assertCount(0, $user->currentTeam->fresh()->teamInvitations);
