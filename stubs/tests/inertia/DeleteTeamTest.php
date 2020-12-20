@@ -19,7 +19,9 @@ class DeleteTeamTest extends TestCase
             'personal_team' => false,
         ]));
 
-        $team->users()->attach($otherUser = User::factory()->create(), ['role' => 'test-role']);
+        $team->users()->attach(
+            $otherUser = User::factory()->create(), ['role' => 'test-role']
+        );
 
         $response = $this->delete('/teams/'.$team->id);
 
