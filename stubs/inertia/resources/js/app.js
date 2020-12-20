@@ -4,7 +4,7 @@ require('moment');
 
 // Import modules...
 import Vue from 'vue';
-import { InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue';
+import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue';
 import { InertiaForm } from 'laravel-jetstream';
 import PortalVue from 'portal-vue';
 import VueI18n from 'vue-i18n';
