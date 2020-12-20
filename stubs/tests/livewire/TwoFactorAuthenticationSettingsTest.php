@@ -51,13 +51,11 @@ class TwoFactorAuthenticationSettingsTest extends TestCase
 
         $this->withSession(['auth.password_confirmed_at' => time()]);
 
-        // Enable two-factor authentication...
         $component = Livewire::test(TwoFactorAuthenticationForm::class)
                 ->call('enableTwoFactorAuthentication');
 
         $this->assertNotNull($user->fresh()->two_factor_secret);
 
-        // Disable two-factor authentication...
         $component->call('disableTwoFactorAuthentication');
 
         $this->assertNull($user->fresh()->two_factor_secret);

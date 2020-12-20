@@ -45,12 +45,10 @@ class TwoFactorAuthenticationSettingsTest extends TestCase
 
         $this->withSession(['auth.password_confirmed_at' => time()]);
 
-        // Enable two-factor authentication...
         $this->post('/user/two-factor-authentication');
 
         $this->assertNotNull($user->fresh()->two_factor_secret);
 
-        // Disable two-factor authentication...
         $this->delete('/user/two-factor-authentication');
 
         $this->assertNull($user->fresh()->two_factor_secret);
