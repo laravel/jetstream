@@ -77,6 +77,23 @@ class Jetstream
     public static $inertiaManager;
 
     /**
+     * The officially supported stacks.
+     *
+     * @var array
+     */
+    public static $stacks = ['livewire', 'inertia'];
+
+    /**
+     * Determine if the current stack is officially supported.
+     *
+     * @return bool
+     */
+    public static function official()
+    {
+        return in_array(config('jetstream.stack'), static::$stacks);
+    }
+
+    /**
      * Determine if Jetstream has registered roles.
      *
      * @return bool
