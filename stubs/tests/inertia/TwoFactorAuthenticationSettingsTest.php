@@ -18,10 +18,8 @@ class TwoFactorAuthenticationSettingsTest extends TestCase
 
         $response = $this->post('/user/two-factor-authentication');
 
-        $user = $user->fresh();
-
-        $this->assertNotNull($user->two_factor_secret);
-        $this->assertCount(8, $user->recoveryCodes());
+        $this->assertNotNull($user->fresh()->two_factor_secret);
+        $this->assertCount(8, $user->fresh()->recoveryCodes());
     }
 
     public function test_recovery_codes_can_be_regenerated()
