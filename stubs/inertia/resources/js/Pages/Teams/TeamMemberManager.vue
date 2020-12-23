@@ -6,30 +6,30 @@
             <!-- Add Team Member -->
             <jet-form-section @submitted="addTeamMember">
                 <template #title>
-                    {{ $t('Add Team Member') }}
+                    Add Team Member
                 </template>
 
                 <template #description>
-                    {{ $t('Add a new team member to your team, allowing them to collaborate with you.') }}
+                    Add a new team member to your team, allowing them to collaborate with you.
                 </template>
 
                 <template #form>
                     <div class="col-span-6">
                         <div class="max-w-xl text-sm text-gray-600">
-                            {{ $t('Please provide the email address of the person you would like to add to this team.') }}
+                            Please provide the email address of the person you would like to add to this team.
                         </div>
                     </div>
 
                     <!-- Member Email -->
                     <div class="col-span-6 sm:col-span-4">
-                        <jet-label for="email" :value="$t('Email')" />
+                        <jet-label for="email" value="Email" />
                         <jet-input id="email" type="text" class="mt-1 block w-full" v-model="addTeamMemberForm.email" />
                         <jet-input-error :message="addTeamMemberForm.error('email')" class="mt-2" />
                     </div>
 
                     <!-- Role -->
                     <div class="col-span-6 lg:col-span-4" v-if="availableRoles.length > 0">
-                        <jet-label for="roles" :value="$t('Role')" />
+                        <jet-label for="roles" value="Role" />
                         <jet-input-error :message="addTeamMemberForm.error('role')" class="mt-2" />
 
                         <div class="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer">
@@ -60,11 +60,11 @@
 
                 <template #actions>
                     <jet-action-message :on="addTeamMemberForm.recentlySuccessful" class="mr-3">
-                        {{ $t('Added.') }}
+                        Added.
                     </jet-action-message>
 
                     <jet-button :class="{ 'opacity-25': addTeamMemberForm.processing }" :disabled="addTeamMemberForm.processing">
-                        {{ $t('Add') }}
+                        Add
                     </jet-button>
                 </template>
             </jet-form-section>
@@ -76,11 +76,11 @@
             <!-- Team Member Invitations -->
             <jet-action-section class="mt-10 sm:mt-0">
                 <template #title>
-                    {{ $t('Pending Team Invitations') }}
+                    Pending Team Invitations
                 </template>
 
                 <template #description>
-                    {{ $t('These people have been invited to your team and have been sent an invitation email. They may join the team by accepting the email invitation.') }}
+                    These people have been invited to your team and have been sent an invitation email. They may join the team by accepting the email invitation.
                 </template>
 
                 <!-- Pending Team Member Invitation List -->
@@ -94,7 +94,7 @@
                                 <button class="cursor-pointer ml-6 text-sm text-red-500 focus:outline-none"
                                                     @click="cancelTeamInvitation(invitation)"
                                                     v-if="userPermissions.canRemoveTeamMembers">
-                                    {{ $t('Cancel') }}
+                                    Cancel
                                 </button>
                             </div>
                         </div>
@@ -109,11 +109,11 @@
             <!-- Manage Team Members -->
             <jet-action-section class="mt-10 sm:mt-0">
                 <template #title>
-                    {{ $t('Team Members') }}
+                    Team Members
                 </template>
 
                 <template #description>
-                    {{ $t('All of the people that are part of this team.') }}
+                    All of the people that are part of this team.
                 </template>
 
                 <!-- Team Member List -->
@@ -141,14 +141,14 @@
                                 <button class="cursor-pointer ml-6 text-sm text-red-500"
                                                     @click="confirmLeavingTeam"
                                                     v-if="$page.props.user.id === user.id">
-                                    {{ $t('Leave') }}
+                                    Leave
                                 </button>
 
                                 <!-- Remove Team Member -->
                                 <button class="cursor-pointer ml-6 text-sm text-red-500"
                                                     @click="confirmTeamMemberRemoval(user)"
                                                     v-if="userPermissions.canRemoveTeamMembers">
-                                    {{ $t('Remove') }}
+                                    Remove
                                 </button>
                             </div>
                         </div>
@@ -160,7 +160,7 @@
         <!-- Role Management Modal -->
         <jet-dialog-modal :show="currentlyManagingRole" @close="currentlyManagingRole = false">
             <template #title>
-                {{ $t('Manage Role') }}
+                Manage Role
             </template>
 
             <template #content>
@@ -193,13 +193,11 @@
 
             <template #footer>
                 <jet-secondary-button @click.native="currentlyManagingRole = false">
-                    {{ $t('Nevermind') }}
+                    Nevermind
                 </jet-secondary-button>
 
-                <jet-button class="ml-2"
-                            :class="{ 'opacity-25': updateRoleForm.processing }" :disabled="updateRoleForm.processing"
-                            @click.native="updateRole">
-                    {{ $t('Save') }}
+                <jet-button class="ml-2" @click.native="updateRole" :class="{ 'opacity-25': updateRoleForm.processing }" :disabled="updateRoleForm.processing">
+                    Save
                 </jet-button>
             </template>
         </jet-dialog-modal>
@@ -207,20 +205,20 @@
         <!-- Leave Team Confirmation Modal -->
         <jet-confirmation-modal :show="confirmingLeavingTeam" @close="confirmingLeavingTeam = false">
             <template #title>
-                {{ $t('Leave Team') }}
+                Leave Team
             </template>
 
             <template #content>
-                {{ $t('Are you sure you would like to leave this team?') }}
+                Are you sure you would like to leave this team?
             </template>
 
             <template #footer>
                 <jet-secondary-button @click.native="confirmingLeavingTeam = false">
-                    {{ $t('Nevermind') }}
+                    Nevermind
                 </jet-secondary-button>
 
                 <jet-danger-button class="ml-2" @click.native="leaveTeam" :class="{ 'opacity-25': leaveTeamForm.processing }" :disabled="leaveTeamForm.processing">
-                    {{ $t('Leave') }}
+                    Leave
                 </jet-danger-button>
             </template>
         </jet-confirmation-modal>
@@ -228,23 +226,20 @@
         <!-- Remove Team Member Confirmation Modal -->
         <jet-confirmation-modal :show="teamMemberBeingRemoved" @close="teamMemberBeingRemoved = null">
             <template #title>
-                {{ $t('Remove Team Member') }}
+                Remove Team Member
             </template>
 
             <template #content>
-                {{ $t('Are you sure you would like to remove this person from the team?') }}
+                Are you sure you would like to remove this person from the team?
             </template>
 
             <template #footer>
                 <jet-secondary-button @click.native="teamMemberBeingRemoved = null">
-                    {{ $t('Nevermind') }}
+                    Nevermind
                 </jet-secondary-button>
 
-                <jet-danger-button class="ml-2"
-                                :class="{ 'opacity-25': removeTeamMemberForm.processing }"
-                                @click.native="removeTeamMember"
-                                :disabled="removeTeamMemberForm.processing">
-                    {{ $t('Remove') }}
+                <jet-danger-button class="ml-2" @click.native="removeTeamMember" :class="{ 'opacity-25': removeTeamMemberForm.processing }" :disabled="removeTeamMemberForm.processing">
+                    Remove
                 </jet-danger-button>
             </template>
         </jet-confirmation-modal>
