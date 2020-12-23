@@ -8,7 +8,7 @@ use Laravel\Jetstream\Http\Controllers\Livewire\UserProfileController;
 use Laravel\Jetstream\Jetstream;
 
 Route::group(['middleware' => config('jetstream.middleware', ['web'])], function () {
-    Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::group(['middleware' => ['auth:'.config('fortify.guard', 'web'), 'verified']], function () {
         // User & Profile...
         Route::get('/user/profile', [UserProfileController::class, 'show'])
                     ->name('profile.show');
