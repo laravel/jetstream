@@ -29,13 +29,11 @@ class ShareInertiaData
                     'canManageTwoFactorAuthentication' => Features::canManageTwoFactorAuthentication(),
                     'canUpdatePassword' => Features::enabled(Features::updatePasswords()),
                     'canUpdateProfileInformation' => Features::canUpdateProfileInformation(),
-                    'fallbackLocale' => app()->getFallbackLocale(),
                     'flash' => $request->session()->get('flash', []),
                     'hasAccountDeletionFeatures' => Jetstream::hasAccountDeletionFeatures(),
                     'hasApiFeatures' => Jetstream::hasApiFeatures(),
                     'hasTeamFeatures' => Jetstream::hasTeamFeatures(),
                     'hasTermsAndPrivacyPolicyFeature' => Jetstream::hasTermsAndPrivacyPolicyFeature(),
-                    'locale' => app()->getLocale(),
                     'managesProfilePhotos' => Jetstream::managesProfilePhotos(),
                 ];
             },
