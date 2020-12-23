@@ -6,11 +6,11 @@
 
         <div class="mb-4 text-sm text-gray-600">
             <template v-if="! recovery">
-                {{ $t('Please confirm access to your account by entering the authentication code provided by your authenticator application.') }}
+                Please confirm access to your account by entering the authentication code provided by your authenticator application.
             </template>
 
             <template v-else>
-                {{ $t('Please confirm access to your account by entering one of your emergency recovery codes.') }}
+                Please confirm access to your account by entering one of your emergency recovery codes.
             </template>
         </div>
 
@@ -18,28 +18,28 @@
 
         <form @submit.prevent="submit">
             <div v-if="! recovery">
-                <jet-label for="code" :value="$t('Code')" />
+                <jet-label for="code" value="Code" />
                 <jet-input ref="code" id="code" type="text" inputmode="numeric" class="mt-1 block w-full" v-model="form.code" autofocus autocomplete="one-time-code" />
             </div>
 
             <div v-else>
-                <jet-label for="recovery_code" :value="$t('Recovery Code')" />
+                <jet-label for="recovery_code" value="Recovery Code" />
                 <jet-input ref="recovery_code" id="recovery_code" type="text" class="mt-1 block w-full" v-model="form.recovery_code" autocomplete="one-time-code" />
             </div>
 
             <div class="flex items-center justify-end mt-4">
                 <button type="button" class="text-sm text-gray-600 hover:text-gray-900 underline cursor-pointer" @click.prevent="toggleRecovery">
                     <template v-if="! recovery">
-                        {{ $t('Use a recovery code') }}
+                        Use a recovery code
                     </template>
 
                     <template v-else>
-                        {{ $t('Use an authentication code') }}
+                        Use an authentication code
                     </template>
                 </button>
 
                 <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    {{ $t('Login') }}
+                    Login
                 </jet-button>
             </div>
         </form>
