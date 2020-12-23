@@ -272,7 +272,6 @@ EOF;
                 '@tailwindcss/forms' => '^0.2.1',
                 '@tailwindcss/typography' => '^0.3.0',
                 'laravel-jetstream' => '^1.0.0',
-                'moment' => '^2.26.0',
                 'portal-vue' => '^2.1.7',
                 'postcss-import' => '^12.0.1',
                 'tailwindcss' => 'npm:@tailwindcss/postcss7-compat@^2.0.1',

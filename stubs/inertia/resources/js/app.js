@@ -1,7 +1,6 @@
 require('./bootstrap');
 
-require('moment');
-
+// Import modules...
 import Vue from 'vue';
 
 import { InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue';

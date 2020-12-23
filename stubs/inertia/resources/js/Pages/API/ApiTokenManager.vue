@@ -67,8 +67,8 @@
                                 </div>
 
                                 <div class="flex items-center">
-                                    <div class="text-sm text-gray-400" v-if="token.last_used_at">
-                                        Last used {{ fromNow(token.last_used_at) }}
+                                    <div class="text-sm text-gray-400" v-if="token.last_used_ago">
+                                        Last used {{ fromNow(token.last_used_ago) }}
                                     </div>
 
                                     <button class="cursor-pointer ml-6 text-sm text-gray-400 underline"
@@ -265,10 +265,6 @@
                         this.apiTokenBeingDeleted = null
                     }
                 })
-            },
-
-            fromNow(timestamp) {
-                return moment(timestamp).local().fromNow()
             },
         },
     }
