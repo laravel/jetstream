@@ -267,18 +267,15 @@ EOF;
         // Install NPM packages...
         $this->updateNodePackages(function ($packages) {
             return [
-                '@inertiajs/inertia' => '^0.8.0',
-                '@inertiajs/inertia-vue' => '^0.5.0',
-                '@intlify/vue-i18n-loader' => '^1.0.0',
+                '@inertiajs/inertia' => '^0.4.0',
+                '@inertiajs/inertia-vue' => '^0.3.0',
                 '@tailwindcss/forms' => '^0.2.1',
                 '@tailwindcss/typography' => '^0.3.0',
-                'moment' => '^2.26.0',
                 'portal-vue' => '^2.1.7',
                 'postcss-import' => '^12.0.1',
                 'tailwindcss' => 'npm:@tailwindcss/postcss7-compat@^2.0.1',
                 'autoprefixer' => '^9.8.6',
                 'vue' => '^2.5.17',
-                'vue-i18n' => '^8.22.1',
                 'vue-template-compiler' => '^2.6.10',
             ] + $packages;
         });

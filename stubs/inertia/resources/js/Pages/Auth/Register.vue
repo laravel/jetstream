@@ -8,22 +8,22 @@
 
         <form @submit.prevent="submit">
             <div>
-                <jet-label for="name" :value="$t('Name')" />
+                <jet-label for="name" value="Name" />
                 <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus autocomplete="name" />
             </div>
 
             <div class="mt-4">
-                <jet-label for="email" :value="$t('Email')" />
+                <jet-label for="email" value="Email" />
                 <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required />
             </div>
 
             <div class="mt-4">
-                <jet-label for="password" :value="$t('Password')" />
+                <jet-label for="password" value="Password" />
                 <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
             </div>
 
             <div class="mt-4">
-                <jet-label for="password_confirmation" :value="$t('Confirm Password')" />
+                <jet-label for="password_confirmation" value="Confirm Password" />
                 <jet-input id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
             </div>
 
@@ -32,26 +32,20 @@
                     <div class="flex items-center">
                         <jet-checkbox name="terms" id="terms" v-model="form.terms"/>
 
-                        <i18n path="I agree to the {terms_of_service} and {privacy_policy}" tag="div" class="ml-2">
-                            <template #terms_of_service>
-                                <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900">{{ $t('Terms of Service') }}</a>
-                            </template>
-
-                            <template #privacy_policy>
-                                <a target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900">{{ $t('Privacy Policy') }}</a>
-                            </template>
-                        </i18n>
+                        <div>
+                            I agree to the <inertia-link target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Terms of Service</inertia-link> and <inertia-link target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Privacy Policy</inertia-link>
+                        </div>
                     </div>
                 </jet-label>
             </div>
 
             <div class="flex items-center justify-end mt-4">
                 <inertia-link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    {{ $t('Already registered?') }}
+                    Already registered?
                 </inertia-link>
 
                 <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    {{ $t('Register') }}
+                    Register
                 </jet-button>
             </div>
         </form>
