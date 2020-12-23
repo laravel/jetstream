@@ -71,7 +71,7 @@
                 form: this.$inertia.form({
                     email: '',
                     password: '',
-                    remember: ''
+                    remember: false
                 }).transform(data => ({
                     ... data,
                     remember: this.form.remember ? 'on' : ''

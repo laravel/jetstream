@@ -152,7 +152,7 @@
             disableTwoFactorAuthentication() {
                 this.disabling = true
 
-                this.$inertia.delete('/user/two-factor-authentication', {
+                this.$inertia.delete('/user/two-factor-authentication', {}, {
                     preserveScroll: true,
                     onSuccess: () => {
                         this.disabling = false
