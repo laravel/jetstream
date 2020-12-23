@@ -15,7 +15,7 @@
                 <div class="col-span-6 sm:col-span-4">
                     <jet-label for="name" value="Name" />
                     <jet-input id="name" type="text" class="mt-1 block w-full" v-model="createApiTokenForm.name" autofocus />
-                    <jet-input-error :message="createApiTokenForm.error('name')" class="mt-2" />
+                    <jet-input-error :message="createApiTokenForm.errors.name" class="mt-2" />
                 </div>
 
                 <!-- Token Permissions -->
@@ -34,7 +34,7 @@
             </template>
 
             <template #actions>
-                <jet-action-message :on="createApiTokenForm.recentlySuccessful" class="mr-3">
+                <jet-action-message :on="createApiTokenFormRecentlySuccessful" class="mr-3">
                     Created.
                 </jet-action-message>
 
@@ -68,12 +68,13 @@
 
                                 <div class="flex items-center">
                                     <div class="text-sm text-gray-400" v-if="token.last_used_ago">
-                                        Last used {{ fromNow(token.last_used_ago) }}
+                                        Last used {{ token.last_used_ago }}
                                     </div>
 
                                     <button class="cursor-pointer ml-6 text-sm text-gray-400 underline"
-                                                @click="manageApiTokenPermissions(token)"
-                                                v-if="availablePermissions.length > 0">
+                                        @click="manageApiTokenPermissions(token)"
+                                        v-if="availablePermissions.length > 0"
+                                    >
                                         Permissions
                                     </button>
 
@@ -205,20 +206,15 @@
                 createApiTokenForm: this.$inertia.form({
                     name: '',
                     permissions: this.defaultPermissions,
-                }, {
-                    bag: 'createApiToken',
-                    resetOnSuccess: true,
                 }),
 
                 updateApiTokenForm: this.$inertia.form({
                     permissions: []
-                }, {
-                    resetOnSuccess: false,
-                    bag: 'updateApiToken',
                 }),
 
                 deleteApiTokenForm: this.$inertia.form(),
 
+                createApiTokenFormRecentlySuccessful: false,
                 displayingToken: false,
                 managingPermissionsFor: null,
                 apiTokenBeingDeleted: null,
@@ -228,11 +224,14 @@
         methods: {
             createApiToken() {
                 this.createApiTokenForm.post(route('api-tokens.store'), {
+                    errorBag: 'createApiToken',
                     preserveScroll: true,
+                    before: () => (this.createApiTokenFormRecentlySuccessful = false),
                     onSuccess: () => {
-                        if (! this.createApiTokenForm.hasErrors()) {
-                            this.displayingToken = true
-                        }
+                        this.createApiTokenFormRecentlySuccessful = true
+                        this.displayingToken = true
+
+                        this.createApiTokenForm.reset()
                     }
                 })
             },
@@ -245,6 +244,7 @@
 
             updateApiToken() {
                 this.updateApiTokenForm.put(route('api-tokens.update', this.managingPermissionsFor), {
+                    errorBag: 'updateApiToken',
                     preserveScroll: true,
                     preserveState: true,
                     onSuccess: () => {

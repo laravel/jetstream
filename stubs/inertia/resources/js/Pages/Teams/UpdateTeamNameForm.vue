@@ -33,7 +33,7 @@
                             v-model="form.name"
                             :disabled="! permissions.canUpdateTeam" />
 
-                <jet-input-error :message="form.error('name')" class="mt-2" />
+                <jet-input-error :message="form.errors.name" class="mt-2" />
             </div>
         </template>
 
@@ -73,9 +73,6 @@
             return {
                 form: this.$inertia.form({
                     name: this.team.name,
-                }, {
-                    bag: 'updateTeamName',
-                    resetOnSuccess: false,
                 })
             }
         },
@@ -83,6 +80,7 @@
         methods: {
             updateTeamName() {
                 this.form.put(route('teams.update', this.team), {
+                    errorBag: 'updateTeamName',
                     preserveScroll: true
                 });
             },

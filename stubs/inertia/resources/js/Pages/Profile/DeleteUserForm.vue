@@ -34,7 +34,7 @@
                                     v-model="form.password"
                                     @keyup.enter.native="deleteUser" />
 
-                        <jet-input-error :message="form.error('password')" class="mt-2" />
+                        <jet-input-error :message="form.errors.password" class="mt-2" />
                     </div>
                 </template>
 
@@ -75,10 +75,7 @@
                 confirmingUserDeletion: false,
 
                 form: this.$inertia.form({
-                    '_method': 'DELETE',
                     password: '',
-                }, {
-                    bag: 'deleteUser'
                 })
             }
         },
@@ -95,13 +92,10 @@
             },
 
             deleteUser() {
-                this.form.post(route('current-user.destroy'), {
+                this.form.delete(route('current-user.destroy'), {
+                    errorBag: 'deleteUser',
                     preserveScroll: true,
-                    onSuccess: () => {
-                        if (! this.form.hasErrors()) {
-                            this.confirmingUserDeletion = false;
-                        }
-                    }
+                    onSuccess: () => (this.confirmingUserDeletion = false)
                 })
             },
         },

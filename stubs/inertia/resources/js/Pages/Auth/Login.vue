@@ -23,7 +23,7 @@
 
             <div class="block mt-4">
                 <label class="flex items-center">
-                    <jet-checkbox  name="remember" v-model="remember"/>
+                    <jet-checkbox name="remember" v-model="form.remember" />
                     <span class="ml-2 text-sm text-gray-600">Remember me</span>
                 </label>
             </div>
@@ -68,28 +68,20 @@
 
         data() {
             return {
-                remember: false,
                 form: this.$inertia.form({
                     email: '',
                     password: '',
                     remember: ''
-                })
-            }
-        },
-
-        watch: {
-            remember(value) {
-                this.form.remember = value ? 'on' : ''
+                }).transform(data => ({
+                    ... data,
+                    remember: this.form.remember ? 'on' : ''
+                }))
             }
         },
 
         methods: {
             submit() {
-                this.form.post(this.route('login'), {
-                    onSuccess: () => {
-                        this.remember = false
-                    }
-                })
+                this.form.post(this.route('login'))
             }
         }
     }

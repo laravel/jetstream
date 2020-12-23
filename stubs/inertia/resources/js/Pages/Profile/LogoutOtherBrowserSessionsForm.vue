@@ -48,7 +48,7 @@
                     Logout Other Browser Sessions
                 </jet-button>
 
-                <jet-action-message :on="form.recentlySuccessful" class="ml-3">
+                <jet-action-message :on="formRecentlySuccessful" class="ml-3">
                     Done.
                 </jet-action-message>
             </div>
@@ -68,7 +68,7 @@
                                     v-model="form.password"
                                     @keyup.enter.native="logoutOtherBrowserSessions" />
 
-                        <jet-input-error :message="form.error('password')" class="mt-2" />
+                        <jet-input-error :message="form.errors.password" class="mt-2" />
                     </div>
                 </template>
 
@@ -111,12 +111,10 @@
         data() {
             return {
                 confirmingLogout: false,
+                formRecentlySuccessful: false,
 
                 form: this.$inertia.form({
-                    '_method': 'DELETE',
                     password: '',
-                }, {
-                    bag: 'logoutOtherBrowserSessions'
                 })
             }
         },
@@ -133,12 +131,13 @@
             },
 
             logoutOtherBrowserSessions() {
-                this.form.post(route('other-browser-sessions.destroy'), {
+                this.form.delete(route('other-browser-sessions.destroy'), {
+                    errorBag: 'logoutOtherBrowserSessions',
                     preserveScroll: true,
+                    before: () => (this.formRecentlySuccessful = false),
                     onSuccess: () => {
-                        if (! this.form.hasErrors()) {
-                            this.confirmingLogout = false
-                        }
+                        this.formRecentlySuccessful = true
+                        this.confirmingLogout = false
                     }
                 })
             },

@@ -66,13 +66,10 @@
         data() {
             return {
                 confirmingPassword: false,
-
-                form: this.$inertia.form({
+                form: {
                     password: '',
                     error: '',
-                }, {
-                    bag: 'confirmPassword',
-                })
+                },
             }
         },
 

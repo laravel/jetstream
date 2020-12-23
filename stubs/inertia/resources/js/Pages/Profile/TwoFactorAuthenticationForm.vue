@@ -68,7 +68,7 @@
                     </jet-confirms-password>
 
                     <jet-confirms-password @confirmed="showRecoveryCodes">
-                        <jet-secondary-button class="mr-3" v-if="recoveryCodes.length == 0">
+                        <jet-secondary-button class="mr-3" v-if="recoveryCodes.length === 0">
                             Show Recovery Codes
                         </jet-secondary-button>
                     </jet-confirms-password>
