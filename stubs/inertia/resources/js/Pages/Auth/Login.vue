@@ -72,16 +72,18 @@
                     email: '',
                     password: '',
                     remember: false
-                }).transform(data => ({
-                    ... data,
-                    remember: this.form.remember ? 'on' : ''
-                }))
+                })
             }
         },
 
         methods: {
             submit() {
-                this.form.post(this.route('login'))
+                this.form
+                    .transform(data => ({
+                        ... data,
+                        remember: this.form.remember ? 'on' : ''
+                    }))
+                    .post(this.route('login'))
             }
         }
     }

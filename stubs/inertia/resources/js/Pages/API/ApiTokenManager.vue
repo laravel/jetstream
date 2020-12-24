@@ -34,7 +34,7 @@
             </template>
 
             <template #actions>
-                <jet-action-message :on="createApiTokenFormRecentlySuccessful" class="mr-3">
+                <jet-action-message :on="apiTokenRecentlyCreated" class="mr-3">
                     Created.
                 </jet-action-message>
 
@@ -214,7 +214,7 @@
 
                 deleteApiTokenForm: this.$inertia.form(),
 
-                createApiTokenFormRecentlySuccessful: false,
+                apiTokenRecentlyCreated: false,
                 displayingToken: false,
                 managingPermissionsFor: null,
                 apiTokenBeingDeleted: null,
@@ -226,9 +226,9 @@
                 this.createApiTokenForm.post(route('api-tokens.store'), {
                     errorBag: 'createApiToken',
                     preserveScroll: true,
-                    before: () => (this.createApiTokenFormRecentlySuccessful = false),
+                    before: () => (this.apiTokenRecentlyCreated = false),
                     onSuccess: () => {
-                        this.createApiTokenFormRecentlySuccessful = true
+                        this.apiTokenRecentlyCreated = true
                         this.displayingToken = true
 
                         this.createApiTokenForm.reset()

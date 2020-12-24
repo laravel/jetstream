@@ -48,7 +48,7 @@
                     Logout Other Browser Sessions
                 </jet-button>
 
-                <jet-action-message :on="formRecentlySuccessful" class="ml-3">
+                <jet-action-message :on="successfulLogoutOtherBrowserSessions" class="ml-3">
                     Done.
                 </jet-action-message>
             </div>
@@ -111,7 +111,7 @@
         data() {
             return {
                 confirmingLogout: false,
-                formRecentlySuccessful: false,
+                successfulLogoutOtherBrowserSessions: false,
 
                 form: this.$inertia.form({
                     password: '',
@@ -134,9 +134,9 @@
                 this.form.delete(route('other-browser-sessions.destroy'), {
                     errorBag: 'logoutOtherBrowserSessions',
                     preserveScroll: true,
-                    before: () => (this.formRecentlySuccessful = false),
+                    before: () => (this.successfulLogoutOtherBrowserSessions = false),
                     onSuccess: () => {
-                        this.formRecentlySuccessful = true
+                        this.successfulLogoutOtherBrowserSessions = true
                         this.confirmingLogout = false
                     }
                 })

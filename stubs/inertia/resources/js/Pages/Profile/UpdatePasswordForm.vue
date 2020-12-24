@@ -29,7 +29,7 @@
         </template>
 
         <template #actions>
-            <jet-action-message :on="formRecentlySuccessful" class="mr-3">
+            <jet-action-message :on="successfullyUpdatedPassword" class="mr-3">
                 Saved.
             </jet-action-message>
 
@@ -60,7 +60,7 @@
 
         data() {
             return {
-                formRecentlySuccessful: false,
+                successfullyUpdatedPassword: false,
                 form: this.$inertia.form({
                     current_password: '',
                     password: '',
@@ -74,9 +74,9 @@
                 this.form.put(route('user-password.update'), {
                     errorBag: 'updatePassword',
                     preserveScroll: true,
-                    before: () => (this.formRecentlySuccessful = false),
+                    before: () => (this.successfullyUpdatedPassword = false),
                     onSuccess: () => {
-                        this.formRecentlySuccessful = true
+                        this.successfullyUpdatedPassword = true
                         this.$refs.current_password.focus()
                     },
                 })
