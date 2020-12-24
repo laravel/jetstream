@@ -93,7 +93,6 @@
 
             deleteUser() {
                 this.form.delete(route('current-user.destroy'), {
-                    errorBag: 'deleteUser',
                     preserveScroll: true,
                     onSuccess: () => (this.confirmingUserDeletion = false)
                 })

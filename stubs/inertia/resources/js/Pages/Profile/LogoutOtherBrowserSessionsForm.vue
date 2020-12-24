@@ -132,7 +132,6 @@
 
             logoutOtherBrowserSessions() {
                 this.form.delete(route('other-browser-sessions.destroy'), {
-                    errorBag: 'logoutOtherBrowserSessions',
                     preserveScroll: true,
                     before: () => (this.successfulLogoutOtherBrowserSessions = false),
                     onSuccess: () => {

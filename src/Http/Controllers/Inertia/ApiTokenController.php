@@ -36,11 +36,9 @@ class ApiTokenController extends Controller
      */
     public function store(Request $request)
     {
-        Validator::make([
-            'name' => $request->name,
-        ], [
-            'name' => ['required', 'string', 'max:255'],
-        ])->validateWithBag('createApiToken');
+        $request->validate([
+            'name' => ['required', 'string', 'max:255']
+        ]);
 
         $token = $request->user()->createToken(
             $request->name, Jetstream::validPermissions($request->input('permissions', []))
@@ -60,6 +58,11 @@ class ApiTokenController extends Controller
      */
     public function update(Request $request, $tokenId)
     {
+        $request->validate([
+            'permissions' => 'array',
+            'permissions.*' => 'string'
+        ]);
+
         $token = $request->user()->tokens()->where('id', $tokenId)->firstOrFail();
 
         $token->forceFill([

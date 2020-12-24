@@ -331,7 +331,6 @@
 
             updateRole() {
                 this.updateRoleForm.put(route('team-members.update', [this.team, this.managingRoleFor]), {
-                    errorBag: 'updateRole',
                     preserveScroll: true,
                     onSuccess: () => (this.currentlyManagingRole = false),
                 })
@@ -342,9 +341,7 @@
             },
 
             leaveTeam() {
-                this.leaveTeamForm.delete(route('team-members.destroy', [this.team, this.$page.props.user]), {
-                    errorBag: 'leaveTeam',
-                })
+                this.leaveTeamForm.delete(route('team-members.destroy', [this.team, this.$page.props.user]))
             },
 
             confirmTeamMemberRemoval(teamMember) {

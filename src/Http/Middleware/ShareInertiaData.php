@@ -51,12 +51,7 @@ class ShareInertiaData
                 ]), [
                     'two_factor_enabled' => ! is_null($request->user()->two_factor_secret),
                 ]);
-            },
-            'errorBags' => function () {
-                return collect(optional(Session::get('errors'))->getBags() ?: [])->mapWithKeys(function ($bag, $key) {
-                    return [$key => $bag->messages()];
-                })->all();
-            },
+            }
         ]));
 
         return $next($request);

@@ -224,7 +224,6 @@
         methods: {
             createApiToken() {
                 this.createApiTokenForm.post(route('api-tokens.store'), {
-                    errorBag: 'createApiToken',
                     preserveScroll: true,
                     before: () => (this.apiTokenRecentlyCreated = false),
                     onSuccess: () => {
@@ -243,7 +242,6 @@
 
             updateApiToken() {
                 this.updateApiTokenForm.put(route('api-tokens.update', this.managingPermissionsFor), {
-                    errorBag: 'updateApiToken',
                     preserveScroll: true,
                     preserveState: true,
                     onSuccess: () => {
