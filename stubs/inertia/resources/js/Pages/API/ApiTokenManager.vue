@@ -230,7 +230,6 @@
                     onSuccess: () => {
                         this.apiTokenRecentlyCreated = true
                         this.displayingToken = true
-
                         this.createApiTokenForm.reset()
                     }
                 })
