@@ -123,6 +123,7 @@
                 this.confirmingLogout = false
                 this.form.reset()
             },
+
             confirmLogout() {
                 this.confirmingLogout = true
 

@@ -85,6 +85,7 @@
                 this.confirmingUserDeletion = false
                 this.form.reset()
             },
+
             confirmUserDeletion() {
                 this.confirmingUserDeletion = true;
 
