@@ -122,9 +122,7 @@
                         this.showQrCode(),
                         this.showRecoveryCodes(),
                     ]),
-                    onFinish: () => {
-                        this.enabling = false
-                    }
+                    onFinish: () => (this.enabling = false),
                 })
             },
 
@@ -154,9 +152,7 @@
 
                 this.$inertia.delete('/user/two-factor-authentication', {}, {
                     preserveScroll: true,
-                    onSuccess: () => {
-                        this.disabling = false
-                    }
+                    onSuccess: () => (this.disabling = false),
                 })
             },
         },

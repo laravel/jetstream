@@ -308,9 +308,7 @@
                 this.addTeamMemberForm.post(route('team-members.store', this.team), {
                     errorBag: 'addTeamMember',
                     preserveScroll: true,
-                    onSuccess: () => {
-                        this.addTeamMemberForm.reset()
-                    },
+                    onSuccess: () => this.addTeamMemberForm.reset(),
                 });
             },
 

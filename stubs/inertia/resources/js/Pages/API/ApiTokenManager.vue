@@ -241,9 +241,7 @@
                 this.updateApiTokenForm.put(route('api-tokens.update', this.managingPermissionsFor), {
                     preserveScroll: true,
                     preserveState: true,
-                    onSuccess: () => {
-                        this.managingPermissionsFor = null
-                    }
+                    onSuccess: () => (this.managingPermissionsFor = null),
                 })
             },
 
@@ -255,9 +253,7 @@
                 this.deleteApiTokenForm.delete(route('api-tokens.destroy', this.apiTokenBeingDeleted), {
                     preserveScroll: true,
                     preserveState: true,
-                    onSuccess: () => {
-                        this.apiTokenBeingDeleted = null
-                    }
+                    onSuccess: () => (this.apiTokenBeingDeleted = null),
                 })
             },
         },
