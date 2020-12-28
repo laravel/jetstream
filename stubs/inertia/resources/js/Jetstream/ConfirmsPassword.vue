@@ -79,6 +79,7 @@
                 this.form.password = '';
                 this.form.error = '';
             },
+
             startConfirmingPassword() {
                 axios.get(route('password.confirmation')).then(response => {
                     if (response.data.confirmed) {
