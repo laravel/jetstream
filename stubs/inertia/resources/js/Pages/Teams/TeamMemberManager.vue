@@ -59,7 +59,7 @@
                 </template>
 
                 <template #actions>
-                    <jet-action-message :on="successfullyAddedTeamMember" class="mr-3">
+                    <jet-action-message :on="addTeamMemberForm.recentlySuccessful" class="mr-3">
                         Added.
                     </jet-action-message>
 
@@ -284,7 +284,6 @@
 
         data() {
             return {
-                successfullyAddedTeamMember: false,
                 addTeamMemberForm: this.$inertia.form({
                     email: '',
                     role: null,
@@ -309,9 +308,7 @@
                 this.addTeamMemberForm.post(route('team-members.store', this.team), {
                     errorBag: 'addTeamMember',
                     preserveScroll: true,
-                    before: () => (this.successfullyAddedTeamMember = false),
                     onSuccess: () => {
-                        this.successfullyAddedTeamMember = true
                         this.addTeamMemberForm.reset()
                     },
                 });

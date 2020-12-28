@@ -17,7 +17,7 @@
 
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="password" value="New Password" />
-                <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" autocomplete="new-password" />
+                <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" ref="password" autocomplete="new-password" />
                 <jet-input-error :message="form.errors.password" class="mt-2" />
             </div>
 
@@ -29,7 +29,7 @@
         </template>
 
         <template #actions>
-            <jet-action-message :on="successfullyUpdatedPassword" class="mr-3">
+            <jet-action-message :on="form.recentlySuccessful" class="mr-3">
                 Saved.
             </jet-action-message>
 
@@ -60,7 +60,6 @@
 
         data() {
             return {
-                successfullyUpdatedPassword: false,
                 form: this.$inertia.form({
                     current_password: '',
                     password: '',
@@ -74,11 +73,18 @@
                 this.form.put(route('user-password.update'), {
                     errorBag: 'updatePassword',
                     preserveScroll: true,
-                    before: () => (this.successfullyUpdatedPassword = false),
-                    onSuccess: () => {
-                        this.successfullyUpdatedPassword = true
-                        this.$refs.current_password.focus()
-                    },
+                    onSuccess: () => this.form.reset(),
+                    onError: () => {
+                        if (this.form.errors.password) {
+                            this.form.reset('password', 'password_confirmation')
+                            this.$refs.password.focus()
+                        }
+
+                        if (this.form.errors.current_password) {
+                            this.form.reset('current_password')
+                            this.$refs.current_password.focus()
+                        }
+                    }
                 })
             },
         },

@@ -94,7 +94,8 @@
             deleteUser() {
                 this.form.delete(route('current-user.destroy'), {
                     preserveScroll: true,
-                    onSuccess: () => (this.confirmingUserDeletion = false)
+                    onSuccess: () => (this.confirmingUserDeletion = false),
+                    onFinish: () => this.form.reset('password'),
                 })
             },
         },
