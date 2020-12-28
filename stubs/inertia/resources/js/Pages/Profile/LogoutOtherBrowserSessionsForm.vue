@@ -54,7 +54,7 @@
             </div>
 
             <!-- Logout Other Devices Confirmation Modal -->
-            <jet-dialog-modal :show="confirmingLogout" @close="confirmingLogout = false">
+            <jet-dialog-modal :show="confirmingLogout" @close="closeModal">
                 <template #title>
                     Logout Other Browser Sessions
                 </template>
@@ -132,7 +132,7 @@
             logoutOtherBrowserSessions() {
                 this.form.delete(route('other-browser-sessions.destroy'), {
                     preserveScroll: true,
-                    onSuccess: () => (this.confirmingLogout = false),
+                    onSuccess: () => this.closeModal(),
                     onFinish: () => this.form.reset(),
                 })
             },

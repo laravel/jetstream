@@ -20,7 +20,7 @@
             </div>
 
             <!-- Delete Account Confirmation Modal -->
-            <jet-dialog-modal :show="confirmingUserDeletion" @close="confirmingUserDeletion = false">
+            <jet-dialog-modal :show="confirmingUserDeletion" @close="closeModal">
                 <template #title>
                     Delete Account
                 </template>
@@ -94,7 +94,7 @@
             deleteUser() {
                 this.form.delete(route('current-user.destroy'), {
                     preserveScroll: true,
-                    onSuccess: () => (this.confirmingUserDeletion = false),
+                    onSuccess: () => this.closeModal(),
                     onFinish: () => this.form.reset(),
                 })
             },

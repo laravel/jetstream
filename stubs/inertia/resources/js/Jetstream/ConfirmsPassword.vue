@@ -4,7 +4,7 @@
             <slot />
         </span>
 
-        <jet-dialog-modal :show="confirmingPassword" @close="confirmingPassword = false">
+        <jet-dialog-modal :show="confirmingPassword" @close="closeModal">
             <template #title>
                 {{ title }}
             </template>
@@ -77,10 +77,9 @@
             closeModal() {
                 this.confirmingPassword = false
                 this.form.password = '';
+                this.form.error = '';
             },
             startConfirmingPassword() {
-                this.form.error = '';
-
                 axios.get(route('password.confirmation')).then(response => {
                     if (response.data.confirmed) {
                         this.$emit('confirmed');
@@ -97,12 +96,9 @@
 
                 axios.post(route('password.confirm'), {
                     password: this.form.password,
-                }).then(response => {
-                    this.confirmingPassword = false;
-                    this.form.password = '';
-                    this.form.error = '';
+                }).then(() => {
                     this.form.processing = false;
-
+                    this.closeModal()
                     this.$nextTick(() => this.$emit('confirmed'));
                 }).catch(error => {
                     this.form.processing = false;
