@@ -23,7 +23,7 @@
             </template>
 
             <template #footer>
-                <jet-secondary-button @click.native="confirmingPassword = false">
+                <jet-secondary-button @click.native="closeModal">
                     Nevermind
                 </jet-secondary-button>
 
@@ -74,6 +74,10 @@
         },
 
         methods: {
+            closeModal() {
+                this.confirmingPassword = false
+                this.form.password = '';
+            },
             startConfirmingPassword() {
                 this.form.error = '';
 
@@ -82,11 +86,8 @@
                         this.$emit('confirmed');
                     } else {
                         this.confirmingPassword = true;
-                        this.form.password = '';
 
-                        setTimeout(() => {
-                            this.$refs.password.focus()
-                        }, 250)
+                        setTimeout(() => this.$refs.password.focus(), 250)
                     }
                 })
             },

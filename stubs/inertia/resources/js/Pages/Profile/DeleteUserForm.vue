@@ -39,7 +39,7 @@
                 </template>
 
                 <template #footer>
-                    <jet-secondary-button @click.native="confirmingUserDeletion = false">
+                    <jet-secondary-button @click.native="closeModal">
                         Nevermind
                     </jet-secondary-button>
 
@@ -81,21 +81,21 @@
         },
 
         methods: {
+            closeModal() {
+                this.confirmingUserDeletion = false
+                this.form.reset()
+            },
             confirmUserDeletion() {
-                this.form.password = '';
-
                 this.confirmingUserDeletion = true;
 
-                setTimeout(() => {
-                    this.$refs.password.focus()
-                }, 250)
+                setTimeout(() => this.$refs.password.focus(), 250)
             },
 
             deleteUser() {
                 this.form.delete(route('current-user.destroy'), {
                     preserveScroll: true,
                     onSuccess: () => (this.confirmingUserDeletion = false),
-                    onFinish: () => this.form.reset('password'),
+                    onFinish: () => this.form.reset(),
                 })
             },
         },

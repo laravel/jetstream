@@ -54,7 +54,7 @@
         methods: {
             submit() {
                 this.form.post(this.route('password.confirm'), {
-                    onFinish: () => this.form.reset('password'),
+                    onFinish: () => this.form.reset(),
                 })
             }
         }

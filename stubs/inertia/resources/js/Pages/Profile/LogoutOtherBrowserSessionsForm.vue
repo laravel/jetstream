@@ -73,7 +73,7 @@
                 </template>
 
                 <template #footer>
-                    <jet-secondary-button @click.native="confirmingLogout = false">
+                    <jet-secondary-button @click.native="closeModal">
                         Nevermind
                     </jet-secondary-button>
 
@@ -119,21 +119,21 @@
         },
 
         methods: {
+            closeModal() {
+                this.confirmingLogout = false
+                this.form.reset()
+            },
             confirmLogout() {
-                this.form.password = ''
-
                 this.confirmingLogout = true
 
-                setTimeout(() => {
-                    this.$refs.password.focus()
-                }, 250)
+                setTimeout(() => this.$refs.password.focus(), 250)
             },
 
             logoutOtherBrowserSessions() {
                 this.form.delete(route('other-browser-sessions.destroy'), {
                     preserveScroll: true,
                     onSuccess: () => (this.confirmingLogout = false),
-                    onFinish: () => this.form.reset('password'),
+                    onFinish: () => this.form.reset(),
                 })
             },
         },
