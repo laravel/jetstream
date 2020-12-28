@@ -103,6 +103,7 @@
                 }).catch(error => {
                     this.form.processing = false;
                     this.form.error = error.response.data.errors.password[0];
+                    this.$refs.password.focus()
                 });
             }
         }

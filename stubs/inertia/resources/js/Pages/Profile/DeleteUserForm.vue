@@ -95,6 +95,7 @@
                 this.form.delete(route('current-user.destroy'), {
                     preserveScroll: true,
                     onSuccess: () => this.closeModal(),
+                    onError: () => this.$refs.password.focus(),
                     onFinish: () => this.form.reset(),
                 })
             },

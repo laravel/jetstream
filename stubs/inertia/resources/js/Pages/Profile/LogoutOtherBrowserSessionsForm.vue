@@ -133,6 +133,7 @@
                 this.form.delete(route('other-browser-sessions.destroy'), {
                     preserveScroll: true,
                     onSuccess: () => this.closeModal(),
+                    onError: () => this.$refs.password.focus(),
                     onFinish: () => this.form.reset(),
                 })
             },
