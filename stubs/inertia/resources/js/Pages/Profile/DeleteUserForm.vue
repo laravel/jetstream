@@ -81,11 +81,6 @@
         },
 
         methods: {
-            closeModal() {
-                this.confirmingUserDeletion = false
-                this.form.reset()
-            },
-
             confirmUserDeletion() {
                 this.confirmingUserDeletion = true;
 
@@ -99,6 +94,12 @@
                     onError: () => this.$refs.password.focus(),
                     onFinish: () => this.form.reset(),
                 })
+            },
+
+            closeModal() {
+                this.confirmingUserDeletion = false
+
+                this.form.reset()
             },
         },
     }

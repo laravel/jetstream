@@ -119,11 +119,6 @@
         },
 
         methods: {
-            closeModal() {
-                this.confirmingLogout = false
-                this.form.reset()
-            },
-
             confirmLogout() {
                 this.confirmingLogout = true
 
@@ -137,6 +132,12 @@
                     onError: () => this.$refs.password.focus(),
                     onFinish: () => this.form.reset(),
                 })
+            },
+
+            closeModal() {
+                this.confirmingLogout = false
+
+                this.form.reset()
             },
         },
     }

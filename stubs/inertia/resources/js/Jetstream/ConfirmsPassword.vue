@@ -74,12 +74,6 @@
         },
 
         methods: {
-            closeModal() {
-                this.confirmingPassword = false
-                this.form.password = '';
-                this.form.error = '';
-            },
-
             startConfirmingPassword() {
                 axios.get(route('password.confirmation')).then(response => {
                     if (response.data.confirmed) {
@@ -106,7 +100,13 @@
                     this.form.error = error.response.data.errors.password[0];
                     this.$refs.password.focus()
                 });
-            }
+            },
+
+            closeModal() {
+                this.confirmingPassword = false
+                this.form.password = '';
+                this.form.error = '';
+            },
         }
     }
 </script>
