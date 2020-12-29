@@ -68,7 +68,7 @@
                     </jet-confirms-password>
 
                     <jet-confirms-password @confirmed="showRecoveryCodes">
-                        <jet-secondary-button class="mr-3" v-if="recoveryCodes.length == 0">
+                        <jet-secondary-button class="mr-3" v-if="recoveryCodes.length === 0">
                             Show Recovery Codes
                         </jet-secondary-button>
                     </jet-confirms-password>
@@ -122,9 +122,7 @@
                         this.showQrCode(),
                         this.showRecoveryCodes(),
                     ]),
-                    onFinish: () => {
-                        this.enabling = false
-                    }
+                    onFinish: () => (this.enabling = false),
                 })
             },
 
@@ -152,11 +150,9 @@
             disableTwoFactorAuthentication() {
                 this.disabling = true
 
-                this.$inertia.delete('/user/two-factor-authentication', {
+                this.$inertia.delete('/user/two-factor-authentication', {}, {
                     preserveScroll: true,
-                    onSuccess: () => {
-                        this.disabling = false
-                    }
+                    onSuccess: () => (this.disabling = false),
                 })
             },
         },

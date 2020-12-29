@@ -15,7 +15,7 @@
                 <div class="col-span-6 sm:col-span-4">
                     <jet-label for="name" value="Name" />
                     <jet-input id="name" type="text" class="mt-1 block w-full" v-model="createApiTokenForm.name" autofocus />
-                    <jet-input-error :message="createApiTokenForm.error('name')" class="mt-2" />
+                    <jet-input-error :message="createApiTokenForm.errors.name" class="mt-2" />
                 </div>
 
                 <!-- Token Permissions -->
@@ -72,8 +72,9 @@
                                     </div>
 
                                     <button class="cursor-pointer ml-6 text-sm text-gray-400 underline"
-                                                @click="manageApiTokenPermissions(token)"
-                                                v-if="availablePermissions.length > 0">
+                                        @click="manageApiTokenPermissions(token)"
+                                        v-if="availablePermissions.length > 0"
+                                    >
                                         Permissions
                                     </button>
 
@@ -205,16 +206,10 @@
                 createApiTokenForm: this.$inertia.form({
                     name: '',
                     permissions: this.defaultPermissions,
-                }, {
-                    bag: 'createApiToken',
-                    resetOnSuccess: true,
                 }),
 
                 updateApiTokenForm: this.$inertia.form({
                     permissions: []
-                }, {
-                    resetOnSuccess: false,
-                    bag: 'updateApiToken',
                 }),
 
                 deleteApiTokenForm: this.$inertia.form(),
@@ -230,9 +225,8 @@
                 this.createApiTokenForm.post(route('api-tokens.store'), {
                     preserveScroll: true,
                     onSuccess: () => {
-                        if (! this.createApiTokenForm.hasErrors()) {
-                            this.displayingToken = true
-                        }
+                        this.displayingToken = true
+                        this.createApiTokenForm.reset()
                     }
                 })
             },
@@ -247,9 +241,7 @@
                 this.updateApiTokenForm.put(route('api-tokens.update', this.managingPermissionsFor), {
                     preserveScroll: true,
                     preserveState: true,
-                    onSuccess: () => {
-                        this.managingPermissionsFor = null
-                    }
+                    onSuccess: () => (this.managingPermissionsFor = null),
                 })
             },
 
@@ -261,9 +253,7 @@
                 this.deleteApiTokenForm.delete(route('api-tokens.destroy', this.apiTokenBeingDeleted), {
                     preserveScroll: true,
                     preserveState: true,
-                    onSuccess: () => {
-                        this.apiTokenBeingDeleted = null
-                    }
+                    onSuccess: () => (this.apiTokenBeingDeleted = null),
                 })
             },
         },

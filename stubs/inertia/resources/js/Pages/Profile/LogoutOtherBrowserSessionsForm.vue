@@ -54,7 +54,7 @@
             </div>
 
             <!-- Logout Other Devices Confirmation Modal -->
-            <jet-dialog-modal :show="confirmingLogout" @close="confirmingLogout = false">
+            <jet-dialog-modal :show="confirmingLogout" @close="closeModal">
                 <template #title>
                     Logout Other Browser Sessions
                 </template>
@@ -68,12 +68,12 @@
                                     v-model="form.password"
                                     @keyup.enter.native="logoutOtherBrowserSessions" />
 
-                        <jet-input-error :message="form.error('password')" class="mt-2" />
+                        <jet-input-error :message="form.errors.password" class="mt-2" />
                     </div>
                 </template>
 
                 <template #footer>
-                    <jet-secondary-button @click.native="confirmingLogout = false">
+                    <jet-secondary-button @click.native="closeModal">
                         Nevermind
                     </jet-secondary-button>
 
@@ -113,34 +113,31 @@
                 confirmingLogout: false,
 
                 form: this.$inertia.form({
-                    '_method': 'DELETE',
                     password: '',
-                }, {
-                    bag: 'logoutOtherBrowserSessions'
                 })
             }
         },
 
         methods: {
             confirmLogout() {
-                this.form.password = ''
-
                 this.confirmingLogout = true
 
-                setTimeout(() => {
-                    this.$refs.password.focus()
-                }, 250)
+                setTimeout(() => this.$refs.password.focus(), 250)
             },
 
             logoutOtherBrowserSessions() {
-                this.form.post(route('other-browser-sessions.destroy'), {
+                this.form.delete(route('other-browser-sessions.destroy'), {
                     preserveScroll: true,
-                    onSuccess: () => {
-                        if (! this.form.hasErrors()) {
-                            this.confirmingLogout = false
-                        }
-                    }
+                    onSuccess: () => this.closeModal(),
+                    onError: () => this.$refs.password.focus(),
+                    onFinish: () => this.form.reset(),
                 })
+            },
+
+            closeModal() {
+                this.confirmingLogout = false
+
+                this.form.reset()
             },
         },
     }

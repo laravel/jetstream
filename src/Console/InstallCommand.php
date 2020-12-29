@@ -262,16 +262,15 @@ EOF;
     protected function installInertiaStack()
     {
         // Install Inertia...
-        $this->requireComposerPackages('inertiajs/inertia-laravel:^0.3', 'laravel/sanctum:^2.6', 'tightenco/ziggy:^1.0');
+        $this->requireComposerPackages('inertiajs/inertia-laravel:^0.3.5', 'laravel/sanctum:^2.6', 'tightenco/ziggy:^1.0');
 
         // Install NPM packages...
         $this->updateNodePackages(function ($packages) {
             return [
-                '@inertiajs/inertia' => '^0.4.0',
-                '@inertiajs/inertia-vue' => '^0.3.0',
+                '@inertiajs/inertia' => '^0.8.0',
+                '@inertiajs/inertia-vue' => '^0.5.2',
                 '@tailwindcss/forms' => '^0.2.1',
                 '@tailwindcss/typography' => '^0.3.0',
-                'laravel-jetstream' => '^1.0.0',
                 'portal-vue' => '^2.1.7',
                 'postcss-import' => '^12.0.1',
                 'tailwindcss' => 'npm:@tailwindcss/postcss7-compat@^2.0.1',

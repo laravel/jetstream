@@ -20,7 +20,7 @@
             </div>
 
             <!-- Delete Account Confirmation Modal -->
-            <jet-dialog-modal :show="confirmingUserDeletion" @close="confirmingUserDeletion = false">
+            <jet-dialog-modal :show="confirmingUserDeletion" @close="closeModal">
                 <template #title>
                     Delete Account
                 </template>
@@ -34,12 +34,12 @@
                                     v-model="form.password"
                                     @keyup.enter.native="deleteUser" />
 
-                        <jet-input-error :message="form.error('password')" class="mt-2" />
+                        <jet-input-error :message="form.errors.password" class="mt-2" />
                     </div>
                 </template>
 
                 <template #footer>
-                    <jet-secondary-button @click.native="confirmingUserDeletion = false">
+                    <jet-secondary-button @click.native="closeModal">
                         Nevermind
                     </jet-secondary-button>
 
@@ -75,34 +75,31 @@
                 confirmingUserDeletion: false,
 
                 form: this.$inertia.form({
-                    '_method': 'DELETE',
                     password: '',
-                }, {
-                    bag: 'deleteUser'
                 })
             }
         },
 
         methods: {
             confirmUserDeletion() {
-                this.form.password = '';
-
                 this.confirmingUserDeletion = true;
 
-                setTimeout(() => {
-                    this.$refs.password.focus()
-                }, 250)
+                setTimeout(() => this.$refs.password.focus(), 250)
             },
 
             deleteUser() {
-                this.form.post(route('current-user.destroy'), {
+                this.form.delete(route('current-user.destroy'), {
                     preserveScroll: true,
-                    onSuccess: () => {
-                        if (! this.form.hasErrors()) {
-                            this.confirmingUserDeletion = false;
-                        }
-                    }
+                    onSuccess: () => this.closeModal(),
+                    onError: () => this.$refs.password.focus(),
+                    onFinish: () => this.form.reset(),
                 })
+            },
+
+            closeModal() {
+                this.confirmingUserDeletion = false
+
+                this.form.reset()
             },
         },
     }

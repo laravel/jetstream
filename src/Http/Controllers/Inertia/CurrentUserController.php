@@ -21,11 +21,9 @@ class CurrentUserController extends Controller
      */
     public function destroy(Request $request, StatefulGuard $auth)
     {
-        if (! Hash::check($request->password, $request->user()->password)) {
-            throw ValidationException::withMessages([
-                'password' => [__('This password does not match our records.')],
-            ])->errorBag('deleteUser');
-        }
+        $request->validate([
+            'password' => 'password',
+        ]);
 
         app(DeletesUsers::class)->delete($request->user()->fresh());
 

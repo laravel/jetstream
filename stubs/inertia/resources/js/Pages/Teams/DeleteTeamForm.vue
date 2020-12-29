@@ -66,11 +66,7 @@
                 confirmingTeamDeletion: false,
                 deleting: false,
 
-                form: this.$inertia.form({
-                    //
-                }, {
-                    bag: 'deleteTeam'
-                })
+                form: this.$inertia.form()
             }
         },
 
@@ -81,7 +77,7 @@
 
             deleteTeam() {
                 this.form.delete(route('teams.destroy', this.team), {
-                    preserveScroll: true
+                    errorBag: 'deleteTeam'
                 });
             },
         },

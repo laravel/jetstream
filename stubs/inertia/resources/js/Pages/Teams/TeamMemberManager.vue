@@ -24,13 +24,13 @@
                     <div class="col-span-6 sm:col-span-4">
                         <jet-label for="email" value="Email" />
                         <jet-input id="email" type="text" class="mt-1 block w-full" v-model="addTeamMemberForm.email" />
-                        <jet-input-error :message="addTeamMemberForm.error('email')" class="mt-2" />
+                        <jet-input-error :message="addTeamMemberForm.errors.email" class="mt-2" />
                     </div>
 
                     <!-- Role -->
                     <div class="col-span-6 lg:col-span-4" v-if="availableRoles.length > 0">
                         <jet-label for="roles" value="Role" />
-                        <jet-input-error :message="addTeamMemberForm.error('role')" class="mt-2" />
+                        <jet-input-error :message="addTeamMemberForm.errors.role" class="mt-2" />
 
                         <div class="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer">
                             <button type="button" class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue"
@@ -167,18 +167,18 @@
                 <div v-if="managingRoleFor">
                     <div class="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer">
                         <button type="button" class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue"
-                                        :class="{'border-t border-gray-200 rounded-t-none': i > 0, 'rounded-b-none': i != Object.keys(availableRoles).length - 1}"
+                                        :class="{'border-t border-gray-200 rounded-t-none': i > 0, 'rounded-b-none': i !== Object.keys(availableRoles).length - 1}"
                                         @click="updateRoleForm.role = role.key"
                                         v-for="(role, i) in availableRoles"
                                         :key="role.key">
-                            <div :class="{'opacity-50': updateRoleForm.role && updateRoleForm.role != role.key}">
+                            <div :class="{'opacity-50': updateRoleForm.role && updateRoleForm.role !== role.key}">
                                 <!-- Role Name -->
                                 <div class="flex items-center">
-                                    <div class="text-sm text-gray-600" :class="{'font-semibold': updateRoleForm.role == role.key}">
+                                    <div class="text-sm text-gray-600" :class="{'font-semibold': updateRoleForm.role === role.key}">
                                         {{ role.name }}
                                     </div>
 
-                                    <svg v-if="updateRoleForm.role == role.key" class="ml-2 h-5 w-5 text-green-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg v-if="updateRoleForm.role === role.key" class="ml-2 h-5 w-5 text-green-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                 </div>
 
                                 <!-- Role Description -->
@@ -287,29 +287,14 @@
                 addTeamMemberForm: this.$inertia.form({
                     email: '',
                     role: null,
-                }, {
-                    bag: 'addTeamMember',
-                    resetOnSuccess: true,
                 }),
 
                 updateRoleForm: this.$inertia.form({
                     role: null,
-                }, {
-                    bag: 'updateRole',
-                    resetOnSuccess: false,
                 }),
 
-                leaveTeamForm: this.$inertia.form({
-                    //
-                }, {
-                    bag: 'leaveTeam',
-                }),
-
-                removeTeamMemberForm: this.$inertia.form({
-                    //
-                }, {
-                    bag: 'removeTeamMember',
-                }),
+                leaveTeamForm: this.$inertia.form(),
+                removeTeamMemberForm: this.$inertia.form(),
 
                 currentlyManagingRole: false,
                 managingRoleFor: null,
@@ -321,12 +306,14 @@
         methods: {
             addTeamMember() {
                 this.addTeamMemberForm.post(route('team-members.store', this.team), {
-                    preserveScroll: true
+                    errorBag: 'addTeamMember',
+                    preserveScroll: true,
+                    onSuccess: () => this.addTeamMemberForm.reset(),
                 });
             },
 
             cancelTeamInvitation(invitation) {
-                this.$inertia.delete(route('team-invitations.destroy', invitation), {
+                this.$inertia.delete(route('team-invitations.destroy', invitation), {}, {
                     preserveScroll: true
                 });
             },
@@ -340,9 +327,7 @@
             updateRole() {
                 this.updateRoleForm.put(route('team-members.update', [this.team, this.managingRoleFor]), {
                     preserveScroll: true,
-                    onSuccess: () => {
-                        this.currentlyManagingRole = false
-                    }
+                    onSuccess: () => (this.currentlyManagingRole = false),
                 })
             },
 
@@ -360,16 +345,15 @@
 
             removeTeamMember() {
                 this.removeTeamMemberForm.delete(route('team-members.destroy', [this.team, this.teamMemberBeingRemoved]), {
+                    errorBag: 'removeTeamMember',
                     preserveScroll: true,
                     preserveState: true,
-                    onSuccess: () => {
-                        this.teamMemberBeingRemoved = null
-                    }
+                    onSuccess: () => (this.teamMemberBeingRemoved = null),
                 })
             },
 
             displayableRole(role) {
-                return this.availableRoles.find(r => r.key == role).name
+                return this.availableRoles.find(r => r.key === role).name
             },
         },
     }
