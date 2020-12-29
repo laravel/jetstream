@@ -313,7 +313,7 @@
             },
 
             cancelTeamInvitation(invitation) {
-                this.$inertia.delete(route('team-invitations.destroy', invitation), {}, {
+                this.$inertia.delete(route('team-invitations.destroy', invitation), {
                     preserveScroll: true
                 });
             },
