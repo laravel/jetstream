@@ -260,6 +260,7 @@ EOF;
                 'postcss-import' => '^12.0.1',
                 'tailwindcss' => '^1.8.0',
                 'vue' => '^2.5.17',
+                'vue-loader' => '^15.9.6',
                 'vue-template-compiler' => '^2.6.10',
             ] + $packages;
         });
