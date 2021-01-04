@@ -1,3 +1,140 @@
 # Upgrade Guide
 
-Future upgrade notes will be placed here.
+## Upgrading From Jetstream 1.x To Jetstream 2.x
+
+> **Note:** This upgrade guide only discusses upgrading to Jetstream 2.x. Upgrading your Tailwind or Inertia installations is outside the scope of this documentation and is not strictly required in order to use Jetstream 2.x. Please consult the upgrade guides for those libraries for information on their upgrade process.
+
+- [Changes Common To Both Stacks](#changes-common-to-both-stacks)
+- [Livewire Stack Upgrade Guide](#livewire-stack-upgrade-guide)
+- [Inertia Stack Upgrade Guide](#inertia-stack-upgrade-guide)
+
+<a name="changes-common-to-both-stacks"></a>
+### Changes Common To Both Stacks
+
+#### Publish Views
+
+Before upgrading, you should publish all of Jetstream's views using the `vendor:publish` Artisan command:
+
+    php artisan vendor:publish --tag=jetstream-views
+
+#### Dependency Versions
+
+Next, you should upgrade your `laravel/jetstream` dependency to `^2.0.0` within your application's `composer.json` file and run the `composer update` command:
+
+    composer update
+
+#### Remove Team Member Action
+
+You should place the new [RemoveTeamMember](https://github.com/laravel/jetstream/blob/master/stubs/app/Actions/Jetstream/RemoveTeamMember.php) action within your application's `app/Actions/Jetstream` directory.
+
+In addition, you should register this action with Jetstream by adding the following code to the `boot` method of your application's `JetstreamServiceProvider`:
+
+```php
+use App\Actions\Jetstream\RemoveTeamMember;
+
+Jetstream::removeTeamMembersUsing(RemoveTeamMember::class);
+```
+
+#### Team Invitation Model
+
+You should place the new [TeamInvitation](https://github.com/laravel/jetstream/blob/master/src/TeamInvitation.php) model within your application's `app/Models` directory.
+
+In addition, you should create a `team_invitations` database migration:
+
+    php artisan make:migration create_team_invitations_table
+
+The generated migration should have the following content:
+
+```php
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateTeamInvitationsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('team_invitations', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('team_id')->constrained()->cascadeOnDelete();
+            $table->string('email')->unique();
+            $table->string('role')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('team_invitations');
+    }
+}
+```
+
+<a name="livewire-stack-upgrade-guide"></a>
+### Livewire Stack Upgrade Guide
+
+#### Navigation Menu
+
+Rename the `resources/views/navigation-dropdown.blade.php` file to `navigation-menu.blade.php`. In addition, ensure that you have updated the reference to this view in your application's `app.blade.php` layout.
+
+<a name="inertia-stack-upgrade-guide"></a>
+### Inertia Stack Upgrade Guide
+
+#### Authentication Views
+
+In order for Jetstream 2.x to continue to render your Blade based authentication views, you should add the following code to the `boot` method of your application's `JetstreamServiceProvider` class:
+
+```php
+use Illuminate\Support\Facades\Route;
+use Laravel\Fortify\Fortify;
+
+Fortify::loginView(function () {
+    return view('auth/login', [
+        'canResetPassword' => Route::has('password.request'),
+        'status' => session('status'),
+    ]);
+});
+
+Fortify::requestPasswordResetLinkView(function () {
+    return view('auth/forgot-password', [
+        'status' => session('status'),
+    ]);
+});
+
+Fortify::resetPasswordView(function (Request $request) {
+    return view('auth/reset-password', [
+        'email' => $request->input('email'),
+        'token' => $request->route('token'),
+    ]);
+});
+
+Fortify::registerView(function () {
+    return view('auth/register');
+});
+
+Fortify::verifyEmailView(function () {
+    return view('auth/verify-email', [
+        'status' => session('status'),
+    ]);
+});
+
+Fortify::twoFactorChallengeView(function () {
+    return view('auth/two-factor-challenge');
+});
+
+Fortify::confirmPasswordView(function () {
+    return view('auth/confirm-password');
+});
+```
