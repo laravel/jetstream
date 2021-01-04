@@ -87,23 +87,21 @@ class TeamMemberManager extends Component
     /**
      * Add a new team member to a team.
      *
-     * @param  \Laravel\Jetstream\Contracts\InvitesTeamMembers  $inviter
-     * @param  \Laravel\Jetstream\Contracts\AddsTeamMembers  $adder
      * @return void
      */
-    public function addTeamMember(InvitesTeamMembers $inviter, AddsTeamMembers $adder)
+    public function addTeamMember()
     {
         $this->resetErrorBag();
 
         if (Features::sendsTeamInvitations()) {
-            $inviter->invite(
+            app(InvitesTeamMembers::class)->invite(
                 $this->user,
                 $this->team,
                 $this->addTeamMemberForm['email'],
                 $this->addTeamMemberForm['role']
             );
         } else {
-            $adder->add(
+            app(AddsTeamMembers::class)->add(
                 $this->user,
                 $this->team,
                 $this->addTeamMemberForm['email'],
