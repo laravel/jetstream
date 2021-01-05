@@ -17,7 +17,7 @@ class InstallCommand extends Command
      */
     protected $signature = 'jetstream:install {stack : The development stack that should be installed}
                                               {--teams : Indicates if team support should be installed}
-                                              {--local-composer : Indicates that the local composer.phar should be use instead of the gobal composer}';
+                                              {--local-composer : Indicates that the local composer.phar binary should be used to require packages instead of the global composer binary}';
 
     /**
      * The console command description.
