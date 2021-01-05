@@ -105,8 +105,8 @@
             </div>
 
             <x-jet-input
-                x-ref="plaintextToken" @keydown.prevent="" @showing-token-modal.window="setTimeout(() => $refs.plaintextToken.select(), 250)"
-                type="text" :value="$plainTextToken" class="mt-4 bg-gray-100 px-4 py-2 rounded font-mono text-sm text-gray-500 w-full"
+                x-ref="plaintextToken" @showing-token-modal.window="setTimeout(() => $refs.plaintextToken.select(), 250)"
+                type="text" readonly :value="$plainTextToken" class="mt-4 bg-gray-100 px-4 py-2 rounded font-mono text-sm text-gray-500 w-full"
                 autofocus autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
             />
         </x-slot>
