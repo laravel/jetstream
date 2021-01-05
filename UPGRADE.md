@@ -2,13 +2,12 @@
 
 ## Upgrading From Jetstream 1.x To Jetstream 2.x
 
-> **Note:** This upgrade guide only discusses upgrading to Jetstream 2.x. Upgrading your Tailwind or Inertia installations is outside the scope of this documentation and is not strictly required in order to use Jetstream 2.x. Please consult the upgrade guides for those libraries for information on their upgrade process.
+> **Note:** This upgrade guide only discusses upgrading to Jetstream 2.x. Upgrading your Tailwind, Livewire or Inertia installations is outside the scope of this documentation and is not strictly required in order to use Jetstream 2.x. Please consult the upgrade guides for those libraries for information on their upgrade process.
 
 - [Changes Common To Both Stacks](#changes-common-to-both-stacks)
 - [Livewire Stack Upgrade Guide](#livewire-stack-upgrade-guide)
 - [Inertia Stack Upgrade Guide](#inertia-stack-upgrade-guide)
 
-<a name="changes-common-to-both-stacks"></a>
 ### Changes Common To Both Stacks
 
 #### Publish Views
@@ -19,13 +18,13 @@ Before upgrading, you should publish all of Jetstream's views using the `vendor:
 
 #### Dependency Versions
 
-Next, you should upgrade your `laravel/jetstream` dependency to `^2.0.0` within your application's `composer.json` file and run the `composer update` command:
+Next, you should upgrade your `laravel/jetstream` dependency to `^2.0` within your application's `composer.json` file and run the `composer update` command:
 
     composer update
 
 #### Remove Team Member Action
 
-You should place the new [RemoveTeamMember](https://github.com/laravel/jetstream/blob/master/stubs/app/Actions/Jetstream/RemoveTeamMember.php) action within your application's `app/Actions/Jetstream` directory.
+You should place the new [RemoveTeamMember](https://github.com/laravel/jetstream/blob/2.x/stubs/app/Actions/Jetstream/RemoveTeamMember.php) action within your application's `app/Actions/Jetstream` directory.
 
 In addition, you should register this action with Jetstream by adding the following code to the `boot` method of your application's `JetstreamServiceProvider`:
 
@@ -37,7 +36,7 @@ Jetstream::removeTeamMembersUsing(RemoveTeamMember::class);
 
 #### Team Invitation Model
 
-You should place the new [TeamInvitation](https://github.com/laravel/jetstream/blob/master/src/TeamInvitation.php) model within your application's `app/Models` directory.
+You should place the new [TeamInvitation](https://github.com/laravel/jetstream/blob/2.x/stubs/app/Models/TeamInvitation.php) model within your application's `app/Models` directory.
 
 In addition, you should create a `team_invitations` database migration:
 
@@ -82,15 +81,13 @@ class CreateTeamInvitationsTable extends Migration
 }
 ```
 
-<a name="livewire-stack-upgrade-guide"></a>
-### Livewire Stack Upgrade Guide
+### Livewire Stack
 
 #### Navigation Menu
 
 Rename the `resources/views/navigation-dropdown.blade.php` file to `navigation-menu.blade.php`. In addition, ensure that you have updated the reference to this view in your application's `app.blade.php` layout.
 
-<a name="inertia-stack-upgrade-guide"></a>
-### Inertia Stack Upgrade Guide
+### Inertia Stack
 
 #### Authentication Views
 
