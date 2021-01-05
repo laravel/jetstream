@@ -70,9 +70,9 @@
             },
 
             alignmentClasses() {
-                if (this.align == 'left') {
+                if (this.align === 'left') {
                     return 'origin-top-left left-0'
-                } else if (this.align == 'right') {
+                } else if (this.align === 'right') {
                     return 'origin-top-right right-0'
                 } else {
                     return 'origin-top'
