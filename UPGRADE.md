@@ -12,7 +12,7 @@
 
 #### Publish Views
 
-Before upgrading, you should publish all of Jetstream's views using the `vendor:publish` Artisan command:
+Before upgrading, you should publish all of Jetstream's views using the `vendor:publish` Artisan command. You may skip this step if you have already published Jetstream's views:
 
     php artisan vendor:publish --tag=jetstream-views
 
