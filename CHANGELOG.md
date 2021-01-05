@@ -1,6 +1,15 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v1.6.5...1.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v1.6.6...1.x)
+
+
+## [v1.6.6 (2021-01-05)](https://github.com/laravel/jetstream/compare/v1.6.5...v1.6.6)
+
+### Changed
+- Update to Laravel Mix v6 ([#582](https://github.com/laravel/jetstream/pull/582))
+
+### Fixed
+- Avoids eqeqeq errors in eslint ([#580](https://github.com/laravel/jetstream/pull/580))
 
 
 ## [v1.6.5 (2020-12-15)](https://github.com/laravel/jetstream/compare/v1.6.4...v1.6.5)
