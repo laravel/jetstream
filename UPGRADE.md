@@ -34,6 +34,17 @@ use App\Actions\Jetstream\RemoveTeamMember;
 Jetstream::removeTeamMembersUsing(RemoveTeamMember::class);
 ```
 
+#### Invite Team Member Action
+
+You should place the new [InviteTeamMember](https://github.com/laravel/jetstream/blob/2.x/stubs/app/Actions/Jetstream/InviteTeamMember.php) action within your application's `app/Actions/Jetstream` directory.
+
+In addition, you should register this action with Jetstream by adding the following code to the `boot` method of your application's `JetstreamServiceProvider`:
+
+```php
+use App\Actions\Jetstream\InviteTeamMember;
+Jetstream::inviteTeamMembersUsing(InviteTeamMember::class);
+```
+
 #### Team Invitation Model
 
 You should place the new [TeamInvitation](https://github.com/laravel/jetstream/blob/2.x/stubs/app/Models/TeamInvitation.php) model within your application's `app/Models` directory.
