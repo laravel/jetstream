@@ -91,7 +91,11 @@ Rename the `resources/views/navigation-dropdown.blade.php` file to `navigation-m
 
 #### Authentication Views
 
-In order for Jetstream 2.x to continue to render your Blade based authentication views, you should add the following code to the `boot` method of your application's `JetstreamServiceProvider` class:
+In  order to use the new Vue based authentication, you will first need to publish a few assets. To do so, run the following command:
+
+    php artisan vendor:publish --tag=jetstream-v2-inertia-files
+
+If you wish to to continue to render your Blade based authentication views in Jetstream 2.x, you should add the following code to the `boot` method of your application's `JetstreamServiceProvider` class:
 
 ```php
 use Illuminate\Support\Facades\Route;
