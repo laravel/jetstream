@@ -103,7 +103,7 @@
                 </div>
 
                 <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-                    Build v{{ laravelVersion }}
+                    Laravel v{{ laravelVersion }} (PHP v{{ phpVersion }})
                 </div>
             </div>
         </div>
@@ -180,6 +180,7 @@
             canLogin: Boolean,
             canRegister: Boolean,
             laravelVersion: String,
+            phpVersion: String,
         }
     }
 </script>
