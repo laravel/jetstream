@@ -38,7 +38,6 @@
 </template>
 
 <script>
-    import JetActionMessage from '@/Jetstream/ActionMessage'
     import JetButton from '@/Jetstream/Button'
     import JetFormSection from '@/Jetstream/FormSection'
     import JetInput from '@/Jetstream/Input'
@@ -47,7 +46,6 @@
 
     export default {
         components: {
-            JetActionMessage,
             JetButton,
             JetFormSection,
             JetInput,
