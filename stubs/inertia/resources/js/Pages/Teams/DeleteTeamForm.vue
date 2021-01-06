@@ -45,7 +45,6 @@
 
 <script>
     import JetActionSection from '@/Jetstream/ActionSection'
-    import JetButton from '@/Jetstream/Button'
     import JetConfirmationModal from '@/Jetstream/ConfirmationModal'
     import JetDangerButton from '@/Jetstream/DangerButton'
     import JetSecondaryButton from '@/Jetstream/SecondaryButton'
@@ -55,7 +54,6 @@
 
         components: {
             JetActionSection,
-            JetButton,
             JetConfirmationModal,
             JetDangerButton,
             JetSecondaryButton,
