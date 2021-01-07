@@ -117,6 +117,8 @@ class ApiTokenManager extends Component
         $this->displayingToken = true;
 
         $this->plainTextToken = explode('|', $token->plainTextToken, 2)[1];
+
+        $this->dispatchBrowserEvent('showing-token-modal');
     }
 
     /**
