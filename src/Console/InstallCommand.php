@@ -17,7 +17,7 @@ class InstallCommand extends Command
      */
     protected $signature = 'jetstream:install {stack : The development stack that should be installed}
                                               {--teams : Indicates if team support should be installed}
-                                              {--local-composer : Indicates that the local composer.phar binary should be used to require packages instead of the global composer binary}';
+                                              {--composer=global : Absolute path to the composer binary which should be used to require packages}';
 
     /**
      * The console command description.
@@ -516,8 +516,9 @@ EOF;
      */
     protected function requireComposerPackages($packages)
     {
-        if ($this->option('local-composer')) {
-            $command = ['php', 'composer.phar', 'require'];
+        $composer = $this->option('composer');
+        if ($composer !== 'global') {
+            $command = ['php', $composer, 'require'];
         }
 
         $command = array_merge(
