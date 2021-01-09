@@ -32,7 +32,9 @@ class CreateTeam implements CreatesTeams
             'personal_team' => false,
         ]);
 
-        $user->current_team_id = $team->id;
+        $user->forceFill({
+            'current_team_id' => $team->id
+        })->save();
         $user->save();
 
         return $team;
