@@ -32,9 +32,7 @@ class CreateTeam implements CreatesTeams
             'personal_team' => false,
         ]);
 
-        $user->forceFill([
-            'current_team_id' => $team->id,
-        ])->save();
+        $user->switchTeam($team);
 
         return $team;
     }
