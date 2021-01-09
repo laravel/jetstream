@@ -147,8 +147,6 @@ class TeamBehaviorTest extends OrchestraTestCase
 
         $anotherTeam = $action->create($user, ['name' => 'Test Team']);
 
-        $this->assertTrue($user->isCurrentTeam($personalTeam));
-
         $user->switchTeam($anotherTeam);
 
         $this->assertTrue($user->isCurrentTeam($anotherTeam));
