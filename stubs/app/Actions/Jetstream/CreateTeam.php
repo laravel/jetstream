@@ -33,7 +33,7 @@ class CreateTeam implements CreatesTeams
         ]);
 
         $user->forceFill([
-            'current_team_id' => $team->id
+            'current_team_id' => $team->id,
         ])->save();
 
         return $team;
