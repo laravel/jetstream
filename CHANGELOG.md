@@ -1,6 +1,21 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.0.3...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.1.0...2.x)
+
+
+## [v2.1.0 (2021-01-12)](https://github.com/laravel/jetstream/compare/v2.0.3...v2.1.0)
+
+### Added
+- Add `--composer` option to the install command ([#607](https://github.com/laravel/jetstream/pull/607))
+
+### Changed
+- Automatically select API token when it's created ([#589](https://github.com/laravel/jetstream/pull/589))
+- Change current team of user when creating a new additional team ([#618](https://github.com/laravel/jetstream/pull/618))
+- Make text translatable in confirm-password livewire view ([#628](https://github.com/laravel/jetstream/pull/628))
+
+### Fixed
+- Banner should be hidden in default ([#599](https://github.com/laravel/jetstream/pull/599))
+- Jetstream ignoring sessions from session connection in config ([#630](https://github.com/laravel/jetstream/pull/630))
 
 
 ## [v2.0.3 (2021-01-06)](https://github.com/laravel/jetstream/compare/v2.0.2...v2.0.3)
