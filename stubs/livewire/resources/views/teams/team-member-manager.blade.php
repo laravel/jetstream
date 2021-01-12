@@ -99,7 +99,7 @@
                                         <!-- Cancel Team Invitation -->
                                         <button class="cursor-pointer ml-6 text-sm text-red-500 focus:outline-none"
                                                             wire:click="cancelTeamInvitation({{ $invitation->id }})">
-                                            Cancel
+                                            {{ __('Cancel') }}
                                         </button>
                                     @endif
                                 </div>

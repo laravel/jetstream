@@ -2,6 +2,7 @@
 
 <div x-data="{{ json_encode(['show' => true, 'style' => $style, 'message' => $message]) }}"
             :class="{ 'bg-indigo-500': style == 'success', 'bg-red-700': style == 'danger' }"
+            style="display: none;"
             x-show="show && message"
             x-init="
                 document.addEventListener('banner-message', event => {

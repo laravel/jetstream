@@ -5,14 +5,14 @@
 > **Note:** This upgrade guide only discusses upgrading to Jetstream 2.x. Upgrading your Tailwind, Livewire or Inertia installations is outside the scope of this documentation and is not strictly required in order to use Jetstream 2.x. Please consult the upgrade guides for those libraries for information on their upgrade process.
 
 - [Changes Common To Both Stacks](#changes-common-to-both-stacks)
-- [Livewire Stack Upgrade Guide](#livewire-stack-upgrade-guide)
-- [Inertia Stack Upgrade Guide](#inertia-stack-upgrade-guide)
+- [Livewire Stack Upgrade Guide](#livewire-stack)
+- [Inertia Stack Upgrade Guide](#inertia-stack)
 
 ### Changes Common To Both Stacks
 
 #### Publish Views
 
-Before upgrading, you should publish all of Jetstream's views using the `vendor:publish` Artisan command:
+Before upgrading, you should publish all of Jetstream's views using the `vendor:publish` Artisan command. You may skip this step if you have already published Jetstream's views:
 
     php artisan vendor:publish --tag=jetstream-views
 
@@ -91,7 +91,11 @@ Rename the `resources/views/navigation-dropdown.blade.php` file to `navigation-m
 
 #### Authentication Views
 
-In order for Jetstream 2.x to continue to render your Blade based authentication views, you should add the following code to the `boot` method of your application's `JetstreamServiceProvider` class:
+Jetstream 2.0's Inertia stack uses Vue based authentication pages. In order to use the new Vue based authentication pages, you will need to publish them using the `vendor:publish` Artisan command:
+
+    php artisan vendor:publish --tag=jetstream-inertia-auth-pages
+
+Or, if you wish to to continue to render your Blade based authentication views in Jetstream 2.x, you should add the following code to the `boot` method of your application's `JetstreamServiceProvider` class:
 
 ```php
 use Illuminate\Support\Facades\Route;
