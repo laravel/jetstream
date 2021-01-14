@@ -1,6 +1,56 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v1.6.6...master)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.1.0...2.x)
+
+
+## [v2.1.0 (2021-01-12)](https://github.com/laravel/jetstream/compare/v2.0.3...v2.1.0)
+
+### Added
+- Add `--composer` option to the install command ([#607](https://github.com/laravel/jetstream/pull/607))
+
+### Changed
+- Automatically select API token when it's created ([#589](https://github.com/laravel/jetstream/pull/589))
+- Change current team of user when creating a new additional team ([#618](https://github.com/laravel/jetstream/pull/618))
+- Make text translatable in confirm-password livewire view ([#628](https://github.com/laravel/jetstream/pull/628))
+
+### Fixed
+- Banner should be hidden in default ([#599](https://github.com/laravel/jetstream/pull/599))
+- Jetstream ignoring sessions from session connection in config ([#630](https://github.com/laravel/jetstream/pull/630))
+
+
+## [v2.0.3 (2021-01-06)](https://github.com/laravel/jetstream/compare/v2.0.2...v2.0.3)
+
+### Added
+- Allow publishing of missing Inertia files ([#596](https://github.com/laravel/jetstream/pull/596), [b28ee67](https://github.com/laravel/jetstream/commit/b28ee670590312d014448c2c8f2479ec264c64cc))
+
+### Changed
+- Make button text in team invitation email translatable ([#598](https://github.com/laravel/jetstream/pull/598))
+
+### Removed
+- Remove unused Vue components ([#596](https://github.com/laravel/jetstream/pull/596))
+
+### Fixed
+- Make a similar footer section on welcome page ([#602](https://github.com/laravel/jetstream/pull/602))
+
+
+## [v2.0.2 (2021-01-06)](https://github.com/laravel/jetstream/compare/v2.0.1...v2.0.2)
+
+### Fixed
+- Fix test ([d24c41b](https://github.com/laravel/jetstream/commit/d24c41bca5fd69fa369915565a18ac2510b04928))
+
+
+## [v2.0.1 (2021-01-06)](https://github.com/laravel/jetstream/compare/v2.0.0...v2.0.1)
+
+### Changed
+- Make cancel link translatable ([#592](https://github.com/laravel/jetstream/pull/592))
+
+### Fixed
+- Inertia Stack Authentication Page logo link update with inertia-link ([#594](https://github.com/laravel/jetstream/pull/594))
+
+
+## [v2.0.0 (2021-01-05)](https://github.com/laravel/jetstream/compare/v1.6.6...v2.0.0)
+
+A major new Jetstream release. Check out [the announcement post](https://blog.laravel.com/jetstream-20-released).
 
 
 ## [v1.6.6 (2021-01-05)](https://github.com/laravel/jetstream/compare/v1.6.5...v1.6.6)
