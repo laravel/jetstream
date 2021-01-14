@@ -497,7 +497,7 @@ EOF;
             $modifiedMiddlewareGroup = str_replace(
                 $after.',',
                 $after.','.PHP_EOL.'            '.$name.',',
-                $middlewareGroup,
+                $middlewareGroup
             );
 
             file_put_contents(app_path('Http/Kernel.php'), str_replace(
