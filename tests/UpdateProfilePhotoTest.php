@@ -21,10 +21,10 @@ class UpdateProfilePhotoTest extends OrchestraTestCase
         $this->migrate();
 
         $user = User::forceCreate([
-                                      'name'     => 'Taylor Otwell',
-                                      'email'    => 'taylor@laravel.com',
-                                      'password' => 'secret',
-                                  ]);
+            'name'     => 'Taylor Otwell',
+            'email'    => 'taylor@laravel.com',
+            'password' => 'secret',
+        ]);
 
         Storage::fake('s3');
         Storage::fake('public');
@@ -42,10 +42,10 @@ class UpdateProfilePhotoTest extends OrchestraTestCase
         $_ENV['VAPOR_ARTIFACT_NAME'] = 'fake-artifact-name';
 
         $user = User::forceCreate([
-                                      'name'     => 'Taylor Otwell',
-                                      'email'    => 'taylor@laravel.com',
-                                      'password' => 'secret',
-                                  ]);
+            'name'     => 'Taylor Otwell',
+            'email'    => 'taylor@laravel.com',
+            'password' => 'secret',
+        ]);
 
         Storage::fake('s3');
         Storage::fake('public');
@@ -63,10 +63,10 @@ class UpdateProfilePhotoTest extends OrchestraTestCase
         config(['jetstream.profile_photo_disk' => 's3']);
 
         $user = User::forceCreate([
-                                      'name'     => 'Taylor Otwell',
-                                      'email'    => 'taylor@laravel.com',
-                                      'password' => 'secret',
-                                  ]);
+            'name'     => 'Taylor Otwell',
+            'email'    => 'taylor@laravel.com',
+            'password' => 'secret',
+        ]);
 
         Storage::fake('s3');
         Storage::fake('public');
