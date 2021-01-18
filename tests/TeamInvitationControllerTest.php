@@ -41,6 +41,24 @@ class TeamInvitationControllerTest extends OrchestraTestCase
         $response->assertRedirect();
     }
 
+    public function test_team_member_invitations_can_be_cancelled()
+    {
+        Jetstream::role('admin', 'Admin', ['foo', 'bar']);
+        Jetstream::role('editor', 'Editor', ['baz', 'qux']);
+
+        $this->migrate();
+
+        $team = $this->createTeam();
+
+        $invitation = $team->teamInvitations()->create(['email' => 'invite@laravel.com', 'role' => 'admin']);
+
+        $url = URL::signedRoute('team-invitations.destroy', ['invitation' => $invitation]);
+
+        $response = $this->actingAs($team->owner)->delete($url);
+
+        $response->assertStatus(303);
+    }
+
     protected function createTeam()
     {
         $action = new CreateTeam;
