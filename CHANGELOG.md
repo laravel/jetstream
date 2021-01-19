@@ -1,6 +1,15 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.1.0...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.1.1...2.x)
+
+
+## [v2.1.1 (2021-01-19)](https://github.com/laravel/jetstream/compare/v2.1.0...v2.1.1)
+
+### Fixed
+- Fix RegistrationTest for Terms of Services ([#632](https://github.com/laravel/jetstream/pull/632))
+- Add z-index to the modal ([#633](https://github.com/laravel/jetstream/pull/633))
+- Skip DeleteAccountTest if feature is not enabled ([#641](https://github.com/laravel/jetstream/pull/641))
+- Fix unique email on email invitations ([593e763](https://github.com/laravel/jetstream/commit/593e763f2eb07a7bdf7206fa497c22c5cb9c2938#), [a394153](https://github.com/laravel/jetstream/commit/a3941534ae9299a38a68bc2ad4f335b73861d43e))
 
 
 ## [v2.1.0 (2021-01-12)](https://github.com/laravel/jetstream/compare/v2.0.3...v2.1.0)
