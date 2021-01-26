@@ -1,6 +1,17 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.1.1...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.1.2...2.x)
+
+
+## [v2.1.2 (2021-01-26)](https://github.com/laravel/jetstream/compare/v2.1.1...v2.1.2)
+
+### Changed
+- Enabling Github Flavored Markdown for Terms and Privacy Policy ([#645](https://github.com/laravel/jetstream/pull/645))
+
+### Fixed
+- Hide AppLayout header if no slot defined in Page component ([#650](https://github.com/laravel/jetstream/pull/650), [523399f](https://github.com/laravel/jetstream/commit/523399f8496d49a6d6b6a8955b87cda0786be31b))
+- Use custom team member model ([#651](https://github.com/laravel/jetstream/pull/651))
+- Use email input type ([#653](https://github.com/laravel/jetstream/pull/653))
 
 
 ## [v2.1.1 (2021-01-19)](https://github.com/laravel/jetstream/compare/v2.1.0...v2.1.1)
