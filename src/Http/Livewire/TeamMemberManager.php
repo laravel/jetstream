@@ -128,7 +128,9 @@ class TeamMemberManager extends Component
     public function cancelTeamInvitation($invitationId)
     {
         if (! empty($invitationId)) {
-            TeamInvitation::whereKey($invitationId)->delete();
+            $model = Jetstream::teamInvitationModel();
+
+            $model::whereKey($invitationId)->delete();
         }
 
         $this->team = $this->team->fresh();

@@ -1,6 +1,26 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.1.0...master)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.1.2...master)
+
+
+## [v2.1.2 (2021-01-26)](https://github.com/laravel/jetstream/compare/v2.1.1...v2.1.2)
+
+### Changed
+- Enabling Github Flavored Markdown for Terms and Privacy Policy ([#645](https://github.com/laravel/jetstream/pull/645))
+
+### Fixed
+- Hide AppLayout header if no slot defined in Page component ([#650](https://github.com/laravel/jetstream/pull/650), [523399f](https://github.com/laravel/jetstream/commit/523399f8496d49a6d6b6a8955b87cda0786be31b))
+- Use custom team member model ([#651](https://github.com/laravel/jetstream/pull/651))
+- Use email input type ([#653](https://github.com/laravel/jetstream/pull/653))
+
+
+## [v2.1.1 (2021-01-19)](https://github.com/laravel/jetstream/compare/v2.1.0...v2.1.1)
+
+### Fixed
+- Fix RegistrationTest for Terms of Services ([#632](https://github.com/laravel/jetstream/pull/632))
+- Add z-index to the modal ([#633](https://github.com/laravel/jetstream/pull/633))
+- Skip DeleteAccountTest if feature is not enabled ([#641](https://github.com/laravel/jetstream/pull/641))
+- Fix unique email on email invitations ([593e763](https://github.com/laravel/jetstream/commit/593e763f2eb07a7bdf7206fa497c22c5cb9c2938#), [a394153](https://github.com/laravel/jetstream/commit/a3941534ae9299a38a68bc2ad4f335b73861d43e))
 
 
 ## [v2.1.0 (2021-01-12)](https://github.com/laravel/jetstream/compare/v2.0.3...v2.1.0)
