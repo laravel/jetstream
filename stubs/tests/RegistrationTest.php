@@ -28,7 +28,7 @@ class RegistrationTest extends TestCase
         if (! Features::enabled(Features::registration())) {
             return $this->markTestSkipped('Account registration is not enabled.');
         }
-        
+
         $response = $this->post('/register', [
             'name' => 'Test User',
             'email' => 'test@example.com',
