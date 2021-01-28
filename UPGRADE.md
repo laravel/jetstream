@@ -140,11 +140,9 @@ Fortify::confirmPasswordView(function () {
 });
 ```
 
-### Remove [laravel-jetstream](https://www.npmjs.com/package/laravel-jetstream) javascript package
+#### Remove [laravel-jetstream](https://www.npmjs.com/package/laravel-jetstream) NPM Package
 
-As of the Jetstream 2.0 release, this library is no longer necessary as all of its features have been incorporated into Inertia itself. 
-
-Remove the following from your `resources/js/app.js`:
+As of the Jetstream 2.0 release, this library is no longer necessary as all of its features have been incorporated into Inertia itself. You should remove the following from your `resources/js/app.js` file:
 
 ```
 import {InertiaForm} from 'laravel-jetstream';
@@ -153,9 +151,6 @@ Vue.use(InertiaForm);
 
 ````
 
-Remove the package from your `package.json`:
-
+Finally, you may remove the package:
 
 `npm uninstall laravel-jetstream`
-or
-`yarn remove laravel-jetstream`
