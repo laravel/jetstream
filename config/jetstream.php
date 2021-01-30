@@ -49,17 +49,4 @@ return [
         Features::accountDeletion(),
     ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Profile Photo Disk
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify the default filesystem disk that should be used by
-    | Jetstream to store the profile photos.
-    | By default, the s3 disk will be used to store profile photos when your
-    | application is running within Laravel Vapor.
-    |
-    */
-
-    'profile_photo_disk' => 'public',
 ];
