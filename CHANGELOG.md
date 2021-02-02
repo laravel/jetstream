@@ -6,7 +6,7 @@
 ## [v2.1.3 (2021-02-02)](https://github.com/laravel/jetstream/compare/v2.1.2...v2.1.3)
 
 ### Changed
-- Add `profile_photo_disk` config option ([#658](https://github.com/laravel/jetstream/pull/658))
+- Add `profile_photo_disk` config option ([#658](https://github.com/laravel/jetstream/pull/658), [a6245c8](https://github.com/laravel/jetstream/commit/a6245c84adc2ea209a34051ff543ccc302a275e8))
 
 
 ## [v2.1.2 (2021-01-26)](https://github.com/laravel/jetstream/compare/v2.1.1...v2.1.2)
