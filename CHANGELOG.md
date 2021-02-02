@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.1.2...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.1.3...2.x)
+
+
+## [v2.1.3 (2021-02-02)](https://github.com/laravel/jetstream/compare/v2.1.2...v2.1.3)
+
+### Changed
+- Add `profile_photo_disk` config option ([#658](https://github.com/laravel/jetstream/pull/658))
 
 
 ## [v2.1.2 (2021-01-26)](https://github.com/laravel/jetstream/compare/v2.1.1...v2.1.2)
