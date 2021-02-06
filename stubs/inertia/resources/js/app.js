@@ -5,13 +5,19 @@ import Vue from 'vue';
 import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue';
 import PortalVue from 'portal-vue';
 
-Vue.mixin({ methods: { route } });
+window.prop = (keys, defaultProp = null) => {
+    const prop = keys.split('.').reduce((object, key) => (object || {})[key], vueApp.$page.props);
+
+    return prop ?? defaultProp ?? null;
+};
+
+Vue.mixin({ methods: { route, prop } });
 Vue.use(InertiaPlugin);
 Vue.use(PortalVue);
 
 const app = document.getElementById('app');
 
-new Vue({
+window.vueApp = new Vue({
     render: (h) =>
         h(InertiaApp, {
             props: {
