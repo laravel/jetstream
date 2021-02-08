@@ -19,5 +19,8 @@
     </head>
     <body class="font-sans antialiased">
         @inertia
+
+        <!-- Modal Portal -->
+        <div id="modal"></div>
     </body>
 </html>
