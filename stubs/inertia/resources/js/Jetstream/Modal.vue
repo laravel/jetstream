@@ -31,6 +31,7 @@
 <script>
     export default {
         emits: ['close'],
+
         props: {
             show: {
                 default: false

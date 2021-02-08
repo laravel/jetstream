@@ -20,7 +20,7 @@
     <body class="font-sans antialiased">
         @inertia
 
-        <!-- Modal Portal -->
+        <!-- Modal Teleport -->
         <div id="modal"></div>
     </body>
 </html>
