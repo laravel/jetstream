@@ -55,10 +55,6 @@
                 }
             }
 
-            this.$once('hook:destroyed', () => {
-                document.removeEventListener('keydown', closeOnEscape)
-            })
-
             document.addEventListener('keydown', closeOnEscape)
         },
 

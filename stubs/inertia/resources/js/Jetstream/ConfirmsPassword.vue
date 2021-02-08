@@ -43,6 +43,8 @@
     import JetSecondaryButton from './SecondaryButton'
 
     export default {
+        emits: ['confirmed'],
+
         props: {
             title: {
                 default: 'Confirm Password',
