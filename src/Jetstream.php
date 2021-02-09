@@ -196,6 +196,16 @@ class Jetstream
     }
 
     /**
+     * Determine if the application is using the code of conduct confirmation feature.
+     *
+     * @return bool
+     */
+    public static function hasCodeofConductFeature()
+    {
+        return Features::hasCodeOfConductFeature();
+    }
+
+    /**
      * Determine if the application is using the terms confirmation feature.
      *
      * @return bool

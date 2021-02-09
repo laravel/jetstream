@@ -43,6 +43,7 @@ return [
 
     'features' => [
         // Features::termsAndPrivacyPolicy(),
+        // Features::codeOfConduct(),
         // Features::profilePhotos(),
         // Features::api(),
         // Features::teams(['invitations' => true]),

@@ -13,7 +13,7 @@ use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
 class CodeOfConductController extends Controller
 {
     /**
-     * Show the conduct policy for the application.
+     * Show the code of conduct for the application.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Inertia\Response

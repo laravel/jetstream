@@ -16,8 +16,11 @@ use Laravel\Jetstream\Http\Controllers\TeamInvitationController;
 use Laravel\Jetstream\Jetstream;
 
 Route::group(['middleware' => config('jetstream.middleware', ['web'])], function () {
+    if (Jetstream::hasCodeOfConductFeature()) {
+        Route::get('/code-of-conduct', [CodeOfConductController::class, 'show'])->name('conduct.show');
+    }
+
     if (Jetstream::hasTermsAndPrivacyPolicyFeature()) {
-        Route::get('/conduct-policy', [CodeOfConductController::class, 'show'])->name('conduct.show');
         Route::get('/terms-of-service', [TermsOfServiceController::class, 'show'])->name('terms.show');
         Route::get('/privacy-policy', [PrivacyPolicyController::class, 'show'])->name('policy.show');
     }

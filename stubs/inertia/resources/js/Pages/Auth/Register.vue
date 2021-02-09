@@ -33,7 +33,19 @@
                         <jet-checkbox name="terms" id="terms" v-model="form.terms" />
 
                         <div class="ml-2">
-                            I agree to the <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Terms of Service</a>, <a target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Privacy Policy</a> and  <a target="_blank" :href="route('conduct.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Conduct Policy</a>
+                            I agree to the <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Terms of Service</a> and <a target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Privacy Policy</a>
+                        </div>
+                    </div>
+                </jet-label>
+            </div>
+
+            <div class="mt-4" v-if="$page.props.jetstream.hasCodeOfConductFeature">
+                <jet-label for="conduct">
+                    <div class="flex items-center">
+                        <jet-checkbox name="conduct" id="conduct" v-model="form.conduct" />
+
+                        <div class="ml-2">
+                            I agree to the <a target="_blank" :href="route('conduct.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Code of Conduct</a>
                         </div>
                     </div>
                 </jet-label>

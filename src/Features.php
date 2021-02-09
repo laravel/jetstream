@@ -71,6 +71,16 @@ class Features
     }
 
     /**
+     * Determine if the application has code of conduct confirmation enabled.
+     *
+     * @return bool
+     */
+    public static function hasCodeOfCOnductFeature()
+    {
+        return static::enabled(static::codeOfConduct());
+    }
+
+    /**
      * Determine if the application has terms of service / privacy policy confirmation enabled.
      *
      * @return bool
@@ -123,6 +133,16 @@ class Features
         }
 
         return 'teams';
+    }
+
+    /**
+     * Enable the code of conduct feature.
+     *
+     * @return string
+     */
+    public static function codeOfConduct()
+    {
+        return 'conduct';
     }
 
     /**

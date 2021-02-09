@@ -148,6 +148,9 @@ class InstallCommand extends Command
 
         (new Filesystem)->deleteDirectory(resource_path('sass'));
 
+        // Code of Conduct...
+        copy(__DIR__.'/../../stubs/resources/markdown/conduct.md', resource_path('markdown/conduct.md'));
+
         // Terms Of Service / Privacy Policy...
         copy(__DIR__.'/../../stubs/resources/markdown/terms.md', resource_path('markdown/terms.md'));
         copy(__DIR__.'/../../stubs/resources/markdown/policy.md', resource_path('markdown/policy.md'));
@@ -174,6 +177,7 @@ class InstallCommand extends Command
         // Single Blade Views...
         copy(__DIR__.'/../../stubs/livewire/resources/views/dashboard.blade.php', resource_path('views/dashboard.blade.php'));
         copy(__DIR__.'/../../stubs/livewire/resources/views/navigation-menu.blade.php', resource_path('views/navigation-menu.blade.php'));
+        copy(__DIR__.'/../../stubs/livewire/resources/views/conduct.blade.php', resource_path('views/conduct.blade.php'));
         copy(__DIR__.'/../../stubs/livewire/resources/views/terms.blade.php', resource_path('views/terms.blade.php'));
         copy(__DIR__.'/../../stubs/livewire/resources/views/policy.blade.php', resource_path('views/policy.blade.php'));
 
@@ -310,6 +314,9 @@ EOF;
 
         (new Filesystem)->deleteDirectory(resource_path('sass'));
 
+        // Code of Conduct...
+        copy(__DIR__.'/../../stubs/resources/markdown/conduct.md', resource_path('markdown/conduct.md'));
+
         // Terms Of Service / Privacy Policy...
         copy(__DIR__.'/../../stubs/resources/markdown/terms.md', resource_path('markdown/terms.md'));
         copy(__DIR__.'/../../stubs/resources/markdown/policy.md', resource_path('markdown/policy.md'));
@@ -345,6 +352,7 @@ EOF;
 
         // Inertia Pages...
         copy(__DIR__.'/../../stubs/inertia/resources/js/Pages/Dashboard.vue', resource_path('js/Pages/Dashboard.vue'));
+        copy(__DIR__.'/../../stubs/inertia/resources/js/Pages/CodeOfConduct.vue', resource_path('js/Pages/CodeOfConduct.vue'));
         copy(__DIR__.'/../../stubs/inertia/resources/js/Pages/PrivacyPolicy.vue', resource_path('js/Pages/PrivacyPolicy.vue'));
         copy(__DIR__.'/../../stubs/inertia/resources/js/Pages/TermsOfService.vue', resource_path('js/Pages/TermsOfService.vue'));
         copy(__DIR__.'/../../stubs/inertia/resources/js/Pages/Welcome.vue', resource_path('js/Pages/Welcome.vue'));
