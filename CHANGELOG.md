@@ -1,6 +1,16 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.1.3...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.1.4...2.x)
+
+
+## [v2.1.4 (2021-02-09)](https://github.com/laravel/jetstream/compare/v2.1.3...v2.1.4)
+
+### Changed
+- Allow custom classes on the dropdown class ([#661](https://github.com/laravel/jetstream/pull/661))
+
+### Fixed
+- Fix permissions for team create routes ([#669](https://github.com/laravel/jetstream/pull/669))
+- Fix overflow hidden issue with overlaping elements inside form section ([#668](https://github.com/laravel/jetstream/pull/668))
 
 
 ## [v2.1.3 (2021-02-02)](https://github.com/laravel/jetstream/compare/v2.1.2...v2.1.3)
