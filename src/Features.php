@@ -75,7 +75,7 @@ class Features
      *
      * @return bool
      */
-    public static function hasCodeOfCOnductFeature()
+    public static function hasCodeOfConductFeature()
     {
         return static::enabled(static::codeOfConduct());
     }
