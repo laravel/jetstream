@@ -38,6 +38,10 @@ class TeamController extends Controller
      */
     public function create(Request $request)
     {
+        if (Gate::denies('create', Jetstream::newTeamModel())) {
+            abort(403);
+        }
+
         return view('teams.create', [
             'user' => $request->user(),
         ]);
