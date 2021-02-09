@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Laravel\Jetstream\Http\Controllers\CurrentTeamController;
 use Laravel\Jetstream\Http\Controllers\Inertia\ApiTokenController;
+use Laravel\Jetstream\Http\Controllers\Inertia\CodeOfConductController;
 use Laravel\Jetstream\Http\Controllers\Inertia\CurrentUserController;
 use Laravel\Jetstream\Http\Controllers\Inertia\OtherBrowserSessionsController;
 use Laravel\Jetstream\Http\Controllers\Inertia\PrivacyPolicyController;
@@ -16,6 +17,7 @@ use Laravel\Jetstream\Jetstream;
 
 Route::group(['middleware' => config('jetstream.middleware', ['web'])], function () {
     if (Jetstream::hasTermsAndPrivacyPolicyFeature()) {
+        Route::get('/conduct-policy', [CodeOfConductController::class, 'show'])->name('conduct.show');
         Route::get('/terms-of-service', [TermsOfServiceController::class, 'show'])->name('terms.show');
         Route::get('/privacy-policy', [PrivacyPolicyController::class, 'show'])->name('policy.show');
     }
