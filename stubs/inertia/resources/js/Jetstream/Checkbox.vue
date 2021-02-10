@@ -7,11 +7,6 @@
 export default {
     emits: ['update:checked'],
 
-    model: {
-        prop: "checked",
-        event: "update:checked",
-    },
-
     props: {
         checked: {
             type: [Array, Boolean],
@@ -21,6 +16,7 @@ export default {
             default: null,
         },
     },
+
     computed: {
         proxyChecked: {
             get() {
