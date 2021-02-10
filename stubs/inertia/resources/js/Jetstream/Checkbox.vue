@@ -1,33 +1,35 @@
 <template>
-    <input type="checkbox" :value="modelValue" v-model="proxyChecked"
+    <input type="checkbox" :value="value" v-model="proxyChecked"
            class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
 </template>
 
 <script>
-    export default {
-        emits: ['update:modelValue'],
+export default {
+    emits: ['update:checked'],
 
-        props: {
-            checked: {
-                type: [Array, Boolean],
-                default: false,
+    model: {
+        prop: "checked",
+        event: "update:checked",
+    },
+
+    props: {
+        checked: {
+            type: [Array, Boolean],
+            default: false,
+        },
+        value: {
+            default: null,
+        },
+    },
+    computed: {
+        proxyChecked: {
+            get() {
+                return this.checked;
             },
-            modelValue: {
-                type: [Array, Boolean],
-                default: false,
+            set(val) {
+                this.$emit("update:checked", val);
             },
         },
-
-        computed: {
-            proxyChecked: {
-                get() {
-                    return this.checked;
-                },
-                set(val) {
-                    this.$emit("update:modelValue", val);
-                },
-            },
-        },
-    }
+    },
+}
 </script>
-
