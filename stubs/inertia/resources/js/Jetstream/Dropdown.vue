@@ -10,10 +10,10 @@
 
         <transition
             enter-active-class="transition ease-out duration-200"
-            enter-class="transform opacity-0 scale-95"
+            enter-from-class="transform opacity-0 scale-95"
             enter-to-class="transform opacity-100 scale-100"
             leave-active-class="transition ease-in duration-75"
-            leave-class="transform opacity-100 scale-100"
+            leave-from-class="transform opacity-100 scale-100"
             leave-to-class="transform opacity-0 scale-95">
             <div v-show="open"
                     class="absolute z-50 mt-2 rounded-md shadow-lg"
@@ -56,6 +56,16 @@
             }
 
             document.addEventListener('keydown', closeOnEscape)
+        },
+
+        unmounted() {
+            const closeOnEscape = (e) => {
+                if (this.open && e.keyCode === 27) {
+                    this.open = false
+                }
+            }
+
+            document.removeEventListener('keydown', closeOnEscape)
         },
 
         computed: {
