@@ -19,8 +19,5 @@
     </head>
     <body class="font-sans antialiased">
         @inertia
-
-        <!-- Modal Teleport -->
-        <div id="modal"></div>
     </body>
 </html>
