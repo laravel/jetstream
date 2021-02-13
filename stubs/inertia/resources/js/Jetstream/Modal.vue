@@ -29,7 +29,9 @@
 </template>
 
 <script>
-    export default {
+import {onMounted, onUnmounted} from "vue";
+
+export default {
         emits: ['close'],
 
         props: {
@@ -42,14 +44,6 @@
             closeable: {
                 default: true
             },
-        },
-
-        methods: {
-            close() {
-                if (this.closeable) {
-                    this.$emit('close')
-                }
-            }
         },
 
         watch: {
@@ -65,14 +59,25 @@
             }
         },
 
-        created() {
-            const closeOnEscape = (e) => {
-                if (e.key === 'Escape' && this.show) {
-                    this.close()
+        setup(props, {emit}) {
+            const close = () => {
+                if (props.closeable) {
+                    emit('close')
                 }
             }
 
-            document.addEventListener('keydown', closeOnEscape)
+            const closeOnEscape = (e) => {
+                if (e.key === 'Escape' && props.show) {
+                    close()
+                }
+            }
+
+            onMounted(() => document.addEventListener('keydown', closeOnEscape))
+            onUnmounted(() => document.removeEventListener('keydown', closeOnEscape))
+
+            return {
+                close,
+            }
         },
 
         computed: {

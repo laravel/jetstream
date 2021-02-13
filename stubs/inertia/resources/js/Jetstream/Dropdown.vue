@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import {onMounted, onUnmounted, ref} from "vue";
+
     export default {
         props: {
             align: {
@@ -42,30 +44,21 @@
             }
         },
 
-        data() {
+        setup() {
+            let open = ref(false)
+
+            const closeOnEscape = (e) => {
+                if (open.value && e.keyCode === 27) {
+                    open.value = false
+                }
+            }
+
+            onMounted(() => document.addEventListener('keydown', closeOnEscape))
+            onUnmounted(() => document.removeEventListener('keydown', closeOnEscape))
+
             return {
-                open: false
+                open,
             }
-        },
-
-        created() {
-            const closeOnEscape = (e) => {
-                if (this.open && e.keyCode === 27) {
-                    this.open = false
-                }
-            }
-
-            document.addEventListener('keydown', closeOnEscape)
-        },
-
-        unmounted() {
-            const closeOnEscape = (e) => {
-                if (this.open && e.keyCode === 27) {
-                    this.open = false
-                }
-            }
-
-            document.removeEventListener('keydown', closeOnEscape)
         },
 
         computed: {
@@ -74,7 +67,6 @@
                     '48': 'w-48',
                 }[this.width.toString()]
             },
-
             alignmentClasses() {
                 if (this.align === 'left') {
                     return 'origin-top-left left-0'
