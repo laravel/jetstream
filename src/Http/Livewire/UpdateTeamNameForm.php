@@ -32,7 +32,7 @@ class UpdateTeamNameForm extends Component
     {
         $this->team = $team;
 
-        $this->state = ['name' => $team->name];
+        $this->state = $team->withoutRelations()->toArray();
     }
 
     /**
