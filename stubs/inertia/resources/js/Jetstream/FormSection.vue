@@ -26,6 +26,8 @@
     import JetSectionTitle from './SectionTitle'
 
     export default {
+        emits: ['submitted'],
+
         components: {
             JetSectionTitle,
         },

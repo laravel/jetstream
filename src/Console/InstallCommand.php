@@ -268,17 +268,16 @@ EOF;
         // Install NPM packages...
         $this->updateNodePackages(function ($packages) {
             return [
-                '@inertiajs/inertia' => '^0.8.2',
-                '@inertiajs/inertia-vue' => '^0.5.4',
+                '@inertiajs/inertia' => '^0.8.4',
+                '@inertiajs/inertia-vue3' => '^0.3.5',
                 '@tailwindcss/forms' => '^0.2.1',
                 '@tailwindcss/typography' => '^0.3.0',
-                'portal-vue' => '^2.1.7',
                 'postcss-import' => '^12.0.1',
                 'tailwindcss' => '^2.0.1',
                 'autoprefixer' => '^10.0.2',
-                'vue' => '^2.5.17',
-                'vue-loader' => '^15.9.6',
-                'vue-template-compiler' => '^2.6.10',
+                'vue' => '^3.0.5',
+                '@vue/compiler-sfc' => '^3.0.5',
+                'vue-loader' => '^16.1.2',
             ] + $packages;
         });
 
