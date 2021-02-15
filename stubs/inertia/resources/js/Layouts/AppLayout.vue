@@ -117,7 +117,7 @@
                                         <!-- Authentication -->
                                         <form @submit.prevent="logout">
                                             <jet-dropdown-link as="button">
-                                                Logout
+                                                Log Out
                                             </jet-dropdown-link>
                                         </form>
                                     </template>
@@ -170,7 +170,7 @@
                             <!-- Authentication -->
                             <form method="POST" @submit.prevent="logout">
                                 <jet-responsive-nav-link as="button">
-                                    Logout
+                                    Log Out
                                 </jet-responsive-nav-link>
                             </form>
 
