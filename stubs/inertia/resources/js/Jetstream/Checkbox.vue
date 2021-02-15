@@ -22,6 +22,7 @@ export default {
             get() {
                 return this.checked;
             },
+
             set(val) {
                 this.$emit("update:checked", val);
             },

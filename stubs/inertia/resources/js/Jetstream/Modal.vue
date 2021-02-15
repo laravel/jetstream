@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import {onMounted, onUnmounted} from "vue";
+import { onMounted, onUnmounted } from "vue";
 
 export default {
         emits: ['close'],
