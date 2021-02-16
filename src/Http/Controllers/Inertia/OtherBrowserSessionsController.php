@@ -12,7 +12,7 @@ use Illuminate\Validation\ValidationException;
 class OtherBrowserSessionsController extends Controller
 {
     /**
-     * Logout from other browser sessions.
+     * Log out from other browser sessions.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Illuminate\Contracts\Auth\StatefulGuard  $guard

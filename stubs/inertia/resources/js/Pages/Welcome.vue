@@ -7,7 +7,7 @@
 
             <template v-else>
                 <inertia-link :href="route('login')" class="text-sm text-gray-700 underline">
-                    Login
+                    Log in
                 </inertia-link>
 
                 <inertia-link v-if="canRegister" :href="route('register')" class="ml-4 text-sm text-gray-700 underline">
