@@ -1,6 +1,17 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.1.4...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.2.0...2.x)
+
+
+## [v2.2.0 (2021-02-16)](https://github.com/laravel/jetstream/compare/v2.1.4...v2.2.0)
+
+### Added
+- Vue v3.0 support ([#666](https://github.com/laravel/jetstream/pull/666))
+
+### Fixed
+- Fix ownsTeam when applied to non-User model ([#673](https://github.com/laravel/jetstream/pull/673))
+- Allow UpdateTeamNameForm in Livewire to hydrate all Team attributes ([#676](https://github.com/laravel/jetstream/pull/676))
+- Change "Logout" text to "Log out" and "Login" to "Log in" ([#677](https://github.com/laravel/jetstream/pull/677))
 
 
 ## [v2.1.4 (2021-02-09)](https://github.com/laravel/jetstream/compare/v2.1.3...v2.1.4)
