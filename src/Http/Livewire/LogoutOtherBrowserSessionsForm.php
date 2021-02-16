@@ -28,7 +28,7 @@ class LogoutOtherBrowserSessionsForm extends Component
     public $password = '';
 
     /**
-     * Confirm that the user would like to logout from other browser sessions.
+     * Confirm that the user would like to log out from other browser sessions.
      *
      * @return void
      */
@@ -42,7 +42,7 @@ class LogoutOtherBrowserSessionsForm extends Component
     }
 
     /**
-     * Logout from other browser sessions.
+     * Log out from other browser sessions.
      *
      * @param  \Illuminate\Contracts\Auth\StatefulGuard  $guard
      * @return void
