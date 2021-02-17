@@ -74,7 +74,7 @@
 
                 <template #footer>
                     <jet-secondary-button @click.native="closeModal">
-                        Nevermind
+                        Cancel
                     </jet-secondary-button>
 
                     <jet-button class="ml-2" @click.native="logoutOtherBrowserSessions" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">

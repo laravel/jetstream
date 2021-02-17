@@ -131,7 +131,7 @@
 
             <template #footer>
                 <jet-secondary-button @click.native="managingPermissionsFor = null">
-                    Nevermind
+                    Cancel
                 </jet-secondary-button>
 
                 <jet-button class="ml-2" @click.native="updateApiToken" :class="{ 'opacity-25': updateApiTokenForm.processing }" :disabled="updateApiTokenForm.processing">
@@ -152,7 +152,7 @@
 
             <template #footer>
                 <jet-secondary-button @click.native="apiTokenBeingDeleted = null">
-                    Nevermind
+                    Cancel
                 </jet-secondary-button>
 
                 <jet-danger-button class="ml-2" @click.native="deleteApiToken" :class="{ 'opacity-25': deleteApiTokenForm.processing }" :disabled="deleteApiTokenForm.processing">
