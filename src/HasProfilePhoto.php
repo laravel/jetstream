@@ -54,6 +54,10 @@ trait HasProfilePhoto
      */
     public function getProfilePhotoUrlAttribute()
     {
+        if (!Features::managesProfilePhotos()) {
+            return null;
+        }
+
         return $this->profile_photo_path
                     ? Storage::disk($this->profilePhotoDisk())->url($this->profile_photo_path)
                     : $this->defaultProfilePhotoUrl();
