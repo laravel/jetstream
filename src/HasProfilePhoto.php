@@ -54,7 +54,7 @@ trait HasProfilePhoto
      */
     public function getProfilePhotoUrlAttribute()
     {
-        if (!Features::managesProfilePhotos()) {
+        if (! Features::managesProfilePhotos()) {
             return null;
         }
 
