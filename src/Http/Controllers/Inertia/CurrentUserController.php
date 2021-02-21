@@ -22,7 +22,7 @@ class CurrentUserController extends Controller
     public function destroy(Request $request, StatefulGuard $auth)
     {
         $request->validate([
-            'password' => 'password',
+            'password' => 'required|string|password',
         ]);
 
         app(DeletesUsers::class)->delete($request->user()->fresh());

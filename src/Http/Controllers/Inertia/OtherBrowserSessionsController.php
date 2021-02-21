@@ -21,7 +21,7 @@ class OtherBrowserSessionsController extends Controller
     public function destroy(Request $request, StatefulGuard $guard)
     {
         $request->validate([
-            'password' => 'password',
+            'password' => 'required|string|password',
         ]);
 
         $guard->logoutOtherDevices($request->password);
