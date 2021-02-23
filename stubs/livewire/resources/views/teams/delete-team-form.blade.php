@@ -30,7 +30,7 @@
 
             <x-slot name="footer">
                 <x-jet-secondary-button wire:click="$toggle('confirmingTeamDeletion')" wire:loading.attr="disabled">
-                    {{ __('Nevermind') }}
+                    {{ __('Cancel') }}
                 </x-jet-secondary-button>
 
                 <x-jet-danger-button class="ml-2" wire:click="deleteTeam" wire:loading.attr="disabled">

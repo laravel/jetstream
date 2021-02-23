@@ -192,11 +192,11 @@
             </template>
 
             <template #footer>
-                <jet-secondary-button @click.native="currentlyManagingRole = false">
-                    Nevermind
+                <jet-secondary-button @click="currentlyManagingRole = false">
+                    Cancel
                 </jet-secondary-button>
 
-                <jet-button class="ml-2" @click.native="updateRole" :class="{ 'opacity-25': updateRoleForm.processing }" :disabled="updateRoleForm.processing">
+                <jet-button class="ml-2" @click="updateRole" :class="{ 'opacity-25': updateRoleForm.processing }" :disabled="updateRoleForm.processing">
                     Save
                 </jet-button>
             </template>
@@ -213,11 +213,11 @@
             </template>
 
             <template #footer>
-                <jet-secondary-button @click.native="confirmingLeavingTeam = false">
-                    Nevermind
+                <jet-secondary-button @click="confirmingLeavingTeam = false">
+                    Cancel
                 </jet-secondary-button>
 
-                <jet-danger-button class="ml-2" @click.native="leaveTeam" :class="{ 'opacity-25': leaveTeamForm.processing }" :disabled="leaveTeamForm.processing">
+                <jet-danger-button class="ml-2" @click="leaveTeam" :class="{ 'opacity-25': leaveTeamForm.processing }" :disabled="leaveTeamForm.processing">
                     Leave
                 </jet-danger-button>
             </template>
@@ -234,11 +234,11 @@
             </template>
 
             <template #footer>
-                <jet-secondary-button @click.native="teamMemberBeingRemoved = null">
-                    Nevermind
+                <jet-secondary-button @click="teamMemberBeingRemoved = null">
+                    Cancel
                 </jet-secondary-button>
 
-                <jet-danger-button class="ml-2" @click.native="removeTeamMember" :class="{ 'opacity-25': removeTeamMemberForm.processing }" :disabled="removeTeamMemberForm.processing">
+                <jet-danger-button class="ml-2" @click="removeTeamMember" :class="{ 'opacity-25': removeTeamMemberForm.processing }" :disabled="removeTeamMemberForm.processing">
                     Remove
                 </jet-danger-button>
             </template>

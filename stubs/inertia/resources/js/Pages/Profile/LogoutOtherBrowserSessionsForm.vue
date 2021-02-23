@@ -44,7 +44,7 @@
             </div>
 
             <div class="flex items-center mt-5">
-                <jet-button @click.native="confirmLogout">
+                <jet-button @click="confirmLogout">
                     Log Out Other Browser Sessions
                 </jet-button>
 
@@ -66,18 +66,18 @@
                         <jet-input type="password" class="mt-1 block w-3/4" placeholder="Password"
                                     ref="password"
                                     v-model="form.password"
-                                    @keyup.enter.native="logoutOtherBrowserSessions" />
+                                    @keyup.enter="logoutOtherBrowserSessions" />
 
                         <jet-input-error :message="form.errors.password" class="mt-2" />
                     </div>
                 </template>
 
                 <template #footer>
-                    <jet-secondary-button @click.native="closeModal">
-                        Nevermind
+                    <jet-secondary-button @click="closeModal">
+                        Cancel
                     </jet-secondary-button>
 
-                    <jet-button class="ml-2" @click.native="logoutOtherBrowserSessions" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    <jet-button class="ml-2" @click="logoutOtherBrowserSessions" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         Log Out Other Browser Sessions
                     </jet-button>
                 </template>

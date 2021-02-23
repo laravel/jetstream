@@ -14,7 +14,7 @@
             </div>
 
             <div class="mt-5">
-                <jet-danger-button @click.native="confirmUserDeletion">
+                <jet-danger-button @click="confirmUserDeletion">
                     Delete Account
                 </jet-danger-button>
             </div>
@@ -32,18 +32,18 @@
                         <jet-input type="password" class="mt-1 block w-3/4" placeholder="Password"
                                     ref="password"
                                     v-model="form.password"
-                                    @keyup.enter.native="deleteUser" />
+                                    @keyup.enter="deleteUser" />
 
                         <jet-input-error :message="form.errors.password" class="mt-2" />
                     </div>
                 </template>
 
                 <template #footer>
-                    <jet-secondary-button @click.native="closeModal">
-                        Nevermind
+                    <jet-secondary-button @click="closeModal">
+                        Cancel
                     </jet-secondary-button>
 
-                    <jet-danger-button class="ml-2" @click.native="deleteUser" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    <jet-danger-button class="ml-2" @click="deleteUser" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         Delete Account
                     </jet-danger-button>
                 </template>
