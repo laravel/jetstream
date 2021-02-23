@@ -1,6 +1,26 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.2.0...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.2.2...2.x)
+
+
+## [v2.2.2 (2021-02-23)](https://github.com/laravel/jetstream/compare/v2.2.1...v2.2.2)
+
+### Changed
+- Use cancel wording ([9b7dbb4e](https://github.com/laravel/jetstream/commit/9b7dbb4ea10aa7a5b678695719f7f1bc820b61ec))
+- Use inertia progress ([c1f1fa0](https://github.com/laravel/jetstream/commit/c1f1fa0ab964f3b9dbe144eb60e18d38e835b195))
+- Remove '.native' deprecated modifier in vue3 ([#689](https://github.com/laravel/jetstream/pull/689))
+
+### Fixed
+- Require password ([b24ef0c](https://github.com/laravel/jetstream/commit/b24ef0ceea656adc71367c1d64190626f27e8c1e))
+
+
+## [v2.2.1 (2021-02-16)](https://github.com/laravel/jetstream/compare/v2.2.0...v2.2.1)
+
+### Changed
+- Add unverified state to `UserFactory` ([#679](https://github.com/laravel/jetstream/pull/679))
+  
+### Fixed
+- Update purge settings ([36c4685](https://github.com/laravel/jetstream/commit/36c46858b2dfd0b6b001872ce4d682a31221bb49))
 
 
 ## [v2.2.0 (2021-02-16)](https://github.com/laravel/jetstream/compare/v2.1.4...v2.2.0)
