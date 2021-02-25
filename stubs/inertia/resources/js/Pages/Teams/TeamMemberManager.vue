@@ -15,7 +15,7 @@
 
                 <template #form>
                     <div class="col-span-6">
-                        <div class="max-w-xl text-sm text-gray-600">
+                        <div class="max-w-xl text-sm text-gray-600 dark:text-gray-400">
                             Please provide the email address of the person you would like to add to this team.
                         </div>
                     </div>
@@ -23,7 +23,7 @@
                     <!-- Member Email -->
                     <div class="col-span-6 sm:col-span-4">
                         <jet-label for="email" value="Email" />
-                        <jet-input id="email" type="email" class="mt-1 block w-full" v-model="addTeamMemberForm.email" />
+                        <jet-input id="email" type="email" class="block w-full mt-1" v-model="addTeamMemberForm.email" />
                         <jet-input-error :message="addTeamMemberForm.errors.email" class="mt-2" />
                     </div>
 
@@ -32,24 +32,24 @@
                         <jet-label for="roles" value="Role" />
                         <jet-input-error :message="addTeamMemberForm.errors.role" class="mt-2" />
 
-                        <div class="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer">
-                            <button type="button" class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue"
-                                            :class="{'border-t border-gray-200 rounded-t-none': i > 0, 'rounded-b-none': i != Object.keys(availableRoles).length - 1}"
+                        <div class="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer dark:border-gray-600">
+                            <button type="button" class="relative inline-flex w-full px-4 py-3 rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue"
+                                            :class="{'border-t border-gray-200 dark:border-gray-600 rounded-t-none': i > 0, 'rounded-b-none': i != Object.keys(availableRoles).length - 1}"
                                             @click="addTeamMemberForm.role = role.key"
                                             v-for="(role, i) in availableRoles"
                                             :key="role.key">
                                 <div :class="{'opacity-50': addTeamMemberForm.role && addTeamMemberForm.role != role.key}">
                                     <!-- Role Name -->
                                     <div class="flex items-center">
-                                        <div class="text-sm text-gray-600" :class="{'font-semibold': addTeamMemberForm.role == role.key}">
+                                        <div class="text-sm text-gray-600 dark:text-gray-200" :class="{'font-semibold': addTeamMemberForm.role == role.key}">
                                             {{ role.name }}
                                         </div>
 
-                                        <svg v-if="addTeamMemberForm.role == role.key" class="ml-2 h-5 w-5 text-green-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        <svg v-if="addTeamMemberForm.role == role.key" class="w-5 h-5 ml-2 text-green-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     </div>
 
                                     <!-- Role Description -->
-                                    <div class="mt-2 text-xs text-gray-600">
+                                    <div class="mt-2 text-xs text-gray-600 dark:text-gray-200">
                                         {{ role.description }}
                                     </div>
                                 </div>
@@ -87,11 +87,11 @@
                 <template #content>
                     <div class="space-y-6">
                         <div class="flex items-center justify-between" v-for="invitation in team.team_invitations" :key="invitation.id">
-                            <div class="text-gray-600">{{ invitation.email }}</div>
+                            <div class="text-gray-600 dark:text-gray-400">{{ invitation.email }}</div>
 
                             <div class="flex items-center">
                                 <!-- Cancel Team Invitation -->
-                                <button class="cursor-pointer ml-6 text-sm text-red-500 focus:outline-none"
+                                <button class="ml-6 text-sm text-red-500 cursor-pointer dark:text-red-400 focus:outline-none"
                                                     @click="cancelTeamInvitation(invitation)"
                                                     v-if="userPermissions.canRemoveTeamMembers">
                                     Cancel
@@ -138,14 +138,14 @@
                                 </div>
 
                                 <!-- Leave Team -->
-                                <button class="cursor-pointer ml-6 text-sm text-red-500"
+                                <button class="ml-6 text-sm text-red-500 cursor-pointer"
                                                     @click="confirmLeavingTeam"
                                                     v-if="$page.props.user.id === user.id">
                                     Leave
                                 </button>
 
                                 <!-- Remove Team Member -->
-                                <button class="cursor-pointer ml-6 text-sm text-red-500"
+                                <button class="ml-6 text-sm text-red-500 cursor-pointer"
                                                     @click="confirmTeamMemberRemoval(user)"
                                                     v-if="userPermissions.canRemoveTeamMembers">
                                     Remove
@@ -166,7 +166,7 @@
             <template #content>
                 <div v-if="managingRoleFor">
                     <div class="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer">
-                        <button type="button" class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue"
+                        <button type="button" class="relative inline-flex w-full px-4 py-3 rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue"
                                         :class="{'border-t border-gray-200 rounded-t-none': i > 0, 'rounded-b-none': i !== Object.keys(availableRoles).length - 1}"
                                         @click="updateRoleForm.role = role.key"
                                         v-for="(role, i) in availableRoles"
@@ -178,7 +178,7 @@
                                         {{ role.name }}
                                     </div>
 
-                                    <svg v-if="updateRoleForm.role === role.key" class="ml-2 h-5 w-5 text-green-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg v-if="updateRoleForm.role === role.key" class="w-5 h-5 ml-2 text-green-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                 </div>
 
                                 <!-- Role Description -->
