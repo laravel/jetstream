@@ -34,7 +34,7 @@
     </x-slot>
 
     <x-slot name="footer">
-        <x-jet-secondary-button wire:click="stopConfirmingPassword" wire:loading.attr="disabled">
+        <x-jet-secondary-button wire:click="stopConfirmingPassword" wire:loading.attr="disabled" @click="$dispatch('close')">
             {{ __('Cancel') }}
         </x-jet-secondary-button>
 
