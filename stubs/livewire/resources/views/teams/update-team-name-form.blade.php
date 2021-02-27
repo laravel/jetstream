@@ -13,11 +13,11 @@
             <x-jet-label value="{{ __('Team Owner') }}" />
 
             <div class="flex items-center mt-2">
-                <img class="w-12 h-12 rounded-full object-cover" src="{{ $team->owner->profile_photo_url }}" alt="{{ $team->owner->name }}">
+                <img class="object-cover w-12 h-12 rounded-full" src="{{ $team->owner->profile_photo_url }}" alt="{{ $team->owner->name }}">
 
                 <div class="ml-4 leading-tight">
-                    <div>{{ $team->owner->name }}</div>
-                    <div class="text-gray-700 text-sm">{{ $team->owner->email }}</div>
+                    <div class="dark:text-gray-200">{{ $team->owner->name }}</div>
+                    <div class="text-sm text-gray-700 dark:text-gray-400">{{ $team->owner->email }}</div>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
 
             <x-jet-input id="name"
                         type="text"
-                        class="mt-1 block w-full"
+                        class="block w-full mt-1"
                         wire:model.defer="state.name"
                         :disabled="! Gate::check('update', $team)" />
 
