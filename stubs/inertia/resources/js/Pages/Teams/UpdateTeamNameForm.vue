@@ -17,7 +17,7 @@
                     <img class="object-cover w-12 h-12 rounded-full" :src="team.owner.profile_photo_url" :alt="team.owner.name">
 
                     <div class="ml-4 leading-tight">
-                        <div class="text-gray-200">{{ team.owner.name }}</div>
+                        <div class="dark:text-gray-200">{{ team.owner.name }}</div>
                         <div class="text-sm text-gray-700 dark:text-gray-400">{{ team.owner.email }}</div>
                     </div>
                 </div>

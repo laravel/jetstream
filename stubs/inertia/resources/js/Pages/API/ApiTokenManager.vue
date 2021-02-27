@@ -62,23 +62,23 @@
                     <template #content>
                         <div class="space-y-6">
                             <div class="flex items-center justify-between" v-for="token in tokens" :key="token.id">
-                                <div>
+                                <div class="dark:text-gray-200">
                                     {{ token.name }}
                                 </div>
 
                                 <div class="flex items-center">
-                                    <div class="text-sm text-gray-400" v-if="token.last_used_ago">
+                                    <div class="text-sm text-gray-400 dark:text-gray-300" v-if="token.last_used_ago">
                                         Last used {{ token.last_used_ago }}
                                     </div>
 
-                                    <button class="ml-6 text-sm text-gray-400 underline cursor-pointer"
+                                    <button class="ml-6 text-sm text-gray-400 underline cursor-pointer dark:text-gray-300"
                                         @click="manageApiTokenPermissions(token)"
                                         v-if="availablePermissions.length > 0"
                                     >
                                         Permissions
                                     </button>
 
-                                    <button class="ml-6 text-sm text-red-500 cursor-pointer" @click="confirmApiTokenDeletion(token)">
+                                    <button class="ml-6 text-sm text-red-500 cursor-pointer dark:text-red-400" @click="confirmApiTokenDeletion(token)">
                                         Delete
                                     </button>
                                 </div>
