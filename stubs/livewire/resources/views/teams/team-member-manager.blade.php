@@ -132,30 +132,30 @@
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
                                     <img class="w-8 h-8 rounded-full" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}">
-                                    <div class="ml-4">{{ $user->name }}</div>
+                                    <div class="ml-4 dark:text-gray-200">{{ $user->name }}</div>
                                 </div>
 
                                 <div class="flex items-center">
                                     <!-- Manage Team Member Role -->
                                     @if (Gate::check('addTeamMember', $team) && Laravel\Jetstream\Jetstream::hasRoles())
-                                        <button class="ml-2 text-sm text-gray-400 underline" wire:click="manageRole('{{ $user->id }}')">
+                                        <button class="ml-2 text-sm text-gray-400 underline dark:text-gray-300 focus:outline-none" wire:click="manageRole('{{ $user->id }}')">
                                             {{ Laravel\Jetstream\Jetstream::findRole($user->membership->role)->name }}
                                         </button>
                                     @elseif (Laravel\Jetstream\Jetstream::hasRoles())
-                                        <div class="ml-2 text-sm text-gray-400">
+                                        <div class="ml-2 text-sm text-gray-400 dark:text-gray-300">
                                             {{ Laravel\Jetstream\Jetstream::findRole($user->membership->role)->name }}
                                         </div>
                                     @endif
 
                                     <!-- Leave Team -->
                                     @if ($this->user->id === $user->id)
-                                        <button class="ml-6 text-sm text-red-500 cursor-pointer dark:text-red-400" wire:click="$toggle('confirmingLeavingTeam')">
+                                        <button class="ml-6 text-sm text-red-500 cursor-pointer dark:text-red-400 focus:outline-none" wire:click="$toggle('confirmingLeavingTeam')">
                                             {{ __('Leave') }}
                                         </button>
 
                                     <!-- Remove Team Member -->
                                     @elseif (Gate::check('removeTeamMember', $team))
-                                        <button class="ml-6 text-sm text-red-500 cursor-pointer dark:text-red-400" wire:click="confirmTeamMemberRemoval('{{ $user->id }}')">
+                                        <button class="ml-6 text-sm text-red-500 cursor-pointer dark:text-red-400 focus:outline-none" wire:click="confirmTeamMemberRemoval('{{ $user->id }}')">
                                             {{ __('Remove') }}
                                         </button>
                                     @endif

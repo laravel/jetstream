@@ -122,30 +122,30 @@
                         <div class="flex items-center justify-between" v-for="user in team.users" :key="user.id">
                             <div class="flex items-center">
                                 <img class="w-8 h-8 rounded-full" :src="user.profile_photo_url" :alt="user.name">
-                                <div class="ml-4">{{ user.name }}</div>
+                                <div class="ml-4 dark:text-gray-200">{{ user.name }}</div>
                             </div>
 
                             <div class="flex items-center">
                                 <!-- Manage Team Member Role -->
-                                <button class="ml-2 text-sm text-gray-400 underline"
+                                <button class="ml-2 text-sm text-gray-400 underline dark:text-gray-300 focus:outline-none"
                                         @click="manageRole(user)"
                                         v-if="userPermissions.canAddTeamMembers && availableRoles.length">
                                     {{ displayableRole(user.membership.role) }}
                                 </button>
 
-                                <div class="ml-2 text-sm text-gray-400" v-else-if="availableRoles.length">
+                                <div class="ml-2 text-sm text-gray-400 dark:text-gray-300" v-else-if="availableRoles.length">
                                     {{ displayableRole(user.membership.role) }}
                                 </div>
 
                                 <!-- Leave Team -->
-                                <button class="ml-6 text-sm text-red-500 cursor-pointer dark:text-red-400"
+                                <button class="ml-6 text-sm text-red-500 cursor-pointer dark:text-red-400 focus:outline-none"
                                                     @click="confirmLeavingTeam"
                                                     v-if="$page.props.user.id === user.id">
                                     Leave
                                 </button>
 
                                 <!-- Remove Team Member -->
-                                <button class="ml-6 text-sm text-red-500 cursor-pointer dark:text-red-400"
+                                <button class="ml-6 text-sm text-red-500 cursor-pointer dark:text-red-400 focus:outline-none"
                                                     @click="confirmTeamMemberRemoval(user)"
                                                     v-if="userPermissions.canRemoveTeamMembers">
                                     Remove
