@@ -1,4 +1,28 @@
-<button x-data="ToggleDark()" 
+<button x-data="{
+            darkMode: false,
+            created() {
+                this.darkMode = JSON.parse(localStorage.getItem('darkMode'))
+
+                this.set()
+            },
+
+            toggle() {
+                this.darkMode = !this.darkMode
+
+                localStorage.setItem('darkMode', this.darkMode)
+
+                this.set()
+            },
+
+            set() {
+                if (this.darkMode) {
+                    document.querySelector('html').classList.add('dark')
+                    return
+                }
+
+                document.querySelector('html').classList.remove('dark')
+            }
+        }" 
         x-init="created()" 
         {{ $attributes->merge(['class' => 'p-2 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md dark:text-gray-200 dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-700 focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-700 active:bg-gray-50']) }}
         @click.prevent="toggle()">
