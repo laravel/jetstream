@@ -1,6 +1,6 @@
 <div class="p-6 bg-white border-b border-gray-200 sm:px-20 dark:bg-gray-800 dark:border-gray-700">
     <div>
-        <x-jet-application-logo class="block w-auto h-12" />
+        <x-jet-application-logo class="block w-auto h-12 text-black dark:text-white" />
     </div>
 
     <div class="mt-8 text-2xl dark:text-gray-200">
