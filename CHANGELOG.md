@@ -1,6 +1,13 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.2.2...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.2.3...2.x)
+
+
+## [v2.2.3 (2021-03-02)](https://github.com/laravel/jetstream/compare/v2.2.2...v2.2.3)
+
+### Fixed
+- Update mimes ([90b6d1b](https://github.com/laravel/jetstream/commit/90b6d1b5ddb02a10f4698428e02c204962a9d16a))
+- Prevent network request when pressing escape to close modal ([#695](https://github.com/laravel/jetstream/pull/695))
 
 
 ## [v2.2.2 (2021-02-23)](https://github.com/laravel/jetstream/compare/v2.2.1...v2.2.2)
