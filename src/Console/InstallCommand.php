@@ -124,7 +124,6 @@ class InstallCommand extends Command
                 '@tailwindcss/forms' => '^0.2.1',
                 '@tailwindcss/typography' => '^0.3.0',
                 'alpinejs' => '^2.7.3',
-                'autoprefixer' => '^10.0.2',
                 'postcss-import' => '^12.0.1',
                 'tailwindcss' => '^2.0.1',
             ] + $packages;
@@ -275,7 +274,6 @@ EOF;
                 '@tailwindcss/typography' => '^0.3.0',
                 'postcss-import' => '^12.0.1',
                 'tailwindcss' => '^2.0.1',
-                'autoprefixer' => '^10.0.2',
                 'vue' => '^3.0.5',
                 '@vue/compiler-sfc' => '^3.0.5',
                 'vue-loader' => '^16.1.2',
