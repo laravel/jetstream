@@ -186,6 +186,10 @@ class JetstreamServiceProvider extends ServiceProvider
             __DIR__.'/../stubs/inertia/resources/js/Jetstream/Checkbox.vue' => resource_path('js/Jetstream/Checkbox.vue'),
             __DIR__.'/../stubs/inertia/resources/js/Jetstream/ValidationErrors.vue' => resource_path('js/Jetstream/ValidationErrors.vue'),
         ], 'jetstream-inertia-auth-pages');
+
+        $this->publishes([
+            __DIR__.'/../stubs/app/Actions/Jetstream/SwitchTeam.php' => base_path('app/Actions/Jetstream/SwitchTeam.php'),
+        ], 'jetstream-actions');
     }
 
     /**

@@ -4,24 +4,21 @@ namespace Laravel\Jetstream\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Laravel\Jetstream\Jetstream;
+use Laravel\Jetstream\Contracts\SwitchesTeams;
 
 class CurrentTeamController extends Controller
 {
+
     /**
-     * Update the authenticated user's current team.
+     * Switches the authenticated user's current team.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request                   $request
+     * @param \Laravel\Jetstream\Contracts\SwitchesTeams $creator
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request)
+    public function update(Request $request, SwitchesTeams $creator)
     {
-        $team = Jetstream::newTeamModel()->findOrFail($request->team_id);
-
-        if (! $request->user()->switchTeam($team)) {
-            abort(403);
-        }
-
-        return redirect(config('fortify.home'), 303);
+        return $creator->switch($request->user(), $request->team_id);
     }
 }

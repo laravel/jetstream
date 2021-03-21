@@ -9,6 +9,7 @@ use Laravel\Jetstream\Contracts\DeletesTeams;
 use Laravel\Jetstream\Contracts\DeletesUsers;
 use Laravel\Jetstream\Contracts\InvitesTeamMembers;
 use Laravel\Jetstream\Contracts\RemovesTeamMembers;
+use Laravel\Jetstream\Contracts\SwitchesTeams;
 use Laravel\Jetstream\Contracts\UpdatesTeamNames;
 
 class Jetstream
@@ -428,6 +429,17 @@ class Jetstream
     public static function deleteUsersUsing(string $class)
     {
         return app()->singleton(DeletesUsers::class, $class);
+    }
+
+    /**
+     * Register a class / callback that should be used to switch user's team.
+     *
+     * @param  string  $class
+     * @return void
+     */
+    public static function switchTeamUsing(string $class)
+    {
+        return app()->singleton(SwitchesTeams::class, $class);
     }
 
     /**
