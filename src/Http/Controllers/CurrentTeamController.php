@@ -8,7 +8,6 @@ use Laravel\Jetstream\Contracts\SwitchesTeams;
 
 class CurrentTeamController extends Controller
 {
-
     /**
      * Switches the authenticated user's current team.
      *

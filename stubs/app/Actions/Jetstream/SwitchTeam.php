@@ -8,10 +8,10 @@ use Laravel\Jetstream\Jetstream;
 class SwitchTeam implements SwitchesTeams
 {
     /**
-     * Switch to selected team
+     * Switch to selected team.
      *
-     * @param mixed $user
-     * @param int   $teamId
+     * @param  mixed  $user
+     * @param  int  $teamId
      *
      * @return mixed
      */
@@ -19,7 +19,7 @@ class SwitchTeam implements SwitchesTeams
     {
         $team = Jetstream::newTeamModel()->findOrFail($teamId);
 
-        if (!$user->switchTeam($team)) {
+        if (! $user->switchTeam($team)) {
             abort(403);
         }
 
