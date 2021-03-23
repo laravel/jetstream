@@ -1,6 +1,22 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.2.3...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.2.4...2.x)
+
+
+## [v2.2.4 (2021-03-23)](https://github.com/laravel/jetstream/compare/v2.2.3...v2.2.4)
+
+### Changed
+- Test team features only when active ([#698](https://github.com/laravel/jetstream/pull/698))
+- Reduce amount of queries for Teams feature ([#708](https://github.com/laravel/jetstream/pull/708))
+- Add a tag dropdown link ([#711](https://github.com/laravel/jetstream/pull/711))
+
+### Fixed
+- Button Disabled opacity-25 ([#712](https://github.com/laravel/jetstream/pull/712))
+- Add scroll-region to modal ([#724](https://github.com/laravel/jetstream/pull/724))
+- Load modal slot on show ([#723](https://github.com/laravel/jetstream/pull/723))
+
+### Removed
+- Don't require autoprefixer ([#714](https://github.com/laravel/jetstream/pull/714))
 
 
 ## [v2.2.3 (2021-03-02)](https://github.com/laravel/jetstream/compare/v2.2.2...v2.2.3)
