@@ -15,7 +15,7 @@ class RemoveTeamMemberTest extends TestCase
         $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
         $user->currentTeam->users()->attach(
-            $otherUser = User::factory()->create(), ['role' => 'admin']
+            $otherUser = User::factory()->withPersonalTeam()->create(), ['role' => 'admin']
         );
 
         $response = $this->delete('/teams/'.$user->currentTeam->id.'/members/'.$otherUser->id);
@@ -28,7 +28,7 @@ class RemoveTeamMemberTest extends TestCase
         $user = User::factory()->withPersonalTeam()->create();
 
         $user->currentTeam->users()->attach(
-            $otherUser = User::factory()->create(), ['role' => 'admin']
+            $otherUser = User::factory()->withPersonalTeam()->create(), ['role' => 'admin']
         );
 
         $this->actingAs($otherUser);

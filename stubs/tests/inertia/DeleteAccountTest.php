@@ -17,7 +17,10 @@ class DeleteAccountTest extends TestCase
             return $this->markTestSkipped('Account deletion is not enabled.');
         }
 
-        $this->actingAs($user = User::factory()->create());
+        $user = Features::hasTeamFeatures()
+                ? User::factory()->withPersonalTeam()->create()
+                : User::factory()->create();
+        $this->actingAs($user);
 
         $response = $this->delete('/user', [
             'password' => 'password',
@@ -32,7 +35,10 @@ class DeleteAccountTest extends TestCase
             return $this->markTestSkipped('Account deletion is not enabled.');
         }
 
-        $this->actingAs($user = User::factory()->create());
+        $user = Features::hasTeamFeatures()
+                ? User::factory()->withPersonalTeam()->create()
+                : User::factory()->create();
+        $this->actingAs($user);
 
         $response = $this->delete('/user', [
             'password' => 'wrong-password',

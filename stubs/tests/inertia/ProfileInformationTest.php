@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Jetstream\Features;
 use Tests\TestCase;
 
 class ProfileInformationTest extends TestCase
@@ -12,7 +13,10 @@ class ProfileInformationTest extends TestCase
 
     public function test_profile_information_can_be_updated()
     {
-        $this->actingAs($user = User::factory()->create());
+        $user = Features::hasTeamFeatures()
+                ? User::factory()->withPersonalTeam()->create()
+                : User::factory()->create();
+        $this->actingAs($user);
 
         $response = $this->put('/user/profile-information', [
             'name' => 'Test Name',
