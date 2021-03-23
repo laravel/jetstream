@@ -99,6 +99,7 @@ Or, if you wish to to continue to render your Blade based authentication views i
 
 ```php
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use Laravel\Fortify\Fortify;
 
 Fortify::loginView(function () {
