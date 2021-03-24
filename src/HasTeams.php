@@ -15,6 +15,8 @@ trait HasTeams
      */
     public function isCurrentTeam($team)
     {
+        $this->getTeamById($team);
+
         return $team->id === $this->currentTeam->id;
     }
 
@@ -43,6 +45,8 @@ trait HasTeams
         if (! $this->belongsToTeam($team)) {
             return false;
         }
+
+        $this->getTeamById($team);
 
         $this->forceFill([
             'current_team_id' => $team->id,
@@ -104,6 +108,8 @@ trait HasTeams
      */
     public function ownsTeam($team)
     {
+        $this->getTeamById($team);
+
         return $this->id == $team->{$this->getForeignKey()};
     }
 
@@ -115,6 +121,8 @@ trait HasTeams
      */
     public function belongsToTeam($team)
     {
+        $this->getTeamById($team);
+
         return $this->teams->contains(function ($t) use ($team) {
             return $t->id === $team->id;
         }) || $this->ownsTeam($team);
@@ -136,6 +144,8 @@ trait HasTeams
             return;
         }
 
+        $this->getTeamById($team);
+
         return Jetstream::findRole($team->users->where(
             'id', $this->id
         )->first()->membership->role);
@@ -153,6 +163,8 @@ trait HasTeams
         if ($this->ownsTeam($team)) {
             return true;
         }
+
+        $this->getTeamById($team);
 
         return $this->belongsToTeam($team) && optional(Jetstream::findRole($team->users->where(
             'id', $this->id
@@ -201,11 +213,24 @@ trait HasTeams
             return false;
         }
 
+        $this->getTeamById($team);
         $permissions = $this->teamPermissions($team);
 
         return in_array($permission, $permissions) ||
                in_array('*', $permissions) ||
                (Str::endsWith($permission, ':create') && in_array('*:create', $permissions)) ||
                (Str::endsWith($permission, ':update') && in_array('*:update', $permissions));
+    }
+
+    /**
+     * Retrieves the user model if the ID is provided.
+     *
+     * @param  mixed  $team
+     * @return void
+     */
+    private function getTeamById(&$team) {
+        if (is_int($team)) {
+            $team = Jetstream::teamModel()::find($team);
+        }
     }
 }
