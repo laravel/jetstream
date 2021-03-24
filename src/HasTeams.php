@@ -228,7 +228,8 @@ trait HasTeams
      * @param  mixed  $team
      * @return void
      */
-    private function getTeamById(&$team) {
+    private function getTeamById(&$team)
+    {
         if (is_int($team)) {
             $team = Jetstream::teamModel()::find($team);
         }

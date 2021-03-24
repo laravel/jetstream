@@ -132,7 +132,8 @@
          * @param  \App\Models\User|int  $user
          * @return void
          */
-        private function getUserById(&$user) {
+        private function getUserById(&$user)
+        {
             if (is_int($user)) {
                 $user = Jetstream::userModel()::find($user);
             }
