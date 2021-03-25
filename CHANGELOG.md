@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.2.4...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.2.5...2.x)
+
+
+## [v2.2.5 (2021-03-25)](https://github.com/laravel/jetstream/compare/v2.2.4...v2.2.5)
+
+### Fixed
+- Revert "Reduce amount of queries for Teams feature" ([#729](https://github.com/laravel/jetstream/pull/729))
 
 
 ## [v2.2.4 (2021-03-23)](https://github.com/laravel/jetstream/compare/v2.2.3...v2.2.4)
