@@ -42,10 +42,16 @@
                         </p>
                     </div>
 
-                    <div class="grid gap-1 max-w-xl mt-4 px-4 py-4 font-mono text-sm bg-gray-100 rounded-lg">
+                    <div class="relative grid gap-1 max-w-xl mt-4 px-4 py-4 font-mono text-sm bg-gray-100 rounded-lg">
                         <div v-for="code in recoveryCodes" :key="code">
                             {{ code }}
                         </div>
+
+                        <a class="absolute right-4 top-4" :href="recoveryCodesObjectUrl" download="jetstream-recovery-codes" title="Download recovery codes">
+                            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -160,6 +166,12 @@
         computed: {
             twoFactorEnabled() {
                 return ! this.enabling && this.$page.props.user.two_factor_enabled
+            },
+
+            recoveryCodesObjectUrl() {
+                const file = new Blob([this.recoveryCodes.join("\n")], {type: 'text/plain'})
+
+                return window.URL.createObjectURL(file)
             }
         }
     }
