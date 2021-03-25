@@ -3,6 +3,7 @@
 namespace Laravel\Jetstream\Http\Livewire;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Laravel\Fortify\Actions\DisableTwoFactorAuthentication;
 use Laravel\Fortify\Actions\EnableTwoFactorAuthentication;
 use Laravel\Fortify\Actions\GenerateNewRecoveryCodes;
@@ -75,6 +76,20 @@ class TwoFactorAuthenticationForm extends Component
         $generate(Auth::user());
 
         $this->showingRecoveryCodes = true;
+    }
+
+    /**
+     * Download recovery codes in a .txt file.
+     *
+     * @return \Symfony\Component\HttpFoundation\StreamedResponse
+     */
+    public function downloadRecoveryCodes()
+    {
+        $fileName = Str::lower(Str::kebab(config('app.name', 'Laravel'))).'-recovery-codes.txt';
+
+        return response()->streamDownload(function () {
+            echo implode("\n", json_decode(decrypt(Auth::user()->two_factor_recovery_codes), true));
+        }, $fileName);
     }
 
     /**
