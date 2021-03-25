@@ -42,9 +42,7 @@ class ShareInertiaData
                 }
 
                 if (Jetstream::hasTeamFeatures() && $request->user()) {
-                    $request->user()->setRelation('currentTeam', $request->user()->allTeams()->filter(function ($team) use ($request) {
-                        return $team->id === $request->user()->current_team_id;
-                    })->first());
+                    $request->user()->currentTeam;
                 }
 
                 return array_merge($request->user()->toArray(), array_filter([

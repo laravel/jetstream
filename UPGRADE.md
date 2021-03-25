@@ -98,6 +98,7 @@ Jetstream 2.0's Inertia stack uses Vue based authentication pages. In order to u
 Or, if you wish to to continue to render your Blade based authentication views in Jetstream 2.x, you should add the following code to the `boot` method of your application's `JetstreamServiceProvider` class:
 
 ```php
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Fortify;
 
