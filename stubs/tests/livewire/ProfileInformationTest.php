@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Jetstream\Http\Livewire\UpdateProfileInformationForm;
+use Laravel\Jetstream\Features;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -14,7 +15,10 @@ class ProfileInformationTest extends TestCase
 
     public function test_current_profile_information_is_available()
     {
-        $this->actingAs($user = User::factory()->create());
+        $user = Features::hasTeamFeatures()
+                ? User::factory()->withPersonalTeam()->create()
+                : User::factory()->create();
+        $this->actingAs($user);
 
         $component = Livewire::test(UpdateProfileInformationForm::class);
 
@@ -24,7 +28,10 @@ class ProfileInformationTest extends TestCase
 
     public function test_profile_information_can_be_updated()
     {
-        $this->actingAs($user = User::factory()->create());
+        $user = Features::hasTeamFeatures()
+                ? User::factory()->withPersonalTeam()->create()
+                : User::factory()->create();
+        $this->actingAs($user);
 
         Livewire::test(UpdateProfileInformationForm::class)
                 ->set('state', ['name' => 'Test Name', 'email' => 'test@example.com'])

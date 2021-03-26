@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Jetstream\Http\Livewire\TwoFactorAuthenticationForm;
+use Laravel\Jetstream\Features;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -14,7 +15,10 @@ class TwoFactorAuthenticationSettingsTest extends TestCase
 
     public function test_two_factor_authentication_can_be_enabled()
     {
-        $this->actingAs($user = User::factory()->create());
+        $user = Features::hasTeamFeatures()
+                ? User::factory()->withPersonalTeam()->create()
+                : User::factory()->create();
+        $this->actingAs($user);
 
         $this->withSession(['auth.password_confirmed_at' => time()]);
 
@@ -29,7 +33,10 @@ class TwoFactorAuthenticationSettingsTest extends TestCase
 
     public function test_recovery_codes_can_be_regenerated()
     {
-        $this->actingAs($user = User::factory()->create());
+        $user = Features::hasTeamFeatures()
+                ? User::factory()->withPersonalTeam()->create()
+                : User::factory()->create();
+        $this->actingAs($user);
 
         $this->withSession(['auth.password_confirmed_at' => time()]);
 
@@ -47,7 +54,10 @@ class TwoFactorAuthenticationSettingsTest extends TestCase
 
     public function test_two_factor_authentication_can_be_disabled()
     {
-        $this->actingAs($user = User::factory()->create());
+        $user = Features::hasTeamFeatures()
+                ? User::factory()->withPersonalTeam()->create()
+                : User::factory()->create();
+        $this->actingAs($user);
 
         $this->withSession(['auth.password_confirmed_at' => time()]);
 
