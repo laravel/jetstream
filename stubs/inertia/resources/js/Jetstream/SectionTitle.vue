@@ -9,6 +9,7 @@
                 <slot name="description"></slot>
             </p>
         </div>
+
         <div class="px-4 sm:px-0">
             <slot name="aside"></slot>
         </div>
