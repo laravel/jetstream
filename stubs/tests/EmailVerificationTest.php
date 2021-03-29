@@ -22,15 +22,9 @@ class EmailVerificationTest extends TestCase
             return $this->markTestSkipped('Email verification not enabled.');
         }
 
-        if (JetstreamFeatures::hasTeamFeatures()) {
-            $user = User::factory()->withPersonalTeam()->create([
-                'email_verified_at' => null,
-            ]);
-        } else {
-            $user = User::factory()->create([
-                'email_verified_at' => null,
-            ]);
-        }
+        $user = User::factory()->withPersonalTeam()->create([
+            'email_verified_at' => null,
+        ]);
 
         $response = $this->actingAs($user)->get('/email/verify');
 
