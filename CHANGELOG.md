@@ -1,6 +1,20 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.2.5...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.0...2.x)
+
+
+## [v2.3.0 (2021-03-30)](https://github.com/laravel/jetstream/compare/v2.2.5...v2.3.0)
+
+### Added
+- Add section title aside slot ([#727](https://github.com/laravel/jetstream/pull/727))
+
+### Changed
+- Remove unnecessary CSS classes ([#735](https://github.com/laravel/jetstream/pull/735))
+- Accept any type of response in RedirectsActions trait ([#740](https://github.com/laravel/jetstream/pull/740))
+
+### Fixed
+- Fixed the test that's failing in EmailVerificationTest ([#737](https://github.com/laravel/jetstream/pull/737), [e0a9d2e](https://github.com/laravel/jetstream/commit/e0a9d2e4d504c88d069691ee82d803801badb641))
+- Fixes an error when sending email invitations when Fortify's registration feature is turned off ([#741](https://github.com/laravel/jetstream/pull/741))
 
 
 ## [v2.2.5 (2021-03-25)](https://github.com/laravel/jetstream/compare/v2.2.4...v2.2.5)
