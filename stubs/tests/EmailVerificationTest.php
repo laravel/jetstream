@@ -9,6 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
 use Laravel\Fortify\Features;
+use Laravel\Jetstream\Features as JetstreamFeatures;
 use Tests\TestCase;
 
 class EmailVerificationTest extends TestCase
@@ -21,7 +22,7 @@ class EmailVerificationTest extends TestCase
             return $this->markTestSkipped('Email verification not enabled.');
         }
 
-        $user = User::factory()->create([
+        $user = User::factory()->withPersonalTeam()->create([
             'email_verified_at' => null,
         ]);
 
