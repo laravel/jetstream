@@ -28,6 +28,7 @@ class CurrentUserController extends Controller
         app(DeletesUsers::class)->delete($request->user()->fresh());
 
         $auth->logout();
+
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
