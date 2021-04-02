@@ -64,6 +64,10 @@ class UserFactory extends Factory
                     return ['name' => $user->name.'\'s Team', 'user_id' => $user->id, 'personal_team' => true];
                 }),
             'ownedTeams'
-        );
+        )->afterCreating(function (User $user) {
+            if ($user->personalTeam()) {
+                $user->currentTeam();
+            }
+        });
     }
 }
