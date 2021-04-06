@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.0...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.1...2.x)
+
+
+## [v2.3.1 (2021-04-06)](https://github.com/laravel/jetstream/compare/v2.3.0...v2.3.1)
+
+### Fixed
+- Made sure that the current session is destroyed when deleting your account ([#742](https://github.com/laravel/jetstream/pull/742), [9663d7e](https://github.com/laravel/jetstream/commit/9663d7eb4e58ec86f105efb07f712fb81e6c92f2))
 
 
 ## [v2.3.0 (2021-03-30)](https://github.com/laravel/jetstream/compare/v2.2.5...v2.3.0)
