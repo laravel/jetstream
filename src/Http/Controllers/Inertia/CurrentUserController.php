@@ -29,6 +29,9 @@ class CurrentUserController extends Controller
 
         $auth->logout();
 
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
         return Inertia::location(url('/'));
     }
 }
