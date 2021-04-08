@@ -3,7 +3,6 @@
 namespace Laravel\Jetstream\Http\Livewire;
 
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -45,7 +44,6 @@ class DeleteUserForm extends Component
     /**
      * Delete the current user.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \Laravel\Jetstream\Contracts\DeletesUsers  $deleter
      * @param  \Illuminate\Contracts\Auth\StatefulGuard  $auth
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
