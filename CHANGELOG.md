@@ -1,6 +1,13 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.1...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.2...2.x)
+
+
+## [v2.3.2 (2021-04-13)](https://github.com/laravel/jetstream/compare/v2.3.1...v2.3.2)
+
+### Fixed
+- Check for session before attempting to invalidate ([#750](https://github.com/laravel/jetstream/pull/750))
+- Replace shadow-outline with ring ([#751](https://github.com/laravel/jetstream/pull/751))
 
 
 ## [v2.3.1 (2021-04-06)](https://github.com/laravel/jetstream/compare/v2.3.0...v2.3.1)
