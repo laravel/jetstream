@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Http\Livewire\TeamMemberManager;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -14,6 +15,10 @@ class RemoveTeamMemberTest extends TestCase
 
     public function test_team_members_can_be_removed_from_teams()
     {
+        if (! Features::hasTeamFeatures()) {
+            $this->markTestSkipped('Jetstream Teams feature is disabled');
+        }
+
         $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
         $user->currentTeam->users()->attach(
@@ -29,6 +34,10 @@ class RemoveTeamMemberTest extends TestCase
 
     public function test_only_team_owner_can_remove_team_members()
     {
+        if (! Features::hasTeamFeatures()) {
+            $this->markTestSkipped('Jetstream Teams feature is disabled');
+        }
+
         $user = User::factory()->withPersonalTeam()->create();
 
         $user->currentTeam->users()->attach(
