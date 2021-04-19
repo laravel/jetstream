@@ -112,7 +112,7 @@
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
-                                <x-jet-dropdown-link href="{{ route('logout') }}"
+                                <x-jet-dropdown-link href="#"
                                          onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                     {{ __('Logout') }}
@@ -174,7 +174,7 @@
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <x-jet-responsive-nav-link href="{{ route('logout') }}"
+                    <x-jet-responsive-nav-link href="#"
                                    onclick="event.preventDefault();
                                     this.closest('form').submit();">
                         {{ __('Logout') }}
