@@ -3,6 +3,12 @@
 ## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.2...master)
 
 
+## [v2.3.3 (2021-04-20)](https://github.com/laravel/jetstream/compare/v2.3.2...v2.3.3)
+
+### Fixed
+- Exclude hidden inputs from focusable elements ([#757](https://github.com/laravel/jetstream/pull/757))
+
+
 ## [v2.3.2 (2021-04-13)](https://github.com/laravel/jetstream/compare/v2.3.1...v2.3.2)
 
 ### Fixed
