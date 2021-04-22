@@ -76,6 +76,12 @@ class JetstreamServiceProvider extends ServiceProvider
         $this->configureRoutes();
         $this->configureCommands();
 
+        if (Features::hasTeamFeatures()) {
+            Request::macro('currentTeam', function ($guard = null) {
+                return optional($this->user($guard))->currentTeam;
+            });
+        }
+
         RedirectResponse::macro('banner', function ($message) {
             return $this->with('flash', [
                 'bannerStyle' => 'success',
