@@ -82,7 +82,7 @@ class ApiTokenController extends Controller
      */
     public function destroy(Request $request, $tokenId)
     {
-        $request->user()->tokens()->where('id', $tokenId)->delete();
+        $request->user()->tokens()->where('id', $tokenId)->first()->delete();
 
         return back(303);
     }
