@@ -172,7 +172,7 @@ class ApiTokenManager extends Component
      */
     public function deleteApiToken()
     {
-        $this->user->tokens()->where('id', $this->apiTokenIdBeingDeleted)->delete();
+        $this->user->tokens()->where('id', $this->apiTokenIdBeingDeleted)->first()->delete();
 
         $this->user->load('tokens');
 
