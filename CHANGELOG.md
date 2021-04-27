@@ -1,6 +1,16 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.3...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.4...2.x)
+
+
+## [v2.3.4 (2021-04-27)](https://github.com/laravel/jetstream/compare/v2.3.3...v2.3.4)
+
+### Changed
+- Update NPM dependencies ([#767](https://github.com/laravel/jetstream/pull/767))
+
+### Fixed
+- Get model of PersonalAccessToken before deleting it ([#771](https://github.com/laravel/jetstream/pull/771))
+- Fix selector query ([#772](https://github.com/laravel/jetstream/pull/772))
 
 
 ## [v2.3.3 (2021-04-20)](https://github.com/laravel/jetstream/compare/v2.3.2...v2.3.3)
