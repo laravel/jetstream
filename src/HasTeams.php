@@ -104,6 +104,11 @@ trait HasTeams
      */
     public function ownsTeam($team)
     {
+        if(is_null($team))
+        {
+            return false;
+        }
+        
         return $this->id == $team->{$this->getForeignKey()};
     }
 
