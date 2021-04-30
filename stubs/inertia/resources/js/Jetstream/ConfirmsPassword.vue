@@ -18,7 +18,7 @@
                                 v-model="form.password"
                                 @keyup.enter="confirmPassword" />
 
-                    <jet-input-error :message="form.error" class="mt-2" />
+                    <jet-input-error :message="form.error" class="mt-1 ml-1" />
                 </div>
             </template>
 
