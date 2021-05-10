@@ -111,7 +111,8 @@
 
                 this.form.post(route('user-profile-information.update'), {
                     errorBag: 'updateProfileInformation',
-                    preserveScroll: true
+                    preserveScroll: true,
+                    onSuccess: () => (this.clearPhotoFileInput()),
                 });
             },
 
@@ -132,8 +133,17 @@
             deletePhoto() {
                 this.$inertia.delete(route('current-user-photo.destroy'), {
                     preserveScroll: true,
-                    onSuccess: () => (this.photoPreview = null),
+                    onSuccess: () => {
+                        this.photoPreview = null;
+                        this.clearPhotoFileInput();
+                    },
                 });
+            },
+
+            clearPhotoFileInput() {
+                if (this.$refs.photo?.value) {
+                    this.$refs.photo.value = null;
+                }
             },
         },
     }
