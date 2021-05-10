@@ -112,7 +112,7 @@
                 this.form.post(route('user-profile-information.update'), {
                     errorBag: 'updateProfileInformation',
                     preserveScroll: true,
-                    onSuccess: () => (this.clearPhotoFileInput())
+                    onSuccess: () => (this.clearPhotoFileInput()),
                 });
             },
 
