@@ -33,6 +33,7 @@ $maxWidth = [
     x-init="$watch('show', value => {
         if (value) {
             document.body.classList.add('overflow-y-hidden');
+            setTimeout(() => (focusables()[0]).focus(), 250);
         } else {
             document.body.classList.remove('overflow-y-hidden');
         }
