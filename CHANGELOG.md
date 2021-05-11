@@ -1,6 +1,16 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.4...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.5...2.x)
+
+
+## [v2.3.5 (2021-05-11)](https://github.com/laravel/jetstream/compare/v2.3.4...v2.3.5)
+
+### Changed
+- Publish `UserFactory.php` ([244150f](https://github.com/laravel/jetstream/commit/244150f145ef7ed4eb9bdeda279d9859859173b6))
+
+### Fixes
+- Check OwnsTeam for null teams ([#774](https://github.com/laravel/jetstream/pull/774))
+- Inertia - clear user profile photo input ([#781](https://github.com/laravel/jetstream/pull/781))
 
 
 ## [v2.3.4 (2021-04-27)](https://github.com/laravel/jetstream/compare/v2.3.3...v2.3.4)
