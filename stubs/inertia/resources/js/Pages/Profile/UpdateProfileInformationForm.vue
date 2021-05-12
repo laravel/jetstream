@@ -122,7 +122,8 @@
 
             updatePhotoPreview() {
                 const photo = this.$refs.photo.files[0];
-                if (!photo) return;
+
+                if (! photo) return;
 
                 const reader = new FileReader();
 
