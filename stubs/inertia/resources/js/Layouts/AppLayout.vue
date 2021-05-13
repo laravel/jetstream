@@ -187,7 +187,7 @@
                                     Team Settings
                                 </jet-responsive-nav-link>
 
-                                <jet-responsive-nav-link :href="route('teams.create')" :active="route().current('teams.create')">
+                                <jet-responsive-nav-link :href="route('teams.create')" :active="route().current('teams.create')" v-if="$page.props.jetstream.canCreateTeams">
                                     Create New Team
                                 </jet-responsive-nav-link>
 
