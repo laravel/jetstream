@@ -1,6 +1,13 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.5...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.6...2.x)
+
+
+## [v2.3.6 (2021-05-18)](https://github.com/laravel/jetstream/compare/v2.3.5...v2.3.6)
+
+### Fixed
+- Inertia - ensure file selection is not empty before updating profile photo preview ([#782](https://github.com/laravel/jetstream/pull/782))
+- Added canCreateTeams validation in responsive-nav-link of AppLayout ([#785](https://github.com/laravel/jetstream/pull/785))
 
 
 ## [v2.3.5 (2021-05-11)](https://github.com/laravel/jetstream/compare/v2.3.4...v2.3.5)
