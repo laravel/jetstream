@@ -121,13 +121,17 @@
             },
 
             updatePhotoPreview() {
+                const photo = this.$refs.photo.files[0];
+
+                if (! photo) return;
+
                 const reader = new FileReader();
 
                 reader.onload = (e) => {
                     this.photoPreview = e.target.result;
                 };
 
-                reader.readAsDataURL(this.$refs.photo.files[0]);
+                reader.readAsDataURL(photo);
             },
 
             deletePhoto() {
