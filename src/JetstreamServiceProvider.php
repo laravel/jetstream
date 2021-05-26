@@ -76,6 +76,16 @@ class JetstreamServiceProvider extends ServiceProvider
         $this->configureRoutes();
         $this->configureCommands();
 
+        Request::macro('banner', function ($message) {
+            $this->session()->flash('flash.banner', $message);
+            $this->session()->flash('flash.bannerStyle', 'success');
+        });
+
+        Request::macro('dangerBanner', function ($message) {
+            $this->session()->flash('flash.banner', $message);
+            $this->session()->flash('flash.bannerStyle', 'danger');
+        });
+
         RedirectResponse::macro('banner', function ($message) {
             return $this->with('flash', [
                 'bannerStyle' => 'success',
