@@ -1,6 +1,17 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.6...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.7...2.x)
+
+
+## [v2.3.7 (2021-06-01)](https://github.com/laravel/jetstream/compare/v2.3.6...v2.3.7)
+
+### Changed
+- Allow Role's `$name` and `$description` to be translated ([#798](https://github.com/laravel/jetstream/pull/798))
+
+### Fixed
+- Remove dark classes from QR Code ([#788](https://github.com/laravel/jetstream/pull/788))
+- Changed the column type of profile_photo_path ([#794](https://github.com/laravel/jetstream/pull/794))
+- Fix cors policy errors with inertia stack ([#797](https://github.com/laravel/jetstream/pull/797))
 
 
 ## [v2.3.6 (2021-05-18)](https://github.com/laravel/jetstream/compare/v2.3.5...v2.3.6)
