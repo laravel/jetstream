@@ -1,6 +1,13 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.7...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.8...2.x)
+
+
+## [v2.3.8 (2021-06-08)](https://github.com/laravel/jetstream/compare/v2.3.7...v2.3.8)
+
+### Fixed
+- Skip registration tests if Fortify registration is disabled ([#799](https://github.com/laravel/jetstream/pull/799))
+- Remove overflow property when unmounted ([#801](https://github.com/laravel/jetstream/pull/801))
 
 
 ## [v2.3.7 (2021-06-01)](https://github.com/laravel/jetstream/compare/v2.3.6...v2.3.7)
