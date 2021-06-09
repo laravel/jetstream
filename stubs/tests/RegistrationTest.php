@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Fortify\Features;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Jetstream\Jetstream;
 use Tests\TestCase;
 
@@ -34,6 +35,19 @@ class RegistrationTest extends TestCase
         $response->assertStatus(404);
     }
 
+    public function test_register_api_validates_input()
+    {
+        $response = $this->post('/register');
+
+        $keys = ['name', 'email', 'password'];
+
+        if (Jetstream::hasTermsAndPrivacyPolicyFeature()) {
+            $keys[] = 'terms';
+        }
+
+        $response->assertSessionHasErrors($keys);
+    }
+
     public function test_new_users_can_register()
     {
         if (! Features::enabled(Features::registration())) {
@@ -50,5 +64,13 @@ class RegistrationTest extends TestCase
 
         $this->assertAuthenticated();
         $response->assertRedirect(RouteServiceProvider::HOME);
+
+        if (Jetstream::hasTermsAndPrivacyPolicyFeature()) {
+            $personalTeam = Auth::user()->ownedTeams()->first();
+
+            $this->assertNotNull($personalTeam, 'User personal team is not created.');
+            $this->assertEquals("Test's Team", $personalTeam->name);
+            $this->assertTrue($personalTeam->personal_team);
+        }
     }
 }

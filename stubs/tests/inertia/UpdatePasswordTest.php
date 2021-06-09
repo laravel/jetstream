@@ -11,6 +11,14 @@ class UpdatePasswordTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_password_api_validates_input()
+    {
+        $this->actingAs(User::factory()->create());
+
+        $this->put('/user/password')
+            ->assertSessionHasErrors(['current_password', 'password'], null, 'updatePassword');
+    }
+
     public function test_password_can_be_updated()
     {
         $this->actingAs($user = User::factory()->create());
