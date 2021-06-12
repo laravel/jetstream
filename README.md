@@ -1,4 +1,4 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-jetstream.svg"></p>
+<p align="center"><img src="/art/logo.svg" alt="Logo Laravel Jetstream"></p>
 
 <p align="center">
     <a href="https://github.com/laravel/jetstream/actions">
