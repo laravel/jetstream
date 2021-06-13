@@ -270,9 +270,9 @@ EOF;
         // Install NPM packages...
         $this->updateNodePackages(function ($packages) {
             return [
-                '@inertiajs/inertia' => '^0.8.4',
-                '@inertiajs/inertia-vue3' => '^0.3.5',
-                '@inertiajs/progress' => '^0.2.4',
+                '@inertiajs/inertia' => '^0.9.1',
+                '@inertiajs/inertia-vue3' => '^0.4.2',
+                '@inertiajs/progress' => '^0.2.5',
                 '@tailwindcss/forms' => '^0.2.1',
                 '@tailwindcss/typography' => '^0.3.0',
                 'postcss-import' => '^12.0.1',
