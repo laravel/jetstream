@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.8...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.9...2.x)
+
+
+## [v2.3.9 (2021-06-15)](https://github.com/laravel/jetstream/compare/v2.3.8...v2.3.9)
+
+### Changed
+- Update front-end dependencies ([#804](https://github.com/laravel/jetstream/pull/804))
 
 
 ## [v2.3.8 (2021-06-08)](https://github.com/laravel/jetstream/compare/v2.3.7...v2.3.8)
