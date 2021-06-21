@@ -125,7 +125,7 @@ class InstallCommand extends Command
                 '@tailwindcss/typography' => '^0.4.0',
                 'alpinejs' => '^3.0.6',
                 'postcss-import' => '^14.0.1',
-                'tailwindcss' => '^2.0.1',
+                'tailwindcss' => '^2.2.2',
             ] + $packages;
         });
 
