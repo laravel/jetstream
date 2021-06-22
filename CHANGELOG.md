@@ -1,6 +1,13 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.9...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.10...2.x)
+
+
+## [v2.3.10 (2021-06-22)](https://github.com/laravel/jetstream/compare/v2.3.9...v2.3.10)
+
+### Changed
+- Upgrade Alpine from V2 to V3 ([#808](https://github.com/laravel/jetstream/pull/808))
+- Enable Tailwind JIT-Mode ([#810](https://github.com/laravel/jetstream/pull/810), [#809](https://github.com/laravel/jetstream/pull/809))
 
 
 ## [v2.3.9 (2021-06-15)](https://github.com/laravel/jetstream/compare/v2.3.8...v2.3.9)
