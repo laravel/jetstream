@@ -105,7 +105,7 @@ class InstallCommand extends Command
     protected function installLivewireStack()
     {
         // Install Livewire...
-        $this->requireComposerPackages('livewire/livewire:^2.0', 'laravel/sanctum:^2.6');
+        $this->requireComposerPackages('livewire/livewire:^2.5', 'laravel/sanctum:^2.6');
 
         // Sanctum...
         (new Process(['php', 'artisan', 'vendor:publish', '--provider=Laravel\Sanctum\SanctumServiceProvider', '--force'], base_path()))
@@ -123,9 +123,9 @@ class InstallCommand extends Command
             return [
                 '@tailwindcss/forms' => '^0.3.1',
                 '@tailwindcss/typography' => '^0.4.0',
-                'alpinejs' => '^2.7.3',
+                'alpinejs' => '^3.0.6',
                 'postcss-import' => '^14.0.1',
-                'tailwindcss' => '^2.0.1',
+                'tailwindcss' => '^2.2.2',
             ] + $packages;
         });
 
