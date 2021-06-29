@@ -1,6 +1,15 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.10...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.11...2.x)
+
+
+## [v2.3.11 (2021-06-29)](https://github.com/laravel/jetstream/compare/v2.3.10...v2.3.11)
+
+### Changed
+- Add ability to focus first modal element on opening ([#814](https://github.com/laravel/jetstream/pull/814))
+
+### Fixed
+- Support both Alpine V2 and V3 ([#813](https://github.com/laravel/jetstream/pull/813))
 
 
 ## [v2.3.10 (2021-06-22)](https://github.com/laravel/jetstream/compare/v2.3.9...v2.3.10)
