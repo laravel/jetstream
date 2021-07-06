@@ -1,5 +1,5 @@
 <template>
-    <div class="relative inline-flex">
+    <div class="relative">
         <div @click="open = ! open">
             <slot name="trigger"></slot>
         </div>
