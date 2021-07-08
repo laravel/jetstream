@@ -5,3 +5,9 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    name: 'JetSectionBorder',
+}
+</script>

@@ -10,6 +10,8 @@
 
 <script>
     export default {
+        name: 'JetValidationErrors',
+
         computed: {
             errors() {
                 return this.$page.props.errors

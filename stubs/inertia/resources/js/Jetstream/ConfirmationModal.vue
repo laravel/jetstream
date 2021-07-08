@@ -31,6 +31,8 @@
     import Modal from './Modal'
 
     export default {
+        name: 'JetConfirmationModal',
+
         emits: ['close'],
 
         components: {

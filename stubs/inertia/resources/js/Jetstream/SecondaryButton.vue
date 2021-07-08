@@ -6,6 +6,8 @@
 
 <script>
     export default {
+        name: 'JetSecondaryButton',
+
         props: {
             type: {
                 type: String,

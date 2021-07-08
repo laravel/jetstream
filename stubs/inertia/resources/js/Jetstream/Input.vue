@@ -4,6 +4,8 @@
 
 <script>
     export default {
+        name: 'JetInput',
+
         props: ['modelValue'],
 
         emits: ['update:modelValue'],

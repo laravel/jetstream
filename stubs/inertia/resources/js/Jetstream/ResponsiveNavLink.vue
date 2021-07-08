@@ -12,6 +12,8 @@
 
 <script>
     export default {
+        name: 'JetResponsiveNavLink',
+
         props: ['active', 'href', 'as'],
 
         computed: {

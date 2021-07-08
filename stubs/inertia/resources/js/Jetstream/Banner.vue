@@ -39,6 +39,8 @@
 
 <script>
     export default {
+        name: 'JetBanner',
+
         data() {
             return {
                 show: true,

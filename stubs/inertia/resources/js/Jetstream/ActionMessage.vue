@@ -10,6 +10,8 @@
 
 <script>
     export default {
+        name: 'JetActionMessage',
+
         props: ['on'],
     }
 </script>

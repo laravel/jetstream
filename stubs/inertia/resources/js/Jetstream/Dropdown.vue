@@ -32,6 +32,8 @@
 import { onMounted, onUnmounted, ref } from "vue";
 
 export default {
+    name: 'JetDropdown',
+
     props: {
         align: {
             default: 'right'

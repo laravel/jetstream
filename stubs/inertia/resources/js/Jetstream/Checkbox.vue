@@ -5,6 +5,8 @@
 
 <script>
 export default {
+    name: 'JetCheckbox',
+
     emits: ['update:checked'],
 
     props: {

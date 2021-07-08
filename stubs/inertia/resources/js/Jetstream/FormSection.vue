@@ -26,6 +26,8 @@
     import JetSectionTitle from './SectionTitle'
 
     export default {
+        name: 'JetFormSection',
+
         emits: ['submitted'],
 
         components: {

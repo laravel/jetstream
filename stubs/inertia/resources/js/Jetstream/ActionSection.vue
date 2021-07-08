@@ -17,6 +17,8 @@
     import JetSectionTitle from './SectionTitle'
 
     export default {
+        name: 'JetActionSection',
+
         components: {
             JetSectionTitle,
         }

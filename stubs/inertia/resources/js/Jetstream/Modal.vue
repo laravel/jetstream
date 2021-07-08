@@ -32,6 +32,8 @@
 import { onMounted, onUnmounted } from "vue";
 
 export default {
+        name: 'JetModal',
+
         emits: ['close'],
 
         props: {

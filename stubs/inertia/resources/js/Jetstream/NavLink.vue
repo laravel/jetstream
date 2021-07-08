@@ -6,6 +6,8 @@
 
 <script>
     export default {
+        name: 'JetNavLink',
+
         props: ['href', 'active'],
 
         computed: {

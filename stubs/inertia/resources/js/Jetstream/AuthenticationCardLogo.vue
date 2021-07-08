@@ -6,3 +6,9 @@
         </svg>
     </inertia-link>
 </template>
+
+<script>
+export default {
+    name: 'JetAuthenticationCardLogo',
+}
+</script>

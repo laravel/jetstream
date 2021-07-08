@@ -238,6 +238,8 @@
     import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink'
 
     export default {
+        name: 'AppLayout',
+
         components: {
             JetApplicationMark,
             JetBanner,

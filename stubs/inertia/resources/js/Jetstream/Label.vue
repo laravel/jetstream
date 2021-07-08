@@ -7,6 +7,8 @@
 
 <script>
     export default {
+        name: 'JetLabel',
+
         props: ['value']
     }
 </script>
