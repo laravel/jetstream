@@ -53,6 +53,7 @@
 </template>
 
 <script>
+    import { useForm } from '@inertiajs/inertia-vue3'
     import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
     import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
     import JetButton from '@/Jetstream/Button'
@@ -72,23 +73,24 @@
             JetValidationErrors
         },
 
-        data() {
-            return {
-                form: this.$inertia.form({
-                    name: '',
-                    email: '',
-                    password: '',
-                    password_confirmation: '',
-                    terms: false,
+        setup() {
+            const form = useForm({
+                name: '',
+                email: '',
+                password: '',
+                password_confirmation: '',
+                terms: false,
+            })
+
+            const submit = () => {
+                form.post(route('register'), {
+                    onFinish: () => form.reset('password', 'password_confirmation'),
                 })
             }
-        },
 
-        methods: {
-            submit() {
-                this.form.post(this.route('register'), {
-                    onFinish: () => this.form.reset('password', 'password_confirmation'),
-                })
+            return {
+                form,
+                submit
             }
         }
     }

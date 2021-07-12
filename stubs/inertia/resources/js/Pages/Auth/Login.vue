@@ -42,6 +42,7 @@
 </template>
 
 <script>
+    import { useForm } from '@inertiajs/inertia-vue3'
     import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
     import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
     import JetButton from '@/Jetstream/Button'
@@ -66,26 +67,26 @@
             status: String
         },
 
-        data() {
-            return {
-                form: this.$inertia.form({
-                    email: '',
-                    password: '',
-                    remember: false
+        setup() {
+            const form = useForm({
+                email: '',
+                password: '',
+                remember: false
+            })
+
+            const submit = () => {
+                form.transform(data => ({
+                    ...data,
+                    remember: form.remember ? 'on' : ''
+                }))
+                .post(route('login'), {
+                    onFinish: () => form.reset('password'),
                 })
             }
-        },
 
-        methods: {
-            submit() {
-                this.form
-                    .transform(data => ({
-                        ... data,
-                        remember: this.form.remember ? 'on' : ''
-                    }))
-                    .post(this.route('login'), {
-                        onFinish: () => this.form.reset('password'),
-                    })
+            return {
+                form,
+                submit
             }
         }
     }
