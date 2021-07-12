@@ -26,6 +26,7 @@
 </template>
 
 <script>
+    import { useForm } from '@inertiajs/inertia-vue3'
     import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
     import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
     import JetButton from '@/Jetstream/Button'
@@ -43,19 +44,18 @@
             JetValidationErrors
         },
 
-        data() {
-            return {
-                form: this.$inertia.form({
-                    password: '',
-                })
-            }
-        },
+        setup() {
+            const form = useForm({
+                password: ''
+            })
 
-        methods: {
-            submit() {
-                this.form.post(this.route('password.confirm'), {
-                    onFinish: () => this.form.reset(),
-                })
+            return {
+                form,
+                submit() {
+                    form.post(route('password.confirm'), {
+                        onFinish: () => form.reset(),
+                    })
+                }
             }
         }
     }

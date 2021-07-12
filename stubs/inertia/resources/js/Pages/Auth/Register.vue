@@ -82,15 +82,13 @@
                 terms: false,
             })
 
-            const submit = () => {
-                form.post(route('register'), {
-                    onFinish: () => form.reset('password', 'password_confirmation'),
-                })
-            }
-
             return {
                 form,
-                submit
+                submit() {
+                    form.post(route('register'), {
+                        onFinish: () => form.reset('password', 'password_confirmation'),
+                    })
+                }
             }
         }
     }

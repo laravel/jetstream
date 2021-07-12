@@ -74,19 +74,17 @@
                 remember: false
             })
 
-            const submit = () => {
-                form.transform(data => ({
-                    ...data,
-                    remember: form.remember ? 'on' : ''
-                }))
-                .post(route('login'), {
-                    onFinish: () => form.reset('password'),
-                })
-            }
-
             return {
                 form,
-                submit
+                submit() {
+                    form.transform(data => ({
+                        ...data,
+                        remember: form.remember ? 'on' : ''
+                    }))
+                    .post(route('login'), {
+                        onFinish: () => form.reset('password'),
+                    })
+                }
             }
         }
     }

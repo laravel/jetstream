@@ -32,6 +32,7 @@
 </template>
 
 <script>
+    import { useForm } from '@inertiajs/inertia-vue3'
     import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
     import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
     import JetButton from '@/Jetstream/Button'
@@ -54,22 +55,21 @@
             token: String,
         },
 
-        data() {
-            return {
-                form: this.$inertia.form({
-                    token: this.token,
-                    email: this.email,
-                    password: '',
-                    password_confirmation: '',
-                })
-            }
-        },
+        setup({ props }) {
+            const form = useForm({
+                token: props.token,
+                email: props.email,
+                password: '',
+                password_confirmation: '',
+            })
 
-        methods: {
-            submit() {
-                this.form.post(this.route('password.update'), {
-                    onFinish: () => this.form.reset('password', 'password_confirmation'),
-                })
+            return {
+                form,
+                submit() {
+                    form.post(route('password.update'), {
+                        onFinish: () => form.reset('password', 'password_confirmation'),
+                    })
+                }
             }
         }
     }
