@@ -39,13 +39,13 @@
 </template>
 
 <script>
-    import AppLayout from '@/Layouts/AppLayout'
-    import DeleteUserForm from './DeleteUserForm'
-    import JetSectionBorder from '@/Jetstream/SectionBorder'
-    import LogoutOtherBrowserSessionsForm from './LogoutOtherBrowserSessionsForm'
-    import TwoFactorAuthenticationForm from './TwoFactorAuthenticationForm'
-    import UpdatePasswordForm from './UpdatePasswordForm'
-    import UpdateProfileInformationForm from './UpdateProfileInformationForm'
+    import AppLayout from '@/Layouts/AppLayout.vue'
+    import DeleteUserForm from './DeleteUserForm.vue'
+    import JetSectionBorder from '@/Jetstream/SectionBorder.vue'
+    import LogoutOtherBrowserSessionsForm from './LogoutOtherBrowserSessionsForm.vue'
+    import TwoFactorAuthenticationForm from './TwoFactorAuthenticationForm.vue'
+    import UpdatePasswordForm from './UpdatePasswordForm.vue'
+    import UpdateProfileInformationForm from './UpdateProfileInformationForm.vue'
 
     export default {
         props: ['sessions'],
