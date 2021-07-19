@@ -11,7 +11,7 @@ createApp({
     render: () =>
         h(InertiaApp, {
             initialPage: JSON.parse(el.dataset.page),
-            resolveComponent: (name) => require(`./Pages/${name}`).default,
+            resolveComponent: (name) => require(`./Pages/${name}.vue`).default,
         }),
 })
     .mixin({ methods: { route } })

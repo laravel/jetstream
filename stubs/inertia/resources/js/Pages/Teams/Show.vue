@@ -26,11 +26,11 @@
 </template>
 
 <script>
-    import TeamMemberManager from './TeamMemberManager'
-    import AppLayout from '@/Layouts/AppLayout'
-    import DeleteTeamForm from './DeleteTeamForm'
-    import JetSectionBorder from '@/Jetstream/SectionBorder'
-    import UpdateTeamNameForm from './UpdateTeamNameForm'
+    import TeamMemberManager from './TeamMemberManager.vue'
+    import AppLayout from '@/Layouts/AppLayout.vue'
+    import DeleteTeamForm from './DeleteTeamForm.vue'
+    import JetSectionBorder from '@/Jetstream/SectionBorder.vue'
+    import UpdateTeamNameForm from './UpdateTeamNameForm.vue'
 
     export default {
         props: [

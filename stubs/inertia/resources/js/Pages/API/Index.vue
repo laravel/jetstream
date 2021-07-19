@@ -17,8 +17,8 @@
 </template>
 
 <script>
-    import ApiTokenManager from './ApiTokenManager'
-    import AppLayout from '@/Layouts/AppLayout'
+    import ApiTokenManager from './ApiTokenManager.vue'
+    import AppLayout from '@/Layouts/AppLayout.vue'
 
     export default {
         props: [

@@ -36,11 +36,11 @@
 </template>
 
 <script>
-    import JetButton from './Button'
-    import JetDialogModal from './DialogModal'
-    import JetInput from './Input'
-    import JetInputError from './InputError'
-    import JetSecondaryButton from './SecondaryButton'
+    import JetButton from './Button.vue'
+    import JetDialogModal from './DialogModal.vue'
+    import JetInput from './Input.vue'
+    import JetInputError from './InputError.vue'
+    import JetSecondaryButton from './SecondaryButton.vue'
 
     export default {
         emits: ['confirmed'],

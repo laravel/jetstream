@@ -47,12 +47,12 @@
 </template>
 
 <script>
-    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
-    import JetButton from '@/Jetstream/Button'
-    import JetInput from '@/Jetstream/Input'
-    import JetLabel from '@/Jetstream/Label'
-    import JetValidationErrors from '@/Jetstream/ValidationErrors'
+    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard.vue'
+    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue'
+    import JetButton from '@/Jetstream/Button.vue'
+    import JetInput from '@/Jetstream/Input.vue'
+    import JetLabel from '@/Jetstream/Label.vue'
+    import JetValidationErrors from '@/Jetstream/ValidationErrors.vue'
 
     export default {
         components: {
