@@ -1,5 +1,6 @@
 <template>
     <Head title="Forgot Password" />
+
     <jet-authentication-card>
         <template #logo>
             <jet-authentication-card-logo />

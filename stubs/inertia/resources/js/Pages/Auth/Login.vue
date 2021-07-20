@@ -1,5 +1,6 @@
 <template>
     <Head title="Log in" />
+
     <jet-authentication-card>
         <template #logo>
             <jet-authentication-card-logo />

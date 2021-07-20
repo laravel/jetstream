@@ -27,8 +27,8 @@
 
 <script>
     import AppLayout from '@/Layouts/AppLayout.vue'
-    import JetSectionBorder from '@/Jetstream/SectionBorder.vue'
     import DeleteTeamForm from '@/Pages/Teams/Partials/DeleteTeamForm.vue'
+    import JetSectionBorder from '@/Jetstream/SectionBorder.vue'
     import TeamMemberManager from '@/Pages/Teams/Partials/TeamMemberManager.vue'
     import UpdateTeamNameForm from '@/Pages/Teams/Partials/UpdateTeamNameForm.vue'
 
@@ -41,8 +41,8 @@
 
         components: {
             AppLayout,
-            JetSectionBorder,
             DeleteTeamForm,
+            JetSectionBorder,
             TeamMemberManager,
             UpdateTeamNameForm,
         },

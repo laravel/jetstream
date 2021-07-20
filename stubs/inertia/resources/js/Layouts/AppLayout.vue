@@ -1,6 +1,7 @@
 <template>
     <div>
         <Head :title="title" />
+
         <jet-banner />
 
         <div class="min-h-screen bg-gray-100">

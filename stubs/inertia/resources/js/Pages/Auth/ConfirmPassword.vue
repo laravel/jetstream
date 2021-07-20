@@ -1,5 +1,6 @@
 <template>
     <Head title="Secure Area" />
+
     <jet-authentication-card>
         <template #logo>
             <jet-authentication-card-logo />

@@ -1,5 +1,6 @@
 <template>
-    <Head title="Two-factor confirmation" />
+    <Head title="Two-factor Confirmation" />
+
     <jet-authentication-card>
         <template #logo>
             <jet-authentication-card-logo />
