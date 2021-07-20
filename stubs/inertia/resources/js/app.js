@@ -5,13 +5,13 @@ import { createInertiaApp } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 
 createInertiaApp({
-    resolve: name => require(`./Pages/${name}.vue`),
+    resolve: (name) => require(`./Pages/${name}.vue`),
     setup({ el, app, props, plugin }) {
         return createApp({ render: () => h(app, props) })
             .use(plugin)
             .mixin({ methods: { route } })
-            .mount(el)
+            .mount(el);
     },
-})
+});
 
 InertiaProgress.init({ color: '#4B5563' });
