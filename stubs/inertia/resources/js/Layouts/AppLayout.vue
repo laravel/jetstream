@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Head :title="title" />
         <jet-banner />
 
         <div class="min-h-screen bg-gray-100">
@@ -236,10 +237,15 @@
     import JetDropdownLink from '@/Jetstream/DropdownLink.vue'
     import JetNavLink from '@/Jetstream/NavLink.vue'
     import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink.vue'
-    import { Link } from '@inertiajs/inertia-vue3';
+    import { Head, Link } from '@inertiajs/inertia-vue3';
 
     export default {
+        props: {
+            title: String,
+        },
+
         components: {
+            Head,
             JetApplicationMark,
             JetBanner,
             JetDropdown,

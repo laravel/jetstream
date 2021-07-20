@@ -1,4 +1,5 @@
 <template>
+    <Head title="Log in" />
     <jet-authentication-card>
         <template #logo>
             <jet-authentication-card-logo />
@@ -49,10 +50,11 @@
     import JetCheckbox from '@/Jetstream/Checkbox.vue'
     import JetLabel from '@/Jetstream/Label.vue'
     import JetValidationErrors from '@/Jetstream/ValidationErrors.vue'
-    import { Link } from '@inertiajs/inertia-vue3';
+    import { Head, Link } from '@inertiajs/inertia-vue3';
 
     export default {
         components: {
+            Head,
             JetAuthenticationCard,
             JetAuthenticationCardLogo,
             JetButton,
