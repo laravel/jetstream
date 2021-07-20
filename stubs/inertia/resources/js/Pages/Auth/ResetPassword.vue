@@ -1,4 +1,6 @@
 <template>
+    <Head title="Reset Password" />
+
     <jet-authentication-card>
         <template #logo>
             <jet-authentication-card-logo />
@@ -32,6 +34,7 @@
 </template>
 
 <script>
+    import { Head } from '@inertiajs/inertia-vue3';
     import JetAuthenticationCard from '@/Jetstream/AuthenticationCard.vue'
     import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue'
     import JetButton from '@/Jetstream/Button.vue'
@@ -41,6 +44,7 @@
 
     export default {
         components: {
+            Head,
             JetAuthenticationCard,
             JetAuthenticationCardLogo,
             JetButton,
