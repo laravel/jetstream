@@ -8,8 +8,8 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
-use Laravel\Jetstream\Contracts\DeletesUsers;
 use Laravel\Fortify\Actions\ConfirmPassword;
+use Laravel\Jetstream\Contracts\DeletesUsers;
 
 class CurrentUserController extends Controller
 {
