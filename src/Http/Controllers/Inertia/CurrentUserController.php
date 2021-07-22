@@ -10,7 +10,6 @@ use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Laravel\Jetstream\Contracts\DeletesUsers;
 use Laravel\Fortify\Actions\ConfirmPassword;
-use function _;
 
 class CurrentUserController extends Controller
 {
@@ -27,10 +26,11 @@ class CurrentUserController extends Controller
             $guard, $request->user(), $request->password
         );
 
-        if (! $confirmed)
+        if (! $confirmed) {
             throw ValidationException::withMessages([
-                "password" => "The password is incorrect."
+                'password' => 'The password is incorrect.'
             ]);
+        }
 
         app(DeletesUsers::class)->delete($request->user()->fresh());
 
