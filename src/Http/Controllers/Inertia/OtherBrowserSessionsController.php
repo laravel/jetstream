@@ -26,8 +26,8 @@ class OtherBrowserSessionsController extends Controller
         );
 
         if (! $confirmed)
-            throw new ValidationException::withMessages([
-                "password" => _('The password is incorrect..')
+            throw ValidationException::withMessages([
+                "password" => "The password is incorrect."
             ]);
 
         $guard->logoutOtherDevices($request->password);
