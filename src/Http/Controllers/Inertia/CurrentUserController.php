@@ -28,7 +28,7 @@ class CurrentUserController extends Controller
 
         if (! $confirmed) {
             throw ValidationException::withMessages([
-                'password' => 'The password is incorrect.'
+                'password' => 'The password is incorrect.',
             ]);
         }
 
