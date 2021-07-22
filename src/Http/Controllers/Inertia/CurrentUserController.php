@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Laravel\Jetstream\Contracts\DeletesUsers;
+use Laravel\Fortify\Actions\ConfirmPassword;
 
 class CurrentUserController extends Controller
 {
@@ -16,18 +17,23 @@ class CurrentUserController extends Controller
      * Delete the current user.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Contracts\Auth\StatefulGuard  $auth
+     * @param  \Illuminate\Contracts\Auth\StatefulGuard  $guard
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, StatefulGuard $auth)
+    public function destroy(Request $request, StatefulGuard $guard)
     {
-        $request->validate([
-            'password' => 'required|string|password',
-        ]);
+        $confirmed = app(ConfirmPassword::class)(
+            $guard, $request->user(), $request->password
+        );
+
+        if (! $confirmed)
+            throw new ValidationException::withMessages([
+                "password" => _('The password is incorrect..')
+            ]);
 
         app(DeletesUsers::class)->delete($request->user()->fresh());
 
-        $auth->logout();
+        $guard->logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
