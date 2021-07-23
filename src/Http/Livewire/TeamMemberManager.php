@@ -251,7 +251,15 @@ class TeamMemberManager extends Component
      */
     public function getRolesProperty()
     {
-        return array_values(Jetstream::$roles);
+        return collect(Jetstream::$roles)->transform(function ($role) {
+            return with($role->jsonSerialize(), function ($data) {
+                return (new Role(
+                    $data['key'],
+                    $data['name'],
+                    $data['permission']
+                ))->description($data['description']);
+            });
+        })->values()->all();
     }
 
     /**
