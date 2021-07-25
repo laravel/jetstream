@@ -9,6 +9,7 @@ use Laravel\Jetstream\Contracts\InvitesTeamMembers;
 use Laravel\Jetstream\Contracts\RemovesTeamMembers;
 use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Jetstream;
+use Laravel\Jetstream\Role;
 use Laravel\Jetstream\TeamInvitation;
 use Livewire\Component;
 
