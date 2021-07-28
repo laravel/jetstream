@@ -18,7 +18,6 @@
         "ext-json": "*",
         "illuminate/support": "^8.0",
         "jenssegers/agent": "^2.6",
-        "league/commonmark": "^1.3|^2.0",
         "laravel/fortify": "^1.6.1"
     },
     "require-dev": {
