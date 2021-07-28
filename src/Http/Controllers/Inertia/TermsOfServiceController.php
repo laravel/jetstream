@@ -4,9 +4,9 @@ namespace Laravel\Jetstream\Http\Controllers\Inertia;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Laravel\Jetstream\Jetstream;
-use League\CommonMark\GithubFlavoredMarkdownConverter;
 
 class TermsOfServiceController extends Controller
 {
@@ -21,7 +21,7 @@ class TermsOfServiceController extends Controller
         $termsFile = Jetstream::localizedMarkdownPath('terms.md');
 
         return Inertia::render('TermsOfService', [
-            'terms' => (new GithubFlavoredMarkdownConverter())->convertToHtml(file_get_contents($termsFile)),
+            'terms' => Str::markdown(file_get_contents($termsFile)),
         ]);
     }
 }

@@ -4,9 +4,9 @@ namespace Laravel\Jetstream\Http\Controllers\Inertia;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Laravel\Jetstream\Jetstream;
-use League\CommonMark\GithubFlavoredMarkdownConverter;
 
 class PrivacyPolicyController extends Controller
 {
@@ -21,7 +21,7 @@ class PrivacyPolicyController extends Controller
         $policyFile = Jetstream::localizedMarkdownPath('policy.md');
 
         return Inertia::render('PrivacyPolicy', [
-            'policy' => (new GithubFlavoredMarkdownConverter())->convertToHtml(file_get_contents($policyFile)),
+            'policy' => Str::markdown(file_get_contents($policyFile)),
         ]);
     }
 }
