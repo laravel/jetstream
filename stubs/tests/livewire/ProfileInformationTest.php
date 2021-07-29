@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Fortify\Features;
 use Laravel\Jetstream\Http\Livewire\UpdateProfileInformationForm;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -14,6 +15,10 @@ class ProfileInformationTest extends TestCase
 
     public function test_current_profile_information_is_available()
     {
+        if (! Features::enabled(Features::canUpdateProfileInformation())) {
+            return $this->markTestSkipped('Profile Information Update support is not enabled.');
+        }
+
         $this->actingAs($user = User::factory()->create());
 
         $component = Livewire::test(UpdateProfileInformationForm::class);
@@ -24,6 +29,10 @@ class ProfileInformationTest extends TestCase
 
     public function test_profile_information_can_be_updated()
     {
+        if (! Features::enabled(Features::canUpdateProfileInformation())) {
+            return $this->markTestSkipped('Profile Information Update support is not enabled.');
+        }
+
         $this->actingAs($user = User::factory()->create());
 
         Livewire::test(UpdateProfileInformationForm::class)
