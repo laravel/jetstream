@@ -1,4 +1,9 @@
-@props(['style' => session('flash.bannerStyle', 'success'), 'message' => session('flash.banner')])
+@props([
+    'style' => session('flash.bannerStyle', 'success'),
+    'message' => session('flash.banner'),
+    'linkUrl' => session('flash.bannerLinkUrl'),
+    'linkText' => session('flash.bannerLinkText'),
+])
 
 <div x-data="{{ json_encode(['show' => true, 'style' => $style, 'message' => $message]) }}"
             :class="{ 'bg-indigo-500': style == 'success', 'bg-red-700': style == 'danger' }"
@@ -22,8 +27,16 @@
 
                 <p class="ml-3 font-medium text-sm text-white truncate" x-text="message"></p>
             </div>
+            
+            @if ($linkUrl)
+                <div class="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
+                    <a href="{{ $linkUrl }}" class="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-indigo-600 bg-white hover:bg-indigo-50">
+                        {{ $linkText ?? __('Read more') }}
+                    </a>
+                </div>
+            @endif
 
-            <div class="flex-shrink-0 sm:ml-3">
+            <div class="order-2 flex-shrink-0 sm:ml-3">
                 <button
                     type="button"
                     class="-mr-1 flex p-2 rounded-md focus:outline-none sm:-mr-2 transition"
