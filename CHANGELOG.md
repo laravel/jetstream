@@ -1,6 +1,42 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.11...master)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.15...master)
+
+
+## [v2.3.15 (2021-08-17)](https://github.com/laravel/jetstream/compare/v2.3.14...v2.3.15)
+
+### Changed
+- Remove unused dependency from `composer.json` ([#846](https://github.com/laravel/jetstream/pull/846))
+- Make string constants a translation strings ([#851](https://github.com/laravel/jetstream/pull/851))
+- Update banner component svg icon ([#857](https://github.com/laravel/jetstream/pull/857))
+
+### Removed
+- Remove unneeded tailwind config variant definitions ([#853](https://github.com/laravel/jetstream/pull/853))
+
+
+## [v2.3.14 (2021-07-28)](https://github.com/laravel/jetstream/compare/v2.3.13...v2.3.14)
+
+### Fixed
+- Support both CommonMark v1 & v2 ([#845](https://github.com/laravel/jetstream/pull/845))
+
+
+## [v2.3.13 (2021-07-26)](https://github.com/laravel/jetstream/compare/v2.3.12...v2.3.13)
+
+### Fixed
+- Fix key name ([b33a95d](https://github.com/laravel/jetstream/commit/b33a95dabf6ca8dc6b3c6fe3135a9645bf70095b))
+
+
+## [v2.3.12 (2021-07-25)](https://github.com/laravel/jetstream/compare/v2.3.11...v2.3.12)
+
+### Changed
+- Redirect by route name ([#828](https://github.com/laravel/jetstream/pull/828))
+- Add Vue file extension to all Vue components imported ([#829](https://github.com/laravel/jetstream/pull/829))
+- Prepare translated roles on Livewire using `jsonSerialize()` ([#837](https://github.com/laravel/jetstream/pull/837))
+- Defer to Fortify for password confirmation ([#835](https://github.com/laravel/jetstream/pull/835))
+
+### Fixed
+- Update `<Link>` tags & implement `<Head>` management ([#832](https://github.com/laravel/jetstream/pull/832))
+- Fix commonmark install issue ([#840](https://github.com/laravel/jetstream/pull/840))
 
 
 ## [v2.3.11 (2021-06-29)](https://github.com/laravel/jetstream/compare/v2.3.10...v2.3.11)

@@ -41,12 +41,12 @@
 </template>
 
 <script>
-    import JetActionMessage from '@/Jetstream/ActionMessage'
-    import JetButton from '@/Jetstream/Button'
-    import JetFormSection from '@/Jetstream/FormSection'
-    import JetInput from '@/Jetstream/Input'
-    import JetInputError from '@/Jetstream/InputError'
-    import JetLabel from '@/Jetstream/Label'
+    import JetActionMessage from '@/Jetstream/ActionMessage.vue'
+    import JetButton from '@/Jetstream/Button.vue'
+    import JetFormSection from '@/Jetstream/FormSection.vue'
+    import JetInput from '@/Jetstream/Input.vue'
+    import JetInputError from '@/Jetstream/InputError.vue'
+    import JetLabel from '@/Jetstream/Label.vue'
 
     export default {
         components: {

@@ -6,8 +6,8 @@ use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Laravel\Fortify\Actions\ConfirmPassword;
 
 class OtherBrowserSessionsController extends Controller
 {
@@ -20,9 +20,15 @@ class OtherBrowserSessionsController extends Controller
      */
     public function destroy(Request $request, StatefulGuard $guard)
     {
-        $request->validate([
-            'password' => 'required|string|password',
-        ]);
+        $confirmed = app(ConfirmPassword::class)(
+            $guard, $request->user(), $request->password
+        );
+
+        if (! $confirmed) {
+            throw ValidationException::withMessages([
+                'password' => __('The password is incorrect.'),
+            ]);
+        }
 
         $guard->logoutOtherDevices($request->password);
 

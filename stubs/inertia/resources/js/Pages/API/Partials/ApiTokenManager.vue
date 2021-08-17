@@ -164,19 +164,19 @@
 </template>
 
 <script>
-    import JetActionMessage from '@/Jetstream/ActionMessage'
-    import JetActionSection from '@/Jetstream/ActionSection'
-    import JetButton from '@/Jetstream/Button'
-    import JetConfirmationModal from '@/Jetstream/ConfirmationModal'
-    import JetDangerButton from '@/Jetstream/DangerButton'
-    import JetDialogModal from '@/Jetstream/DialogModal'
-    import JetFormSection from '@/Jetstream/FormSection'
-    import JetInput from '@/Jetstream/Input'
-    import JetCheckbox from '@/Jetstream/Checkbox'
-    import JetInputError from '@/Jetstream/InputError'
-    import JetLabel from '@/Jetstream/Label'
-    import JetSecondaryButton from '@/Jetstream/SecondaryButton'
-    import JetSectionBorder from '@/Jetstream/SectionBorder'
+    import JetActionMessage from '@/Jetstream/ActionMessage.vue'
+    import JetActionSection from '@/Jetstream/ActionSection.vue'
+    import JetButton from '@/Jetstream/Button.vue'
+    import JetConfirmationModal from '@/Jetstream/ConfirmationModal.vue'
+    import JetDangerButton from '@/Jetstream/DangerButton.vue'
+    import JetDialogModal from '@/Jetstream/DialogModal.vue'
+    import JetFormSection from '@/Jetstream/FormSection.vue'
+    import JetInput from '@/Jetstream/Input.vue'
+    import JetCheckbox from '@/Jetstream/Checkbox.vue'
+    import JetInputError from '@/Jetstream/InputError.vue'
+    import JetLabel from '@/Jetstream/Label.vue'
+    import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue'
+    import JetSectionBorder from '@/Jetstream/SectionBorder.vue'
 
     export default {
         components: {

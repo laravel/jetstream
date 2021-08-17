@@ -1,5 +1,5 @@
 <template>
-    <app-layout>
+    <app-layout title="Create Team">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Create Team
@@ -15,8 +15,8 @@
 </template>
 
 <script>
-    import AppLayout from '@/Layouts/AppLayout'
-    import CreateTeamForm from './CreateTeamForm'
+    import AppLayout from '@/Layouts/AppLayout.vue'
+    import CreateTeamForm from '@/Pages/Teams/Partials/CreateTeamForm.vue'
 
     export default {
         components: {

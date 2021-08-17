@@ -1,5 +1,5 @@
 <template>
-    <app-layout>
+    <app-layout title="API Tokens">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 API Tokens
@@ -17,8 +17,8 @@
 </template>
 
 <script>
-    import ApiTokenManager from './ApiTokenManager'
-    import AppLayout from '@/Layouts/AppLayout'
+    import ApiTokenManager from '@/Pages/API/Partials/ApiTokenManager.vue'
+    import AppLayout from '@/Layouts/AppLayout.vue'
 
     export default {
         props: [
