@@ -1,6 +1,17 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.14...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.15...2.x)
+
+
+## [v2.3.15 (2021-08-17)](https://github.com/laravel/jetstream/compare/v2.3.14...v2.3.15)
+
+### Changed
+- Remove unused dependency from `composer.json` ([#846](https://github.com/laravel/jetstream/pull/846))
+- Make string constants a translation strings ([#851](https://github.com/laravel/jetstream/pull/851))
+- Update banner component svg icon ([#857](https://github.com/laravel/jetstream/pull/857))
+
+### Removed
+- Remove unneeded tailwind config variant definitions ([#853](https://github.com/laravel/jetstream/pull/853))
 
 
 ## [v2.3.14 (2021-07-28)](https://github.com/laravel/jetstream/compare/v2.3.13...v2.3.14)
