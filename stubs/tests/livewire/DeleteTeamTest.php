@@ -6,6 +6,7 @@ use App\Models\Team;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Jetstream\Http\Livewire\DeleteTeamForm;
+use Laravel\Jetstream\Features;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -34,6 +35,10 @@ class DeleteTeamTest extends TestCase
 
     public function test_personal_teams_cant_be_deleted()
     {
+        if (! Features::hasTeamFeatures()) {
+            return $this->markTestSkipped('Teams support is not enabled.');
+        }
+
         $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
         $component = Livewire::test(DeleteTeamForm::class, ['team' => $user->currentTeam])
