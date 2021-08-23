@@ -34,8 +34,6 @@ class Team extends JetstreamTeam
     /**
      * The event map for the model.
      *
-     * Allows for object-based events for native Eloquent events.
-     *
      * @var array
      */
     protected $dispatchesEvents = [
