@@ -16,7 +16,7 @@ class CreateTeamTest extends TestCase
         if (! Features::hasTeamFeatures()) {
             return $this->markTestSkipped('Teams support is not enabled.');
         }
-        
+
         $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
         $response = $this->post('/teams', [

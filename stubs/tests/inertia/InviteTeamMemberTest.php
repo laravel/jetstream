@@ -38,7 +38,7 @@ class InviteTeamMemberTest extends TestCase
         if (! Features::sendsTeamInvitations()) {
             return $this->markTestSkipped('Teams invitaions support is not enabled.');
         }
-        
+
         $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
         $invitation = $user->currentTeam->teamInvitations()->create([

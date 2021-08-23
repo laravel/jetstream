@@ -16,7 +16,7 @@ class LeaveTeamTest extends TestCase
         if (! Features::hasTeamFeatures()) {
             return $this->markTestSkipped('Teams support is not enabled.');
         }
-        
+
         $user = User::factory()->withPersonalTeam()->create();
 
         $user->currentTeam->users()->attach(
