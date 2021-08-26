@@ -50,7 +50,7 @@
                                             </div>
 
                                             <!-- Role Description -->
-                                            <div class="mt-2 text-xs text-gray-600">
+                                            <div class="mt-2 text-xs text-gray-600 text-left">
                                                 {{ $role->description }}
                                             </div>
                                         </div>
