@@ -13,7 +13,7 @@ test('users can leave teams', function () {
 
     $response = $this->delete('/teams/'.$user->currentTeam->id.'/members/'.$otherUser->id);
 
-    $this->assertCount(0, $user->currentTeam->fresh()->users);
+    expect($user->currentTeam->fresh()->users)->toHaveCount(0);
 });
 
 test('team owners cant leave their own team', function () {
@@ -23,5 +23,5 @@ test('team owners cant leave their own team', function () {
 
     $response->assertSessionHasErrorsIn('removeTeamMember', ['team']);
 
-    $this->assertNotNull($user->currentTeam->fresh());
+    expect($user->currentTeam->fresh())->not->toBeNull();
 });

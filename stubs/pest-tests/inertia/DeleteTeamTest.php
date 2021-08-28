@@ -16,8 +16,8 @@ test('teams can be deleted', function () {
 
     $response = $this->delete('/teams/'.$team->id);
 
-    $this->assertNull($team->fresh());
-    $this->assertCount(0, $otherUser->fresh()->teams);
+    expect($team->fresh())->toBeNull();
+    expect($otherUser->fresh()->teams)->toHaveCount(0);
 });
 
 test('personal teams cant be deleted', function ()
@@ -26,5 +26,5 @@ test('personal teams cant be deleted', function ()
 
     $response = $this->delete('/teams/'.$user->currentTeam->id);
 
-    $this->assertNotNull($user->currentTeam->fresh());
+    expect($user->currentTeam->fresh())->not->toBeNull();
 });

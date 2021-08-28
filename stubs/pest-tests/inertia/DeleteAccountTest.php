@@ -14,7 +14,7 @@ test('user accounts can be deleted', function () {
         'password' => 'password',
     ]);
 
-    $this->assertNull($user->fresh());
+    expect($user->fresh())->toBeNull();
 });
 
 test('correct password must be provided before account can be deleted', function () {
@@ -28,5 +28,5 @@ test('correct password must be provided before account can be deleted', function
         'password' => 'wrong-password',
     ]);
 
-    $this->assertNotNull($user->fresh());
+    expect($user->fresh())->not->toBeNull();
 });

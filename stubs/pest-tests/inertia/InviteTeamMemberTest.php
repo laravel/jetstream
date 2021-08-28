@@ -16,7 +16,7 @@ test('team members can be invited to team', function () {
 
     Mail::assertSent(TeamInvitation::class);
 
-    $this->assertCount(1, $user->currentTeam->fresh()->teamInvitations);
+    expect($user->currentTeam->fresh()->teamInvitations)->toHaveCount(1);
 });
 
 test('team member invitations can be cancelled', function () {
@@ -29,5 +29,5 @@ test('team member invitations can be cancelled', function () {
 
     $response = $this->delete('/team-invitations/'.$invitation->id);
 
-    $this->assertCount(0, $user->currentTeam->fresh()->teamInvitations);
+    expect($user->currentTeam->fresh()->teamInvitations)->toHaveCount(0);
 });

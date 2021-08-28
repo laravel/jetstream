@@ -10,6 +10,6 @@ test('profile information can be updated', function () {
         'email' => 'test@example.com',
     ]);
 
-    $this->assertEquals('Test Name', $user->fresh()->name);
-    $this->assertEquals('test@example.com', $user->fresh()->email);
+    expect($user->fresh()->name)->toEqual('Test Name');
+    expect($user->fresh()->email)->toEqual('test@example.com');
 });

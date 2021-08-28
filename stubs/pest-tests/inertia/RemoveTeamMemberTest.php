@@ -11,7 +11,7 @@ test('team members can be removed from teams', function () {
 
     $response = $this->delete('/teams/'.$user->currentTeam->id.'/members/'.$otherUser->id);
 
-    $this->assertCount(0, $user->currentTeam->fresh()->users);
+    expect($user->currentTeam->fresh()->users)->toHaveCount(0);
 });
 
 test('only team owner can remove team members', function () {

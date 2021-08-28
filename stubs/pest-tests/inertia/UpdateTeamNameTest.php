@@ -9,6 +9,6 @@ test('team names can be updated', function () {
         'name' => 'Test Team',
     ]);
 
-    $this->assertCount(1, $user->fresh()->ownedTeams);
-    $this->assertEquals('Test Team', $user->currentTeam->fresh()->name);
+    expect($user->fresh()->ownedTeams)->toHaveCount(1);
+    expect($user->currentTeam->fresh()->name)->toEqual('Test Team');
 });
