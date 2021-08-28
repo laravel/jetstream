@@ -77,6 +77,8 @@ class InstallCommand extends Command
             $this->requireComposerPackages('pestphp/pest:^1.16', 'pestphp/pest-plugin-laravel:^1.1');
 
             copy($stubs.'/Pest.php', base_path('tests/Pest.php'));
+            copy($stubs.'/ExampleTest.php', base_path('tests/Feature/ExampleTest.php'));
+            copy($stubs.'/ExampleUnitTest.php', base_path('tests/Unit/ExampleTest.php'));
         }
 
         copy($stubs.'/AuthenticationTest.php', base_path('tests/Feature/AuthenticationTest.php'));
