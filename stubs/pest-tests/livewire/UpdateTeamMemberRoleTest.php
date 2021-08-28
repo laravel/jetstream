@@ -16,9 +16,9 @@ test('team member roles can be updated', function () {
                     ->set('currentRole', 'editor')
                     ->call('updateRole');
 
-    $this->assertTrue($otherUser->fresh()->hasTeamRole(
+    expect($otherUser->fresh()->hasTeamRole(
         $user->currentTeam->fresh(), 'editor'
-    ));
+    ))->toBeTrue();
 });
 
 test('only team owner can update team member roles', function () {
@@ -36,7 +36,7 @@ test('only team owner can update team member roles', function () {
                     ->call('updateRole')
                     ->assertStatus(403);
 
-    $this->assertTrue($otherUser->fresh()->hasTeamRole(
+    expect($otherUser->fresh()->hasTeamRole(
         $user->currentTeam->fresh(), 'admin'
-    ));
+    ))->toBeTrue();
 });

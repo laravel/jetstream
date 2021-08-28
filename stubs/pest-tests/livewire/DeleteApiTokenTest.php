@@ -28,5 +28,5 @@ test('api tokens can be deleted', function ()
                 ->set(['apiTokenIdBeingDeleted' => $token->id])
                 ->call('deleteApiToken');
 
-    $this->assertCount(0, $user->fresh()->tokens);
+    expect($user->fresh()->tokens)->toHaveCount(0);
 });

@@ -9,8 +9,8 @@ test('current profile information is available', function () {
 
     $component = Livewire::test(UpdateProfileInformationForm::class);
 
-    $this->assertEquals($user->name, $component->state['name']);
-    $this->assertEquals($user->email, $component->state['email']);
+    expect($component->state['name'])->toEqual($user->name);
+    expect($component->state['email'])->toEqual($user->email);
 });
 
 test('profile information can be updated', function () {
@@ -20,6 +20,6 @@ test('profile information can be updated', function () {
             ->set('state', ['name' => 'Test Name', 'email' => 'test@example.com'])
             ->call('updateProfileInformation');
 
-    $this->assertEquals('Test Name', $user->fresh()->name);
-    $this->assertEquals('test@example.com', $user->fresh()->email);
+    expect($user->fresh()->name)->toEqual('Test Name');
+    expect($user->fresh()->email)->toEqual('test@example.com');
 });

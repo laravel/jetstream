@@ -19,8 +19,8 @@ test('teams can be deleted', function () {
     $component = Livewire::test(DeleteTeamForm::class, ['team' => $team->fresh()])
                             ->call('deleteTeam');
 
-    $this->assertNull($team->fresh());
-    $this->assertCount(0, $otherUser->fresh()->teams);
+    expect($team->fresh())->toBeNull();
+    expect($otherUser->fresh()->teams)->toHaveCount(0);
 });
 
 test('personal teams cant be deleted', function () {
@@ -30,5 +30,5 @@ test('personal teams cant be deleted', function () {
                             ->call('deleteTeam')
                             ->assertHasErrors(['team']);
 
-    $this->assertNotNull($user->currentTeam->fresh());
+    expect($user->currentTeam->fresh())->not->toBeNull();
 });

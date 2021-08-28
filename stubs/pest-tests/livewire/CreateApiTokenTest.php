@@ -26,8 +26,8 @@ test('api tokens can be created', function () {
                 ]])
                 ->call('createApiToken');
 
-    $this->assertCount(1, $user->fresh()->tokens);
-    $this->assertEquals('Test Token', $user->fresh()->tokens->first()->name);
-    $this->assertTrue($user->fresh()->tokens->first()->can('read'));
-    $this->assertFalse($user->fresh()->tokens->first()->can('delete'));
+    expect($user->fresh()->tokens)->toHaveCount(1);
+    expect($user->fresh()->tokens->first()->name)->toEqual('Test Token');
+    expect($user->fresh()->tokens->first()->can('read'))->toBeTrue();
+    expect($user->fresh()->tokens->first()->can('delete'))->toBeFalse();
 });

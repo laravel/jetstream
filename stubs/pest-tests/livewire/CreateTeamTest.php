@@ -12,6 +12,6 @@ test('teams can be created', function ()
                 ->set(['state' => ['name' => 'Test Team']])
                 ->call('createTeam');
 
-    $this->assertCount(2, $user->fresh()->ownedTeams);
-    $this->assertEquals('Test Team', $user->fresh()->ownedTeams()->latest('id')->first()->name);
+    expect($user->fresh()->ownedTeams)->toHaveCount(2);
+    expect($user->fresh()->ownedTeams()->latest('id')->first()->name)->toEqual('Test Team');
 });

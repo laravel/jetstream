@@ -16,7 +16,7 @@ test('user accounts can be deleted', function () {
                     ->set('password', 'password')
                     ->call('deleteUser');
 
-    $this->assertNull($user->fresh());
+    expect($user->fresh())->toBeNull();
 });
 
 test('correct_password_must_be_provided_before_account_can_be_deleted', function () {
@@ -31,5 +31,5 @@ test('correct_password_must_be_provided_before_account_can_be_deleted', function
                     ->call('deleteUser')
                     ->assertHasErrors(['password']);
 
-    $this->assertNotNull($user->fresh());
+    expect($user->fresh())->not->toBeNull();
 });

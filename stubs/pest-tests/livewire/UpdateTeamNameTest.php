@@ -11,6 +11,6 @@ test('team names can be updated', function () {
                 ->set(['state' => ['name' => 'Test Team']])
                 ->call('updateTeamName');
 
-    $this->assertCount(1, $user->fresh()->ownedTeams);
-    $this->assertEquals('Test Team', $user->currentTeam->fresh()->name);
+    expect($user->fresh()->ownedTeams)->toHaveCount(1);
+    expect($user->currentTeam->fresh()->name)->toEqual('Test Team');
 });

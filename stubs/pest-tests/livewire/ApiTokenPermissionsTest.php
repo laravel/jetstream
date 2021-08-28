@@ -33,7 +33,7 @@ test('api token permissions can be updated', function () {
                 ]])
                 ->call('updateApiToken');
 
-    $this->assertTrue($user->fresh()->tokens->first()->can('delete'));
-    $this->assertFalse($user->fresh()->tokens->first()->can('read'));
-    $this->assertFalse($user->fresh()->tokens->first()->can('missing-permission'));
+    expect($user->fresh()->tokens->first()->can('delete'))->toBeTrue();
+    expect($user->fresh()->tokens->first()->can('read'))->toBeFalse();
+    expect($user->fresh()->tokens->first()->can('missing-permission'))->toBeFalse();
 });

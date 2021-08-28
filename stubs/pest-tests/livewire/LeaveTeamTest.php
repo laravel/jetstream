@@ -16,7 +16,7 @@ test('users can leave teams', function () {
     $component = Livewire::test(TeamMemberManager::class, ['team' => $user->currentTeam])
                     ->call('leaveTeam');
 
-    $this->assertCount(0, $user->currentTeam->fresh()->users);
+    expect($user->currentTeam->fresh()->users)->toHaveCount(0);
 });
 
 test('team owners cant leave their own team', function () {
@@ -26,5 +26,5 @@ test('team owners cant leave their own team', function () {
                     ->call('leaveTeam')
                     ->assertHasErrors(['team']);
 
-    $this->assertNotNull($user->currentTeam->fresh());
+    expect($user->currentTeam->fresh())->not->toBeNull();
 });
