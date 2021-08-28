@@ -31,8 +31,8 @@ test('recovery codes can be regenerated', function () {
 
     $component->call('regenerateRecoveryCodes');
 
-    expect(8, $user->recoveryCodes())->toHaveCount(8);
-    expect(8, array_diff($user->recoveryCodes(), $user->fresh()->recoveryCodes()))->toHaveCount(8);
+    expect($user->recoveryCodes())->toHaveCount(8);
+    expect(array_diff($user->recoveryCodes(), $user->fresh()->recoveryCodes()))->toHaveCount(8);
 });
 
 test('two factor authentication can be disabled', function () {
