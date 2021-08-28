@@ -6,20 +6,14 @@ use Illuminate\Support\Facades\Notification;
 use Laravel\Fortify\Features;
 
 test('reset password link screen can be rendered', function () {
-    if (! Features::enabled(Features::updatePasswords())) {
-        return $this->markTestSkipped('Password updates are not enabled.');
-    }
-
     $response = $this->get('/forgot-password');
 
     $response->assertStatus(200);
-});
+})->skip(function() {
+    return ! Features::enabled(Features::updatePasswords());
+}, 'Password updates are not enabled.');
 
 test('reset password link can be requested', function () {
-    if (! Features::enabled(Features::updatePasswords())) {
-        return $this->markTestSkipped('Password updates are not enabled.');
-    }
-
     Notification::fake();
 
     $user = User::factory()->create();
@@ -29,13 +23,11 @@ test('reset password link can be requested', function () {
     ]);
 
     Notification::assertSentTo($user, ResetPassword::class);
-});
+})->skip(function() {
+    return ! Features::enabled(Features::updatePasswords());
+}, 'Password updates are not enabled.');
 
 test('reset password screen can be rendered', function () {
-    if (! Features::enabled(Features::updatePasswords())) {
-        return $this->markTestSkipped('Password updates are not enabled.');
-    }
-
     Notification::fake();
 
     $user = User::factory()->create();
@@ -51,13 +43,11 @@ test('reset password screen can be rendered', function () {
 
         return true;
     });
-});
+})->skip(function() {
+    return ! Features::enabled(Features::updatePasswords());
+}, 'Password updates are not enabled.');
 
 test('password can be reset with valid token', function () {
-    if (! Features::enabled(Features::updatePasswords())) {
-        return $this->markTestSkipped('Password updates are not enabled.');
-    }
-
     Notification::fake();
 
     $user = User::factory()->create();
@@ -78,4 +68,6 @@ test('password can be reset with valid token', function () {
 
         return true;
     });
-});
+})->skip(function() {
+    return ! Features::enabled(Features::updatePasswords());
+}, 'Password updates are not enabled.');
