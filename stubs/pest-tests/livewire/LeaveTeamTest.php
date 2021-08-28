@@ -4,7 +4,7 @@ use App\Models\User;
 use Laravel\Jetstream\Http\Livewire\TeamMemberManager;
 use Livewire\Livewire;
 
-test('users_can_leave_teams', function () {
+test('users can leave teams', function () {
     $user = User::factory()->withPersonalTeam()->create();
 
     $user->currentTeam->users()->attach(
@@ -19,7 +19,7 @@ test('users_can_leave_teams', function () {
     $this->assertCount(0, $user->currentTeam->fresh()->users);
 });
 
-test('team_owners_cant_leave_their_own_team', function () {
+test('team owners cant leave their own team', function () {
     $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
     $component = Livewire::test(TeamMemberManager::class, ['team' => $user->currentTeam])

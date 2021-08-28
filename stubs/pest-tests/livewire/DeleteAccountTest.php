@@ -5,7 +5,7 @@ use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Http\Livewire\DeleteUserForm;
 use Livewire\Livewire;
 
-test('user_accounts_can_be_deleted', function () {
+test('user accounts can be deleted', function () {
     if (! Features::hasAccountDeletionFeatures()) {
         return $this->markTestSkipped('Account deletion is not enabled.');
     }
