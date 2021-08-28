@@ -4,7 +4,7 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
 
-test('api_tokens_can_be_deleted', function () {
+test('api tokens can be deleted', function () {
     if (! Features::hasApiFeatures()) {
         return $this->markTestSkipped('API support is not enabled.');
     }

@@ -4,7 +4,7 @@ use App\Providers\RouteServiceProvider;
 use Laravel\Fortify\Features;
 use Laravel\Jetstream\Jetstream;
 
-test('registration_screen_can_be_rendered', function () {
+test('registration screen can be rendered', function () {
     if (! Features::enabled(Features::registration())) {
         return $this->markTestSkipped('Registration support is not enabled.');
     }
@@ -14,7 +14,7 @@ test('registration_screen_can_be_rendered', function () {
     $response->assertStatus(200);
 });
 
-test('registration_screen_cannot_be_rendered_if_support_is_disabled', function () {
+test('registration screen cannot be rendered if support is disabled', function () {
     if (Features::enabled(Features::registration())) {
         return $this->markTestSkipped('Registration support is enabled.');
     }
@@ -24,7 +24,7 @@ test('registration_screen_cannot_be_rendered_if_support_is_disabled', function (
     $response->assertStatus(404);
 });
 
-test('new_users_can_register', function () {
+test('new users can register', function () {
     if (! Features::enabled(Features::registration())) {
         return $this->markTestSkipped('Registration support is not enabled.');
     }

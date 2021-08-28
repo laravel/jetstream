@@ -5,7 +5,7 @@ use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Notification;
 use Laravel\Fortify\Features;
 
-test('reset_password_link_screen_can_be_rendered', function () {
+test('reset password link screen can be rendered', function () {
     if (! Features::enabled(Features::updatePasswords())) {
         return $this->markTestSkipped('Password updates are not enabled.');
     }
@@ -15,7 +15,7 @@ test('reset_password_link_screen_can_be_rendered', function () {
     $response->assertStatus(200);
 });
 
-test('reset_password_link_can_be_requested', function () {
+test('reset password link can be requested', function () {
     if (! Features::enabled(Features::updatePasswords())) {
         return $this->markTestSkipped('Password updates are not enabled.');
     }
@@ -31,7 +31,7 @@ test('reset_password_link_can_be_requested', function () {
     Notification::assertSentTo($user, ResetPassword::class);
 });
 
-test('reset_password_screen_can_be_rendered', function () {
+test('reset password screen can be rendered', function () {
     if (! Features::enabled(Features::updatePasswords())) {
         return $this->markTestSkipped('Password updates are not enabled.');
     }
@@ -53,7 +53,7 @@ test('reset_password_screen_can_be_rendered', function () {
     });
 });
 
-test('password_can_be_reset_with_valid_token', function () {
+test('password can be reset with valid token', function () {
     if (! Features::enabled(Features::updatePasswords())) {
         return $this->markTestSkipped('Password updates are not enabled.');
     }
