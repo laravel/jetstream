@@ -17,7 +17,7 @@ test('user accounts can be deleted', function () {
     return ! Features::hasAccountDeletionFeatures();
 }, 'Account deletion is not enabled.');
 
-test('correct_password_must_be_provided_before_account_can_be_deleted', function () {
+test('correct password must be provided before account can be deleted', function () {
     $this->actingAs($user = User::factory()->create());
 
     Livewire::test(DeleteUserForm::class)
