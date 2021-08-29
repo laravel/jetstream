@@ -29,9 +29,10 @@ test('api token permissions can be updated', function () {
                 ]])
                 ->call('updateApiToken');
 
-    expect($user->fresh()->tokens->first()->can('delete'))->toBeTrue();
-    expect($user->fresh()->tokens->first()->can('read'))->toBeFalse();
-    expect($user->fresh()->tokens->first()->can('missing-permission'))->toBeFalse();
+    expect($user->fresh()->tokens->first())
+        ->can('delete')->toBeTrue()
+        ->can('read')->toBeFalse()
+        ->can('missing-permission')->toBeFalse();
 })->skip(function() {
     return ! Features::hasApiFeatures();
 }, 'API support is not enabled.');
