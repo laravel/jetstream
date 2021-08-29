@@ -8,7 +8,7 @@ test('registration screen can be rendered', function () {
     $response = $this->get('/register');
 
     $response->assertStatus(200);
-})->skip(function() {
+})->skip(function () {
     return ! Features::enabled(Features::registration());
 }, 'Registration support is not enabled.');
 
@@ -16,7 +16,7 @@ test('registration screen cannot be rendered if support is disabled', function (
     $response = $this->get('/register');
 
     $response->assertStatus(404);
-})->skip(function() {
+})->skip(function () {
     return Features::enabled(Features::registration());
 }, 'Registration support is enabled.');
 
@@ -31,6 +31,6 @@ test('new users can register', function () {
 
     $this->assertAuthenticated();
     $response->assertRedirect(RouteServiceProvider::HOME);
-})->skip(function() {
+})->skip(function () {
     return ! Features::enabled(Features::registration());
 }, 'Registration support is not enabled.');

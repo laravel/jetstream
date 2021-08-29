@@ -13,7 +13,7 @@ test('user accounts can be deleted', function () {
                     ->call('deleteUser');
 
     expect($user->fresh())->toBeNull();
-})->skip(function() {
+})->skip(function () {
     return ! Features::hasAccountDeletionFeatures();
 }, 'Account deletion is not enabled.');
 
@@ -26,6 +26,6 @@ test('correct_password_must_be_provided_before_account_can_be_deleted', function
                     ->assertHasErrors(['password']);
 
     expect($user->fresh())->not->toBeNull();
-})->skip(function() {
+})->skip(function () {
     return ! Features::hasAccountDeletionFeatures();
 }, 'Account deletion is not enabled.');

@@ -9,7 +9,7 @@ test('reset password link screen can be rendered', function () {
     $response = $this->get('/forgot-password');
 
     $response->assertStatus(200);
-})->skip(function() {
+})->skip(function () {
     return ! Features::enabled(Features::updatePasswords());
 }, 'Password updates are not enabled.');
 
@@ -23,7 +23,7 @@ test('reset password link can be requested', function () {
     ]);
 
     Notification::assertSentTo($user, ResetPassword::class);
-})->skip(function() {
+})->skip(function () {
     return ! Features::enabled(Features::updatePasswords());
 }, 'Password updates are not enabled.');
 
@@ -43,7 +43,7 @@ test('reset password screen can be rendered', function () {
 
         return true;
     });
-})->skip(function() {
+})->skip(function () {
     return ! Features::enabled(Features::updatePasswords());
 }, 'Password updates are not enabled.');
 
@@ -68,6 +68,6 @@ test('password can be reset with valid token', function () {
 
         return true;
     });
-})->skip(function() {
+})->skip(function () {
     return ! Features::enabled(Features::updatePasswords());
 }, 'Password updates are not enabled.');
