@@ -17,7 +17,7 @@ class InstallCommand extends Command
      */
     protected $signature = 'jetstream:install {stack : The development stack that should be installed}
                                               {--teams : Indicates if team support should be installed}
-                                              {--pest : Indicate that Pest should be installed}
+                                              {--pest : Indicates if Pest should be installed}
                                               {--composer=global : Absolute path to the Composer binary which should be used to install packages}';
 
     /**
