@@ -1,6 +1,15 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.15...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.16...2.x)
+
+
+## [v2.3.16 (2021-08-31)](https://github.com/laravel/jetstream/compare/v2.3.15...v2.3.16)
+
+### Changed
+- Use defineComponent in vue stubs for easier typescript setup ([#869](https://github.com/laravel/jetstream/pull/869))
+
+### Fixed
+- Added "text-left" class to team role descriptions ([#865](https://github.com/laravel/jetstream/pull/865))
 
 
 ## [v2.3.15 (2021-08-17)](https://github.com/laravel/jetstream/compare/v2.3.14...v2.3.15)
