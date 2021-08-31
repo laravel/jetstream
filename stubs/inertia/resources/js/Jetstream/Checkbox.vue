@@ -4,7 +4,9 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from 'vue'
+
+export default defineComponent({
     emits: ['update:checked'],
 
     props: {
@@ -28,5 +30,5 @@ export default {
             },
         },
     },
-}
+})
 </script>

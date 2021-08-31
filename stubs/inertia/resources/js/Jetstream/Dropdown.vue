@@ -29,9 +29,9 @@
 </template>
 
 <script>
-import { onMounted, onUnmounted, ref } from "vue";
+import { defineComponent, onMounted, onUnmounted, ref } from "vue";
 
-export default {
+export default defineComponent({
     props: {
         align: {
             default: 'right'
@@ -78,5 +78,5 @@ export default {
             }
         },
     }
-}
+})
 </script>

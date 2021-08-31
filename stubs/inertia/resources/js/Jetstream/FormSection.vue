@@ -23,9 +23,10 @@
 </template>
 
 <script>
+    import { defineComponent } from 'vue'
     import JetSectionTitle from './SectionTitle.vue'
 
-    export default {
+    export default defineComponent({
         emits: ['submitted'],
 
         components: {
@@ -37,5 +38,5 @@
                 return !! this.$slots.actions
             }
         }
-    }
+    })
 </script>

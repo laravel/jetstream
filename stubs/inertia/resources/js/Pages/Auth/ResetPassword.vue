@@ -34,6 +34,7 @@
 </template>
 
 <script>
+    import { defineComponent } from 'vue';
     import { Head } from '@inertiajs/inertia-vue3';
     import JetAuthenticationCard from '@/Jetstream/AuthenticationCard.vue'
     import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue'
@@ -42,7 +43,7 @@
     import JetLabel from '@/Jetstream/Label.vue'
     import JetValidationErrors from '@/Jetstream/ValidationErrors.vue'
 
-    export default {
+    export default defineComponent({
         components: {
             Head,
             JetAuthenticationCard,
@@ -76,5 +77,5 @@
                 })
             }
         }
-    }
+    })
 </script>

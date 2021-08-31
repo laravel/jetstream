@@ -87,13 +87,14 @@
 </template>
 
 <script>
+    import { defineComponent } from 'vue'
     import JetActionSection from '@/Jetstream/ActionSection.vue'
     import JetButton from '@/Jetstream/Button.vue'
     import JetConfirmsPassword from '@/Jetstream/ConfirmsPassword.vue'
     import JetDangerButton from '@/Jetstream/DangerButton.vue'
     import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue'
 
-    export default {
+    export default defineComponent({
         components: {
             JetActionSection,
             JetButton,
@@ -162,5 +163,5 @@
                 return ! this.enabling && this.$page.props.user.two_factor_enabled
             }
         }
-    }
+    })
 </script>
