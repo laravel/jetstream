@@ -50,6 +50,7 @@
 </template>
 
 <script>
+    import { defineComponent } from 'vue'
     import JetActionMessage from '@/Jetstream/ActionMessage'
     import JetButton from '@/Jetstream/Button'
     import JetFormSection from '@/Jetstream/FormSection'
@@ -57,7 +58,7 @@
     import JetInputError from '@/Jetstream/InputError'
     import JetLabel from '@/Jetstream/Label'
 
-    export default {
+    export default defineComponent({
         components: {
             JetActionMessage,
             JetButton,
@@ -85,5 +86,5 @@
                 });
             },
         },
-    }
+    })
 </script>

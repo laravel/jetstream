@@ -38,7 +38,9 @@
 </template>
 
 <script>
-    export default {
+    import { defineComponent } from 'vue'
+
+    export default defineComponent({
         data() {
             return {
                 show: true,
@@ -54,5 +56,5 @@
                 return this.$page.props.jetstream.flash?.banner || ''
             },
         }
-    }
+    })
 </script>

@@ -177,9 +177,10 @@
 </style>
 
 <script>
+    import { defineComponent } from 'vue'
     import { Head, Link } from '@inertiajs/inertia-vue3';
 
-    export default {
+    export default defineComponent({
         components: {
             Head,
             Link,
@@ -191,5 +192,5 @@
             laravelVersion: String,
             phpVersion: String,
         }
-    }
+    })
 </script>

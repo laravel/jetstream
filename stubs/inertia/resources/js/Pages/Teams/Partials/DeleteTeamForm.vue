@@ -44,12 +44,13 @@
 </template>
 
 <script>
+    import { defineComponent } from 'vue'
     import JetActionSection from '@/Jetstream/ActionSection.vue'
     import JetConfirmationModal from '@/Jetstream/ConfirmationModal.vue'
     import JetDangerButton from '@/Jetstream/DangerButton.vue'
     import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue'
 
-    export default {
+    export default defineComponent({
         props: ['team'],
 
         components: {
@@ -79,5 +80,5 @@
                 });
             },
         },
-    }
+    })
 </script>

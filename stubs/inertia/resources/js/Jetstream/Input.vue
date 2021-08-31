@@ -3,7 +3,9 @@
 </template>
 
 <script>
-    export default {
+    import { defineComponent } from 'vue'
+
+    export default defineComponent({
         props: ['modelValue'],
 
         emits: ['update:modelValue'],
@@ -13,6 +15,5 @@
                 this.$refs.input.focus()
             }
         }
-    }
+    })
 </script>
-
