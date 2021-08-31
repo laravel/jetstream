@@ -16,15 +16,16 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import { Head } from '@inertiajs/inertia-vue3';
 import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue'
 
-export default {
+export default defineComponent({
     props: ['policy'],
 
     components: {
         Head,
         JetAuthenticationCardLogo,
     },
-}
+})
 </script>

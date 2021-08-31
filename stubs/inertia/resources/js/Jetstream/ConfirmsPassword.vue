@@ -36,13 +36,14 @@
 </template>
 
 <script>
+    import { defineComponent } from 'vue'
     import JetButton from './Button.vue'
     import JetDialogModal from './DialogModal.vue'
     import JetInput from './Input.vue'
     import JetInputError from './InputError.vue'
     import JetSecondaryButton from './SecondaryButton.vue'
 
-    export default {
+    export default defineComponent({
         emits: ['confirmed'],
 
         props: {
@@ -110,5 +111,5 @@
                 this.form.error = '';
             },
         }
-    }
+    })
 </script>
