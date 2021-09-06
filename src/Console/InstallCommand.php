@@ -105,7 +105,7 @@ class InstallCommand extends Command
     protected function installLivewireStack()
     {
         // Install Livewire...
-        $this->requireComposerPackages('livewire/livewire:^2.5', 'laravel/sanctum:^2.6');
+        $this->requireComposerPackages('livewire/livewire:^2.5');
 
         // Sanctum...
         (new Process(['php', 'artisan', 'vendor:publish', '--provider=Laravel\Sanctum\SanctumServiceProvider', '--force'], base_path()))
@@ -265,7 +265,7 @@ EOF;
     protected function installInertiaStack()
     {
         // Install Inertia...
-        $this->requireComposerPackages('inertiajs/inertia-laravel:^0.4.3', 'laravel/sanctum:^2.6', 'tightenco/ziggy:^1.0');
+        $this->requireComposerPackages('inertiajs/inertia-laravel:^0.4.3', 'tightenco/ziggy:^1.0');
 
         // Install NPM packages...
         $this->updateNodePackages(function ($packages) {
