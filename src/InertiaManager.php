@@ -19,10 +19,10 @@ class InertiaManager
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  string  $page
-     * @param  array  $data
+     * @param  mixed  $data
      * @return \Inertia\Response
      */
-    public function render(Request $request, string $page, array $data = [])
+    public function render(Request $request, string $page, $data = [])
     {
         if (isset($this->renderingCallbacks[$page])) {
             foreach ($this->renderingCallbacks[$page] as $callback) {
