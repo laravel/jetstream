@@ -1,6 +1,18 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.3.16...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.4.0...2.x)
+
+
+## [v2.4.0 (2021-09-14)](https://github.com/laravel/jetstream/compare/v2.3.16...v2.4.0)
+
+### Added
+- Pest support ([#866](https://github.com/laravel/jetstream/pull/866))
+
+### Changed
+- Remove `csrf_token` from meta in Inertia app ([#878](https://github.com/laravel/jetstream/pull/878))
+
+### Fixed
+- Use correct feature flag in password reset tests ([#881](https://github.com/laravel/jetstream/pull/881))
 
 
 ## [v2.3.16 (2021-08-31)](https://github.com/laravel/jetstream/compare/v2.3.15...v2.3.16)
