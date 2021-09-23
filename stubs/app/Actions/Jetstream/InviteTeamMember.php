@@ -67,7 +67,8 @@ class InviteTeamMember implements InvitesTeamMembers
      */
     protected function rules($team)
     {
-        $teamInvitation = new (Jetstream::teamInvitationModel());
+        $class = Jetstream::teamInvitationModel();
+        $teamInvitation = $class::make();
         $connectionTable = $teamInvitation->getConnectionName() . '.' . $teamInvitation->getTable();
 
         return array_filter([
