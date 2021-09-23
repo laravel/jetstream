@@ -69,7 +69,7 @@ class InviteTeamMember implements InvitesTeamMembers
     {
         $class = Jetstream::teamInvitationModel();
         $teamInvitation = $class::make();
-        $connectionTable = $teamInvitation->getConnectionName() . '.' . $teamInvitation->getTable();
+        $connectionTable = $teamInvitation->getConnectionName().'.'.$teamInvitation->getTable();
 
         return array_filter([
             'email' => ['required', 'email', Rule::unique($connectionTable)->where(function ($query) use ($team) {
