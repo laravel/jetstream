@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.4.0...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.4.1...2.x)
+
+
+## [v2.4.1 (2021-09-28)](https://github.com/laravel/jetstream/compare/v2.4.0...v2.4.1)
+
+### Fixed
+- Use custom `TeamInvitation` model in `TeamInvitationController` ([#892](https://github.com/laravel/jetstream/pull/892))
 
 
 ## [v2.4.0 (2021-09-14)](https://github.com/laravel/jetstream/compare/v2.3.16...v2.4.0)
