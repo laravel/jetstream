@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Jetstream\Http\Livewire\CreateTeamForm;
+use Laravel\Jetstream\Features;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -14,6 +15,10 @@ class CreateTeamTest extends TestCase
 
     public function test_teams_can_be_created()
     {
+        if (! Features::hasTeamFeatures()) {
+            return $this->markTestSkipped('Team support is not enabled.');
+        }
+
         $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
         Livewire::test(CreateTeamForm::class)
