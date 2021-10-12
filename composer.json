@@ -1,5 +1,5 @@
 {
-    "name": "laravel/jetstream",
+    "name": "spiritsaint/jetstream",
     "description": "Tailwind scaffolding for the Laravel framework.",
     "keywords": ["laravel", "tailwind", "auth"],
     "license": "MIT",
