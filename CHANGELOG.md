@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.4.2...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.4.3...2.x)
+
+
+## [v2.4.3 (2021-10-12)](https://github.com/laravel/jetstream/compare/v2.4.2...v2.4.3)
+
+### Changed
+- Merge action-section attributes ([#898](https://github.com/laravel/jetstream/pull/898))
 
 
 ## [v2.4.2 (2021-09-30)](https://github.com/laravel/jetstream/compare/v2.4.1...v2.4.2)
