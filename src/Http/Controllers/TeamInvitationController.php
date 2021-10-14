@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
-use Laravel\Jetstream\TeamInvitation;
+use App\Models\TeamInvitation;
 
 class TeamInvitationController extends Controller
 {
