@@ -63,7 +63,7 @@ class ApiTokenController extends Controller
             'permissions.*' => 'string',
         ]);
 
-        $token = $request->user()->tokens()->where('id', $tokenId)->firstOrFail();
+        $token = $request->user()->tokens()->where($request->user()->tokens()->getRelated()->getKeyName(), $tokenId)->firstOrFail();
 
         $token->forceFill([
             'abilities' => Jetstream::validPermissions($request->input('permissions', [])),
