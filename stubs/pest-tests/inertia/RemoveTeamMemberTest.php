@@ -9,7 +9,7 @@ test('team members can be removed from teams', function () {
         $otherUser = User::factory()->create(), ['role' => 'admin']
     );
 
-    $response = $this->delete('/teams/'.$user->currentTeam->id.'/members/'.$otherUser->id);
+    $response = $this->delete('/teams/'.$user->currentTeam->{$user->currentTeam->getKeyName()}.'/members/'.$otherUser->{$otherUser->getKeyName()});
 
     expect($user->currentTeam->fresh()->users)->toHaveCount(0);
 });
@@ -23,7 +23,7 @@ test('only team owner can remove team members', function () {
 
     $this->actingAs($otherUser);
 
-    $response = $this->delete('/teams/'.$user->currentTeam->id.'/members/'.$user->id);
+    $response = $this->delete('/teams/'.$user->currentTeam->{$user->currentTeam->getKeyName()}.'/members/'.$user->{$user->getKeyName()});
 
     $response->assertStatus(403);
 });
