@@ -5,7 +5,7 @@ use App\Models\User;
 test('team names can be updated', function () {
     $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
-    $response = $this->put('/teams/'.$user->currentTeam->id, [
+    $response = $this->put('/teams/'.$user->currentTeam->{$user->currentTeam->getKeyName()}, [
         'name' => 'Test Team',
     ]);
 
