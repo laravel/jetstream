@@ -81,7 +81,7 @@ class TeamMemberController extends Controller
             $user = Jetstream::findUserByIdOrFail($userId)
         );
 
-        if ($request->user()->uuid === $user->uuid) {
+        if ($request->user()->{$request->user()->getKeyName()} === $user->{$user->getKeyName()}) {
             return redirect(config('fortify.home'));
         }
 
