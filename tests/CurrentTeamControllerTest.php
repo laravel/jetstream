@@ -33,11 +33,11 @@ class CurrentTeamControllerTest extends OrchestraTestCase
 
         $team = $action->create($user, ['name' => 'Test Team']);
 
-        $response = $this->actingAs($user)->put('/current-team', ['team_id' => $team->id]);
+        $response = $this->actingAs($user)->put('/current-team', [$team->getKeyName() => $team->{$team->getKeyName()}]);
 
         $response->assertRedirect('/home');
 
-        $this->assertEquals($team->id, $user->fresh()->currentTeam->id);
+        $this->assertEquals($team->{$team->getKeyName()}, $user->fresh()->currentTeam->{$team->getKeyName()});
         $this->assertTrue($user->isCurrentTeam($team));
     }
 
@@ -61,7 +61,7 @@ class CurrentTeamControllerTest extends OrchestraTestCase
             'password' => 'secret',
         ]);
 
-        $response = $this->actingAs($otherUser)->put('/current-team', ['team_id' => $team->id]);
+        $response = $this->actingAs($otherUser)->put('/current-team', [$team->getKeyName() => $team->{$team->getKeyName()}]);
 
         $response->assertStatus(403);
     }
