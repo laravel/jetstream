@@ -48,7 +48,7 @@ class InviteTeamMemberTest extends OrchestraTestCase
         $this->assertCount(0, $team->users);
         $this->assertCount(1, $team->teamInvitations);
         $this->assertEquals('adam@laravel.com', $team->teamInvitations->first()->email);
-        $this->assertEquals($team->id, $team->teamInvitations->first()->team->id);
+        $this->assertEquals($team->{$team->getKeyName()}, $team->teamInvitations->first()->team->{$team->getKeyName()});
     }
 
     public function test_user_cant_already_be_on_team()

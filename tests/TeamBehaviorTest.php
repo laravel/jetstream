@@ -44,8 +44,8 @@ class TeamBehaviorTest extends OrchestraTestCase
 
         $team->forceFill(['personal_team' => true])->save();
 
-        $this->assertEquals($team->id, $user->fresh()->personalTeam()->id);
-        $this->assertEquals($team->id, $user->fresh()->currentTeam->id);
+        $this->assertEquals($team->{$team->getKeyName()}, $user->fresh()->personalTeam()->{$team->getKeyName()});
+        $this->assertEquals($team->{$team->getKeyName()}, $user->fresh()->currentTeam->{$team->getKeyName()});
         $this->assertTrue($user->hasTeamPermission($team, 'foo'));
 
         // Test with another user that isn't on the team...
