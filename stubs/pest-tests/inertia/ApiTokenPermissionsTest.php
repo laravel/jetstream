@@ -17,7 +17,7 @@ test('api token permissions can be updated', function () {
         'abilities' => ['create', 'read'],
     ]);
 
-    $response = $this->put('/user/api-tokens/'.$token->id, [
+    $response = $this->put('/user/api-tokens/'.$token->{$token->getKeyName()}, [
         'name' => $token->name,
         'permissions' => [
             'delete',
