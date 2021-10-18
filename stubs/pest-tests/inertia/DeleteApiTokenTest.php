@@ -17,7 +17,7 @@ test('api tokens can be deleted', function () {
         'abilities' => ['create', 'read'],
     ]);
 
-    $response = $this->delete('/user/api-tokens/'.$token->id);
+    $response = $this->delete('/user/api-tokens/'.$token->{$token->getKeyName()});
 
     expect($user->fresh()->tokens)->toHaveCount(0);
 })->skip(function () {
