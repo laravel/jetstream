@@ -10,5 +10,6 @@ test('teams can be created', function () {
     ]);
 
     expect($user->fresh()->ownedTeams)->toHaveCount(2);
-    expect($user->fresh()->ownedTeams()->latest('id')->first()->name)->toEqual('Test Team');
+    expect($user->fresh()->ownedTeams()->get()->some(function($team) { return $team->name === 'Test Team'; }))
+        ->toEqual(TRUE);
 });
