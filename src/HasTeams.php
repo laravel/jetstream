@@ -128,7 +128,7 @@ trait HasTeams
      * Get the role that the user has on the team.
      *
      * @param  mixed  $team
-     * @return \Laravel\Jetstream\Role
+     * @return \Laravel\Jetstream\Role|null
      */
     public function teamRole($team)
     {
@@ -140,9 +140,13 @@ trait HasTeams
             return;
         }
 
-        return Jetstream::findRole($team->users->where(
-            'id', $this->id
-        )->first()->membership->role);
+        $role = $team->users
+            ->where('id', $this->id)
+            ->first()
+            ->membership
+            ->role;
+
+        return $role ? Jetstream::findRole($role) : null;
     }
 
     /**
@@ -179,7 +183,7 @@ trait HasTeams
             return [];
         }
 
-        return $this->teamRole($team)->permissions;
+        return (array) optional($this->teamRole($team))->permissions;
     }
 
     /**
