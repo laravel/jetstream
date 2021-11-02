@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.4.3...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.4.4...2.x)
+
+
+## [v2.4.4 (2021-11-02)](https://github.com/laravel/jetstream/compare/v2.4.3...v2.4.4)
+
+### Changed
+- Better handle situations where a user's role on a team is undefined ([#905](https://github.com/laravel/jetstream/pull/905))
 
 
 ## [v2.4.3 (2021-10-12)](https://github.com/laravel/jetstream/compare/v2.4.2...v2.4.3)
