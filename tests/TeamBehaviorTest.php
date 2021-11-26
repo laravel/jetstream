@@ -42,7 +42,7 @@ class TeamBehaviorTest extends OrchestraTestCase
         $this->assertCount(1, $user->fresh()->ownedTeams);
         $this->assertCount(1, $user->fresh()->allTeams());
 
-        $team->forceFill(['personal_team' => true])->save();
+        $team->forceFill(['personal_team' => Features::createsPersonalTeam()])->save();
 
         $this->assertEquals($team->id, $user->fresh()->personalTeam()->id);
         $this->assertEquals($team->id, $user->fresh()->currentTeam->id);
@@ -143,7 +143,7 @@ class TeamBehaviorTest extends OrchestraTestCase
 
         $personalTeam = $action->create($user, ['name' => 'Personal Team']);
 
-        $personalTeam->forceFill(['personal_team' => true])->save();
+        $personalTeam->forceFill(['personal_team' => Features::createsPersonalTeam()])->save();
 
         $this->assertTrue($user->isCurrentTeam($personalTeam));
 
