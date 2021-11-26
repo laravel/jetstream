@@ -4,9 +4,9 @@ namespace Laravel\Jetstream\Tests;
 
 use App\Actions\Jetstream\CreateTeam;
 use Illuminate\Support\Facades\Gate;
+use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Team;
-use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
 use Laravel\Sanctum\Sanctum;
