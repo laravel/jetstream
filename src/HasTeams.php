@@ -4,6 +4,7 @@ namespace Laravel\Jetstream;
 
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Jetstream\Features;
 
 trait HasTeams
 {
@@ -93,7 +94,7 @@ trait HasTeams
      */
     public function personalTeam()
     {
-        return $this->ownedTeams->where('personal_team', true)->first();
+        return $this->ownedTeams->where('personal_team', Features::createsPersonalTeam())->first();
     }
 
     /**

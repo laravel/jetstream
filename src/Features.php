@@ -59,6 +59,16 @@ class Features
     }
 
     /**
+     * Determine if a personal team is created on user registration.
+     *
+     * @return bool
+     */
+    public static function createsPersonalTeam()
+    {
+        return static::optionEnabled(static::teams(), 'personal');
+    }
+
+    /**
      * Determine if invitations are sent to team members.
      *
      * @return bool
