@@ -1,3 +1,4 @@
+@@ -1,25 +1,25 @@
 <template>
     <teleport to="body">
         <transition leave-active-class="duration-200">

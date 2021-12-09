@@ -11,7 +11,7 @@
                     <div class="flex justify-between h-16">
                         <div class="flex">
                             <!-- Logo -->
-                            <div class="flex-shrink-0 flex items-center">
+                            <div class="shrink-0 flex items-center">
                                 <Link :href="route('dashboard')">
                                     <jet-application-mark class="block h-9 w-auto" />
                                 </Link>
@@ -40,7 +40,6 @@
                                             </button>
                                         </span>
                                     </template>
-
                                     <template #content>
                                         <div class="w-60">
                                             <!-- Team Management -->
@@ -48,23 +47,18 @@
                                                 <div class="block px-4 py-2 text-xs text-gray-400">
                                                     Manage Team
                                                 </div>
-
                                                 <!-- Team Settings -->
                                                 <jet-dropdown-link :href="route('teams.show', $page.props.user.current_team)">
                                                     Team Settings
                                                 </jet-dropdown-link>
-
                                                 <jet-dropdown-link :href="route('teams.create')" v-if="$page.props.jetstream.canCreateTeams">
                                                     Create New Team
                                                 </jet-dropdown-link>
-
                                                 <div class="border-t border-gray-100"></div>
-
                                                 <!-- Team Switcher -->
                                                 <div class="block px-4 py-2 text-xs text-gray-400">
                                                     Switch Teams
                                                 </div>
-
                                                 <template v-for="team in $page.props.user.all_teams" :key="team.id">
                                                     <form @submit.prevent="switchToTeam(team)">
                                                         <jet-dropdown-link as="button">
@@ -99,23 +93,18 @@
                                             </button>
                                         </span>
                                     </template>
-
                                     <template #content>
                                         <!-- Account Management -->
                                         <div class="block px-4 py-2 text-xs text-gray-400">
                                             Manage Account
                                         </div>
-
                                         <jet-dropdown-link :href="route('profile.show')">
                                             Profile
                                         </jet-dropdown-link>
-
                                         <jet-dropdown-link :href="route('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
                                             API Tokens
                                         </jet-dropdown-link>
-
                                         <div class="border-t border-gray-100"></div>
-
                                         <!-- Authentication -->
                                         <form @submit.prevent="logout">
                                             <jet-dropdown-link as="button">
@@ -138,7 +127,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Responsive Navigation Menu -->
                 <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                     <div class="pt-2 pb-3 space-y-1">
@@ -146,11 +134,10 @@
                             Dashboard
                         </jet-responsive-nav-link>
                     </div>
-
                     <!-- Responsive Settings Options -->
                     <div class="pt-4 pb-1 border-t border-gray-200">
                         <div class="flex items-center px-4">
-                            <div v-if="$page.props.jetstream.managesProfilePhotos" class="flex-shrink-0 mr-3" >
+                            <div v-if="$page.props.jetstream.managesProfilePhotos" class="shrink-0 mr-3" >
                                 <img class="h-10 w-10 rounded-full object-cover" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name" />
                             </div>
 
@@ -164,42 +151,33 @@
                             <jet-responsive-nav-link :href="route('profile.show')" :active="route().current('profile.show')">
                                 Profile
                             </jet-responsive-nav-link>
-
                             <jet-responsive-nav-link :href="route('api-tokens.index')" :active="route().current('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
                                 API Tokens
                             </jet-responsive-nav-link>
-
                             <!-- Authentication -->
                             <form method="POST" @submit.prevent="logout">
                                 <jet-responsive-nav-link as="button">
                                     Log Out
                                 </jet-responsive-nav-link>
                             </form>
-
                             <!-- Team Management -->
                             <template v-if="$page.props.jetstream.hasTeamFeatures">
                                 <div class="border-t border-gray-200"></div>
-
                                 <div class="block px-4 py-2 text-xs text-gray-400">
                                     Manage Team
                                 </div>
-
                                 <!-- Team Settings -->
                                 <jet-responsive-nav-link :href="route('teams.show', $page.props.user.current_team)" :active="route().current('teams.show')">
                                     Team Settings
                                 </jet-responsive-nav-link>
-
                                 <jet-responsive-nav-link :href="route('teams.create')" :active="route().current('teams.create')" v-if="$page.props.jetstream.canCreateTeams">
                                     Create New Team
                                 </jet-responsive-nav-link>
-
                                 <div class="border-t border-gray-200"></div>
-
                                 <!-- Team Switcher -->
                                 <div class="block px-4 py-2 text-xs text-gray-400">
                                     Switch Teams
                                 </div>
-
                                 <template v-for="team in $page.props.user.all_teams" :key="team.id">
                                     <form @submit.prevent="switchToTeam(team)">
                                         <jet-responsive-nav-link as="button">
@@ -222,7 +200,6 @@
                     <slot name="header"></slot>
                 </div>
             </header>
-
             <!-- Page Content -->
             <main>
                 <slot></slot>
@@ -230,7 +207,6 @@
         </div>
     </div>
 </template>
-
 <script>
     import { defineComponent } from 'vue'
     import JetApplicationMark from '@/Jetstream/ApplicationMark.vue'
@@ -240,12 +216,10 @@
     import JetNavLink from '@/Jetstream/NavLink.vue'
     import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink.vue'
     import { Head, Link } from '@inertiajs/inertia-vue3';
-
     export default defineComponent({
         props: {
             title: String,
         },
-
         components: {
             Head,
             JetApplicationMark,
@@ -256,13 +230,11 @@
             JetResponsiveNavLink,
             Link,
         },
-
         data() {
             return {
                 showingNavigationDropdown: false,
             }
         },
-
         methods: {
             switchToTeam(team) {
                 this.$inertia.put(route('current-team.update'), {
@@ -271,7 +243,6 @@
                     preserveState: false
                 })
             },
-
             logout() {
                 this.$inertia.post(route('logout'));
             },
