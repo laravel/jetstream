@@ -132,8 +132,8 @@ class InstallCommand extends Command
         // NPM Packages...
         $this->updateNodePackages(function ($packages) {
             return [
-                "@tailwindcss/forms" => "^0.4.0",
-                "@tailwindcss/typography" => "^0.5.0",
+                '@tailwindcss/forms' => '^0.4.0',
+                '@tailwindcss/typography' => '^0.5.0',
                 'alpinejs' => '^3.0.6',
                 'postcss-import' => '^14.0.1',
                 'tailwindcss' => '^3.0.0',
