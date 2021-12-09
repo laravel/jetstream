@@ -19,7 +19,7 @@
                         </p>
                     </div>
 
-                    <div class="flex-shrink-0 sm:ml-3">
+                    <div class="shrink-0 sm:ml-3">
                         <button
                             type="button"
                             class="-mr-1 flex p-2 rounded-md focus:outline-none sm:-mr-2 transition"
