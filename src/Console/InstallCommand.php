@@ -132,11 +132,11 @@ class InstallCommand extends Command
         // NPM Packages...
         $this->updateNodePackages(function ($packages) {
             return [
-                '@tailwindcss/forms' => '^0.3.1',
-                '@tailwindcss/typography' => '^0.4.0',
+                '@tailwindcss/forms' => '^0.4.0',
+                '@tailwindcss/typography' => '^0.5.0',
                 'alpinejs' => '^3.0.6',
                 'postcss-import' => '^14.0.1',
-                'tailwindcss' => '^2.2.2',
+                'tailwindcss' => '^3.0.0',
             ] + $packages;
         });
 
@@ -288,10 +288,10 @@ EOF;
                 '@inertiajs/inertia' => '^0.10.0',
                 '@inertiajs/inertia-vue3' => '^0.5.1',
                 '@inertiajs/progress' => '^0.2.6',
-                '@tailwindcss/forms' => '^0.2.1',
-                '@tailwindcss/typography' => '^0.3.0',
+                '@tailwindcss/forms' => '^0.4.0',
+                '@tailwindcss/typography' => '^0.5.0',
                 'postcss-import' => '^12.0.1',
-                'tailwindcss' => '^2.0.1',
+                'tailwindcss' => '^3.0.0',
                 'vue' => '^3.0.5',
                 '@vue/compiler-sfc' => '^3.0.5',
                 'vue-loader' => '^16.1.2',
