@@ -1,6 +1,13 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.4.4...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.5.0...2.x)
+
+
+## [v2.5.0 (2021-12-14)](https://github.com/laravel/jetstream/compare/v2.4.4...v2.5.0)
+
+### Changed
+- Update to Tailwind CSS v3 ([#920](https://github.com/laravel/jetstream/pull/920), [#926](https://github.com/laravel/jetstream/pull/926))
+- Use KeyboardEvent key attribute for Escape ([#911](https://github.com/laravel/jetstream/pull/911))
 
 
 ## [v2.4.4 (2021-11-02)](https://github.com/laravel/jetstream/compare/v2.4.3...v2.4.4)
