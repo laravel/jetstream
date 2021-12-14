@@ -1,6 +1,25 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.4.2...master)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.5.0...master)
+
+
+## [v2.5.0 (2021-12-14)](https://github.com/laravel/jetstream/compare/v2.4.4...v2.5.0)
+
+### Changed
+- Update to Tailwind CSS v3 ([#920](https://github.com/laravel/jetstream/pull/920), [#926](https://github.com/laravel/jetstream/pull/926))
+- Use KeyboardEvent key attribute for Escape ([#911](https://github.com/laravel/jetstream/pull/911))
+
+
+## [v2.4.4 (2021-11-02)](https://github.com/laravel/jetstream/compare/v2.4.3...v2.4.4)
+
+### Changed
+- Better handle situations where a user's role on a team is undefined ([#905](https://github.com/laravel/jetstream/pull/905))
+
+
+## [v2.4.3 (2021-10-12)](https://github.com/laravel/jetstream/compare/v2.4.2...v2.4.3)
+
+### Changed
+- Merge action-section attributes ([#898](https://github.com/laravel/jetstream/pull/898))
 
 
 ## [v2.4.2 (2021-09-30)](https://github.com/laravel/jetstream/compare/v2.4.1...v2.4.2)

@@ -35,7 +35,8 @@
     "autoload-dev": {
         "psr-4": {
             "Laravel\\Jetstream\\Tests\\": "tests/",
-            "App\\": "stubs/app/"
+            "App\\": "stubs/app/",
+            "Database\\Factories\\": "database/factories/"
         }
     },
     "extra": {
