@@ -1,6 +1,15 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v1.6.6...1.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v1.6.7...1.x)
+
+
+## [v1.6.7 (2021-12-14)](https://github.com/laravel/jetstream/compare/v1.6.6...v1.6.7)
+
+### Changed
+- Merge action-section attributes ([#879](https://github.com/laravel/jetstream/pull/879))
+
+### Fixed
+- Correct PHP DocBlock reference ([#925](https://github.com/laravel/jetstream/pull/925))
 
 
 ## [v1.6.6 (2021-01-05)](https://github.com/laravel/jetstream/compare/v1.6.5...v1.6.6)
