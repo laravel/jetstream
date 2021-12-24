@@ -77,7 +77,7 @@
                         Cancel
                     </jet-secondary-button>
 
-                    <jet-button class="ml-2" @click="logoutOtherBrowserSessions" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    <jet-button class="ml-3" @click="logoutOtherBrowserSessions" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         Log Out Other Browser Sessions
                     </jet-button>
                 </template>
