@@ -15,7 +15,7 @@
             <div class="flex items-center mt-2">
                 <img class="w-12 h-12 rounded-full object-cover" src="{{ $team->owner->profile_photo_url }}" alt="{{ $team->owner->name }}">
 
-                <div class="ml-4 leading-tight">
+                <div class="ml-4 rtl:ml-0 rtl:mr-4 leading-tight">
                     <div>{{ $team->owner->name }}</div>
                     <div class="text-gray-700 text-sm">{{ $team->owner->email }}</div>
                 </div>
@@ -38,7 +38,7 @@
 
     @if (Gate::check('update', $team))
         <x-slot name="actions">
-            <x-jet-action-message class="mr-3" on="saved">
+            <x-jet-action-message class="mr-3 rtl:mr-0 rtl:ml-3" on="saved">
                 {{ __('Saved.') }}
             </x-jet-action-message>
 

@@ -47,7 +47,7 @@
                         {{ __('Use an authentication code') }}
                     </button>
 
-                    <x-jet-button class="ml-4">
+                    <x-jet-button class="ml-4 rtl:ml-0 rtl:mr-4">
                         {{ __('Log in') }}
                     </x-jet-button>
                 </div>

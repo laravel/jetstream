@@ -28,7 +28,7 @@
             <div class="block mt-4">
                 <label for="remember_me" class="flex items-center">
                     <x-jet-checkbox id="remember_me" name="remember" />
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                    <span class="ml-2 rtl:ml-0 rtl:mr-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                 </label>
             </div>
 
@@ -39,7 +39,7 @@
                     </a>
                 @endif
 
-                <x-jet-button class="ml-4">
+                <x-jet-button class="ml-4 rtl:ml-0 rtl:mr-4">
                     {{ __('Log in') }}
                 </x-jet-button>
             </div>

@@ -28,7 +28,7 @@
     </x-slot>
 
     <x-slot name="actions">
-        <x-jet-action-message class="mr-3" on="saved">
+        <x-jet-action-message class="mr-3 rtl:mr-0 rtl:ml-3" on="saved">
             {{ __('Saved.') }}
         </x-jet-action-message>
 

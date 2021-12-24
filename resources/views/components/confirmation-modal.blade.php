@@ -9,7 +9,7 @@
                 </svg>
             </div>
 
-            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 rtl:sm:ml-0 rtl:sm:mr-4 sm:text-left rtl:sm:text-right">
                 <h3 class="text-lg">
                     {{ $title }}
                 </h3>
@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <div class="px-6 py-4 bg-gray-100 text-right">
+    <div class="px-6 py-4 bg-gray-100 text-right rtl:text-left">
         {{ $footer }}
     </div>
 </x-jet-modal>

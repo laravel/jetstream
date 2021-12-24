@@ -35,7 +35,7 @@
                         <div class="flex items-center">
                             <x-jet-checkbox name="terms" id="terms"/>
 
-                            <div class="ml-2">
+                            <div class="ml-2 rtl:ml-0 rtl:mr-2">
                                 {!! __('I agree to the :terms_of_service and :privacy_policy', [
                                         'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Terms of Service').'</a>',
                                         'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Privacy Policy').'</a>',
@@ -51,7 +51,7 @@
                     {{ __('Already registered?') }}
                 </a>
 
-                <x-jet-button class="ml-4">
+                <x-jet-button class="ml-4 rtl:ml-0 rtl:mr-4">
                     {{ __('Register') }}
                 </x-jet-button>
             </div>
