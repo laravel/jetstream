@@ -34,7 +34,7 @@
                         Cancel
                     </jet-secondary-button>
 
-                    <jet-danger-button class="ml-2" @click="deleteTeam" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    <jet-danger-button class="ml-3" @click="deleteTeam" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         Delete Team
                     </jet-danger-button>
                 </template>
