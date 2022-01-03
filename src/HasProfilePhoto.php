@@ -70,14 +70,14 @@ trait HasProfilePhoto
      */
     protected function defaultProfilePhotoUrl()
     {
-        $hash         = md5(strtolower(trim($this->email)));
+        $hash = md5(strtolower(trim($this->email)));
         $defaultImage = config('jetstream.profile_photo_fallback.default_image', 'initials');
 
         if ($defaultImage === 'initials') {
-            $name     = urlencode($this->name); // name needs to be double-urlencoded for Gravatar fallback URL
-            $size     = config('jetstream.profile_photo_fallback.initials.size', 64);
-            $bg       = config('jetstream.profile_photo_fallback.initials.bg', 'ebf4ff');
-            $color    = config('jetstream.profile_photo_fallback.initials.color', '7f9cf5');
+            $name = urlencode($this->name); // name needs to be double-urlencoded for Gravatar fallback URL
+            $size = config('jetstream.profile_photo_fallback.initials.size', 64);
+            $bg = config('jetstream.profile_photo_fallback.initials.bg', 'ebf4ff');
+            $color = config('jetstream.profile_photo_fallback.initials.color', '7f9cf5');
             $fallback = urlencode("https://ui-avatars.com/api/{$name}/{$size}/{$bg}/{$color}");
         } else {
             $fallback = $defaultImage;
