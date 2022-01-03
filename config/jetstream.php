@@ -55,11 +55,37 @@ return [
     |--------------------------------------------------------------------------
     |
     | This configuration value determines the default disk that will be used
-    | when storing profile photos for your application's users. Typically
-    | this will be the "public" disk but you may adjust this if needed.
+    | when storing profile photos for your application's users. Typically,
+    | this will be the "public" disk, but you may adjust this if needed.
     |
     */
 
     'profile_photo_disk' => 'public',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Profile Photo Fallback Image
+    |--------------------------------------------------------------------------
+    |
+    | This configuration value determines the default image that is used as a
+    | fallback if the user has not stored a profile photo.
+    | By default, we use Gravatar images with UI-Avatars as a fallback.
+    |
+    | Possible values for profile_photo_fallback.default_image:
+    | mp|identicon|monsterid|wavatar|retro|robohash|blank|initials
+    | (see http://gravatar.com/site/implement/images/)
+    | 'initials' (default) is a special extension where we use ui-avatars.com as
+    | a Gravatar fallback service to generate avatars with initials from names.
+    |
+    */
+
+    'profile_photo_fallback' => [
+        'default_image' => 'initials',
+        'initials' => [
+            'size'  => 64,
+            'bg'    => 'ebf4ff',
+            'color' => '7f9cf5',
+        ],
+    ],
 
 ];

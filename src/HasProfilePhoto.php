@@ -62,11 +62,28 @@ trait HasProfilePhoto
     /**
      * Get the default profile photo URL if no profile photo has been uploaded.
      *
+     * Using Gravatar with UI-Avatars as fallback. Like this, we get all avatars delivered by Gravatar with
+     * the following bonus: Prevent rate-limiting (ui-avatars.com uses Cloudflare that blocks fast, while Gravatar
+     * has virtually no rate-limiting), nice UI-Avatars with initials (which is currently not offered by Gravatar).
+     *
      * @return string
      */
     protected function defaultProfilePhotoUrl()
     {
-        return 'https://ui-avatars.com/api/?name='.urlencode($this->name).'&color=7F9CF5&background=EBF4FF';
+        $hash         = md5(strtolower(trim($this->email)));
+        $defaultImage = config('jetstream.profile_photo_fallback.default_image', 'initials');
+
+        if ($defaultImage === 'initials') {
+            $name     = urlencode($this->name); // name needs to be double-urlencoded for Gravatar fallback URL
+            $size     = config('jetstream.profile_photo_fallback.initials.size', 64);
+            $bg       = config('jetstream.profile_photo_fallback.initials.bg', 'ebf4ff');
+            $color    = config('jetstream.profile_photo_fallback.initials.color', '7f9cf5');
+            $fallback = urlencode("https://ui-avatars.com/api/{$name}/{$size}/{$bg}/{$color}");
+        } else {
+            $fallback = $defaultImage;
+        }
+
+        return "https://www.gravatar.com/avatar/{$hash}?d={$fallback}";
     }
 
     /**
