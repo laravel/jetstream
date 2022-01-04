@@ -1,6 +1,14 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.5.0...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.5.1...2.x)
+
+
+## [v2.5.1 (2022-01-04)](https://github.com/laravel/jetstream/compare/v2.5.0...v2.5.1)
+
+### Changed
+* Fixed a content reflow issue on slower connection in update profile info form ([#929](https://github.com/laravel/jetstream/pull/929))
+* Fixed a button spacing issue in dialog modal footer ([#930](https://github.com/laravel/jetstream/pull/930), [#935](https://github.com/laravel/jetstream/pull/935))
+* Show 'Unknown' instead of 'false' if other browser session Useragent details are not matched in library ([#934](https://github.com/laravel/jetstream/pull/934))
 
 
 ## [v2.5.0 (2021-12-14)](https://github.com/laravel/jetstream/compare/v2.4.4...v2.5.0)
