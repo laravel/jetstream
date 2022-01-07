@@ -91,16 +91,6 @@ class JetstreamServiceProvider extends ServiceProvider
             ]);
         });
 
-        Str::macro('anonymizeName',function ($name){
-            $anonymizedName = "";
-
-            foreach (explode(" ", $name) as $word) {
-                $anonymizedName .= $word[0].' ';
-            }
-
-            return Str::replaceLast(' ', '', $anonymizedName);
-        });
-
         if (config('jetstream.stack') === 'inertia') {
             $this->bootInertia();
         }

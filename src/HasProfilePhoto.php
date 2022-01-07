@@ -67,7 +67,11 @@ trait HasProfilePhoto
      */
     protected function defaultProfilePhotoUrl()
     {
-        return 'https://ui-avatars.com/api/?name='.urlencode(Str::anonymizeName($this->name)).'&color=7F9CF5&background=EBF4FF';
+        $name = trim(collect(explode(' ', $this->name))->map(function ($segment) {
+            return $segment[0] ?? '';
+        })->join(' '));
+
+        return 'https://ui-avatars.com/api/?name='.urlencode($name).'&color=7F9CF5&background=EBF4FF';
     }
 
     /**
