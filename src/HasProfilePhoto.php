@@ -67,15 +67,7 @@ trait HasProfilePhoto
      */
     protected function defaultProfilePhotoUrl()
     {
-        $anonymizedName = "";
-
-        foreach (explode(" ", $this->name) as $word) {
-            $anonymizedName .= $word[0].' ';
-        }
-
-        $anonymizedName = Str::replaceLast(' ', '', $anonymizedName);
-
-        return 'https://ui-avatars.com/api/?name='.urlencode($anonymizedName).'&color=7F9CF5&background=EBF4FF';
+        return 'https://ui-avatars.com/api/?name='.urlencode(Str::anonymizeName($this->name)).'&color=7F9CF5&background=EBF4FF';
     }
 
     /**

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Illuminate\View\Compilers\BladeCompiler;
 use Inertia\Inertia;
 use Laravel\Fortify\Fortify;
@@ -88,6 +89,16 @@ class JetstreamServiceProvider extends ServiceProvider
                 'bannerStyle' => 'danger',
                 'banner' => $message,
             ]);
+        });
+
+        Str::macro('anonymizeName',function ($name){
+            $anonymizedName = "";
+
+            foreach (explode(" ", $name) as $word) {
+                $anonymizedName .= $word[0].' ';
+            }
+
+            return Str::replaceLast(' ', '', $anonymizedName);
         });
 
         if (config('jetstream.stack') === 'inertia') {
