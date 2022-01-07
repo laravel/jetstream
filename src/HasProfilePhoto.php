@@ -4,6 +4,7 @@ namespace Laravel\Jetstream;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
 
 trait HasProfilePhoto
@@ -66,7 +67,15 @@ trait HasProfilePhoto
      */
     protected function defaultProfilePhotoUrl()
     {
-        return 'https://ui-avatars.com/api/?name='.urlencode($this->name).'&color=7F9CF5&background=EBF4FF';
+        $anonymizedName = "";
+
+        foreach (explode(" ", $this->name) as $word) {
+            $anonymizedName .= $word[0].' ';
+        }
+
+        $anonymizedName = Str::replaceLast(' ', '', $anonymizedName);
+
+        return 'https://ui-avatars.com/api/?name='.urlencode($anonymizedName).'&color=7F9CF5&background=EBF4FF';
     }
 
     /**
