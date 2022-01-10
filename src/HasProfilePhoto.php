@@ -73,7 +73,7 @@ trait HasProfilePhoto
         try {
             $avatar = new InitialAvatar();
 
-            return $avatar->name($this->name)->color('#7F9CF5')->background('#EBF4FF')->size(100)->generate()->encode('data-url');
+            return $avatar->name($this->name)->color('#7F9CF5')->background('#EBF4FF')->size(100)->generate()->encode('data-url')->encoded;
         } catch (NotSupportedException|MissingDependencyException $e) {
             $name = trim(collect(explode(' ', $this->name))->map(function ($segment) {
                 return $segment[0] ?? '';
