@@ -4,7 +4,6 @@ namespace Laravel\Jetstream;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Intervention\Image\Exception\MissingDependencyException;
 use Intervention\Image\Exception\NotSupportedException;
 use Laravel\Jetstream\Features;
