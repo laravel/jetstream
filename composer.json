@@ -18,7 +18,8 @@
         "ext-json": "*",
         "illuminate/support": "^8.0",
         "jenssegers/agent": "^2.6",
-        "laravel/fortify": "^1.6.1"
+        "laravel/fortify": "^1.6.1",
+        "lasserafn/php-initial-avatar-generator": "^4.2"
     },
     "require-dev": {
         "inertiajs/inertia-laravel": "^0.3",

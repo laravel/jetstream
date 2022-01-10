@@ -6,6 +6,8 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
+use LasseRafn\InitialAvatarGenerator\InitialAvatar;
+use Intervention\Image\Exception\NotSupportedException;
 
 trait HasProfilePhoto
 {
@@ -67,11 +69,17 @@ trait HasProfilePhoto
      */
     protected function defaultProfilePhotoUrl()
     {
-        $name = trim(collect(explode(' ', $this->name))->map(function ($segment) {
-            return $segment[0] ?? '';
-        })->join(' '));
-
-        return 'https://ui-avatars.com/api/?name='.urlencode($name).'&color=7F9CF5&background=EBF4FF';
+        try {
+            $avatar = new InitialAvatar();
+        
+            return $avatar->name($this->name)->color('#7F9CF5')->background('#EBF4FF')->size(100)->generate()->encode('data-url');
+        } catch (NotSupportedException $e) {
+            $name = trim(collect(explode(' ', $this->name))->map(function ($segment) {
+                return $segment[0] ?? '';
+            })->join(' '));
+    
+            return 'https://ui-avatars.com/api/?name='.urlencode($name).'&color=7F9CF5&background=EBF4FF';
+        }
     }
 
     /**
