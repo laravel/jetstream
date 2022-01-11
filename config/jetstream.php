@@ -18,6 +18,21 @@ return [
     'stack' => 'inertia',
 
     /*
+    |--------------------------------------------------------------------------
+    | Jetstream Routes Prefix / Subdomain
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify which prefix Jetstream will assign to all the routes
+    | that it registers with the application. If necessary, you may change
+    | subdomain under which all of the Jetstream routes will be available.
+    |
+    */
+
+    'prefix' => '',
+
+    'domain' => null,
+
+    /*
      |--------------------------------------------------------------------------
      | Jetstream Route Middleware
      |--------------------------------------------------------------------------
