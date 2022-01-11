@@ -158,13 +158,7 @@ trait HasTeams
      */
     public function hasTeamRole($team, string $role)
     {
-        if ($this->ownsTeam($team)) {
-            return true;
-        }
-
-        return $this->belongsToTeam($team) && optional(Jetstream::findRole($team->users->where(
-            'id', $this->id
-        )->first()->membership->role))->key === $role;
+        return optional($this->teamRole($team))->key === $role;
     }
 
     /**
