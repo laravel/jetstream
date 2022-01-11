@@ -2,6 +2,7 @@
 
 namespace Laravel\Jetstream;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -128,25 +129,29 @@ trait HasTeams
      * Get the role that the user has on the team.
      *
      * @param  mixed  $team
-     * @return \Laravel\Jetstream\Role|null
+     * @return Collection<int,\Laravel\Jetstream\Role>
      */
-    public function teamRole($team)
+    public function teamRoles($team): Collection
     {
-        if ($this->ownsTeam($team)) {
-            return new OwnerRole;
-        }
+        $roles = Collection::make();
 
         if (! $this->belongsToTeam($team)) {
-            return;
+            return $roles;
         }
 
-        $role = $team->users
-            ->where('id', $this->id)
-            ->first()
-            ->membership
-            ->role;
+        if ($this->ownsTeam($team)) {
+            $roles->push(new OwnerRole);
+        }
 
-        return $role ? Jetstream::findRole($role) : null;
+        $memberShip = $team->users()
+            ->where('users.id', $this->id)
+            ->limit(1)
+            ->first();
+        $otherRoles = $memberShip ? optional($memberShip)->membership->role : [];
+
+        return $roles->merge($otherRoles)->filter()->map(function ($role) {
+            return $role instanceof Role ? $role : Jetstream::findRole($role);
+        });
     }
 
     /**
@@ -158,13 +163,9 @@ trait HasTeams
      */
     public function hasTeamRole($team, string $role)
     {
-        if ($this->ownsTeam($team)) {
-            return true;
-        }
-
-        return $this->belongsToTeam($team) && optional(Jetstream::findRole($team->users->where(
-            'id', $this->id
-        )->first()->membership->role))->key === $role;
+        return (bool) $this->teamRoles($team)->first(function (Role $userRole) use ($role) {
+            return $userRole->key === $role;
+        });
     }
 
     /**
@@ -183,7 +184,7 @@ trait HasTeams
             return [];
         }
 
-        return (array) optional($this->teamRole($team))->permissions;
+        return $this->teamRoles($team)->pluck('permissions')->flatten()->toArray();
     }
 
     /**

@@ -58,6 +58,43 @@ class AddTeamMemberTest extends OrchestraTestCase
         $this->assertFalse($team->users->first()->hasTeamPermission($team, 'bar'));
     }
 
+    public function test_team_members_can_be_added_with_multiple_roles()
+    {
+        Jetstream::role('admin', 'Admin', ['foo']);
+        Jetstream::role('admin2', 'Admin2', ['foo2']);
+
+        $this->migrate();
+
+        $team = $this->createTeam();
+
+        $otherUser = User::forceCreate([
+            'name' => 'Adam Wathan',
+            'email' => 'adam@laravel.com',
+            'password' => 'secret',
+        ]);
+
+        $action = new AddTeamMember;
+
+        $action->add($team->owner, $team, 'adam@laravel.com', ['admin', 'admin2']);
+
+        $team = $team->fresh();
+
+        $this->assertCount(1, $team->users);
+
+        $this->assertInstanceOf(Membership::class, $team->users[0]->membership);
+
+        $this->assertTrue($otherUser->hasTeamRole($team, 'admin'));
+        $this->assertTrue($otherUser->hasTeamRole($team, 'admin2'));
+        $this->assertFalse($otherUser->hasTeamRole($team, 'editor'));
+        $this->assertFalse($otherUser->hasTeamRole($team, 'foobar'));
+
+        $team->users->first()->withAccessToken(new TransientToken);
+
+        $this->assertTrue($team->users->first()->hasTeamPermission($team, 'foo'));
+        $this->assertTrue($team->users->first()->hasTeamPermission($team, 'foo2'));
+        $this->assertFalse($team->users->first()->hasTeamPermission($team, 'bar'));
+    }
+
     public function test_user_email_address_must_exist()
     {
         $this->expectException(ValidationException::class);

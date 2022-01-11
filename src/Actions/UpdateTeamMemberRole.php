@@ -2,6 +2,7 @@
 
 namespace Laravel\Jetstream\Actions;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Jetstream\Events\TeamMemberUpdated;
@@ -16,17 +17,17 @@ class UpdateTeamMemberRole
      * @param  mixed  $user
      * @param  mixed  $team
      * @param  int  $teamMemberId
-     * @param  string  $role
+     * @param  array<string>|string|null  $role
      * @return void
      */
-    public function update($user, $team, $teamMemberId, string $role)
+    public function update($user, $team, $teamMemberId, $role)
     {
         Gate::forUser($user)->authorize('updateTeamMember', $team);
-
+        $role = Arr::wrap($role);
         Validator::make([
-            'role' => $role,
+            'role.*' => $role,
         ], [
-            'role' => ['required', 'string', new Role],
+            'role.*' => ['required', 'string', new Role],
         ])->validate();
 
         $team->users()->updateExistingPivot($teamMemberId, [

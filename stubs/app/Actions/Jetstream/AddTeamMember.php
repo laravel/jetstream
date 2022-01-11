@@ -2,6 +2,7 @@
 
 namespace App\Actions\Jetstream;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
@@ -18,13 +19,13 @@ class AddTeamMember implements AddsTeamMembers
      * @param  mixed  $user
      * @param  mixed  $team
      * @param  string  $email
-     * @param  string|null  $role
+     * @param  array<string>|string|null  $role
      * @return void
      */
-    public function add($user, $team, string $email, string $role = null)
+    public function add($user, $team, string $email, $role = [])
     {
         Gate::forUser($user)->authorize('addTeamMember', $team);
-
+        $role = Arr::wrap($role);
         $this->validate($team, $email, $role);
 
         $newTeamMember = Jetstream::findUserByEmailOrFail($email);
@@ -43,14 +44,14 @@ class AddTeamMember implements AddsTeamMembers
      *
      * @param  mixed  $team
      * @param  string  $email
-     * @param  string|null  $role
+     * @param  array  $role
      * @return void
      */
-    protected function validate($team, string $email, ?string $role)
+    protected function validate($team, string $email, array $role)
     {
         Validator::make([
             'email' => $email,
-            'role' => $role,
+            'role.*' => $role,
         ], $this->rules(), [
             'email.exists' => __('We were unable to find a registered user with this email address.'),
         ])->after(
@@ -67,7 +68,7 @@ class AddTeamMember implements AddsTeamMembers
     {
         return array_filter([
             'email' => ['required', 'email', 'exists:users'],
-            'role' => Jetstream::hasRoles()
+            'role.*' => Jetstream::hasRoles()
                             ? ['required', 'string', new Role]
                             : null,
         ]);

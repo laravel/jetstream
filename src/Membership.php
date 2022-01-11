@@ -12,4 +12,6 @@ abstract class Membership extends Pivot
      * @var string
      */
     protected $table = 'team_user';
+
+    protected $casts = ['role' => 'array'];
 }
