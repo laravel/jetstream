@@ -29,7 +29,7 @@ class HasTeamsTest extends OrchestraTestCase
     {
         $team = Team::factory()->create();
 
-        $this->assertInstanceOf(OwnerRole::class, $team->owner->teamRole($team));
+        $this->assertInstanceOf(OwnerRole::class, $team->owner->teamRoles($team)->first());
     }
 
     public function test_teamRole_returns_the_matching_role(): void
@@ -44,7 +44,7 @@ class HasTeamsTest extends OrchestraTestCase
                 'role' => 'admin',
             ])
             ->create();
-        $role = $team->users->first()->teamRole($team);
+        $role = $team->users->first()->teamRoles($team)->first();
 
         $this->assertInstanceOf(Role::class, $role);
         $this->assertSame('admin', $role->key);
@@ -54,7 +54,7 @@ class HasTeamsTest extends OrchestraTestCase
     {
         $team = Team::factory()->create();
 
-        $this->assertNull((new UserFixture())->teamRole($team));
+        $this->assertEmpty((new UserFixture())->teamRoles($team));
     }
 
     public function test_teamRole_returns_null_if_the_user_does_not_have_a_role_on_the_site(): void
@@ -63,7 +63,7 @@ class HasTeamsTest extends OrchestraTestCase
             ->has(User::factory())
             ->create();
 
-        $this->assertNull($team->users->first()->teamRole($team));
+        $this->assertEmpty($team->users->first()->teamRoles($team));
     }
 
     public function test_teamPermissions_returns_all_for_team_owners(): void
