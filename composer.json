@@ -18,11 +18,11 @@
         "ext-json": "*",
         "illuminate/support": "^8.0|^9.0",
         "jenssegers/agent": "^2.6",
-        "laravel/fortify": "^1.0|dev-develop"
+        "laravel/fortify": "^1.9"
     },
     "require-dev": {
         "inertiajs/inertia-laravel": "^0.2.4|dev-laravel-9",
-        "laravel/sanctum": "^2.6|dev-develop",
+        "laravel/sanctum": "^2.7",
         "mockery/mockery": "^1.0",
         "orchestra/testbench": "^6.0|^7.0",
         "phpunit/phpunit": "^9.3"
