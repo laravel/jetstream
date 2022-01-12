@@ -1,6 +1,13 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.5.1...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.6.0...2.x)
+
+
+## [v2.6.0 (2022-01-12)](https://github.com/laravel/jetstream/compare/v2.5.1...v2.6.0)
+
+### Changed
+- Laravel 9 Support ([#948](https://github.com/laravel/jetstream/pull/948))
+- Anonymize default profile photo url calls ([#940](https://github.com/laravel/jetstream/pull/940))
 
 
 ## [v2.5.1 (2022-01-04)](https://github.com/laravel/jetstream/compare/v2.5.0...v2.5.1)
