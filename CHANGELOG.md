@@ -1,6 +1,13 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v1.6.7...1.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v1.7.0...1.x)
+
+
+## [v1.7.0 (2022-01-12)](https://github.com/laravel/jetstream/compare/v1.6.7...v1.7.0)
+
+### Changed
+- Laravel 9 Support ([#952](https://github.com/laravel/jetstream/pull/952))
+- Separate webpack ([#927](https://github.com/laravel/jetstream/pull/927))
 
 
 ## [v1.6.7 (2021-12-14)](https://github.com/laravel/jetstream/compare/v1.6.6...v1.6.7)
