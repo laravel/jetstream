@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.6.0...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.6.1...2.x)
+
+
+## [v2.6.1 (2022-01-13)](https://github.com/laravel/jetstream/compare/v2.6.0...v2.6.1)
+
+### Changed
+- Bump `inertiajs/inertia-laravel` ([#954](https://github.com/laravel/jetstream/pull/954))
 
 
 ## [v2.6.0 (2022-01-12)](https://github.com/laravel/jetstream/compare/v2.5.1...v2.6.0)
