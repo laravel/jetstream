@@ -1,6 +1,14 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.6.1...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.6.2...2.x)
+
+
+## [v2.6.2 (2022-01-18)](https://github.com/laravel/jetstream/compare/v2.6.1...v2.6.2)
+
+### Changed
+- Route group Sanctum guard ([#957](https://github.com/laravel/jetstream/pull/957))
+- Add config option for guard ([82724e7](https://github.com/laravel/jetstream/commit/82724e7d7053fbaed82fcd9f196cdea4f1ca311f))
+- Make config stub and set default guard ([fff4df4](https://github.com/laravel/jetstream/commit/fff4df4dbe2ab9aa03ecd8f0120399b91ec6aef9))
 
 
 ## [v2.6.1 (2022-01-13)](https://github.com/laravel/jetstream/compare/v2.6.0...v2.6.1)
