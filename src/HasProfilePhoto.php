@@ -41,6 +41,10 @@ trait HasProfilePhoto
             return;
         }
 
+        if($this->profile_photo_path === null) {
+            return;
+        }
+
         Storage::disk($this->profilePhotoDisk())->delete($this->profile_photo_path);
 
         $this->forceFill([
