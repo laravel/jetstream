@@ -41,7 +41,7 @@ trait HasProfilePhoto
             return;
         }
 
-        if ($this->profile_photo_path === null) {
+        if (is_null($this->profile_photo_path)) {
             return;
         }
 
