@@ -42,11 +42,11 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
 
         // API...
         if (Jetstream::hasApiFeatures()) {
-            Route::controller(ApiTokenController::class)->name('api-tokens.')->group(function (){
+            Route::controller(ApiTokenController::class)->name('api-tokens.')->group(function () {
                 Route::get('/user/api-tokens', 'index')->name('index');
                 Route::post('/user/api-tokens', 'store')->name('store');
                 Route::put('/user/api-tokens/{token}', 'update')->name('update');
-                Route::delete('/user/api-tokens/{token}','destroy')->name('destroy');
+                Route::delete('/user/api-tokens/{token}', 'destroy')->name('destroy');
             });
         }
 
