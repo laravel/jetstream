@@ -42,23 +42,31 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
 
         // API...
         if (Jetstream::hasApiFeatures()) {
-            Route::get('/user/api-tokens', [ApiTokenController::class, 'index'])->name('api-tokens.index');
-            Route::post('/user/api-tokens', [ApiTokenController::class, 'store'])->name('api-tokens.store');
-            Route::put('/user/api-tokens/{token}', [ApiTokenController::class, 'update'])->name('api-tokens.update');
-            Route::delete('/user/api-tokens/{token}', [ApiTokenController::class, 'destroy'])->name('api-tokens.destroy');
+            Route::controller(ApiTokenController::class)->prefix('api-tokens.')->group(function (){
+                Route::get('/user/api-tokens', 'index')->name('index');
+                Route::post('/user/api-tokens', 'store')->name('store');
+                Route::put('/user/api-tokens/{token}', 'update')->name('update');
+                Route::delete('/user/api-tokens/{token}','destroy')->name('destroy');
+            });
         }
 
         // Teams...
         if (Jetstream::hasTeamFeatures()) {
-            Route::get('/teams/create', [TeamController::class, 'create'])->name('teams.create');
-            Route::post('/teams', [TeamController::class, 'store'])->name('teams.store');
-            Route::get('/teams/{team}', [TeamController::class, 'show'])->name('teams.show');
-            Route::put('/teams/{team}', [TeamController::class, 'update'])->name('teams.update');
-            Route::delete('/teams/{team}', [TeamController::class, 'destroy'])->name('teams.destroy');
+            Route::controller(TeamController::class)->prefix('teams.')->group(function () {
+                Route::get('/teams/create', 'create')->name('create');
+                Route::post('/teams', 'store')->name('store');
+                Route::get('/teams/{team}', 'show')->name('show');
+                Route::put('/teams/{team}', 'update')->name('update');
+                Route::delete('/teams/{team}', 'destroy')->name('destroy');
+            });
+
             Route::put('/current-team', [CurrentTeamController::class, 'update'])->name('current-team.update');
-            Route::post('/teams/{team}/members', [TeamMemberController::class, 'store'])->name('team-members.store');
-            Route::put('/teams/{team}/members/{user}', [TeamMemberController::class, 'update'])->name('team-members.update');
-            Route::delete('/teams/{team}/members/{user}', [TeamMemberController::class, 'destroy'])->name('team-members.destroy');
+
+            Route::controller(TeamController::class)->prefix('team-members.')->group(function () {
+                Route::post('/teams/{team}/members', 'store')->name('store');
+                Route::put('/teams/{team}/members/{user}', 'update')->name('update');
+                Route::delete('/teams/{team}/members/{user}', 'destroy')->name('destroy');
+            });
 
             Route::get('/team-invitations/{invitation}', [TeamInvitationController::class, 'accept'])
                         ->middleware(['signed'])
