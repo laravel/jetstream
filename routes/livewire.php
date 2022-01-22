@@ -33,8 +33,8 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
         // Teams...
         if (Jetstream::hasTeamFeatures()) {
             Route::controller(TeamController::class)->name('teams.')->group(function () {
-                Route::get('/teams/create','create')->name('create');
-                Route::get('/teams/{team}','show')->name('show');
+                Route::get('/teams/create', 'create')->name('create');
+                Route::get('/teams/{team}', 'show')->name('show');
             });
 
             Route::put('/current-team', [CurrentTeamController::class, 'update'])->name('current-team.update');
