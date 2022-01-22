@@ -42,7 +42,7 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
 
         // API...
         if (Jetstream::hasApiFeatures()) {
-            Route::controller(ApiTokenController::class)->prefix('api-tokens.')->group(function (){
+            Route::controller(ApiTokenController::class)->name('api-tokens.')->group(function (){
                 Route::get('/user/api-tokens', 'index')->name('index');
                 Route::post('/user/api-tokens', 'store')->name('store');
                 Route::put('/user/api-tokens/{token}', 'update')->name('update');
@@ -52,7 +52,7 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
 
         // Teams...
         if (Jetstream::hasTeamFeatures()) {
-            Route::controller(TeamController::class)->prefix('teams.')->group(function () {
+            Route::controller(TeamController::class)->name('teams.')->group(function () {
                 Route::get('/teams/create', 'create')->name('create');
                 Route::post('/teams', 'store')->name('store');
                 Route::get('/teams/{team}', 'show')->name('show');
@@ -62,7 +62,7 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
 
             Route::put('/current-team', [CurrentTeamController::class, 'update'])->name('current-team.update');
 
-            Route::controller(TeamController::class)->prefix('team-members.')->group(function () {
+            Route::controller(TeamMemberController::class)->name('team-members.')->group(function () {
                 Route::post('/teams/{team}/members', 'store')->name('store');
                 Route::put('/teams/{team}/members/{user}', 'update')->name('update');
                 Route::delete('/teams/{team}/members/{user}', 'destroy')->name('destroy');
