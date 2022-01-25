@@ -1,6 +1,16 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.6.2...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.6.3...2.x)
+
+
+## [v2.6.3 (2022-01-25)](https://github.com/laravel/jetstream/compare/v2.6.2...v2.6.3)
+
+### Changed
+- Switch to Laravel 8.37 >= anonymous migrations ([#961](https://github.com/laravel/jetstream/pull/961))
+
+### Fixed
+- Add Check before deleting a profile photo ([#959](https://github.com/laravel/jetstream/pull/959))
+- Always return array to ui from allTeams() ([#966](https://github.com/laravel/jetstream/pull/966))
 
 
 ## [v2.6.2 (2022-01-18)](https://github.com/laravel/jetstream/compare/v2.6.1...v2.6.2)
