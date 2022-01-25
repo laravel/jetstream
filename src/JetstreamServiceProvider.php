@@ -158,7 +158,7 @@ class JetstreamServiceProvider extends ServiceProvider
         }
 
         $this->publishes([
-            __DIR__.'/../config/jetstream.php' => config_path('jetstream.php'),
+            __DIR__.'/../stubs/config/jetstream.php' => config_path('jetstream.php'),
         ], 'jetstream-config');
 
         $this->publishes([

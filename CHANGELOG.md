@@ -1,6 +1,45 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.5.0...master)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.6.3...master)
+
+
+## [v2.6.3 (2022-01-25)](https://github.com/laravel/jetstream/compare/v2.6.2...v2.6.3)
+
+### Changed
+- Switch to Laravel 8.37 >= anonymous migrations ([#961](https://github.com/laravel/jetstream/pull/961))
+
+### Fixed
+- Add Check before deleting a profile photo ([#959](https://github.com/laravel/jetstream/pull/959))
+- Always return array to ui from allTeams() ([#966](https://github.com/laravel/jetstream/pull/966))
+
+
+## [v2.6.2 (2022-01-18)](https://github.com/laravel/jetstream/compare/v2.6.1...v2.6.2)
+
+### Changed
+- Route group Sanctum guard ([#957](https://github.com/laravel/jetstream/pull/957))
+- Add config option for guard ([82724e7](https://github.com/laravel/jetstream/commit/82724e7d7053fbaed82fcd9f196cdea4f1ca311f))
+- Make config stub and set default guard ([fff4df4](https://github.com/laravel/jetstream/commit/fff4df4dbe2ab9aa03ecd8f0120399b91ec6aef9))
+
+
+## [v2.6.1 (2022-01-13)](https://github.com/laravel/jetstream/compare/v2.6.0...v2.6.1)
+
+### Changed
+- Bump `inertiajs/inertia-laravel` ([#954](https://github.com/laravel/jetstream/pull/954))
+
+
+## [v2.6.0 (2022-01-12)](https://github.com/laravel/jetstream/compare/v2.5.1...v2.6.0)
+
+### Changed
+- Laravel 9 Support ([#948](https://github.com/laravel/jetstream/pull/948))
+- Anonymize default profile photo url calls ([#940](https://github.com/laravel/jetstream/pull/940))
+
+
+## [v2.5.1 (2022-01-04)](https://github.com/laravel/jetstream/compare/v2.5.0...v2.5.1)
+
+### Changed
+* Fixed a content reflow issue on slower connection in update profile info form ([#929](https://github.com/laravel/jetstream/pull/929))
+* Fixed a button spacing issue in dialog modal footer ([#930](https://github.com/laravel/jetstream/pull/930), [#935](https://github.com/laravel/jetstream/pull/935))
+* Show 'Unknown' instead of 'false' if other browser session Useragent details are not matched in library ([#934](https://github.com/laravel/jetstream/pull/934))
 
 
 ## [v2.5.0 (2021-12-14)](https://github.com/laravel/jetstream/compare/v2.4.4...v2.5.0)

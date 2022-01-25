@@ -4,6 +4,7 @@ namespace Laravel\Jetstream;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
 
 trait HasProfilePhoto
@@ -40,6 +41,10 @@ trait HasProfilePhoto
             return;
         }
 
+        if (is_null($this->profile_photo_path)) {
+            return;
+        }
+
         Storage::disk($this->profilePhotoDisk())->delete($this->profile_photo_path);
 
         $this->forceFill([
@@ -66,7 +71,11 @@ trait HasProfilePhoto
      */
     protected function defaultProfilePhotoUrl()
     {
-        return 'https://ui-avatars.com/api/?name='.urlencode($this->name).'&color=7F9CF5&background=EBF4FF';
+        $name = trim(collect(explode(' ', $this->name))->map(function ($segment) {
+            return $segment[0] ?? '';
+        })->join(' '));
+
+        return 'https://ui-avatars.com/api/?name='.urlencode($name).'&color=7F9CF5&background=EBF4FF';
     }
 
     /**
