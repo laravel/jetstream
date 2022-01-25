@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v1.7.1...1.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v1.7.2...1.x)
+
+
+## [v1.7.2 (2022-01-25)](https://github.com/laravel/jetstream/compare/v1.7.1...v1.7.2)
+
+### Fixed
+- Add Check before deleting profile photo ([#960](https://github.com/laravel/jetstream/pull/960))
 
 
 ## [v1.7.1 (2022-01-13)](https://github.com/laravel/jetstream/compare/v1.7.0...v1.7.1)
