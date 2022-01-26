@@ -25,9 +25,9 @@ class ShareInertiaData
     }
 
     /**
-     * Jetstream related data to be shared with Inertia
+     * Jetstream related data to be shared with Inertia.
      *
-     * @param \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function shareJetstreamData($request)
