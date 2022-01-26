@@ -19,12 +19,25 @@ class ShareInertiaData
      */
     public function handle($request, $next)
     {
-        Inertia::share(array_filter([
+        Inertia::share($this->shareJetstreamData($request));
+
+        return $next($request);
+    }
+
+    /**
+     * Jetstream related data to be shared with Inertia
+     *
+     * @param \Illuminate\Http\Request  $request
+     * @return array
+     */
+    public function shareJetstreamData($request)
+    {
+        return array_filter([
             'jetstream' => function () use ($request) {
                 return [
                     'canCreateTeams' => $request->user() &&
-                                        Jetstream::hasTeamFeatures() &&
-                                        Gate::forUser($request->user())->check('create', Jetstream::newTeamModel()),
+                        Jetstream::hasTeamFeatures() &&
+                        Gate::forUser($request->user())->check('create', Jetstream::newTeamModel()),
                     'canManageTwoFactorAuthentication' => Features::canManageTwoFactorAuthentication(),
                     'canUpdatePassword' => Features::enabled(Features::updatePasswords()),
                     'canUpdateProfileInformation' => Features::canUpdateProfileInformation(),
@@ -56,8 +69,6 @@ class ShareInertiaData
                     return [$key => $bag->messages()];
                 })->all();
             },
-        ]));
-
-        return $next($request);
+        ]);
     }
 }
