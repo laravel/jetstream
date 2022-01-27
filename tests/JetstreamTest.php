@@ -31,4 +31,22 @@ class JetstreamTest extends OrchestraTestCase
             'update',
         ], Jetstream::$permissions);
     }
+
+    public function test_roles_can_be_json_serialized()
+    {
+        Jetstream::$permissions = [];
+        Jetstream::$roles = [];
+
+        $role = Jetstream::role('admin', 'Admin', [
+            'read',
+            'create',
+        ])->description('Admin Description');
+
+        $serialized = $role->jsonSerialize();
+
+        $this->assertArrayHasKey('key', $serialized);
+        $this->assertArrayHasKey('name', $serialized);
+        $this->assertArrayHasKey('description', $serialized);
+        $this->assertArrayHasKey('permissions', $serialized);
+    }
 }
