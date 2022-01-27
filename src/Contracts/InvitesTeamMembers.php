@@ -10,8 +10,8 @@ interface InvitesTeamMembers
      * @param  mixed  $user
      * @param  mixed  $team
      * @param  string  $email
-     * @param  array<string>|string|null  $role
+     * @param  array<string>|string|null  $roles
      * @return void
      */
-    public function invite($user, $team, string $email, $role = []);
+    public function invite($user, $team, string $email, $roles = []);
 }

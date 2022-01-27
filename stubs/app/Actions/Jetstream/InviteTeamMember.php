@@ -21,20 +21,20 @@ class InviteTeamMember implements InvitesTeamMembers
      * @param  mixed  $user
      * @param  mixed  $team
      * @param  string  $email
-     * @param  array<string>|string|null  $role
+     * @param  array<string>|string|null  $roles
      * @return void
      */
-    public function invite($user, $team, string $email, $role = [])
+    public function invite($user, $team, string $email, $roles = [])
     {
         Gate::forUser($user)->authorize('addTeamMember', $team);
-        $role = Arr::wrap($role);
-        $this->validate($team, $email, $role);
+        $roles = Arr::wrap($roles);
+        $this->validate($team, $email, $roles);
 
-        InvitingTeamMember::dispatch($team, $email, $role);
+        InvitingTeamMember::dispatch($team, $email, $roles);
 
         $invitation = $team->teamInvitations()->create([
             'email' => $email,
-            'role.*' => $role,
+            'role.*' => $roles,
         ]);
 
         Mail::to($email)->send(new TeamInvitation($invitation));
@@ -45,14 +45,14 @@ class InviteTeamMember implements InvitesTeamMembers
      *
      * @param  mixed  $team
      * @param  string  $email
-     * @param  array  $role
+     * @param  array  $roles
      * @return void
      */
-    protected function validate($team, string $email, array $role)
+    protected function validate($team, string $email, array $roles)
     {
         Validator::make([
             'email' => $email,
-            'role.*' => $role,
+            'role.*' => $roles,
         ], $this->rules($team), [
             'email.unique' => __('This user has already been invited to the team.'),
         ])->after(

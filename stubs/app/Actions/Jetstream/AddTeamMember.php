@@ -19,21 +19,21 @@ class AddTeamMember implements AddsTeamMembers
      * @param  mixed  $user
      * @param  mixed  $team
      * @param  string  $email
-     * @param  array<string>|string|null  $role
+     * @param  array<string>|string|null  $roles
      * @return void
      */
-    public function add($user, $team, string $email, $role = [])
+    public function add($user, $team, string $email, $roles = [])
     {
         Gate::forUser($user)->authorize('addTeamMember', $team);
-        $role = Arr::wrap($role);
-        $this->validate($team, $email, $role);
+        $roles = Arr::wrap($roles);
+        $this->validate($team, $email, $roles);
 
         $newTeamMember = Jetstream::findUserByEmailOrFail($email);
 
         AddingTeamMember::dispatch($team, $newTeamMember);
 
         $team->users()->attach(
-            $newTeamMember, ['role' => $role]
+            $newTeamMember, ['role' => $roles]
         );
 
         TeamMemberAdded::dispatch($team, $newTeamMember);
@@ -44,14 +44,14 @@ class AddTeamMember implements AddsTeamMembers
      *
      * @param  mixed  $team
      * @param  string  $email
-     * @param  array  $role
+     * @param  array  $roles
      * @return void
      */
-    protected function validate($team, string $email, array $role)
+    protected function validate($team, string $email, array $roles)
     {
         Validator::make([
             'email' => $email,
-            'role.*' => $role,
+            'role.*' => $roles,
         ], $this->rules(), [
             'email.exists' => __('We were unable to find a registered user with this email address.'),
         ])->after(

@@ -17,21 +17,21 @@ class UpdateTeamMemberRole
      * @param  mixed  $user
      * @param  mixed  $team
      * @param  int  $teamMemberId
-     * @param  array<string>|string|null  $role
+     * @param  array<string>|string|null  $roles
      * @return void
      */
-    public function update($user, $team, $teamMemberId, $role)
+    public function update($user, $team, $teamMemberId, $roles)
     {
         Gate::forUser($user)->authorize('updateTeamMember', $team);
-        $role = Arr::wrap($role);
+        $roles = Arr::wrap($roles);
         Validator::make([
-            'role.*' => $role,
+            'role.*' => $roles,
         ], [
             'role.*' => ['required', 'string', new Role],
         ])->validate();
 
         $team->users()->updateExistingPivot($teamMemberId, [
-            'role' => $role,
+            'role' => $roles,
         ]);
 
         TeamMemberUpdated::dispatch($team->fresh(), Jetstream::findUserByIdOrFail($teamMemberId));
