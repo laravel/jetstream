@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.6.3...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.6.4...2.x)
+
+
+## [v2.6.4 (2022-02-01)](https://github.com/laravel/jetstream/compare/v2.6.3...v2.6.4)
+
+### Changed
+* Fix PHP 8.1 return type ([#969](https://github.com/laravel/jetstream/pull/969))
 
 
 ## [v2.6.3 (2022-01-25)](https://github.com/laravel/jetstream/compare/v2.6.2...v2.6.3)
