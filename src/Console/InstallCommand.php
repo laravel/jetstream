@@ -629,11 +629,11 @@ EOF;
     }
 
     /**
-     * Find the path to the php binary used
+     * Get the path to the appropriate PHP binary.
      *
      * @return string
      */
-    protected function getPhpBinary(): string
+    protected function phpBinary()
     {
         return (new PhpExecutableFinder())->find(false) ?: 'php';
     }
