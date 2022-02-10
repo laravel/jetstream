@@ -120,7 +120,7 @@ class InstallCommand extends Command
         $this->requireComposerPackages('livewire/livewire:^2.5');
 
         // Sanctum...
-        (new Process([$this->getPhpBinary(), 'artisan', 'vendor:publish', '--provider=Laravel\Sanctum\SanctumServiceProvider', '--force'], base_path()))
+        (new Process([$this->phpBinary(), 'artisan', 'vendor:publish', '--provider=Laravel\Sanctum\SanctumServiceProvider', '--force'], base_path()))
                 ->setTimeout(null)
                 ->run(function ($type, $output) {
                     $this->output->write($output);
@@ -300,7 +300,7 @@ EOF;
         });
 
         // Sanctum...
-        (new Process([$this->getPhpBinary(), 'artisan', 'vendor:publish', '--provider=Laravel\Sanctum\SanctumServiceProvider', '--force'], base_path()))
+        (new Process([$this->phpBinary(), 'artisan', 'vendor:publish', '--provider=Laravel\Sanctum\SanctumServiceProvider', '--force'], base_path()))
                 ->setTimeout(null)
                 ->run(function ($type, $output) {
                     $this->output->write($output);
@@ -337,7 +337,7 @@ EOF;
         $this->installServiceProviderAfter('FortifyServiceProvider', 'JetstreamServiceProvider');
 
         // Middleware...
-        (new Process([$this->getPhpBinary(), 'artisan', 'inertia:middleware', 'HandleInertiaRequests', '--force'], base_path()))
+        (new Process([$this->phpBinary(), 'artisan', 'inertia:middleware', 'HandleInertiaRequests', '--force'], base_path()))
             ->setTimeout(null)
             ->run(function ($type, $output) {
                 $this->output->write($output);
@@ -555,7 +555,7 @@ EOF;
         $composer = $this->option('composer');
 
         if ($composer !== 'global') {
-            $command = [$this->getPhpBinary(), $composer, 'require'];
+            $command = [$this->phpBinary(), $composer, 'require'];
         }
 
         $command = array_merge(
