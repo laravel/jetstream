@@ -1,6 +1,14 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.6.5...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.6.6...2.x)
+
+## [v2.6.6](https://github.com/laravel/jetstream/compare/v2.6.5...v2.6.6) - 2022-02-15
+
+### Fixed
+
+- Install command find the path to the php binary used ([#976](https://github.com/laravel/jetstream/pull/976))
+- Priorize 'accepted' validation rule for terms checkbox ([#980](https://github.com/laravel/jetstream/pull/980))
+- Mail Faker need on test cancelled invitations ([#978](https://github.com/laravel/jetstream/pull/978), [a03b8ec](https://github.com/laravel/jetstream/commit/a03b8ececef21e4d2c3bfb8a7e90ec36c2dfaaf9))
 
 ## [v2.6.5](https://github.com/laravel/jetstream/compare/v2.6.4...v2.6.5) - 2022-02-08
 
