@@ -23,6 +23,8 @@ test('team members can be invited to team', function () {
 });
 
 test('team member invitations can be cancelled', function () {
+    Mail::fake();
+
     $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
     // Add the team member...
