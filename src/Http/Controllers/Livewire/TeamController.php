@@ -25,7 +25,7 @@ class TeamController extends Controller
         }
 
         return view('teams.show', [
-            'user' => $request->user(),
+            'user' => $request->user(config('jetstream.guard')),
             'team' => $team,
         ]);
     }
@@ -41,7 +41,7 @@ class TeamController extends Controller
         Gate::authorize('create', Jetstream::newTeamModel());
 
         return view('teams.create', [
-            'user' => $request->user(),
+            'user' => $request->user(config('jetstream.guard')),
         ]);
     }
 }

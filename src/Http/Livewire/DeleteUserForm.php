@@ -54,13 +54,13 @@ class DeleteUserForm extends Component
     {
         $this->resetErrorBag();
 
-        if (! Hash::check($this->password, Auth::user()->password)) {
+        if (! Hash::check($this->password, Auth::guard(config('jetstream.guard'))->user()->password)) {
             throw ValidationException::withMessages([
                 'password' => [__('This password does not match our records.')],
             ]);
         }
 
-        $deleter->delete(Auth::user()->fresh());
+        $deleter->delete(Auth::guard(config('jetstream.guard'))->user()->fresh());
 
         $auth->logout();
 

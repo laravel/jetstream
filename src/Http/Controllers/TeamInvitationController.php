@@ -43,7 +43,7 @@ class TeamInvitationController extends Controller
      */
     public function destroy(Request $request, TeamInvitation $invitation)
     {
-        if (! Gate::forUser($request->user())->check('removeTeamMember', $invitation->team)) {
+        if (! Gate::forUser($request->user(config('jetstream.guard')))->check('removeTeamMember', $invitation->team)) {
             throw new AuthorizationException;
         }
 

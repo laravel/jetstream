@@ -51,7 +51,7 @@ class LogoutOtherBrowserSessionsForm extends Component
     {
         $this->resetErrorBag();
 
-        if (! Hash::check($this->password, Auth::user()->password)) {
+        if (! Hash::check($this->password, Auth::guard(config('jetstream.guard'))->user()->password)) {
             throw ValidationException::withMessages([
                 'password' => [__('This password does not match our records.')],
             ]);
@@ -78,7 +78,7 @@ class LogoutOtherBrowserSessionsForm extends Component
         }
 
         DB::connection(config('session.connection'))->table(config('session.table', 'sessions'))
-            ->where('user_id', Auth::user()->getAuthIdentifier())
+            ->where('user_id', Auth::guard(config('jetstream.guard'))->user()->getAuthIdentifier())
             ->where('id', '!=', request()->session()->getId())
             ->delete();
     }
@@ -96,7 +96,7 @@ class LogoutOtherBrowserSessionsForm extends Component
 
         return collect(
             DB::connection(config('session.connection'))->table(config('session.table', 'sessions'))
-                    ->where('user_id', Auth::user()->getAuthIdentifier())
+                    ->where('user_id', Auth::guard(config('jetstream.guard'))->user()->getAuthIdentifier())
                     ->orderBy('last_activity', 'desc')
                     ->get()
         )->map(function ($session) {

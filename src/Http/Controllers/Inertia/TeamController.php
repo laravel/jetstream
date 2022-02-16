@@ -67,7 +67,7 @@ class TeamController extends Controller
     {
         $creator = app(CreatesTeams::class);
 
-        $creator->create($request->user(), $request->all());
+        $creator->create($request->user(config('jetstream.guard')), $request->all());
 
         return $this->redirectPath($creator);
     }
@@ -83,7 +83,7 @@ class TeamController extends Controller
     {
         $team = Jetstream::newTeamModel()->findOrFail($teamId);
 
-        app(UpdatesTeamNames::class)->update($request->user(), $team, $request->all());
+        app(UpdatesTeamNames::class)->update($request->user(config('jetstream.guard')), $team, $request->all());
 
         return back(303);
     }
@@ -99,7 +99,7 @@ class TeamController extends Controller
     {
         $team = Jetstream::newTeamModel()->findOrFail($teamId);
 
-        app(ValidateTeamDeletion::class)->validate($request->user(), $team);
+        app(ValidateTeamDeletion::class)->validate($request->user(config('jetstream.guard')), $team);
 
         $deleter = app(DeletesTeams::class);
 

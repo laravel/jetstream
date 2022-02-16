@@ -32,7 +32,7 @@ class UpdateProfileInformationForm extends Component
      */
     public function mount()
     {
-        $this->state = Auth::user()->withoutRelations()->toArray();
+        $this->state = Auth::guard(config('jetstream.guard'))->user()->withoutRelations()->toArray();
     }
 
     /**
@@ -46,7 +46,7 @@ class UpdateProfileInformationForm extends Component
         $this->resetErrorBag();
 
         $updater->update(
-            Auth::user(),
+            Auth::guard(config('jetstream.guard'))->user(),
             $this->photo
                 ? array_merge($this->state, ['photo' => $this->photo])
                 : $this->state
@@ -68,7 +68,7 @@ class UpdateProfileInformationForm extends Component
      */
     public function deleteProfilePhoto()
     {
-        Auth::user()->deleteProfilePhoto();
+        Auth::guard(config('jetstream.guard'))->user()->deleteProfilePhoto();
 
         $this->emit('refresh-navigation-menu');
     }
@@ -80,7 +80,7 @@ class UpdateProfileInformationForm extends Component
      */
     public function getUserProperty()
     {
-        return Auth::user();
+        return Auth::guard(config('jetstream.guard'))->user();
     }
 
     /**

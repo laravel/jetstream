@@ -22,7 +22,7 @@ class CurrentUserController extends Controller
     public function destroy(Request $request, StatefulGuard $guard)
     {
         $confirmed = app(ConfirmPassword::class)(
-            $guard, $request->user(), $request->password
+            $guard, $request->user(config('jetstream.guard')), $request->password
         );
 
         if (! $confirmed) {
@@ -31,7 +31,7 @@ class CurrentUserController extends Controller
             ]);
         }
 
-        app(DeletesUsers::class)->delete($request->user()->fresh());
+        app(DeletesUsers::class)->delete($request->user(config('jetstream.guard'))->fresh());
 
         $guard->logout();
 

@@ -29,7 +29,7 @@ class UpdatePasswordForm extends Component
     {
         $this->resetErrorBag();
 
-        $updater->update(Auth::user(), $this->state);
+        $updater->update(Auth::guard(config('jetstream.guard'))->user(), $this->state);
 
         $this->state = [
             'current_password' => '',
@@ -47,7 +47,7 @@ class UpdatePasswordForm extends Component
      */
     public function getUserProperty()
     {
-        return Auth::user();
+        return Auth::guard(config('jetstream.guard'))->user();
     }
 
     /**

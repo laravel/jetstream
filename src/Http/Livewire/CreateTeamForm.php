@@ -28,7 +28,7 @@ class CreateTeamForm extends Component
     {
         $this->resetErrorBag();
 
-        $creator->create(Auth::user(), $this->state);
+        $creator->create(Auth::guard(config('jetstream.guard'))->user(), $this->state);
 
         return $this->redirectPath($creator);
     }
@@ -40,7 +40,7 @@ class CreateTeamForm extends Component
      */
     public function getUserProperty()
     {
-        return Auth::user();
+        return Auth::guard(config('jetstream.guard'))->user();
     }
 
     /**

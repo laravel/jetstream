@@ -188,7 +188,7 @@ class ApiTokenManager extends Component
      */
     public function getUserProperty()
     {
-        return Auth::user();
+        return Auth::guard(config('jetstream.guard'))->user();
     }
 
     /**

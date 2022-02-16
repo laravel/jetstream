@@ -72,7 +72,7 @@ trait ConfirmsPasswords
      */
     public function confirmPassword()
     {
-        if (! app(ConfirmPassword::class)(app(StatefulGuard::class), Auth::user(), $this->confirmablePassword)) {
+        if (! app(ConfirmPassword::class)(app(StatefulGuard::class), Auth::guard(config('jetstream.guard'))->user(), $this->confirmablePassword)) {
             throw ValidationException::withMessages([
                 'confirmable_password' => [__('This password does not match our records.')],
             ]);

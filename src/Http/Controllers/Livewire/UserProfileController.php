@@ -17,7 +17,7 @@ class UserProfileController extends Controller
     {
         return view('profile.show', [
             'request' => $request,
-            'user' => $request->user(),
+            'user' => $request->user(config('jetstream.guard')),
         ]);
     }
 }

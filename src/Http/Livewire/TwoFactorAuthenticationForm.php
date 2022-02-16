@@ -40,7 +40,7 @@ class TwoFactorAuthenticationForm extends Component
             $this->ensurePasswordIsConfirmed();
         }
 
-        $enable(Auth::user());
+        $enable(Auth::guard(config('jetstream.guard'))->user());
 
         $this->showingQrCode = true;
         $this->showingRecoveryCodes = true;
@@ -72,7 +72,7 @@ class TwoFactorAuthenticationForm extends Component
             $this->ensurePasswordIsConfirmed();
         }
 
-        $generate(Auth::user());
+        $generate(Auth::guard(config('jetstream.guard'))->user());
 
         $this->showingRecoveryCodes = true;
     }
@@ -89,7 +89,7 @@ class TwoFactorAuthenticationForm extends Component
             $this->ensurePasswordIsConfirmed();
         }
 
-        $disable(Auth::user());
+        $disable(Auth::guard(config('jetstream.guard'))->user());
     }
 
     /**
@@ -99,7 +99,7 @@ class TwoFactorAuthenticationForm extends Component
      */
     public function getUserProperty()
     {
-        return Auth::user();
+        return Auth::guard(config('jetstream.guard'))->user();
     }
 
     /**

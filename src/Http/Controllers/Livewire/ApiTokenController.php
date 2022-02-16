@@ -17,7 +17,7 @@ class ApiTokenController extends Controller
     {
         return view('api.index', [
             'request' => $request,
-            'user' => $request->user(),
+            'user' => $request->user(config('jetstream.guard')),
         ]);
     }
 }

@@ -26,14 +26,14 @@ class TeamMemberController extends Controller
 
         if (Features::sendsTeamInvitations()) {
             app(InvitesTeamMembers::class)->invite(
-                $request->user(),
+                $request->user(config('jetstream.guard')),
                 $team,
                 $request->email ?: '',
                 $request->role
             );
         } else {
             app(AddsTeamMembers::class)->add(
-                $request->user(),
+                $request->user(config('jetstream.guard')),
                 $team,
                 $request->email ?: '',
                 $request->role
@@ -54,7 +54,7 @@ class TeamMemberController extends Controller
     public function update(Request $request, $teamId, $userId)
     {
         app(UpdateTeamMemberRole::class)->update(
-            $request->user(),
+            $request->user(config('jetstream.guard')),
             Jetstream::newTeamModel()->findOrFail($teamId),
             $userId,
             $request->role
@@ -76,12 +76,12 @@ class TeamMemberController extends Controller
         $team = Jetstream::newTeamModel()->findOrFail($teamId);
 
         app(RemovesTeamMembers::class)->remove(
-            $request->user(),
+            $request->user(config('jetstream.guard')),
             $team,
             $user = Jetstream::findUserByIdOrFail($userId)
         );
 
-        if ($request->user()->id === $user->id) {
+        if ($request->user(config('jetstream.guard'))->id === $user->id) {
             return redirect(config('fortify.home'));
         }
 

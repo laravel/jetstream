@@ -46,7 +46,7 @@ class DeleteTeamForm extends Component
      */
     public function deleteTeam(ValidateTeamDeletion $validator, DeletesTeams $deleter)
     {
-        $validator->validate(Auth::user(), $this->team);
+        $validator->validate(Auth::guard(config('jetstream.guard'))->user(), $this->team);
 
         $deleter->delete($this->team);
 

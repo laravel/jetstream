@@ -21,7 +21,7 @@ class OtherBrowserSessionsController extends Controller
     public function destroy(Request $request, StatefulGuard $guard)
     {
         $confirmed = app(ConfirmPassword::class)(
-            $guard, $request->user(), $request->password
+            $guard, $request->user(config('jetstream.guard')), $request->password
         );
 
         if (! $confirmed) {
@@ -50,7 +50,7 @@ class OtherBrowserSessionsController extends Controller
         }
 
         DB::connection(config('session.connection'))->table(config('session.table', 'sessions'))
-            ->where('user_id', $request->user()->getAuthIdentifier())
+            ->where('user_id', $request->user(config('jetstream.guard'))->getAuthIdentifier())
             ->where('id', '!=', $request->session()->getId())
             ->delete();
     }

@@ -15,7 +15,7 @@ class ProfilePhotoController extends Controller
      */
     public function destroy(Request $request)
     {
-        $request->user()->deleteProfilePhoto();
+        $request->user(config('jetstream.guard'))->deleteProfilePhoto();
 
         return back(303)->with('status', 'profile-photo-deleted');
     }

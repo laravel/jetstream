@@ -22,9 +22,9 @@ class ShareInertiaData
         Inertia::share(array_filter([
             'jetstream' => function () use ($request) {
                 return [
-                    'canCreateTeams' => $request->user() &&
+                    'canCreateTeams' => $request->user(config('jetstream.guard')) &&
                                         Jetstream::hasTeamFeatures() &&
-                                        Gate::forUser($request->user())->check('create', Jetstream::newTeamModel()),
+                                        Gate::forUser($request->user(config('jetstream.guard')))->check('create', Jetstream::newTeamModel()),
                     'canManageTwoFactorAuthentication' => Features::canManageTwoFactorAuthentication(),
                     'canUpdatePassword' => Features::enabled(Features::updatePasswords()),
                     'canUpdateProfileInformation' => Features::canUpdateProfileInformation(),
@@ -37,18 +37,18 @@ class ShareInertiaData
                 ];
             },
             'user' => function () use ($request) {
-                if (! $request->user()) {
+                if (! $request->user(config('jetstream.guard'))) {
                     return;
                 }
 
-                if (Jetstream::hasTeamFeatures() && $request->user()) {
-                    $request->user()->currentTeam;
+                if (Jetstream::hasTeamFeatures() && $request->user(config('jetstream.guard'))) {
+                    $request->user(config('jetstream.guard'))->currentTeam;
                 }
 
-                return array_merge($request->user()->toArray(), array_filter([
-                    'all_teams' => Jetstream::hasTeamFeatures() ? $request->user()->allTeams()->values() : null,
+                return array_merge($request->user(config('jetstream.guard'))->toArray(), array_filter([
+                    'all_teams' => Jetstream::hasTeamFeatures() ? $request->user(config('jetstream.guard'))->allTeams()->values() : null,
                 ]), [
-                    'two_factor_enabled' => ! is_null($request->user()->two_factor_secret),
+                    'two_factor_enabled' => ! is_null($request->user(config('jetstream.guard'))->two_factor_secret),
                 ]);
             },
             'errorBags' => function () {

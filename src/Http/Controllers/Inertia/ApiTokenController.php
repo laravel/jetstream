@@ -17,7 +17,7 @@ class ApiTokenController extends Controller
     public function index(Request $request)
     {
         return Jetstream::inertia()->render($request, 'API/Index', [
-            'tokens' => $request->user()->tokens->map(function ($token) {
+            'tokens' => $request->user(config('jetstream.guard'))->tokens->map(function ($token) {
                 return $token->toArray() + [
                     'last_used_ago' => optional($token->last_used_at)->diffForHumans(),
                 ];
@@ -39,7 +39,7 @@ class ApiTokenController extends Controller
             'name' => ['required', 'string', 'max:255'],
         ]);
 
-        $token = $request->user()->createToken(
+        $token = $request->user(config('jetstream.guard'))->createToken(
             $request->name,
             Jetstream::validPermissions($request->input('permissions', []))
         );
@@ -63,7 +63,7 @@ class ApiTokenController extends Controller
             'permissions.*' => 'string',
         ]);
 
-        $token = $request->user()->tokens()->where('id', $tokenId)->firstOrFail();
+        $token = $request->user(config('jetstream.guard'))->tokens()->where('id', $tokenId)->firstOrFail();
 
         $token->forceFill([
             'abilities' => Jetstream::validPermissions($request->input('permissions', [])),
@@ -81,7 +81,7 @@ class ApiTokenController extends Controller
      */
     public function destroy(Request $request, $tokenId)
     {
-        $request->user()->tokens()->where('id', $tokenId)->first()->delete();
+        $request->user(config('jetstream.guard'))->tokens()->where('id', $tokenId)->first()->delete();
 
         return back(303);
     }
