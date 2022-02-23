@@ -16,7 +16,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "ext-json": "*",
-        "illuminate/support": "^8.0|^9.0",
+        "illuminate/support": "^8.37|^9.0",
         "jenssegers/agent": "^2.6",
         "laravel/fortify": "^1.9"
     },
