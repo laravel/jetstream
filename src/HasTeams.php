@@ -122,7 +122,7 @@ trait HasTeams
         if (is_null($team)) {
             return false;
         }
-        
+
         return $this->teams->contains(function ($t) use ($team) {
             return $t->id === $team->id;
         }) || $this->ownsTeam($team);
