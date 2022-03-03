@@ -1,6 +1,13 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.6.6...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.6.7...2.x)
+
+## [v2.6.7](https://github.com/laravel/jetstream/compare/v2.6.6...v2.6.7) - 2022-03-03
+
+### Changed
+
+- HasTeams.php: make belongsToTeam accept null team by @cholladay0816 in https://github.com/laravel/jetstream/pull/986
+- Use Alpine's @click.prevent for log out by @jrd-lewis in https://github.com/laravel/jetstream/pull/989
 
 ## [v2.6.6](https://github.com/laravel/jetstream/compare/v2.6.5...v2.6.6) - 2022-02-15
 
