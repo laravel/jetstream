@@ -1,3 +1,34 @@
+<script setup>
+import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
+import JetAuthenticationCard from '@/Jetstream/AuthenticationCard.vue';
+import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue';
+import JetButton from '@/Jetstream/Button.vue';
+import JetInput from '@/Jetstream/Input.vue';
+import JetCheckbox from '@/Jetstream/Checkbox.vue';
+import JetLabel from '@/Jetstream/Label.vue';
+import JetValidationErrors from '@/Jetstream/ValidationErrors.vue';
+
+defineProps({
+    canResetPassword: Boolean,
+    status: String,
+});
+
+const form = useForm({
+    email: '',
+    password: '',
+    remember: false,
+});
+
+const submit = () => {
+    form.transform(data => ({
+        ...data,
+        remember: form.remember ? 'on' : '',
+    })).post(route('login'), {
+        onFinish: () => form.reset('password'),
+    });
+};
+</script>
+
 <template>
     <Head title="Log in" />
 
@@ -15,17 +46,31 @@
         <form @submit.prevent="submit">
             <div>
                 <JetLabel for="email" value="Email" />
-                <JetInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus />
+                <JetInput
+                    id="email"
+                    v-model="form.email"
+                    type="email"
+                    class="mt-1 block w-full"
+                    required
+                    autofocus
+                />
             </div>
 
             <div class="mt-4">
                 <JetLabel for="password" value="Password" />
-                <JetInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" />
+                <JetInput
+                    id="password"
+                    v-model="form.password"
+                    type="password"
+                    class="mt-1 block w-full"
+                    required
+                    autocomplete="current-password"
+                />
             </div>
 
             <div class="block mt-4">
                 <label class="flex items-center">
-                    <JetCheckbox name="remember" v-model:checked="form.remember" />
+                    <JetCheckbox v-model:checked="form.remember" name="remember" />
                     <span class="ml-2 text-sm text-gray-600">Remember me</span>
                 </label>
             </div>
@@ -42,34 +87,3 @@
         </form>
     </JetAuthenticationCard>
 </template>
-
-<script setup>
-import JetAuthenticationCard from '@/Jetstream/AuthenticationCard.vue'
-import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue'
-import JetButton from '@/Jetstream/Button.vue'
-import JetInput from '@/Jetstream/Input.vue'
-import JetCheckbox from '@/Jetstream/Checkbox.vue'
-import JetLabel from '@/Jetstream/Label.vue'
-import JetValidationErrors from '@/Jetstream/ValidationErrors.vue'
-import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
-
-defineProps({
-    canResetPassword: Boolean,
-    status: String,
-});
-
-const form = useForm({
-    email: '',
-    password: '',
-    remember: false
-});
-
-const submit = () => {
-    form.transform(data => ({
-        ...data,
-        remember: form.remember ? 'on' : ''
-    })).post(route('login'), {
-        onFinish: () => form.reset('password'),
-    })
-}
-</script>
