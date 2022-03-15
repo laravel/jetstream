@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.6.7...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.6.8...2.x)
+
+## [v2.6.8](https://github.com/laravel/jetstream/compare/v2.6.7...v2.6.8) - 2022-03-15
+
+### Fixed
+
+- First check for ownership by @rennokki in https://github.com/laravel/jetstream/pull/996
 
 ## [v2.6.7](https://github.com/laravel/jetstream/compare/v2.6.6...v2.6.7) - 2022-03-03
 
