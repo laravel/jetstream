@@ -51,7 +51,7 @@ trait ConfirmsTwoFactorAuthentication
     protected function twoFactorAuthenticationDisabled(Request $request)
     {
         return is_null($request->user()->two_factor_secret) &&
-               is_null($request->user()->two_factor_confirmed_at);
+            is_null($request->user()->two_factor_confirmed_at);
     }
 
     /**
@@ -63,9 +63,9 @@ trait ConfirmsTwoFactorAuthentication
     protected function hasJustBegunConfirmingTwoFactorAuthentication(Request $request)
     {
         return ! is_null($request->user()->two_factor_secret) &&
-               is_null($request->user()->two_factor_confirmed_at) &&
-               $request->session()->has('two_factor_empty_at') &&
-               is_null($request->session()->get('two_factor_confirming_at'));
+            is_null($request->user()->two_factor_confirmed_at) &&
+            $request->session()->has('two_factor_empty_at') &&
+            is_null($request->session()->get('two_factor_confirming_at'));
     }
 
     /**
@@ -78,6 +78,6 @@ trait ConfirmsTwoFactorAuthentication
     protected function neverFinishedConfirmingTwoFactorAuthentication(Request $request, $currentTime)
     {
         return is_null($request->user()->two_factor_confirmed_at) &&
-               $request->session()->get('two_factor_confirming_at', 0) != $currentTime;
+            $request->session()->get('two_factor_confirming_at', 0) != $currentTime;
     }
 }
