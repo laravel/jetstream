@@ -15,12 +15,12 @@ trait HasProfilePhoto
      * @param  \Illuminate\Http\UploadedFile  $photo
      * @return void
      */
-    public function updateProfilePhoto(UploadedFile $photo)
+    public function updateProfilePhoto(UploadedFile $photo, $storagePath = 'profile-photos')
     {
-        tap($this->profile_photo_path, function ($previous) use ($photo) {
+        tap($this->profile_photo_path, function ($previous) use ($photo, $storagePath) {
             $this->forceFill([
                 'profile_photo_path' => $photo->storePublicly(
-                    'profile-photos', ['disk' => $this->profilePhotoDisk()]
+                    $storagePath, ['disk' => $this->profilePhotoDisk()]
                 ),
             ])->save();
 
