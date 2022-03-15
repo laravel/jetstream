@@ -46,7 +46,7 @@
                     <div class="mt-4">
                         <x-jet-label for="code" value="{{ __('Code') }}" />
 
-                        <x-jet-input id="code" class="block mt-1 w-1/2" type="text" inputmode="numeric" name="code" autofocus autocomplete="one-time-code"
+                        <x-jet-input id="code" type="text" name="code" class="block mt-1 w-1/2" inputmode="numeric" autofocus autocomplete="one-time-code"
                             wire:model.defer="code"
                             wire:keydown.enter="confirmTwoFactorAuthentication" />
 

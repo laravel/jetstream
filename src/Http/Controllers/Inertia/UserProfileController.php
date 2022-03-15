@@ -5,8 +5,11 @@ namespace Laravel\Jetstream\Http\Controllers\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Jenssegers\Agent\Agent;
+use Laravel\Fortify\Actions\DisableTwoFactorAuthentication;
+use Laravel\Fortify\Features;
 use Laravel\Jetstream\Jetstream;
 
 class UserProfileController extends Controller
@@ -19,7 +22,37 @@ class UserProfileController extends Controller
      */
     public function show(Request $request)
     {
+        $currentTime = time();
+
+        // Notate totally disabled state in session...
+        if (Features::optionEnabled(Features::twoFactorAuthentication(), 'confirm') &&
+            is_null(Auth::user()->two_factor_secret) &&
+            is_null(Auth::user()->two_factor_confirmed_at)) {
+            $request->session()->put('two_factor_empty_at', $currentTime);
+        }
+
+        // If was previously totally disabled this session but is now confirming, notate time...
+        if (Features::optionEnabled(Features::twoFactorAuthentication(), 'confirm') &&
+            ! is_null(Auth::user()->two_factor_secret) &&
+            is_null(Auth::user()->two_factor_confirmed_at) &&
+            $request->session()->has('two_factor_empty_at') &&
+            is_null($request->session()->get('two_factor_confirming_at'))) {
+            $request->session()->put('two_factor_confirming_at', $currentTime);
+        }
+
+        // If the profile is reloaded and is not confirmed but was previously in confirming state, disable...
+        if (Features::optionEnabled(Features::twoFactorAuthentication(), 'confirm') &&
+            is_null(Auth::user()->two_factor_confirmed_at) &&
+            // Don't disable if confirmation was first noted during this same request...
+            $request->session()->get('two_factor_confirming_at', 0) != $currentTime) {
+            app(DisableTwoFactorAuthentication::class)(Auth::user());
+
+            $request->session()->put('two_factor_empty_at', $currentTime);
+            $request->session()->remove('two_factor_confirming_at');
+        }
+
         return Jetstream::inertia()->render($request, 'Profile/Show', [
+            'confirmsTwoFactorAuthentication' => Features::optionEnabled(Features::twoFactorAuthentication(), 'confirm'),
             'sessions' => $this->sessions($request)->all(),
         ]);
     }
