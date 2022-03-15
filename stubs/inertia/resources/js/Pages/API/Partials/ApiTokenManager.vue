@@ -16,9 +16,9 @@ import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue';
 import JetSectionBorder from '@/Jetstream/SectionBorder.vue';
 
 const props = defineProps({
-    tokens: String,
-    availablePermissions: String,
-    defaultPermissions: String,
+    tokens: Array,
+    availablePermissions: Array,
+    defaultPermissions: Array,
 });
 
 const createApiTokenForm = useForm({
