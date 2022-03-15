@@ -23,7 +23,7 @@ class TwoFactorAuthenticationForm extends Component
     public $showingQrCode = false;
 
     /**
-     * Indicates if two factor authentication confirmation input and button are being displayed.
+     * Indicates if the two factor authentication confirmation input and button are being displayed.
      *
      * @var bool
      */
@@ -37,7 +37,7 @@ class TwoFactorAuthenticationForm extends Component
     public $showingRecoveryCodes = false;
 
     /**
-     * The OTP code for confirming 2FA.
+     * The OTP code for confirming two factor authentication.
      *
      * @var string|null
      */
