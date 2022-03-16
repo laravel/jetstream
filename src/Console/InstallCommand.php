@@ -62,15 +62,6 @@ class InstallCommand extends Command
         // Configure Session...
         $this->configureSession();
 
-        // AuthenticateSession Middleware...
-        if ($this->argument('stack') === 'inertia') {
-            $this->replaceInFile(
-                '// \Illuminate\Session\Middleware\AuthenticateSession::class',
-                '\Laravel\Jetstream\Http\Middleware\AuthenticateSession::class',
-                app_path('Http/Kernel.php')
-            );
-        }
-
         // Install Stack...
         if ($this->argument('stack') === 'livewire') {
             $this->installLivewireStack();
@@ -348,6 +339,13 @@ EOF;
         copy(__DIR__.'/../../stubs/app/Providers/JetstreamServiceProvider.php', app_path('Providers/JetstreamServiceProvider.php'));
 
         $this->installServiceProviderAfter('FortifyServiceProvider', 'JetstreamServiceProvider');
+
+        // AuthenticateSession Middleware...
+        $this->replaceInFile(
+            '// \Illuminate\Session\Middleware\AuthenticateSession::class',
+            '\Laravel\Jetstream\Http\Middleware\AuthenticateSession::class',
+            app_path('Http/Kernel.php')
+        );
 
         // Middleware...
         (new Process([$this->phpBinary(), 'artisan', 'inertia:middleware', 'HandleInertiaRequests', '--force'], base_path()))
