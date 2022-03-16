@@ -9,6 +9,7 @@ import JetLabel from '@/Jetstream/Label.vue';
 import JetValidationErrors from '@/Jetstream/ValidationErrors.vue';
 
 const recovery = ref(false);
+
 const form = useForm({
     code: '',
     recovery_code: '',

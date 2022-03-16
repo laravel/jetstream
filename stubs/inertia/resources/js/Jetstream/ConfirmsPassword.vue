@@ -24,6 +24,7 @@ defineProps({
 });
 
 const confirmingPassword = ref(false);
+
 const form = reactive({
     password: '',
     error: '',
