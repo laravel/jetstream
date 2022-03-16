@@ -31,6 +31,8 @@ return [
 
     'middleware' => ['web'],
 
+    'authenticate_session' => AuthenticateSession::class,
+
     /*
     |--------------------------------------------------------------------------
     | Jetstream Guard
