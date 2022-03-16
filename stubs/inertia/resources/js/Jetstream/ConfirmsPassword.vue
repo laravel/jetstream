@@ -85,7 +85,7 @@ const closeModal = () => {
 
                 <div class="mt-4">
                     <JetInput
-                        ref="password"
+                        ref="passwordInput"
                         v-model="form.password"
                         type="password"
                         class="mt-1 block w-3/4"
