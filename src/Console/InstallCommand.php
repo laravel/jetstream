@@ -268,7 +268,11 @@ class InstallCommand extends Command
     {
         return <<<'EOF'
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+Route::middleware([
+    'auth:sanctum',
+    \Laravel\Jetstream\Http\Middleware\AuthenticateSession::class,
+    'verified'
+])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
