@@ -37,11 +37,6 @@ class InstallCommand extends Command
     {
         // Publish...
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-config', '--force' => true]);
-
-        if ($this->argument('stack') === 'livewire') {
-            copy(__DIR__.'/../../stubs/livewire/config/jetstream.php', config_path('jetstream.php'));
-        }
-
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-migrations', '--force' => true]);
 
         $this->callSilent('vendor:publish', ['--tag' => 'fortify-config', '--force' => true]);
@@ -347,12 +342,19 @@ EOF;
 
         $this->installServiceProviderAfter('FortifyServiceProvider', 'JetstreamServiceProvider');
 
-        // AuthenticateSession Middleware...
+        // Remove AuthenticateSession Middleware...
         $this->replaceInFile(
-            '// \Illuminate\Session\Middleware\AuthenticateSession::class',
-            '\Laravel\Jetstream\Http\Middleware\AuthenticateSession::class',
+            PHP_EOL.'            // \Illuminate\Session\Middleware\AuthenticateSession::class,',
+            '',
             app_path('Http/Kernel.php')
         );
+
+        // AuthenticateSession Middleware...
+        // $this->replaceInFile(
+        //     '// \Illuminate\Session\Middleware\AuthenticateSession::class',
+        //     '\Laravel\Jetstream\Http\Middleware\AuthenticateSession::class',
+        //     app_path('Http/Kernel.php')
+        // );
 
         // Middleware...
         (new Process([$this->phpBinary(), 'artisan', 'inertia:middleware', 'HandleInertiaRequests', '--force'], base_path()))
