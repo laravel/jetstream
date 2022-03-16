@@ -77,8 +77,8 @@ const disableTwoFactorAuthentication = () => {
     Inertia.delete('/user/two-factor-authentication', {
         preserveScroll: true,
         onSuccess: () => {
-            disabling.value = false
-            confirming.value = false
+            disabling.value = false;
+            confirming.value = false;
         },
     });
 };
@@ -116,7 +116,7 @@ const disableTwoFactorAuthentication = () => {
             <div v-if="twoFactorEnabled">
                 <div v-if="qrCode">
                     <div class="mt-4 max-w-xl text-sm text-gray-600">
-                        <p class="font-semibold" v-if="confirming">
+                        <p v-if="confirming" class="font-semibold">
                             To finish enabling two factor authentication, scan the following QR code using your phone's authenticator application and provide the generated OTP code.
                         </p>
 
@@ -130,13 +130,17 @@ const disableTwoFactorAuthentication = () => {
                     <div v-if="confirming" class="mt-4">
                         <JetLabel for="code" value="Code" />
 
-                        <JetInput id="code" type="text" name="code"
-                                class="block mt-1 w-1/2"
-                                inputmode="numeric"
-                                autofocus
-                                autocomplete="one-time-code"
-                                v-model="confirmationForm.code"
-                                @keyup.enter="confirmTwoFactorAuthentication" />
+                        <JetInput
+                            id="code"
+                            v-model="confirmationForm.code"
+                            type="text"
+                            name="code"
+                            class="block mt-1 w-1/2"
+                            inputmode="numeric"
+                            autofocus
+                            autocomplete="one-time-code"
+                            @keyup.enter="confirmTwoFactorAuthentication"
+                        />
 
                         <JetInputError :message="confirmationForm.errors.code" class="mt-2" />
                     </div>
@@ -168,7 +172,13 @@ const disableTwoFactorAuthentication = () => {
 
                 <div v-else>
                     <JetConfirmsPassword @confirmed="confirmTwoFactorAuthentication">
-                        <JetButton type="button" class="mr-3" :class="{ 'opacity-25': enabling }" :disabled="enabling" v-if="confirming">
+                        <JetButton
+                            v-if="confirming"
+                            type="button"
+                            class="mr-3"
+                            :class="{ 'opacity-25': enabling }"
+                            :disabled="enabling"
+                        >
                             Confirm
                         </JetButton>
                     </JetConfirmsPassword>
