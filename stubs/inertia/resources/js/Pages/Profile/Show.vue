@@ -8,6 +8,7 @@ import UpdatePasswordForm from '@/Pages/Profile/Partials/UpdatePasswordForm.vue'
 import UpdateProfileInformationForm from '@/Pages/Profile/Partials/UpdateProfileInformationForm.vue';
 
 defineProps({
+    confirmsTwoFactorAuthentication: Boolean,
     sessions: Array,
 });
 </script>
@@ -35,7 +36,10 @@ defineProps({
                 </div>
 
                 <div v-if="$page.props.jetstream.canManageTwoFactorAuthentication">
-                    <TwoFactorAuthenticationForm class="mt-10 sm:mt-0" />
+                    <TwoFactorAuthenticationForm 
+                        :requires-confirmation="confirmsTwoFactorAuthentication"
+                        class="mt-10 sm:mt-0" 
+                    />
 
                     <JetSectionBorder />
                 </div>

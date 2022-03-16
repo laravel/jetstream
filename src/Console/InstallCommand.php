@@ -37,6 +37,11 @@ class InstallCommand extends Command
     {
         // Publish...
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-config', '--force' => true]);
+
+        if ($this->argument('stack') === 'livewire') {
+            copy(__DIR__.'/../../stubs/livewire/config/jetstream.php', config_path('jetstream.php'));
+        }
+
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-migrations', '--force' => true]);
 
         $this->callSilent('vendor:publish', ['--tag' => 'fortify-config', '--force' => true]);
@@ -56,13 +61,6 @@ class InstallCommand extends Command
 
         // Configure Session...
         $this->configureSession();
-
-        // AuthenticateSession Middleware...
-        $this->replaceInFile(
-            '// \Illuminate\Session\Middleware\AuthenticateSession::class',
-            '\Laravel\Jetstream\Http\Middleware\AuthenticateSession::class',
-            app_path('Http/Kernel.php')
-        );
 
         // Install Stack...
         if ($this->argument('stack') === 'livewire') {
@@ -203,6 +201,13 @@ class InstallCommand extends Command
             (new Filesystem)->append(base_path('routes/web.php'), $this->livewireRouteDefinition());
         }
 
+        // Remove AuthenticateSession Middleware...
+        $this->replaceInFile(
+            PHP_EOL.'            // \Illuminate\Session\Middleware\AuthenticateSession::class,',
+            '',
+            app_path('Http/Kernel.php')
+        );
+
         // Assets...
         copy(__DIR__.'/../../stubs/public/css/app.css', public_path('css/app.css'));
         copy(__DIR__.'/../../stubs/resources/css/app.css', resource_path('css/app.css'));
@@ -266,9 +271,15 @@ class InstallCommand extends Command
     {
         return <<<'EOF'
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.authenticate_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
 
 EOF;
     }
@@ -335,6 +346,13 @@ EOF;
         copy(__DIR__.'/../../stubs/app/Providers/JetstreamServiceProvider.php', app_path('Providers/JetstreamServiceProvider.php'));
 
         $this->installServiceProviderAfter('FortifyServiceProvider', 'JetstreamServiceProvider');
+
+        // AuthenticateSession Middleware...
+        $this->replaceInFile(
+            '// \Illuminate\Session\Middleware\AuthenticateSession::class',
+            '\Laravel\Jetstream\Http\Middleware\AuthenticateSession::class',
+            app_path('Http/Kernel.php')
+        );
 
         // Middleware...
         (new Process([$this->phpBinary(), 'artisan', 'inertia:middleware', 'HandleInertiaRequests', '--force'], base_path()))
