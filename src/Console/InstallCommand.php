@@ -277,9 +277,11 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.authenticate_session'),
     'verified'
-])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
 
 EOF;
     }
