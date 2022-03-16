@@ -37,6 +37,11 @@ class InstallCommand extends Command
     {
         // Publish...
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-config', '--force' => true]);
+
+        if ($this->argument('stack') === 'livewire') {
+            copy(__DIR__.'/../../stubs/livewire/config/jetstream.php', config_path('jetstream.php'));
+        }
+
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-migrations', '--force' => true]);
 
         $this->callSilent('vendor:publish', ['--tag' => 'fortify-config', '--force' => true]);
