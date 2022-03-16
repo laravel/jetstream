@@ -275,7 +275,7 @@ class InstallCommand extends Command
 
 Route::middleware([
     'auth:sanctum',
-    \Laravel\Jetstream\Http\Middleware\AuthenticateSession::class,
+    config('jetstream.authenticate_session'),
     'verified'
 ])->get('/dashboard', function () {
     return view('dashboard');
