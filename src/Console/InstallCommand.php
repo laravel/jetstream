@@ -201,6 +201,13 @@ class InstallCommand extends Command
             (new Filesystem)->append(base_path('routes/web.php'), $this->livewireRouteDefinition());
         }
 
+        // Remove AuthenticateSession Middleware...
+        $this->replaceInFile(
+            PHP_EOL.'            // \Illuminate\Session\Middleware\AuthenticateSession::class,',
+            '',
+            app_path('Http/Kernel.php')
+        );
+
         // Assets...
         copy(__DIR__.'/../../stubs/public/css/app.css', public_path('css/app.css'));
         copy(__DIR__.'/../../stubs/resources/css/app.css', resource_path('css/app.css'));
