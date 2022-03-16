@@ -196,13 +196,6 @@ class InstallCommand extends Command
             (new Filesystem)->append(base_path('routes/web.php'), $this->livewireRouteDefinition());
         }
 
-        // Remove AuthenticateSession Middleware...
-        $this->replaceInFile(
-            PHP_EOL.'            // \Illuminate\Session\Middleware\AuthenticateSession::class,',
-            '',
-            app_path('Http/Kernel.php')
-        );
-
         // Assets...
         copy(__DIR__.'/../../stubs/public/css/app.css', public_path('css/app.css'));
         copy(__DIR__.'/../../stubs/resources/css/app.css', resource_path('css/app.css'));
@@ -268,7 +261,7 @@ class InstallCommand extends Command
 
 Route::middleware([
     'auth:sanctum',
-    config('jetstream.authenticate_session'),
+    config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
@@ -341,20 +334,6 @@ EOF;
         copy(__DIR__.'/../../stubs/app/Providers/JetstreamServiceProvider.php', app_path('Providers/JetstreamServiceProvider.php'));
 
         $this->installServiceProviderAfter('FortifyServiceProvider', 'JetstreamServiceProvider');
-
-        // Remove AuthenticateSession Middleware...
-        $this->replaceInFile(
-            PHP_EOL.'            // \Illuminate\Session\Middleware\AuthenticateSession::class,',
-            '',
-            app_path('Http/Kernel.php')
-        );
-
-        // AuthenticateSession Middleware...
-        // $this->replaceInFile(
-        //     '// \Illuminate\Session\Middleware\AuthenticateSession::class',
-        //     '\Laravel\Jetstream\Http\Middleware\AuthenticateSession::class',
-        //     app_path('Http/Kernel.php')
-        // );
 
         // Middleware...
         (new Process([$this->phpBinary(), 'artisan', 'inertia:middleware', 'HandleInertiaRequests', '--force'], base_path()))

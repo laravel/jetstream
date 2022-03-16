@@ -20,8 +20,8 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
             ? 'auth:'.config('jetstream.guard')
             : 'auth';
 
-    $authSessionMiddleware = config('jetstream.authenticate_session', false)
-            ? config('jetstream.authenticate_session')
+    $authSessionMiddleware = config('jetstream.auth_session', false)
+            ? config('jetstream.auth_session')
             : null;
 
     Route::group(['middleware' => array_values(array_filter([$authMiddleware, $authSessionMiddleware, 'verified']))], function () {
