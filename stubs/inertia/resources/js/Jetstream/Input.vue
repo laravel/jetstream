@@ -1,5 +1,5 @@
 <script setup>
-import { defineExpose, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 defineProps({
     modelValue: String,
