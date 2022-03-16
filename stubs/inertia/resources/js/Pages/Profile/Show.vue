@@ -21,7 +21,9 @@
                 </div>
 
                 <div v-if="$page.props.jetstream.canManageTwoFactorAuthentication">
-                    <two-factor-authentication-form class="mt-10 sm:mt-0" />
+                    <two-factor-authentication-form
+                                class="mt-10 sm:mt-0"
+                                :requires-confirmation="confirmsTwoFactorAuthentication" />
 
                     <jet-section-border />
                 </div>
@@ -49,7 +51,10 @@
     import UpdateProfileInformationForm from '@/Pages/Profile/Partials/UpdateProfileInformationForm.vue'
 
     export default defineComponent({
-        props: ['sessions'],
+        props: [
+            'confirmsTwoFactorAuthentication',
+            'sessions'
+        ],
 
         components: {
             AppLayout,
