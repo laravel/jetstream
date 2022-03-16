@@ -1,5 +1,31 @@
+<script setup>
+import { ref } from 'vue';
+import { useForm } from '@inertiajs/inertia-vue3';
+import JetActionSection from '@/Jetstream/ActionSection.vue';
+import JetConfirmationModal from '@/Jetstream/ConfirmationModal.vue';
+import JetDangerButton from '@/Jetstream/DangerButton.vue';
+import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue';
+
+const props = defineProps({
+    team: Object,
+});
+
+const confirmingTeamDeletion = ref(false);
+const form = useForm();
+
+const confirmTeamDeletion = () => {
+    confirmingTeamDeletion.value = true;
+};
+
+const deleteTeam = () => {
+    form.delete(route('teams.destroy', props.team), {
+        errorBag: 'deleteTeam',
+    });
+};
+</script>
+
 <template>
-    <jet-action-section>
+    <JetActionSection>
         <template #title>
             Delete Team
         </template>
@@ -14,13 +40,13 @@
             </div>
 
             <div class="mt-5">
-                <jet-danger-button @click="confirmTeamDeletion">
+                <JetDangerButton @click="confirmTeamDeletion">
                     Delete Team
-                </jet-danger-button>
+                </JetDangerButton>
             </div>
 
             <!-- Delete Team Confirmation Modal -->
-            <jet-confirmation-modal :show="confirmingTeamDeletion" @close="confirmingTeamDeletion = false">
+            <JetConfirmationModal :show="confirmingTeamDeletion" @close="confirmingTeamDeletion = false">
                 <template #title>
                     Delete Team
                 </template>
@@ -30,55 +56,20 @@
                 </template>
 
                 <template #footer>
-                    <jet-secondary-button @click="confirmingTeamDeletion = false">
+                    <JetSecondaryButton @click="confirmingTeamDeletion = false">
                         Cancel
-                    </jet-secondary-button>
+                    </JetSecondaryButton>
 
-                    <jet-danger-button class="ml-3" @click="deleteTeam" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    <JetDangerButton
+                        class="ml-3"
+                        :class="{ 'opacity-25': form.processing }"
+                        :disabled="form.processing"
+                        @click="deleteTeam"
+                    >
                         Delete Team
-                    </jet-danger-button>
+                    </JetDangerButton>
                 </template>
-            </jet-confirmation-modal>
+            </JetConfirmationModal>
         </template>
-    </jet-action-section>
+    </JetActionSection>
 </template>
-
-<script>
-    import { defineComponent } from 'vue'
-    import JetActionSection from '@/Jetstream/ActionSection.vue'
-    import JetConfirmationModal from '@/Jetstream/ConfirmationModal.vue'
-    import JetDangerButton from '@/Jetstream/DangerButton.vue'
-    import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue'
-
-    export default defineComponent({
-        props: ['team'],
-
-        components: {
-            JetActionSection,
-            JetConfirmationModal,
-            JetDangerButton,
-            JetSecondaryButton,
-        },
-
-        data() {
-            return {
-                confirmingTeamDeletion: false,
-                deleting: false,
-
-                form: this.$inertia.form()
-            }
-        },
-
-        methods: {
-            confirmTeamDeletion() {
-                this.confirmingTeamDeletion = true
-            },
-
-            deleteTeam() {
-                this.form.delete(route('teams.destroy', this.team), {
-                    errorBag: 'deleteTeam'
-                });
-            },
-        },
-    })
-</script>
