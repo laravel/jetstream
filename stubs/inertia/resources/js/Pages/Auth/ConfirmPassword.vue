@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue';
 import { Head, useForm } from '@inertiajs/inertia-vue3';
 import JetAuthenticationCard from '@/Jetstream/AuthenticationCard.vue';
 import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue';
@@ -11,9 +12,14 @@ const form = useForm({
     password: '',
 });
 
+const passwordInput = ref(null);
+
 const submit = () => {
     form.post(route('password.confirm'), {
-        onFinish: () => form.reset(),
+        onFinish: () => {
+            form.reset();
+            passwordInput.value.focus();
+        },
     });
 };
 </script>
@@ -37,6 +43,7 @@ const submit = () => {
                 <JetLabel for="password" value="Password" />
                 <JetInput
                     id="password"
+                    ref="passwordInput"
                     v-model="form.password"
                     type="password"
                     class="mt-1 block w-full"
