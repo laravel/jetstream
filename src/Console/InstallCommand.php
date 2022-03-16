@@ -58,11 +58,13 @@ class InstallCommand extends Command
         $this->configureSession();
 
         // AuthenticateSession Middleware...
-        $this->replaceInFile(
-            '// \Illuminate\Session\Middleware\AuthenticateSession::class',
-            '\Laravel\Jetstream\Http\Middleware\AuthenticateSession::class',
-            app_path('Http/Kernel.php')
-        );
+        if ($this->argument('stack') === 'inertia') {
+            $this->replaceInFile(
+                '// \Illuminate\Session\Middleware\AuthenticateSession::class',
+                '\Laravel\Jetstream\Http\Middleware\AuthenticateSession::class',
+                app_path('Http/Kernel.php')
+            );
+        }
 
         // Install Stack...
         if ($this->argument('stack') === 'livewire') {
