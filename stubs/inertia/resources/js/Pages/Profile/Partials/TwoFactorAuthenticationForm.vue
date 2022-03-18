@@ -19,6 +19,7 @@ const enabling = ref(false);
 const confirming = ref(false);
 const disabling = ref(false);
 const qrCode = ref(null);
+const setupKey = ref(null);
 const recoveryCodes = ref([]);
 
 const confirmationForm = useForm({
@@ -36,6 +37,7 @@ const enableTwoFactorAuthentication = () => {
         preserveScroll: true,
         onSuccess: () => Promise.all([
             showQrCode(),
+            showSetupKey(),
             showRecoveryCodes(),
         ]),
         onFinish: () => {
@@ -51,6 +53,12 @@ const showQrCode = () => {
     });
 };
 
+const showSetupKey = () => {
+    return axios.get('/user/two-factor-setup-key').then(response => {
+        setupKey.value = response.data.setupKey;
+    });
+}
+
 const showRecoveryCodes = () => {
     return axios.get('/user/two-factor-recovery-codes').then(response => {
         recoveryCodes.value = response.data;
@@ -64,6 +72,7 @@ const confirmTwoFactorAuthentication = () => {
         onSuccess: () => {
             confirming.value = false;
             qrCode.value = null;
+            setupKey.value = null;
         },
     });
 };
@@ -120,15 +129,21 @@ const disableTwoFactorAuthentication = () => {
                 <div v-if="qrCode">
                     <div class="mt-4 max-w-xl text-sm text-gray-600">
                         <p v-if="confirming" class="font-semibold">
-                            To finish enabling two factor authentication, scan the following QR code using your phone's authenticator application and provide the generated OTP code.
+                            To finish enabling two factor authentication, scan the following QR code using your phone's authenticator application or enter the setup key and provide the generated OTP code.
                         </p>
 
                         <p v-else>
-                            Two factor authentication is now enabled. Scan the following QR code using your phone's authenticator application.
+                            Two factor authentication is now enabled. Scan the following QR code using your phone's authenticator application or enter the setup key.
                         </p>
                     </div>
 
                     <div class="mt-4" v-html="qrCode" />
+
+                    <div class="mt-4 max-w-xl text-sm text-gray-600">
+                        <p class="font-semibold">
+                            Setup Key: <span v-html="setupKey"></span>
+                        </p>
+                    </div>
 
                     <div v-if="confirming" class="mt-4">
                         <JetLabel for="code" value="Code" />
