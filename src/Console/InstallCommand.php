@@ -290,6 +290,7 @@ EOF;
                 '@inertiajs/progress' => '^0.2.7',
                 '@tailwindcss/forms' => '^0.5.0',
                 '@tailwindcss/typography' => '^0.5.2',
+                'laravel-vue-i18n' => '^1.3.1',
                 'postcss-import' => '^14.0.2',
                 'tailwindcss' => '^3.0.0',
                 'vue' => '^3.2.31',
