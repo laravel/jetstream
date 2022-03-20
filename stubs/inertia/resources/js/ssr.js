@@ -21,9 +21,9 @@ createServer((page) =>
                             return route(name, params, absolute, {
                                 ...page.props.ziggy,
                                 location: new URL(page.props.ziggy.url),
-                            })
+                            });
                         },
-                    }
+                    },
                 });
         },
     })
