@@ -288,13 +288,16 @@ EOF;
                 '@inertiajs/inertia' => '^0.11.0',
                 '@inertiajs/inertia-vue3' => '^0.6.0',
                 '@inertiajs/progress' => '^0.2.7',
+                '@inertiajs/server' => '^0.1.0',
                 '@tailwindcss/forms' => '^0.5.0',
                 '@tailwindcss/typography' => '^0.5.2',
                 'postcss-import' => '^14.0.2',
                 'tailwindcss' => '^3.0.0',
                 'vue' => '^3.2.31',
                 '@vue/compiler-sfc' => '^3.2.31',
+                '@vue/server-renderer' => '^3.2.31',
                 'vue-loader' => '^17.0.0',
+                'webpack-node-externals' => '^3.0.0'
             ] + $packages;
         });
 
@@ -308,6 +311,7 @@ EOF;
         // Tailwind Configuration...
         copy(__DIR__.'/../../stubs/inertia/tailwind.config.js', base_path('tailwind.config.js'));
         copy(__DIR__.'/../../stubs/inertia/webpack.mix.js', base_path('webpack.mix.js'));
+        copy(__DIR__.'/../../stubs/inertia/webpack.ssr.mix.js', base_path('webpack.ssr.mix.js'));
 
         // Directories...
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Fortify'));
@@ -340,6 +344,16 @@ EOF;
             ->run(function ($type, $output) {
                 $this->output->write($output);
             });
+
+        // SSR...
+        (new Process([$this->phpBinary(), 'artisan', 'vendor:publish', '--provider=Inertia\ServiceProvider', '--force'], base_path()))
+            ->setTimeout(null)
+            ->run(function ($type, $output) {
+                $this->output->write($output);
+            });
+
+        $this->replaceInFile("'enabled' => false", "'enabled' => true", config_path('inertia.php'));
+        $this->replaceInFile("mix --production", "mix --production --mix-config=webpack.ssr.mix.js && mix --production", base_path('package.json'));
 
         $this->installMiddlewareAfter('SubstituteBindings::class', '\App\Http\Middleware\HandleInertiaRequests::class');
 
@@ -382,6 +396,7 @@ EOF;
         copy(__DIR__.'/../../stubs/public/css/app.css', public_path('css/app.css'));
         copy(__DIR__.'/../../stubs/resources/css/app.css', resource_path('css/app.css'));
         copy(__DIR__.'/../../stubs/inertia/resources/js/app.js', resource_path('js/app.js'));
+        copy(__DIR__.'/../../stubs/inertia/resources/js/ssr.js', resource_path('js/ssr.js'));
 
         // Flush node_modules...
         // static::flushNodeModules();
