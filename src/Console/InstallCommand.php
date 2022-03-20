@@ -513,7 +513,7 @@ EOF;
             });
 
         $this->replaceInFile("'enabled' => false", "'enabled' => true", config_path('inertia.php'));
-        $this->replaceInFile("mix --production", "mix --production --mix-config=webpack.ssr.mix.js && mix --production", base_path('package.json'));
+        $this->replaceInFile('mix --production', 'mix --production --mix-config=webpack.ssr.mix.js && mix --production', base_path('package.json'));
     }
 
     /**
