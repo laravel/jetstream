@@ -59,7 +59,7 @@ class ShareInertiaData
             },
             'ziggy' => function () {
                 return (new Ziggy)->toArray();
-            }
+            },
         ]));
 
         return $next($request);
