@@ -49,6 +49,10 @@ class LogoutOtherBrowserSessionsForm extends Component
      */
     public function logoutOtherBrowserSessions(StatefulGuard $guard)
     {
+        if (config('session.driver') !== 'database') {
+            return;
+        }
+
         $this->resetErrorBag();
 
         if (! Hash::check($this->password, Auth::user()->password)) {
