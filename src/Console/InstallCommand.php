@@ -19,6 +19,7 @@ class InstallCommand extends Command
     protected $signature = 'jetstream:install {stack : The development stack that should be installed}
                                               {--teams : Indicates if team support should be installed}
                                               {--pest : Indicates if Pest should be installed}
+                                              {--ssr : Indicates if Inertia SSR support should be installed}
                                               {--composer=global : Absolute path to the Composer binary which should be used to install packages}';
 
     /**
@@ -403,6 +404,10 @@ EOF;
             $this->installInertiaTeamStack();
         }
 
+        if ($this->option('ssr')) {
+            $this->installInertiaSsrStack();
+        }
+
         $this->line('');
         $this->info('Inertia scaffolding installed successfully.');
         $this->comment('Please execute "npm install && npm run dev" to build your assets.');
@@ -480,6 +485,34 @@ EOF;
         // Factories...
         copy(__DIR__.'/../../database/factories/UserFactory.php', base_path('database/factories/UserFactory.php'));
         copy(__DIR__.'/../../database/factories/TeamFactory.php', base_path('database/factories/TeamFactory.php'));
+    }
+
+    /**
+     * Install the Inertia SSR stack into the application.
+     *
+     * @return void
+     */
+    protected function installInertiaSsrStack()
+    {
+        $this->updateNodePackages(function ($packages) {
+            return [
+                '@inertiajs/server' => '^0.1.0',
+                '@vue/server-renderer' => '^3.2.31',
+                'webpack-node-externals' => '^3.0.0',
+            ] + $packages;
+        });
+
+        copy(__DIR__.'/../../stubs/inertia/webpack.ssr.mix.js', base_path('webpack.ssr.mix.js'));
+        copy(__DIR__.'/../../stubs/inertia/resources/js/ssr.js', resource_path('js/ssr.js'));
+
+        (new Process([$this->phpBinary(), 'artisan', 'vendor:publish', '--provider=Inertia\ServiceProvider', '--force'], base_path()))
+            ->setTimeout(null)
+            ->run(function ($type, $output) {
+                $this->output->write($output);
+            });
+
+        $this->replaceInFile("'enabled' => false", "'enabled' => true", config_path('inertia.php'));
+        $this->replaceInFile('mix --production', 'mix --production --mix-config=webpack.ssr.mix.js && mix --production', base_path('package.json'));
     }
 
     /**
