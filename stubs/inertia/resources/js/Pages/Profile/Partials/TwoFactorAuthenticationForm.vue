@@ -55,7 +55,7 @@ const showQrCode = () => {
 
 const showSetupKey = () => {
     return axios.get('/user/two-factor-setup-key').then(response => {
-        setupKey.value = response.data.key;
+        setupKey.value = response.data.setupKey;
     });
 }
 
