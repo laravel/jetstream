@@ -1,6 +1,26 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.6.8...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.7.0...2.x)
+
+## [v2.7.0](https://github.com/laravel/jetstream/compare/v2.6.8...v2.7.0) - 2022-03-29
+
+### Added
+
+- Confirm 2FA when enabling by @driesvints & @taylorotwell in https://github.com/laravel/jetstream/pull/992
+- 2FA Setup Key by @ps-sean in https://github.com/laravel/jetstream/pull/1008
+- Add Inertia SSR Support by @xiCO2k in https://github.com/laravel/jetstream/pull/1012
+
+### Changed
+
+- Match Inertia Scaffolding with Livewire in regards to AuthenticateSessions by @taylorotwell in https://github.com/laravel/jetstream/pull/1003
+- Change Inertia Stubs to Composition API by @xiCO2k in https://github.com/laravel/jetstream/pull/1001
+- Remove return in ensurePasswordIsConfirmed by @driesvints in https://github.com/laravel/jetstream/pull/1006
+- Use `.alias` method from `Mix` by @xiCO2k in https://github.com/laravel/jetstream/pull/1009
+
+### Fixed
+
+- Fix stub tests by @driesvints in https://github.com/laravel/jetstream/pull/1014
+- Prioritize 'accepted' validation rule for terms checkbox in CreateNewUserWithTeams.php by @ChrisRiddell in https://github.com/laravel/jetstream/pull/1019
 
 ## [v2.6.8](https://github.com/laravel/jetstream/compare/v2.6.7...v2.6.8) - 2022-03-15
 
