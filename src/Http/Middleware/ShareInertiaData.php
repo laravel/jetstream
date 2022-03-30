@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
 use Laravel\Jetstream\Jetstream;
-use Tightenco\Ziggy\Ziggy;
 
 class ShareInertiaData
 {
@@ -56,9 +55,6 @@ class ShareInertiaData
                 return collect(optional(Session::get('errors'))->getBags() ?: [])->mapWithKeys(function ($bag, $key) {
                     return [$key => $bag->messages()];
                 })->all();
-            },
-            'ziggy' => function () {
-                return (new Ziggy)->toArray();
             },
         ]));
 
