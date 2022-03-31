@@ -1,10 +1,17 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { onUpdated, computed, ref } from 'vue';
 import { usePage } from '@inertiajs/inertia-vue3';
 
 const show = ref(true);
 const style = computed(() => usePage().props.value.jetstream.flash?.bannerStyle || 'success');
 const message = computed(() => usePage().props.value.jetstream.flash?.banner || '');
+
+onUpdated(() => {
+    if (false === show.value) {
+        show.value = true
+        usePage().props.value.jetstream.flash = null
+    }
+})
 </script>
 
 <template>
