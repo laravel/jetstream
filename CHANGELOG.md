@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.7.1...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.7.2...2.x)
+
+## [v2.7.2](https://github.com/laravel/jetstream/compare/v2.7.1...v2.7.2) - 2022-04-03
+
+### Fixed
+
+- Use Alpine's @click.prevent for switching teams by @jrd-lewis in https://github.com/laravel/jetstream/pull/1027
 
 ## [v2.7.1](https://github.com/laravel/jetstream/compare/v2.7.0...v2.7.1) - 2022-03-30
 
