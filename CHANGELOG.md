@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.7.0...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.7.1...2.x)
+
+## [v2.7.1](https://github.com/laravel/jetstream/compare/v2.7.0...v2.7.1) - 2022-03-30
+
+### Fixed
+
+- Not require `Ziggy` on `ShareInertiaData` middleware. by @xiCO2k in https://github.com/laravel/jetstream/pull/1024
 
 ## [v2.7.0](https://github.com/laravel/jetstream/compare/v2.6.8...v2.7.0) - 2022-03-29
 
