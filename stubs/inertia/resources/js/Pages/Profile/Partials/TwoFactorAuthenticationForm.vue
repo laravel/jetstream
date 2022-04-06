@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
 import { useForm, usePage } from '@inertiajs/inertia-vue3';
 import JetActionSection from '@/Jetstream/ActionSection.vue';
@@ -29,6 +29,13 @@ const confirmationForm = useForm({
 const twoFactorEnabled = computed(
     () => ! enabling.value && usePage().props.value.user.two_factor_enabled,
 );
+
+watch(twoFactorEnabled, () => {
+    if (! twoFactorEnabled.value) {
+        confirmationForm.reset();
+        confirmationForm.clearErrors();
+    }
+});
 
 const enableTwoFactorAuthentication = () => {
     enabling.value = true;
@@ -67,6 +74,7 @@ const showRecoveryCodes = () => {
 
 const confirmTwoFactorAuthentication = () => {
     confirmationForm.post('/user/confirmed-two-factor-authentication', {
+        errorBag: "confirmTwoFactorAuthentication",
         preserveScroll: true,
         preserveState: true,
         onSuccess: () => {
@@ -111,7 +119,7 @@ const disableTwoFactorAuthentication = () => {
                 You have enabled two factor authentication.
             </h3>
 
-            <h3 v-else-if="confirming" class="text-lg font-medium text-gray-900">
+            <h3 v-else-if="twoFactorEnabled && confirming" class="text-lg font-medium text-gray-900">
                 Finish enabling two factor authentication.
             </h3>
 
