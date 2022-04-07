@@ -165,7 +165,6 @@ const disableTwoFactorAuthentication = () => {
                             inputmode="numeric"
                             autofocus
                             autocomplete="one-time-code"
-                            @keyup.enter="confirmTwoFactorAuthentication"
                         />
 
                         <JetInputError :message="confirmationForm.errors.code" class="mt-2" />
