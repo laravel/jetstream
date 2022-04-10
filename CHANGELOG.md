@@ -1,6 +1,14 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.7.2...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.7.3...2.x)
+
+## [v2.7.3](https://github.com/laravel/jetstream/compare/v2.7.2...v2.7.3) - 2022-04-08
+
+## What's Changed
+
+- Fix parse error caused by alpine shorthand on dynamic-component by @authanram in https://github.com/laravel/jetstream/pull/1032
+- Fix error handling during 2FA confirmation by @ManuelLeiner in https://github.com/laravel/jetstream/pull/1030
+- Fix if user logs out when viewing the 2FA Form by @jjhamkuijpers in https://github.com/laravel/jetstream/pull/1034
 
 ## [v2.7.2](https://github.com/laravel/jetstream/compare/v2.7.1...v2.7.2) - 2022-04-03
 
