@@ -604,7 +604,7 @@ EOF;
     }
 
     /**
-     * Install the given Composer Packages as dev dependencies.
+     * Install the given Composer Packages as "dev" dependencies.
      *
      * @param  mixed  $packages
      * @return void
