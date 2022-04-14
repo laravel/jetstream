@@ -69,7 +69,7 @@ class InstallCommand extends Command
         $stubs = $this->getTestStubsPath();
 
         if ($this->option('pest')) {
-            $this->requireComposerPackages('pestphp/pest:^1.16', 'pestphp/pest-plugin-laravel:^1.1');
+            $this->requireComposerDevPackages('pestphp/pest:^1.16', 'pestphp/pest-plugin-laravel:^1.1');
 
             copy($stubs.'/Pest.php', base_path('tests/Pest.php'));
             copy($stubs.'/ExampleTest.php', base_path('tests/Feature/ExampleTest.php'));
@@ -593,6 +593,32 @@ EOF;
 
         $command = array_merge(
             $command ?? ['composer', 'require'],
+            is_array($packages) ? $packages : func_get_args()
+        );
+
+        (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))
+            ->setTimeout(null)
+            ->run(function ($type, $output) {
+                $this->output->write($output);
+            });
+    }
+
+    /**
+     * Install the given Composer Packages as "dev" dependencies.
+     *
+     * @param  mixed  $packages
+     * @return void
+     */
+    protected function requireComposerDevPackages($packages)
+    {
+        $composer = $this->option('composer');
+
+        if ($composer !== 'global') {
+            $command = [$this->phpBinary(), $composer, 'require', '--dev'];
+        }
+
+        $command = array_merge(
+            $command ?? ['composer', 'require', '--dev'],
             is_array($packages) ? $packages : func_get_args()
         );
 
