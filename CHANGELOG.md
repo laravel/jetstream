@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.7.3...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.7.4...2.x)
+
+## [v2.7.4](https://github.com/laravel/jetstream/compare/v2.7.3...v2.7.4) - 2022-04-19
+
+### Changed
+
+- Install pest as devDependency by @abenerd in https://github.com/laravel/jetstream/pull/1040
 
 ## [v2.7.3](https://github.com/laravel/jetstream/compare/v2.7.2...v2.7.3) - 2022-04-08
 
