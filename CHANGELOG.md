@@ -4,7 +4,7 @@
 
 ## [v2.7.3](https://github.com/laravel/jetstream/compare/v2.7.2...v2.7.3) - 2022-04-08
 
-## What's Changed
+### Fixed
 
 - Fix parse error caused by alpine shorthand on dynamic-component by @authanram in https://github.com/laravel/jetstream/pull/1032
 - Fix error handling during 2FA confirmation by @ManuelLeiner in https://github.com/laravel/jetstream/pull/1030
