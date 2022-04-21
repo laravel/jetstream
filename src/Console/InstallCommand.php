@@ -110,7 +110,7 @@ class InstallCommand extends Command
             }
         })->filter()->whenEmpty(function () {
             $this->info(<<<'END_OF_INFO'
-                \nJetstream attempted to update .env, .env.local, and .env.example to ensure the session driver is
+                Jetstream attempted to update .env, .env.local, and .env.example to ensure the session driver is
                 set to "database", but could not find one. Jetstream works best with database sessions, for more
                 information see: https://jetstream.laravel.com/2.x/features/browser-sessions.html
                 END_OF_INFO
