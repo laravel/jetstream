@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.7.4...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.7.5...2.x)
+
+## [v2.7.5](https://github.com/laravel/jetstream/compare/v2.7.4...v2.7.5) - 2022-04-25
+
+### Fixed
+
+- Fix banner not showing again if dismissed by the user by @LucaRed in https://github.com/laravel/jetstream/pull/1045
 
 ## [v2.7.4](https://github.com/laravel/jetstream/compare/v2.7.3...v2.7.4) - 2022-04-19
 
