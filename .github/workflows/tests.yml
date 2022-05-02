@@ -82,6 +82,12 @@ jobs:
           composer dump
           php artisan jetstream:install inertia --teams
 
+      - name: Install NPM dependencies
+        run: npm ci
+
+      - name: Compile assets
+        run: npm run production
+
       - name: Execute tests
         run: vendor/bin/phpunit --verbose
         env:
