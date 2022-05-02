@@ -44,13 +44,15 @@ jobs:
       - name: Execute tests
         run: vendor/bin/phpunit --verbose
 
-  inertia-test-stubs:
+  stub-tests:
     runs-on: ubuntu-20.04
 
     strategy:
       fail-fast: true
+      matrix:
+        stack: [inertia, livewire]
 
-    name: Inertia Test Stubs
+    name: Test Stubs (${{ matrix.stack }})
 
     steps:
       - name: Setup PHP
@@ -76,7 +78,7 @@ jobs:
       - name: Install Jetstream
         run: |
           composer dump
-          php artisan jetstream:install inertia --teams --api --verification
+          php artisan jetstream:install ${{ matrix.stack }} --teams --api --verification
 
       - name: Install NPM dependencies
         run: npm i
