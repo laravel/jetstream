@@ -65,10 +65,13 @@ jobs:
       - name: Setup Laravel
         run: composer create-project laravel/laravel:^9 .
 
-      - name: Setup Jetstream
+      - name: Checkout code
         uses: actions/checkout@v2
         with:
           path: 'vendor/laravel/jetstream'
+
+      - name: Install Jetstream
+        run: php artisan jetstream:install inertia --teams
 
       - name: Execute tests
         run: vendor/bin/phpunit --verbose
