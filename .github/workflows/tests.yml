@@ -76,7 +76,7 @@ jobs:
       - name: Install Jetstream
         run: |
           composer dump
-          php artisan jetstream:install inertia --teams
+          php artisan jetstream:install inertia --teams --api --verification
 
       - name: Install NPM dependencies
         run: npm i
