@@ -66,10 +66,9 @@ jobs:
         run: composer create-project laravel/laravel:^9 .
 
       - name: Setup Jetstream
-        run: |
-          composer config repositories.jetstream vcs ${{ github.server_url }}/${{ github.repository }}
-          composer require laravel/jetstream:dev-${{ github.ref_name }}#${{ github.sha }}
-          php artisan jetstream:install inertia --teams
+        uses: actions/checkout@v2
+        with:
+          path: 'vendor/laravel/jetstream'
 
       - name: Execute tests
         run: vendor/bin/phpunit --verbose
