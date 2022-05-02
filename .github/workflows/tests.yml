@@ -84,3 +84,6 @@ jobs:
 
       - name: Execute tests
         run: vendor/bin/phpunit --verbose
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ":memory:"
