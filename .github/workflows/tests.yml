@@ -63,11 +63,11 @@ jobs:
           coverage: none
 
       - name: Setup Laravel
-        run: composer create-project laravel/laravel .
+        run: composer create-project laravel/laravel:^9 .
 
       - name: Setup Jetstream
         run: |
-          config repositories.jetstream vcs {{ github.server_url }}/{{ github.repository }}
+          composer config repositories.jetstream vcs {{ github.server_url }}/{{ github.repository }}
           composer require laravel/jetstream:dev-{{ github.ref_name }}#{{ github.sha }}
           php artisan jetstream:install inertia --teams
 
