@@ -49,6 +49,10 @@ jobs:
 
     strategy:
       fail-fast: true
+      matrix:
+        php: [8.1]
+        laravel: [9]
+        jetstream: [2]
 
     name: Inertia Test Stubs
 
@@ -56,14 +60,17 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.1
+          php-version: ${{ matrix.php }}
           extensions: dom, curl, libxml, mbstring, zip
           ini-values: error_reporting=E_ALL
           tools: composer:v2
           coverage: none
 
       - name: Setup Laravel
-        run: composer create-project laravel/laravel:^9 .
+        run: |
+          composer create-project laravel/laravel:^${{ matrix.laravel }} .
+          composer require laravel/jetstream:^${{ matrix.jetstream }}
+          rm -rf vendor/laravel/jetstream
 
       - name: Checkout code
         uses: actions/checkout@v2
