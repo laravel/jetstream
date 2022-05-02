@@ -38,8 +38,38 @@ jobs:
 
       - name: Install dependencies
         run: |
-           composer require "illuminate/contracts=^${{ matrix.laravel }}" --no-update
-           composer update --prefer-dist --no-interaction --no-progress
+          composer require "illuminate/contracts=^${{ matrix.laravel }}" --no-update
+          composer update --prefer-dist --no-interaction --no-progress
+
+      - name: Execute tests
+        run: vendor/bin/phpunit --verbose
+
+  inertia-test-stubs:
+    runs-on: ubuntu-20.04
+
+    strategy:
+      fail-fast: true
+
+    name: Inertia Test Stubs
+
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+          extensions: dom, curl, libxml, mbstring, zip
+          ini-values: error_reporting=E_ALL
+          tools: composer:v2
+          coverage: none
+
+      - name: Setup Laravel
+        run: composer create-project laravel/laravel .
+
+      - name: Setup Jetstream
+        run: |
+          config repositories.jetstream vcs {{ github.server_url }}/{{ github.repository }}
+          composer require laravel/jetstream:dev-{{ github.ref_name }}#{{ github.sha }}
+          php artisan jetstream:install inertia --teams
 
       - name: Execute tests
         run: vendor/bin/phpunit --verbose
