@@ -38,8 +38,56 @@ jobs:
 
       - name: Install dependencies
         run: |
-           composer require "illuminate/contracts=^${{ matrix.laravel }}" --no-update
-           composer update --prefer-dist --no-interaction --no-progress
+          composer require "illuminate/contracts=^${{ matrix.laravel }}" --no-update
+          composer update --prefer-dist --no-interaction --no-progress
 
       - name: Execute tests
         run: vendor/bin/phpunit --verbose
+
+  stub-tests:
+    runs-on: ubuntu-20.04
+
+    strategy:
+      fail-fast: true
+      matrix:
+        stack: [inertia, livewire]
+
+    name: Test Stubs (${{ matrix.stack }})
+
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+          extensions: dom, curl, libxml, mbstring, zip
+          ini-values: error_reporting=E_ALL
+          tools: composer:v2
+          coverage: none
+
+      - name: Setup Laravel
+        run: |
+          composer create-project laravel/laravel:^9 .
+          composer require laravel/jetstream:^2
+          rm -rf vendor/laravel/jetstream
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          path: 'vendor/laravel/jetstream'
+
+      - name: Install Jetstream
+        run: |
+          composer dump
+          php artisan jetstream:install ${{ matrix.stack }} --teams --api --verification
+
+      - name: Install NPM dependencies
+        run: npm i
+
+      - name: Compile assets
+        run: npm run production
+
+      - name: Execute tests
+        run: vendor/bin/phpunit --verbose
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ":memory:"

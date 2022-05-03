@@ -18,6 +18,8 @@ class InstallCommand extends Command
      */
     protected $signature = 'jetstream:install {stack : The development stack that should be installed}
                                               {--teams : Indicates if team support should be installed}
+                                              {--api : Indicates if API support should be installed}
+                                              {--verification : Indicates if email verification support should be installed}
                                               {--pest : Indicates if Pest should be installed}
                                               {--ssr : Indicates if Inertia SSR support should be installed}
                                               {--composer=global : Absolute path to the Composer binary which should be used to install packages}';
@@ -57,6 +59,16 @@ class InstallCommand extends Command
 
         // Configure Session...
         $this->configureSession();
+
+        // Configure API...
+        if ($this->option('api')) {
+            $this->replaceInFile('// Features::api(),', 'Features::api(),', config_path('jetstream.php'));
+        }
+
+        // Configure Email Verification...
+        if ($this->option('verification')) {
+            $this->replaceInFile('// Features::emailVerification(),', 'Features::emailVerification(),', config_path('fortify.php'));
+        }
 
         // Install Stack...
         if ($this->argument('stack') === 'livewire') {
