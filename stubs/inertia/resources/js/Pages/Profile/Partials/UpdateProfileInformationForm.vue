@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
-import { useForm } from '@inertiajs/inertia-vue3';
+import { Link, useForm } from '@inertiajs/inertia-vue3';
 import JetButton from '@/Jetstream/Button.vue';
 import JetFormSection from '@/Jetstream/FormSection.vue';
 import JetInput from '@/Jetstream/Input.vue';
@@ -21,6 +21,7 @@ const form = useForm({
     photo: null,
 });
 
+const verificationLinkSent = ref(null);
 const photoPreview = ref(null);
 const photoInput = ref(null);
 
@@ -34,6 +35,10 @@ const updateProfileInformation = () => {
         preserveScroll: true,
         onSuccess: () => clearPhotoFileInput(),
     });
+};
+
+const sendEmailVerification = () => {
+    verificationLinkSent.value = true;
 };
 
 const selectNewPhoto = () => {
@@ -146,6 +151,26 @@ const clearPhotoFileInput = () => {
                     class="mt-1 block w-full"
                 />
                 <JetInputError :message="form.errors.email" class="mt-2" />
+
+                <div v-show="user.email_verified_at === null">
+                    <p class="text-sm mt-2">
+                        Your email address is unverified.
+
+                        <Link
+                            :href="route('verification.send')"
+                            method="post"
+                            as="button"
+                            class="underline text-gray-600 hover:text-gray-900"
+                            @click.prevent="sendEmailVerification"
+                        >
+                            Click here to re-send the verification email.
+                        </Link>
+                    </p>
+
+                    <div v-show="verificationLinkSent" class="mt-2 font-medium text-sm text-green-600">
+                        A new verification link has been sent to the above email address you.
+                    </div>
+                </div>
             </div>
         </template>
 
