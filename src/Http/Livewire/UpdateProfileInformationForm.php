@@ -26,6 +26,13 @@ class UpdateProfileInformationForm extends Component
     public $photo;
 
     /**
+     * Determine if the verification email was sent.
+     *
+     * @var bool
+     */
+    public $verificationLinkSent = false;
+
+    /**
      * Prepare the component.
      *
      * @return void
@@ -71,6 +78,18 @@ class UpdateProfileInformationForm extends Component
         Auth::user()->deleteProfilePhoto();
 
         $this->emit('refresh-navigation-menu');
+    }
+
+    /**
+     * Sent the email verification.
+     *
+     * @return void
+     */
+    public function sendEmailVerification()
+    {
+        Auth::user()->sendEmailVerificationNotification();
+
+        $this->verificationLinkSent = true;
     }
 
     /**
