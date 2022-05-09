@@ -67,7 +67,7 @@
 
             @unless ($this->user->hasVerifiedEmail())
                 <p class="text-sm mt-2">
-                    Your email address is unverified.
+                    {{ __('Your email address is unverified.') }}
 
                     <button type="button" class="underline text-sm text-gray-600 hover:text-gray-900" wire:click.prevent="sendEmailVerification">
                         {{ __('Click here to re-send the verification email.') }}
@@ -76,7 +76,7 @@
 
                 @if ($this->verificationLinkSent)
                     <p v-show="verificationLinkSent" class="mt-2 font-medium text-sm text-green-600">
-                        A new verification link has been sent to the above email address you.
+                        {{ __('A new verification link has been sent to the above email address you.') }}
                     </p>
                 @endif
             @endif
