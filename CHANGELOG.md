@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.7.5...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.8.0...2.x)
+
+## [v2.8.0](https://github.com/laravel/jetstream/compare/v2.7.5...v2.8.0) - 2022-05-10
+
+### Added
+
+- Verification improvements by @driesvints in https://github.com/laravel/jetstream/pull/1048
 
 ## [v2.7.5](https://github.com/laravel/jetstream/compare/v2.7.4...v2.7.5) - 2022-04-25
 
