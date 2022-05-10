@@ -76,7 +76,7 @@
 
                 @if ($this->verificationLinkSent)
                     <p v-show="verificationLinkSent" class="mt-2 font-medium text-sm text-green-600">
-                        {{ __('A new verification link has been sent to the above email address you.') }}
+                        {{ __('A new verification link has been sent to your email address.') }}
                     </p>
                 @endif
             @endif
