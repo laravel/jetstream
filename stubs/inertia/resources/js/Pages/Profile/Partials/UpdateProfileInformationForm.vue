@@ -168,7 +168,7 @@ const clearPhotoFileInput = () => {
                     </p>
 
                     <div v-show="verificationLinkSent" class="mt-2 font-medium text-sm text-green-600">
-                        A new verification link has been sent to the above email address you.
+                        A new verification link has been sent to your email address.
                     </div>
                 </div>
             </div>
