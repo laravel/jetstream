@@ -2,6 +2,7 @@
 
 namespace Laravel\Jetstream\Http\Middleware;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
@@ -49,6 +50,7 @@ class ShareInertiaData
                     'all_teams' => Jetstream::hasTeamFeatures() ? $request->user()->allTeams()->values() : null,
                 ]), [
                     'two_factor_enabled' => ! is_null($request->user()->two_factor_secret),
+                    'mustVerifyEmail' =>  ($request->user() instanceof MustVerifyEmail),
                 ]);
             },
             'errorBags' => function () {
