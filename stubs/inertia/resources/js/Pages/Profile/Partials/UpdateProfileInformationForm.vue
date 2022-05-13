@@ -152,7 +152,7 @@ const clearPhotoFileInput = () => {
                 />
                 <JetInputError :message="form.errors.email" class="mt-2" />
 
-                <div v-show="user.email_verified_at === null">
+                <div v-if="$page.props.jetstream.hasEmailVerification && user.email_verified_at === null">
                     <p class="text-sm mt-2">
                         Your email address is unverified.
 
