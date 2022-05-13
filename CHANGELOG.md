@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.8.0...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.8.1...2.x)
+
+## [v2.8.1](https://github.com/laravel/jetstream/compare/v2.8.0...v2.8.1) - 2022-05-13
+
+### Fixed
+
+- Fix disabled email verification mode by @driesvints in https://github.com/laravel/jetstream/pull/1053
 
 ## [v2.8.0](https://github.com/laravel/jetstream/compare/v2.7.5...v2.8.0) - 2022-05-10
 
