@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.8.1...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.8.2...2.x)
+
+## [v2.8.2](https://github.com/laravel/jetstream/compare/v2.8.1...v2.8.2) - 2022-05-24
+
+### Fixed
+
+- Fixed an issue causing warning when clicking on Manage Permissions or Delete on created token. by @ravibpatel in https://github.com/laravel/jetstream/pull/1056
 
 ## [v2.8.1](https://github.com/laravel/jetstream/compare/v2.8.0...v2.8.1) - 2022-05-13
 
