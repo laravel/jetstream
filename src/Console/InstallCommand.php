@@ -142,7 +142,6 @@ class InstallCommand extends Command
                 '@tailwindcss/forms' => '^0.5.0',
                 '@tailwindcss/typography' => '^0.5.0',
                 'alpinejs' => '^3.0.6',
-                'postcss-import' => '^14.0.1',
                 'tailwindcss' => '^3.0.0',
             ] + $packages;
         });
@@ -303,7 +302,6 @@ EOF;
                 '@inertiajs/progress' => '^0.2.7',
                 '@tailwindcss/forms' => '^0.5.0',
                 '@tailwindcss/typography' => '^0.5.2',
-                'postcss-import' => '^14.0.2',
                 'tailwindcss' => '^3.0.0',
                 'vue' => '^3.2.31',
                 '@vue/compiler-sfc' => '^3.2.31',
