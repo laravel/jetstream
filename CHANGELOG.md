@@ -1,6 +1,14 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.8.2...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.8.3...2.x)
+
+## [v2.8.3](https://github.com/laravel/jetstream/compare/v2.8.2...v2.8.3) - 2022-05-30
+
+### Changed
+
+- Switch to ESM imports by @jessarcher in https://github.com/laravel/jetstream/pull/1059
+- Bump tailwindcss/forms to 0.5.0 by @driesvints in https://github.com/laravel/jetstream/pull/1061
+- Simplify Tailwind installation by @jessarcher in https://github.com/laravel/jetstream/pull/1060
 
 ## [v2.8.2](https://github.com/laravel/jetstream/compare/v2.8.1...v2.8.2) - 2022-05-24
 
