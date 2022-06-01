@@ -200,6 +200,9 @@ const displayableRole = (role) => {
                             <div class="text-gray-600">
                                 {{ invitation.email }}
                             </div>
+                            <div class="text-gray-400">
+                                {{ displayableRole(invitation.role) }}
+                            </div>
 
                             <div class="flex items-center">
                                 <!-- Cancel Team Invitation -->

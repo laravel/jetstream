@@ -93,6 +93,7 @@
                         @foreach ($team->teamInvitations as $invitation)
                             <div class="flex items-center justify-between">
                                 <div class="text-gray-600">{{ $invitation->email }}</div>
+                                <div class="text-gray-400">{{ Laravel\Jetstream\Jetstream::findRole($invitation->role)->name }}</div>
 
                                 <div class="flex items-center">
                                     @if (Gate::check('removeTeamMember', $team))
