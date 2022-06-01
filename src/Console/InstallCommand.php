@@ -16,7 +16,7 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'jetstream:install {stack : The development stack that should be installed}
+    protected $signature = 'jetstream:install {stack : The development stack that should be installed (inertia,livewire)}
                                               {--teams : Indicates if team support should be installed}
                                               {--api : Indicates if API support should be installed}
                                               {--verification : Indicates if email verification support should be installed}
