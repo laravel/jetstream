@@ -1,6 +1,13 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.8.3...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.8.4...2.x)
+
+## [v2.8.4](https://github.com/laravel/jetstream/compare/v2.8.3...v2.8.4) - 2022-06-01
+
+### Changed
+
+- Skip tests for team invitations if disabled by @jradtilbrook in https://github.com/laravel/jetstream/pull/1063
+- Display available stack options by @jessarcher in https://github.com/laravel/jetstream/pull/1062
 
 ## [v2.8.3](https://github.com/laravel/jetstream/compare/v2.8.2...v2.8.3) - 2022-05-30
 
