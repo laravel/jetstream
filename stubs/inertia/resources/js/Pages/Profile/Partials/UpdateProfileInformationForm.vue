@@ -93,6 +93,7 @@ const clearPhotoFileInput = () => {
                 <input
                     ref="photoInput"
                     type="file"
+                    accept="image/jpg, image/jpeg, image/png"
                     class="hidden"
                     @change="updatePhotoPreview"
                 >
