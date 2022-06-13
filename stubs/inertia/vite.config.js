@@ -4,7 +4,9 @@ import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
     plugins: [
-        laravel(),
+        laravel({
+            input: 'resources/js/app.js',
+        }),
         vue({
             template: {
                 transformAssetUrls: {
