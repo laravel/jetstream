@@ -17,6 +17,7 @@ mix.js('resources/js/app.js', 'public/js').vue()
     ])
     .alias({
         '@': 'resources/js',
+        ziggy: "vendor/tightenco/ziggy/dist/vue",
     });
 
 if (mix.inProduction()) {

@@ -9,7 +9,7 @@ mix.js('resources/js/ssr.js', 'public/js')
     })
     .alias({
         '@': 'resources/js',
-        ziggy: 'vendor/tightenco/ziggy/dist/index',
+        ziggy: 'vendor/tightenco/ziggy/dist/vue',
     })
     .webpackConfig({
         target: 'node',
