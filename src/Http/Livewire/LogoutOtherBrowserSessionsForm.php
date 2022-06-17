@@ -102,19 +102,19 @@ class LogoutOtherBrowserSessionsForm extends Component
             return collect();
         }
 
-        return collect(
+        return
             DB::connection(config('session.connection'))->table(config('session.table', 'sessions'))
-                    ->where('user_id', Auth::user()->getAuthIdentifier())
-                    ->orderBy('last_activity', 'desc')
-                    ->get()
-        )->map(function ($session) {
-            return (object) [
-                'agent' => $this->createAgent($session),
-                'ip_address' => $session->ip_address,
-                'is_current_device' => $session->id === request()->session()->getId(),
-                'last_active' => Carbon::createFromTimestamp($session->last_activity)->diffForHumans(),
-            ];
-        });
+            ->where('user_id', Auth::user()->getAuthIdentifier())
+            ->orderBy('last_activity', 'desc')
+            ->get()
+            ->map(function ($session) {
+                return (object) [
+                    'agent' => $this->createAgent($session),
+                    'ip_address' => $session->ip_address,
+                    'is_current_device' => $session->id === request()->session()->getId(),
+                    'last_active' => Carbon::createFromTimestamp($session->last_activity)->diffForHumans(),
+                ];
+            });
     }
 
     /**
