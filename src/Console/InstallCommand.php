@@ -524,7 +524,7 @@ EOF;
         copy(__DIR__.'/../../stubs/inertia/app/Http/Middleware/HandleInertiaRequests.php', app_path('Http/Middleware/HandleInertiaRequests.php'));
 
         $this->replaceInFile("'enabled' => false", "'enabled' => true", config_path('inertia.php'));
-        $this->replaceInFile('vite build', 'vite build --ssr && vite build', base_path('package.json'));
+        $this->replaceInFile('vite build', 'vite build && vite build --ssr', base_path('package.json'));
         $this->replaceInFile('/storage/*.key', '/storage/ssr'.PHP_EOL.'/storage/*.key', base_path('.gitignore'));
     }
 
