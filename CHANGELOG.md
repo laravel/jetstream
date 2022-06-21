@@ -1,6 +1,17 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.8.4...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.8.5...2.x)
+
+## [v2.8.5](https://github.com/laravel/jetstream/compare/v2.8.4...v2.8.5) - 2022-06-16
+
+### Changed
+
+- Add .vue extension to imports by @SamuelMwangiW in https://github.com/laravel/jetstream/pull/1067
+- Bump TailwindCSS to 3.1 by @geisi in https://github.com/laravel/jetstream/pull/1066
+
+### Fixed
+
+- Fix Inertia SSR usage with Ziggy route function in setup() by @prestonholt in https://github.com/laravel/jetstream/pull/1069
 
 ## [v2.8.4](https://github.com/laravel/jetstream/compare/v2.8.3...v2.8.4) - 2022-06-01
 
