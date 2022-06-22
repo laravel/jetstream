@@ -142,19 +142,21 @@ class InstallCommand extends Command
                 '@tailwindcss/forms' => '^0.5.0',
                 '@tailwindcss/typography' => '^0.5.0',
                 'alpinejs' => '^3.0.6',
+                'autoprefixer' => '^10.4.7',
+                'postcss' => '^8.4.14',
                 'tailwindcss' => '^3.1.0',
             ] + $packages;
         });
 
         // Tailwind Configuration...
         copy(__DIR__.'/../../stubs/livewire/tailwind.config.js', base_path('tailwind.config.js'));
-        copy(__DIR__.'/../../stubs/livewire/webpack.mix.js', base_path('webpack.mix.js'));
+        copy(__DIR__.'/../../stubs/livewire/postcss.config.js', base_path('postcss.config.js'));
+        copy(__DIR__.'/../../stubs/livewire/vite.config.js', base_path('vite.config.js'));
 
         // Directories...
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Fortify'));
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Jetstream'));
         (new Filesystem)->ensureDirectoryExists(app_path('View/Components'));
-        (new Filesystem)->ensureDirectoryExists(public_path('css'));
         (new Filesystem)->ensureDirectoryExists(resource_path('css'));
         (new Filesystem)->ensureDirectoryExists(resource_path('markdown'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/api'));
@@ -209,7 +211,6 @@ class InstallCommand extends Command
         }
 
         // Assets...
-        copy(__DIR__.'/../../stubs/public/css/app.css', public_path('css/app.css'));
         copy(__DIR__.'/../../stubs/resources/css/app.css', resource_path('css/app.css'));
         copy(__DIR__.'/../../stubs/livewire/resources/js/app.js', resource_path('js/app.js'));
 
@@ -302,10 +303,11 @@ EOF;
                 '@inertiajs/progress' => '^0.2.7',
                 '@tailwindcss/forms' => '^0.5.0',
                 '@tailwindcss/typography' => '^0.5.2',
+                '@vitejs/plugin-vue' => '^2.3.3',
+                'autoprefixer' => '^10.4.7',
+                'postcss' => '^8.4.14',
                 'tailwindcss' => '^3.1.0',
                 'vue' => '^3.2.31',
-                '@vue/compiler-sfc' => '^3.2.31',
-                'vue-loader' => '^17.0.0',
             ] + $packages;
         });
 
@@ -318,12 +320,12 @@ EOF;
 
         // Tailwind Configuration...
         copy(__DIR__.'/../../stubs/inertia/tailwind.config.js', base_path('tailwind.config.js'));
-        copy(__DIR__.'/../../stubs/inertia/webpack.mix.js', base_path('webpack.mix.js'));
+        copy(__DIR__.'/../../stubs/inertia/postcss.config.js', base_path('postcss.config.js'));
+        copy(__DIR__.'/../../stubs/inertia/vite.config.js', base_path('vite.config.js'));
 
         // Directories...
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Fortify'));
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Jetstream'));
-        (new Filesystem)->ensureDirectoryExists(public_path('css'));
         (new Filesystem)->ensureDirectoryExists(resource_path('css'));
         (new Filesystem)->ensureDirectoryExists(resource_path('js/Jetstream'));
         (new Filesystem)->ensureDirectoryExists(resource_path('js/Layouts'));
@@ -390,7 +392,6 @@ EOF;
         copy(__DIR__.'/../../stubs/inertia/routes/web.php', base_path('routes/web.php'));
 
         // Assets...
-        copy(__DIR__.'/../../stubs/public/css/app.css', public_path('css/app.css'));
         copy(__DIR__.'/../../stubs/resources/css/app.css', resource_path('css/app.css'));
         copy(__DIR__.'/../../stubs/inertia/resources/js/app.js', resource_path('js/app.js'));
 
@@ -508,12 +509,11 @@ EOF;
             return [
                 '@inertiajs/server' => '^0.1.0',
                 '@vue/server-renderer' => '^3.2.31',
-                'webpack-node-externals' => '^3.0.0',
             ] + $packages;
         });
 
-        copy(__DIR__.'/../../stubs/inertia/webpack.ssr.mix.js', base_path('webpack.ssr.mix.js'));
         copy(__DIR__.'/../../stubs/inertia/resources/js/ssr.js', resource_path('js/ssr.js'));
+        $this->replaceInFile("input: 'resources/js/app.js',", "input: 'resources/js/app.js',".PHP_EOL."            ssr: 'resources/js/ssr.js',", base_path('vite.config.js'));
 
         (new Process([$this->phpBinary(), 'artisan', 'vendor:publish', '--provider=Inertia\ServiceProvider', '--force'], base_path()))
             ->setTimeout(null)
@@ -524,7 +524,8 @@ EOF;
         copy(__DIR__.'/../../stubs/inertia/app/Http/Middleware/HandleInertiaRequests.php', app_path('Http/Middleware/HandleInertiaRequests.php'));
 
         $this->replaceInFile("'enabled' => false", "'enabled' => true", config_path('inertia.php'));
-        $this->replaceInFile('mix --production', 'mix --production --mix-config=webpack.ssr.mix.js && mix --production', base_path('package.json'));
+        $this->replaceInFile('vite build', 'vite build && vite build --ssr', base_path('package.json'));
+        $this->replaceInFile('/storage/*.key', '/storage/ssr'.PHP_EOL.'/storage/*.key', base_path('.gitignore'));
     }
 
     /**

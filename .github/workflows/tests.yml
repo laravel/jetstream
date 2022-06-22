@@ -84,7 +84,7 @@ jobs:
         run: npm i
 
       - name: Compile assets
-        run: npm run production
+        run: npm run build
 
       - name: Execute tests
         run: vendor/bin/phpunit --verbose
