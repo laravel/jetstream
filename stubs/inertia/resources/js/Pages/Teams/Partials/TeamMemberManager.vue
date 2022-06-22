@@ -140,7 +140,7 @@
                                 <!-- Leave Team -->
                                 <button class="cursor-pointer ml-6 text-sm text-red-500"
                                                     @click="confirmLeavingTeam"
-                                                    v-if="$page.props.user.id === user.id">
+                                                    v-if="$page.props.auth.user.id === user.id">
                                     Leave
                                 </button>
 
@@ -337,7 +337,7 @@
             },
 
             leaveTeam() {
-                this.leaveTeamForm.delete(route('team-members.destroy', [this.team, this.$page.props.user]))
+                this.leaveTeamForm.delete(route('team-members.destroy', [this.team, this.$page.props.auth.user]))
             },
 
             confirmTeamMemberRemoval(teamMember) {
