@@ -21,7 +21,7 @@ class HandleInertiaRequests extends Middleware
      * @param  \Illuminate\Http\Request  $request
      * @return string|null
      */
-    public function version(Request $request): ?string
+    public function version(Request $request)
     {
         if (config('app.asset_url')) {
             return md5(config('app.asset_url'));
@@ -30,8 +30,6 @@ class HandleInertiaRequests extends Middleware
         if (file_exists($manifest = public_path('build/manifest.json'))) {
             return md5_file($manifest);
         }
-
-        return null;
     }
 
     /**
