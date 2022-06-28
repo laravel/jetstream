@@ -1,6 +1,18 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.8.5...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.9.0...2.x)
+
+## [v2.9.0](https://github.com/laravel/jetstream/compare/v2.8.5...v2.9.0) - 2022-06-28
+
+### Added
+
+- Vite by @jessarcher in https://github.com/laravel/jetstream/pull/1068
+
+### Fixed
+
+- Fix TailwindCSS first party TypeScript types weren't working right by @geisi in https://github.com/laravel/jetstream/pull/1074
+- Bump @tailwindcss/forms by @timacdonald in https://github.com/laravel/jetstream/pull/1076
+- Fix ziggy location instead of base url by @matthieumota in https://github.com/laravel/jetstream/pull/1078
 
 ## [v2.8.5](https://github.com/laravel/jetstream/compare/v2.8.4...v2.8.5) - 2022-06-16
 
