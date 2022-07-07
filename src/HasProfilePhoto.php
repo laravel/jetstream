@@ -16,17 +16,17 @@ trait HasProfilePhoto
      */
     public function updateProfilePhoto(UploadedFile $photo)
     {
-        return tap($this->profile_photo_path, function ($previous) use ($photo) {
-            if ($previous) {
-                Storage::disk($this->profilePhotoDisk())->delete($previous);
-            }
+        $previous = $this->profile_photo_path;
 
-            return [
-                'profile_photo_path' => $photo->storePublicly(
-                    'profile-photos', ['disk' => $this->profilePhotoDisk()]
-                ),
-            ];
-        });
+        if ($previous) {
+            Storage::disk($this->profilePhotoDisk())->delete($previous);
+        }
+
+        return [
+            'profile_photo_path' => $photo->storePublicly(
+                'profile-photos', ['disk' => $this->profilePhotoDisk()]
+            ),
+        ];
     }
 
     /**
