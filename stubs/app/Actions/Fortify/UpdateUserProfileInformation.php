@@ -24,18 +24,18 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
         ])->validateWithBag('updateProfileInformation');
 
-        if ($data->email !== $user->email &&
+        if ($data['email'] !== $user->email &&
             $user instanceof MustVerifyEmail) {
             $data['email_verified_at'] = null;
         }
 
-        if ($data->photo) {
-            $data = array_merge($data, $user->updateProfilePhoto($data->photo));
+        if (isset($data['photo'])) {
+            $data = array_merge($data, $user->updateProfilePhoto($data['photo']));
         }
-        
+
         $user->forceFill($data)->save();
-        
-        if ($input['email'] !== $user->email &&
+
+        if ($data['email'] !== $user->email &&
             $user instanceof MustVerifyEmail) {
             $user->sendEmailVerificationNotification();
         }
