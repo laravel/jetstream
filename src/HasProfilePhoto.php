@@ -4,7 +4,6 @@ namespace Laravel\Jetstream;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
 
 trait HasProfilePhoto
@@ -13,20 +12,20 @@ trait HasProfilePhoto
      * Update the user's profile photo.
      *
      * @param  \Illuminate\Http\UploadedFile  $photo
-     * @return void
+     * @return array
      */
     public function updateProfilePhoto(UploadedFile $photo)
     {
-        tap($this->profile_photo_path, function ($previous) use ($photo) {
-            $this->forceFill([
-                'profile_photo_path' => $photo->storePublicly(
-                    'profile-photos', ['disk' => $this->profilePhotoDisk()]
-                ),
-            ])->save();
-
+        return tap($this->profile_photo_path, function ($previous) use ($photo) {
             if ($previous) {
                 Storage::disk($this->profilePhotoDisk())->delete($previous);
             }
+
+            return [
+                'profile_photo_path' => $photo->storePublicly(
+                    'profile-photos', ['disk' => $this->profilePhotoDisk()]
+                ),
+            ];
         });
     }
 
@@ -37,6 +36,17 @@ trait HasProfilePhoto
      */
     public function deleteProfilePhoto()
     {
+        $this->removeProfilePhotoFromDisk();
+        $this->setNullInToProfilePhoto();
+    }
+
+    /**
+     * Remove the user's profile photo from disk.
+     *
+     * @return void
+     */
+    public function removeProfilePhotoFromDisk()
+    {
         if (! Features::managesProfilePhotos()) {
             return;
         }
@@ -46,7 +56,15 @@ trait HasProfilePhoto
         }
 
         Storage::disk($this->profilePhotoDisk())->delete($this->profile_photo_path);
+    }
 
+    /**
+     * Set null user's profile photo path.
+     *
+     * @return void
+     */
+    public function setNullInToProfilePhoto()
+    {
         $this->forceFill([
             'profile_photo_path' => null,
         ])->save();
