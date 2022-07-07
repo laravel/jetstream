@@ -2,9 +2,9 @@
 
 namespace Laravel\Jetstream;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Laravel\Jetstream\Features;
 
 trait HasProfilePhoto
