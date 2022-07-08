@@ -2,9 +2,9 @@
 
 namespace Laravel\Jetstream;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
 
 trait HasProfilePhoto
@@ -13,22 +13,21 @@ trait HasProfilePhoto
      * Update the user's profile photo.
      *
      * @param  \Illuminate\Http\UploadedFile  $photo
-     * @param  string  $storagePath
-     * @return void
+     * @return array
      */
-    public function updateProfilePhoto(UploadedFile $photo, $storagePath = 'profile-photos')
+    public function updateProfilePhoto(UploadedFile $photo)
     {
-        tap($this->profile_photo_path, function ($previous) use ($photo, $storagePath) {
-            $this->forceFill([
-                'profile_photo_path' => $photo->storePublicly(
-                    $storagePath, ['disk' => $this->profilePhotoDisk()]
-                ),
-            ])->save();
+        $previous = $this->profile_photo_path;
 
-            if ($previous) {
-                Storage::disk($this->profilePhotoDisk())->delete($previous);
-            }
-        });
+        if ($previous) {
+            Storage::disk($this->profilePhotoDisk())->delete($previous);
+        }
+
+        return [
+            'profile_photo_path' => $photo->storePublicly(
+                'profile-photos', ['disk' => $this->profilePhotoDisk()]
+            ),
+        ];
     }
 
     /**
@@ -37,6 +36,17 @@ trait HasProfilePhoto
      * @return void
      */
     public function deleteProfilePhoto()
+    {
+        $this->removeProfilePhotoFromDisk();
+        $this->setNullInToProfilePhoto();
+    }
+
+    /**
+     * Remove the user's profile photo from disk.
+     *
+     * @return void
+     */
+    public function removeProfilePhotoFromDisk()
     {
         if (! Features::managesProfilePhotos()) {
             return;
@@ -47,7 +57,15 @@ trait HasProfilePhoto
         }
 
         Storage::disk($this->profilePhotoDisk())->delete($this->profile_photo_path);
+    }
 
+    /**
+     * Set null user's profile photo path.
+     *
+     * @return void
+     */
+    public function setNullInToProfilePhoto()
+    {
         $this->forceFill([
             'profile_photo_path' => null,
         ])->save();
@@ -56,13 +74,15 @@ trait HasProfilePhoto
     /**
      * Get the URL to the user's profile photo.
      *
-     * @return string
+     * @return Attribute
      */
-    public function getProfilePhotoUrlAttribute()
+    protected function profilePhotoUrl(): Attribute
     {
-        return $this->profile_photo_path
-                    ? Storage::disk($this->profilePhotoDisk())->url($this->profile_photo_path)
-                    : $this->defaultProfilePhotoUrl();
+        return Attribute::get(function () {
+            return $this->profile_photo_path
+                ? Storage::disk($this->profilePhotoDisk())->url($this->profile_photo_path)
+                : $this->defaultProfilePhotoUrl();
+        });
     }
 
     /**
