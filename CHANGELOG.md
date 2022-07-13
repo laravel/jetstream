@@ -1,6 +1,18 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.9.0...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.10.0...2.x)
+
+## [v2.10.0](https://github.com/laravel/jetstream/compare/v2.9.0...v2.10.0) - 2022-07-11
+
+### Changed
+
+- Add default view / routes reloading to jetstream stacks by @timacdonald in https://github.com/laravel/jetstream/pull/1080
+- Update SSR directory by @jessarcher in https://github.com/laravel/jetstream/pull/1084
+- Add livewire component paths to default refresh paths for livewire stack by @timacdonald in https://github.com/laravel/jetstream/pull/1081
+
+### Removed
+
+- Drop Laravel 8.x support (and PHP < 8) by @timacdonald in https://github.com/laravel/jetstream/pull/1082
 
 ## [v2.9.0](https://github.com/laravel/jetstream/compare/v2.8.5...v2.9.0) - 2022-06-28
 
