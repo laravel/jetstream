@@ -39,22 +39,22 @@ class JetstreamServiceProvider extends ServiceProvider
 
         $this->app->afterResolving(BladeCompiler::class, function () {
             if (config('jetstream.stack') === 'livewire' && class_exists(Livewire::class)) {
-                Livewire::component('navigation-menu', NavigationMenu::class);
-                Livewire::component('profile.update-profile-information-form', UpdateProfileInformationForm::class);
-                Livewire::component('profile.update-password-form', UpdatePasswordForm::class);
-                Livewire::component('profile.two-factor-authentication-form', TwoFactorAuthenticationForm::class);
-                Livewire::component('profile.logout-other-browser-sessions-form', LogoutOtherBrowserSessionsForm::class);
-                Livewire::component('profile.delete-user-form', DeleteUserForm::class);
+                Livewire::component('navigation-menu', config('jetstream.livewire.components.navigation-menu', NavigationMenu::class));
+                Livewire::component('profile.update-profile-information-form', config('jetstream.livewire.components.profile.update-profile-information-form', UpdateProfileInformationForm::class));
+                Livewire::component('profile.update-password-form', config('jetstream.livewire.components.profile.update-password-form', UpdatePasswordForm::class));
+                Livewire::component('profile.two-factor-authentication-form', config('jetstream.livewire.components.profile.two-factor-authentication-form', TwoFactorAuthenticationForm::class));
+                Livewire::component('profile.logout-other-browser-sessions-form', config('jetstream.livewire.components.profile.logout-other-browser-sessions-form', LogoutOtherBrowserSessionsForm::class));
+                Livewire::component('profile.delete-user-form', config('jetstream.livewire.components.profile.delete-user-form', DeleteUserForm::class));
 
                 if (Features::hasApiFeatures()) {
-                    Livewire::component('api.api-token-manager', ApiTokenManager::class);
+                    Livewire::component('api.api-token-manager', config('jetstream.livewire.components.api.api-token-manager', ApiTokenManager::class));
                 }
 
                 if (Features::hasTeamFeatures()) {
-                    Livewire::component('teams.create-team-form', CreateTeamForm::class);
-                    Livewire::component('teams.update-team-name-form', UpdateTeamNameForm::class);
-                    Livewire::component('teams.team-member-manager', TeamMemberManager::class);
-                    Livewire::component('teams.delete-team-form', DeleteTeamForm::class);
+                    Livewire::component('teams.create-team-form', config('jetstream.livewire.components.teams.create-team-form', CreateTeamForm::class));
+                    Livewire::component('teams.update-team-name-form', config('jetstream.livewire.components.teams.update-team-name-form', UpdateTeamNameForm::class));
+                    Livewire::component('teams.team-member-manager', config('jetstream.livewire.components.teams.team-member-manager', TeamMemberManager::class));
+                    Livewire::component('teams.delete-team-form', config('jetstream.livewire.components.teams.delete-team-form', DeleteTeamForm::class));
                 }
             }
         });
@@ -186,6 +186,10 @@ class JetstreamServiceProvider extends ServiceProvider
             __DIR__.'/../stubs/inertia/resources/js/Jetstream/Checkbox.vue' => resource_path('js/Jetstream/Checkbox.vue'),
             __DIR__.'/../stubs/inertia/resources/js/Jetstream/ValidationErrors.vue' => resource_path('js/Jetstream/ValidationErrors.vue'),
         ], 'jetstream-inertia-auth-pages');
+
+        $this->publishes([
+            __DIR__.'/../stubs/app/Http/Livewire/Jetstream/' => app_path('Http/Livewire/Jetstream'),
+        ], 'jetstream-livewire-components');
     }
 
     /**
