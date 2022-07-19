@@ -303,7 +303,7 @@ EOF;
                 '@inertiajs/progress' => '^0.2.7',
                 '@tailwindcss/forms' => '^0.5.2',
                 '@tailwindcss/typography' => '^0.5.2',
-                '@vitejs/plugin-vue' => '^2.3.3',
+                '@vitejs/plugin-vue' => '^3.0.0',
                 'autoprefixer' => '^10.4.7',
                 'postcss' => '^8.4.14',
                 'tailwindcss' => '^3.1.0',
@@ -514,6 +514,7 @@ EOF;
 
         copy(__DIR__.'/../../stubs/inertia/resources/js/ssr.js', resource_path('js/ssr.js'));
         $this->replaceInFile("input: 'resources/js/app.js',", "input: 'resources/js/app.js',".PHP_EOL."            ssr: 'resources/js/ssr.js',", base_path('vite.config.js'));
+        $this->replaceInFile('});', '    ssr: {'.PHP_EOL."        noExternal: ['@inertiajs/server'],".PHP_EOL.'    },'.PHP_EOL.'});', base_path('vite.config.js'));
 
         (new Process([$this->phpBinary(), 'artisan', 'vendor:publish', '--provider=Inertia\ServiceProvider', '--force'], base_path()))
             ->setTimeout(null)
