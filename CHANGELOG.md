@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.10.0...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.10.1...2.x)
+
+## [v2.10.1](https://github.com/laravel/jetstream/compare/v2.10.0...v2.10.1) - 2022-07-20
+
+### Changed
+
+- Vite 3 support by @timacdonald in https://github.com/laravel/jetstream/pull/1089
 
 ## [v2.10.0](https://github.com/laravel/jetstream/compare/v2.9.0...v2.10.0) - 2022-07-11
 
