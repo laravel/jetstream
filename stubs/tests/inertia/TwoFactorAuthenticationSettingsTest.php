@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Fortify\Features;
 use Tests\TestCase;
 
 class TwoFactorAuthenticationSettingsTest extends TestCase
@@ -12,6 +13,10 @@ class TwoFactorAuthenticationSettingsTest extends TestCase
 
     public function test_two_factor_authentication_can_be_enabled()
     {
+        if (! Features::canManageTwoFactorAuthentication()) {
+            return $this->markTestSkipped('Two factor authentication is not enabled.');
+        }
+
         $this->actingAs($user = User::factory()->create());
 
         $this->withSession(['auth.password_confirmed_at' => time()]);
@@ -24,6 +29,10 @@ class TwoFactorAuthenticationSettingsTest extends TestCase
 
     public function test_recovery_codes_can_be_regenerated()
     {
+        if (! Features::canManageTwoFactorAuthentication()) {
+            return $this->markTestSkipped('Two factor authentication is not enabled.');
+        }
+
         $this->actingAs($user = User::factory()->create());
 
         $this->withSession(['auth.password_confirmed_at' => time()]);
@@ -41,6 +50,10 @@ class TwoFactorAuthenticationSettingsTest extends TestCase
 
     public function test_two_factor_authentication_can_be_disabled()
     {
+        if (! Features::canManageTwoFactorAuthentication()) {
+            return $this->markTestSkipped('Two factor authentication is not enabled.');
+        }
+
         $this->actingAs($user = User::factory()->create());
 
         $this->withSession(['auth.password_confirmed_at' => time()]);
