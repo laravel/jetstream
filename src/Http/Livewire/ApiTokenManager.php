@@ -106,7 +106,7 @@ class ApiTokenManager extends Component
         ));
 
         $this->createApiTokenForm['name'] = '';
-        $this->createApiTokenForm['expires_at'] = '';
+        $this->createApiTokenForm['expires_at'] = null;
         $this->createApiTokenForm['permissions'] = Jetstream::$defaultPermissions;
 
         $this->emit('created');

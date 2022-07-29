@@ -52,10 +52,10 @@ class CreateApiTokenTest extends TestCase
             ],
         ]);
 
-        $this->assertCount(2, $user->fresh()->tokens);
-        $this->assertEquals('Test Token With Expires At', $user->fresh()->tokens->latest()->first()->name);
-        $this->assertEquals(now()->addDay()->format('Y-m-d'), $user->fresh()->tokens->latest()->first()->expires_at->format('Y-m-d'));
-        $this->assertTrue($user->fresh()->tokens->latest()->first()->can('read'));
-        $this->assertFalse($user->fresh()->tokens->latest()->first()->can('delete'));
+        $this->assertCount(1, $user->fresh()->tokens);
+        $this->assertEquals('Test Token With Expires At', $user->fresh()->tokens->first()->name);
+        $this->assertEquals(now()->addDay()->format('Y-m-d'), $user->fresh()->tokens->first()->expires_at->format('Y-m-d'));
+        $this->assertTrue($user->fresh()->tokens->first()->can('read'));
+        $this->assertFalse($user->fresh()->tokens->first()->can('delete'));
     }
 }

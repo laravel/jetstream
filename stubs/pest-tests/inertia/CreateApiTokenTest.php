@@ -46,8 +46,8 @@ test('api tokens can be created with expires at date', function () {
         ],
     ]);
 
-    expect($user->fresh()->tokens)->toHaveCount(2);
-    expect($user->fresh()->tokens->latest()->first())
+    expect($user->fresh()->tokens)->toHaveCount(1);
+    expect($user->fresh()->tokens->first())
         ->name->toEqual('Test Token With Expires At')
         ->expires_at->toEqual(Carbon::parse(now()->addDay()->format('Y-m-d')))
         ->can('read')->toBeTrue()
