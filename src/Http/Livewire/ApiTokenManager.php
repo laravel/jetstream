@@ -17,6 +17,7 @@ class ApiTokenManager extends Component
      */
     public $createApiTokenForm = [
         'name' => '',
+        'expires_at' => null,
         'permissions' => [],
     ];
 
