@@ -42,7 +42,7 @@ test('api tokens can be created with expires at date', function () {
     }
 
     $response = $this->post('/user/api-tokens', [
-        'name' => 'Test Token',
+        'name' => 'Test Token With Expires At',
         'expires_at' => now()->addDay()->format('Y-m-d'),
         'permissions' => [
             'read',
@@ -50,10 +50,10 @@ test('api tokens can be created with expires at date', function () {
         ],
     ]);
 
-    expect($user->fresh()->tokens)->toHaveCount(1);
-    expect($user->fresh()->tokens->first())
-        ->name->toEqual('Test Token')
-        ->expires_at->toEqual(Carbon::parse(now()->addDays(1)->format('Y-m-d')))
+    expect($user->fresh()->tokens)->toHaveCount(2);
+    expect($user->fresh()->tokens->latest()->first())
+        ->name->toEqual('Test Token With Expires At')
+        ->expires_at->toEqual(Carbon::parse(now()->addDay()->format('Y-m-d')))
         ->can('read')->toBeTrue()
         ->can('delete')->toBeFalse();
 })->skip(function () {
