@@ -4,6 +4,7 @@ use App\Models\User;
 use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Http\Livewire\ApiTokenManager;
 use Livewire\Livewire;
+use Illuminate\Support\Carbon;
 
 test('api tokens can be created', function () {
     if (Features::hasTeamFeatures()) {
@@ -52,7 +53,7 @@ test('api tokens can be created with expires at date', function () {
     expect($user->fresh()->tokens)->toHaveCount(1);
     expect($user->fresh()->tokens->first())
         ->name->toEqual('Test Token')
-        ->expires_at->toBeLike(now()->addDay())
+        ->expires_at->toEqual(Carbon::parse(now()->addDays(1)->format('Y-m-d')))
         ->can('read')->toBeTrue()
         ->can('delete')->toBeFalse();
 })->skip(function () {
