@@ -101,7 +101,7 @@ class ApiTokenManager extends Component
         $this->displayTokenValue($this->user->createToken(
             $this->createApiTokenForm['name'],
             Jetstream::validPermissions($this->createApiTokenForm['permissions']),
-            $this->createApiTokenForm['name'] ? Carbon::parse($this->createApiTokenForm['name']) : null
+            $this->createApiTokenForm['expires_at'] ? Carbon::parse($this->createApiTokenForm['expires_at']) : null
         ));
 
         $this->createApiTokenForm['name'] = '';
