@@ -30,7 +30,6 @@ test('api tokens can be created', function () {
     return ! Features::hasApiFeatures();
 }, 'API support is not enabled.');
 
-
 test('api tokens can be created with expires at date', function () {
     if (Features::hasTeamFeatures()) {
         $this->actingAs($user = User::factory()->withPersonalTeam()->create());
