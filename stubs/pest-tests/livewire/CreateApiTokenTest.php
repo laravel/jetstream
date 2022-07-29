@@ -1,10 +1,10 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Support\Carbon;
 use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Http\Livewire\ApiTokenManager;
 use Livewire\Livewire;
-use Illuminate\Support\Carbon;
 
 test('api tokens can be created', function () {
     if (Features::hasTeamFeatures()) {
