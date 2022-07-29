@@ -23,6 +23,7 @@ const props = defineProps({
 
 const createApiTokenForm = useForm({
     name: '',
+    expires_at: '',
     permissions: props.defaultPermissions,
 });
 
@@ -96,6 +97,19 @@ const deleteApiToken = () => {
                         autofocus
                     />
                     <JetInputError :message="createApiTokenForm.errors.name" class="mt-2" />
+                </div>
+
+                <!-- Token Expires At -->
+                <div class="col-span-6 sm:col-span-4">
+                    <JetLabel for="expires_at" value="Token Expiration Date" />
+                    <JetInput
+                        id="expires_at"
+                        v-model="createApiTokenForm.expires_at"
+                        type="date"
+                        class="block w-full mt-1"
+                        autofocus
+                    />
+                    <JetInputError :message="createApiTokenForm.errors.expires_at" class="mt-2" />
                 </div>
 
                 <!-- Token Permissions -->

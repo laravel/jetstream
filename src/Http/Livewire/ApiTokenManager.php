@@ -2,6 +2,7 @@
 
 namespace Laravel\Jetstream\Http\Livewire;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Jetstream\Jetstream;
@@ -91,16 +92,20 @@ class ApiTokenManager extends Component
 
         Validator::make([
             'name' => $this->createApiTokenForm['name'],
+            'expires_at' => $this->createApiTokenForm['expires_at'],
         ], [
             'name' => ['required', 'string', 'max:255'],
+            'expires_at' => ['nullable', 'date', 'date_format:Y-m-d', 'after:today'],
         ])->validateWithBag('createApiToken');
 
         $this->displayTokenValue($this->user->createToken(
             $this->createApiTokenForm['name'],
-            Jetstream::validPermissions($this->createApiTokenForm['permissions'])
+            Jetstream::validPermissions($this->createApiTokenForm['permissions']),
+            $this->createApiTokenForm['name'] ? Carbon::parse($this->createApiTokenForm['name']) : null
         ));
 
         $this->createApiTokenForm['name'] = '';
+        $this->createApiTokenForm['expires_at'] = '';
         $this->createApiTokenForm['permissions'] = Jetstream::$defaultPermissions;
 
         $this->emit('created');

@@ -17,6 +17,13 @@
                 <x-jet-input-error for="name" class="mt-2" />
             </div>
 
+            <!-- Token Expires At -->
+            <div class="col-span-6 sm:col-span-4">
+                <x-jet-label for="expires_at" value="{{ __('Token Expiration Date') }}" />
+                <x-jet-input id="expires_at" type="date" class="mt-1 block w-full" wire:model.defer="createApiTokenForm.expires_at" autofocus />
+                <x-jet-input-error for="expires_at" class="mt-2" />
+            </div>
+
             <!-- Token Permissions -->
             @if (Laravel\Jetstream\Jetstream::hasPermissions())
                 <div class="col-span-6">
