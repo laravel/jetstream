@@ -81,6 +81,7 @@ class InstallCommand extends Command
         $stubs = $this->getTestStubsPath();
 
         if ($this->option('pest')) {
+            $this->addPestToAllowedPlugins();
             $this->requireComposerDevPackages('pestphp/pest:^1.16', 'pestphp/pest-plugin-laravel:^1.1');
 
             copy($stubs.'/Pest.php', base_path('tests/Pest.php'));
@@ -587,6 +588,31 @@ EOF;
         return $this->option('pest')
             ? __DIR__.'/../../stubs/pest-tests'
             : __DIR__.'/../../stubs/tests';
+    }
+
+    /**
+     * Adds pestphp/pest-plugin to composer's allow-plugins
+     *
+     * @return void
+     */
+    protected function addPestToAllowedPlugins()
+    {
+        $composer = $this->option('composer');
+
+        if ($composer !== 'global') {
+            $command = [$this->phpBinary(), $composer, 'config'];
+        }
+
+        $command = array_merge(
+            $command ?? ['composer', 'config'],
+            ['allow-plugins.pestphp/pest-plugin', 'true']
+        );
+
+        (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))
+            ->setTimeout(null)
+            ->run(function ($type, $output) {
+                $this->output->write($output);
+            });
     }
 
     /**
