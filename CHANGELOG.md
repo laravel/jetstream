@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.10.2...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.10.3...2.x)
+
+## [v2.10.3](https://github.com/laravel/jetstream/compare/v2.10.2...v2.10.3) - 2022-08-01
+
+### Changed
+
+- Switch to fonts.bunny.net instead of Google Fonts by @lucasRolff in https://github.com/laravel/jetstream/pull/1104
 
 ## [v2.10.2](https://github.com/laravel/jetstream/compare/v2.10.1...v2.10.2) - 2022-07-21
 
