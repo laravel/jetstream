@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
-import { Head, Link } from '@inertiajs/inertia-vue3';
+import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
 import JetApplicationMark from '@/Jetstream/ApplicationMark.vue';
 import JetBanner from '@/Jetstream/Banner.vue';
 import JetDropdown from '@/Jetstream/Dropdown.vue';
@@ -24,7 +24,7 @@ const switchToTeam = (team) => {
 };
 
 const logout = () => {
-    Inertia.post(route('logout'));
+    useForm.post(route('logout'));
 };
 </script>
 
@@ -166,11 +166,9 @@ const logout = () => {
                                         <div class="border-t border-gray-100" />
 
                                         <!-- Authentication -->
-                                        <form @submit.prevent="logout">
-                                            <JetDropdownLink as="button">
-                                                Log Out
-                                            </JetDropdownLink>
-                                        </form>
+                                        <JetDropdownLink @click.prevent="logout">
+                                            Log Out
+                                        </JetDropdownLink>
                                     </template>
                                 </JetDropdown>
                             </div>
@@ -240,11 +238,9 @@ const logout = () => {
                             </JetResponsiveNavLink>
 
                             <!-- Authentication -->
-                            <form method="POST" @submit.prevent="logout">
-                                <JetResponsiveNavLink as="button">
-                                    Log Out
-                                </JetResponsiveNavLink>
-                            </form>
+                            <JetResponsiveNavLink @click.prevent="logout">
+                                Log Out
+                            </JetResponsiveNavLink>
 
                             <!-- Team Management -->
                             <template v-if="$page.props.jetstream.hasTeamFeatures">
