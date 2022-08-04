@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Support\Carbon;
 use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Http\Livewire\ApiTokenManager;
 use Livewire\Livewire;
@@ -15,6 +16,7 @@ test('api tokens can be created', function () {
     Livewire::test(ApiTokenManager::class)
                 ->set(['createApiTokenForm' => [
                     'name' => 'Test Token',
+                    'expires_at' => null,
                     'permissions' => [
                         'read',
                         'update',
@@ -25,6 +27,33 @@ test('api tokens can be created', function () {
     expect($user->fresh()->tokens)->toHaveCount(1);
     expect($user->fresh()->tokens->first())
         ->name->toEqual('Test Token')
+        ->expires_at->toBeNull()
+        ->can('read')->toBeTrue()
+        ->can('delete')->toBeFalse();
+})->skip(function () {
+    return ! Features::hasApiFeatures();
+}, 'API support is not enabled.');
+
+test('api tokens can be created with expires at date', function () {
+    if (Features::hasTeamFeatures()) {
+        $this->actingAs($user = User::factory()->withPersonalTeam()->create());
+    } else {
+        $this->actingAs($user = User::factory()->create());
+    }
+
+    $response = $this->post('/user/api-tokens', [
+        'name' => 'Test Token With Expires At',
+        'expires_at' => now()->addDay()->format('Y-m-d'),
+        'permissions' => [
+            'read',
+            'update',
+        ],
+    ]);
+
+    expect($user->fresh()->tokens)->toHaveCount(1);
+    expect($user->fresh()->tokens->first())
+        ->name->toEqual('Test Token With Expires At')
+        ->expires_at->toEqual(Carbon::parse(now()->addDay()->format('Y-m-d')))
         ->can('read')->toBeTrue()
         ->can('delete')->toBeFalse();
 })->skip(function () {

@@ -4,6 +4,7 @@ namespace Laravel\Jetstream\Http\Controllers\Inertia;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Carbon;
 use Laravel\Jetstream\Jetstream;
 
 class ApiTokenController extends Controller
@@ -37,11 +38,13 @@ class ApiTokenController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'expires_at' => ['sometimes', 'date', 'date_format:Y-m-d', 'after:today'],
         ]);
 
         $token = $request->user()->createToken(
             $request->name,
-            Jetstream::validPermissions($request->input('permissions', []))
+            Jetstream::validPermissions($request->input('permissions', [])),
+            $request->expires_at ? Carbon::parse($request->expires_at) : null
         );
 
         return back()->with('flash', [
