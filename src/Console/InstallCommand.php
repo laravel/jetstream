@@ -233,7 +233,7 @@ class InstallCommand extends Command
 
         $this->line('');
         $this->components->info('Livewire scaffolding installed successfully.');
-        $this->components->warn('Please execute the [npm install && npm run dev] commands to build your assets.');
+        $this->components->warn('Please execute the [npm install && npm run build] commands to build your assets.');
     }
 
     /**
@@ -421,7 +421,7 @@ EOF;
 
         $this->line('');
         $this->components->info('Inertia scaffolding installed successfully.');
-        $this->components->warn('Please execute the [npm install && npm run dev] commands to build your assets.');
+        $this->components->warn('Please execute the [npm install && npm run build] commands to build your assets.');
     }
 
     /**
