@@ -333,7 +333,7 @@ EOF;
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Fortify'));
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Jetstream'));
         (new Filesystem)->ensureDirectoryExists(resource_path('css'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('js/Jetstream'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('js/Components'));
         (new Filesystem)->ensureDirectoryExists(resource_path('js/Layouts'));
         (new Filesystem)->ensureDirectoryExists(resource_path('js/Pages'));
         (new Filesystem)->ensureDirectoryExists(resource_path('js/Pages/API'));
@@ -386,7 +386,7 @@ EOF;
         copy(__DIR__.'/../../stubs/inertia/resources/js/Pages/TermsOfService.vue', resource_path('js/Pages/TermsOfService.vue'));
         copy(__DIR__.'/../../stubs/inertia/resources/js/Pages/Welcome.vue', resource_path('js/Pages/Welcome.vue'));
 
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Jetstream', resource_path('js/Jetstream'));
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Components', resource_path('js/Components'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Layouts', resource_path('js/Layouts'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/API', resource_path('js/Pages/API'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Auth', resource_path('js/Pages/Auth'));

@@ -1,10 +1,10 @@
 <script setup>
 import { ref } from 'vue';
 import { useForm } from '@inertiajs/inertia-vue3';
-import JetActionSection from '@/Jetstream/ActionSection.vue';
-import JetConfirmationModal from '@/Jetstream/ConfirmationModal.vue';
-import JetDangerButton from '@/Jetstream/DangerButton.vue';
-import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue';
+import JetActionSection from '@/Components/ActionSection.vue';
+import JetConfirmationModal from '@/Components/ConfirmationModal.vue';
+import JetDangerButton from '@/Components/DangerButton.vue';
+import JetSecondaryButton from '@/Components/SecondaryButton.vue';
 
 const props = defineProps({
     team: Object,
