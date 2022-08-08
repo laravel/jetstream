@@ -39,7 +39,7 @@ class InstallCommand extends Command
     public function handle()
     {
         if (! in_array($this->argument('stack'), ['inertia', 'livewire'])) {
-            $this->components->error('The stack must be inertia or livewire.');
+            $this->components->error('Invalid stack. Supported stacks are [inertia] and [livewire].');
 
             return 1;
         }
