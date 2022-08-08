@@ -34,16 +34,10 @@ class InstallCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return int|null
+     * @return void
      */
     public function handle()
     {
-        if (! in_array($this->argument('stack'), ['inertia', 'livewire'])) {
-            $this->components->error('The stack must be inertia or livewire.');
-
-            return 1;
-        }
-
         // Publish...
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-config', '--force' => true]);
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-migrations', '--force' => true]);
