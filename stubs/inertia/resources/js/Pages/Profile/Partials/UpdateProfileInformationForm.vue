@@ -2,13 +2,13 @@
 import { ref } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
 import { Link, useForm } from '@inertiajs/inertia-vue3';
-import JetButton from '@/Jetstream/Button.vue';
-import JetFormSection from '@/Jetstream/FormSection.vue';
-import JetInput from '@/Jetstream/Input.vue';
-import JetInputError from '@/Jetstream/InputError.vue';
-import JetLabel from '@/Jetstream/Label.vue';
-import JetActionMessage from '@/Jetstream/ActionMessage.vue';
-import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue';
+import JetButton from '@/Components/Button.vue';
+import JetFormSection from '@/Components/FormSection.vue';
+import JetInput from '@/Components/Input.vue';
+import JetInputError from '@/Components/InputError.vue';
+import JetLabel from '@/Components/Label.vue';
+import JetActionMessage from '@/Components/ActionMessage.vue';
+import JetSecondaryButton from '@/Components/SecondaryButton.vue';
 
 const props = defineProps({
     user: Object,
