@@ -1,6 +1,14 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.10.3...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.11.0...2.x)
+
+## [v2.11.0](https://github.com/laravel/jetstream/compare/v2.10.3...v2.11.0) - 2022-08-08
+
+### Changed
+
+- Update install command output to display vite build command by @RhysLees in https://github.com/laravel/jetstream/pull/1109
+- Validate the stack argument by @jessarcher in https://github.com/laravel/jetstream/pull/1113
+- Move Jetstream components to Components directory by @jessarcher in https://github.com/laravel/jetstream/pull/1110
 
 ## [v2.10.3](https://github.com/laravel/jetstream/compare/v2.10.2...v2.10.3) - 2022-08-01
 
