@@ -39,12 +39,21 @@ const submit = () => {
         <form @submit.prevent="submit">
             <div>
                 <JetLabel for="email" value="Email" />
-                <JetInput id="email" v-model="form.email" type="email" class="mt-1 block w-full" required autofocus />
+                <JetInput
+                    id="email"
+                    v-model="form.email"
+                    type="email"
+                    class="mt-1 block w-full"
+                    required
+                    autofocus
+                />
                 <JetInputError class="mt-2" :message="form.errors.email" />
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <JetButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing"> Email Password Reset Link </JetButton>
+                <JetButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Email Password Reset Link
+                </JetButton>
             </div>
         </form>
     </JetAuthenticationCard>
