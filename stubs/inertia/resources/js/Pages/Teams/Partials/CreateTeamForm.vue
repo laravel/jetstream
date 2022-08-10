@@ -1,10 +1,10 @@
 <script setup>
 import { useForm } from '@inertiajs/inertia-vue3';
-import JetButton from '@/Components/Button.vue';
-import JetFormSection from '@/Components/FormSection.vue';
-import JetInput from '@/Components/Input.vue';
-import JetInputError from '@/Components/InputError.vue';
-import JetLabel from '@/Components/Label.vue';
+import Button from '@/Components/Button.vue';
+import FormSection from '@/Components/FormSection.vue';
+import Input from '@/Components/Input.vue';
+import InputError from '@/Components/InputError.vue';
+import Label from '@/Components/Label.vue';
 
 const form = useForm({
     name: '',
@@ -19,7 +19,7 @@ const createTeam = () => {
 </script>
 
 <template>
-    <JetFormSection @submitted="createTeam">
+    <FormSection @submitted="createTeam">
         <template #title>
             Team Details
         </template>
@@ -30,7 +30,7 @@ const createTeam = () => {
 
         <template #form>
             <div class="col-span-6">
-                <JetLabel value="Team Owner" />
+                <Label value="Team Owner" />
 
                 <div class="flex items-center mt-2">
                     <img class="object-cover w-12 h-12 rounded-full" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name">
@@ -45,22 +45,22 @@ const createTeam = () => {
             </div>
 
             <div class="col-span-6 sm:col-span-4">
-                <JetLabel for="name" value="Team Name" />
-                <JetInput
+                <Label for="name" value="Team Name" />
+                <Input
                     id="name"
                     v-model="form.name"
                     type="text"
                     class="block w-full mt-1"
                     autofocus
                 />
-                <JetInputError :message="form.errors.name" class="mt-2" />
+                <InputError :message="form.errors.name" class="mt-2" />
             </div>
         </template>
 
         <template #actions>
-            <JetButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <Button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                 Create
-            </JetButton>
+            </Button>
         </template>
-    </JetFormSection>
+    </FormSection>
 </template>

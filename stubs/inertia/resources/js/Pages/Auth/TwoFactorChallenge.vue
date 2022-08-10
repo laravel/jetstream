@@ -1,12 +1,12 @@
 <script setup>
 import { nextTick, ref } from 'vue';
 import { Head, useForm } from '@inertiajs/inertia-vue3';
-import JetAuthenticationCard from '@/Components/AuthenticationCard.vue';
-import JetAuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
-import JetButton from '@/Components/Button.vue';
-import JetInput from '@/Components/Input.vue';
-import JetInputError from '@/Components/InputError.vue';
-import JetLabel from '@/Components/Label.vue';
+import AuthenticationCard from '@/Components/AuthenticationCard.vue';
+import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
+import Button from '@/Components/Button.vue';
+import Input from '@/Components/Input.vue';
+import InputError from '@/Components/InputError.vue';
+import Label from '@/Components/Label.vue';
 
 const recovery = ref(false);
 
@@ -40,9 +40,9 @@ const submit = () => {
 <template>
     <Head title="Two-factor Confirmation" />
 
-    <JetAuthenticationCard>
+    <AuthenticationCard>
         <template #logo>
-            <JetAuthenticationCardLogo />
+            <AuthenticationCardLogo />
         </template>
 
         <div class="mb-4 text-sm text-gray-600">
@@ -57,8 +57,8 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <div v-if="! recovery">
-                <JetLabel for="code" value="Code" />
-                <JetInput
+                <Label for="code" value="Code" />
+                <Input
                     id="code"
                     ref="codeInput"
                     v-model="form.code"
@@ -68,12 +68,12 @@ const submit = () => {
                     autofocus
                     autocomplete="one-time-code"
                 />
-                <JetInputError class="mt-2" :message="form.errors.code" />
+                <InputError class="mt-2" :message="form.errors.code" />
             </div>
 
             <div v-else>
-                <JetLabel for="recovery_code" value="Recovery Code" />
-                <JetInput
+                <Label for="recovery_code" value="Recovery Code" />
+                <Input
                     id="recovery_code"
                     ref="recoveryCodeInput"
                     v-model="form.recovery_code"
@@ -81,7 +81,7 @@ const submit = () => {
                     class="mt-1 block w-full"
                     autocomplete="one-time-code"
                 />
-                <JetInputError class="mt-2" :message="form.errors.recovery_code" />
+                <InputError class="mt-2" :message="form.errors.recovery_code" />
             </div>
 
             <div class="flex items-center justify-end mt-4">
@@ -95,10 +95,10 @@ const submit = () => {
                     </template>
                 </button>
 
-                <JetButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <Button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Log in
-                </JetButton>
+                </Button>
             </div>
         </form>
-    </JetAuthenticationCard>
+    </AuthenticationCard>
 </template>
