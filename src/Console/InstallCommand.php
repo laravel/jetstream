@@ -83,6 +83,10 @@ class InstallCommand extends Command
             $this->installInertiaStack();
         }
 
+        // Emails...
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/emails'));
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/resources/views/emails', resource_path('views/emails'));
+
         // Tests...
         $stubs = $this->getTestStubsPath();
 
@@ -167,6 +171,7 @@ class InstallCommand extends Command
         (new Filesystem)->ensureDirectoryExists(resource_path('markdown'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/api'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/auth'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/components'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/layouts'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/profile'));
 
@@ -190,6 +195,9 @@ class InstallCommand extends Command
         copy(__DIR__.'/../../stubs/app/Actions/Fortify/CreateNewUser.php', app_path('Actions/Fortify/CreateNewUser.php'));
         copy(__DIR__.'/../../stubs/app/Actions/Fortify/UpdateUserProfileInformation.php', app_path('Actions/Fortify/UpdateUserProfileInformation.php'));
         copy(__DIR__.'/../../stubs/app/Actions/Jetstream/DeleteUser.php', app_path('Actions/Jetstream/DeleteUser.php'));
+
+        // Components...
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/components', resource_path('views/components'));
 
         // View Components...
         copy(__DIR__.'/../../stubs/livewire/app/View/Components/AppLayout.php', app_path('View/Components/AppLayout.php'));
