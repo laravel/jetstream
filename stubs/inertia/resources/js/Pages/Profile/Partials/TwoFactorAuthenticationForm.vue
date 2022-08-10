@@ -3,7 +3,7 @@ import { ref, computed, watch } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
 import { useForm, usePage } from '@inertiajs/inertia-vue3';
 import ActionSection from '@/Components/ActionSection.vue';
-import Button from '@/Components/Button.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 import ConfirmsPassword from '@/Components/ConfirmsPassword.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 import Input from '@/Components/Input.vue';
@@ -190,15 +190,15 @@ const disableTwoFactorAuthentication = () => {
             <div class="mt-5">
                 <div v-if="! twoFactorEnabled">
                     <ConfirmsPassword @confirmed="enableTwoFactorAuthentication">
-                        <Button type="button" :class="{ 'opacity-25': enabling }" :disabled="enabling">
+                        <PrimaryButton type="button" :class="{ 'opacity-25': enabling }" :disabled="enabling">
                             Enable
-                        </Button>
+                        </PrimaryButton>
                     </ConfirmsPassword>
                 </div>
 
                 <div v-else>
                     <ConfirmsPassword @confirmed="confirmTwoFactorAuthentication">
-                        <Button
+                        <PrimaryButton
                             v-if="confirming"
                             type="button"
                             class="mr-3"
@@ -206,7 +206,7 @@ const disableTwoFactorAuthentication = () => {
                             :disabled="enabling"
                         >
                             Confirm
-                        </Button>
+                        </PrimaryButton>
                     </ConfirmsPassword>
 
                     <ConfirmsPassword @confirmed="regenerateRecoveryCodes">

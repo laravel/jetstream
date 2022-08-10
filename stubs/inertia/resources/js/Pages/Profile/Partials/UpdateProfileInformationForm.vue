@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
 import { Link, useForm } from '@inertiajs/inertia-vue3';
-import Button from '@/Components/Button.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 import FormSection from '@/Components/FormSection.vue';
 import Input from '@/Components/Input.vue';
 import InputError from '@/Components/InputError.vue';
@@ -179,9 +179,9 @@ const clearPhotoFileInput = () => {
                 Saved.
             </ActionMessage>
 
-            <Button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                 Save
-            </Button>
+            </PrimaryButton>
         </template>
     </FormSection>
 </template>

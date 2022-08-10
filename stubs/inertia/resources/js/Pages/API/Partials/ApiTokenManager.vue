@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { useForm } from '@inertiajs/inertia-vue3';
 import ActionMessage from '@/Components/ActionMessage.vue';
 import ActionSection from '@/Components/ActionSection.vue';
-import Button from '@/Components/Button.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 import ConfirmationModal from '@/Components/ConfirmationModal.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 import DialogModal from '@/Components/DialogModal.vue';
@@ -118,9 +118,9 @@ const deleteApiToken = () => {
                     Created.
                 </ActionMessage>
 
-                <Button :class="{ 'opacity-25': createApiTokenForm.processing }" :disabled="createApiTokenForm.processing">
+                <PrimaryButton :class="{ 'opacity-25': createApiTokenForm.processing }" :disabled="createApiTokenForm.processing">
                     Create
-                </Button>
+                </PrimaryButton>
             </template>
         </FormSection>
 
@@ -215,14 +215,14 @@ const deleteApiToken = () => {
                     Cancel
                 </SecondaryButton>
 
-                <Button
+                <PrimaryButton
                     class="ml-3"
                     :class="{ 'opacity-25': updateApiTokenForm.processing }"
                     :disabled="updateApiTokenForm.processing"
                     @click="updateApiToken"
                 >
                     Save
-                </Button>
+                </PrimaryButton>
             </template>
         </DialogModal>
 

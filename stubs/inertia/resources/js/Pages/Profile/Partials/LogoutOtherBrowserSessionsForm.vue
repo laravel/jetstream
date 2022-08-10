@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { useForm } from '@inertiajs/inertia-vue3';
 import ActionMessage from '@/Components/ActionMessage.vue';
 import ActionSection from '@/Components/ActionSection.vue';
-import Button from '@/Components/Button.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 import DialogModal from '@/Components/DialogModal.vue';
 import Input from '@/Components/Input.vue';
 import InputError from '@/Components/InputError.vue';
@@ -113,9 +113,9 @@ const closeModal = () => {
             </div>
 
             <div class="flex items-center mt-5">
-                <Button @click="confirmLogout">
+                <PrimaryButton @click="confirmLogout">
                     Log Out Other Browser Sessions
-                </Button>
+                </PrimaryButton>
 
                 <ActionMessage :on="form.recentlySuccessful" class="ml-3">
                     Done.
@@ -150,14 +150,14 @@ const closeModal = () => {
                         Cancel
                     </SecondaryButton>
 
-                    <Button
+                    <PrimaryButton
                         class="ml-3"
                         :class="{ 'opacity-25': form.processing }"
                         :disabled="form.processing"
                         @click="logoutOtherBrowserSessions"
                     >
                         Log Out Other Browser Sessions
-                    </Button>
+                    </PrimaryButton>
                 </template>
             </DialogModal>
         </template>

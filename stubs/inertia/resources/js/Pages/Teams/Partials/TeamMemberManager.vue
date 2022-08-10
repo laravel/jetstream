@@ -4,7 +4,7 @@ import { Inertia } from '@inertiajs/inertia';
 import { useForm, usePage } from '@inertiajs/inertia-vue3';
 import ActionMessage from '@/Components/ActionMessage.vue';
 import ActionSection from '@/Components/ActionSection.vue';
-import Button from '@/Components/Button.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 import ConfirmationModal from '@/Components/ConfirmationModal.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 import DialogModal from '@/Components/DialogModal.vue';
@@ -173,9 +173,9 @@ const displayableRole = (role) => {
                         Added.
                     </ActionMessage>
 
-                    <Button :class="{ 'opacity-25': addTeamMemberForm.processing }" :disabled="addTeamMemberForm.processing">
+                    <PrimaryButton :class="{ 'opacity-25': addTeamMemberForm.processing }" :disabled="addTeamMemberForm.processing">
                         Add
-                    </Button>
+                    </PrimaryButton>
                 </template>
             </FormSection>
         </div>
@@ -330,14 +330,14 @@ const displayableRole = (role) => {
                     Cancel
                 </SecondaryButton>
 
-                <Button
+                <PrimaryButton
                     class="ml-3"
                     :class="{ 'opacity-25': updateRoleForm.processing }"
                     :disabled="updateRoleForm.processing"
                     @click="updateRole"
                 >
                     Save
-                </Button>
+                </PrimaryButton>
             </template>
         </DialogModal>
 
