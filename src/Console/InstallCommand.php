@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
+use RuntimeException;
 use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
 
@@ -237,9 +238,10 @@ class InstallCommand extends Command
             $this->installLivewireTeamStack();
         }
 
+        $this->runCommands(['npm install', 'npm run build']);
+
         $this->line('');
         $this->components->info('Livewire scaffolding installed successfully.');
-        $this->components->warn('Please execute the [npm install && npm run build] commands to build your assets.');
     }
 
     /**
@@ -425,9 +427,10 @@ EOF;
             $this->installInertiaSsrStack();
         }
 
+        $this->runCommands(['npm install', 'npm run build']);
+
         $this->line('');
         $this->components->info('Inertia scaffolding installed successfully.');
-        $this->components->warn('Please execute the [npm install && npm run build] commands to build your assets.');
     }
 
     /**
@@ -713,5 +716,28 @@ EOF;
     protected function phpBinary()
     {
         return (new PhpExecutableFinder())->find(false) ?: 'php';
+    }
+
+    /**
+     * Run the given commands.
+     *
+     * @param  array  $commands
+     * @return void
+     */
+    protected function runCommands($commands)
+    {
+        $process = Process::fromShellCommandline(implode(' && ', $commands), null, null, null, null);
+
+        if ('\\' !== DIRECTORY_SEPARATOR && file_exists('/dev/tty') && is_readable('/dev/tty')) {
+            try {
+                $process->setTty(true);
+            } catch (RuntimeException $e) {
+                $this->output->writeln('  <bg=yellow;fg=black> WARN </> '.$e->getMessage().PHP_EOL);
+            }
+        }
+
+        $process->run(function ($type, $line) {
+            $this->output->write('    '.$line);
+        });
     }
 }
