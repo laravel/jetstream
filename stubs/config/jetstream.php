@@ -1,6 +1,7 @@
 <?php
 
 use Laravel\Jetstream\Features;
+use Laravel\Jetstream\Http\Middleware\AuthenticateSession;
 
 return [
 
@@ -29,6 +30,8 @@ return [
      */
 
     'middleware' => ['web'],
+
+    'auth_session' => AuthenticateSession::class,
 
     /*
     |--------------------------------------------------------------------------

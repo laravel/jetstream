@@ -119,9 +119,13 @@ trait HasTeams
      */
     public function belongsToTeam($team)
     {
-        return $this->teams->contains(function ($t) use ($team) {
+        if (is_null($team)) {
+            return false;
+        }
+
+        return $this->ownsTeam($team) || $this->teams->contains(function ($t) use ($team) {
             return $t->id === $team->id;
-        }) || $this->ownsTeam($team);
+        });
     }
 
     /**

@@ -31,6 +31,12 @@ class UpdatePasswordForm extends Component
 
         $updater->update(Auth::user(), $this->state);
 
+        if (request()->hasSession()) {
+            request()->session()->put([
+                'password_hash_'.Auth::getDefaultDriver() => Auth::user()->getAuthPassword(),
+            ]);
+        }
+
         $this->state = [
             'current_password' => '',
             'password' => '',

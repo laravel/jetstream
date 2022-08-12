@@ -28,6 +28,7 @@ class ShareInertiaData
                     'canManageTwoFactorAuthentication' => Features::canManageTwoFactorAuthentication(),
                     'canUpdatePassword' => Features::enabled(Features::updatePasswords()),
                     'canUpdateProfileInformation' => Features::canUpdateProfileInformation(),
+                    'hasEmailVerification' => Features::enabled(Features::emailVerification()),
                     'flash' => $request->session()->get('flash', []),
                     'hasAccountDeletionFeatures' => Jetstream::hasAccountDeletionFeatures(),
                     'hasApiFeatures' => Jetstream::hasApiFeatures(),
