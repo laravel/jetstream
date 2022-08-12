@@ -2,6 +2,7 @@
 
 namespace Laravel\Jetstream\Tests;
 
+use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Jetstream;
 
 class JetstreamTest extends OrchestraTestCase
@@ -48,5 +49,14 @@ class JetstreamTest extends OrchestraTestCase
         $this->assertArrayHasKey('name', $serialized);
         $this->assertArrayHasKey('description', $serialized);
         $this->assertArrayHasKey('permissions', $serialized);
+    }
+
+    /**
+     * @define-env defineHasTeamEnvironment
+     */
+    public function test_user_has_team_feature_can_be_determined_from_the_user()
+    {
+        $this->assertTrue(Jetstream::userHasTeamFeatures(new Fixtures\User));
+        $this->assertFalse(Jetstream::userHasTeamFeatures(new Fixtures\Admin));
     }
 }
