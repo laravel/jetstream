@@ -51,11 +51,19 @@ class JetstreamTest extends OrchestraTestCase
         $this->assertArrayHasKey('permissions', $serialized);
     }
 
+    public function test_has_team_feature_will_always_return_false_when_team_is_not_enabled()
+    {
+        $this->assertFalse(Jetstream::hasTeamFeatures());
+        $this->assertFalse(Jetstream::userHasTeamFeatures(new Fixtures\User));
+        $this->assertFalse(Jetstream::userHasTeamFeatures(new Fixtures\Admin));
+    }
+
     /**
      * @define-env defineHasTeamEnvironment
      */
-    public function test_user_has_team_feature_can_be_determined_from_the_user()
+    public function test_has_team_feature_can_be_determined_when_team_is_enabled()
     {
+        $this->assertTrue(Jetstream::hasTeamFeatures());
         $this->assertTrue(Jetstream::userHasTeamFeatures(new Fixtures\User));
         $this->assertFalse(Jetstream::userHasTeamFeatures(new Fixtures\Admin));
     }
