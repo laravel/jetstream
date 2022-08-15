@@ -71,7 +71,6 @@ class JetstreamServiceProvider extends ServiceProvider
 
         Fortify::viewPrefix('auth.');
 
-        $this->configureComponents();
         $this->configurePublishing();
         $this->configureRoutes();
         $this->configureCommands();
@@ -96,57 +95,6 @@ class JetstreamServiceProvider extends ServiceProvider
     }
 
     /**
-     * Configure the Jetstream Blade components.
-     *
-     * @return void
-     */
-    protected function configureComponents()
-    {
-        $this->callAfterResolving(BladeCompiler::class, function () {
-            $this->registerComponent('action-message');
-            $this->registerComponent('action-section');
-            $this->registerComponent('application-logo');
-            $this->registerComponent('application-mark');
-            $this->registerComponent('authentication-card');
-            $this->registerComponent('authentication-card-logo');
-            $this->registerComponent('banner');
-            $this->registerComponent('button');
-            $this->registerComponent('confirmation-modal');
-            $this->registerComponent('confirms-password');
-            $this->registerComponent('danger-button');
-            $this->registerComponent('dialog-modal');
-            $this->registerComponent('dropdown');
-            $this->registerComponent('dropdown-link');
-            $this->registerComponent('form-section');
-            $this->registerComponent('input');
-            $this->registerComponent('checkbox');
-            $this->registerComponent('input-error');
-            $this->registerComponent('label');
-            $this->registerComponent('modal');
-            $this->registerComponent('nav-link');
-            $this->registerComponent('responsive-nav-link');
-            $this->registerComponent('responsive-switchable-team');
-            $this->registerComponent('secondary-button');
-            $this->registerComponent('section-border');
-            $this->registerComponent('section-title');
-            $this->registerComponent('switchable-team');
-            $this->registerComponent('validation-errors');
-            $this->registerComponent('welcome');
-        });
-    }
-
-    /**
-     * Register the given component.
-     *
-     * @param  string  $component
-     * @return void
-     */
-    protected function registerComponent(string $component)
-    {
-        Blade::component('jetstream::components.'.$component, 'jet-'.$component);
-    }
-
-    /**
      * Configure publishing for the package.
      *
      * @return void
@@ -160,10 +108,6 @@ class JetstreamServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../stubs/config/jetstream.php' => config_path('jetstream.php'),
         ], 'jetstream-config');
-
-        $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/jetstream'),
-        ], 'jetstream-views');
 
         $this->publishes([
             __DIR__.'/../database/migrations/2014_10_12_000000_create_users_table.php' => database_path('migrations/2014_10_12_000000_create_users_table.php'),

@@ -37,7 +37,7 @@ class TeamInvitation extends Mailable
      */
     public function build()
     {
-        return $this->markdown('jetstream::mail.team-invitation', ['acceptUrl' => URL::signedRoute('team-invitations.accept', [
+        return $this->markdown('emails.team-invitation', ['acceptUrl' => URL::signedRoute('team-invitations.accept', [
             'invitation' => $this->invitation,
         ])])->subject(__('Team Invitation'));
     }
