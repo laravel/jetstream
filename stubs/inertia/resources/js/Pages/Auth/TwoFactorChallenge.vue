@@ -81,7 +81,7 @@ const submit = () => {
                     class="mt-1 block w-full"
                     autocomplete="one-time-code"
                 />
-                <JetInputError class="mt-2" :message="form.errors.code" />
+                <JetInputError class="mt-2" :message="form.errors.recovery_code" />
             </div>
 
             <div class="flex items-center justify-end mt-4">
