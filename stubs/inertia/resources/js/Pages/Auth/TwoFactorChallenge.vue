@@ -5,8 +5,8 @@ import JetAuthenticationCard from '@/Components/AuthenticationCard.vue';
 import JetAuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
 import JetButton from '@/Components/Button.vue';
 import JetInput from '@/Components/Input.vue';
+import JetInputError from '@/Components/InputError.vue';
 import JetLabel from '@/Components/Label.vue';
-import JetValidationErrors from '@/Components/ValidationErrors.vue';
 
 const recovery = ref(false);
 
@@ -55,8 +55,6 @@ const submit = () => {
             </template>
         </div>
 
-        <JetValidationErrors class="mb-4" />
-
         <form @submit.prevent="submit">
             <div v-if="! recovery">
                 <JetLabel for="code" value="Code" />
@@ -70,6 +68,7 @@ const submit = () => {
                     autofocus
                     autocomplete="one-time-code"
                 />
+                <JetInputError class="mt-2" :message="form.errors.code" />
             </div>
 
             <div v-else>
@@ -82,6 +81,7 @@ const submit = () => {
                     class="mt-1 block w-full"
                     autocomplete="one-time-code"
                 />
+                <JetInputError class="mt-2" :message="form.errors.recovery_code" />
             </div>
 
             <div class="flex items-center justify-end mt-4">

@@ -19,7 +19,7 @@
         "illuminate/console": "^9.21",
         "illuminate/support": "^9.21",
         "jenssegers/agent": "^2.6",
-        "laravel/fortify": "^1.12"
+        "laravel/fortify": "^1.13.3"
     },
     "require-dev": {
         "inertiajs/inertia-laravel": "^0.6.3",

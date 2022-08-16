@@ -4,9 +4,9 @@ import JetAuthenticationCard from '@/Components/AuthenticationCard.vue';
 import JetAuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
 import JetButton from '@/Components/Button.vue';
 import JetInput from '@/Components/Input.vue';
+import JetInputError from '@/Components/InputError.vue';
 import JetCheckbox from '@/Components/Checkbox.vue';
 import JetLabel from '@/Components/Label.vue';
-import JetValidationErrors from '@/Components/ValidationErrors.vue';
 
 defineProps({
     canResetPassword: Boolean,
@@ -37,8 +37,6 @@ const submit = () => {
             <JetAuthenticationCardLogo />
         </template>
 
-        <JetValidationErrors class="mb-4" />
-
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
         </div>
@@ -54,6 +52,7 @@ const submit = () => {
                     required
                     autofocus
                 />
+                <JetInputError class="mt-2" :message="form.errors.email" />
             </div>
 
             <div class="mt-4">
@@ -66,6 +65,7 @@ const submit = () => {
                     required
                     autocomplete="current-password"
                 />
+                <JetInputError class="mt-2" :message="form.errors.password" />
             </div>
 
             <div class="block mt-4">

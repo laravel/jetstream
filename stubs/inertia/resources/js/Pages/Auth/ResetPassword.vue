@@ -4,8 +4,8 @@ import JetAuthenticationCard from '@/Components/AuthenticationCard.vue';
 import JetAuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
 import JetButton from '@/Components/Button.vue';
 import JetInput from '@/Components/Input.vue';
+import JetInputError from '@/Components/InputError.vue';
 import JetLabel from '@/Components/Label.vue';
-import JetValidationErrors from '@/Components/ValidationErrors.vue';
 
 const props = defineProps({
     email: String,
@@ -34,8 +34,6 @@ const submit = () => {
             <JetAuthenticationCardLogo />
         </template>
 
-        <JetValidationErrors class="mb-4" />
-
         <form @submit.prevent="submit">
             <div>
                 <JetLabel for="email" value="Email" />
@@ -47,6 +45,7 @@ const submit = () => {
                     required
                     autofocus
                 />
+                <JetInputError class="mt-2" :message="form.errors.email" />
             </div>
 
             <div class="mt-4">
@@ -59,6 +58,7 @@ const submit = () => {
                     required
                     autocomplete="new-password"
                 />
+                <JetInputError class="mt-2" :message="form.errors.password" />
             </div>
 
             <div class="mt-4">
@@ -71,6 +71,7 @@ const submit = () => {
                     required
                     autocomplete="new-password"
                 />
+                <JetInputError class="mt-2" :message="form.errors.password_confirmation" />
             </div>
 
             <div class="flex items-center justify-end mt-4">
