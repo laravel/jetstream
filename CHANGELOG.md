@@ -1,6 +1,15 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.11.0...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.11.1...2.x)
+
+## [v2.11.1](https://github.com/laravel/jetstream/compare/v2.11.0...v2.11.1) - 2022-08-17
+
+### Changed
+
+- Style improvements by @jessarcher in https://github.com/laravel/jetstream/pull/1116
+- Install NPM dependencies and build assets by @jessarcher in https://github.com/laravel/jetstream/pull/1119
+- Update inertiajs/inertia-laravel to ^0.6.3 by @ashleyshenton in https://github.com/laravel/jetstream/pull/1122
+- Display validation errors alongside fields in the Inertia stack by @jessarcher in https://github.com/laravel/jetstream/pull/1123
 
 ## [v2.11.0](https://github.com/laravel/jetstream/compare/v2.10.3...v2.11.0) - 2022-08-08
 
