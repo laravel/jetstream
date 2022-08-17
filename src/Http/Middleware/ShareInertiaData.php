@@ -19,10 +19,10 @@ class ShareInertiaData
      */
     public function handle($request, $next)
     {
-        $user = $request->user();
-
         Inertia::share(array_filter([
-            'jetstream' => function () use ($request, $user) {
+            'jetstream' => function () use ($request) {
+                $user = $request->user();
+
                 return [
                     'canCreateTeams' => $user &&
                                         Jetstream::userHasTeamFeatures($user) &&
@@ -39,8 +39,8 @@ class ShareInertiaData
                     'managesProfilePhotos' => Jetstream::managesProfilePhotos(),
                 ];
             },
-            'user' => function () use ($user) {
-                if (! $user) {
+            'user' => function () use ($request) {
+                if (! $user = $request->user()) {
                     return;
                 }
 
