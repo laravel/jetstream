@@ -197,13 +197,16 @@ class Jetstream
     }
 
     /**
-     * Determine if User model is supporting team features.
+     * Determine if a given user model utilizes the "HasTeams" trait.
      *
+     * @param  \Illuminate\Database\Eloquent\Model
      * @return bool
      */
-    public static function userHasTeamFeatures(Model $user)
+    public static function userHasTeamFeatures($user)
     {
-        return array_key_exists(HasTeams::class, class_uses_recursive($user)) && static::hasTeamFeatures();
+        return (array_key_exists(HasTeams::class, class_uses_recursive($user)) ||
+                method_exists($user, 'currentTeam')) &&
+                static::hasTeamFeatures();
     }
 
     /**

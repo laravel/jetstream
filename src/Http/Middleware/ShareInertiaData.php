@@ -46,7 +46,7 @@ class ShareInertiaData
 
                 $userHasTeamFeatures = Jetstream::userHasTeamFeatures($user);
 
-                if ($userHasTeamFeatures && $user) {
+                if ($user && $userHasTeamFeatures) {
                     $user->currentTeam;
                 }
 
