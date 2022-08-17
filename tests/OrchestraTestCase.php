@@ -3,6 +3,7 @@
 namespace Laravel\Jetstream\Tests;
 
 use Laravel\Fortify\FortifyServiceProvider;
+use Laravel\Jetstream\Features;
 use Laravel\Jetstream\JetstreamServiceProvider;
 use Mockery;
 use Orchestra\Testbench\TestCase;
@@ -16,7 +17,7 @@ abstract class OrchestraTestCase extends TestCase
 
     public function tearDown(): void
     {
-        Mockery::close();
+        parent::tearDown();
     }
 
     protected function getPackageProviders($app)
@@ -24,7 +25,7 @@ abstract class OrchestraTestCase extends TestCase
         return [JetstreamServiceProvider::class, FortifyServiceProvider::class];
     }
 
-    protected function getEnvironmentSetUp($app)
+    protected function defineEnvironment($app)
     {
         $app['migrator']->path(__DIR__.'/../database/migrations');
 
@@ -35,5 +36,14 @@ abstract class OrchestraTestCase extends TestCase
             'database' => ':memory:',
             'prefix'   => '',
         ]);
+    }
+
+    protected function defineHasTeamEnvironment($app)
+    {
+        $features = $app->config->get('jetstream.features', []);
+
+        $features[] = Features::teams(['invitations' => true]);
+
+        $app->config->set('jetstream.features', $features);
     }
 }

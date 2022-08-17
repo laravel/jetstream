@@ -2,6 +2,7 @@
 
 namespace Laravel\Jetstream;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
 use Laravel\Jetstream\Contracts\CreatesTeams;
@@ -193,6 +194,19 @@ class Jetstream
     public static function hasTeamFeatures()
     {
         return Features::hasTeamFeatures();
+    }
+
+    /**
+     * Determine if a given user model utilizes the "HasTeams" trait.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model
+     * @return bool
+     */
+    public static function userHasTeamFeatures($user)
+    {
+        return (array_key_exists(HasTeams::class, class_uses_recursive($user)) ||
+                method_exists($user, 'currentTeam')) &&
+                static::hasTeamFeatures();
     }
 
     /**
