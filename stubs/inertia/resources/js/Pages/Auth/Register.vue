@@ -93,6 +93,7 @@ const submit = () => {
                             I agree to the <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Terms of Service</a> and <a target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Privacy Policy</a>
                         </div>
                     </div>
+                    <JetInputError class="mt-2" :message="form.errors.terms" />
                 </JetLabel>
             </div>
 
