@@ -1,6 +1,13 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.11.1...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.11.2...2.x)
+
+## [v2.11.2](https://github.com/laravel/jetstream/compare/v2.11.1...v2.11.2) - 2022-08-22
+
+### Changed
+
+- Check current model supports HasTeams before trying to access team information. by @crynobone in https://github.com/laravel/jetstream/pull/1120
+- Update Register.vue by @JoshSalway in https://github.com/laravel/jetstream/pull/1127
 
 ## [v2.11.1](https://github.com/laravel/jetstream/compare/v2.11.0...v2.11.1) - 2022-08-17
 
