@@ -1,10 +1,10 @@
 <script setup>
 import { ref, reactive, nextTick } from 'vue';
-import JetButton from './Button.vue';
-import JetDialogModal from './DialogModal.vue';
-import JetInput from './Input.vue';
-import JetInputError from './InputError.vue';
-import JetSecondaryButton from './SecondaryButton.vue';
+import DialogModal from './DialogModal.vue';
+import InputError from './InputError.vue';
+import PrimaryButton from './PrimaryButton.vue';
+import SecondaryButton from './SecondaryButton.vue';
+import TextInput from './TextInput.vue';
 
 const emit = defineEmits(['confirmed']);
 
@@ -76,7 +76,7 @@ const closeModal = () => {
             <slot />
         </span>
 
-        <JetDialogModal :show="confirmingPassword" @close="closeModal">
+        <DialogModal :show="confirmingPassword" @close="closeModal">
             <template #title>
                 {{ title }}
             </template>
@@ -85,7 +85,7 @@ const closeModal = () => {
                 {{ content }}
 
                 <div class="mt-4">
-                    <JetInput
+                    <TextInput
                         ref="passwordInput"
                         v-model="form.password"
                         type="password"
@@ -94,24 +94,24 @@ const closeModal = () => {
                         @keyup.enter="confirmPassword"
                     />
 
-                    <JetInputError :message="form.error" class="mt-2" />
+                    <InputError :message="form.error" class="mt-2" />
                 </div>
             </template>
 
             <template #footer>
-                <JetSecondaryButton @click="closeModal">
+                <SecondaryButton @click="closeModal">
                     Cancel
-                </JetSecondaryButton>
+                </SecondaryButton>
 
-                <JetButton
+                <PrimaryButton
                     class="ml-3"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                     @click="confirmPassword"
                 >
                     {{ button }}
-                </JetButton>
+                </PrimaryButton>
             </template>
-        </JetDialogModal>
+        </DialogModal>
     </span>
 </template>
