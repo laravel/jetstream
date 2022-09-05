@@ -5,11 +5,11 @@ import { useForm, usePage } from '@inertiajs/inertia-vue3';
 import ActionSection from '@/Components/ActionSection.vue';
 import ConfirmsPassword from '@/Components/ConfirmsPassword.vue';
 import DangerButton from '@/Components/DangerButton.vue';
-import Input from '@/Components/Input.vue';
 import InputError from '@/Components/InputError.vue';
-import Label from '@/Components/Label.vue';
+import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
+import TextInput from '@/Components/TextInput.vue';
 
 const props = defineProps({
     requiresConfirmation: Boolean,
@@ -154,9 +154,9 @@ const disableTwoFactorAuthentication = () => {
                     </div>
 
                     <div v-if="confirming" class="mt-4">
-                        <Label for="code" value="Code" />
+                        <InputLabel for="code" value="Code" />
 
-                        <Input
+                        <TextInput
                             id="code"
                             v-model="confirmationForm.code"
                             type="text"

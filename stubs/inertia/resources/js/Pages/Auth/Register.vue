@@ -3,10 +3,10 @@ import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
 import AuthenticationCard from '@/Components/AuthenticationCard.vue';
 import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
 import Checkbox from '@/Components/Checkbox.vue';
-import Input from '@/Components/Input.vue';
 import InputError from '@/Components/InputError.vue';
-import Label from '@/Components/Label.vue';
+import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import TextInput from '@/Components/TextInput.vue';
 
 const form = useForm({
     name: '',
@@ -33,8 +33,8 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <div>
-                <Label for="name" value="Name" />
-                <Input
+                <InputLabel for="name" value="Name" />
+                <TextInput
                     id="name"
                     v-model="form.name"
                     type="text"
@@ -47,8 +47,8 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <Label for="email" value="Email" />
-                <Input
+                <InputLabel for="email" value="Email" />
+                <TextInput
                     id="email"
                     v-model="form.email"
                     type="email"
@@ -59,8 +59,8 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <Label for="password" value="Password" />
-                <Input
+                <InputLabel for="password" value="Password" />
+                <TextInput
                     id="password"
                     v-model="form.password"
                     type="password"
@@ -72,8 +72,8 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <Label for="password_confirmation" value="Confirm Password" />
-                <Input
+                <InputLabel for="password_confirmation" value="Confirm Password" />
+                <TextInput
                     id="password_confirmation"
                     v-model="form.password_confirmation"
                     type="password"
@@ -85,7 +85,7 @@ const submit = () => {
             </div>
 
             <div v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature" class="mt-4">
-                <Label for="terms">
+                <InputLabel for="terms">
                     <div class="flex items-center">
                         <Checkbox id="terms" v-model:checked="form.terms" name="terms" required />
 
@@ -94,7 +94,7 @@ const submit = () => {
                         </div>
                     </div>
                     <InputError class="mt-2" :message="form.errors.terms" />
-                </Label>
+                </InputLabel>
             </div>
 
             <div class="flex items-center justify-end mt-4">

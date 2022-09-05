@@ -3,10 +3,10 @@ import { nextTick, ref } from 'vue';
 import { Head, useForm } from '@inertiajs/inertia-vue3';
 import AuthenticationCard from '@/Components/AuthenticationCard.vue';
 import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
-import Input from '@/Components/Input.vue';
 import InputError from '@/Components/InputError.vue';
-import Label from '@/Components/Label.vue';
+import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import TextInput from '@/Components/TextInput.vue';
 
 const recovery = ref(false);
 
@@ -57,8 +57,8 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <div v-if="! recovery">
-                <Label for="code" value="Code" />
-                <Input
+                <InputLabel for="code" value="Code" />
+                <TextInput
                     id="code"
                     ref="codeInput"
                     v-model="form.code"
@@ -72,8 +72,8 @@ const submit = () => {
             </div>
 
             <div v-else>
-                <Label for="recovery_code" value="Recovery Code" />
-                <Input
+                <InputLabel for="recovery_code" value="Recovery Code" />
+                <TextInput
                     id="recovery_code"
                     ref="recoveryCodeInput"
                     v-model="form.recovery_code"

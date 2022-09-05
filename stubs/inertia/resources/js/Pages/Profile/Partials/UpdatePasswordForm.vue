@@ -3,10 +3,10 @@ import { ref } from 'vue';
 import { useForm } from '@inertiajs/inertia-vue3';
 import ActionMessage from '@/Components/ActionMessage.vue';
 import FormSection from '@/Components/FormSection.vue';
-import Input from '@/Components/Input.vue';
 import InputError from '@/Components/InputError.vue';
-import Label from '@/Components/Label.vue';
+import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import TextInput from '@/Components/TextInput.vue';
 
 const passwordInput = ref(null);
 const currentPasswordInput = ref(null);
@@ -49,8 +49,8 @@ const updatePassword = () => {
 
         <template #form>
             <div class="col-span-6 sm:col-span-4">
-                <Label for="current_password" value="Current Password" />
-                <Input
+                <InputLabel for="current_password" value="Current Password" />
+                <TextInput
                     id="current_password"
                     ref="currentPasswordInput"
                     v-model="form.current_password"
@@ -62,8 +62,8 @@ const updatePassword = () => {
             </div>
 
             <div class="col-span-6 sm:col-span-4">
-                <Label for="password" value="New Password" />
-                <Input
+                <InputLabel for="password" value="New Password" />
+                <TextInput
                     id="password"
                     ref="passwordInput"
                     v-model="form.password"
@@ -75,8 +75,8 @@ const updatePassword = () => {
             </div>
 
             <div class="col-span-6 sm:col-span-4">
-                <Label for="password_confirmation" value="Confirm Password" />
-                <Input
+                <InputLabel for="password_confirmation" value="Confirm Password" />
+                <TextInput
                     id="password_confirmation"
                     v-model="form.password_confirmation"
                     type="password"

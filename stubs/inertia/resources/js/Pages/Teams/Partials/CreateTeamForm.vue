@@ -1,10 +1,10 @@
 <script setup>
 import { useForm } from '@inertiajs/inertia-vue3';
 import FormSection from '@/Components/FormSection.vue';
-import Input from '@/Components/Input.vue';
 import InputError from '@/Components/InputError.vue';
-import Label from '@/Components/Label.vue';
+import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import TextInput from '@/Components/TextInput.vue';
 
 const form = useForm({
     name: '',
@@ -30,7 +30,7 @@ const createTeam = () => {
 
         <template #form>
             <div class="col-span-6">
-                <Label value="Team Owner" />
+                <InputLabel value="Team Owner" />
 
                 <div class="flex items-center mt-2">
                     <img class="object-cover w-12 h-12 rounded-full" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name">
@@ -45,8 +45,8 @@ const createTeam = () => {
             </div>
 
             <div class="col-span-6 sm:col-span-4">
-                <Label for="name" value="Team Name" />
-                <Input
+                <InputLabel for="name" value="Team Name" />
+                <TextInput
                     id="name"
                     v-model="form.name"
                     type="text"
