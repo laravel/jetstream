@@ -2,11 +2,11 @@
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
 import AuthenticationCard from '@/Components/AuthenticationCard.vue';
 import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
+import Checkbox from '@/Components/Checkbox.vue';
 import Input from '@/Components/Input.vue';
 import InputError from '@/Components/InputError.vue';
-import Checkbox from '@/Components/Checkbox.vue';
 import Label from '@/Components/Label.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 
 const form = useForm({
     name: '',
