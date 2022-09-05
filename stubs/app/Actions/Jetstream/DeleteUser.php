@@ -3,6 +3,7 @@
 namespace App\Actions\Jetstream;
 
 use Laravel\Jetstream\Contracts\DeletesUsers;
+use Laravel\Jetstream\Jetstream;
 
 class DeleteUser implements DeletesUsers
 {
@@ -14,8 +15,14 @@ class DeleteUser implements DeletesUsers
      */
     public function delete($user)
     {
-        $user->deleteProfilePhoto();
-        $user->tokens->each->delete();
+        if (Jetstream::managesProfilePhotos()) {
+            $user->deleteProfilePhoto();
+        }
+        
+        if (Jetstream::hasApiFeatures()) {
+            $user->tokens->each->delete();
+        }
+        
         $user->delete();
     }
 }
