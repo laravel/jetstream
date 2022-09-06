@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.11.2...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.12.0...2.x)
+
+## [v2.12.0](https://github.com/laravel/jetstream/compare/v2.11.2...v2.12.0) - 2022-09-06
+
+### Changed
+
+- Remove "Jet" component prefix by @jessarcher in https://github.com/laravel/jetstream/pull/1117
 
 ## [v2.11.2](https://github.com/laravel/jetstream/compare/v2.11.1...v2.11.2) - 2022-08-22
 
