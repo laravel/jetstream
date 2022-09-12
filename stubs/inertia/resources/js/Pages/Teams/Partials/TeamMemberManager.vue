@@ -266,7 +266,7 @@ const displayableRole = (role) => {
 
                                 <!-- Remove Team Member -->
                                 <button
-                                    v-if="userPermissions.canRemoveTeamMembers"
+                                    v-else-if="userPermissions.canRemoveTeamMembers"
                                     class="cursor-pointer ml-6 text-sm text-red-500"
                                     @click="confirmTeamMemberRemoval(user)"
                                 >
