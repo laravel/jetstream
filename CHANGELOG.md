@@ -1,6 +1,13 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.12.0...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.12.1...2.x)
+
+## [v2.12.1](https://github.com/laravel/jetstream/compare/v2.12.0...v2.12.1) - 2022-09-12
+
+### Changed
+
+- Call `storage:link` on install by @jessarcher in https://github.com/laravel/jetstream/pull/1133
+- Remove redundant remove-member link by @devnll in https://github.com/laravel/jetstream/pull/1135
 
 ## [v2.12.0](https://github.com/laravel/jetstream/compare/v2.11.2...v2.12.0) - 2022-09-06
 
