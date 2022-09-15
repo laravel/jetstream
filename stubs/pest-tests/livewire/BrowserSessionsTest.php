@@ -9,5 +9,6 @@ test('other browser sessions can be logged out', function () {
 
     Livewire::test(LogoutOtherBrowserSessionsForm::class)
             ->set('password', 'password')
-            ->call('logoutOtherBrowserSessions');
+            ->call('logoutOtherBrowserSessions')
+            ->assertSuccessful();
 });
