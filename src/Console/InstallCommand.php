@@ -254,7 +254,7 @@ class InstallCommand extends Command
             }
 
             return 'npm';
-        })(); 
+        })();
 
         // Install and Build NPM Packages...
         $this->line('');
@@ -461,7 +461,7 @@ EOF;
             }
 
             return 'npm';
-        })(); 
+        })();
 
         // Install and Build NPM Packages...
         $this->line('');
