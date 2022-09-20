@@ -241,7 +241,25 @@ class InstallCommand extends Command
             $this->installLivewireTeamStack();
         }
 
-        $this->runCommands(['npm install', 'npm run build']);
+        // Get NPM Package Manager...
+        $npmPackageManager = (function () {
+            if ((new Filesystem)->exists(base_path().'/package-lock.json')) {
+                return 'npm';
+            }
+            if ((new Filesystem)->exists(base_path().'/pnpm-lock.yaml')) {
+                return 'pnpm';
+            }
+            if ((new Filesystem)->exists(base_path().'/yarn.lock')) {
+                return 'yarn';
+            }
+
+            return 'npm';
+        })(); 
+
+        // Install and Build NPM Packages...
+        $this->line('');
+        $this->components->info("Installing $npmPackageManager packages.");
+        $this->runCommands(["$npmPackageManager install", "$npmPackageManager run build"]);
 
         $this->line('');
         $this->components->info('Livewire scaffolding installed successfully.');
@@ -430,7 +448,25 @@ EOF;
             $this->installInertiaSsrStack();
         }
 
-        $this->runCommands(['npm install', 'npm run build']);
+        // Get NPM Package Manager...
+        $npmPackageManager = (function () {
+            if ((new Filesystem)->exists(base_path().'/package-lock.json')) {
+                return 'npm';
+            }
+            if ((new Filesystem)->exists(base_path().'/pnpm-lock.yaml')) {
+                return 'pnpm';
+            }
+            if ((new Filesystem)->exists(base_path().'/yarn.lock')) {
+                return 'yarn';
+            }
+
+            return 'npm';
+        })(); 
+
+        // Install and Build NPM Packages...
+        $this->line('');
+        $this->components->info("Installing $npmPackageManager packages.");
+        $this->runCommands(["$npmPackageManager install", "$npmPackageManager run build"]);
 
         $this->line('');
         $this->components->info('Inertia scaffolding installed successfully.');
