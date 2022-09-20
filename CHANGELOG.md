@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.12.1...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.12.2...2.x)
+
+## [v2.12.2](https://github.com/laravel/jetstream/compare/v2.12.1...v2.12.2) - 2022-09-15
+
+### Fixed
+
+- Fix test by @driesvints in https://github.com/laravel/jetstream/pull/1138
 
 ## [v2.12.1](https://github.com/laravel/jetstream/compare/v2.12.0...v2.12.1) - 2022-09-12
 
