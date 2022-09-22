@@ -1,4 +1,4 @@
-@props(['id', 'maxWidth'])
+@props(['id', 'maxWidth', 'deferEntangle' => true])
 
 @php
 $id = $id ?? md5($attributes->wire('model'));
@@ -14,7 +14,7 @@ $maxWidth = [
 
 <div
     x-data="{
-        show: @entangle($attributes->wire('model')).defer,
+        show: @entangle($attributes->wire('model')) @if($deferEntangle) .defer @endif,
         focusables() {
             // All focusable element types...
             let selector = 'a, button, input:not([type=\'hidden\']), textarea, select, details, [tabindex]:not([tabindex=\'-1\'])'
