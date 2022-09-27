@@ -23,7 +23,7 @@ class UserProfileControllerTest extends OrchestraTestCase
         $this->migrate();
 
         $disable = $this->mock(DisableTwoFactorAuthentication::class);
-        $disable->shouldReceive('__invoke')->once();
+        $disable->shouldNotReceive('__invoke');
 
         Jetstream::$inertiaManager = $inertia = m::mock();
         $inertia->shouldReceive('render')->once();
