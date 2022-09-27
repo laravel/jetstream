@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.12.2...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.12.3...2.x)
+
+## [v2.12.3](https://github.com/laravel/jetstream/compare/v2.12.2...v2.12.3) - 2022-09-26
+
+### Changed
+
+- Pass additional props to the teams create view. by @clcarver in https://github.com/laravel/jetstream/pull/1149
 
 ## [v2.12.2](https://github.com/laravel/jetstream/compare/v2.12.1...v2.12.2) - 2022-09-15
 
