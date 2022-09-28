@@ -22,16 +22,18 @@ Next, you should upgrade your `laravel/jetstream` dependency to `^2.0` within yo
 
     composer update
 
-#### Remove Team Member Action
+#### New Jetstream Actions
 
-You should place the new [RemoveTeamMember](https://github.com/laravel/jetstream/blob/2.x/stubs/app/Actions/Jetstream/RemoveTeamMember.php) action within your application's `app/Actions/Jetstream` directory.
+You should place the new [RemoveTeamMember](https://github.com/laravel/jetstream/blob/2.x/stubs/app/Actions/Jetstream/RemoveTeamMember.php) and [InviteTeamMember](https://github.com/laravel/jetstream/blob/2.x/stubs/app/Actions/Jetstream/InviteTeamMember.php) actions within your application's `app/Actions/Jetstream` directory.
 
-In addition, you should register this action with Jetstream by adding the following code to the `boot` method of your application's `JetstreamServiceProvider`:
+In addition, you should register these actions with Jetstream by adding the following code to the `boot` method of your application's `JetstreamServiceProvider`:
 
 ```php
 use App\Actions\Jetstream\RemoveTeamMember;
+use App\Actions\Jetstream\InviteTeamMember;
 
 Jetstream::removeTeamMembersUsing(RemoveTeamMember::class);
+Jetstream::inviteTeamMembersUsing(InviteTeamMember::class);
 ```
 
 #### Team Invitation Model
