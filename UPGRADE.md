@@ -29,11 +29,11 @@ You should place the new [RemoveTeamMember](https://github.com/laravel/jetstream
 In addition, you should register these actions with Jetstream by adding the following code to the `boot` method of your application's `JetstreamServiceProvider`:
 
 ```php
-use App\Actions\Jetstream\RemoveTeamMember;
 use App\Actions\Jetstream\InviteTeamMember;
+use App\Actions\Jetstream\RemoveTeamMember;
 
-Jetstream::removeTeamMembersUsing(RemoveTeamMember::class);
 Jetstream::inviteTeamMembersUsing(InviteTeamMember::class);
+Jetstream::removeTeamMembersUsing(RemoveTeamMember::class);
 ```
 
 #### Team Invitation Model
