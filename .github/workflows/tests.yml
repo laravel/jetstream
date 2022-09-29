@@ -14,7 +14,7 @@ jobs:
       fail-fast: true
       matrix:
         php: ['8.0', 8.1]
-        laravel: [9]
+        laravel: [9.*]
 
     name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }}
 
@@ -33,7 +33,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "illuminate/contracts=^${{ matrix.laravel }}" --no-update
+          composer require "illuminate/contracts=${{ matrix.laravel }}" --dev --no-update
           composer update --prefer-dist --no-interaction --no-progress
 
       - name: Execute tests
@@ -62,17 +62,17 @@ jobs:
       - name: Setup Laravel
         run: |
           composer create-project laravel/laravel:^9 .
-          composer require laravel/jetstream:^2
-          rm -rf vendor/laravel/jetstream
+          composer require laravel/jetstream:* --no-interaction --no-update
+          composer config repositories.jetstream '{"type": "path", "url": "jetstream"}' --file composer.json
 
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          path: 'vendor/laravel/jetstream'
+          path: 'jetstream'
 
       - name: Install Jetstream
         run: |
-          composer dump
+          composer update "laravel/jetstream" --prefer-dist --no-interaction --no-progress -W
           php artisan jetstream:install ${{ matrix.stack }} --teams --api --verification
 
       - name: Install NPM dependencies
