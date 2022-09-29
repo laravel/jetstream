@@ -72,7 +72,7 @@ jobs:
 
       - name: Install Jetstream
         run: |
-          composer update "laravel/jetstream" --prefer-dist --no-interaction --no-progress
+          composer update "laravel/jetstream" --prefer-dist --no-interaction --no-progress -W
           php artisan jetstream:install ${{ matrix.stack }} --teams --api --verification
 
       - name: Install NPM dependencies
