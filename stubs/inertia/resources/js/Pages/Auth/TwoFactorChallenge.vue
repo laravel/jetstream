@@ -1,4 +1,5 @@
 <script setup>
+import {pickBy, property} from 'lodash';
 import { nextTick, ref } from 'vue';
 import { Head, useForm } from '@inertiajs/inertia-vue3';
 import AuthenticationCard from '@/Components/AuthenticationCard.vue';
@@ -33,7 +34,7 @@ const toggleRecovery = async () => {
 };
 
 const submit = () => {
-    form.post(route('two-factor.login'));
+    form.transform((data) => pickBy(data, property)).post(route('two-factor.login'));
 };
 </script>
 
