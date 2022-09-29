@@ -62,17 +62,17 @@ jobs:
       - name: Setup Laravel
         run: |
           composer create-project laravel/laravel:^9 .
-          composer require laravel/jetstream:^2
-          rm -rf vendor/laravel/jetstream
+          composer require laravel/jetstream:* --no-interaction --no-update
+          composer config repositories.breeze '{"type": "path", "url": "jetstream"}' --file composer.json
 
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          path: 'vendor/laravel/jetstream'
+          path: 'jetstream'
 
       - name: Install Jetstream
         run: |
-          composer dump
+          composer update "laravel/jetstream" --prefer-dist --no-interaction --no-progress
           php artisan jetstream:install ${{ matrix.stack }} --teams --api --verification
 
       - name: Install NPM dependencies
