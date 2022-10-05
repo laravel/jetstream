@@ -19,7 +19,7 @@ const recoveryCodeInput = ref(null);
 const codeInput = ref(null);
 
 const toggleRecovery = async () => {
-    recovery.value ^= true;
+    recovery.value = true;
 
     await nextTick();
 
