@@ -36,7 +36,7 @@ class ApiTokenController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'min:5', 'max:255'],
         ]);
 
         $token = $request->user()->createToken(
