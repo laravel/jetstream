@@ -50,8 +50,23 @@ const updatePhotoPreview = () => {
 
     if (! photo) return;
 
-    const reader = new FileReader();
+    const accepted = photoInput.getAttribute('accept').split(',');
+    const mime = photo.type;
+    let isValid = false;
+    let reader;
 
+    for (const accept of accepted) {
+        if (mime !== accept)
+            continue;
+
+        isValid = true;
+        break;
+    }
+
+    if (!isValid)
+        return;
+
+    reader = new FileReader();
     reader.onload = (e) => {
         photoPreview.value = e.target.result;
     };
@@ -93,6 +108,7 @@ const clearPhotoFileInput = () => {
                 <input
                     ref="photoInput"
                     type="file"
+                    accept="image/jpeg,image/png"
                     class="hidden"
                     @change="updatePhotoPreview"
                 >

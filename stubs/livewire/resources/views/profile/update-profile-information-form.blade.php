@@ -12,17 +12,38 @@
         @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
             <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 sm:col-span-4">
                 <!-- Profile Photo File Input -->
-                <input type="file" class="hidden"
+                <input type="file" class="hidden" accept="image/jpeg,image/png"
                             wire:model="photo"
                             x-ref="photo"
-                            x-on:change="
-                                    photoName = $refs.photo.files[0].name;
-                                    const reader = new FileReader();
-                                    reader.onload = (e) => {
-                                        photoPreview = e.target.result;
-                                    };
-                                    reader.readAsDataURL($refs.photo.files[0]);
-                            " />
+                            x-on:change="() => {
+                                const userfile = $refs.photo.files[0];
+
+                                if (!userfile)
+                                    return;
+
+                                const accepted = $refs.photo.getAttribute('accept').split(',');
+                                const mime = userfile.type;
+                                let isValid = false;
+                                let reader;
+
+                                for (const accept of accepted) {
+                                    if (mime !== accept)
+                                        continue;
+
+                                    isValid = true;
+                                    break;
+                                }
+
+                                if (!isValid)
+                                    return;
+
+                                reader = new FileReader();
+                                photoName = userfile.name;
+                                reader.onload = (e) => {
+                                    photoPreview = e.target.result;
+                                };
+                                reader.readAsDataURL(userfile);
+                            }" />
 
                 <x-jet-label for="photo" value="{{ __('Photo') }}" />
 
