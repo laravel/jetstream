@@ -15,7 +15,7 @@ class DeleteTeamTest extends TestCase
 
     public function test_teams_can_be_deleted()
     {
-        $this->actingAs($user = User::factory()->withPersonalTeam()->create());
+        $this->actingAs($user = User::factory()->withPersonalTeam()->create()->fresh());
 
         $user->ownedTeams()->save($team = Team::factory()->make([
             'personal_team' => false,

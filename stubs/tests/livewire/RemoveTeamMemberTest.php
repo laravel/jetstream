@@ -14,7 +14,7 @@ class RemoveTeamMemberTest extends TestCase
 
     public function test_team_members_can_be_removed_from_teams()
     {
-        $this->actingAs($user = User::factory()->withPersonalTeam()->create());
+        $this->actingAs($user = User::factory()->withPersonalTeam()->create()->fresh());
 
         $user->currentTeam->users()->attach(
             $otherUser = User::factory()->create(), ['role' => 'admin']
