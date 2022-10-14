@@ -12,7 +12,7 @@ class UpdateTeamNameTest extends TestCase
 
     public function test_team_names_can_be_updated()
     {
-        $this->actingAs($user = User::factory()->withPersonalTeam()->create());
+        $this->actingAs($user = User::factory()->withPersonalTeam()->create()->fresh());
 
         $response = $this->put('/teams/'.$user->currentTeam->id, [
             'name' => 'Test Team',

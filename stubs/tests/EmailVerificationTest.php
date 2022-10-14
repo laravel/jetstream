@@ -21,7 +21,7 @@ class EmailVerificationTest extends TestCase
             return $this->markTestSkipped('Email verification not enabled.');
         }
 
-        $user = User::factory()->withPersonalTeam()->unverified()->create();
+        $user = User::factory()->withPersonalTeam()->unverified()->create()->fresh();
 
         $response = $this->actingAs($user)->get('/email/verify');
 
