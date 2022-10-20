@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use Laravel\Fortify\Features;
 
 test('profile information can be updated', function () {
     $this->actingAs($user = User::factory()->create());
@@ -13,4 +14,6 @@ test('profile information can be updated', function () {
     expect($user->fresh())
         ->name->toEqual('Test Name')
         ->email->toEqual('test@example.com');
-});
+})->skip(function () {
+    return ! Features::enabled(Features::updateProfileInformation());
+}, 'Update profile information is not enabled.');

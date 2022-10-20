@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Fortify\Features;
 use Tests\TestCase;
 
 class ProfileInformationTest extends TestCase
@@ -12,6 +13,10 @@ class ProfileInformationTest extends TestCase
 
     public function test_profile_information_can_be_updated()
     {
+        if (! Features::enabled(Features::updateProfileInformation())) {
+            return $this->markTestSkipped('Update profile information is not enabled.');
+        }
+
         $this->actingAs($user = User::factory()->create());
 
         $response = $this->put('/user/profile-information', [
