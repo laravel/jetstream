@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Jetstream\Features;
 use Tests\TestCase;
 
 class UpdateTeamNameTest extends TestCase
@@ -12,6 +13,10 @@ class UpdateTeamNameTest extends TestCase
 
     public function test_team_names_can_be_updated()
     {
+        if (! Features::hasTeamFeatures()) {
+            return $this->markTestSkipped('Team features is not enabled.');
+        }
+
         $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
         $response = $this->put('/teams/'.$user->currentTeam->id, [

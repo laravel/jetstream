@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Jetstream\Features;
 use Tests\TestCase;
 
 class DeleteTeamTest extends TestCase
@@ -13,6 +14,10 @@ class DeleteTeamTest extends TestCase
 
     public function test_teams_can_be_deleted()
     {
+        if (! Features::hasTeamFeatures()) {
+            return $this->markTestSkipped('Team features is not enabled.');
+        }
+
         $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
         $user->ownedTeams()->save($team = Team::factory()->make([
@@ -31,6 +36,10 @@ class DeleteTeamTest extends TestCase
 
     public function test_personal_teams_cant_be_deleted()
     {
+        if (! Features::hasTeamFeatures()) {
+            return $this->markTestSkipped('Team features is not enabled.');
+        }
+
         $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
         $response = $this->delete('/teams/'.$user->currentTeam->id);
