@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Fortify\Features;
 use Laravel\Jetstream\Http\Livewire\UpdatePasswordForm;
 use Livewire\Livewire;
 
@@ -17,7 +18,9 @@ test('password can be updated', function () {
             ->call('updatePassword');
 
     expect(Hash::check('new-password', $user->fresh()->password))->toBeTrue();
-});
+})->skip(function () {
+    return ! Features::enabled(Features::updatePasswords());
+}, 'Password updates are not enabled.');
 
 test('current password must be correct', function () {
     $this->actingAs($user = User::factory()->create());
@@ -32,7 +35,9 @@ test('current password must be correct', function () {
             ->assertHasErrors(['current_password']);
 
     expect(Hash::check('password', $user->fresh()->password))->toBeTrue();
-});
+})->skip(function () {
+    return ! Features::enabled(Features::updatePasswords());
+}, 'Password updates are not enabled.');
 
 test('new passwords must match', function () {
     $this->actingAs($user = User::factory()->create());
@@ -47,4 +52,6 @@ test('new passwords must match', function () {
             ->assertHasErrors(['password']);
 
     expect(Hash::check('password', $user->fresh()->password))->toBeTrue();
-});
+})->skip(function () {
+    return ! Features::enabled(Features::updatePasswords());
+}, 'Password updates are not enabled.');
