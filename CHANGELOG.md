@@ -1,6 +1,14 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.12.3...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.12.4...2.x)
+
+## [v2.12.4](https://github.com/laravel/jetstream/compare/v2.12.3...v2.12.4) - 2022-10-25
+
+### Changed
+
+- Register: add required to terms checkbox by @A-w-x in https://github.com/laravel/jetstream/pull/1158
+- Added missing localization in logout-other-browser-sessions-form.blade.php by @JakyeRU in https://github.com/laravel/jetstream/pull/1163
+- Vite preloading by @timacdonald in https://github.com/laravel/jetstream/pull/1169
 
 ## [v2.12.3](https://github.com/laravel/jetstream/compare/v2.12.2...v2.12.3) - 2022-09-26
 
