@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.12.4...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.12.5...2.x)
+
+## [v2.12.5](https://github.com/laravel/jetstream/compare/v2.12.4...v2.12.5) - 2022-10-26
+
+### Fixed
+
+- Fix dev preloading by @timacdonald in https://github.com/laravel/jetstream/pull/1171
 
 ## [v2.12.4](https://github.com/laravel/jetstream/compare/v2.12.3...v2.12.4) - 2022-10-25
 
