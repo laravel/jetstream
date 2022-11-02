@@ -5,6 +5,7 @@ namespace App\Actions\Jetstream;
 use App\Models\User;
 use App\Models\Team;
 use Closure;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -59,9 +60,12 @@ class InviteTeamMember implements InvitesTeamMembers
     protected function rules(Team $team): array
     {
         return array_filter([
-            'email' => ['required', 'email', Rule::unique('team_invitations')->where(function ($query) use ($team) {
-                $query->where('team_id', $team->id);
-            })],
+            'email' => [
+                'required', 'email',
+                Rule::unique('team_invitations')->where(function (Builder $query) use ($team) {
+                    $query->where('team_id', $team->id);
+                }),
+            ],
             'role' => Jetstream::hasRoles()
                             ? ['required', 'string', new Role]
                             : null,
