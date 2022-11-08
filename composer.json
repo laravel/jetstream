@@ -22,7 +22,7 @@
         "laravel/fortify": "^1.13.3"
     },
     "require-dev": {
-        "inertiajs/inertia-laravel": "^0.6.3",
+        "inertiajs/inertia-laravel": "^0.6.4",
         "laravel/sanctum": "^3.0",
         "mockery/mockery": "^1.0",
         "orchestra/testbench": "^7.0",
