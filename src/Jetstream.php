@@ -355,6 +355,18 @@ class Jetstream
     }
 
     /**
+     * Get a new instance of the team invitation model.
+     *
+     * @return mixed
+     */
+    public static function newTeamInvitationModel()
+    {
+        $model = static::teamInvitationModel();
+
+        return new $model;
+    }
+
+    /**
      * Specify the team invitation model that should be used by Jetstream.
      *
      * @param  string  $model
