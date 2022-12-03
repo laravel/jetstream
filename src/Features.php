@@ -4,8 +4,6 @@ namespace Laravel\Jetstream;
 
 class Features
 {
-    // Base..
-
     /**
      * Determine if the given feature is enabled.
      *
@@ -51,6 +49,46 @@ class Features
     }
 
     /**
+     * Determine if the application is using any team features.
+     *
+     * @return bool
+     */
+    public static function hasTeamFeatures()
+    {
+        return static::enabled(static::teams());
+    }
+
+    /**
+     * Determine if the application is using any company features.
+     *
+     * @return bool
+     */
+    public static function hasCompanyFeatures()
+    {
+        return static::enabled(static::companies());
+    }
+
+    /**
+     * Determine if invitations are sent to team members.
+     *
+     * @return bool
+     */
+    public static function sendsTeamInvitations()
+    {
+        return static::optionEnabled(static::teams(), 'invitations');
+    }
+
+    /**
+     * Determine if invitations are sent to company employees.
+     *
+     * @return bool
+     */
+    public static function sendsCompanyInvitations()
+    {
+        return static::optionEnabled(static::companies(), 'invitations');
+    }
+
+    /**
      * Determine if the application has terms of service / privacy policy confirmation enabled.
      *
      * @return bool
@@ -91,6 +129,36 @@ class Features
     }
 
     /**
+     * Enable the teams feature.
+     *
+     * @param  array  $options
+     * @return string
+     */
+    public static function teams(array $options = [])
+    {
+        if (! empty($options)) {
+            config(['jetstream-options.teams' => $options]);
+        }
+
+        return 'teams';
+    }
+
+    /**
+     * Enable the companies feature.
+     *
+     * @param  array  $options
+     * @return string
+     */
+    public static function companies(array $options = [])
+    {
+        if (! empty($options)) {
+            config(['jetstream-options.companies' => $options]);
+        }
+
+        return 'companies';
+    }
+
+    /**
      * Enable the terms of service and privacy policy feature.
      *
      * @return string
@@ -108,81 +176,5 @@ class Features
     public static function accountDeletion()
     {
         return 'account-deletion';
-    }
-
-
-    // Teams...
-
-    /**
-     * Determine if the application is using any team features.
-     *
-     * @return bool
-     */
-    public static function hasTeamFeatures()
-    {
-        return static::enabled(static::teams());
-    }
-
-    /**
-     * Determine if invitations are sent to team members.
-     *
-     * @return bool
-     */
-    public static function sendsTeamInvitations()
-    {
-        return static::optionEnabled(static::teams(), 'invitations');
-    }
-
-    /**
-     * Enable the teams feature.
-     *
-     * @param  array  $options
-     * @return string
-     */
-    public static function teams(array $options = [])
-    {
-        if (! empty($options)) {
-            config(['jetstream-options.teams' => $options]);
-        }
-
-        return 'teams';
-    }
-
-
-    // Companies...
-
-    /**
-     * Determine if the application is using any team features.
-     *
-     * @return bool
-     */
-    public static function hasCompanyFeatures()
-    {
-        return static::enabled(static::companies());
-    }
-
-    /**
-     * Determine if invitations are sent to company employees.
-     *
-     * @return bool
-     */
-    public static function sendsCompanyInvitations()
-    {
-        return static::optionEnabled(static::companies(), 'invitations');
-    }
-
-    /**
-     * Enable the companies feature.
-     *
-     * @param  array  $options
-     * @return string
-     */
-    public static function companies(array $options = [])
-    {
-        if (! empty($options)) {
-            config(['jetstream-options.companies' => $options]);
-        }
-
-        return 'companies';
     }
 }
