@@ -27,6 +27,9 @@ class ShareInertiaData
                     'canCreateTeams' => $user &&
                                         Jetstream::userHasTeamFeatures($user) &&
                                         Gate::forUser($user)->check('create', Jetstream::newTeamModel()),
+                    'canCreateCompanies' => $user &&
+                                        Jetstream::userHasCompanyFeatures($user) &&
+                                        Gate::forUser($user)->check('create', Jetstream::newCompanyModel()),
                     'canManageTwoFactorAuthentication' => Features::canManageTwoFactorAuthentication(),
                     'canUpdatePassword' => Features::enabled(Features::updatePasswords()),
                     'canUpdateProfileInformation' => Features::canUpdateProfileInformation(),
@@ -35,6 +38,7 @@ class ShareInertiaData
                     'hasAccountDeletionFeatures' => Jetstream::hasAccountDeletionFeatures(),
                     'hasApiFeatures' => Jetstream::hasApiFeatures(),
                     'hasTeamFeatures' => Jetstream::hasTeamFeatures(),
+                    'hasCompanyFeatures' => Jetstream::hasCompanyFeatures(),
                     'hasTermsAndPrivacyPolicyFeature' => Jetstream::hasTermsAndPrivacyPolicyFeature(),
                     'managesProfilePhotos' => Jetstream::managesProfilePhotos(),
                 ];
@@ -52,6 +56,18 @@ class ShareInertiaData
 
                 return array_merge($user->toArray(), array_filter([
                     'all_teams' => $userHasTeamFeatures ? $user->allTeams()->values() : null,
+                ]), [
+                    'two_factor_enabled' => ! is_null($user->two_factor_secret),
+                ]);
+
+                $userHasCompanyFeatures = Jetstream::userHasCompanyFeatures($user);
+
+                if ($user && $userHasCompanyFeatures) {
+                    $user->currentCompany;
+                }
+
+                return array_merge($user->toArray(), array_filter([
+                    'all_companies' => $userHasCompanyFeatures ? $user->allCompanies()->values() : null,
                 ]), [
                     'two_factor_enabled' => ! is_null($user->two_factor_secret),
                 ]);

@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
+use Laravel\Jetstream\Tests\OrchestraTestCase;
 
 class DeleteUserWithTeamsTest extends OrchestraTestCase
 {

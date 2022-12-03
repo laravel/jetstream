@@ -2,18 +2,32 @@
 
 namespace Laravel\Jetstream;
 
-use Illuminate\Database\Eloquent\Model;
+// Common...
 use Illuminate\Support\Arr;
-use Laravel\Jetstream\Contracts\AddsTeamMembers;
+use Illuminate\Database\Eloquent\Model;
+use Laravel\Jetstream\Contracts\DeletesUsers;
+
+// Teams...
 use Laravel\Jetstream\Contracts\CreatesTeams;
 use Laravel\Jetstream\Contracts\DeletesTeams;
-use Laravel\Jetstream\Contracts\DeletesUsers;
-use Laravel\Jetstream\Contracts\InvitesTeamMembers;
-use Laravel\Jetstream\Contracts\RemovesTeamMembers;
+use Laravel\Jetstream\Contracts\AddsTeamMembers;
 use Laravel\Jetstream\Contracts\UpdatesTeamNames;
+use Laravel\Jetstream\Contracts\RemovesTeamMembers;
+use Laravel\Jetstream\Contracts\InvitesTeamMembers;
+
+// Companies...
+use Laravel\Jetstream\Contracts\CreatesCompanies;
+use Laravel\Jetstream\Contracts\DeletesCompanies;
+use Laravel\Jetstream\Contracts\UpdatesCompanyNames;
+use Laravel\Jetstream\Contracts\AddsCompanyEmployees;
+use Laravel\Jetstream\Contracts\InvitesCompanyEmployees;
+use Laravel\Jetstream\Contracts\RemovesCompanyEmployees;
+
 
 class Jetstream
 {
+    // Common...
+
     /**
      * Indicates if Jetstream routes will be registered.
      *
@@ -49,26 +63,56 @@ class Jetstream
      */
     public static $userModel = 'App\\Models\\User';
 
+
+    // Teams...
+
     /**
      * The team model that should be used by Jetstream.
      *
      * @var string
      */
-    public static $teamModel = 'App\\Models\\Team';
+    public static $teamModel = 'App\\Models\\\Team';
 
     /**
      * The membership model that should be used by Jetstream.
      *
      * @var string
      */
-    public static $membershipModel = 'App\\Models\\Membership';
+    public static $membershipModel = 'App\\Models\\\Membership';
 
     /**
      * The team invitation model that should be used by Jetstream.
      *
      * @var string
      */
-    public static $teamInvitationModel = 'App\\Models\\TeamInvitation';
+    public static $teamInvitationModel = 'App\\Models\\\TeamInvitation';
+
+
+    // Companies...
+
+    /**
+     * The company model that should be used by Jetstream.
+     *
+     * @var string
+     */
+    public static $companyModel = 'App\\Models\\\Company';
+
+    /**
+     * The employeeship model that should be used by Jetstream.
+     *
+     * @var string
+     */
+    public static $employeeshipModel = 'App\\Models\\\Employeeship';
+
+    /**
+     * The company invitation model that should be used by Jetstream.
+     *
+     * @var string
+     */
+    public static $companyInvitationModel = 'App\\Models\\\CompanyInvitation';
+
+
+    // Inertia...
 
     /**
      * The Inertia manager instance.
@@ -76,6 +120,8 @@ class Jetstream
      * @var \Laravel\Jetstream\InertiaManager
      */
     public static $inertiaManager;
+
+    // Common...
 
     /**
      * Determine if Jetstream has registered roles.
@@ -186,6 +232,9 @@ class Jetstream
         return Features::hasApiFeatures();
     }
 
+
+    // Teams...
+
     /**
      * Determine if Jetstream is supporting team features.
      *
@@ -207,83 +256,6 @@ class Jetstream
         return (array_key_exists(HasTeams::class, class_uses_recursive($user)) ||
                 method_exists($user, 'currentTeam')) &&
                 static::hasTeamFeatures();
-    }
-
-    /**
-     * Determine if the application is using the terms confirmation feature.
-     *
-     * @return bool
-     */
-    public static function hasTermsAndPrivacyPolicyFeature()
-    {
-        return Features::hasTermsAndPrivacyPolicyFeature();
-    }
-
-    /**
-     * Determine if the application is using any account deletion features.
-     *
-     * @return bool
-     */
-    public static function hasAccountDeletionFeatures()
-    {
-        return Features::hasAccountDeletionFeatures();
-    }
-
-    /**
-     * Find a user instance by the given ID.
-     *
-     * @param  int  $id
-     * @return mixed
-     */
-    public static function findUserByIdOrFail($id)
-    {
-        return static::newUserModel()->where('id', $id)->firstOrFail();
-    }
-
-    /**
-     * Find a user instance by the given email address or fail.
-     *
-     * @param  string  $email
-     * @return mixed
-     */
-    public static function findUserByEmailOrFail(string $email)
-    {
-        return static::newUserModel()->where('email', $email)->firstOrFail();
-    }
-
-    /**
-     * Get the name of the user model used by the application.
-     *
-     * @return string
-     */
-    public static function userModel()
-    {
-        return static::$userModel;
-    }
-
-    /**
-     * Get a new instance of the user model.
-     *
-     * @return mixed
-     */
-    public static function newUserModel()
-    {
-        $model = static::userModel();
-
-        return new $model;
-    }
-
-    /**
-     * Specify the user model that should be used by Jetstream.
-     *
-     * @param  string  $model
-     * @return static
-     */
-    public static function useUserModel(string $model)
-    {
-        static::$userModel = $model;
-
-        return new static;
     }
 
     /**
@@ -432,6 +404,295 @@ class Jetstream
     {
         return app()->singleton(DeletesTeams::class, $class);
     }
+
+
+    // Companies...
+
+    /**
+     * Determine if Jetstream is supporting company features.
+     *
+     * @return bool
+     */
+    public static function hasCompanyFeatures()
+    {
+        return Features::hasCompanyFeatures();
+    }
+
+    /**
+     * Determine if a given user model utilizes the "HasCompanies" trait.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model
+     * @return bool
+     */
+    public static function userHasCompanyFeatures($user)
+    {
+        return (array_key_exists(HasCompanies::class, class_uses_recursive($user)) ||
+                method_exists($user, 'currentCompany')) &&
+                static::hasCompanyFeatures();
+    }
+
+    /**
+     * Get the name of the company model used by the application.
+     *
+     * @return string
+     */
+    public static function companyModel()
+    {
+        return static::$companyModel;
+    }
+
+    /**
+     * Get a new instance of the company model.
+     *
+     * @return mixed
+     */
+    public static function newCompanyModel()
+    {
+        $model = static::companyModel();
+
+        return new $model;
+    }
+
+    /**
+     * Specify the company model that should be used by Jetstream.
+     *
+     * @param  string  $model
+     * @return static
+     */
+    public static function useCompanyModel(string $model)
+    {
+        static::$companyModel = $model;
+
+        return new static;
+    }
+
+    /**
+     * Get the name of the employeeship model used by the application.
+     *
+     * @return string
+     */
+    public static function employeeshipModel()
+    {
+        return static::$employeeshipModel;
+    }
+
+    /**
+     * Specify the employeeship model that should be used by Jetstream.
+     *
+     * @param  string  $model
+     * @return static
+     */
+    public static function useEmployeeshipModel(string $model)
+    {
+        static::$employeeshipModel = $model;
+
+        return new static;
+    }
+
+    /**
+     * Get the name of the company invitation model used by the application.
+     *
+     * @return string
+     */
+    public static function companyInvitationModel()
+    {
+        return static::$companyInvitationModel;
+    }
+
+    /**
+     * Specify the company invitation model that should be used by Jetstream.
+     *
+     * @param  string  $model
+     * @return static
+     */
+    public static function useCompanyInvitationModel(string $model)
+    {
+        static::$companyInvitationModel = $model;
+
+        return new static;
+    }
+
+    /**
+     * Register a class / callback that should be used to create teams.
+     *
+     * @param  string  $class
+     * @return void
+     */
+    public static function createCompaniesUsing(string $class)
+    {
+        return app()->singleton(CreatesCompanies::class, $class);
+    }
+
+    /**
+     * Register a class / callback that should be used to update company names.
+     *
+     * @param  string  $class
+     * @return void
+     */
+    public static function updateCompanyNamesUsing(string $class)
+    {
+        return app()->singleton(UpdatesCompanyNames::class, $class);
+    }
+
+    /**
+     * Register a class / callback that should be used to add company employees.
+     *
+     * @param  string  $class
+     * @return void
+     */
+    public static function addCompanyEmployeesUsing(string $class)
+    {
+        return app()->singleton(AddsCompanyEmployees::class, $class);
+    }
+
+    /**
+     * Register a class / callback that should be used to add company employees.
+     *
+     * @param  string  $class
+     * @return void
+     */
+    public static function inviteCompanyEmployeesUsing(string $class)
+    {
+        return app()->singleton(InvitesCompanyEmployees::class, $class);
+    }
+
+    /**
+     * Register a class / callback that should be used to remove company employees.
+     *
+     * @param  string  $class
+     * @return void
+     */
+    public static function removeCompanyEmployeesUsing(string $class)
+    {
+        return app()->singleton(RemovesCompanyEmployees::class, $class);
+    }
+
+    /**
+     * Register a class / callback that should be used to delete companies.
+     *
+     * @param  string  $class
+     * @return void
+     */
+    public static function deleteCompaniesUsing(string $class)
+    {
+        return app()->singleton(DeletesCompanies::class, $class);
+    }
+
+
+    // Common...
+
+    /**
+     * Determine if the application is using the terms confirmation feature.
+     *
+     * @return bool
+     */
+    public static function hasTermsAndPrivacyPolicyFeature()
+    {
+        return Features::hasTermsAndPrivacyPolicyFeature();
+    }
+
+    /**
+     * Determine if the application is using any account deletion features.
+     *
+     * @return bool
+     */
+    public static function hasAccountDeletionFeatures()
+    {
+        return Features::hasAccountDeletionFeatures();
+    }
+
+    /**
+     * Find a user instance by the given ID.
+     *
+     * @param  int  $id
+     * @return mixed
+     */
+    public static function findUserByIdOrFail($id)
+    {
+        return static::newUserModel()->where('id', $id)->firstOrFail();
+    }
+
+    /**
+     * Find a user instance by the given email address or fail.
+     *
+     * @param  string  $email
+     * @return mixed
+     */
+    public static function findUserByEmailOrFail(string $email)
+    {
+        return static::newUserModel()->where('email', $email)->firstOrFail();
+    }
+
+    /**
+     * Get the name of the user model used by the application.
+     *
+     * @return string
+     */
+    public static function userModel()
+    {
+        return static::$userModel;
+    }
+
+    /**
+     * Get a new instance of the user model.
+     *
+     * @return mixed
+     */
+    public static function newUserModel()
+    {
+        $model = static::userModel();
+
+        return new $model;
+    }
+
+    /**
+     * Specify the user model that should be used by Jetstream.
+     *
+     * @param  string  $model
+     * @return static
+     */
+    public static function useUserModel(string $model)
+    {
+        static::$userModel = $model;
+
+        return new static;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Register a class / callback that should be used to delete users.

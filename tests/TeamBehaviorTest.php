@@ -10,6 +10,7 @@ use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
 use Laravel\Sanctum\Sanctum;
 use Laravel\Sanctum\TransientToken;
+use Laravel\Jetstream\Tests\OrchestraTestCase;
 
 class TeamBehaviorTest extends OrchestraTestCase
 {

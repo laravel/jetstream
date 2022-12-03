@@ -3,6 +3,7 @@
 namespace Laravel\Jetstream;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Jetstream\Jetstream;
 
 class TeamInvitation extends Model
 {

@@ -1,17 +1,30 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+// Teams...
 use Laravel\Jetstream\Http\Controllers\CurrentTeamController;
+use Laravel\Jetstream\Http\Controllers\Inertia\TeamController;
+use Laravel\Jetstream\Http\Controllers\Inertia\TeamMemberController;
+use Laravel\Jetstream\Http\Controllers\TeamInvitationController;
+
+// Companies...
+use Laravel\Jetstream\Http\Controllers\CurrentCompanyController;
+use Laravel\Jetstream\Http\Controllers\Inertia\CompanyController;
+use Laravel\Jetstream\Http\Controllers\Inertia\CompanyEmployeeController;
+use Laravel\Jetstream\Http\Controllers\CompanyInvitationController;
+
+// Common...
 use Laravel\Jetstream\Http\Controllers\Inertia\ApiTokenController;
 use Laravel\Jetstream\Http\Controllers\Inertia\CurrentUserController;
 use Laravel\Jetstream\Http\Controllers\Inertia\OtherBrowserSessionsController;
 use Laravel\Jetstream\Http\Controllers\Inertia\PrivacyPolicyController;
 use Laravel\Jetstream\Http\Controllers\Inertia\ProfilePhotoController;
-use Laravel\Jetstream\Http\Controllers\Inertia\TeamController;
-use Laravel\Jetstream\Http\Controllers\Inertia\TeamMemberController;
 use Laravel\Jetstream\Http\Controllers\Inertia\TermsOfServiceController;
 use Laravel\Jetstream\Http\Controllers\Inertia\UserProfileController;
-use Laravel\Jetstream\Http\Controllers\TeamInvitationController;
+
+
+
 use Laravel\Jetstream\Jetstream;
 
 Route::group(['middleware' => config('jetstream.middleware', ['web'])], function () {
@@ -71,6 +84,26 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
 
                 Route::delete('/team-invitations/{invitation}', [TeamInvitationController::class, 'destroy'])
                             ->name('team-invitations.destroy');
+            }
+
+            // Companies...
+            if (Jetstream::hasCompanyFeatures()) {
+                Route::get('/companies/create', [CompanyController::class, 'create'])->name('companies.create');
+                Route::post('/companies', [CompanyController::class, 'store'])->name('companies.store');
+                Route::get('/companies/{company}', [CompanyController::class, 'show'])->name('companies.show');
+                Route::put('/companies/{company}', [CompanyController::class, 'update'])->name('companies.update');
+                Route::delete('/companies/{company}', [CompanyController::class, 'destroy'])->name('companies.destroy');
+                Route::put('/current-company', [CurrentCompanyController::class, 'update'])->name('current-company.update');
+                Route::post('/companies/{company}/employees', [CompanyEmployeeController::class, 'store'])->name('company-employees.store');
+                Route::put('/companies/{company}/employees/{user}', [CompanyEmployeeController::class, 'update'])->name('company-employees.update');
+                Route::delete('/companies/{company}/employees/{user}', [CompanyEmployeeController::class, 'destroy'])->name('company-employees.destroy');
+
+                Route::get('/company-invitations/{invitation}', [CompanyInvitationController::class, 'accept'])
+                            ->middleware(['signed'])
+                            ->name('company-invitations.accept');
+
+                Route::delete('/company-invitations/{invitation}', [CompanyInvitationController::class, 'destroy'])
+                            ->name('company-invitations.destroy');
             }
         });
     });

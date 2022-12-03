@@ -15,6 +15,7 @@ use Laravel\Jetstream\Events\TeamMemberRemoved;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
+use Laravel\Jetstream\Tests\OrchestraTestCase;
 
 class RemoveTeamMemberTest extends OrchestraTestCase
 {

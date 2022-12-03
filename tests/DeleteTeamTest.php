@@ -12,6 +12,7 @@ use Laravel\Jetstream\Actions\ValidateTeamDeletion;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
+use Laravel\Jetstream\Tests\OrchestraTestCase;
 
 class DeleteTeamTest extends OrchestraTestCase
 {

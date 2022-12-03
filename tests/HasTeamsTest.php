@@ -9,6 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\OwnerRole;
 use Laravel\Jetstream\Role;
+use Laravel\Jetstream\Tests\OrchestraTestCase;
 use Laravel\Jetstream\Tests\Fixtures\User as UserFixture;
 
 class HasTeamsTest extends OrchestraTestCase

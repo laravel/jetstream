@@ -9,6 +9,11 @@ test('api tokens can be created', function () {
     } else {
         $this->actingAs($user = User::factory()->create());
     }
+    if (Features::hasCompanyFeatures()) {
+        $this->actingAs($user = User::factory()->withPersonalCompany()->create());
+    } else {
+        $this->actingAs($user = User::factory()->create());
+    }
 
     $response = $this->post('/user/api-tokens', [
         'name' => 'Test Token',

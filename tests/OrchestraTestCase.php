@@ -38,11 +38,23 @@ abstract class OrchestraTestCase extends TestCase
         ]);
     }
 
+
+    // Teams...
     protected function defineHasTeamEnvironment($app)
     {
         $features = $app->config->get('jetstream.features', []);
 
         $features[] = Features::teams(['invitations' => true]);
+
+        $app->config->set('jetstream.features', $features);
+    }
+
+    // Companies...
+    protected function defineHasCompanyEnvironment($app)
+    {
+        $features = $app->config->get('jetstream.features', []);
+
+        $features[] = Features::companies(['invitations' => true]);
 
         $app->config->set('jetstream.features', $features);
     }
