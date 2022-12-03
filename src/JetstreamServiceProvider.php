@@ -203,9 +203,9 @@ class JetstreamServiceProvider extends ServiceProvider
 
         // Companies...
         $this->publishes([
-            __DIR__.'/../database/migrations/companies/2020_05_21_100000_create_companies_table.php' => database_path('migrations/2020_05_21_100000_create_companies_table.php'),
-            __DIR__.'/../database/migrations/companies/2020_05_21_200000_create_company_user_table.php' => database_path('migrations/2020_05_21_200000_create_company_user_table.php'),
-            __DIR__.'/../database/migrations/companies/2020_05_21_300000_create_company_invitations_table.php' => database_path('migrations/2020_05_21_300000_create_company_invitations_table.php'),
+            __DIR__.'/../database/migrations/companies/2020_05_21_400000_create_companies_table.php' => database_path('migrations/2020_05_21_400000_create_companies_table.php'),
+            __DIR__.'/../database/migrations/companies/2020_05_21_500000_create_company_user_table.php' => database_path('migrations/2020_05_21_500000_create_company_user_table.php'),
+            __DIR__.'/../database/migrations/companies/2020_05_21_600000_create_company_invitations_table.php' => database_path('migrations/2020_05_21_600000_create_company_invitations_table.php'),
         ], 'jetstream-company-migrations');
 
         $this->publishes([
