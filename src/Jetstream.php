@@ -71,21 +71,21 @@ class Jetstream
      *
      * @var string
      */
-    public static $teamModel = 'App\\Models\\\Team';
+    public static $teamModel = 'App\\Models\\Team';
 
     /**
      * The membership model that should be used by Jetstream.
      *
      * @var string
      */
-    public static $membershipModel = 'App\\Models\\\Membership';
+    public static $membershipModel = 'App\\Models\\Membership';
 
     /**
      * The team invitation model that should be used by Jetstream.
      *
      * @var string
      */
-    public static $teamInvitationModel = 'App\\Models\\\TeamInvitation';
+    public static $teamInvitationModel = 'App\\Models\\TeamInvitation';
 
 
     // Companies...
@@ -95,21 +95,21 @@ class Jetstream
      *
      * @var string
      */
-    public static $companyModel = 'App\\Models\\\Company';
+    public static $companyModel = 'App\\Models\\Company';
 
     /**
      * The employeeship model that should be used by Jetstream.
      *
      * @var string
      */
-    public static $employeeshipModel = 'App\\Models\\\Employeeship';
+    public static $employeeshipModel = 'App\\Models\\Employeeship';
 
     /**
      * The company invitation model that should be used by Jetstream.
      *
      * @var string
      */
-    public static $companyInvitationModel = 'App\\Models\\\CompanyInvitation';
+    public static $companyInvitationModel = 'App\\Models\\CompanyInvitation';
 
 
     // Inertia...
