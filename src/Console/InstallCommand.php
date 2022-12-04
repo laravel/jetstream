@@ -2,6 +2,7 @@
 
 namespace Laravel\Jetstream\Console;
 
+use DirectoryIterator;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
@@ -570,6 +571,13 @@ EOF;
      */
     protected function ensureApplicationIsTeamCompatible()
     {
+
+        if (file_exists(base_path('database/migrations/_create_sessions_table.php'))) {
+            tap(new Filesystem, function ($files) {
+                $files->delete(base_path('database/migrations/*'));
+            });
+        };
+
         // Publish Team Migrations...
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-team-migrations', '--force' => true]);
 
@@ -622,6 +630,13 @@ EOF;
      */
     protected function ensureApplicationIsCompanyCompatible()
     {
+
+        if (file_exists(base_path('database/migrations/_create_sessions_table.php'))) {
+            tap(new Filesystem, function ($files) {
+                $files->delete(base_path('database/migrations/*'));
+            });
+        };
+
         // Publish Team Migrations...
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-company-migrations', '--force' => true]);
 
@@ -674,6 +689,12 @@ EOF;
      */
     protected function installInertiaSsrStack()
     {
+        if (file_exists(base_path('database/migrations/_create_sessions_table.php'))) {
+            tap(new Filesystem, function ($files) {
+                $files->delete(base_path('database/migrations/*'));
+            });
+        };
+
         $this->updateNodePackages(function ($packages) {
             return [
                 '@inertiajs/server' => '^0.1.0',
