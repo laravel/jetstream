@@ -253,7 +253,14 @@ class InstallCommand extends Command
 
         }
 
-        $this->runCommands(['npm install', 'npm run build']);
+        // Try to use existing package manager when installing dependencies...
+        if (file_exists(base_path('pnpm-lock.yaml'))) {
+            $this->runCommands(['pnpm install', 'pnpm run build']);
+        } elseif (file_exists(base_path('yarn.lock'))) {
+            $this->runCommands(['yarn install', 'yarn run build']);
+        } else {
+            $this->runCommands(['npm install', 'npm run build']);
+        }
 
         $this->line('');
         $this->components->info('Livewire scaffolding installed successfully.');
@@ -483,7 +490,14 @@ EOF;
             $this->installInertiaSsrStack();
         }
 
-        $this->runCommands(['npm install', 'npm run build']);
+        // Try to use existing package manager when installing dependencies...
+        if (file_exists(base_path('pnpm-lock.yaml'))) {
+            $this->runCommands(['pnpm install', 'pnpm run build']);
+        } elseif (file_exists(base_path('yarn.lock'))) {
+            $this->runCommands(['yarn install', 'yarn run build']);
+        } else {
+            $this->runCommands(['npm install', 'npm run build']);
+        }
 
         $this->line('');
         $this->components->info('Inertia scaffolding installed successfully.');
@@ -838,6 +852,7 @@ EOF;
 
             $files->delete(base_path('yarn.lock'));
             $files->delete(base_path('package-lock.json'));
+            $files->delete(base_path('pnpm-lock.yaml'));
         });
     }
 
