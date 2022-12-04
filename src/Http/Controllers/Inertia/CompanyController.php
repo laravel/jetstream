@@ -30,7 +30,7 @@ class CompanyController extends Controller
 
         Gate::authorize('view', $company);
 
-        return Jetstream::inertia()->render($request, 'Show', [
+        return Jetstream::inertia()->render($request, 'Companies/Show', [
             'company' => $company->load('owner', 'users', 'companyInvitations'),
             'availableRoles' => array_values(Jetstream::$roles),
             'availablePermissions' => Jetstream::$permissions,
@@ -54,7 +54,7 @@ class CompanyController extends Controller
     {
         Gate::authorize('create', Jetstream::newCompanyModel());
 
-        return Jetstream::inertia()->render($request, 'Create');
+        return Jetstream::inertia()->render($request, 'Companies/Create');
     }
 
     /**

@@ -25,7 +25,7 @@ const createCompany = () => {
         </template>
 
         <template #description>
-            Create a new company to collaborate with others on projects.
+            Create a new company to collaborate with your employees on your business endeavurs.
         </template>
 
         <template #form>

@@ -1,6 +1,6 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import CreateCompanyForm from '@/Pages/Partials/CreateCompanyForm.vue';
+import CreateCompanyForm from '@/Pages/Companies/Partials/CreateCompanyForm.vue';
 </script>
 
 <template>

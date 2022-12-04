@@ -191,25 +191,26 @@ class JetstreamServiceProvider extends ServiceProvider
         ], 'jetstream-views');
 
         $this->publishes([
-            __DIR__.'/../database/migrations/2014_10_12_000000_create_users_table.php' => database_path('migrations/2014_10_12_000000_create_users_table.php'),
+            __DIR__.'/../database/migrations/teams/2014_10_12_000000_create_users_table.php' => database_path('migrations/2014_10_12_000000_create_users_table.php'),
         ], 'jetstream-migrations');
 
         // Teams...
         $this->publishes([
-            __DIR__.'/../database/migrations/2020_05_21_100000_create_teams_table.php' => database_path('migrations/2020_05_21_100000_create_teams_table.php'),
-            __DIR__.'/../database/migrations/2020_05_21_200000_create_team_user_table.php' => database_path('migrations/2020_05_21_200000_create_team_user_table.php'),
-            __DIR__.'/../database/migrations/2020_05_21_300000_create_team_invitations_table.php' => database_path('migrations/2020_05_21_300000_create_team_invitations_table.php'),
+            __DIR__.'/../database/migrations/teams/2020_05_21_100000_create_teams_table.php' => database_path('migrations/2020_05_21_100000_create_teams_table.php'),
+            __DIR__.'/../database/migrations/teams/2020_05_21_200000_create_team_user_table.php' => database_path('migrations/2020_05_21_200000_create_team_user_table.php'),
+            __DIR__.'/../database/migrations/teams/2020_05_21_300000_create_team_invitations_table.php' => database_path('migrations/2020_05_21_300000_create_team_invitations_table.php'),
         ], 'jetstream-team-migrations');
 
         // Companies...
         $this->publishes([
-            __DIR__.'/../database/migrations/2020_05_21_400000_create_companies_table.php' => database_path('migrations/2020_05_21_400000_create_companies_table.php'),
-            __DIR__.'/../database/migrations/2020_05_21_500000_create_company_user_table.php' => database_path('migrations/2020_05_21_500000_create_company_user_table.php'),
-            __DIR__.'/../database/migrations/2020_05_21_600000_create_company_invitations_table.php' => database_path('migrations/2020_05_21_600000_create_company_invitations_table.php'),
+            __DIR__.'/../database/migrations/companies/2014_10_12_000000_create_users_table.php' => database_path('migrations/2014_10_12_000000_create_users_table.php'),
+            __DIR__.'/../database/migrations/companies/2020_05_21_100000_create_companies_table.php' => database_path('migrations/2020_05_21_100000_create_companies_table.php'),
+            __DIR__.'/../database/migrations/companies/2020_05_21_200000_create_company_user_table.php' => database_path('migrations/2020_05_21_200000_create_company_user_table.php'),
+            __DIR__.'/../database/migrations/companies/2020_05_21_300000_create_company_invitations_table.php' => database_path('migrations/2020_05_21_300000_create_company_invitations_table.php'),
         ], 'jetstream-company-migrations');
 
         $this->publishes([
-            __DIR__.'/../routes/'.config('jetstream.stack').'.php' => base_path('routes/jetstream.php'),
+            __DIR__.'/../routes/'.config('jetstream.entity_group').'/'.config('jetstream.stack').'.php' => base_path('routes/jetstream.php'),
         ], 'jetstream-routes');
 
         $this->publishes([
@@ -234,7 +235,7 @@ class JetstreamServiceProvider extends ServiceProvider
                 'domain' => config('jetstream.domain', null),
                 'prefix' => config('jetstream.prefix', config('jetstream.path')),
             ], function () {
-                $this->loadRoutesFrom(__DIR__.'/../routes/'.config('jetstream.stack').'.php');
+                $this->loadRoutesFrom(__DIR__.'/../routes/'.config('jetstream.entity_group').'/'.config('jetstream.stack').'.php');
             });
         }
     }

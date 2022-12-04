@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Team;
-use App\Models\Company;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -65,26 +64,6 @@ class UserFactory extends Factory
                     return ['name' => $user->name.'\'s Team', 'user_id' => $user->id, 'personal_team' => true];
                 }),
             'ownedTeams'
-        );
-    }
-
-    /**
-     * Indicate that the user should have a personal company.
-     *
-     * @return $this
-     */
-    public function withPersonalCompany()
-    {
-        if (! Features::hasCompanyFeatures()) {
-            return $this->state([]);
-        }
-
-        return $this->has(
-            Company::factory()
-                ->state(function (array $attributes, User $user) {
-                    return ['name' => $user->name.'\'s Company', 'user_id' => $user->id, 'personal_company' => true];
-                }),
-            'ownedCompanies'
         );
     }
 }

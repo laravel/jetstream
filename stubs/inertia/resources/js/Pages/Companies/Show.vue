@@ -1,9 +1,9 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import DeleteCompanyForm from '@/Pages/Partials/DeleteCompanyForm.vue';
+import DeleteCompanyForm from '@/Pages/Companies/Partials/DeleteCompanyForm.vue';
 import SectionBorder from '@/Components/SectionBorder.vue';
-import CompanyEmployeeManager from '@/Pages/Partials/CompanyEmployeeManager.vue';
-import UpdateCompanyNameForm from '@/Pages/Partials/UpdateCompanyNameForm.vue';
+import CompanyEmployeeManager from '@/Pages/Companies/Partials/CompanyEmployeeManager.vue';
+import UpdateCompanyNameForm from '@/Pages/Companies/Partials/UpdateCompanyNameForm.vue';
 
 defineProps({
     company: Object,

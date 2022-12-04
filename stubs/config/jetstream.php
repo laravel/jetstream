@@ -19,6 +19,19 @@ return [
     'stack' => 'inertia',
 
     /*
+    |--------------------------------------------------------------------------
+    | Jetstream Entity Group
+    |--------------------------------------------------------------------------
+    |
+    | This configuration value informs Jetstream which "entity group" you will be
+    | using for your application. In general, this value is set for you
+    | during installation and will not need to be changed after that.
+    |
+    */
+
+    'entity_group' => 'none',
+
+    /*
      |--------------------------------------------------------------------------
      | Jetstream Route Middleware
      |--------------------------------------------------------------------------

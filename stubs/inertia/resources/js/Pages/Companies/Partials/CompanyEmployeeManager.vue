@@ -54,7 +54,7 @@ const cancelCompanyInvitation = (invitation) => {
 
 const manageRole = (companyEmployee) => {
     managingRoleFor.value = companyEmployee;
-    updateRoleForm.role = companyEmployee.employee.role;
+    updateRoleForm.role = companyEmployee.employeeship.role;
     currentlyManagingRole.value = true;
 };
 
@@ -103,13 +103,13 @@ const displayableRole = (role) => {
                 </template>
 
                 <template #description>
-                    Add a new company employee to your company, allowing them to collaborate with you.
+                    Add a new company employee to your company, allowing them to collaborate with you on your business endeavors.
                 </template>
 
                 <template #form>
                     <div class="col-span-6">
                         <div class="max-w-xl text-sm text-gray-600">
-                            Please provide the email address of the person you would like to add to this company.
+                            Please provide the email address of the employee you would like to add to this company.
                         </div>
                     </div>
 
@@ -180,7 +180,7 @@ const displayableRole = (role) => {
             </FormSection>
         </div>
 
-        <div v-if="company.company_invitations.length > 0 && userPermissions.canAddCompanyEmployees">
+        <div v-if="(company.company_invitations.length > 0 && userPermissions.canAddCompanyEmployees)">
             <SectionBorder />
 
             <!-- Company Employee Invitations -->
@@ -190,7 +190,7 @@ const displayableRole = (role) => {
                 </template>
 
                 <template #description>
-                    These people have been invited to your company and have been sent an invitation email. They may join the company by accepting the email invitation.
+                    These employees have been invited to your company and have been sent an invitation email. They may join the company by accepting the email invitation.
                 </template>
 
                 <!-- Pending Company Employee Invitation List -->
@@ -227,7 +227,7 @@ const displayableRole = (role) => {
                 </template>
 
                 <template #description>
-                    All of the people that are part of this company.
+                    All of the employees that are part of this company.
                 </template>
 
                 <!-- Company Employee List -->
@@ -248,11 +248,11 @@ const displayableRole = (role) => {
                                     class="ml-2 text-sm text-gray-400 underline"
                                     @click="manageRole(user)"
                                 >
-                                    {{ displayableRole(user.employee.role) }}
+                                    {{ displayableRole(user.employeeship.role) }}
                                 </button>
 
                                 <div v-else-if="availableRoles.length" class="ml-2 text-sm text-gray-400">
-                                    {{ displayableRole(user.employee.role) }}
+                                    {{ displayableRole(user.employeeship.role) }}
                                 </div>
 
                                 <!-- Leave Company -->
@@ -374,7 +374,7 @@ const displayableRole = (role) => {
             </template>
 
             <template #content>
-                Are you sure you would like to remove this person from the company?
+                Are you sure you would like to remove this employee from the company?
             </template>
 
             <template #footer>

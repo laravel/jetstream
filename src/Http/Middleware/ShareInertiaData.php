@@ -49,29 +49,22 @@ class ShareInertiaData
                 }
 
                 $userHasTeamFeatures = Jetstream::userHasTeamFeatures($user);
+                $userHasCompanyFeatures = Jetstream::userHasCompanyFeatures($user);
 
                 if ($user && $userHasTeamFeatures) {
                     $user->currentTeam;
                 }
 
-                return array_merge($user->toArray(), array_filter([
-                    'all_teams' => $userHasTeamFeatures ? $user->allTeams()->values() : null,
-                ]), [
-                    'two_factor_enabled' => ! is_null($user->two_factor_secret),
-                ]);
-
-                $userHasCompanyFeatures = Jetstream::userHasCompanyFeatures($user);
-
                 if ($user && $userHasCompanyFeatures) {
                     $user->currentCompany;
-                }
 
                 return array_merge($user->toArray(), array_filter([
+                    'all_teams' => $userHasTeamFeatures ? $user->allTeams()->values() : null,
                     'all_companies' => $userHasCompanyFeatures ? $user->allCompanies()->values() : null,
                 ]), [
                     'two_factor_enabled' => ! is_null($user->two_factor_secret),
                 ]);
-            },
+            }},
             'errorBags' => function () {
                 return collect(optional(Session::get('errors'))->getBags() ?: [])->mapWithKeys(function ($bag, $key) {
                     return [$key => $bag->messages()];
