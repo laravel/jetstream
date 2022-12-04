@@ -25,7 +25,10 @@ return [
     |
     | This configuration value informs Jetstream which "entity group" you will be
     | using for your application. In general, this value is set for you
-    | during installation and will not need to be changed after that.
+    | during installation and will not need to be changed after that. The default
+    | "entity group" value is "teams" regardless of if you opted out for using jetstream
+    | team support or jetstream company support. If you opted for using jetstream company
+    | support during installation the value will be set to "companies".
     |
     */
 
