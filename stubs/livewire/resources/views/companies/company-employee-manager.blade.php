@@ -10,13 +10,13 @@
                 </x-slot>
 
                 <x-slot name="description">
-                    {{ __('Add a new company employee to your company, allowing them to collaborate with you.') }}
+                    {{ __('Add a new company employee to your company, allowing them to collaborate with you on your business endeavors.') }}
                 </x-slot>
 
                 <x-slot name="form">
                     <div class="col-span-6">
                         <div class="max-w-xl text-sm text-gray-600">
-                            {{ __('Please provide the email address of the person you would like to add to this company.') }}
+                            {{ __('Please provide the email address of the employee you would like to add to this company.') }}
                         </div>
                     </div>
 
@@ -85,7 +85,7 @@
                 </x-slot>
 
                 <x-slot name="description">
-                    {{ __('These people have been invited to your company and have been sent an invitation email. They may join the company by accepting the email invitation.') }}
+                    {{ __('These employees have been invited to your company and have been sent an invitation email. They may join the company by accepting the email invitation.') }}
                 </x-slot>
 
                 <x-slot name="content">
@@ -122,7 +122,7 @@
                 </x-slot>
 
                 <x-slot name="description">
-                    {{ __('All of the people that are part of this company.') }}
+                    {{ __('All of the employees that are part of this company.') }}
                 </x-slot>
 
                 <!-- Company Employee List -->
@@ -240,7 +240,7 @@
         </x-slot>
 
         <x-slot name="content">
-            {{ __('Are you sure you would like to remove this person from the company?') }}
+            {{ __('Are you sure you would like to remove this employee from the company?') }}
         </x-slot>
 
         <x-slot name="footer">

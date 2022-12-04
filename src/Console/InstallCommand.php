@@ -150,6 +150,10 @@ class InstallCommand extends Command
         $this->replaceInFile('inertia', 'livewire', config_path('jetstream.php'));
         // $this->replaceInFile("'guard' => 'web'", "'guard' => 'sanctum'", config_path('auth.php'));
 
+        // Separation of Entity Group name as either 'none', 'teams', or 'companies'.
+        // This will help right now with routes directory... and maybe other things in future.
+        $this->replaceInFile('teams', 'none', config_path('jetstream.php'));
+
         // NPM Packages...
         $this->updateNodePackages(function ($packages) {
             return [
@@ -344,6 +348,10 @@ EOF;
     {
         // Install Inertia...
         $this->requireComposerPackages('inertiajs/inertia-laravel:^0.6.3', 'tightenco/ziggy:^1.0');
+
+        // Separation of Entity Group name as either 'none', 'teams', or 'companies'.
+        // This will help right now with routes directory... and maybe other things in future.
+        $this->replaceInFile('teams', 'none', config_path('jetstream.php'));
 
         // Install NPM packages...
         $this->updateNodePackages(function ($packages) {
@@ -657,6 +665,10 @@ EOF;
                 '@vue/server-renderer' => '^3.2.31',
             ] + $packages;
         });
+
+        // Separation of Entity Group name as either 'none', 'teams', or 'companies'.
+        // This will help right now with routes directory... and maybe other things in future.
+        $this->replaceInFile('teams', 'none', config_path('jetstream.php'));
 
         copy(__DIR__.'/../../stubs/inertia/resources/js/ssr.js', resource_path('js/ssr.js'));
         $this->replaceInFile("input: 'resources/js/app.js',", "input: 'resources/js/app.js',".PHP_EOL."            ssr: 'resources/js/ssr.js',", base_path('vite.config.js'));
