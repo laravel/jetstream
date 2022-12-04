@@ -584,7 +584,8 @@ EOF;
         copy(__DIR__.'/../../stubs/app/Actions/Fortify/CreateNewUserWithTeams.php', app_path('Actions/Fortify/CreateNewUser.php'));
 
         // Policies...
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/app/Policies', app_path('Policies'));
+        //(new Filesystem)->copyDirectory(__DIR__.'/../../stubs/app/Policies', app_path('Policies'));
+        copy(__DIR__.'/../../stubs/app/Policies/TeamPolicy.php', app_path('Policies/TeamPolicy.php'));
 
         // Factories...
         copy(__DIR__.'/../../database/factories/teams/UserFactory.php', base_path('database/factories/UserFactory.php'));
@@ -635,7 +636,8 @@ EOF;
         copy(__DIR__.'/../../stubs/app/Actions/Fortify/CreateNewUserWithCompanies.php', app_path('Actions/Fortify/CreateNewUser.php'));
 
         // Policies...
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/app/Policies', app_path('Policies'));
+        //(new Filesystem)->copyDirectory(__DIR__.'/../../stubs/app/Policies', app_path('Policies'));
+        copy(__DIR__.'/../../stubs/app/Policies/CompanyPolicy.php', app_path('Policies/CompanyPolicy.php'));
 
         // Factories...
         copy(__DIR__.'/../../database/factories/companies/UserFactory.php', base_path('database/factories/UserFactory.php'));
