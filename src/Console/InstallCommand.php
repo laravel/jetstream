@@ -6,6 +6,7 @@ use DirectoryIterator;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use RuntimeException;
 use Symfony\Component\Process\PhpExecutableFinder;
@@ -572,11 +573,10 @@ EOF;
     protected function ensureApplicationIsTeamCompatible()
     {
 
-        if (file_exists(base_path('database/migrations/_create_sessions_table.php'))) {
-            tap(new Filesystem, function ($files) {
-                $files->delete(base_path('database/migrations/*'));
-            });
-        };
+        if (file_exists(base_path('database/factories/CompanyFactory.php'))) {
+            unlink(base_path('database/factories/CompanyFactory.php'));
+            unlink(base_path('database/migrations/*.php'));
+        }
 
         // Publish Team Migrations...
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-team-migrations', '--force' => true]);
@@ -631,11 +631,10 @@ EOF;
     protected function ensureApplicationIsCompanyCompatible()
     {
 
-        if (file_exists(base_path('database/migrations/_create_sessions_table.php'))) {
-            tap(new Filesystem, function ($files) {
-                $files->delete(base_path('database/migrations/*'));
-            });
-        };
+        if (file_exists(base_path('database/factories/TeamFactory.php'))) {
+            unlink(base_path('database/factories/TeamFactory.php'));
+            unlink(base_path('database/migrations/*.php'));
+        }
 
         // Publish Team Migrations...
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-company-migrations', '--force' => true]);
@@ -689,11 +688,6 @@ EOF;
      */
     protected function installInertiaSsrStack()
     {
-        if (file_exists(base_path('database/migrations/_create_sessions_table.php'))) {
-            tap(new Filesystem, function ($files) {
-                $files->delete(base_path('database/migrations/*'));
-            });
-        };
 
         $this->updateNodePackages(function ($packages) {
             return [
