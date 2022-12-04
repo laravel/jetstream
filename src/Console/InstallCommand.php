@@ -552,7 +552,7 @@ EOF;
 
         // Separation of Entity Group name as either 'none', 'teams', or 'companies'.
         // This will help right now with routes directory... and maybe other things in future.
-        $this->replaceInFile('none', 'teams', config_path('jetstream.php'));
+        $this->replaceInFile('teams', 'teams', config_path('jetstream.php'));
 
         // Configuration...
         $this->replaceInFile('// Features::teams([\'invitations\' => true])', 'Features::teams([\'invitations\' => true])', config_path('jetstream.php'));
@@ -603,7 +603,7 @@ EOF;
 
         // Separation of Entity Group name as either 'none', 'teams', or 'companies'.
         // This will help right now with routes directory... and maybe other things in future.
-        $this->replaceInFile('none', 'companies', config_path('jetstream.php'));
+        $this->replaceInFile('teams', 'companies', config_path('jetstream.php'));
 
         // Configuration...
         $this->replaceInFile('// Features::companies([\'invitations\' => true])', 'Features::companies([\'invitations\' => true])', config_path('jetstream.php'));
