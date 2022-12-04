@@ -209,7 +209,8 @@ class InstallCommand extends Command
 
         // Single Blade Views...
         copy(__DIR__.'/../../stubs/livewire/resources/views/dashboard.blade.php', resource_path('views/dashboard.blade.php'));
-        copy(__DIR__.'/../../stubs/livewire/resources/views/navigation-menu.blade.php', resource_path('views/navigation-menu.blade.php'));
+        // Default navigation-menu.php file is the "teams" navigation menu for now as it was before.
+        copy(__DIR__.'/../../stubs/livewire/resources/views/navigation-menu/Teams/navigation-menu.blade.php', resource_path('views/navigation-menu.blade.php'));
         copy(__DIR__.'/../../stubs/livewire/resources/views/terms.blade.php', resource_path('views/terms.blade.php'));
         copy(__DIR__.'/../../stubs/livewire/resources/views/policy.blade.php', resource_path('views/policy.blade.php'));
 
@@ -248,7 +249,6 @@ class InstallCommand extends Command
 
         // Companies...
         if ($this->option('companies')) {
-            copy(__DIR__.'/../../stubs/livewire/resources/views/navigation-menu/Companies/navigation-menu.blade.php', resource_path('views/navigation-menu.blade.php'));
             $this->installLivewireCompanyStack();
 
         }
@@ -271,6 +271,9 @@ class InstallCommand extends Command
 
         // Other Views...
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/teams', resource_path('views/teams'));
+
+        // navigation-menu.php file for livewire teams stack option (which is default)
+        copy(__DIR__.'/../../stubs/livewire/resources/views/navigation-menu/Teams/navigation-menu.blade.php', resource_path('views/navigation-menu.blade.php'));
 
         // Tests...
         $stubs = $this->getTestStubsPath();
@@ -298,6 +301,9 @@ class InstallCommand extends Command
 
         // Other Views...
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/companies', resource_path('views/companies'));
+
+        // navigation-menu.php file for livewire companies stack option
+        copy(__DIR__.'/../../stubs/livewire/resources/views/navigation-menu/Companies/navigation-menu.blade.php', resource_path('views/navigation-menu.blade.php'));
 
         // Tests...
         $stubs = $this->getTestStubsPath();
@@ -433,6 +439,7 @@ EOF;
 
 
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Components', resource_path('js/Components'));
+        // Default Layout is Teams AppLayout
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Layouts/Teams', resource_path('js/Layouts'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/API', resource_path('js/Pages/API'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Auth', resource_path('js/Pages/Auth'));
@@ -552,7 +559,7 @@ EOF;
         // Publish Team Migrations...
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-team-migrations', '--force' => true]);
 
-        // Separation of Entity Group name as either 'none', 'teams', or 'companies'.
+        // Separation of Entity Group name as either 'teams' or 'companies'.
         // This will help right now with routes directory... and maybe other things in future.
         $this->replaceInFile('teams', 'teams', config_path('jetstream.php'));
 
@@ -586,8 +593,8 @@ EOF;
         copy(__DIR__.'/../../stubs/app/Actions/Fortify/CreateNewUserWithTeams.php', app_path('Actions/Fortify/CreateNewUser.php'));
 
         // Policies...
-        //(new Filesystem)->copyDirectory(__DIR__.'/../../stubs/app/Policies', app_path('Policies'));
-        copy(__DIR__.'/../../stubs/app/Policies/TeamPolicy.php', app_path('Policies/TeamPolicy.php'));
+        // Separation of Filesystem Team vs Company Policies
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/app/Policies/Teams', app_path('Policies'));
 
         // Factories...
         copy(__DIR__.'/../../database/factories/teams/UserFactory.php', base_path('database/factories/UserFactory.php'));
@@ -638,10 +645,10 @@ EOF;
         copy(__DIR__.'/../../stubs/app/Actions/Fortify/CreateNewUserWithCompanies.php', app_path('Actions/Fortify/CreateNewUser.php'));
 
         // Policies...
-        //(new Filesystem)->copyDirectory(__DIR__.'/../../stubs/app/Policies', app_path('Policies'));
-        copy(__DIR__.'/../../stubs/app/Policies/CompanyPolicy.php', app_path('Policies/CompanyPolicy.php'));
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/app/Policies/Companies', app_path('Policies'));
 
         // Factories...
+        // Separation of Filesystem Team vs Company Policies
         copy(__DIR__.'/../../database/factories/companies/UserFactory.php', base_path('database/factories/UserFactory.php'));
         copy(__DIR__.'/../../database/factories/companies/CompanyFactory.php', base_path('database/factories/CompanyFactory.php'));
     }
