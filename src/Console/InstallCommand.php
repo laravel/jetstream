@@ -433,9 +433,7 @@ EOF;
 
 
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Components', resource_path('js/Components'));
-        //(new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Layouts', resource_path('js/Layouts'));
-        // Make sure if someone installs "only inertia or inertia ssr they get the default Team AppLayout.vue file
-        copy(__DIR__.'/../../stubs/inertia/resources/js/Layouts/Teams/AppLayout.vue', resource_path('js/Layouts/AppLayout.vue'));
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Layouts/Teams', resource_path('js/Layouts'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/API', resource_path('js/Pages/API'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Auth', resource_path('js/Pages/Auth'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Profile', resource_path('js/Pages/Profile'));
@@ -466,20 +464,15 @@ EOF;
 
         // Teams...
         if ($this->option('teams')) {
-            // Teams AppLayout
-            copy(__DIR__.'/../../stubs/inertia/resources/js/Layouts/Teams/AppLayout.vue', resource_path('js/Layouts/AppLayout.vue'));
             $this->installInertiaTeamStack();
         }
 
         // Companies...
         if ($this->option('companies')) {
-            // Companies AppLayout
-            copy(__DIR__.'/../../stubs/inertia/resources/js/Layouts/Companies/AppLayout.vue', resource_path('js/Layouts/AppLayout.vue'));
             $this->installInertiaCompanyStack();
         }
 
         if ($this->option('ssr')) {
-            copy(__DIR__.'/../../stubs/inertia/resources/js/Layouts/Teams/AppLayout.vue', resource_path('js/Layouts/AppLayout.vue'));
             $this->installInertiaSsrStack();
         }
 
@@ -501,6 +494,9 @@ EOF;
 
         // Pages...
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Teams', resource_path('js/Pages/Teams'));
+
+        // Teams AppLayout
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Layouts/Teams', resource_path('js/Layouts'));
 
         // Tests...
         $stubs = $this->getTestStubsPath();
@@ -528,6 +524,9 @@ EOF;
 
         // Pages...
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Companies', resource_path('js/Pages/Companies'));
+
+        // Companies AppLayout
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Layouts/Companies', resource_path('js/Layouts'));
 
         // Tests...
         $stubs = $this->getTestStubsPath();
