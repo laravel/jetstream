@@ -433,7 +433,9 @@ EOF;
 
 
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Components', resource_path('js/Components'));
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Layouts', resource_path('js/Layouts'));
+        //(new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Layouts', resource_path('js/Layouts'));
+        // Make sure if someone installs "only inertia or inertia ssr they get the default Team AppLayout.vue file
+        copy(__DIR__.'/../../stubs/inertia/resources/js/Layouts/Teams/AppLayout.vue', resource_path('js/Layouts/AppLayout.vue'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/API', resource_path('js/Pages/API'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Auth', resource_path('js/Pages/Auth'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Profile', resource_path('js/Pages/Profile'));
@@ -477,6 +479,7 @@ EOF;
         }
 
         if ($this->option('ssr')) {
+            copy(__DIR__.'/../../stubs/inertia/resources/js/Layouts/Teams/AppLayout.vue', resource_path('js/Layouts/AppLayout.vue'));
             $this->installInertiaSsrStack();
         }
 
