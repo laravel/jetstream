@@ -573,26 +573,6 @@ EOF;
     protected function ensureApplicationIsTeamCompatible()
     {
 
-        if (file_exists(base_path('database/factories/CompanyFactory.php'))) {
-            if (file_exists(base_path('database/migrations/2020_05_21_100000_create_companies_table.php'))) {
-            unlink(base_path('database/factories/CompanyFactory.php'));
-            $base_path = base_path('database/migrations');
-            $files = glob($base_path . '/*');
-            foreach ($files as $file) {
-                if (is_file($file)) {
-                    unlink($file);
-                }}
-            }
-            $this->callSilent('vendor:publish', ['--tag' => 'fortify-migrations', '--force' => true]);
-            // Sanctum...
-            (new Process([$this->phpBinary(), 'artisan', 'vendor:publish', '--provider=Laravel\Sanctum\SanctumServiceProvider', '--force'], base_path()))
-            ->setTimeout(null)
-            ->run(function ($type, $output) {
-                $this->output->write($output);
-            });
-            $this->configureSession();
-        }
-
         // Publish Team Migrations...
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-team-migrations', '--force' => true]);
 
@@ -645,26 +625,6 @@ EOF;
      */
     protected function ensureApplicationIsCompanyCompatible()
     {
-
-        if (file_exists(base_path('database/factories/TeamFactory.php'))) {
-            if (file_exists(base_path('database/migrations/2020_05_21_100000_create_teams_table.php'))) {
-            unlink(base_path('database/factories/TeamFactory.php'));
-            $base_path = base_path('database/migrations');
-            $files = glob($base_path . '/*');
-            foreach ($files as $file) {
-                if (is_file($file)) {
-                    unlink($file);
-                }}
-            }
-            $this->callSilent('vendor:publish', ['--tag' => 'fortify-migrations', '--force' => true]);
-            // Sanctum...
-            (new Process([$this->phpBinary(), 'artisan', 'vendor:publish', '--provider=Laravel\Sanctum\SanctumServiceProvider', '--force'], base_path()))
-            ->setTimeout(null)
-            ->run(function ($type, $output) {
-                $this->output->write($output);
-            });
-            $this->configureSession();
-        }
 
         // Publish Team Migrations...
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-company-migrations', '--force' => true]);
