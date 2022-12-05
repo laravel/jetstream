@@ -255,7 +255,7 @@ class InstallCommand extends Command
 
         }
 
-        // Try to use existing package manager when installing dependencies...
+
         if (file_exists(base_path('pnpm-lock.yaml'))) {
             $this->runCommands(['pnpm install', 'pnpm run build']);
         } elseif (file_exists(base_path('yarn.lock'))) {
@@ -492,7 +492,7 @@ EOF;
             $this->installInertiaSsrStack();
         }
 
-        // Try to use existing package manager when installing dependencies...
+
         if (file_exists(base_path('pnpm-lock.yaml'))) {
             $this->runCommands(['pnpm install', 'pnpm run build']);
         } elseif (file_exists(base_path('yarn.lock'))) {
@@ -855,9 +855,9 @@ EOF;
         tap(new Filesystem, function ($files) {
             $files->deleteDirectory(base_path('node_modules'));
 
+            $files->delete(base_path('pnpm-lock.yaml'));
             $files->delete(base_path('yarn.lock'));
             $files->delete(base_path('package-lock.json'));
-            $files->delete(base_path('pnpm-lock.yaml'));
         });
     }
 
