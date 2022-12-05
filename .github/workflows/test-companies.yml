@@ -1,0 +1,91 @@
+name: test-companies
+
+on:
+  push:
+    branches:
+      - master
+      - '*.x'
+  pull_request:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  tests:
+    runs-on: ubuntu-20.04
+
+    strategy:
+      fail-fast: true
+      matrix:
+        php: ['8.0', 8.1, 8.2]
+        laravel: [9.*]
+
+    name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip
+          ini-values: error_reporting=E_ALL
+          tools: composer:v2
+          coverage: none
+
+      - name: Install dependencies
+        run: |
+          composer require "illuminate/contracts=${{ matrix.laravel }}" --dev --no-update
+          composer update --prefer-dist --no-interaction --no-progress
+
+      - name: Execute tests
+        run: vendor/bin/phpunit --verbose
+
+  stub-tests:
+    runs-on: ubuntu-20.04
+
+    strategy:
+      fail-fast: true
+      matrix:
+        stack: [inertia, livewire]
+
+    name: Test Stubs (${{ matrix.stack }})
+
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+          extensions: dom, curl, libxml, mbstring, zip
+          ini-values: error_reporting=E_ALL
+          tools: composer:v2
+          coverage: none
+
+      - name: Setup Laravel
+        run: |
+          composer create-project laravel/laravel:^9 .
+          composer require laravel/jetstream:* --no-interaction --no-update
+          composer config repositories.jetstream '{"type": "path", "url": "jetstream"}' --file composer.json
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          path: 'jetstream'
+
+      - name: Install Jetstream
+        run: |
+          composer update "laravel/jetstream" --prefer-dist --no-interaction --no-progress -W
+          php artisan jetstream:install ${{ matrix.stack }} --companies --api --verification
+
+      - name: Install NPM dependencies
+        run: npm i
+
+      - name: Compile assets
+        run: npm run build
+
+      - name: Execute tests
+        run: vendor/bin/phpunit --verbose
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ":memory:"
