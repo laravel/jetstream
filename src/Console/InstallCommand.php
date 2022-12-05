@@ -2,11 +2,9 @@
 
 namespace Laravel\Jetstream\Console;
 
-use DirectoryIterator;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use RuntimeException;
 use Symfony\Component\Process\PhpExecutableFinder;
@@ -281,7 +279,7 @@ class InstallCommand extends Command
         // Other Views...
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/teams', resource_path('views/teams'));
 
-        // navigation-menu.php file for livewire teams stack option (which is default)
+        // navigation-menu.php file for livewire teams stack option (which is same default layout as before)
         copy(__DIR__.'/../../stubs/livewire/resources/views/navigation-menu/Teams/navigation-menu.blade.php', resource_path('views/navigation-menu.blade.php'));
 
         // Tests...
@@ -426,7 +424,8 @@ EOF;
         copy(__DIR__.'/../../stubs/app/Models/User.php', app_path('Models/User.php'));
 
         // Factories...
-        copy(__DIR__.'/../../database/factories/UserFactory.php', base_path('database/factories/UserFactory.php'));
+        // Default factory for user is same as teams UserFactory.php as it was before...
+        copy(__DIR__.'/../../database/factories/teams/UserFactory.php', base_path('database/factories/UserFactory.php'));
 
         // Actions...
         copy(__DIR__.'/../../stubs/app/Actions/Fortify/CreateNewUser.php', app_path('Actions/Fortify/CreateNewUser.php'));
@@ -448,7 +447,7 @@ EOF;
 
 
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Components', resource_path('js/Components'));
-        // Default Layout is Teams AppLayout
+        // Default Layout is Teams AppLayout as it was before...
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Layouts/Teams', resource_path('js/Layouts'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/API', resource_path('js/Pages/API'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Auth', resource_path('js/Pages/Auth'));
@@ -560,7 +559,7 @@ EOF;
         copy($stubs.'/inertia/LeaveCompanyTest.php', base_path('tests/Feature/LeaveCompanyTest.php'));
         copy($stubs.'/inertia/RemoveCompanyEmployeeTest.php', base_path('tests/Feature/RemoveCompanyEmployeeTest.php'));
         copy($stubs.'/inertia/UpdateCompanyEmployeeRoleTest.php', base_path('tests/Feature/UpdateCompanyEmployeeRoleTest.php'));
-        copy($stubs.'/inertia/UpdateCompanyNameTest.php', base_path('tests/Feature/UpdateCompanuNameTest.php'));
+        copy($stubs.'/inertia/UpdateCompanyNameTest.php', base_path('tests/Feature/UpdateCompanyNameTest.php'));
 
         $this->ensureApplicationIsCompanyCompatible();
     }
@@ -577,7 +576,7 @@ EOF;
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-team-migrations', '--force' => true]);
 
         // Separation of Entity Group name as either 'teams' or 'companies'.
-        // This will help right now with routes directory... and maybe other things in future.
+        // See line 192 in JetstreamServiceProvider.php in src folder.
         $this->replaceInFile('teams', 'teams', config_path('jetstream.php'));
 
         // Configuration...
@@ -607,7 +606,7 @@ EOF;
         copy(__DIR__.'/../../stubs/app/Actions/Jetstream/Teams/RemoveTeamMember.php', app_path('Actions/Jetstream/RemoveTeamMember.php'));
         copy(__DIR__.'/../../stubs/app/Actions/Jetstream/Teams/UpdateTeamName.php', app_path('Actions/Jetstream/UpdateTeamName.php'));
 
-        copy(__DIR__.'/../../stubs/app/Actions/Fortify/CreateNewUserWithTeams.php', app_path('Actions/Fortify/CreateNewUser.php'));
+        copy(__DIR__.'/../../stubs/app/Actions/Fortify/Teams/CreateNewUserWithTeams.php', app_path('Actions/Fortify/CreateNewUser.php'));
 
         // Policies...
         // Separation of Filesystem Team vs Company Policies
@@ -629,8 +628,8 @@ EOF;
         // Publish Team Migrations...
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-company-migrations', '--force' => true]);
 
-        // Separation of Entity Group name as either 'none', 'teams', or 'companies'.
-        // This will help right now with routes directory... and maybe other things in future.
+        // Separation of Entity Group name as either 'teams' or 'companies'.
+        // See line 192 in JetstreamServiceProvider.php in src folder.
         $this->replaceInFile('teams', 'companies', config_path('jetstream.php'));
 
         // Configuration...
@@ -660,13 +659,12 @@ EOF;
         copy(__DIR__.'/../../stubs/app/Actions/Jetstream/Companies/RemoveCompanyEmployee.php', app_path('Actions/Jetstream/RemoveCompanyEmployee.php'));
         copy(__DIR__.'/../../stubs/app/Actions/Jetstream/Companies/UpdateCompanyName.php', app_path('Actions/Jetstream/UpdateCompanyName.php'));
 
-        copy(__DIR__.'/../../stubs/app/Actions/Fortify/CreateNewUserWithCompanies.php', app_path('Actions/Fortify/CreateNewUser.php'));
+        copy(__DIR__.'/../../stubs/app/Actions/Fortify/Companies/CreateNewUserWithCompanies.php', app_path('Actions/Fortify/CreateNewUser.php'));
 
         // Policies...
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/app/Policies/Companies', app_path('Policies'));
 
         // Factories...
-        // Separation of Filesystem Team vs Company Policies
         copy(__DIR__.'/../../database/factories/companies/UserFactory.php', base_path('database/factories/UserFactory.php'));
         copy(__DIR__.'/../../database/factories/companies/CompanyFactory.php', base_path('database/factories/CompanyFactory.php'));
     }

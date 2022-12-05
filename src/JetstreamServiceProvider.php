@@ -2,7 +2,6 @@
 
 namespace Laravel\Jetstream;
 
-// Common...
 use Livewire\Livewire;
 use Laravel\Fortify\Fortify;
 use Illuminate\Http\Request;
@@ -148,13 +147,13 @@ class JetstreamServiceProvider extends ServiceProvider
             $this->registerComponent('modal');
             $this->registerComponent('nav-link');
             $this->registerComponent('responsive-nav-link');
-            $this->registerComponent('responsive-switchable-team'); // Teams ..
+            $this->registerComponent('responsive-switchable-team'); // Teams...
             $this->registerComponent('responsive-switchable-company'); // Companies...
             $this->registerComponent('secondary-button');
             $this->registerComponent('section-border');
             $this->registerComponent('section-title');
-            $this->registerComponent('switchable-team'); // Teams..
-            $this->registerComponent('switchable-company'); // Companies..
+            $this->registerComponent('switchable-team'); // Teams...
+            $this->registerComponent('switchable-company'); // Companies...
             $this->registerComponent('validation-errors');
             $this->registerComponent('welcome');
         });
@@ -190,6 +189,7 @@ class JetstreamServiceProvider extends ServiceProvider
             __DIR__.'/../resources/views' => resource_path('views/vendor/jetstream'),
         ], 'jetstream-views');
 
+        // Default "entity_group" is teams, this is same users table as before...
         $this->publishes([
             __DIR__.'/../database/migrations/teams/2014_10_12_000000_create_users_table.php' => database_path('migrations/2014_10_12_000000_create_users_table.php'),
         ], 'jetstream-migrations');
@@ -210,6 +210,8 @@ class JetstreamServiceProvider extends ServiceProvider
             __DIR__.'/../database/migrations/companies/2020_05_21_300000_create_company_invitations_table.php' => database_path('migrations/2020_05_21_300000_create_company_invitations_table.php'),
         ], 'jetstream-company-migrations');
 
+        // Separation of Company vs Team route folders for the package...
+        // Look in .config jetstream file for "entity_group"
         $this->publishes([
             __DIR__.'/../routes/'.config('jetstream.entity_group').'/'.config('jetstream.stack').'.php' => base_path('routes/jetstream.php'),
         ], 'jetstream-routes');
