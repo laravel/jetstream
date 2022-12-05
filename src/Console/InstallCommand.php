@@ -19,6 +19,7 @@ class InstallCommand extends Command
      */
     protected $signature = 'jetstream:install {stack : The development stack that should be installed (inertia,livewire)}
                                               {--teams : Indicates if team support should be installed}
+                                              {--companies : Indicates if company support should be installed}
                                               {--api : Indicates if API support should be installed}
                                               {--verification : Indicates if email verification support should be installed}
                                               {--pest : Indicates if Pest should be installed}
@@ -189,7 +190,7 @@ class InstallCommand extends Command
         copy(__DIR__.'/../../stubs/app/Models/User.php', app_path('Models/User.php'));
 
         // Factories...
-        copy(__DIR__.'/../../database/factories/UserFactory.php', base_path('database/factories/UserFactory.php'));
+        copy(__DIR__.'/../../database/factories/teams/UserFactory.php', base_path('database/factories/UserFactory.php'));
 
         // Actions...
         copy(__DIR__.'/../../stubs/app/Actions/Fortify/CreateNewUser.php', app_path('Actions/Fortify/CreateNewUser.php'));
@@ -205,7 +206,7 @@ class InstallCommand extends Command
 
         // Single Blade Views...
         copy(__DIR__.'/../../stubs/livewire/resources/views/dashboard.blade.php', resource_path('views/dashboard.blade.php'));
-        copy(__DIR__.'/../../stubs/livewire/resources/views/navigation-menu.blade.php', resource_path('views/navigation-menu.blade.php'));
+        copy(__DIR__.'/../../stubs/livewire/resources/views/navigation-menu/Teams/navigation-menu.blade.php', resource_path('views/navigation-menu.blade.php'));
         copy(__DIR__.'/../../stubs/livewire/resources/views/terms.blade.php', resource_path('views/terms.blade.php'));
         copy(__DIR__.'/../../stubs/livewire/resources/views/policy.blade.php', resource_path('views/policy.blade.php'));
 
@@ -242,6 +243,11 @@ class InstallCommand extends Command
             $this->installLivewireTeamStack();
         }
 
+        // Companies...
+        if ($this->option('companies')) {
+            $this->installLivewireCompanyStack();
+        }
+
         if (file_exists(base_path('pnpm-lock.yaml'))) {
             $this->runCommands(['pnpm install', 'pnpm run build']);
         } elseif (file_exists(base_path('yarn.lock'))) {
@@ -267,6 +273,9 @@ class InstallCommand extends Command
         // Other Views...
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/teams', resource_path('views/teams'));
 
+        // navigation-menu.php file for livewire teams stack option (which is same default layout as before)
+        copy(__DIR__.'/../../stubs/livewire/resources/views/navigation-menu/Teams/navigation-menu.blade.php', resource_path('views/navigation-menu.blade.php'));
+
         // Tests...
         $stubs = $this->getTestStubsPath();
 
@@ -279,6 +288,36 @@ class InstallCommand extends Command
         copy($stubs.'/livewire/UpdateTeamNameTest.php', base_path('tests/Feature/UpdateTeamNameTest.php'));
 
         $this->ensureApplicationIsTeamCompatible();
+    }
+
+    /**
+     * Install the Livewire company stack into the application.
+     *
+     * @return void
+     */
+    protected function installLivewireCompanyStack()
+    {
+        // Directories...
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/companies'));
+
+        // Other Views...
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/companies', resource_path('views/companies'));
+
+        // navigation-menu.php file for livewire companies stack option
+        copy(__DIR__.'/../../stubs/livewire/resources/views/navigation-menu/Companies/navigation-menu.blade.php', resource_path('views/navigation-menu.blade.php'));
+
+        // Tests...
+        $stubs = $this->getTestStubsPath();
+
+        copy($stubs.'/livewire/CreateCompanyTest.php', base_path('tests/Feature/CreateCompanyTest.php'));
+        copy($stubs.'/livewire/DeleteCompanyTest.php', base_path('tests/Feature/DeleteCompanyTest.php'));
+        copy($stubs.'/livewire/InviteCompanyEmployeeTest.php', base_path('tests/Feature/InviteCompanyEmployeeTest.php'));
+        copy($stubs.'/livewire/LeaveCompanyTest.php', base_path('tests/Feature/LeaveCompanyTest.php'));
+        copy($stubs.'/livewire/RemoveCompanyEmployeeTest.php', base_path('tests/Feature/RemoveCompanyEmployeeTest.php'));
+        copy($stubs.'/livewire/UpdateCompanyEmployeeRoleTest.php', base_path('tests/Feature/UpdateCompanyEmployeeRoleTest.php'));
+        copy($stubs.'/livewire/UpdateCompanyNameTest.php', base_path('tests/Feature/UpdateCompanyNameTest.php'));
+
+        $this->ensureApplicationIsCompanyCompatible();
     }
 
     /**
@@ -379,7 +418,7 @@ EOF;
         copy(__DIR__.'/../../stubs/app/Models/User.php', app_path('Models/User.php'));
 
         // Factories...
-        copy(__DIR__.'/../../database/factories/UserFactory.php', base_path('database/factories/UserFactory.php'));
+        copy(__DIR__.'/../../database/factories/teams/UserFactory.php', base_path('database/factories/UserFactory.php'));
 
         // Actions...
         copy(__DIR__.'/../../stubs/app/Actions/Fortify/CreateNewUser.php', app_path('Actions/Fortify/CreateNewUser.php'));
@@ -400,7 +439,7 @@ EOF;
         copy(__DIR__.'/../../stubs/inertia/resources/js/Pages/Welcome.vue', resource_path('js/Pages/Welcome.vue'));
 
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Components', resource_path('js/Components'));
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Layouts', resource_path('js/Layouts'));
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Layouts/Teams', resource_path('js/Layouts'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/API', resource_path('js/Pages/API'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Auth', resource_path('js/Pages/Auth'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Profile', resource_path('js/Pages/Profile'));
@@ -434,6 +473,11 @@ EOF;
             $this->installInertiaTeamStack();
         }
 
+        // Companies...
+        if ($this->option('companies')) {
+            $this->installInertiaCompanyStack();
+        }
+
         if ($this->option('ssr')) {
             $this->installInertiaSsrStack();
         }
@@ -463,6 +507,9 @@ EOF;
         // Pages...
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Teams', resource_path('js/Pages/Teams'));
 
+        // Teams AppLayout
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Layouts/Teams', resource_path('js/Layouts'));
+
         // Tests...
         $stubs = $this->getTestStubsPath();
 
@@ -478,6 +525,36 @@ EOF;
     }
 
     /**
+     * Install the Inertia company stack into the application.
+     *
+     * @return void
+     */
+    protected function installInertiaCompanyStack()
+    {
+        // Directories...
+        (new Filesystem)->ensureDirectoryExists(resource_path('js/Pages/Profile'));
+
+        // Pages...
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Companies', resource_path('js/Pages/Companies'));
+
+        // Companies AppLayout
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Layouts/Companies', resource_path('js/Layouts'));
+
+        // Tests...
+        $stubs = $this->getTestStubsPath();
+
+        copy($stubs.'/inertia/CreateCompanyTest.php', base_path('tests/Feature/CreateCompanyTest.php'));
+        copy($stubs.'/inertia/DeleteCompanyTest.php', base_path('tests/Feature/DeleteCompanyTest.php'));
+        copy($stubs.'/inertia/InviteCompanyEmployeeTest.php', base_path('tests/Feature/InviteCompanyEmployeeTest.php'));
+        copy($stubs.'/inertia/LeaveCompanyTest.php', base_path('tests/Feature/LeaveCompanyTest.php'));
+        copy($stubs.'/inertia/RemoveCompanyEmployeeTest.php', base_path('tests/Feature/RemoveCompanyEmployeeTest.php'));
+        copy($stubs.'/inertia/UpdateCompanyEmployeeRoleTest.php', base_path('tests/Feature/UpdateCompanyEmployeeRoleTest.php'));
+        copy($stubs.'/inertia/UpdateCompanyNameTest.php', base_path('tests/Feature/UpdateCompanyNameTest.php'));
+
+        $this->ensureApplicationIsCompanyCompatible();
+    }
+
+    /**
      * Ensure the installed user model is ready for team usage.
      *
      * @return void
@@ -486,6 +563,9 @@ EOF;
     {
         // Publish Team Migrations...
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-team-migrations', '--force' => true]);
+
+        // See line 192 in JetstreamServiceProvider.php in src folder.
+        $this->replaceInFile('teams', 'teams', config_path('jetstream.php'));
 
         // Configuration...
         $this->replaceInFile('// Features::teams([\'invitations\' => true])', 'Features::teams([\'invitations\' => true])', config_path('jetstream.php'));
@@ -496,32 +576,83 @@ EOF;
         (new Filesystem)->ensureDirectoryExists(app_path('Policies'));
 
         // Service Providers...
-        copy(__DIR__.'/../../stubs/app/Providers/AuthServiceProvider.php', app_path('Providers/AuthServiceProvider.php'));
-        copy(__DIR__.'/../../stubs/app/Providers/JetstreamWithTeamsServiceProvider.php', app_path('Providers/JetstreamServiceProvider.php'));
+        copy(__DIR__.'/../../stubs/app/Providers/Teams/AuthServiceProvider.php', app_path('Providers/AuthServiceProvider.php'));
+        copy(__DIR__.'/../../stubs/app/Providers/Teams/JetstreamWithTeamsServiceProvider.php', app_path('Providers/JetstreamServiceProvider.php'));
 
         // Models...
-        copy(__DIR__.'/../../stubs/app/Models/Membership.php', app_path('Models/Membership.php'));
-        copy(__DIR__.'/../../stubs/app/Models/Team.php', app_path('Models/Team.php'));
-        copy(__DIR__.'/../../stubs/app/Models/TeamInvitation.php', app_path('Models/TeamInvitation.php'));
-        copy(__DIR__.'/../../stubs/app/Models/UserWithTeams.php', app_path('Models/User.php'));
+        copy(__DIR__.'/../../stubs/app/Models/Teams/Membership.php', app_path('Models/Membership.php'));
+        copy(__DIR__.'/../../stubs/app/Models/Teams/Team.php', app_path('Models/Team.php'));
+        copy(__DIR__.'/../../stubs/app/Models/Teams/TeamInvitation.php', app_path('Models/TeamInvitation.php'));
+        copy(__DIR__.'/../../stubs/app/Models/Teams/UserWithTeams.php', app_path('Models/User.php'));
 
         // Actions...
-        copy(__DIR__.'/../../stubs/app/Actions/Jetstream/AddTeamMember.php', app_path('Actions/Jetstream/AddTeamMember.php'));
-        copy(__DIR__.'/../../stubs/app/Actions/Jetstream/CreateTeam.php', app_path('Actions/Jetstream/CreateTeam.php'));
-        copy(__DIR__.'/../../stubs/app/Actions/Jetstream/DeleteTeam.php', app_path('Actions/Jetstream/DeleteTeam.php'));
-        copy(__DIR__.'/../../stubs/app/Actions/Jetstream/DeleteUserWithTeams.php', app_path('Actions/Jetstream/DeleteUser.php'));
-        copy(__DIR__.'/../../stubs/app/Actions/Jetstream/InviteTeamMember.php', app_path('Actions/Jetstream/InviteTeamMember.php'));
-        copy(__DIR__.'/../../stubs/app/Actions/Jetstream/RemoveTeamMember.php', app_path('Actions/Jetstream/RemoveTeamMember.php'));
-        copy(__DIR__.'/../../stubs/app/Actions/Jetstream/UpdateTeamName.php', app_path('Actions/Jetstream/UpdateTeamName.php'));
+        copy(__DIR__.'/../../stubs/app/Actions/Jetstream/Teams/AddTeamMember.php', app_path('Actions/Jetstream/AddTeamMember.php'));
+        copy(__DIR__.'/../../stubs/app/Actions/Jetstream/Teams/CreateTeam.php', app_path('Actions/Jetstream/CreateTeam.php'));
+        copy(__DIR__.'/../../stubs/app/Actions/Jetstream/Teams/DeleteTeam.php', app_path('Actions/Jetstream/DeleteTeam.php'));
+        copy(__DIR__.'/../../stubs/app/Actions/Jetstream/Teams/DeleteUserWithTeams.php', app_path('Actions/Jetstream/DeleteUser.php'));
+        copy(__DIR__.'/../../stubs/app/Actions/Jetstream/Teams/InviteTeamMember.php', app_path('Actions/Jetstream/InviteTeamMember.php'));
+        copy(__DIR__.'/../../stubs/app/Actions/Jetstream/Teams/RemoveTeamMember.php', app_path('Actions/Jetstream/RemoveTeamMember.php'));
+        copy(__DIR__.'/../../stubs/app/Actions/Jetstream/Teams/UpdateTeamName.php', app_path('Actions/Jetstream/UpdateTeamName.php'));
 
-        copy(__DIR__.'/../../stubs/app/Actions/Fortify/CreateNewUserWithTeams.php', app_path('Actions/Fortify/CreateNewUser.php'));
+        copy(__DIR__.'/../../stubs/app/Actions/Fortify/Teams/CreateNewUserWithTeams.php', app_path('Actions/Fortify/CreateNewUser.php'));
 
         // Policies...
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/app/Policies', app_path('Policies'));
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/app/Policies/Teams', app_path('Policies'));
 
         // Factories...
-        copy(__DIR__.'/../../database/factories/UserFactory.php', base_path('database/factories/UserFactory.php'));
-        copy(__DIR__.'/../../database/factories/TeamFactory.php', base_path('database/factories/TeamFactory.php'));
+        copy(__DIR__.'/../../database/factories/teams/UserFactory.php', base_path('database/factories/UserFactory.php'));
+        copy(__DIR__.'/../../database/factories/teams/TeamFactory.php', base_path('database/factories/TeamFactory.php'));
+    }
+
+    /**
+     * Ensure the installed user model is ready for company usage.
+     *
+     * @return void
+     */
+    protected function ensureApplicationIsCompanyCompatible()
+    {
+
+        // Publish Team Migrations...
+        $this->callSilent('vendor:publish', ['--tag' => 'jetstream-company-migrations', '--force' => true]);
+
+        // See line 192 in JetstreamServiceProvider.php in src folder.
+        $this->replaceInFile('teams', 'companies', config_path('jetstream.php'));
+
+        // Configuration...
+        $this->replaceInFile('// Features::companies([\'invitations\' => true])', 'Features::companies([\'invitations\' => true])', config_path('jetstream.php'));
+
+        // Directories...
+        (new Filesystem)->ensureDirectoryExists(app_path('Actions/Jetstream'));
+        (new Filesystem)->ensureDirectoryExists(app_path('Events'));
+        (new Filesystem)->ensureDirectoryExists(app_path('Policies'));
+
+        // Service Providers...
+        copy(__DIR__.'/../../stubs/app/Providers/Companies/AuthServiceProvider.php', app_path('Providers/AuthServiceProvider.php'));
+        copy(__DIR__.'/../../stubs/app/Providers/Companies/JetstreamWithCompaniesServiceProvider.php', app_path('Providers/JetstreamServiceProvider.php'));
+
+        // Models...
+        copy(__DIR__.'/../../stubs/app/Models/Companies/Employeeship.php', app_path('Models/Employeeship.php'));
+        copy(__DIR__.'/../../stubs/app/Models/Companies/Company.php', app_path('Models/Company.php'));
+        copy(__DIR__.'/../../stubs/app/Models/Companies/CompanyInvitation.php', app_path('Models/CompanyInvitation.php'));
+        copy(__DIR__.'/../../stubs/app/Models/Companies/UserWithCompanies.php', app_path('Models/User.php'));
+
+        // Actions...
+        copy(__DIR__.'/../../stubs/app/Actions/Jetstream/Companies/AddCompanyEmployee.php', app_path('Actions/Jetstream/AddCompanyEmployee.php'));
+        copy(__DIR__.'/../../stubs/app/Actions/Jetstream/Companies/CreateCompany.php', app_path('Actions/Jetstream/CreateCompany.php'));
+        copy(__DIR__.'/../../stubs/app/Actions/Jetstream/Companies/DeleteCompany.php', app_path('Actions/Jetstream/DeleteCompany.php'));
+        copy(__DIR__.'/../../stubs/app/Actions/Jetstream/Companies/DeleteUserWithCompanies.php', app_path('Actions/Jetstream/DeleteUser.php'));
+        copy(__DIR__.'/../../stubs/app/Actions/Jetstream/Companies/InviteCompanyEmployee.php', app_path('Actions/Jetstream/InviteCompanyEmployee.php'));
+        copy(__DIR__.'/../../stubs/app/Actions/Jetstream/Companies/RemoveCompanyEmployee.php', app_path('Actions/Jetstream/RemoveCompanyEmployee.php'));
+        copy(__DIR__.'/../../stubs/app/Actions/Jetstream/Companies/UpdateCompanyName.php', app_path('Actions/Jetstream/UpdateCompanyName.php'));
+
+        copy(__DIR__.'/../../stubs/app/Actions/Fortify/Companies/CreateNewUserWithCompanies.php', app_path('Actions/Fortify/CreateNewUser.php'));
+
+        // Policies...
+        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/app/Policies/Companies', app_path('Policies'));
+
+        // Factories...
+        copy(__DIR__.'/../../database/factories/companies/UserFactory.php', base_path('database/factories/UserFactory.php'));
+        copy(__DIR__.'/../../database/factories/companies/CompanyFactory.php', base_path('database/factories/CompanyFactory.php'));
     }
 
     /**

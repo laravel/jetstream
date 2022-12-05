@@ -46,4 +46,13 @@ abstract class OrchestraTestCase extends TestCase
 
         $app->config->set('jetstream.features', $features);
     }
+
+    protected function defineHasCompanyEnvironment($app)
+    {
+        $features = $app->config->get('jetstream.features', []);
+
+        $features[] = Features::companies(['invitations' => true]);
+
+        $app->config->set('jetstream.features', $features);
+    }
 }

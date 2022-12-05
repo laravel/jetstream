@@ -59,6 +59,16 @@ class Features
     }
 
     /**
+     * Determine if the application is using any company features.
+     *
+     * @return bool
+     */
+    public static function hasCompanyFeatures()
+    {
+        return static::enabled(static::companies());
+    }
+
+    /**
      * Determine if invitations are sent to team members.
      *
      * @return bool
@@ -66,6 +76,16 @@ class Features
     public static function sendsTeamInvitations()
     {
         return static::optionEnabled(static::teams(), 'invitations');
+    }
+
+    /**
+     * Determine if invitations are sent to company employees.
+     *
+     * @return bool
+     */
+    public static function sendsCompanyInvitations()
+    {
+        return static::optionEnabled(static::companies(), 'invitations');
     }
 
     /**
@@ -121,6 +141,21 @@ class Features
         }
 
         return 'teams';
+    }
+
+    /**
+     * Enable the companies feature.
+     *
+     * @param  array  $options
+     * @return string
+     */
+    public static function companies(array $options = [])
+    {
+        if (! empty($options)) {
+            config(['jetstream-options.companies' => $options]);
+        }
+
+        return 'companies';
     }
 
     /**

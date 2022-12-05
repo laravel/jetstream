@@ -64,5 +64,52 @@ class ShareInertiaData
         ]));
 
         return $next($request);
+
+
+        Inertia::share(array_filter([
+            'jetstream' => function () use ($request) {
+                $user = $request->user();
+
+                return [
+                    'canCreateCompanies' => $user &&
+                                        Jetstream::userHasCompanyFeatures($user) &&
+                                        Gate::forUser($user)->check('create', Jetstream::newCompanyModel()),
+                    'canManageTwoFactorAuthentication' => Features::canManageTwoFactorAuthentication(),
+                    'canUpdatePassword' => Features::enabled(Features::updatePasswords()),
+                    'canUpdateProfileInformation' => Features::canUpdateProfileInformation(),
+                    'hasEmailVerification' => Features::enabled(Features::emailVerification()),
+                    'flash' => $request->session()->get('flash', []),
+                    'hasAccountDeletionFeatures' => Jetstream::hasAccountDeletionFeatures(),
+                    'hasApiFeatures' => Jetstream::hasApiFeatures(),
+                    'hasCompanyFeatures' => Jetstream::hasCompanyFeatures(),
+                    'hasTermsAndPrivacyPolicyFeature' => Jetstream::hasTermsAndPrivacyPolicyFeature(),
+                    'managesProfilePhotos' => Jetstream::managesProfilePhotos(),
+                ];
+            },
+            'user' => function () use ($request) {
+                if (! $user = $request->user()) {
+                    return;
+                }
+
+                $userHasCompanyFeatures = Jetstream::userHasCompanyFeatures($user);
+
+                if ($user && $userHasCompanyFeatures) {
+                    $user->currentCompany;
+                }
+
+                return array_merge($user->toArray(), array_filter([
+                    'all_companies' => $userHasCompanyFeatures ? $user->allCompanies()->values() : null,
+                ]), [
+                    'two_factor_enabled' => ! is_null($user->two_factor_secret),
+                ]);
+            },
+            'errorBags' => function () {
+                return collect(optional(Session::get('errors'))->getBags() ?: [])->mapWithKeys(function ($bag, $key) {
+                    return [$key => $bag->messages()];
+                })->all();
+            },
+        ]));
+
+        return $next($request);
     }
 }

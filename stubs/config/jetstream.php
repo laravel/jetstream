@@ -19,6 +19,25 @@ return [
     'stack' => 'inertia',
 
     /*
+    |--------------------------------------------------------------------------
+    | Jetstream Entity Group
+    |--------------------------------------------------------------------------
+    |
+    | This configuration value informs Jetstream which "entity group" you will be
+    | using for your application. In general, this value is set for you
+    | during installation and will not need to be changed after that. The default
+    | "entity group" value is "teams" regardless of if you opted out for using jetstream
+    | team support or jetstream company support. If you opted for using jetstream company
+    | support during installation the value will be set to "companies" and the line
+    | " //Features::teams(['invitations' => true]),." in the "features" array below will
+    | change to " //Features::companies(['invitations' => true])," and will be uncommented
+    | during the installation of Jetstream company support.
+    |
+    */
+
+    'entity_group' => 'teams',
+
+    /*
      |--------------------------------------------------------------------------
      | Jetstream Route Middleware
      |--------------------------------------------------------------------------

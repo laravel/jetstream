@@ -12,6 +12,14 @@ use Laravel\Jetstream\Contracts\InvitesTeamMembers;
 use Laravel\Jetstream\Contracts\RemovesTeamMembers;
 use Laravel\Jetstream\Contracts\UpdatesTeamNames;
 
+// Companies...
+use Laravel\Jetstream\Contracts\CreatesCompanies;
+use Laravel\Jetstream\Contracts\DeletesCompanies;
+use Laravel\Jetstream\Contracts\UpdatesCompanyNames;
+use Laravel\Jetstream\Contracts\AddsCompanyEmployees;
+use Laravel\Jetstream\Contracts\InvitesCompanyEmployees;
+use Laravel\Jetstream\Contracts\RemovesCompanyEmployees;
+
 class Jetstream
 {
     /**
@@ -57,6 +65,13 @@ class Jetstream
     public static $teamModel = 'App\\Models\\Team';
 
     /**
+     * The company model that should be used by Jetstream.
+     *
+     * @var string
+     */
+    public static $companyModel = 'App\\Models\\Company';
+
+    /**
      * The membership model that should be used by Jetstream.
      *
      * @var string
@@ -64,11 +79,25 @@ class Jetstream
     public static $membershipModel = 'App\\Models\\Membership';
 
     /**
+     * The employeeship model that should be used by Jetstream.
+     *
+     * @var string
+     */
+    public static $employeeshipModel = 'App\\Models\\Employeeship';
+
+    /**
      * The team invitation model that should be used by Jetstream.
      *
      * @var string
      */
     public static $teamInvitationModel = 'App\\Models\\TeamInvitation';
+
+    /**
+     * The company invitation model that should be used by Jetstream.
+     *
+     * @var string
+     */
+    public static $companyInvitationModel = 'App\\Models\\CompanyInvitation';
 
     /**
      * The Inertia manager instance.
@@ -197,6 +226,16 @@ class Jetstream
     }
 
     /**
+     * Determine if Jetstream is supporting company features.
+     *
+     * @return bool
+     */
+    public static function hasCompanyFeatures()
+    {
+        return Features::hasCompanyFeatures();
+    }
+
+    /**
      * Determine if a given user model utilizes the "HasTeams" trait.
      *
      * @param  \Illuminate\Database\Eloquent\Model
@@ -207,6 +246,19 @@ class Jetstream
         return (array_key_exists(HasTeams::class, class_uses_recursive($user)) ||
                 method_exists($user, 'currentTeam')) &&
                 static::hasTeamFeatures();
+    }
+
+    /**
+     * Determine if a given user model utilizes the "HasCompanies" trait.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model
+     * @return bool
+     */
+    public static function userHasCompanyFeatures($user)
+    {
+        return (array_key_exists(HasCompanies::class, class_uses_recursive($user)) ||
+                method_exists($user, 'currentCompany')) &&
+                static::hasCompanyFeatures();
     }
 
     /**
@@ -297,6 +349,16 @@ class Jetstream
     }
 
     /**
+     * Get the name of the company model used by the application.
+     *
+     * @return string
+     */
+    public static function companyModel()
+    {
+        return static::$companyModel;
+    }
+
+    /**
      * Get a new instance of the team model.
      *
      * @return mixed
@@ -304,6 +366,18 @@ class Jetstream
     public static function newTeamModel()
     {
         $model = static::teamModel();
+
+        return new $model;
+    }
+
+    /**
+     * Get a new instance of the company model.
+     *
+     * @return mixed
+     */
+    public static function newCompanyModel()
+    {
+        $model = static::companyModel();
 
         return new $model;
     }
@@ -322,6 +396,19 @@ class Jetstream
     }
 
     /**
+     * Specify the company model that should be used by Jetstream.
+     *
+     * @param  string  $model
+     * @return static
+     */
+    public static function useCompanyModel(string $model)
+    {
+        static::$companyModel = $model;
+
+        return new static;
+    }
+
+    /**
      * Get the name of the membership model used by the application.
      *
      * @return string
@@ -329,6 +416,16 @@ class Jetstream
     public static function membershipModel()
     {
         return static::$membershipModel;
+    }
+
+    /**
+     * Get the name of the employeeship model used by the application.
+     *
+     * @return string
+     */
+    public static function employeeshipModel()
+    {
+        return static::$employeeshipModel;
     }
 
     /**
@@ -345,6 +442,19 @@ class Jetstream
     }
 
     /**
+     * Specify the employeeship model that should be used by Jetstream.
+     *
+     * @param  string  $model
+     * @return static
+     */
+    public static function useEmployeeshipModel(string $model)
+    {
+        static::$employeeshipModel = $model;
+
+        return new static;
+    }
+
+    /**
      * Get the name of the team invitation model used by the application.
      *
      * @return string
@@ -352,6 +462,16 @@ class Jetstream
     public static function teamInvitationModel()
     {
         return static::$teamInvitationModel;
+    }
+
+    /**
+     * Get the name of the company invitation model used by the application.
+     *
+     * @return string
+     */
+    public static function companyInvitationModel()
+    {
+        return static::$companyInvitationModel;
     }
 
     /**
@@ -368,6 +488,19 @@ class Jetstream
     }
 
     /**
+     * Specify the company invitation model that should be used by Jetstream.
+     *
+     * @param  string  $model
+     * @return static
+     */
+    public static function useCompanyInvitationModel(string $model)
+    {
+        static::$companyInvitationModel = $model;
+
+        return new static;
+    }
+
+    /**
      * Register a class / callback that should be used to create teams.
      *
      * @param  string  $class
@@ -376,6 +509,17 @@ class Jetstream
     public static function createTeamsUsing(string $class)
     {
         return app()->singleton(CreatesTeams::class, $class);
+    }
+
+    /**
+     * Register a class / callback that should be used to create companies.
+     *
+     * @param  string  $class
+     * @return void
+     */
+    public static function createCompaniesUsing(string $class)
+    {
+        return app()->singleton(CreatesCompanies::class, $class);
     }
 
     /**
@@ -390,6 +534,17 @@ class Jetstream
     }
 
     /**
+     * Register a class / callback that should be used to update company names.
+     *
+     * @param  string  $class
+     * @return void
+     */
+    public static function updateCompanyNamesUsing(string $class)
+    {
+        return app()->singleton(UpdatesCompanyNames::class, $class);
+    }
+
+    /**
      * Register a class / callback that should be used to add team members.
      *
      * @param  string  $class
@@ -398,6 +553,17 @@ class Jetstream
     public static function addTeamMembersUsing(string $class)
     {
         return app()->singleton(AddsTeamMembers::class, $class);
+    }
+
+    /**
+     * Register a class / callback that should be used to add company employees.
+     *
+     * @param  string  $class
+     * @return void
+     */
+    public static function addCompanyEmployeesUsing(string $class)
+    {
+        return app()->singleton(AddsCompanyEmployees::class, $class);
     }
 
     /**
@@ -412,6 +578,17 @@ class Jetstream
     }
 
     /**
+     * Register a class / callback that should be used to add company employees.
+     *
+     * @param  string  $class
+     * @return void
+     */
+    public static function inviteCompanyEmployeesUsing(string $class)
+    {
+        return app()->singleton(InvitesCompanyEmployees::class, $class);
+    }
+
+    /**
      * Register a class / callback that should be used to remove team members.
      *
      * @param  string  $class
@@ -423,6 +600,17 @@ class Jetstream
     }
 
     /**
+     * Register a class / callback that should be used to remove company employees.
+     *
+     * @param  string  $class
+     * @return void
+     */
+    public static function removeCompanyEmployeesUsing(string $class)
+    {
+        return app()->singleton(RemovesCompanyEmployees::class, $class);
+    }
+
+    /**
      * Register a class / callback that should be used to delete teams.
      *
      * @param  string  $class
@@ -431,6 +619,17 @@ class Jetstream
     public static function deleteTeamsUsing(string $class)
     {
         return app()->singleton(DeletesTeams::class, $class);
+    }
+
+    /**
+     * Register a class / callback that should be used to delete companies.
+     *
+     * @param  string  $class
+     * @return void
+     */
+    public static function deleteCompaniesUsing(string $class)
+    {
+        return app()->singleton(DeletesCompanies::class, $class);
     }
 
     /**

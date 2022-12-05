@@ -26,6 +26,12 @@ use Laravel\Jetstream\Http\Livewire\UpdateTeamNameForm;
 use Laravel\Jetstream\Http\Middleware\ShareInertiaData;
 use Livewire\Livewire;
 
+// Companies..
+use Laravel\Jetstream\Http\Livewire\CreateCompanyForm;
+use Laravel\Jetstream\Http\Livewire\DeleteCompanyForm;
+use Laravel\Jetstream\Http\Livewire\UpdateCompanyNameForm;
+use Laravel\Jetstream\Http\Livewire\CompanyEmployeeManager;
+
 class JetstreamServiceProvider extends ServiceProvider
 {
     /**
@@ -55,6 +61,14 @@ class JetstreamServiceProvider extends ServiceProvider
                     Livewire::component('teams.update-team-name-form', UpdateTeamNameForm::class);
                     Livewire::component('teams.team-member-manager', TeamMemberManager::class);
                     Livewire::component('teams.delete-team-form', DeleteTeamForm::class);
+                }
+
+                // Companies..
+                if (Features::hasCompanyFeatures()) {
+                    Livewire::component('companies.create-company-form', CreateCompanyForm::class);
+                    Livewire::component('companies.update-company-name-form', UpdateCompanyNameForm::class);
+                    Livewire::component('companies.company-employee-manager', CompanyEmployeeManager::class);
+                    Livewire::component('companies.delete-company-form', DeleteCompanyForm::class);
                 }
             }
         });
@@ -126,10 +140,12 @@ class JetstreamServiceProvider extends ServiceProvider
             $this->registerComponent('nav-link');
             $this->registerComponent('responsive-nav-link');
             $this->registerComponent('responsive-switchable-team');
+            $this->registerComponent('responsive-switchable-company'); // Companies...
             $this->registerComponent('secondary-button');
             $this->registerComponent('section-border');
             $this->registerComponent('section-title');
             $this->registerComponent('switchable-team');
+            $this->registerComponent('switchable-company'); // Companies...
             $this->registerComponent('validation-errors');
             $this->registerComponent('welcome');
         });
@@ -165,18 +181,30 @@ class JetstreamServiceProvider extends ServiceProvider
             __DIR__.'/../resources/views' => resource_path('views/vendor/jetstream'),
         ], 'jetstream-views');
 
+        // Default "entity_group" is teams, this is same users table as before...
         $this->publishes([
-            __DIR__.'/../database/migrations/2014_10_12_000000_create_users_table.php' => database_path('migrations/2014_10_12_000000_create_users_table.php'),
+            __DIR__.'/../database/migrations/teams/2014_10_12_000000_create_users_table.php' => database_path('migrations/2014_10_12_000000_create_users_table.php'),
         ], 'jetstream-migrations');
 
+        // Teams...
         $this->publishes([
-            __DIR__.'/../database/migrations/2020_05_21_100000_create_teams_table.php' => database_path('migrations/2020_05_21_100000_create_teams_table.php'),
-            __DIR__.'/../database/migrations/2020_05_21_200000_create_team_user_table.php' => database_path('migrations/2020_05_21_200000_create_team_user_table.php'),
-            __DIR__.'/../database/migrations/2020_05_21_300000_create_team_invitations_table.php' => database_path('migrations/2020_05_21_300000_create_team_invitations_table.php'),
+            __DIR__.'/../database/migrations/teams/2014_10_12_000000_create_users_table.php' => database_path('migrations/2014_10_12_000000_create_users_table.php'),
+            __DIR__.'/../database/migrations/teams/2020_05_21_100000_create_teams_table.php' => database_path('migrations/2020_05_21_100000_create_teams_table.php'),
+            __DIR__.'/../database/migrations/teams/2020_05_21_200000_create_team_user_table.php' => database_path('migrations/2020_05_21_200000_create_team_user_table.php'),
+            __DIR__.'/../database/migrations/teams/2020_05_21_300000_create_team_invitations_table.php' => database_path('migrations/2020_05_21_300000_create_team_invitations_table.php'),
         ], 'jetstream-team-migrations');
 
+        // Companies...
         $this->publishes([
-            __DIR__.'/../routes/'.config('jetstream.stack').'.php' => base_path('routes/jetstream.php'),
+            __DIR__.'/../database/migrations/companies/2014_10_12_000000_create_users_table.php' => database_path('migrations/2014_10_12_000000_create_users_table.php'),
+            __DIR__.'/../database/migrations/companies/2020_05_21_100000_create_companies_table.php' => database_path('migrations/2020_05_21_100000_create_companies_table.php'),
+            __DIR__.'/../database/migrations/companies/2020_05_21_200000_create_company_user_table.php' => database_path('migrations/2020_05_21_200000_create_company_user_table.php'),
+            __DIR__.'/../database/migrations/companies/2020_05_21_300000_create_company_invitations_table.php' => database_path('migrations/2020_05_21_300000_create_company_invitations_table.php'),
+        ], 'jetstream-company-migrations');
+
+        // Separation of Company vs Team route folders for the package...
+        $this->publishes([
+            __DIR__.'/../routes/'.config('jetstream.entity_group').'/'.config('jetstream.stack').'.php' => base_path('routes/jetstream.php'),
         ], 'jetstream-routes');
 
         $this->publishes([
@@ -201,7 +229,7 @@ class JetstreamServiceProvider extends ServiceProvider
                 'domain' => config('jetstream.domain', null),
                 'prefix' => config('jetstream.prefix', config('jetstream.path')),
             ], function () {
-                $this->loadRoutesFrom(__DIR__.'/../routes/'.config('jetstream.stack').'.php');
+                $this->loadRoutesFrom(__DIR__.'/../routes/'.config('jetstream.entity_group').'/'.config('jetstream.stack').'.php');
             });
         }
     }
