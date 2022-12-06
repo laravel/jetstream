@@ -1,6 +1,13 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.12.5...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.12.6...2.x)
+
+## [v2.12.6](https://github.com/laravel/jetstream/compare/v2.12.5...v2.12.6) - 2022-12-05
+
+### Changed
+
+- Use x-Focus Alpine JS plugin for Livewire stack modal by @x7ryan in https://github.com/laravel/jetstream/pull/1186
+- Use Default NPM Package Manager of User if Lock File Exists In Base Path by @andrewdwallo in https://github.com/laravel/jetstream/pull/1187
 
 ## [v2.12.5](https://github.com/laravel/jetstream/compare/v2.12.4...v2.12.5) - 2022-10-26
 
