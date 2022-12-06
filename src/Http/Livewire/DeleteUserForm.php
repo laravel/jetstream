@@ -8,10 +8,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Laravel\Jetstream\Contracts\DeletesUsers;
+use Laravel\Jetstream\RedirectsActions;
 use Livewire\Component;
 
 class DeleteUserForm extends Component
 {
+    use RedirectsActions;
+
     /**
      * Indicates if user deletion is being confirmed.
      *
@@ -69,7 +72,7 @@ class DeleteUserForm extends Component
             $request->session()->regenerateToken();
         }
 
-        return redirect('/');
+        return $this->redirectPath($deleter);
     }
 
     /**
