@@ -69,7 +69,7 @@ class DeleteUserForm extends Component
             $request->session()->regenerateToken();
         }
 
-        return redirect('/');
+        return redirect(config('fortify.redirects.logout', '/'));
     }
 
     /**
