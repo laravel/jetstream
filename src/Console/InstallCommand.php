@@ -321,7 +321,7 @@ EOF;
                 '@inertiajs/progress' => '^0.2.7',
                 '@tailwindcss/forms' => '^0.5.2',
                 '@tailwindcss/typography' => '^0.5.2',
-                '@vitejs/plugin-vue' => '^3.0.0',
+                '@vitejs/plugin-vue' => '^4.0.0',
                 'autoprefixer' => '^10.4.7',
                 'postcss' => '^8.4.14',
                 'tailwindcss' => '^3.1.0',
