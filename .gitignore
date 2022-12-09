@@ -1,3 +1,5 @@
+.idea/
+.vscode/
 /vendor
 composer.lock
 /phpunit.xml
