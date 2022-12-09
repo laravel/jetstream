@@ -29,12 +29,12 @@ trait ConfirmsTwoFactorAuthentication
         }
 
         // If was previously totally disabled this session but is now confirming, notate time...
-        if ($this->hasJustBegunConfirmingTwoFactorAuthentication($request)) {
+        else if ($this->hasJustBegunConfirmingTwoFactorAuthentication($request)) {
             $request->session()->put('two_factor_confirming_at', $currentTime);
         }
 
         // If the profile is reloaded and is not confirmed but was previously in confirming state, disable...
-        if ($this->neverFinishedConfirmingTwoFactorAuthentication($request, $currentTime)) {
+        else if ($this->neverFinishedConfirmingTwoFactorAuthentication($request, $currentTime)) {
             app(DisableTwoFactorAuthentication::class)(Auth::user());
 
             $request->session()->put('two_factor_empty_at', $currentTime);
