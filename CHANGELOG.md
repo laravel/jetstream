@@ -1,6 +1,16 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.12.6...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.13.0...2.x)
+
+## [v2.13.0](https://github.com/laravel/jetstream/compare/v2.12.6...v2.13.0) - 2022-12-16
+
+### Added
+
+- Vite 4 support by @timacdonald in https://github.com/laravel/jetstream/pull/1193
+
+### Changed
+
+- Redirect to the fortify configured logout redirect after deleting user by @riasvdv in https://github.com/laravel/jetstream/pull/1191
 
 ## [v2.12.6](https://github.com/laravel/jetstream/compare/v2.12.5...v2.12.6) - 2022-12-05
 
