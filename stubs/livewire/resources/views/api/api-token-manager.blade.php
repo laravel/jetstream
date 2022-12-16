@@ -64,11 +64,11 @@
                     <div class="space-y-6">
                         @foreach ($this->user->tokens->sortBy('name') as $token)
                             <div class="flex items-center justify-between">
-                                <div>
+                                <div class="break-all">
                                     {{ $token->name }}
                                 </div>
 
-                                <div class="flex items-center">
+                                <div class="flex items-center ml-2">
                                     @if ($token->last_used_at)
                                         <div class="text-sm text-gray-400">
                                             {{ __('Last used') }} {{ $token->last_used_at->diffForHumans() }}
@@ -105,7 +105,7 @@
             </div>
 
             <x-jet-input x-ref="plaintextToken" type="text" readonly :value="$plainTextToken"
-                class="mt-4 bg-gray-100 px-4 py-2 rounded font-mono text-sm text-gray-500 w-full"
+                class="mt-4 bg-gray-100 px-4 py-2 rounded font-mono text-sm text-gray-500 w-full break-all"
                 autofocus autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
                 @showing-token-modal.window="setTimeout(() => $refs.plaintextToken.select(), 250)"
             />
