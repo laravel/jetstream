@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.13.0...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.13.1...2.x)
+
+## [v2.13.1](https://github.com/laravel/jetstream/compare/v2.13.0...v2.13.1) - 2022-12-16
+
+### Fixed
+
+- Fixed and issue causing overflow in ApiTokenManager page on mobile devices. by @ravibpatel in https://github.com/laravel/jetstream/pull/1198
 
 ## [v2.13.0](https://github.com/laravel/jetstream/compare/v2.12.6...v2.13.0) - 2022-12-16
 
