@@ -7,5 +7,5 @@ return [
     'middleware' => ['web'],
     'features' => [Features::accountDeletion()],
     'profile_photo_disk' => 'public',
-    'view_prefix' => 'auth.'
+    'view_prefix' => 'auth.',
 ];

@@ -78,4 +78,16 @@ return [
 
     'profile_photo_disk' => 'public',
 
+    /*
+    |--------------------------------------------------------------------------
+    | Jetstream View Prefix
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify the view prefix used by Jetstream and Fortify
+    | the default is usually sufficient
+    |
+    */
+
+    'view_prefix' => 'auth.',
+
 ];
