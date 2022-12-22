@@ -69,7 +69,7 @@ class JetstreamServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'jetstream');
 
-        Fortify::viewPrefix('auth.');
+        Fortify::viewPrefix(config('jetstream.view_prefix', 'auth.'));
 
         $this->configureComponents();
         $this->configurePublishing();
