@@ -1,6 +1,18 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.13.1...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.14.0...2.x)
+
+## [v2.14.0](https://github.com/laravel/jetstream/compare/v2.13.1...v2.14.0) - 2023-01-03
+
+### Changed
+
+- Update to Heroicons v2 by @driesvints in https://github.com/laravel/jetstream/pull/1200
+- Uses PHP Native Type Declarations 🐘  by @nunomaduro in https://github.com/laravel/jetstream/pull/1175
+
+### Fixed
+
+- Add focus styling for settings dropdown trigger button by @thema-d in https://github.com/laravel/jetstream/pull/1206
+- Fix the order of the v-if attribute. by @milorojas in https://github.com/laravel/jetstream/pull/1208
 
 ## [v2.13.1](https://github.com/laravel/jetstream/compare/v2.13.0...v2.13.1) - 2022-12-16
 
