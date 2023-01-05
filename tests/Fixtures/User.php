@@ -2,12 +2,12 @@
 
 namespace Laravel\Jetstream\Tests\Fixtures;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\User as BaseUser;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends BaseUser
 {
     use HasApiTokens, HasTeams, HasProfilePhoto;
 
