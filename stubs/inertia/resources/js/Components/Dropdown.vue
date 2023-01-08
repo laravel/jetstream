@@ -6,9 +6,9 @@ const props = defineProps({
         type: String,
         default: 'right',
     },
-    width: {
+    widthClass: {
         type: String,
-        default: '48',
+        default: 'w-48',
     },
     contentClasses: {
         type: Array,
@@ -26,12 +26,6 @@ const closeOnEscape = (e) => {
 
 onMounted(() => document.addEventListener('keydown', closeOnEscape));
 onUnmounted(() => document.removeEventListener('keydown', closeOnEscape));
-
-const widthClass = computed(() => {
-    return {
-        '48': 'w-48',
-    }[props.width.toString()];
-});
 
 const alignmentClasses = computed(() => {
     if (props.align === 'left') {
@@ -66,7 +60,7 @@ const alignmentClasses = computed(() => {
             <div
                 v-show="open"
                 class="absolute z-50 mt-2 rounded-md shadow-lg"
-                :class="[widthClass, alignmentClasses]"
+                :class="[props.widthClass, alignmentClasses]"
                 style="display: none;"
                 @click="open = false"
             >
