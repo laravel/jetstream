@@ -27,8 +27,6 @@ abstract class OrchestraTestCase extends TestCase
 
     protected function defineEnvironment($app)
     {
-        $app['migrator']->path(__DIR__.'/../database/migrations');
-
         $app['config']->set('database.default', 'testbench');
 
         $app['config']->set('database.connections.testbench', [
@@ -36,6 +34,12 @@ abstract class OrchestraTestCase extends TestCase
             'database' => ':memory:',
             'prefix'   => '',
         ]);
+    }
+
+    protected function defineDatabaseMigrations()
+    {
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../vendor/laravel/fortify/database/migrations');
     }
 
     protected function defineHasTeamEnvironment($app)
