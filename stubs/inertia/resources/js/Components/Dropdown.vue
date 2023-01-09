@@ -6,7 +6,7 @@ const props = defineProps({
         type: String,
         default: 'right',
     },
-    widthClass: {
+    dropdownClasses: {
         type: String,
         default: 'w-48',
     },
@@ -60,7 +60,7 @@ const alignmentClasses = computed(() => {
             <div
                 v-show="open"
                 class="absolute z-50 mt-2 rounded-md shadow-lg"
-                :class="[props.widthClass, alignmentClasses]"
+                :class="[alignmentClasses, props.dropdownClasses]"
                 style="display: none;"
                 @click="open = false"
             >
