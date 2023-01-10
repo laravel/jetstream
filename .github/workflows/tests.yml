@@ -67,7 +67,7 @@ jobs:
 
       - name: Setup Laravel
         run: |
-          composer create-project laravel/laravel:dev-10.x .
+          composer create-project laravel/laravel:10.x-dev .
           composer require laravel/jetstream:* --no-interaction --no-update
           composer config repositories.jetstream '{"type": "path", "url": "jetstream"}' --file composer.json
 
