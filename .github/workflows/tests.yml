@@ -17,10 +17,10 @@ jobs:
       fail-fast: true
       matrix:
         php: ['8.0', 8.1, 8.2]
-        laravel: [9, l10-dev]
+        laravel: [9, 10.x-dev]
         exclude:
           - php: '8.0'
-            laravel: l10-dev
+            laravel: 10.x-dev
 
     name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }}
 
