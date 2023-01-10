@@ -1,6 +1,13 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.14.0...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.14.1...2.x)
+
+## [v2.14.1](https://github.com/laravel/jetstream/compare/v2.14.0...v2.14.1) - 2023-01-10
+
+### Fixed
+
+- Fixes publishing jetstream-inertia-auth-pages, that was referencing an old stub path by @juse-less in https://github.com/laravel/jetstream/pull/1210
+- Prevent `MissingAttributeException` by @jessarcher in https://github.com/laravel/jetstream/pull/1213
 
 ## [v2.14.0](https://github.com/laravel/jetstream/compare/v2.13.1...v2.14.0) - 2023-01-03
 
