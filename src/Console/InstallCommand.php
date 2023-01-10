@@ -319,7 +319,7 @@ EOF;
     protected function installInertiaStack()
     {
         // Install Inertia...
-        if ($this->requireComposerPackages('inertiajs/inertia-laravel:^0.6.5', 'tightenco/ziggy:^1.0')) {
+        if (! $this->requireComposerPackages('inertiajs/inertia-laravel:^0.6.5', 'tightenco/ziggy:^1.0')) {
             return false;
         }
 
