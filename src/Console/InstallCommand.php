@@ -82,9 +82,13 @@ class InstallCommand extends Command
 
         // Install Stack...
         if ($this->argument('stack') === 'livewire') {
-            $this->installLivewireStack();
+            if (! $this->installLivewireStack()) {
+                return 1;
+            }
         } elseif ($this->argument('stack') === 'inertia') {
-            $this->installInertiaStack();
+            if (! $this->installInertiaStack()) {
+                return 1;
+            }
         }
 
         // Tests...
@@ -128,12 +132,14 @@ class InstallCommand extends Command
     /**
      * Install the Livewire stack into the application.
      *
-     * @return void
+     * @return bool
      */
     protected function installLivewireStack()
     {
         // Install Livewire...
-        $this->requireComposerPackages('livewire/livewire:^2.5');
+        if (! $this->requireComposerPackages('livewire/livewire:^2.5')) {
+            return false;
+        }
 
         // Sanctum...
         (new Process([$this->phpBinary(), 'artisan', 'vendor:publish', '--provider=Laravel\Sanctum\SanctumServiceProvider', '--force'], base_path()))
@@ -306,12 +312,14 @@ EOF;
     /**
      * Install the Inertia stack into the application.
      *
-     * @return void
+     * @return bool
      */
     protected function installInertiaStack()
     {
         // Install Inertia...
-        $this->requireComposerPackages('inertiajs/inertia-laravel:^0.6.5', 'tightenco/ziggy:^1.0');
+        if ($this->requireComposerPackages('inertiajs/inertia-laravel:^0.6.5', 'tightenco/ziggy:^1.0')) {
+            return false;
+        }
 
         // Install NPM packages...
         $this->updateNodePackages(function ($packages) {
@@ -619,7 +627,7 @@ EOF;
      * Installs the given Composer Packages into the application.
      *
      * @param  mixed  $packages
-     * @return void
+     * @return bool
      */
     protected function requireComposerPackages($packages)
     {
@@ -634,7 +642,7 @@ EOF;
             is_array($packages) ? $packages : func_get_args()
         );
 
-        (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))
+        return ! (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))
             ->setTimeout(null)
             ->run(function ($type, $output) {
                 $this->output->write($output);
