@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Http\Livewire\UpdateTeamNameForm;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -14,6 +15,12 @@ class UpdateTeamNameTest extends TestCase
 
     public function test_team_names_can_be_updated(): void
     {
+        if (! Features::hasTeamFeatures()) {
+            $this->markTestSkipped('Team support is not enabled.');
+
+            return;
+        }
+
         $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
         Livewire::test(UpdateTeamNameForm::class, ['team' => $user->currentTeam])
