@@ -69,7 +69,7 @@ const confirmLeavingTeam = () => {
 };
 
 const leaveTeam = () => {
-    leaveTeamForm.delete(route('team-members.destroy', [props.team, usePage().props.value.user]));
+    leaveTeamForm.delete(route('team-members.destroy', [props.team, usePage().props.user]));
 };
 
 const confirmTeamMemberRemoval = (teamMember) => {
