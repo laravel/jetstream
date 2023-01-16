@@ -17,7 +17,10 @@ jobs:
       fail-fast: true
       matrix:
         php: ['8.0', 8.1, 8.2]
-        laravel: [9.*]
+        laravel: [9, 10]
+        exclude:
+          - php: '8.0'
+            laravel: 10
 
     name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }}
 
@@ -36,7 +39,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "illuminate/contracts=${{ matrix.laravel }}" --dev --no-update
+          composer require "illuminate/contracts=^${{ matrix.laravel }}" --dev --no-update
           composer update --prefer-dist --no-interaction --no-progress
 
       - name: Execute tests
@@ -56,7 +59,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.1
+          php-version: 8.2
           extensions: dom, curl, libxml, mbstring, zip
           ini-values: error_reporting=E_ALL
           tools: composer:v2
@@ -64,7 +67,7 @@ jobs:
 
       - name: Setup Laravel
         run: |
-          composer create-project laravel/laravel:^9 .
+          composer create-project laravel/laravel:10.x-dev .
           composer require laravel/jetstream:* --no-interaction --no-update
           composer config repositories.jetstream '{"type": "path", "url": "jetstream"}' --file composer.json
 

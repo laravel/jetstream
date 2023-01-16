@@ -82,16 +82,22 @@ class InstallCommand extends Command
 
         // Install Stack...
         if ($this->argument('stack') === 'livewire') {
-            $this->installLivewireStack();
+            if (! $this->installLivewireStack()) {
+                return 1;
+            }
         } elseif ($this->argument('stack') === 'inertia') {
-            $this->installInertiaStack();
+            if (! $this->installInertiaStack()) {
+                return 1;
+            }
         }
 
         // Tests...
         $stubs = $this->getTestStubsPath();
 
         if ($this->option('pest')) {
-            $this->requireComposerDevPackages('pestphp/pest:^1.16', 'pestphp/pest-plugin-laravel:^1.1');
+            if ($this->requireComposerDevPackages('pestphp/pest:^1.16', 'pestphp/pest-plugin-laravel:^1.1')) {
+                return 1;
+            }
 
             copy($stubs.'/Pest.php', base_path('tests/Pest.php'));
             copy($stubs.'/ExampleTest.php', base_path('tests/Feature/ExampleTest.php'));
@@ -128,12 +134,14 @@ class InstallCommand extends Command
     /**
      * Install the Livewire stack into the application.
      *
-     * @return void
+     * @return bool
      */
     protected function installLivewireStack()
     {
         // Install Livewire...
-        $this->requireComposerPackages('livewire/livewire:^2.5');
+        if (! $this->requireComposerPackages('livewire/livewire:^2.11')) {
+            return false;
+        }
 
         // Sanctum...
         (new Process([$this->phpBinary(), 'artisan', 'vendor:publish', '--provider=Laravel\Sanctum\SanctumServiceProvider', '--force'], base_path()))
@@ -252,6 +260,8 @@ class InstallCommand extends Command
 
         $this->line('');
         $this->components->info('Livewire scaffolding installed successfully.');
+
+        return true;
     }
 
     /**
@@ -306,12 +316,14 @@ EOF;
     /**
      * Install the Inertia stack into the application.
      *
-     * @return void
+     * @return bool
      */
     protected function installInertiaStack()
     {
         // Install Inertia...
-        $this->requireComposerPackages('inertiajs/inertia-laravel:^0.6.3', 'tightenco/ziggy:^1.0');
+        if (! $this->requireComposerPackages('inertiajs/inertia-laravel:^0.6.5', 'tightenco/ziggy:^1.0')) {
+            return false;
+        }
 
         // Install NPM packages...
         $this->updateNodePackages(function ($packages) {
@@ -448,6 +460,8 @@ EOF;
 
         $this->line('');
         $this->components->info('Inertia scaffolding installed successfully.');
+
+        return true;
     }
 
     /**
@@ -619,7 +633,7 @@ EOF;
      * Installs the given Composer Packages into the application.
      *
      * @param  mixed  $packages
-     * @return void
+     * @return bool
      */
     protected function requireComposerPackages($packages)
     {
@@ -634,7 +648,7 @@ EOF;
             is_array($packages) ? $packages : func_get_args()
         );
 
-        (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))
+        return ! (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))
             ->setTimeout(null)
             ->run(function ($type, $output) {
                 $this->output->write($output);
@@ -645,7 +659,7 @@ EOF;
      * Install the given Composer Packages as "dev" dependencies.
      *
      * @param  mixed  $packages
-     * @return void
+     * @return bool
      */
     protected function requireComposerDevPackages($packages)
     {
@@ -660,7 +674,7 @@ EOF;
             is_array($packages) ? $packages : func_get_args()
         );
 
-        (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))
+        return ! (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))
             ->setTimeout(null)
             ->run(function ($type, $output) {
                 $this->output->write($output);
