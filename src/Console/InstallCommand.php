@@ -260,6 +260,8 @@ class InstallCommand extends Command
 
         $this->line('');
         $this->components->info('Livewire scaffolding installed successfully.');
+
+        return true;
     }
 
     /**
@@ -458,6 +460,8 @@ EOF;
 
         $this->line('');
         $this->components->info('Inertia scaffolding installed successfully.');
+
+        return true;
     }
 
     /**
