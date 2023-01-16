@@ -139,7 +139,7 @@ class InstallCommand extends Command
     protected function installLivewireStack()
     {
         // Install Livewire...
-        if (! $this->requireComposerPackages('livewire/livewire:^2.5')) {
+        if (! $this->requireComposerPackages('livewire/livewire:^2.11')) {
             return false;
         }
 
