@@ -263,6 +263,9 @@ class InstallCommand extends Command
                 ->in(resource_path('views'))
                 ->name('*.blade.php')
                 ->notName('welcome.blade.php')
+                ->append((new Finder)
+                    ->in(resource_path('views/vendor/jetstream/components'))
+                    ->name('welcome.blade.php'))
             );
         }
 
@@ -435,7 +438,7 @@ EOF;
             $this->removeDarkClasses((new Finder)
                 ->in(resource_path('js'))
                 ->name('*.vue')
-                ->notName('Welcome.vue')
+                ->notPath('Pages/Welcome.vue')
             );
         }
 
