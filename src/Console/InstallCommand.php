@@ -575,7 +575,6 @@ EOF;
 
         copy(__DIR__.'/../../stubs/inertia/resources/js/ssr.js', resource_path('js/ssr.js'));
         $this->replaceInFile("input: 'resources/js/app.js',", "input: 'resources/js/app.js',".PHP_EOL."            ssr: 'resources/js/ssr.js',", base_path('vite.config.js'));
-        $this->replaceInFile('});', '    ssr: {'.PHP_EOL."        noExternal: ['@inertiajs/vue3/server'],".PHP_EOL.'    },'.PHP_EOL.'});', base_path('vite.config.js'));
 
         copy(__DIR__.'/../../stubs/inertia/app/Http/Middleware/HandleInertiaRequests.php', app_path('Http/Middleware/HandleInertiaRequests.php'));
 
