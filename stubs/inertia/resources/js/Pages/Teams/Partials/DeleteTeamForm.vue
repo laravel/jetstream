@@ -11,7 +11,7 @@ const props = defineProps({
 });
 
 const confirmingTeamDeletion = ref(false);
-const form = useForm();
+const form = useForm({});
 
 const confirmTeamDeletion = () => {
     confirmingTeamDeletion.value = true;

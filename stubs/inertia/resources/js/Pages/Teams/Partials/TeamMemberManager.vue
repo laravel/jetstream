@@ -29,8 +29,8 @@ const updateRoleForm = useForm({
     role: null,
 });
 
-const leaveTeamForm = useForm();
-const removeTeamMemberForm = useForm();
+const leaveTeamForm = useForm({});
+const removeTeamMemberForm = useForm({});
 
 const currentlyManagingRole = ref(false);
 const managingRoleFor = ref(null);
