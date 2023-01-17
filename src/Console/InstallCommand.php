@@ -262,7 +262,7 @@ class InstallCommand extends Command
             $this->removeDarkClasses((new Finder)
                 ->in(resource_path('views'))
                 ->name('*.blade.php')
-                ->notName('welcome.blade.php')
+                ->filter(fn ($file) => $file->getPathname() !== resource_path('views/welcome.blade.php'))
             );
         }
 
@@ -435,7 +435,7 @@ EOF;
             $this->removeDarkClasses((new Finder)
                 ->in(resource_path('js'))
                 ->name('*.vue')
-                ->notName('Welcome.vue')
+                ->notPath('Pages/Welcome.vue')
             );
         }
 
