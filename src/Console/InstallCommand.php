@@ -262,10 +262,7 @@ class InstallCommand extends Command
             $this->removeDarkClasses((new Finder)
                 ->in(resource_path('views'))
                 ->name('*.blade.php')
-                ->notName('welcome.blade.php')
-                ->append((new Finder)
-                    ->in(resource_path('views/vendor/jetstream/components'))
-                    ->name('welcome.blade.php'))
+                ->filter(fn ($file) => $file->getPathname() !== resource_path('views/welcome.blade.php'))
             );
         }
 
