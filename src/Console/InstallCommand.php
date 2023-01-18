@@ -754,19 +754,6 @@ EOF;
     }
 
     /**
-     * Remove Tailwind dark classes from the given files.
-     *
-     * @param  \Symfony\Component\Finder\Finder  $finder
-     * @return void
-     */
-    protected function removeDarkClasses(Finder $finder)
-    {
-        foreach ($finder as $file) {
-            file_put_contents($file->getPathname(), preg_replace('/\sdark:[^\s"\']+/', '', $file->getContents()));
-        }
-    }
-
-    /**
      * Get the path to the appropriate PHP binary.
      *
      * @return string
@@ -797,5 +784,18 @@ EOF;
         $process->run(function ($type, $line) {
             $this->output->write('    '.$line);
         });
+    }
+
+    /**
+     * Remove Tailwind dark classes from the given files.
+     *
+     * @param  \Symfony\Component\Finder\Finder  $finder
+     * @return void
+     */
+    protected function removeDarkClasses(Finder $finder)
+    {
+        foreach ($finder as $file) {
+            file_put_contents($file->getPathname(), preg_replace('/\sdark:[^\s"\']+/', '', $file->getContents()));
+        }
     }
 }
