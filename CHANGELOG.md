@@ -1,13 +1,19 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.15.0...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.16.0...2.x)
+
+## [v2.16.0](https://github.com/laravel/jetstream/compare/v2.15.0...v2.16.0) - 2023-01-18
+
+### Changed
+
+- Reverted dark mode support in https://github.com/laravel/jetstream/pull/1228
 
 ## [v2.15.0](https://github.com/laravel/jetstream/compare/v2.14.1...v2.15.0) - 2023-01-18
 
 ### Added
 
 - Laravel v10 Support by @driesvints in https://github.com/laravel/jetstream/pull/1216
-- Opt-in dark mode support  by @fotrino in https://github.com/laravel/jetstream/pull/1209
+- Opt-in dark mode support by @fotrino in https://github.com/laravel/jetstream/pull/1209
 - Inertia v1 by @jessarcher in https://github.com/laravel/jetstream/pull/1219
 
 ## [v2.14.1](https://github.com/laravel/jetstream/compare/v2.14.0...v2.14.1) - 2023-01-10
