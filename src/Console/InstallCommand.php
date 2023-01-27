@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use RuntimeException;
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
 
@@ -18,6 +19,7 @@ class InstallCommand extends Command
      * @var string
      */
     protected $signature = 'jetstream:install {stack : The development stack that should be installed (inertia,livewire)}
+                                              {--dark : Indicate that dark mode support should be installed}
                                               {--teams : Indicates if team support should be installed}
                                               {--api : Indicates if API support should be installed}
                                               {--verification : Indicates if email verification support should be installed}
@@ -258,6 +260,14 @@ class InstallCommand extends Command
             $this->installLivewireTeamStack();
         }
 
+        if (! $this->option('dark')) {
+            $this->removeDarkClasses((new Finder)
+                ->in(resource_path('views'))
+                ->name('*.blade.php')
+                ->filter(fn ($file) => $file->getPathname() !== resource_path('views/welcome.blade.php'))
+            );
+        }
+
         if (file_exists(base_path('pnpm-lock.yaml'))) {
             $this->runCommands(['pnpm install', 'pnpm run build']);
         } elseif (file_exists(base_path('yarn.lock'))) {
@@ -454,6 +464,14 @@ EOF;
 
         if ($this->option('ssr')) {
             $this->installInertiaSsrStack();
+        }
+
+        if (! $this->option('dark')) {
+            $this->removeDarkClasses((new Finder)
+                ->in(resource_path('js'))
+                ->name('*.vue')
+                ->notPath('Pages/Welcome.vue')
+            );
         }
 
         if (file_exists(base_path('pnpm-lock.yaml'))) {
@@ -735,6 +753,19 @@ EOF;
     protected function replaceInFile($search, $replace, $path)
     {
         file_put_contents($path, str_replace($search, $replace, file_get_contents($path)));
+    }
+
+    /**
+     * Remove Tailwind dark classes from the given files.
+     *
+     * @param  \Symfony\Component\Finder\Finder  $finder
+     * @return void
+     */
+    protected function removeDarkClasses(Finder $finder)
+    {
+        foreach ($finder as $file) {
+            file_put_contents($file->getPathname(), preg_replace('/\sdark:[^\s"\']+/', '', $file->getContents()));
+        }
     }
 
     /**
