@@ -1,12 +1,12 @@
 <script setup>
 import { ref } from 'vue';
-import { Head, useForm } from '@inertiajs/inertia-vue3';
-import JetAuthenticationCard from '@/Components/AuthenticationCard.vue';
-import JetAuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
-import JetButton from '@/Components/Button.vue';
-import JetInput from '@/Components/Input.vue';
-import JetLabel from '@/Components/Label.vue';
-import JetValidationErrors from '@/Components/ValidationErrors.vue';
+import { Head, useForm } from '@inertiajs/vue3';
+import AuthenticationCard from '@/Components/AuthenticationCard.vue';
+import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
+import InputError from '@/Components/InputError.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import TextInput from '@/Components/TextInput.vue';
 
 const form = useForm({
     password: '',
@@ -28,21 +28,19 @@ const submit = () => {
 <template>
     <Head title="Secure Area" />
 
-    <JetAuthenticationCard>
+    <AuthenticationCard>
         <template #logo>
-            <JetAuthenticationCardLogo />
+            <AuthenticationCardLogo />
         </template>
 
         <div class="mb-4 text-sm text-gray-600">
             This is a secure area of the application. Please confirm your password before continuing.
         </div>
 
-        <JetValidationErrors class="mb-4" />
-
         <form @submit.prevent="submit">
             <div>
-                <JetLabel for="password" value="Password" />
-                <JetInput
+                <InputLabel for="password" value="Password" />
+                <TextInput
                     id="password"
                     ref="passwordInput"
                     v-model="form.password"
@@ -52,13 +50,14 @@ const submit = () => {
                     autocomplete="current-password"
                     autofocus
                 />
+                <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
             <div class="flex justify-end mt-4">
-                <JetButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Confirm
-                </JetButton>
+                </PrimaryButton>
             </div>
         </form>
-    </JetAuthenticationCard>
+    </AuthenticationCard>
 </template>

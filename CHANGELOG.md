@@ -1,6 +1,118 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.11.0...master)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.16.0...master)
+
+## [v2.16.0](https://github.com/laravel/jetstream/compare/v2.15.0...v2.16.0) - 2023-01-18
+
+### Changed
+
+- Reverted dark mode support in https://github.com/laravel/jetstream/pull/1228
+
+## [v2.15.0](https://github.com/laravel/jetstream/compare/v2.14.1...v2.15.0) - 2023-01-18
+
+### Added
+
+- Laravel v10 Support by @driesvints in https://github.com/laravel/jetstream/pull/1216
+- Opt-in dark mode support by @fotrino in https://github.com/laravel/jetstream/pull/1209
+- Inertia v1 by @jessarcher in https://github.com/laravel/jetstream/pull/1219
+
+## [v2.14.1](https://github.com/laravel/jetstream/compare/v2.14.0...v2.14.1) - 2023-01-10
+
+### Fixed
+
+- Fixes publishing jetstream-inertia-auth-pages, that was referencing an old stub path by @juse-less in https://github.com/laravel/jetstream/pull/1210
+- Prevent `MissingAttributeException` by @jessarcher in https://github.com/laravel/jetstream/pull/1213
+
+## [v2.14.0](https://github.com/laravel/jetstream/compare/v2.13.1...v2.14.0) - 2023-01-03
+
+### Changed
+
+- Update to Heroicons v2 by @driesvints in https://github.com/laravel/jetstream/pull/1200
+- Uses PHP Native Type Declarations 🐘  by @nunomaduro in https://github.com/laravel/jetstream/pull/1175
+
+### Fixed
+
+- Add focus styling for settings dropdown trigger button by @thema-d in https://github.com/laravel/jetstream/pull/1206
+- Fix the order of the v-if attribute. by @milorojas in https://github.com/laravel/jetstream/pull/1208
+
+## [v2.13.1](https://github.com/laravel/jetstream/compare/v2.13.0...v2.13.1) - 2022-12-16
+
+### Fixed
+
+- Fixed and issue causing overflow in ApiTokenManager page on mobile devices. by @ravibpatel in https://github.com/laravel/jetstream/pull/1198
+
+## [v2.13.0](https://github.com/laravel/jetstream/compare/v2.12.6...v2.13.0) - 2022-12-16
+
+### Added
+
+- Vite 4 support by @timacdonald in https://github.com/laravel/jetstream/pull/1193
+
+### Changed
+
+- Redirect to the fortify configured logout redirect after deleting user by @riasvdv in https://github.com/laravel/jetstream/pull/1191
+
+## [v2.12.6](https://github.com/laravel/jetstream/compare/v2.12.5...v2.12.6) - 2022-12-05
+
+### Changed
+
+- Use x-Focus Alpine JS plugin for Livewire stack modal by @x7ryan in https://github.com/laravel/jetstream/pull/1186
+- Use Default NPM Package Manager of User if Lock File Exists In Base Path by @andrewdwallo in https://github.com/laravel/jetstream/pull/1187
+
+## [v2.12.5](https://github.com/laravel/jetstream/compare/v2.12.4...v2.12.5) - 2022-10-26
+
+### Fixed
+
+- Fix dev preloading by @timacdonald in https://github.com/laravel/jetstream/pull/1171
+
+## [v2.12.4](https://github.com/laravel/jetstream/compare/v2.12.3...v2.12.4) - 2022-10-25
+
+### Changed
+
+- Register: add required to terms checkbox by @A-w-x in https://github.com/laravel/jetstream/pull/1158
+- Added missing localization in logout-other-browser-sessions-form.blade.php by @JakyeRU in https://github.com/laravel/jetstream/pull/1163
+- Vite preloading by @timacdonald in https://github.com/laravel/jetstream/pull/1169
+
+## [v2.12.3](https://github.com/laravel/jetstream/compare/v2.12.2...v2.12.3) - 2022-09-26
+
+### Changed
+
+- Pass additional props to the teams create view. by @clcarver in https://github.com/laravel/jetstream/pull/1149
+
+## [v2.12.2](https://github.com/laravel/jetstream/compare/v2.12.1...v2.12.2) - 2022-09-15
+
+### Fixed
+
+- Fix test by @driesvints in https://github.com/laravel/jetstream/pull/1138
+
+## [v2.12.1](https://github.com/laravel/jetstream/compare/v2.12.0...v2.12.1) - 2022-09-12
+
+### Changed
+
+- Call `storage:link` on install by @jessarcher in https://github.com/laravel/jetstream/pull/1133
+- Remove redundant remove-member link by @devnll in https://github.com/laravel/jetstream/pull/1135
+
+## [v2.12.0](https://github.com/laravel/jetstream/compare/v2.11.2...v2.12.0) - 2022-09-06
+
+### Changed
+
+- Remove "Jet" component prefix by @jessarcher in https://github.com/laravel/jetstream/pull/1117
+
+## [v2.11.2](https://github.com/laravel/jetstream/compare/v2.11.1...v2.11.2) - 2022-08-22
+
+### Changed
+
+- Check current model supports HasTeams before trying to access team information. by @crynobone in https://github.com/laravel/jetstream/pull/1120
+- Update Register.vue by @JoshSalway in https://github.com/laravel/jetstream/pull/1127
+
+## [v2.11.1](https://github.com/laravel/jetstream/compare/v2.11.0...v2.11.1) - 2022-08-17
+
+### Changed
+
+- Style improvements by @jessarcher in https://github.com/laravel/jetstream/pull/1116
+- Install NPM dependencies and build assets by @jessarcher in https://github.com/laravel/jetstream/pull/1119
+- Update inertiajs/inertia-laravel to ^0.6.3 by @ashleyshenton in https://github.com/laravel/jetstream/pull/1122
+- Display validation errors alongside fields in the Inertia stack by @jessarcher in https://github.com/laravel/jetstream/pull/1123
+>>>>>>> 2.x
 
 ## [v2.11.0](https://github.com/laravel/jetstream/compare/v2.10.3...v2.11.0) - 2022-08-08
 

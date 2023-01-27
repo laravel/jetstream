@@ -54,7 +54,7 @@ class TeamController extends Controller
     {
         Gate::authorize('create', Jetstream::newTeamModel());
 
-        return Inertia::render('Teams/Create');
+        return Jetstream::inertia()->render($request, 'Teams/Create');
     }
 
     /**

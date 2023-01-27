@@ -16,20 +16,20 @@
     "require": {
         "php": "^8.0.2",
         "ext-json": "*",
-        "illuminate/console": "^9.21",
-        "illuminate/support": "^9.21",
+        "illuminate/console": "^9.21|^10.0",
+        "illuminate/support": "^9.21|^10.0",
         "jenssegers/agent": "^2.6",
-        "laravel/fortify": "^1.12"
+        "laravel/fortify": "^1.15"
     },
     "require-dev": {
-        "inertiajs/inertia-laravel": "^0.5.2",
+        "inertiajs/inertia-laravel": "^0.6.5",
         "laravel/sanctum": "^3.0",
         "mockery/mockery": "^1.0",
-        "orchestra/testbench": "^7.0",
+        "orchestra/testbench": "^7.0|^8.0",
         "phpunit/phpunit": "^9.3"
     },
     "conflict": {
-        "laravel/framework": "<9.19.0"
+        "laravel/framework": "<9.37.0"
     },
     "autoload": {
         "psr-4": {

@@ -2,14 +2,14 @@
 
 namespace Laravel\Jetstream\Tests\Fixtures;
 
-use App\Models\User as BaseUser;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends BaseUser
+class Admin extends Authenticatable
 {
-    use HasApiTokens, HasTeams, HasProfilePhoto;
+    use HasApiTokens, HasProfilePhoto;
 
     /**
      * The attributes that aren't mass assignable.

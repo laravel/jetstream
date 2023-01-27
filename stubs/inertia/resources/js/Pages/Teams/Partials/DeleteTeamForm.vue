@@ -1,17 +1,17 @@
 <script setup>
 import { ref } from 'vue';
-import { useForm } from '@inertiajs/inertia-vue3';
-import JetActionSection from '@/Components/ActionSection.vue';
-import JetConfirmationModal from '@/Components/ConfirmationModal.vue';
-import JetDangerButton from '@/Components/DangerButton.vue';
-import JetSecondaryButton from '@/Components/SecondaryButton.vue';
+import { useForm } from '@inertiajs/vue3';
+import ActionSection from '@/Components/ActionSection.vue';
+import ConfirmationModal from '@/Components/ConfirmationModal.vue';
+import DangerButton from '@/Components/DangerButton.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
 
 const props = defineProps({
     team: Object,
 });
 
 const confirmingTeamDeletion = ref(false);
-const form = useForm();
+const form = useForm({});
 
 const confirmTeamDeletion = () => {
     confirmingTeamDeletion.value = true;
@@ -25,7 +25,7 @@ const deleteTeam = () => {
 </script>
 
 <template>
-    <JetActionSection>
+    <ActionSection>
         <template #title>
             Delete Team
         </template>
@@ -40,13 +40,13 @@ const deleteTeam = () => {
             </div>
 
             <div class="mt-5">
-                <JetDangerButton @click="confirmTeamDeletion">
+                <DangerButton @click="confirmTeamDeletion">
                     Delete Team
-                </JetDangerButton>
+                </DangerButton>
             </div>
 
             <!-- Delete Team Confirmation Modal -->
-            <JetConfirmationModal :show="confirmingTeamDeletion" @close="confirmingTeamDeletion = false">
+            <ConfirmationModal :show="confirmingTeamDeletion" @close="confirmingTeamDeletion = false">
                 <template #title>
                     Delete Team
                 </template>
@@ -56,20 +56,20 @@ const deleteTeam = () => {
                 </template>
 
                 <template #footer>
-                    <JetSecondaryButton @click="confirmingTeamDeletion = false">
+                    <SecondaryButton @click="confirmingTeamDeletion = false">
                         Cancel
-                    </JetSecondaryButton>
+                    </SecondaryButton>
 
-                    <JetDangerButton
+                    <DangerButton
                         class="ml-3"
                         :class="{ 'opacity-25': form.processing }"
                         :disabled="form.processing"
                         @click="deleteTeam"
                     >
                         Delete Team
-                    </JetDangerButton>
+                    </DangerButton>
                 </template>
-            </JetConfirmationModal>
+            </ConfirmationModal>
         </template>
-    </JetActionSection>
+    </ActionSection>
 </template>
