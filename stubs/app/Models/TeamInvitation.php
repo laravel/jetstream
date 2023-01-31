@@ -11,7 +11,7 @@ class TeamInvitation extends JetstreamTeamInvitation
     /**
      * The attributes that are mass assignable.
      *
-     * @var string<int, string>
+     * @var array<int, string>
      */
     protected $fillable = [
         'email',
