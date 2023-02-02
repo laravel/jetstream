@@ -72,6 +72,7 @@
 
                 <div class="mt-4" x-data="{}" x-on:confirming-logout-other-browser-sessions.window="setTimeout(() => $refs.password.focus(), 250)">
                     <x-jet-input type="password" class="mt-1 block w-3/4"
+                                autocomplete="current-password"
                                 placeholder="{{ __('Password') }}"
                                 x-ref="password"
                                 wire:model.defer="password"
