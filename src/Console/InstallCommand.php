@@ -95,7 +95,7 @@ class InstallCommand extends Command
         $stubs = $this->getTestStubsPath();
 
         if ($this->option('pest')) {
-            if (! $this->requireComposerDevPackages('pestphp/pest:^1.16', 'pestphp/pest-plugin-laravel:^1.1')) {
+            if (! $this->requireComposerDevPackages('pestphp/pest:^1.22', 'pestphp/pest-plugin-laravel:^1.4')) {
                 return 1;
             }
 
