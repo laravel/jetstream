@@ -123,9 +123,10 @@ trait HasTeams
             return false;
         }
 
-        return $this->ownsTeam($team) || $this->teams->contains(function ($t) use ($team) {
-            return $t->id === $team->id;
-        });
+        return $this->ownsTeam($team) || Jetstream::newMembershipModel()
+                ->where('user_id', $this->id)
+                ->where('team_id', $team->id)
+                ->exists();
     }
 
     /**
@@ -144,8 +145,9 @@ trait HasTeams
             return;
         }
 
-        $role = $team->users
-            ->where('id', $this->id)
+        $role = Jetstream::newMembershipModel()
+            ->where('user_id', $this->id)
+            ->where('team_id', $team->id)
             ->first()
             ->membership
             ->role;
@@ -166,9 +168,12 @@ trait HasTeams
             return true;
         }
 
-        return $this->belongsToTeam($team) && optional(Jetstream::findRole($team->users->where(
-            'id', $this->id
-        )->first()->membership->role))->key === $role;
+        return $this->belongsToTeam($team) && optional(Jetstream::findRole(Jetstream::newMembershipModel()
+                ->where('user_id', $this->id)
+                ->where('team_id', $team->id)
+                ->first()
+                ->membership
+                ->role))->key === $role;
     }
 
     /**

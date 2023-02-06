@@ -345,6 +345,18 @@ class Jetstream
     }
 
     /**
+     * Get a new instance of the membership model.
+     *
+     * @return mixed
+     */
+    public static function newMembershipModel()
+    {
+        $model = static::membershipModel();
+
+        return new $model;
+    }
+
+    /**
      * Get the name of the team invitation model used by the application.
      *
      * @return string
