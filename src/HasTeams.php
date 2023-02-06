@@ -148,9 +148,8 @@ trait HasTeams
         $role = optional(Jetstream::newMembershipModel()
             ->where('user_id', $this->id)
             ->where('team_id', $team->id)
-            ->first()
-            ->membership
-            ->role);
+            ->first())
+            ->role;
 
         return $role ? Jetstream::findRole($role) : null;
     }
@@ -172,7 +171,6 @@ trait HasTeams
                 ->where('user_id', $this->id)
                 ->where('team_id', $team->id)
                 ->first()
-                ->membership
                 ->role))->key === $role;
     }
 
