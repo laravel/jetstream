@@ -555,7 +555,7 @@ EOF;
         copy(__DIR__.'/../../stubs/inertia/app/Http/Middleware/HandleInertiaRequests.php', app_path('Http/Middleware/HandleInertiaRequests.php'));
 
         $this->replaceInFile('vite build', 'vite build && vite build --ssr', base_path('package.json'));
-        $this->replaceInFile('/node_modules', '/bootstrap/ssr'.PHP_EOL.'/node_modules', base_path('.gitignore'));
+        $this->replaceInFile('/node_modules', '/.laravel/ssr'.PHP_EOL.'/node_modules', base_path('.gitignore'));
     }
 
     /**
