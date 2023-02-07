@@ -1,6 +1,15 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.16.0...2.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v2.16.1...2.x)
+
+## [v2.16.1](https://github.com/laravel/jetstream/compare/v2.16.0...v2.16.1) - 2023-02-03
+
+### Fixed
+
+- Fix typo by @nhedger in https://github.com/laravel/jetstream/pull/1230
+- Fixed not redirecting after deleting the user by @JakyeRU in https://github.com/laravel/jetstream/pull/1236
+- Use autocomplete for all fields for password manager compatibility by @lukearmstrong in https://github.com/laravel/jetstream/pull/1239
+- Fixes Pest stubs files by @nunomaduro in https://github.com/laravel/jetstream/pull/1240
 
 ## [v2.16.0](https://github.com/laravel/jetstream/compare/v2.15.0...v2.16.0) - 2023-01-18
 
