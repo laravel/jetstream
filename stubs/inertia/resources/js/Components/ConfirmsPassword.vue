@@ -91,6 +91,7 @@ const closeModal = () => {
                         type="password"
                         class="mt-1 block w-3/4"
                         placeholder="Password"
+                        autocomplete="current-password"
                         @keyup.enter="confirmPassword"
                     />
 
