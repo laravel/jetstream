@@ -79,7 +79,7 @@ jobs:
       - name: Install Jetstream
         run: |
           composer update "laravel/jetstream" --prefer-dist --no-interaction --no-progress -W
-          php artisan jetstream:install ${{ matrix.stack }} --teams --api --verification
+          php artisan jetstream:install ${{ matrix.stack }} --teams --api --verification --pest
 
       - name: Install NPM dependencies
         run: npm i
@@ -88,7 +88,7 @@ jobs:
         run: npm run build
 
       - name: Execute tests
-        run: vendor/bin/phpunit
+        run: vendor/bin/pest
         env:
           DB_CONNECTION: sqlite
           DB_DATABASE: ":memory:"

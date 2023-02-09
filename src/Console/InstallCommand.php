@@ -95,7 +95,9 @@ class InstallCommand extends Command
         $stubs = $this->getTestStubsPath();
 
         if ($this->option('pest')) {
-            if (! $this->requireComposerDevPackages('pestphp/pest:^1.22', 'pestphp/pest-plugin-laravel:^1.4')) {
+            $this->removeComposerDevPackages(['nunomaduro/collision', 'phpunit/phpunit']);
+
+            if (! $this->requireComposerDevPackages(['nunomaduro/collision:^6.4', 'pestphp/pest:^1.22', 'pestphp/pest-plugin-laravel:^1.2'])) {
                 return 1;
             }
 
@@ -642,6 +644,32 @@ EOF;
             ->run(function ($type, $output) {
                 $this->output->write($output);
             });
+    }
+
+    /**
+     * Removes the given Composer Packages as "dev" dependencies.
+     *
+     * @param  mixed  $packages
+     * @return bool
+     */
+    protected function removeComposerDevPackages($packages)
+    {
+        $composer = $this->option('composer');
+
+        if ($composer !== 'global') {
+            $command = [$this->phpBinary(), $composer, 'remove', '--dev'];
+        }
+
+        $command = array_merge(
+            $command ?? ['composer', 'remove', '--dev'],
+            is_array($packages) ? $packages : func_get_args()
+        );
+
+        return (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))
+            ->setTimeout(null)
+            ->run(function ($type, $output) {
+                $this->output->write($output);
+            }) === 0;
     }
 
     /**
