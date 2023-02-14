@@ -69,7 +69,7 @@ jobs:
       - name: Setup Laravel
         run: |
           composer create-project laravel/laravel:^${{ matrix.laravel }} .
-          composer require laravel/jetstream:* --no-interaction --no-update
+          composer require laravel/jetstream:@dev --no-interaction --no-update
           composer config repositories.jetstream '{"type": "path", "url": "jetstream"}' --file composer.json
 
       - name: Checkout code
