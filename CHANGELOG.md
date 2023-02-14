@@ -1,6 +1,6 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v3.0.0...3.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v3.0.0...master)
 
 ## [v3.0.0](https://github.com/laravel/jetstream/compare/v2.16.1...v3.0.0) - 2023-02-14
 
