@@ -52,8 +52,9 @@ jobs:
       fail-fast: true
       matrix:
         stack: [inertia, livewire]
+        laravel: [10]
 
-    name: Test Stubs (${{ matrix.stack }})
+    name: Test Stubs - Laravel ${{ matrix.laravel }} - ${{ matrix.stack }}
 
     steps:
       - name: Setup PHP
@@ -67,7 +68,7 @@ jobs:
 
       - name: Setup Laravel
         run: |
-          composer create-project laravel/laravel:10.x-dev .
+          composer create-project laravel/laravel:^${{ matrix.laravel }} .
           composer require laravel/jetstream:* --no-interaction --no-update
           composer config repositories.jetstream '{"type": "path", "url": "jetstream"}' --file composer.json
 
