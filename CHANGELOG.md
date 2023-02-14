@@ -1,6 +1,22 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v2.16.1...master)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v3.0.0...3.x)
+
+## [v3.0.0](https://github.com/laravel/jetstream/compare/v2.16.1...v3.0.0) - 2023-02-14
+
+### Added
+
+- Dark Mode by @fotrino in https://github.com/laravel/jetstream/pull/1234
+- New welcome by @jessarcher in https://github.com/laravel/jetstream/pull/1247
+
+### Changed
+
+- Use custom TeamInvitation model in TeamInvitationController by @ManuelLeiner in https://github.com/laravel/jetstream/pull/897
+- Adding Storage Path support to the HasProfilePhoto Trait by @baminc in https://github.com/laravel/jetstream/pull/999
+- Change $page.user to $page.auth.user by @SamuelMwangiW in https://github.com/laravel/jetstream/pull/1073
+- Copy Blade files on installation by @jessarcher in https://github.com/laravel/jetstream/pull/1118
+- Type Error in PHPdoc by @marvinrabe in https://github.com/laravel/jetstream/pull/1235
+- Convert Profile Photo URL attribute to newer syntax by @jrd-lewis in https://github.com/laravel/jetstream/pull/1237
 
 ## [v2.16.1](https://github.com/laravel/jetstream/compare/v2.16.0...v2.16.1) - 2023-02-03
 
@@ -121,7 +137,8 @@
 - Install NPM dependencies and build assets by @jessarcher in https://github.com/laravel/jetstream/pull/1119
 - Update inertiajs/inertia-laravel to ^0.6.3 by @ashleyshenton in https://github.com/laravel/jetstream/pull/1122
 - Display validation errors alongside fields in the Inertia stack by @jessarcher in https://github.com/laravel/jetstream/pull/1123
->>>>>>> 2.x
+
+> > > > > > > 2.x
 
 ## [v2.11.0](https://github.com/laravel/jetstream/compare/v2.10.3...v2.11.0) - 2022-08-08
 
