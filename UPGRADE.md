@@ -3,7 +3,7 @@
 ## Upgrading from Jetstream 2.x to Jetstream 3.x
 
 > **Note**
-> This upgrade guide only discusses upgrading to Jetstream 3.x. Upgrading your Laravel, Tailwind, Livewire or Inertia installations is outside the scope of this documentation and is not strictly required in order to use Jetstream 3.x. Please consult the upgrade guides for those libraries for information on their upgrade process.
+> This upgrade guide only discusses upgrading to Jetstream 3.x. Upgrading your Laravel, Tailwind, Livewire, or Inertia installations is outside the scope of this documentation and is not strictly required in order to use Jetstream 3.x. Please consult the upgrade guides for those libraries for information on their upgrade process.
 
 - [Changes Common To Both Stacks](#jetstream-3x-changes-common-to-both-stacks)
 - [Livewire Stack Upgrade Guide](#jetstream-3x-livewire-stack)
@@ -13,7 +13,7 @@
 
 #### Publish Views
 
-Before upgrading, you should publish all of Jetstream's views using the `vendor:publish` Artisan command. You may skip this step if you have already published Jetstream's views:
+**Before upgrading**, you should publish all of Jetstream's views using the `vendor:publish` Artisan command. You may skip this step if you have already published Jetstream's views:
 
     php artisan vendor:publish --tag=jetstream-views
 
@@ -44,7 +44,7 @@ Next, you should remove all references to the `jet-` prefix from your views. For
 + @props(['team', 'component' => 'dropdown-link'])
 ```
 
-Finally, you may need to clear your view cache:
+Finally, clear your view cache:
 
     php artisan view:clear
 
@@ -54,11 +54,11 @@ Finally, you may need to clear your view cache:
 
 You should move the published Jetstream mail views from `resources/views/vendor/jetstream/mail` to `resources/views/emails`, taking care to note the new directory name of `emails` instead of `mail`.
 
-You may also need to clear your view cache:
+Next, clear your view cache:
 
     php artisan view:clear
 
-#### Accessing the Authenticated User
+#### Accessing The Authenticated User
 
 You should change all references of `$page.props.user` to `$page.props.auth.user` and `usePage().props.user` to `usePage().props.auth.user`.
 
