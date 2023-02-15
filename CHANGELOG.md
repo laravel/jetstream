@@ -1,6 +1,11 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v3.0.0...3.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v3.0.1...3.x)
+
+## [v3.0.1](https://github.com/laravel/jetstream/compare/v3.0.0...v3.0.1) - 2023-02-15
+
+- Fixes incorrect classes for Laracasts link on Welcome.vue component by @AaronLil in https://github.com/laravel/jetstream/pull/1252
+- Removed loadViewsFrom by @sirikkoster in https://github.com/laravel/jetstream/pull/1259
 
 ## [v3.0.0](https://github.com/laravel/jetstream/compare/v2.16.1...v3.0.0) - 2023-02-14
 
