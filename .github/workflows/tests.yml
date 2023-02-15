@@ -52,9 +52,13 @@ jobs:
       fail-fast: true
       matrix:
         stack: [inertia, livewire]
-        laravel: [10]
+        laravel: [9, 10]
+        php: [ '8.0', 8.1, 8.2 ]
+        exclude:
+          - php: '8.0'
+            laravel: 10
 
-    name: Test Stubs - Laravel ${{ matrix.laravel }} - ${{ matrix.stack }}
+    name: Test Stubs - PHP ${{ matrix.php }} – Laravel ${{ matrix.laravel }} - ${{ matrix.stack }}
 
     steps:
       - name: Setup PHP
