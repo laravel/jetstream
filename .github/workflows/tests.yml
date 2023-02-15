@@ -51,14 +51,15 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        stack: [inertia, livewire]
-        laravel: [9, 10]
         php: [ '8.0', 8.1, 8.2 ]
+        laravel: [ 9, 10 ]
+        stack: [ inertia, livewire ]
+        tester: [ phpunit, pest ]
         exclude:
           - php: '8.0'
             laravel: 10
 
-    name: Test Stubs - PHP ${{ matrix.php }} – Laravel ${{ matrix.laravel }} - ${{ matrix.stack }}
+    name: Test Stubs - PHP ${{matrix.php }} – Laravel ${{ matrix.laravel }} - ${{ matrix.stack }} – ${{ metrics.tester }}
 
     steps:
       - name: Setup PHP
@@ -82,9 +83,16 @@ jobs:
           path: 'jetstream'
 
       - name: Install Jetstream
+        if: ${{ matrix.test == 'pest' }}
         run: |
           composer update "laravel/jetstream" --prefer-dist --no-interaction --no-progress -W
           php artisan jetstream:install ${{ matrix.stack }} --teams --api --verification --pest
+
+      - name: Install Jetstream
+        if: ${{ matrix.test == 'phpunit' }}
+        run: |
+          composer update "laravel/jetstream" --prefer-dist --no-interaction --no-progress -W
+          php artisan jetstream:install ${{ matrix.stack }} --teams --api --verification
 
       - name: Install NPM dependencies
         run: npm i
@@ -93,7 +101,7 @@ jobs:
         run: npm run build
 
       - name: Execute tests
-        run: vendor/bin/pest
+        run: vendor/bin/${{ matrix.tester }}
         env:
           DB_CONNECTION: sqlite
           DB_DATABASE: ":memory:"
