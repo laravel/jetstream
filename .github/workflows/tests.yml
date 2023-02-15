@@ -83,13 +83,13 @@ jobs:
           path: 'jetstream'
 
       - name: Install Jetstream
-        if: ${{ matrix.test == 'pest' }}
+        if: ${{ matrix.tester == 'pest' }}
         run: |
           composer update "laravel/jetstream" --prefer-dist --no-interaction --no-progress -W
           php artisan jetstream:install ${{ matrix.stack }} --teams --api --verification --pest
 
       - name: Install Jetstream
-        if: ${{ matrix.test == 'phpunit' }}
+        if: ${{ matrix.tester == 'phpunit' }}
         run: |
           composer update "laravel/jetstream" --prefer-dist --no-interaction --no-progress -W
           php artisan jetstream:install ${{ matrix.stack }} --teams --api --verification
