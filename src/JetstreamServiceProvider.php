@@ -67,7 +67,6 @@ class JetstreamServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
         Fortify::viewPrefix('auth.');
 
         $this->configurePublishing();
