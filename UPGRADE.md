@@ -2,7 +2,8 @@
 
 ## Upgrading from Jetstream 2.x to Jetstream 3.x
 
-> **Note:** This upgrade guide only discusses upgrading to Jetstream 3.x. Upgrading your Laravel, Tailwind, Livewire or Inertia installations is outside the scope of this documentation and is not strictly required in order to use Jetstream 3.x. Please consult the upgrade guides for those libraries for information on their upgrade process.
+> **Note**
+> This upgrade guide only discusses upgrading to Jetstream 3.x. Upgrading your Laravel, Tailwind, Livewire or Inertia installations is outside the scope of this documentation and is not strictly required in order to use Jetstream 3.x. Please consult the upgrade guides for those libraries for information on their upgrade process.
 
 - [Changes Common To Both Stacks](#jetstream-3x-changes-common-to-both-stacks)
 - [Livewire Stack Upgrade Guide](#jetstream-3x-livewire-stack)
@@ -76,7 +77,8 @@ For example:
 
 ## Upgrading From Jetstream 1.x To Jetstream 2.x
 
-> **Note:** This upgrade guide only discusses upgrading to Jetstream 2.x. Upgrading your Tailwind, Livewire or Inertia installations is outside the scope of this documentation and is not strictly required in order to use Jetstream 2.x. Please consult the upgrade guides for those libraries for information on their upgrade process.
+> **Note**
+> This upgrade guide only discusses upgrading to Jetstream 2.x. Upgrading your Tailwind, Livewire or Inertia installations is outside the scope of this documentation and is not strictly required in order to use Jetstream 2.x. Please consult the upgrade guides for those libraries for information on their upgrade process.
 
 - [Changes Common To Both Stacks](#changes-common-to-both-stacks)
 - [Livewire Stack Upgrade Guide](#livewire-stack)
