@@ -59,7 +59,7 @@ jobs:
           - php: '8.0'
             laravel: 10
 
-    name: Test Stubs - PHP ${{matrix.php }} – Laravel ${{ matrix.laravel }} - ${{ matrix.stack }} – ${{ metrics.tester }}
+    name: Test Stubs - PHP ${{matrix.php }} – Laravel ${{ matrix.laravel }} - ${{ matrix.stack }} – ${{ matrix.tester }}
 
     steps:
       - name: Setup PHP
