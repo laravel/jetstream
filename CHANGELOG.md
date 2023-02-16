@@ -7,7 +7,7 @@
 - Fixes incorrect classes for Laracasts link on Welcome.vue component by @AaronLil in https://github.com/laravel/jetstream/pull/1252
 - Removed loadViewsFrom by @sirikkoster in https://github.com/laravel/jetstream/pull/1259
 
-## [v3.0.0](https://github.com/laravel/jetstream/compare/v2.16.1...v3.0.0) - 2023-02-14
+## [v3.0.0](https://github.com/laravel/jetstream/compare/v2.16.2...v3.0.0) - 2023-02-14
 
 ### Added
 
@@ -22,6 +22,12 @@
 - Copy Blade files on installation by @jessarcher in https://github.com/laravel/jetstream/pull/1118
 - Type Error in PHPdoc by @marvinrabe in https://github.com/laravel/jetstream/pull/1235
 - Convert Profile Photo URL attribute to newer syntax by @jrd-lewis in https://github.com/laravel/jetstream/pull/1237
+
+## [v2.16.2](https://github.com/laravel/jetstream/compare/v2.16.1...v2.16.2) - 2023-02-14
+
+### Fixed
+
+- Fixes Laravel 10 `--pest` installation by @nunomaduro in https://github.com/laravel/jetstream/pull/1246
 
 ## [v2.16.1](https://github.com/laravel/jetstream/compare/v2.16.0...v2.16.1) - 2023-02-03
 
