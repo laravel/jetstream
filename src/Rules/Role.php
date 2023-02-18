@@ -2,30 +2,19 @@
 
 namespace Laravel\Jetstream\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Laravel\Jetstream\Jetstream;
 
-class Role implements Rule
+class Role implements ValidationRule
 {
     /**
-     * Determine if the validation rule passes.
-     *
-     * @param  string  $attribute
-     * @param  mixed  $value
-     * @return bool
+     * Run the validation rule.
      */
-    public function passes($attribute, $value)
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        return in_array($value, array_keys(Jetstream::$roles));
-    }
-
-    /**
-     * Get the validation error message.
-     *
-     * @return string
-     */
-    public function message()
-    {
-        return __('The :attribute must be a valid role.');
+        if (! in_array($value, array_keys(Jetstream::$roles))) {
+            $fail('The :attribute must be a valid role.')->translate();
+        }
     }
 }
