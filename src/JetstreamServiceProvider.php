@@ -25,6 +25,7 @@ use Laravel\Jetstream\Http\Livewire\UpdateProfileInformationForm;
 use Laravel\Jetstream\Http\Livewire\UpdateTeamNameForm;
 use Laravel\Jetstream\Http\Middleware\ShareInertiaData;
 use Livewire\Livewire;
+use Livewire\Redirector;
 
 class JetstreamServiceProvider extends ServiceProvider
 {
@@ -86,6 +87,22 @@ class JetstreamServiceProvider extends ServiceProvider
                 'banner' => $message,
             ]);
         });
+
+        if (config('jetstream.stack') === 'livewire') {
+            Redirector::macro('banner', function ($message) {
+                return $this->with('flash', [
+                    'bannerStyle' => 'success',
+                    'banner' => $message,
+                ]);
+            });
+
+            Redirector::macro('dangerBanner', function ($message) {
+                return $this->with('flash', [
+                    'bannerStyle' => 'danger',
+                    'banner' => $message,
+                ]);
+            });
+        }
 
         if (config('jetstream.stack') === 'inertia') {
             $this->bootInertia();
