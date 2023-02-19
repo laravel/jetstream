@@ -88,7 +88,7 @@ class JetstreamServiceProvider extends ServiceProvider
             ]);
         });
 
-        if (config('jetstream.stack') === 'livewire') {
+        if (config('jetstream.stack') === 'livewire' && class_exists(Livewire::class)) {
             Redirector::macro('banner', function ($message) {
                 return $this->with('flash', [
                     'bannerStyle' => 'success',
