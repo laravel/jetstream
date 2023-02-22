@@ -2,10 +2,13 @@
 
 namespace Laravel\Jetstream\Http\Controllers\Inertia;
 
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Gate;
-use Inertia\Inertia;
+use Inertia\Response;
 use Laravel\Jetstream\Actions\ValidateTeamDeletion;
 use Laravel\Jetstream\Contracts\CreatesTeams;
 use Laravel\Jetstream\Contracts\DeletesTeams;
@@ -19,18 +22,14 @@ class TeamController extends Controller
 
     /**
      * Show the team management screen.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $teamId
-     * @return \Inertia\Response
      */
-    public function show(Request $request, $teamId)
+    public function show(Request $request, int $teamId): Response
     {
         $team = Jetstream::newTeamModel()->findOrFail($teamId);
 
         Gate::authorize('view', $team);
 
-        return Jetstream::inertia()->render($request, 'Teams/Show', [
+        return Jetstream::inertia()?->render($request, 'Teams/Show', [
             'team' => $team->load('owner', 'users', 'teamInvitations'),
             'availableRoles' => array_values(Jetstream::$roles),
             'availablePermissions' => Jetstream::$permissions,
@@ -46,24 +45,18 @@ class TeamController extends Controller
 
     /**
      * Show the team creation screen.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Inertia\Response
      */
-    public function create(Request $request)
+    public function create(Request $request): Response
     {
         Gate::authorize('create', Jetstream::newTeamModel());
 
-        return Jetstream::inertia()->render($request, 'Teams/Create');
+        return Jetstream::inertia()?->render($request, 'Teams/Create');
     }
 
     /**
      * Create a new team.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse|Response|Redirector
     {
         $creator = app(CreatesTeams::class);
 
@@ -74,12 +67,8 @@ class TeamController extends Controller
 
     /**
      * Update the given team's name.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $teamId
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $teamId)
+    public function update(Request $request, int $teamId): RedirectResponse
     {
         $team = Jetstream::newTeamModel()->findOrFail($teamId);
 
@@ -91,11 +80,9 @@ class TeamController extends Controller
     /**
      * Delete the given team.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $teamId
-     * @return \Illuminate\Http\RedirectResponse
+     * @throws AuthorizationException
      */
-    public function destroy(Request $request, $teamId)
+    public function destroy(Request $request, int $teamId): RedirectResponse|Response|Redirector
     {
         $team = Jetstream::newTeamModel()->findOrFail($teamId);
 

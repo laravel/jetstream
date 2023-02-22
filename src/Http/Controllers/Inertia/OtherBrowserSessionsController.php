@@ -2,7 +2,9 @@
 
 namespace Laravel\Jetstream\Http\Controllers\Inertia;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Auth\StatefulGuard;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
@@ -14,11 +16,9 @@ class OtherBrowserSessionsController extends Controller
     /**
      * Log out from other browser sessions.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Contracts\Auth\StatefulGuard  $guard
-     * @return \Illuminate\Http\RedirectResponse
+     * @throws AuthenticationException
      */
-    public function destroy(Request $request, StatefulGuard $guard)
+    public function destroy(Request $request, StatefulGuard $guard): RedirectResponse
     {
         $confirmed = app(ConfirmPassword::class)(
             $guard, $request->user(), $request->password
@@ -39,11 +39,8 @@ class OtherBrowserSessionsController extends Controller
 
     /**
      * Delete the other browser session records from storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return void
      */
-    protected function deleteOtherSessionRecords(Request $request)
+    protected function deleteOtherSessionRecords(Request $request): void
     {
         if (config('session.driver') !== 'database') {
             return;

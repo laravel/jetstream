@@ -5,10 +5,10 @@ namespace Laravel\Jetstream\Http\Controllers\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Inertia\Response;
 use Jenssegers\Agent\Agent;
-use Laravel\Fortify\Actions\DisableTwoFactorAuthentication;
 use Laravel\Fortify\Features;
 use Laravel\Jetstream\Jetstream;
 
@@ -18,15 +18,12 @@ class UserProfileController extends Controller
 
     /**
      * Show the general profile settings screen.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Inertia\Response
      */
-    public function show(Request $request)
+    public function show(Request $request): Response
     {
         $this->validateTwoFactorAuthenticationState($request);
 
-        return Jetstream::inertia()->render($request, 'Profile/Show', [
+        return Jetstream::inertia()?->render($request, 'Profile/Show', [
             'confirmsTwoFactorAuthentication' => Features::optionEnabled(Features::twoFactorAuthentication(), 'confirm'),
             'sessions' => $this->sessions($request)->all(),
         ]);
@@ -34,11 +31,8 @@ class UserProfileController extends Controller
 
     /**
      * Get the current sessions.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Support\Collection
      */
-    public function sessions(Request $request)
+    public function sessions(Request $request): Collection
     {
         if (config('session.driver') !== 'database') {
             return collect();
@@ -67,11 +61,8 @@ class UserProfileController extends Controller
 
     /**
      * Create a new agent instance from the given session.
-     *
-     * @param  mixed  $session
-     * @return \Jenssegers\Agent\Agent
      */
-    protected function createAgent($session)
+    protected function createAgent(mixed $session): Agent
     {
         return tap(new Agent, function ($agent) use ($session) {
             $agent->setUserAgent($session->user_agent);

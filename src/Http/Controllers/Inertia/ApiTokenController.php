@@ -2,21 +2,20 @@
 
 namespace Laravel\Jetstream\Http\Controllers\Inertia;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Inertia\Response;
 use Laravel\Jetstream\Jetstream;
 
 class ApiTokenController extends Controller
 {
     /**
      * Show the user API token screen.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Inertia\Response
      */
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
-        return Jetstream::inertia()->render($request, 'API/Index', [
+        return Jetstream::inertia()?->render($request, 'API/Index', [
             'tokens' => $request->user()->tokens->map(function ($token) {
                 return $token->toArray() + [
                     'last_used_ago' => optional($token->last_used_at)->diffForHumans(),
@@ -29,11 +28,8 @@ class ApiTokenController extends Controller
 
     /**
      * Create a new API token.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -51,12 +47,8 @@ class ApiTokenController extends Controller
 
     /**
      * Update the given API token's permissions.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $tokenId
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $tokenId)
+    public function update(Request $request, string $tokenId): RedirectResponse
     {
         $request->validate([
             'permissions' => 'array',
@@ -74,12 +66,8 @@ class ApiTokenController extends Controller
 
     /**
      * Delete the given API token.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $tokenId
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Request $request, $tokenId)
+    public function destroy(Request $request, string $tokenId): RedirectResponse
     {
         $request->user()->tokens()->where('id', $tokenId)->first()->delete();
 

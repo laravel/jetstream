@@ -2,6 +2,7 @@
 
 namespace Laravel\Jetstream\Http\Controllers\Inertia;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Laravel\Jetstream\Actions\UpdateTeamMemberRole;
@@ -15,12 +16,8 @@ class TeamMemberController extends Controller
 {
     /**
      * Add a new team member to a team.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $teamId
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request, $teamId)
+    public function store(Request $request, int $teamId): RedirectResponse
     {
         $team = Jetstream::newTeamModel()->findOrFail($teamId);
 
@@ -45,13 +42,8 @@ class TeamMemberController extends Controller
 
     /**
      * Update the given team member's role.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $teamId
-     * @param  int  $userId
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $teamId, $userId)
+    public function update(Request $request, int $teamId, int $userId): RedirectResponse
     {
         app(UpdateTeamMemberRole::class)->update(
             $request->user(),
@@ -65,13 +57,8 @@ class TeamMemberController extends Controller
 
     /**
      * Remove the given user from the given team.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $teamId
-     * @param  int  $userId
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Request $request, $teamId, $userId)
+    public function destroy(Request $request, int $teamId, int $userId): RedirectResponse
     {
         $team = Jetstream::newTeamModel()->findOrFail($teamId);
 

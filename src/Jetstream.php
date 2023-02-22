@@ -57,7 +57,7 @@ class Jetstream
     /**
      * The Inertia manager instance.
      */
-    public static InertiaManager $inertiaManager;
+    public static ?InertiaManager $inertiaManager = null;
 
     /**
      * Determine if Jetstream has registered roles.
@@ -344,7 +344,7 @@ class Jetstream
     /**
      * Manage Jetstream's Inertia settings.
      */
-    public static function inertia(): InertiaManager
+    public static function inertia(): ?InertiaManager
     {
         if (is_null(static::$inertiaManager)) {
             static::$inertiaManager = new InertiaManager;
