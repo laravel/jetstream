@@ -2,90 +2,75 @@
 
 namespace Laravel\Jetstream\Http\Livewire;
 
+use App\Models\User;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\View\View;
 use Laravel\Jetstream\Jetstream;
+use Laravel\Sanctum\NewAccessToken;
+use Laravel\Sanctum\PersonalAccessToken;
 use Livewire\Component;
 
 class ApiTokenManager extends Component
 {
     /**
      * The create API token form state.
-     *
-     * @var array
      */
-    public $createApiTokenForm = [
+    public array $createApiTokenForm = [
         'name' => '',
         'permissions' => [],
     ];
 
     /**
      * Indicates if the plain text token is being displayed to the user.
-     *
-     * @var bool
      */
-    public $displayingToken = false;
+    public bool $displayingToken = false;
 
     /**
      * The plain text token value.
-     *
-     * @var string|null
      */
-    public $plainTextToken;
+    public string|null $plainTextToken;
 
     /**
      * Indicates if the user is currently managing an API token's permissions.
-     *
-     * @var bool
      */
-    public $managingApiTokenPermissions = false;
+    public bool $managingApiTokenPermissions = false;
 
     /**
      * The token that is currently having its permissions managed.
-     *
-     * @var \Laravel\Sanctum\PersonalAccessToken|null
      */
-    public $managingPermissionsFor;
+    public PersonalAccessToken|null $managingPermissionsFor;
 
     /**
      * The update API token form state.
-     *
-     * @var array
      */
-    public $updateApiTokenForm = [
+    public array $updateApiTokenForm = [
         'permissions' => [],
     ];
 
     /**
      * Indicates if the application is confirming if an API token should be deleted.
-     *
-     * @var bool
      */
-    public $confirmingApiTokenDeletion = false;
+    public bool $confirmingApiTokenDeletion = false;
 
     /**
      * The ID of the API token being deleted.
-     *
-     * @var int
      */
-    public $apiTokenIdBeingDeleted;
+    public int $apiTokenIdBeingDeleted;
 
     /**
      * Mount the component.
-     *
-     * @return void
      */
-    public function mount()
+    public function mount(): void
     {
         $this->createApiTokenForm['permissions'] = Jetstream::$defaultPermissions;
     }
 
     /**
      * Create a new API token.
-     *
-     * @return void
      */
-    public function createApiToken()
+    public function createApiToken(): void
     {
         $this->resetErrorBag();
 
@@ -108,11 +93,8 @@ class ApiTokenManager extends Component
 
     /**
      * Display the token value to the user.
-     *
-     * @param  \Laravel\Sanctum\NewAccessToken  $token
-     * @return void
      */
-    protected function displayTokenValue($token)
+    protected function displayTokenValue(NewAccessToken $token): void
     {
         $this->displayingToken = true;
 
@@ -123,11 +105,8 @@ class ApiTokenManager extends Component
 
     /**
      * Allow the given token's permissions to be managed.
-     *
-     * @param  int  $tokenId
-     * @return void
      */
-    public function manageApiTokenPermissions($tokenId)
+    public function manageApiTokenPermissions(int $tokenId): void
     {
         $this->managingApiTokenPermissions = true;
 
@@ -140,10 +119,8 @@ class ApiTokenManager extends Component
 
     /**
      * Update the API token's permissions.
-     *
-     * @return void
      */
-    public function updateApiToken()
+    public function updateApiToken(): void
     {
         $this->managingPermissionsFor->forceFill([
             'abilities' => Jetstream::validPermissions($this->updateApiTokenForm['permissions']),
@@ -154,11 +131,8 @@ class ApiTokenManager extends Component
 
     /**
      * Confirm that the given API token should be deleted.
-     *
-     * @param  int  $tokenId
-     * @return void
      */
-    public function confirmApiTokenDeletion($tokenId)
+    public function confirmApiTokenDeletion(int $tokenId): void
     {
         $this->confirmingApiTokenDeletion = true;
 
@@ -167,10 +141,8 @@ class ApiTokenManager extends Component
 
     /**
      * Delete the API token.
-     *
-     * @return void
      */
-    public function deleteApiToken()
+    public function deleteApiToken(): void
     {
         $this->user->tokens()->where('id', $this->apiTokenIdBeingDeleted)->first()->delete();
 
@@ -183,20 +155,16 @@ class ApiTokenManager extends Component
 
     /**
      * Get the current user of the application.
-     *
-     * @return mixed
      */
-    public function getUserProperty()
+    public function getUserProperty(): User|Authenticatable|null
     {
         return Auth::user();
     }
 
     /**
      * Render the component.
-     *
-     * @return \Illuminate\View\View
      */
-    public function render()
+    public function render(): View
     {
         return view('api.api-token-manager');
     }

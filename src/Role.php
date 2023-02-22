@@ -8,38 +8,27 @@ class Role implements JsonSerializable
 {
     /**
      * The key identifier for the role.
-     *
-     * @var string
      */
-    public $key;
+    public string $key;
 
     /**
      * The name of the role.
-     *
-     * @var string
      */
-    public $name;
+    public string $name;
 
     /**
      * The role's permissions.
-     *
-     * @var array
      */
-    public $permissions;
+    public array $permissions;
 
     /**
      * The role's description.
-     *
-     * @var string
      */
-    public $description;
+    public string $description;
 
     /**
      * Create a new role instance.
      *
-     * @param  string  $key
-     * @param  string  $name
-     * @param  array  $permissions
      * @return void
      */
     public function __construct(string $key, string $name, array $permissions)
@@ -51,11 +40,8 @@ class Role implements JsonSerializable
 
     /**
      * Describe the role.
-     *
-     * @param  string  $description
-     * @return $this
      */
-    public function description(string $description)
+    public function description(string $description): static
     {
         $this->description = $description;
 
@@ -64,11 +50,9 @@ class Role implements JsonSerializable
 
     /**
      * Get the JSON serializable representation of the object.
-     *
-     * @return array
      */
     #[\ReturnTypeWillChange]
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'key' => $this->key,

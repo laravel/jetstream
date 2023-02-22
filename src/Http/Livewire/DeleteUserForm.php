@@ -3,10 +3,13 @@
 namespace Laravel\Jetstream\Http\Livewire;
 
 use Illuminate\Contracts\Auth\StatefulGuard;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 use Laravel\Jetstream\Contracts\DeletesUsers;
 use Livewire\Component;
 
@@ -14,24 +17,18 @@ class DeleteUserForm extends Component
 {
     /**
      * Indicates if user deletion is being confirmed.
-     *
-     * @var bool
      */
-    public $confirmingUserDeletion = false;
+    public bool $confirmingUserDeletion = false;
 
     /**
      * The user's current password.
-     *
-     * @var string
      */
-    public $password = '';
+    public string $password = '';
 
     /**
      * Confirm that the user would like to delete their account.
-     *
-     * @return void
      */
-    public function confirmUserDeletion()
+    public function confirmUserDeletion(): void
     {
         $this->resetErrorBag();
 
@@ -44,13 +41,8 @@ class DeleteUserForm extends Component
 
     /**
      * Delete the current user.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Laravel\Jetstream\Contracts\DeletesUsers  $deleter
-     * @param  \Illuminate\Contracts\Auth\StatefulGuard  $auth
-     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
-    public function deleteUser(Request $request, DeletesUsers $deleter, StatefulGuard $auth)
+    public function deleteUser(Request $request, DeletesUsers $deleter, StatefulGuard $auth): Redirector|RedirectResponse
     {
         $this->resetErrorBag();
 
@@ -60,7 +52,7 @@ class DeleteUserForm extends Component
             ]);
         }
 
-        $deleter->delete(Auth::user()->fresh());
+        $deleter->delete(Auth::user()?->fresh());
 
         $auth->logout();
 
@@ -74,10 +66,8 @@ class DeleteUserForm extends Component
 
     /**
      * Render the component.
-     *
-     * @return \Illuminate\View\View
      */
-    public function render()
+    public function render(): View
     {
         return view('profile.delete-user-form');
     }

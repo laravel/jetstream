@@ -4,16 +4,14 @@ namespace Laravel\Jetstream\Http\Controllers\Livewire;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\View\View;
 
 class UserProfileController extends Controller
 {
     /**
      * Show the user profile screen.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\View\View
      */
-    public function show(Request $request)
+    public function show(Request $request): View
     {
         return view('profile.show', [
             'request' => $request,

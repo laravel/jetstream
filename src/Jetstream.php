@@ -16,97 +16,69 @@ class Jetstream
 {
     /**
      * Indicates if Jetstream routes will be registered.
-     *
-     * @var bool
      */
-    public static $registersRoutes = true;
+    public static bool $registersRoutes = true;
 
     /**
      * The roles that are available to assign to users.
-     *
-     * @var array
      */
-    public static $roles = [];
+    public static array $roles = [];
 
     /**
      * The permissions that exist within the application.
-     *
-     * @var array
      */
-    public static $permissions = [];
+    public static array $permissions = [];
 
     /**
      * The default permissions that should be available to new entities.
-     *
-     * @var array
      */
-    public static $defaultPermissions = [];
+    public static array $defaultPermissions = [];
 
     /**
      * The user model that should be used by Jetstream.
-     *
-     * @var string
      */
-    public static $userModel = 'App\\Models\\User';
+    public static string $userModel = 'App\\Models\\User';
 
     /**
      * The team model that should be used by Jetstream.
-     *
-     * @var string
      */
-    public static $teamModel = 'App\\Models\\Team';
+    public static string $teamModel = 'App\\Models\\Team';
 
     /**
      * The membership model that should be used by Jetstream.
-     *
-     * @var string
      */
-    public static $membershipModel = 'App\\Models\\Membership';
+    public static string $membershipModel = 'App\\Models\\Membership';
 
     /**
      * The team invitation model that should be used by Jetstream.
-     *
-     * @var string
      */
-    public static $teamInvitationModel = 'App\\Models\\TeamInvitation';
+    public static string $teamInvitationModel = 'App\\Models\\TeamInvitation';
 
     /**
      * The Inertia manager instance.
-     *
-     * @var \Laravel\Jetstream\InertiaManager
      */
-    public static $inertiaManager;
+    public static InertiaManager $inertiaManager;
 
     /**
      * Determine if Jetstream has registered roles.
-     *
-     * @return bool
      */
-    public static function hasRoles()
+    public static function hasRoles(): bool
     {
         return count(static::$roles) > 0;
     }
 
     /**
      * Find the role with the given key.
-     *
-     * @param  string  $key
-     * @return \Laravel\Jetstream\Role
      */
-    public static function findRole(string $key)
+    public static function findRole(string $key): Role|null
     {
         return static::$roles[$key] ?? null;
     }
 
     /**
      * Define a role.
-     *
-     * @param  string  $key
-     * @param  string  $name
-     * @param  array  $permissions
-     * @return \Laravel\Jetstream\Role
      */
-    public static function role(string $key, string $name, array $permissions)
+    public static function role(string $key, string $name, array $permissions): Role
     {
         static::$permissions = collect(array_merge(static::$permissions, $permissions))
                                     ->unique()
@@ -121,21 +93,16 @@ class Jetstream
 
     /**
      * Determine if any permissions have been registered with Jetstream.
-     *
-     * @return bool
      */
-    public static function hasPermissions()
+    public static function hasPermissions(): bool
     {
         return count(static::$permissions) > 0;
     }
 
     /**
      * Define the available API token permissions.
-     *
-     * @param  array  $permissions
-     * @return static
      */
-    public static function permissions(array $permissions)
+    public static function permissions(array $permissions): static
     {
         static::$permissions = $permissions;
 
@@ -144,11 +111,8 @@ class Jetstream
 
     /**
      * Define the default permissions that should be available to new API tokens.
-     *
-     * @param  array  $permissions
-     * @return static
      */
-    public static function defaultApiTokenPermissions(array $permissions)
+    public static function defaultApiTokenPermissions(array $permissions): static
     {
         static::$defaultPermissions = $permissions;
 
@@ -157,52 +121,40 @@ class Jetstream
 
     /**
      * Return the permissions in the given list that are actually defined permissions for the application.
-     *
-     * @param  array  $permissions
-     * @return array
      */
-    public static function validPermissions(array $permissions)
+    public static function validPermissions(array $permissions): array
     {
         return array_values(array_intersect($permissions, static::$permissions));
     }
 
     /**
      * Determine if Jetstream is managing profile photos.
-     *
-     * @return bool
      */
-    public static function managesProfilePhotos()
+    public static function managesProfilePhotos(): bool
     {
         return Features::managesProfilePhotos();
     }
 
     /**
      * Determine if Jetstream is supporting API features.
-     *
-     * @return bool
      */
-    public static function hasApiFeatures()
+    public static function hasApiFeatures(): bool
     {
         return Features::hasApiFeatures();
     }
 
     /**
      * Determine if Jetstream is supporting team features.
-     *
-     * @return bool
      */
-    public static function hasTeamFeatures()
+    public static function hasTeamFeatures(): bool
     {
         return Features::hasTeamFeatures();
     }
 
     /**
      * Determine if a given user model utilizes the "HasTeams" trait.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model
-     * @return bool
      */
-    public static function userHasTeamFeatures($user)
+    public static function userHasTeamFeatures(Model $user): bool
     {
         return (array_key_exists(HasTeams::class, class_uses_recursive($user)) ||
                 method_exists($user, 'currentTeam')) &&
@@ -211,62 +163,48 @@ class Jetstream
 
     /**
      * Determine if the application is using the terms confirmation feature.
-     *
-     * @return bool
      */
-    public static function hasTermsAndPrivacyPolicyFeature()
+    public static function hasTermsAndPrivacyPolicyFeature(): bool
     {
         return Features::hasTermsAndPrivacyPolicyFeature();
     }
 
     /**
      * Determine if the application is using any account deletion features.
-     *
-     * @return bool
      */
-    public static function hasAccountDeletionFeatures()
+    public static function hasAccountDeletionFeatures(): bool
     {
         return Features::hasAccountDeletionFeatures();
     }
 
     /**
      * Find a user instance by the given ID.
-     *
-     * @param  int  $id
-     * @return mixed
      */
-    public static function findUserByIdOrFail($id)
+    public static function findUserByIdOrFail(int $id): mixed
     {
         return static::newUserModel()->where('id', $id)->firstOrFail();
     }
 
     /**
      * Find a user instance by the given email address or fail.
-     *
-     * @param  string  $email
-     * @return mixed
      */
-    public static function findUserByEmailOrFail(string $email)
+    public static function findUserByEmailOrFail(string $email): mixed
     {
         return static::newUserModel()->where('email', $email)->firstOrFail();
     }
 
     /**
      * Get the name of the user model used by the application.
-     *
-     * @return string
      */
-    public static function userModel()
+    public static function userModel(): string
     {
         return static::$userModel;
     }
 
     /**
      * Get a new instance of the user model.
-     *
-     * @return mixed
      */
-    public static function newUserModel()
+    public static function newUserModel(): mixed
     {
         $model = static::userModel();
 
@@ -275,11 +213,8 @@ class Jetstream
 
     /**
      * Specify the user model that should be used by Jetstream.
-     *
-     * @param  string  $model
-     * @return static
      */
-    public static function useUserModel(string $model)
+    public static function useUserModel(string $model): static
     {
         static::$userModel = $model;
 
@@ -288,20 +223,16 @@ class Jetstream
 
     /**
      * Get the name of the team model used by the application.
-     *
-     * @return string
      */
-    public static function teamModel()
+    public static function teamModel(): string
     {
         return static::$teamModel;
     }
 
     /**
      * Get a new instance of the team model.
-     *
-     * @return mixed
      */
-    public static function newTeamModel()
+    public static function newTeamModel(): mixed
     {
         $model = static::teamModel();
 
@@ -310,11 +241,8 @@ class Jetstream
 
     /**
      * Specify the team model that should be used by Jetstream.
-     *
-     * @param  string  $model
-     * @return static
      */
-    public static function useTeamModel(string $model)
+    public static function useTeamModel(string $model): static
     {
         static::$teamModel = $model;
 
@@ -323,21 +251,16 @@ class Jetstream
 
     /**
      * Get the name of the membership model used by the application.
-     *
-     * @return string
      */
-    public static function membershipModel()
+    public static function membershipModel(): string
     {
         return static::$membershipModel;
     }
 
     /**
      * Specify the membership model that should be used by Jetstream.
-     *
-     * @param  string  $model
-     * @return static
      */
-    public static function useMembershipModel(string $model)
+    public static function useMembershipModel(string $model): static
     {
         static::$membershipModel = $model;
 
@@ -346,21 +269,16 @@ class Jetstream
 
     /**
      * Get the name of the team invitation model used by the application.
-     *
-     * @return string
      */
-    public static function teamInvitationModel()
+    public static function teamInvitationModel(): string
     {
         return static::$teamInvitationModel;
     }
 
     /**
      * Specify the team invitation model that should be used by Jetstream.
-     *
-     * @param  string  $model
-     * @return static
      */
-    public static function useTeamInvitationModel(string $model)
+    public static function useTeamInvitationModel(string $model): static
     {
         static::$teamInvitationModel = $model;
 
@@ -369,87 +287,64 @@ class Jetstream
 
     /**
      * Register a class / callback that should be used to create teams.
-     *
-     * @param  string  $class
-     * @return void
      */
-    public static function createTeamsUsing(string $class)
+    public static function createTeamsUsing(string $class): void
     {
-        return app()->singleton(CreatesTeams::class, $class);
+        app()->singleton(CreatesTeams::class, $class);
     }
 
     /**
      * Register a class / callback that should be used to update team names.
-     *
-     * @param  string  $class
-     * @return void
      */
-    public static function updateTeamNamesUsing(string $class)
+    public static function updateTeamNamesUsing(string $class): void
     {
-        return app()->singleton(UpdatesTeamNames::class, $class);
+        app()->singleton(UpdatesTeamNames::class, $class);
     }
 
     /**
      * Register a class / callback that should be used to add team members.
-     *
-     * @param  string  $class
-     * @return void
      */
-    public static function addTeamMembersUsing(string $class)
+    public static function addTeamMembersUsing(string $class): void
     {
-        return app()->singleton(AddsTeamMembers::class, $class);
+        app()->singleton(AddsTeamMembers::class, $class);
     }
 
     /**
      * Register a class / callback that should be used to add team members.
-     *
-     * @param  string  $class
-     * @return void
      */
-    public static function inviteTeamMembersUsing(string $class)
+    public static function inviteTeamMembersUsing(string $class): void
     {
-        return app()->singleton(InvitesTeamMembers::class, $class);
+        app()->singleton(InvitesTeamMembers::class, $class);
     }
 
     /**
      * Register a class / callback that should be used to remove team members.
-     *
-     * @param  string  $class
-     * @return void
      */
-    public static function removeTeamMembersUsing(string $class)
+    public static function removeTeamMembersUsing(string $class): void
     {
-        return app()->singleton(RemovesTeamMembers::class, $class);
+        app()->singleton(RemovesTeamMembers::class, $class);
     }
 
     /**
      * Register a class / callback that should be used to delete teams.
-     *
-     * @param  string  $class
-     * @return void
      */
-    public static function deleteTeamsUsing(string $class)
+    public static function deleteTeamsUsing(string $class): void
     {
-        return app()->singleton(DeletesTeams::class, $class);
+        app()->singleton(DeletesTeams::class, $class);
     }
 
     /**
      * Register a class / callback that should be used to delete users.
-     *
-     * @param  string  $class
-     * @return void
      */
-    public static function deleteUsersUsing(string $class)
+    public static function deleteUsersUsing(string $class): void
     {
-        return app()->singleton(DeletesUsers::class, $class);
+        app()->singleton(DeletesUsers::class, $class);
     }
 
     /**
      * Manage Jetstream's Inertia settings.
-     *
-     * @return \Laravel\Jetstream\InertiaManager
      */
-    public static function inertia()
+    public static function inertia(): InertiaManager
     {
         if (is_null(static::$inertiaManager)) {
             static::$inertiaManager = new InertiaManager;
@@ -460,11 +355,8 @@ class Jetstream
 
     /**
      * Find the path to a localized Markdown resource.
-     *
-     * @param  string  $name
-     * @return string|null
      */
-    public static function localizedMarkdownPath($name)
+    public static function localizedMarkdownPath(string $name): string|null
     {
         $localName = preg_replace('#(\.md)$#i', '.'.app()->getLocale().'$1', $name);
 
@@ -478,10 +370,8 @@ class Jetstream
 
     /**
      * Configure Jetstream to not register its routes.
-     *
-     * @return static
      */
-    public static function ignoreRoutes()
+    public static function ignoreRoutes(): static
     {
         static::$registersRoutes = false;
 

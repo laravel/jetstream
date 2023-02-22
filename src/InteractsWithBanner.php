@@ -6,11 +6,8 @@ trait InteractsWithBanner
 {
     /**
      * Update the banner message.
-     *
-     * @param  string  $message
-     * @return void
      */
-    protected function banner($message)
+    protected function banner(string $message): void
     {
         $this->dispatchBrowserEvent('banner-message', [
             'style' => 'success',
@@ -19,12 +16,9 @@ trait InteractsWithBanner
     }
 
     /**
-     * Update the banner message with an danger / error message.
-     *
-     * @param  string  $message
-     * @return void
+     * Update the banner message with a danger / error message.
      */
-    protected function dangerBanner($message)
+    protected function dangerBanner(string $message): void
     {
         $this->dispatchBrowserEvent('banner-message', [
             'style' => 'danger',

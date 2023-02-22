@@ -5,17 +5,15 @@ namespace Laravel\Jetstream\Http\Controllers\Livewire;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 use Laravel\Jetstream\Jetstream;
 
 class TermsOfServiceController extends Controller
 {
     /**
      * Show the terms of service for the application.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\View\View
      */
-    public function show(Request $request)
+    public function show(Request $request): View
     {
         $termsFile = Jetstream::localizedMarkdownPath('terms.md');
 

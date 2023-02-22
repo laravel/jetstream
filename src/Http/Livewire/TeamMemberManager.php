@@ -2,71 +2,67 @@
 
 namespace Laravel\Jetstream\Http\Livewire;
 
+use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 use Laravel\Jetstream\Actions\UpdateTeamMemberRole;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
 use Laravel\Jetstream\Contracts\InvitesTeamMembers;
 use Laravel\Jetstream\Contracts\RemovesTeamMembers;
 use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Jetstream;
+use Laravel\Jetstream\RedirectsActions;
 use Laravel\Jetstream\Role;
 use Livewire\Component;
 
 class TeamMemberManager extends Component
 {
+    use RedirectsActions;
+
     /**
      * The team instance.
-     *
-     * @var mixed
      */
-    public $team;
+    public mixed $team;
 
     /**
      * Indicates if a user's role is currently being managed.
-     *
-     * @var bool
      */
-    public $currentlyManagingRole = false;
+    public bool $currentlyManagingRole = false;
 
     /**
      * The user that is having their role managed.
-     *
-     * @var mixed
      */
-    public $managingRoleFor;
+    public mixed $managingRoleFor;
 
     /**
      * The current role for the user that is having their role managed.
-     *
-     * @var string
      */
-    public $currentRole;
+    public string $currentRole;
 
     /**
      * Indicates if the application is confirming if a user wishes to leave the current team.
-     *
-     * @var bool
      */
-    public $confirmingLeavingTeam = false;
+    public bool $confirmingLeavingTeam = false;
 
     /**
      * Indicates if the application is confirming if a team member should be removed.
-     *
-     * @var bool
      */
-    public $confirmingTeamMemberRemoval = false;
+    public bool $confirmingTeamMemberRemoval = false;
 
     /**
      * The ID of the team member being removed.
-     *
-     * @var int|null
      */
-    public $teamMemberIdBeingRemoved = null;
+    public int|null $teamMemberIdBeingRemoved = null;
 
     /**
      * The "add team member" form state.
      *
-     * @var array
+     * @var array<string, mixed>
      */
     public $addTeamMemberForm = [
         'email' => '',
@@ -75,21 +71,16 @@ class TeamMemberManager extends Component
 
     /**
      * Mount the component.
-     *
-     * @param  mixed  $team
-     * @return void
      */
-    public function mount($team)
+    public function mount(mixed $team): void
     {
         $this->team = $team;
     }
 
     /**
      * Add a new team member to a team.
-     *
-     * @return void
      */
-    public function addTeamMember()
+    public function addTeamMember(): void
     {
         $this->resetErrorBag();
 
@@ -121,11 +112,8 @@ class TeamMemberManager extends Component
 
     /**
      * Cancel a pending team member invitation.
-     *
-     * @param  int  $invitationId
-     * @return void
      */
-    public function cancelTeamInvitation($invitationId)
+    public function cancelTeamInvitation(int $invitationId): void
     {
         if (! empty($invitationId)) {
             $model = Jetstream::teamInvitationModel();
@@ -138,11 +126,8 @@ class TeamMemberManager extends Component
 
     /**
      * Allow the given user's role to be managed.
-     *
-     * @param  int  $userId
-     * @return void
      */
-    public function manageRole($userId)
+    public function manageRole(int $userId): void
     {
         $this->currentlyManagingRole = true;
         $this->managingRoleFor = Jetstream::findUserByIdOrFail($userId);
@@ -152,10 +137,9 @@ class TeamMemberManager extends Component
     /**
      * Save the role for the user being managed.
      *
-     * @param  \Laravel\Jetstream\Actions\UpdateTeamMemberRole  $updater
-     * @return void
+     * @throws AuthorizationException
      */
-    public function updateRole(UpdateTeamMemberRole $updater)
+    public function updateRole(UpdateTeamMemberRole $updater): void
     {
         $updater->update(
             $this->user,
@@ -171,21 +155,16 @@ class TeamMemberManager extends Component
 
     /**
      * Stop managing the role of a given user.
-     *
-     * @return void
      */
-    public function stopManagingRole()
+    public function stopManagingRole(): void
     {
         $this->currentlyManagingRole = false;
     }
 
     /**
      * Remove the currently authenticated user from the team.
-     *
-     * @param  \Laravel\Jetstream\Contracts\RemovesTeamMembers  $remover
-     * @return void
      */
-    public function leaveTeam(RemovesTeamMembers $remover)
+    public function leaveTeam(RemovesTeamMembers $remover): Response|Redirector|RedirectResponse
     {
         $remover->remove(
             $this->user,
@@ -197,16 +176,13 @@ class TeamMemberManager extends Component
 
         $this->team = $this->team->fresh();
 
-        return redirect(config('fortify.home'));
+        return $this->redirectPath($remover);
     }
 
     /**
      * Confirm that the given team member should be removed.
-     *
-     * @param  int  $userId
-     * @return void
      */
-    public function confirmTeamMemberRemoval($userId)
+    public function confirmTeamMemberRemoval(int $userId): void
     {
         $this->confirmingTeamMemberRemoval = true;
 
@@ -215,11 +191,8 @@ class TeamMemberManager extends Component
 
     /**
      * Remove a team member from the team.
-     *
-     * @param  \Laravel\Jetstream\Contracts\RemovesTeamMembers  $remover
-     * @return void
      */
-    public function removeTeamMember(RemovesTeamMembers $remover)
+    public function removeTeamMember(RemovesTeamMembers $remover): void
     {
         $remover->remove(
             $this->user,
@@ -236,20 +209,16 @@ class TeamMemberManager extends Component
 
     /**
      * Get the current user of the application.
-     *
-     * @return mixed
      */
-    public function getUserProperty()
+    public function getUserProperty(): User|Authenticatable|null
     {
         return Auth::user();
     }
 
     /**
      * Get the available team member roles.
-     *
-     * @return array
      */
-    public function getRolesProperty()
+    public function getRolesProperty(): array
     {
         return collect(Jetstream::$roles)->transform(function ($role) {
             return with($role->jsonSerialize(), function ($data) {
@@ -264,10 +233,8 @@ class TeamMemberManager extends Component
 
     /**
      * Render the component.
-     *
-     * @return \Illuminate\View\View
      */
-    public function render()
+    public function render(): View
     {
         return view('teams.team-member-manager');
     }

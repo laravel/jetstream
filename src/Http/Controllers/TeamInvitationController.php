@@ -3,6 +3,7 @@
 namespace Laravel\Jetstream\Http\Controllers;
 
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Gate;
@@ -13,12 +14,8 @@ class TeamInvitationController extends Controller
 {
     /**
      * Accept a team invitation.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $invitationId
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function accept(Request $request, $invitationId)
+    public function accept(Request $request, int $invitationId): RedirectResponse
     {
         $model = Jetstream::teamInvitationModel();
 
@@ -41,11 +38,9 @@ class TeamInvitationController extends Controller
     /**
      * Cancel the given team invitation.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $invitationId
-     * @return \Illuminate\Http\RedirectResponse
+     * @throws AuthorizationException
      */
-    public function destroy(Request $request, $invitationId)
+    public function destroy(Request $request, int $invitationId): RedirectResponse
     {
         $model = Jetstream::teamInvitationModel();
 

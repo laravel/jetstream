@@ -9,22 +9,16 @@ class Role implements Rule
 {
     /**
      * Determine if the validation rule passes.
-     *
-     * @param  string  $attribute
-     * @param  mixed  $value
-     * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $value): bool
     {
-        return in_array($value, array_keys(Jetstream::$roles));
+        return array_key_exists($value, Jetstream::$roles);
     }
 
     /**
      * Get the validation error message.
-     *
-     * @return string
      */
-    public function message()
+    public function message(): string
     {
         return __('The :attribute must be a valid role.');
     }

@@ -2,7 +2,12 @@
 
 namespace Laravel\Jetstream\Http\Livewire;
 
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 use Laravel\Jetstream\Actions\ValidateTeamDeletion;
 use Laravel\Jetstream\Contracts\DeletesTeams;
 use Laravel\Jetstream\RedirectsActions;
@@ -14,25 +19,18 @@ class DeleteTeamForm extends Component
 
     /**
      * The team instance.
-     *
-     * @var mixed
      */
-    public $team;
+    public mixed $team;
 
     /**
      * Indicates if team deletion is being confirmed.
-     *
-     * @var bool
      */
-    public $confirmingTeamDeletion = false;
+    public bool $confirmingTeamDeletion = false;
 
     /**
      * Mount the component.
-     *
-     * @param  mixed  $team
-     * @return void
      */
-    public function mount($team)
+    public function mount(mixed $team): void
     {
         $this->team = $team;
     }
@@ -40,11 +38,9 @@ class DeleteTeamForm extends Component
     /**
      * Delete the team.
      *
-     * @param  \Laravel\Jetstream\Actions\ValidateTeamDeletion  $validator
-     * @param  \Laravel\Jetstream\Contracts\DeletesTeams  $deleter
-     * @return void
+     * @throws AuthorizationException
      */
-    public function deleteTeam(ValidateTeamDeletion $validator, DeletesTeams $deleter)
+    public function deleteTeam(ValidateTeamDeletion $validator, DeletesTeams $deleter): Response|Redirector|RedirectResponse
     {
         $validator->validate(Auth::user(), $this->team);
 
@@ -55,10 +51,8 @@ class DeleteTeamForm extends Component
 
     /**
      * Render the component.
-     *
-     * @return \Illuminate\View\View
      */
-    public function render()
+    public function render(): View
     {
         return view('teams.delete-team-form');
     }

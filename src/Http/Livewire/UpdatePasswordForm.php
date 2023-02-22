@@ -2,7 +2,10 @@
 
 namespace Laravel\Jetstream\Http\Livewire;
 
+use App\Models\User;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 use Laravel\Fortify\Contracts\UpdatesUserPasswords;
 use Livewire\Component;
 
@@ -11,7 +14,7 @@ class UpdatePasswordForm extends Component
     /**
      * The component's state.
      *
-     * @var array
+     * @var array<string, mixed>
      */
     public $state = [
         'current_password' => '',
@@ -21,19 +24,16 @@ class UpdatePasswordForm extends Component
 
     /**
      * Update the user's password.
-     *
-     * @param  \Laravel\Fortify\Contracts\UpdatesUserPasswords  $updater
-     * @return void
      */
-    public function updatePassword(UpdatesUserPasswords $updater)
+    public function updatePassword(UpdatesUserPasswords $updater): void
     {
         $this->resetErrorBag();
 
         $updater->update(Auth::user(), $this->state);
 
-        if (request()->hasSession()) {
-            request()->session()->put([
-                'password_hash_'.Auth::getDefaultDriver() => Auth::user()->getAuthPassword(),
+        if (! is_null(session())) {
+            session()->put([
+                'password_hash_'.Auth::getDefaultDriver() => Auth::user()?->getAuthPassword(),
             ]);
         }
 
@@ -48,20 +48,16 @@ class UpdatePasswordForm extends Component
 
     /**
      * Get the current user of the application.
-     *
-     * @return mixed
      */
-    public function getUserProperty()
+    public function getUserProperty(): User|Authenticatable|null
     {
         return Auth::user();
     }
 
     /**
      * Render the component.
-     *
-     * @return \Illuminate\View\View
      */
-    public function render()
+    public function render(): View
     {
         return view('profile.update-password-form');
     }

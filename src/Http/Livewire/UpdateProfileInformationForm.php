@@ -2,7 +2,12 @@
 
 namespace Laravel\Jetstream\Http\Livewire;
 
+use App\Models\User;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -13,42 +18,31 @@ class UpdateProfileInformationForm extends Component
 
     /**
      * The component's state.
-     *
-     * @var array
      */
-    public $state = [];
+    public array $state = [];
 
     /**
      * The new avatar for the user.
-     *
-     * @var mixed
      */
     public $photo;
 
     /**
      * Determine if the verification email was sent.
-     *
-     * @var bool
      */
-    public $verificationLinkSent = false;
+    public bool $verificationLinkSent = false;
 
     /**
      * Prepare the component.
-     *
-     * @return void
      */
-    public function mount()
+    public function mount(): void
     {
-        $this->state = Auth::user()->withoutRelations()->toArray();
+        $this->state = Auth::user()?->withoutRelations()->toArray();
     }
 
     /**
      * Update the user's profile information.
-     *
-     * @param  \Laravel\Fortify\Contracts\UpdatesUserProfileInformation  $updater
-     * @return void
      */
-    public function updateProfileInformation(UpdatesUserProfileInformation $updater)
+    public function updateProfileInformation(UpdatesUserProfileInformation $updater): Redirector|RedirectResponse
     {
         $this->resetErrorBag();
 
@@ -66,48 +60,42 @@ class UpdateProfileInformationForm extends Component
         $this->emit('saved');
 
         $this->emit('refresh-navigation-menu');
+
+        return redirect()->back(303);
     }
 
     /**
      * Delete user's profile photo.
-     *
-     * @return void
      */
-    public function deleteProfilePhoto()
+    public function deleteProfilePhoto(): void
     {
-        Auth::user()->deleteProfilePhoto();
+        Auth::user()?->deleteProfilePhoto();
 
         $this->emit('refresh-navigation-menu');
     }
 
     /**
      * Sent the email verification.
-     *
-     * @return void
      */
-    public function sendEmailVerification()
+    public function sendEmailVerification(): void
     {
-        Auth::user()->sendEmailVerificationNotification();
+        Auth::user()?->sendEmailVerificationNotification();
 
         $this->verificationLinkSent = true;
     }
 
     /**
      * Get the current user of the application.
-     *
-     * @return mixed
      */
-    public function getUserProperty()
+    public function getUserProperty(): User|Authenticatable|null
     {
         return Auth::user();
     }
 
     /**
      * Render the component.
-     *
-     * @return \Illuminate\View\View
      */
-    public function render()
+    public function render(): View
     {
         return view('profile.update-profile-information-form');
     }

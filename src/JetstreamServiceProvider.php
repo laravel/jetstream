@@ -3,10 +3,10 @@
 namespace Laravel\Jetstream;
 
 use App\Http\Middleware\HandleInertiaRequests;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
@@ -30,15 +30,13 @@ class JetstreamServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->mergeConfigFrom(__DIR__.'/../config/jetstream.php', 'jetstream');
 
         $this->app->afterResolving(BladeCompiler::class, function () {
-            if (config('jetstream.stack') === 'livewire' && class_exists(Livewire::class)) {
+            if (class_exists(Livewire::class) && config('jetstream.stack') === 'livewire') {
                 Livewire::component('navigation-menu', NavigationMenu::class);
                 Livewire::component('profile.update-profile-information-form', UpdateProfileInformationForm::class);
                 Livewire::component('profile.update-password-form', UpdatePasswordForm::class);
@@ -63,9 +61,9 @@ class JetstreamServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      *
-     * @return void
+     * @throws BindingResolutionException
      */
-    public function boot()
+    public function boot(): void
     {
         Fortify::viewPrefix('auth.');
 
@@ -94,10 +92,8 @@ class JetstreamServiceProvider extends ServiceProvider
 
     /**
      * Configure publishing for the package.
-     *
-     * @return void
      */
-    protected function configurePublishing()
+    protected function configurePublishing(): void
     {
         if (! $this->app->runningInConsole()) {
             return;
@@ -131,10 +127,8 @@ class JetstreamServiceProvider extends ServiceProvider
 
     /**
      * Configure the routes offered by the application.
-     *
-     * @return void
      */
-    protected function configureRoutes()
+    protected function configureRoutes(): void
     {
         if (Jetstream::$registersRoutes) {
             Route::group([
@@ -149,10 +143,8 @@ class JetstreamServiceProvider extends ServiceProvider
 
     /**
      * Configure the commands offered by the application.
-     *
-     * @return void
      */
-    protected function configureCommands()
+    protected function configureCommands(): void
     {
         if (! $this->app->runningInConsole()) {
             return;
@@ -166,9 +158,9 @@ class JetstreamServiceProvider extends ServiceProvider
     /**
      * Boot any Inertia related services.
      *
-     * @return void
+     * @throws BindingResolutionException
      */
-    protected function bootInertia()
+    protected function bootInertia(): void
     {
         $kernel = $this->app->make(Kernel::class);
 

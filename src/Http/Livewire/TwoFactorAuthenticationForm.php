@@ -2,7 +2,10 @@
 
 namespace Laravel\Jetstream\Http\Livewire;
 
+use App\Models\User;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 use Laravel\Fortify\Actions\ConfirmTwoFactorAuthentication;
 use Laravel\Fortify\Actions\DisableTwoFactorAuthentication;
 use Laravel\Fortify\Actions\EnableTwoFactorAuthentication;
@@ -16,53 +19,40 @@ class TwoFactorAuthenticationForm extends Component
     use ConfirmsPasswords;
 
     /**
-     * Indicates if two factor authentication QR code is being displayed.
-     *
-     * @var bool
+     * Indicates if two-factor authentication QR code is being displayed.
      */
-    public $showingQrCode = false;
+    public bool $showingQrCode = false;
 
     /**
-     * Indicates if the two factor authentication confirmation input and button are being displayed.
-     *
-     * @var bool
+     * Indicates if the two-factor authentication confirmation input and button are being displayed.
      */
-    public $showingConfirmation = false;
+    public bool $showingConfirmation = false;
 
     /**
-     * Indicates if two factor authentication recovery codes are being displayed.
-     *
-     * @var bool
+     * Indicates if two-factor authentication recovery codes are being displayed.
      */
-    public $showingRecoveryCodes = false;
+    public bool $showingRecoveryCodes = false;
 
     /**
-     * The OTP code for confirming two factor authentication.
-     *
-     * @var string|null
+     * The OTP code for confirming two-factor authentication.
      */
-    public $code;
+    public string|null $code;
 
     /**
      * Mount the component.
-     *
-     * @return void
      */
-    public function mount()
+    public function mount(): void
     {
-        if (Features::optionEnabled(Features::twoFactorAuthentication(), 'confirm') &&
-            is_null(Auth::user()->two_factor_confirmed_at)) {
+        if (is_null(Auth::user()->two_factor_confirmed_at) &&
+            Features::optionEnabled(Features::twoFactorAuthentication(), 'confirm')) {
             app(DisableTwoFactorAuthentication::class)(Auth::user());
         }
     }
 
     /**
-     * Enable two factor authentication for the user.
-     *
-     * @param  \Laravel\Fortify\Actions\EnableTwoFactorAuthentication  $enable
-     * @return void
+     * Enable two-factor authentication for the user.
      */
-    public function enableTwoFactorAuthentication(EnableTwoFactorAuthentication $enable)
+    public function enableTwoFactorAuthentication(EnableTwoFactorAuthentication $enable): void
     {
         if (Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword')) {
             $this->ensurePasswordIsConfirmed();
@@ -80,12 +70,9 @@ class TwoFactorAuthenticationForm extends Component
     }
 
     /**
-     * Confirm two factor authentication for the user.
-     *
-     * @param  \Laravel\Fortify\Actions\ConfirmTwoFactorAuthentication  $confirm
-     * @return void
+     * Confirm two-factor authentication for the user.
      */
-    public function confirmTwoFactorAuthentication(ConfirmTwoFactorAuthentication $confirm)
+    public function confirmTwoFactorAuthentication(ConfirmTwoFactorAuthentication $confirm): void
     {
         if (Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword')) {
             $this->ensurePasswordIsConfirmed();
@@ -100,10 +87,8 @@ class TwoFactorAuthenticationForm extends Component
 
     /**
      * Display the user's recovery codes.
-     *
-     * @return void
      */
-    public function showRecoveryCodes()
+    public function showRecoveryCodes(): void
     {
         if (Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword')) {
             $this->ensurePasswordIsConfirmed();
@@ -114,11 +99,8 @@ class TwoFactorAuthenticationForm extends Component
 
     /**
      * Generate new recovery codes for the user.
-     *
-     * @param  \Laravel\Fortify\Actions\GenerateNewRecoveryCodes  $generate
-     * @return void
      */
-    public function regenerateRecoveryCodes(GenerateNewRecoveryCodes $generate)
+    public function regenerateRecoveryCodes(GenerateNewRecoveryCodes $generate): void
     {
         if (Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword')) {
             $this->ensurePasswordIsConfirmed();
@@ -130,12 +112,9 @@ class TwoFactorAuthenticationForm extends Component
     }
 
     /**
-     * Disable two factor authentication for the user.
-     *
-     * @param  \Laravel\Fortify\Actions\DisableTwoFactorAuthentication  $disable
-     * @return void
+     * Disable two-factor authentication for the user.
      */
-    public function disableTwoFactorAuthentication(DisableTwoFactorAuthentication $disable)
+    public function disableTwoFactorAuthentication(DisableTwoFactorAuthentication $disable): void
     {
         if (Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword')) {
             $this->ensurePasswordIsConfirmed();
@@ -150,30 +129,24 @@ class TwoFactorAuthenticationForm extends Component
 
     /**
      * Get the current user of the application.
-     *
-     * @return mixed
      */
-    public function getUserProperty()
+    public function getUserProperty(): User|Authenticatable|null
     {
         return Auth::user();
     }
 
     /**
-     * Determine if two factor authentication is enabled.
-     *
-     * @return bool
+     * Determine if two-factor authentication is enabled.
      */
-    public function getEnabledProperty()
+    public function getEnabledProperty(): bool
     {
         return ! empty($this->user->two_factor_secret);
     }
 
     /**
      * Render the component.
-     *
-     * @return \Illuminate\View\View
      */
-    public function render()
+    public function render(): View
     {
         return view('profile.two-factor-authentication-form');
     }

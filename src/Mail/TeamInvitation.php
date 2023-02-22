@@ -14,16 +14,11 @@ class TeamInvitation extends Mailable
 
     /**
      * The team invitation instance.
-     *
-     * @var \Laravel\Jetstream\TeamInvitation
      */
-    public $invitation;
+    public TeamInvitationModel $invitation;
 
     /**
      * Create a new message instance.
-     *
-     * @param  \Laravel\Jetstream\TeamInvitation  $invitation
-     * @return void
      */
     public function __construct(TeamInvitationModel $invitation)
     {
@@ -32,10 +27,8 @@ class TeamInvitation extends Mailable
 
     /**
      * Build the message.
-     *
-     * @return $this
      */
-    public function build()
+    public function build(): static
     {
         return $this->markdown('emails.team-invitation', ['acceptUrl' => URL::signedRoute('team-invitations.accept', [
             'invitation' => $this->invitation,

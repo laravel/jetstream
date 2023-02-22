@@ -2,6 +2,7 @@
 
 namespace Laravel\Jetstream\Http\Livewire;
 
+use Illuminate\View\View;
 use Livewire\Component;
 
 class NavigationMenu extends Component
@@ -9,7 +10,7 @@ class NavigationMenu extends Component
     /**
      * The component's listeners.
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $listeners = [
         'refresh-navigation-menu' => '$refresh',
@@ -17,10 +18,8 @@ class NavigationMenu extends Component
 
     /**
      * Render the component.
-     *
-     * @return \Illuminate\View\View
      */
-    public function render()
+    public function render(): View
     {
         return view('navigation-menu');
     }

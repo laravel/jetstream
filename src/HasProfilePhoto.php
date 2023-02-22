@@ -5,19 +5,13 @@ namespace Laravel\Jetstream;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Laravel\Jetstream\Features;
 
 trait HasProfilePhoto
 {
     /**
      * Update the user's profile photo.
-     *
-     * @param  \Illuminate\Http\UploadedFile  $photo
-     * @param  string  $storagePath
-     * @return void
      */
-    public function updateProfilePhoto(UploadedFile $photo, $storagePath = 'profile-photos')
+    public function updateProfilePhoto(UploadedFile $photo, string $storagePath = 'profile-photos'): void
     {
         tap($this->profile_photo_path, function ($previous) use ($photo, $storagePath) {
             $this->forceFill([
@@ -34,10 +28,8 @@ trait HasProfilePhoto
 
     /**
      * Delete the user's profile photo.
-     *
-     * @return void
      */
-    public function deleteProfilePhoto()
+    public function deleteProfilePhoto(): void
     {
         if (! Features::managesProfilePhotos()) {
             return;
@@ -56,8 +48,6 @@ trait HasProfilePhoto
 
     /**
      * Get the URL to the user's profile photo.
-     *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
     public function profilePhotoUrl(): Attribute
     {
@@ -70,24 +60,20 @@ trait HasProfilePhoto
 
     /**
      * Get the default profile photo URL if no profile photo has been uploaded.
-     *
-     * @return string
      */
-    protected function defaultProfilePhotoUrl()
+    protected function defaultProfilePhotoUrl(): string
     {
         $name = trim(collect(explode(' ', $this->name))->map(function ($segment) {
             return mb_substr($segment, 0, 1);
         })->join(' '));
 
-        return 'https://ui-avatars.com/api/?name='.urlencode($name).'&color=7F9CF5&background=EBF4FF';
+        return sprintf('https://ui-avatars.com/api/?name=%s&color=7F9CF5&background=EBF4FF', urlencode($name));
     }
 
     /**
      * Get the disk that profile photos should be stored on.
-     *
-     * @return string
      */
-    protected function profilePhotoDisk()
+    protected function profilePhotoDisk(): string
     {
         return isset($_ENV['VAPOR_ARTIFACT_NAME']) ? 's3' : config('jetstream.profile_photo_disk', 'public');
     }

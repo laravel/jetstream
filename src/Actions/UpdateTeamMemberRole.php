@@ -2,6 +2,7 @@
 
 namespace Laravel\Jetstream\Actions;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Jetstream\Events\TeamMemberUpdated;
@@ -13,13 +14,9 @@ class UpdateTeamMemberRole
     /**
      * Update the role for the given team member.
      *
-     * @param  mixed  $user
-     * @param  mixed  $team
-     * @param  int  $teamMemberId
-     * @param  string  $role
-     * @return void
+     * @throws AuthorizationException
      */
-    public function update($user, $team, $teamMemberId, string $role)
+    public function update(mixed $user, mixed $team, int $teamMemberId, string $role): void
     {
         Gate::forUser($user)->authorize('updateTeamMember', $team);
 

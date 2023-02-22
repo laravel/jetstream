@@ -2,7 +2,13 @@
 
 namespace Laravel\Jetstream\Http\Livewire;
 
+use App\Models\User;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 use Laravel\Jetstream\Contracts\CreatesTeams;
 use Laravel\Jetstream\RedirectsActions;
 use Livewire\Component;
@@ -13,18 +19,13 @@ class CreateTeamForm extends Component
 
     /**
      * The component's state.
-     *
-     * @var array
      */
-    public $state = [];
+    public array $state = [];
 
     /**
      * Create a new team.
-     *
-     * @param  \Laravel\Jetstream\Contracts\CreatesTeams  $creator
-     * @return void
      */
-    public function createTeam(CreatesTeams $creator)
+    public function createTeam(CreatesTeams $creator): Response|Redirector|RedirectResponse
     {
         $this->resetErrorBag();
 
@@ -35,20 +36,16 @@ class CreateTeamForm extends Component
 
     /**
      * Get the current user of the application.
-     *
-     * @return mixed
      */
-    public function getUserProperty()
+    public function getUserProperty(): User|Authenticatable|null
     {
         return Auth::user();
     }
 
     /**
      * Render the component.
-     *
-     * @return \Illuminate\View\View
      */
-    public function render()
+    public function render(): View
     {
         return view('teams.create-team-form');
     }
