@@ -1,0 +1,11 @@
+parameters:
+  paths:
+    - config
+    - database
+    - routes
+    - src
+
+  level: 0
+
+  ignoreErrors:
+    - "#Unsafe usage of new static\\(\\)#"
