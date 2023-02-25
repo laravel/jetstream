@@ -43,7 +43,7 @@ test('team members can be invited', function (): void {
     $this->assertEquals($team->id, $team->teamInvitations->first()->team->id);
 });
 
-test('user cant already be on team', function (): void  {
+test('user cant already be on team', function (): void {
     Mail::fake();
 
     $this->expectException(ValidationException::class);
