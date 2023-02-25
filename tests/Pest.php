@@ -11,6 +11,23 @@
 |
 */
 
+use App\Actions\Jetstream\CreateTeam;
+use Laravel\Jetstream\Tests\Fixtures\User;
 use Laravel\Jetstream\Tests\OrchestraTestCase;
 
 uses(OrchestraTestCase::class)->in('Feature', 'Unit');
+
+function createTeam(
+    $name = 'Taylor Otwell',
+    $email = 'taylor@laravel.com'
+) {
+    $action = new CreateTeam;
+
+    $user = User::forceCreate([
+        'name' => $name,
+        'email' => $email,
+        'password' => 'secret',
+    ]);
+
+    return $action->create($user, ['name' => 'Test Team']);
+}

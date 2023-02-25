@@ -2,7 +2,6 @@
 
 namespace Laravel\Jetstream\Tests\Unit;
 
-use App\Actions\Jetstream\CreateTeam;
 use App\Actions\Jetstream\DeleteTeam;
 use App\Actions\Jetstream\DeleteUser;
 use App\Models\Team;
@@ -13,7 +12,6 @@ use Illuminate\Support\Str;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
-use Laravel\Jetstream\Tests\OrchestraTestCase;
 
 beforeEach(function () {
     Gate::policy(Team::class, TeamPolicy::class);
@@ -29,8 +27,8 @@ beforeEach(function () {
 });
 
 test('user can be deleted', function (): void {
-    $team = createTeam();
-    $otherTeam = createTeam();
+    $team = createTeam(Str::random(10), Str::random(10).'@laravel.com');
+    $otherTeam = createTeam(Str::random(10), Str::random(10).'@laravel.com');
 
     $otherTeam->users()->attach($team->owner, ['role' => null]);
 
@@ -51,16 +49,3 @@ test('user can be deleted', function (): void {
 
     @unlink($fixture);
 });
-
-function createTeam()
-{
-    $action = new CreateTeam;
-
-    $user = User::forceCreate([
-        'name' => Str::random(10),
-        'email' => Str::random(10).'@laravel.com',
-        'password' => 'secret',
-    ]);
-
-    return $action->create($user, ['name' => 'Test Team']);
-}

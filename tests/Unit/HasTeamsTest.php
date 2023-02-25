@@ -9,7 +9,6 @@ use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\OwnerRole;
 use Laravel\Jetstream\Role;
 use Laravel\Jetstream\Tests\Fixtures\User as UserFixture;
-use Laravel\Jetstream\Tests\OrchestraTestCase;
 
 uses(RefreshDatabase::class);
 

@@ -2,7 +2,6 @@
 
 namespace Laravel\Jetstream\Tests\Unit;
 
-use App\Actions\Jetstream\CreateTeam;
 use App\Actions\Jetstream\DeleteTeam;
 use App\Models\Team;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -12,7 +11,6 @@ use Laravel\Jetstream\Actions\ValidateTeamDeletion;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
-use Laravel\Jetstream\Tests\OrchestraTestCase;
 
 beforeEach(function () {
     Gate::policy(Team::class, TeamPolicy::class);
@@ -72,16 +70,3 @@ test('non owner cant delete team', function (): void {
         'password' => 'secret',
     ]), $team);
 });
-
-function createTeam()
-{
-    $action = new CreateTeam;
-
-    $user = User::forceCreate([
-        'name' => 'Taylor Otwell',
-        'email' => 'taylor@laravel.com',
-        'password' => 'secret',
-    ]);
-
-    return $action->create($user, ['name' => 'Test Team']);
-}

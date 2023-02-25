@@ -2,7 +2,6 @@
 
 namespace Laravel\Jetstream\Tests\Unit;
 
-use App\Actions\Jetstream\CreateTeam;
 use App\Actions\Jetstream\RemoveTeamMember;
 use App\Models\Team;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -90,16 +89,3 @@ test('the user must be authorized to remove team members', function (): void {
 
     $action->remove($adam, $team, $abigail);
 });
-
-function createTeam()
-{
-    $action = new CreateTeam;
-
-    $user = User::forceCreate([
-        'name' => 'Taylor Otwell',
-        'email' => 'taylor@laravel.com',
-        'password' => 'secret',
-    ]);
-
-    return $action->create($user, ['name' => 'Test Team']);
-}

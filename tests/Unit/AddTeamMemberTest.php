@@ -3,7 +3,6 @@
 namespace Laravel\Jetstream\Tests\Unit;
 
 use App\Actions\Jetstream\AddTeamMember;
-use App\Actions\Jetstream\CreateTeam;
 use App\Models\Team;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\ValidationException;
@@ -11,7 +10,6 @@ use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Membership;
 use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
-use Laravel\Jetstream\Tests\OrchestraTestCase;
 use Laravel\Sanctum\TransientToken;
 
 beforeEach(function () {
@@ -81,16 +79,3 @@ test('user cant already be on team', function (): void {
     $this->assertTrue(true);
     $action->add($team->owner, $team->fresh(), 'adam@laravel.com', 'admin');
 });
-
-function createTeam()
-{
-    $action = new CreateTeam;
-
-    $user = User::forceCreate([
-        'name' => 'Taylor Otwell',
-        'email' => 'taylor@laravel.com',
-        'password' => 'secret',
-    ]);
-
-    return $action->create($user, ['name' => 'Test Team']);
-}
