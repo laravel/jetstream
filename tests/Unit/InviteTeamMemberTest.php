@@ -2,7 +2,6 @@
 
 namespace Laravel\Jetstream\Tests\Unit;
 
-use App\Actions\Jetstream\CreateTeam;
 use App\Actions\Jetstream\InviteTeamMember;
 use App\Models\Team;
 use Illuminate\Support\Facades\Gate;
