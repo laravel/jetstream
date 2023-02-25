@@ -15,64 +15,52 @@ use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
 use Laravel\Jetstream\Tests\OrchestraTestCase;
 
-class DeleteUserWithTeamsTest extends OrchestraTestCase
+beforeEach(function () {
+    Gate::policy(Team::class, TeamPolicy::class);
+    Jetstream::useUserModel(User::class);
+
+    $this->artisan('migrate', ['--database' => 'testbench'])->run();
+
+    Schema::create('personal_access_tokens', function ($table) {
+        $table->id();
+        $table->foreignId('tokenable_id');
+        $table->string('tokenable_type');
+    });
+});
+
+test('user can be deleted', function (): void {
+    $team = createTeam();
+    $otherTeam = createTeam();
+
+    $otherTeam->users()->attach($team->owner, ['role' => null]);
+
+    $this->assertSame(2, DB::table('teams')->count());
+    $this->assertSame(1, DB::table('team_user')->count());
+
+    copy(__DIR__.'/../../stubs/app/Actions/Jetstream/DeleteUserWithTeams.php', $fixture = __DIR__.'/../Fixtures/DeleteUser.php');
+
+    require $fixture;
+
+    $action = new DeleteUser(new DeleteTeam);
+
+    $action->delete($team->owner);
+
+    $this->assertNull($team->owner->fresh());
+    $this->assertSame(1, DB::table('teams')->count());
+    $this->assertSame(0, DB::table('team_user')->count());
+
+    @unlink($fixture);
+});
+
+function createTeam()
 {
-    public function setUp(): void
-    {
-        parent::setUp();
+    $action = new CreateTeam;
 
-        Gate::policy(Team::class, TeamPolicy::class);
-        Jetstream::useUserModel(User::class);
-    }
+    $user = User::forceCreate([
+        'name' => Str::random(10),
+        'email' => Str::random(10).'@laravel.com',
+        'password' => 'secret',
+    ]);
 
-    public function test_user_can_be_deleted()
-    {
-        $this->migrate();
-
-        $team = $this->createTeam();
-        $otherTeam = $this->createTeam();
-
-        $otherTeam->users()->attach($team->owner, ['role' => null]);
-
-        $this->assertSame(2, DB::table('teams')->count());
-        $this->assertSame(1, DB::table('team_user')->count());
-
-        copy(__DIR__.'/../../stubs/app/Actions/Jetstream/DeleteUserWithTeams.php', $fixture = __DIR__.'/../Fixtures/DeleteUser.php');
-
-        require $fixture;
-
-        $action = new DeleteUser(new DeleteTeam);
-
-        $action->delete($team->owner);
-
-        $this->assertNull($team->owner->fresh());
-        $this->assertSame(1, DB::table('teams')->count());
-        $this->assertSame(0, DB::table('team_user')->count());
-
-        @unlink($fixture);
-    }
-
-    protected function createTeam()
-    {
-        $action = new CreateTeam;
-
-        $user = User::forceCreate([
-            'name' => Str::random(10),
-            'email' => Str::random(10).'@laravel.com',
-            'password' => 'secret',
-        ]);
-
-        return $action->create($user, ['name' => 'Test Team']);
-    }
-
-    protected function migrate()
-    {
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
-
-        Schema::create('personal_access_tokens', function ($table) {
-            $table->id();
-            $table->foreignId('tokenable_id');
-            $table->string('tokenable_type');
-        });
-    }
+    return $action->create($user, ['name' => 'Test Team']);
 }

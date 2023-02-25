@@ -14,102 +14,83 @@ use Laravel\Jetstream\Tests\Fixtures\User;
 use Laravel\Jetstream\Tests\OrchestraTestCase;
 use Laravel\Sanctum\TransientToken;
 
-class AddTeamMemberTest extends OrchestraTestCase
+beforeEach(function () {
+    Gate::policy(Team::class, TeamPolicy::class);
+    Jetstream::useUserModel(User::class);
+
+    $this->artisan('migrate', ['--database' => 'testbench'])->run();
+});
+
+test('team members can be added', function (): void {
+    Jetstream::role('admin', 'Admin', ['foo']);
+
+    $team = createTeam();
+
+    $otherUser = User::forceCreate([
+        'name' => 'Adam Wathan',
+        'email' => 'adam@laravel.com',
+        'password' => 'secret',
+    ]);
+
+    $action = new AddTeamMember;
+
+    $action->add($team->owner, $team, 'adam@laravel.com', 'admin');
+
+    $team = $team->fresh();
+
+    $this->assertCount(1, $team->users);
+
+    $this->assertInstanceOf(Membership::class, $team->users[0]->membership);
+
+    $this->assertTrue($otherUser->hasTeamRole($team, 'admin'));
+    $this->assertFalse($otherUser->hasTeamRole($team, 'editor'));
+    $this->assertFalse($otherUser->hasTeamRole($team, 'foobar'));
+
+    $team->users->first()->withAccessToken(new TransientToken);
+
+    $this->assertTrue($team->users->first()->hasTeamPermission($team, 'foo'));
+    $this->assertFalse($team->users->first()->hasTeamPermission($team, 'bar'));
+});
+
+test('user email address must exist', function (): void {
+    $this->expectException(ValidationException::class);
+
+    $team = createTeam();
+
+    $action = new AddTeamMember;
+
+    $action->add($team->owner, $team, 'missing@laravel.com', 'admin');
+
+    $this->assertCount(1, $team->fresh()->users);
+});
+
+test('user cant already be on team', function (): void {
+    $this->expectException(ValidationException::class);
+
+    $team = createTeam();
+
+    $otherUser = User::forceCreate([
+        'name' => 'Adam Wathan',
+        'email' => 'adam@laravel.com',
+        'password' => 'secret',
+    ]);
+
+    $action = new AddTeamMember;
+
+    $action->add($team->owner, $team, 'adam@laravel.com', 'admin');
+    $this->assertTrue(true);
+    $action->add($team->owner, $team->fresh(), 'adam@laravel.com', 'admin');
+});
+
+function createTeam()
 {
-    public function setUp(): void
-    {
-        parent::setUp();
+    $action = new CreateTeam;
 
-        Gate::policy(Team::class, TeamPolicy::class);
+    $user = User::forceCreate([
+        'name' => 'Taylor Otwell',
+        'email' => 'taylor@laravel.com',
+        'password' => 'secret',
+    ]);
 
-        Jetstream::useUserModel(User::class);
-    }
-
-    public function test_team_members_can_be_added()
-    {
-        Jetstream::role('admin', 'Admin', ['foo']);
-
-        $this->migrate();
-
-        $team = $this->createTeam();
-
-        $otherUser = User::forceCreate([
-            'name' => 'Adam Wathan',
-            'email' => 'adam@laravel.com',
-            'password' => 'secret',
-        ]);
-
-        $action = new AddTeamMember;
-
-        $action->add($team->owner, $team, 'adam@laravel.com', 'admin');
-
-        $team = $team->fresh();
-
-        $this->assertCount(1, $team->users);
-
-        $this->assertInstanceOf(Membership::class, $team->users[0]->membership);
-
-        $this->assertTrue($otherUser->hasTeamRole($team, 'admin'));
-        $this->assertFalse($otherUser->hasTeamRole($team, 'editor'));
-        $this->assertFalse($otherUser->hasTeamRole($team, 'foobar'));
-
-        $team->users->first()->withAccessToken(new TransientToken);
-
-        $this->assertTrue($team->users->first()->hasTeamPermission($team, 'foo'));
-        $this->assertFalse($team->users->first()->hasTeamPermission($team, 'bar'));
-    }
-
-    public function test_user_email_address_must_exist()
-    {
-        $this->expectException(ValidationException::class);
-
-        $this->migrate();
-
-        $team = $this->createTeam();
-
-        $action = new AddTeamMember;
-
-        $action->add($team->owner, $team, 'missing@laravel.com', 'admin');
-
-        $this->assertCount(1, $team->fresh()->users);
-    }
-
-    public function test_user_cant_already_be_on_team()
-    {
-        $this->expectException(ValidationException::class);
-
-        $this->migrate();
-
-        $team = $this->createTeam();
-
-        $otherUser = User::forceCreate([
-            'name' => 'Adam Wathan',
-            'email' => 'adam@laravel.com',
-            'password' => 'secret',
-        ]);
-
-        $action = new AddTeamMember;
-
-        $action->add($team->owner, $team, 'adam@laravel.com', 'admin');
-        $this->assertTrue(true);
-        $action->add($team->owner, $team->fresh(), 'adam@laravel.com', 'admin');
-    }
-
-    protected function createTeam()
-    {
-        $action = new CreateTeam;
-
-        $user = User::forceCreate([
-            'name' => 'Taylor Otwell',
-            'email' => 'taylor@laravel.com',
-            'password' => 'secret',
-        ]);
-
-        return $action->create($user, ['name' => 'Test Team']);
-    }
-
-    protected function migrate()
-    {
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
-    }
+    return $action->create($user, ['name' => 'Test Team']);
 }

@@ -14,95 +14,74 @@ use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
 use Laravel\Jetstream\Tests\OrchestraTestCase;
 
-class DeleteTeamTest extends OrchestraTestCase
+beforeEach(function () {
+    Gate::policy(Team::class, TeamPolicy::class);
+    Jetstream::useUserModel(User::class);
+
+    $this->artisan('migrate', ['--database' => 'testbench'])->run();
+});
+
+test('team can be deleted', function (): void {
+    $team = createTeam();
+
+    $action = new DeleteTeam;
+
+    $action->delete($team);
+
+    $this->assertNull($team->fresh());
+});
+
+test('team deletion can be validated', function (): void {
+    Jetstream::useUserModel(User::class);
+
+    $team = createTeam();
+
+    $action = new ValidateTeamDeletion;
+
+    $action->validate($team->owner, $team);
+
+    $this->assertTrue(true);
+});
+
+test('personal team cant be deleted', function (): void {
+    $this->expectException(ValidationException::class);
+
+    Jetstream::useUserModel(User::class);
+
+    $team = createTeam();
+
+    $team->forceFill(['personal_team' => true])->save();
+
+    $action = new ValidateTeamDeletion;
+
+    $action->validate($team->owner, $team);
+});
+
+test('non owner cant delete team', function (): void {
+    $this->expectException(AuthorizationException::class);
+
+    Jetstream::useUserModel(User::class);
+
+    $team = createTeam();
+
+    $action = new ValidateTeamDeletion;
+
+    $action->validate(User::forceCreate([
+        'name' => 'Adam Wathan',
+        'email' => 'adam@laravel.com',
+        'password' => 'secret',
+    ]), $team);
+});
+
+function createTeam()
 {
-    public function setUp(): void
-    {
-        parent::setUp();
+    $action = new CreateTeam;
 
-        Gate::policy(Team::class, TeamPolicy::class);
-        Jetstream::useUserModel(User::class);
-    }
+    $user = User::forceCreate([
+        'name' => 'Taylor Otwell',
+        'email' => 'taylor@laravel.com',
+        'password' => 'secret',
+    ]);
 
-    public function test_team_can_be_deleted()
-    {
-        $this->migrate();
-
-        $team = $this->createTeam();
-
-        $action = new DeleteTeam;
-
-        $action->delete($team);
-
-        $this->assertNull($team->fresh());
-    }
-
-    public function test_team_deletion_can_be_validated()
-    {
-        Jetstream::useUserModel(User::class);
-
-        $this->migrate();
-
-        $team = $this->createTeam();
-
-        $action = new ValidateTeamDeletion;
-
-        $action->validate($team->owner, $team);
-
-        $this->assertTrue(true);
-    }
-
-    public function test_personal_team_cant_be_deleted()
-    {
-        $this->expectException(ValidationException::class);
-
-        Jetstream::useUserModel(User::class);
-
-        $this->migrate();
-
-        $team = $this->createTeam();
-
-        $team->forceFill(['personal_team' => true])->save();
-
-        $action = new ValidateTeamDeletion;
-
-        $action->validate($team->owner, $team);
-    }
-
-    public function test_non_owner_cant_delete_team()
-    {
-        $this->expectException(AuthorizationException::class);
-
-        Jetstream::useUserModel(User::class);
-
-        $this->migrate();
-
-        $team = $this->createTeam();
-
-        $action = new ValidateTeamDeletion;
-
-        $action->validate(User::forceCreate([
-            'name' => 'Adam Wathan',
-            'email' => 'adam@laravel.com',
-            'password' => 'secret',
-        ]), $team);
-    }
-
-    protected function createTeam()
-    {
-        $action = new CreateTeam;
-
-        $user = User::forceCreate([
-            'name' => 'Taylor Otwell',
-            'email' => 'taylor@laravel.com',
-            'password' => 'secret',
-        ]);
-
-        return $action->create($user, ['name' => 'Test Team']);
-    }
-
-    protected function migrate()
-    {
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
-    }
+    return $action->create($user, ['name' => 'Test Team']);
 }

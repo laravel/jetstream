@@ -11,102 +11,88 @@ use Laravel\Jetstream\Role;
 use Laravel\Jetstream\Tests\Fixtures\User as UserFixture;
 use Laravel\Jetstream\Tests\OrchestraTestCase;
 
-class HasTeamsTest extends OrchestraTestCase
-{
-    use RefreshDatabase;
+uses(RefreshDatabase::class);
 
-    public function setUp(): void
-    {
-        parent::setUp();
+beforeEach(function () {
+    Jetstream::$permissions = [];
+    Jetstream::$roles = [];
 
-        Jetstream::$permissions = [];
-        Jetstream::$roles = [];
+    Jetstream::useUserModel(UserFixture::class);
+});
 
-        Jetstream::useUserModel(UserFixture::class);
-    }
+test('team Role returns an Owner Role for the team owner', function (): void {
+    $team = Team::factory()->create();
 
-    public function test_teamRole_returns_an_OwnerRole_for_the_team_owner(): void
-    {
-        $team = Team::factory()->create();
+    $this->assertInstanceOf(OwnerRole::class, $team->owner->teamRole($team));
+});
 
-        $this->assertInstanceOf(OwnerRole::class, $team->owner->teamRole($team));
-    }
+test('team Role returns the matching role', function (): void {
+    Jetstream::role('admin', 'Admin', [
+        'read',
+        'create',
+    ])->description('Admin Description');
 
-    public function test_teamRole_returns_the_matching_role(): void
-    {
-        Jetstream::role('admin', 'Admin', [
-            'read',
-            'create',
-        ])->description('Admin Description');
+    $team = Team::factory()
+        ->hasAttached(User::factory(), [
+            'role' => 'admin',
+        ])
+        ->create();
+    $role = $team->users->first()->teamRole($team);
 
-        $team = Team::factory()
-            ->hasAttached(User::factory(), [
-                'role' => 'admin',
-            ])
-            ->create();
-        $role = $team->users->first()->teamRole($team);
+    $this->assertInstanceOf(Role::class, $role);
+    $this->assertSame('admin', $role->key);
+});
 
-        $this->assertInstanceOf(Role::class, $role);
-        $this->assertSame('admin', $role->key);
-    }
+test('team Role returns null if the user does not belong to the team', function (): void {
+    $team = Team::factory()->create();
 
-    public function test_teamRole_returns_null_if_the_user_does_not_belong_to_the_team(): void
-    {
-        $team = Team::factory()->create();
+    $this->assertNull((new UserFixture())->teamRole($team));
+});
 
-        $this->assertNull((new UserFixture())->teamRole($team));
-    }
+test('team Role returns null if the user does not have a role on the site', function (): void {
+    $team = Team::factory()
+        ->has(User::factory())
+        ->create();
 
-    public function test_teamRole_returns_null_if_the_user_does_not_have_a_role_on_the_site(): void
-    {
-        $team = Team::factory()
-            ->has(User::factory())
-            ->create();
+    $this->assertNull($team->users->first()->teamRole($team));
+});
 
-        $this->assertNull($team->users->first()->teamRole($team));
-    }
+test('team Permissions returns all for team owners', function (): void {
+    $team = Team::factory()->create();
 
-    public function test_teamPermissions_returns_all_for_team_owners(): void
-    {
-        $team = Team::factory()->create();
+    $this->assertSame(['*'], $team->owner->teamPermissions($team));
+});
 
-        $this->assertSame(['*'], $team->owner->teamPermissions($team));
-    }
+test('team Permissions returns empty for non members', function (): void {
+    $team = Team::factory()->create();
 
-    public function test_teamPermissions_returns_empty_for_non_members(): void
-    {
-        $team = Team::factory()->create();
+    $this->assertSame([], (new UserFixture())->teamPermissions($team));
+});
 
-        $this->assertSame([], (new UserFixture())->teamPermissions($team));
-    }
+test('team Permissions returns permissions for the users role', function (): void {
+    Jetstream::role('admin', 'Admin', [
+        'read',
+        'create',
+    ])->description('Admin Description');
 
-    public function test_teamPermissions_returns_permissions_for_the_users_role(): void
-    {
-        Jetstream::role('admin', 'Admin', [
-            'read',
-            'create',
-        ])->description('Admin Description');
+    $team = Team::factory()
+        ->hasAttached(User::factory(), [
+            'role' => 'admin',
+        ])
+        ->create();
 
-        $team = Team::factory()
-            ->hasAttached(User::factory(), [
-                'role' => 'admin',
-            ])
-            ->create();
+    $this->assertSame(['read', 'create'], $team->users->first()->teamPermissions($team));
+});
 
-        $this->assertSame(['read', 'create'], $team->users->first()->teamPermissions($team));
-    }
+test('team Permissions returns empty permissions for members without a defined role', function (): void {
+    Jetstream::role('admin', 'Admin', [
+        'read',
+        'create',
+    ])->description('Admin Description');
 
-    public function test_teamPermissions_returns_empty_permissions_for_members_without_a_defined_role(): void
-    {
-        Jetstream::role('admin', 'Admin', [
-            'read',
-            'create',
-        ])->description('Admin Description');
+    $team = Team::factory()
+        ->has(User::factory())
+        ->create();
 
-        $team = Team::factory()
-            ->has(User::factory())
-            ->create();
-
-        $this->assertSame([], $team->users->first()->teamPermissions($team));
-    }
-}
+    $this->assertSame([], $team->users->first()->teamPermissions($team));
+});

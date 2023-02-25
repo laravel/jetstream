@@ -13,69 +13,59 @@ use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
 use Laravel\Jetstream\Tests\OrchestraTestCase;
 
-class InviteTeamMemberTest extends OrchestraTestCase
-{
-    public function setUp(): void
-    {
-        parent::setUp();
+beforeEach(function () {
+    Gate::policy(Team::class, TeamPolicy::class);
+    Jetstream::useUserModel(User::class);
 
-        Gate::policy(Team::class, TeamPolicy::class);
+    $this->artisan('migrate', ['--database' => 'testbench'])->run();
+});
 
-        Jetstream::useUserModel(User::class);
-    }
+test('team members can be invited', function (): void {
+    Mail::fake();
 
-    public function test_team_members_can_be_invited()
-    {
-        Mail::fake();
+    Jetstream::role('admin', 'Admin', ['foo']);
 
-        Jetstream::role('admin', 'Admin', ['foo']);
+    $team = createTeam();
 
-        $this->migrate();
+    $otherUser = User::forceCreate([
+        'name' => 'Adam Wathan',
+        'email' => 'adam@laravel.com',
+        'password' => 'secret',
+    ]);
 
-        $team = $this->createTeam();
+    $action = new InviteTeamMember;
 
-        $otherUser = User::forceCreate([
-            'name' => 'Adam Wathan',
-            'email' => 'adam@laravel.com',
-            'password' => 'secret',
-        ]);
+    $action->invite($team->owner, $team, 'adam@laravel.com', 'admin');
 
-        $action = new InviteTeamMember;
+    $team = $team->fresh();
 
-        $action->invite($team->owner, $team, 'adam@laravel.com', 'admin');
+    $this->assertCount(0, $team->users);
+    $this->assertCount(1, $team->teamInvitations);
+    $this->assertEquals('adam@laravel.com', $team->teamInvitations->first()->email);
+    $this->assertEquals($team->id, $team->teamInvitations->first()->team->id);
+});
 
-        $team = $team->fresh();
+test('user cant already be on team', function (): void  {
+    Mail::fake();
 
-        $this->assertCount(0, $team->users);
-        $this->assertCount(1, $team->teamInvitations);
-        $this->assertEquals('adam@laravel.com', $team->teamInvitations->first()->email);
-        $this->assertEquals($team->id, $team->teamInvitations->first()->team->id);
-    }
+    $this->expectException(ValidationException::class);
 
-    public function test_user_cant_already_be_on_team()
-    {
-        Mail::fake();
+    $team = createTeam();
 
-        $this->expectException(ValidationException::class);
+    $otherUser = User::forceCreate([
+        'name' => 'Adam Wathan',
+        'email' => 'adam@laravel.com',
+        'password' => 'secret',
+    ]);
 
-        $this->migrate();
+    $action = new InviteTeamMember;
 
-        $team = $this->createTeam();
+    $action->invite($team->owner, $team, 'adam@laravel.com', 'admin');
+    $this->assertTrue(true);
+    $action->invite($team->owner, $team->fresh(), 'adam@laravel.com', 'admin');
+});
 
-        $otherUser = User::forceCreate([
-            'name' => 'Adam Wathan',
-            'email' => 'adam@laravel.com',
-            'password' => 'secret',
-        ]);
-
-        $action = new InviteTeamMember;
-
-        $action->invite($team->owner, $team, 'adam@laravel.com', 'admin');
-        $this->assertTrue(true);
-        $action->invite($team->owner, $team->fresh(), 'adam@laravel.com', 'admin');
-    }
-
-    protected function createTeam()
+function createTeam()
     {
         $action = new CreateTeam;
 
@@ -87,9 +77,3 @@ class InviteTeamMemberTest extends OrchestraTestCase
 
         return $action->create($user, ['name' => 'Test Team']);
     }
-
-    protected function migrate()
-    {
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
-    }
-}

@@ -9,56 +9,38 @@ use Illuminate\Validation\ValidationException;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
-use Laravel\Jetstream\Tests\OrchestraTestCase;
 
-class CreateTeamTest extends OrchestraTestCase
-{
-    public function setUp(): void
-    {
-        parent::setUp();
+beforeEach(function () {
+    Gate::policy(Team::class, TeamPolicy::class);
+    Jetstream::useUserModel(User::class);
 
-        Gate::policy(Team::class, TeamPolicy::class);
-        Jetstream::useUserModel(User::class);
-    }
+    $this->artisan('migrate', ['--database' => 'testbench'])->run();
+});
 
-    public function test_team_name_can_be_updated()
-    {
-        $this->migrate();
+test('team name can be updated', function (): void {
+    $action = new CreateTeam;
 
-        $action = new CreateTeam;
+    $user = User::forceCreate([
+        'name' => 'Taylor Otwell',
+        'email' => 'taylor@laravel.com',
+        'password' => 'secret',
+    ]);
 
-        $user = User::forceCreate([
-            'name' => 'Taylor Otwell',
-            'email' => 'taylor@laravel.com',
-            'password' => 'secret',
-        ]);
+    $team = $action->create($user, ['name' => 'Test Team']);
 
-        $team = $action->create($user, ['name' => 'Test Team']);
+    $this->assertInstanceOf(Team::class, $team);
+});
 
-        $this->assertInstanceOf(Team::class, $team);
-    }
+test('name is required', function (): void {
+    $this->expectException(ValidationException::class);
 
-    public function test_name_is_required()
-    {
-        $this->expectException(ValidationException::class);
+    $action = new CreateTeam;
 
-        $this->migrate();
+    $user = User::forceCreate([
+        'name' => 'Taylor Otwell',
+        'email' => 'taylor@laravel.com',
+        'password' => 'secret',
+    ]);
 
-        $action = new CreateTeam;
-
-        $user = User::forceCreate([
-            'name' => 'Taylor Otwell',
-            'email' => 'taylor@laravel.com',
-            'password' => 'secret',
-        ]);
-
-        $action->create($user, ['name' => '']);
-    }
-
-    protected function migrate()
-    {
-        // $this->loadLaravelMigrations(['--database' => 'testbench']);
-
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
-    }
-}
+    $action->create($user, ['name' => '']);
+});
