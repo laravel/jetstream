@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Jetstream\Tests;
+namespace Laravel\Jetstream\Tests\Feature;
 
 use App\Actions\Jetstream\CreateTeam;
 use App\Models\Team;
@@ -10,6 +10,7 @@ use Laravel\Jetstream\Contracts\AddsTeamMembers;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
+use Laravel\Jetstream\Tests\OrchestraTestCase;
 
 class TeamInvitationControllerTest extends OrchestraTestCase
 {

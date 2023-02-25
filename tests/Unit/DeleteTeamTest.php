@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Jetstream\Tests;
+namespace Laravel\Jetstream\Tests\Unit;
 
 use App\Actions\Jetstream\CreateTeam;
 use App\Actions\Jetstream\DeleteTeam;
@@ -12,6 +12,7 @@ use Laravel\Jetstream\Actions\ValidateTeamDeletion;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
+use Laravel\Jetstream\Tests\OrchestraTestCase;
 
 class DeleteTeamTest extends OrchestraTestCase
 {

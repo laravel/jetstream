@@ -1,17 +1,17 @@
 <?php
 
-namespace Laravel\Jetstream\Tests;
+namespace Laravel\Jetstream\Tests\Unit;
 
 use App\Actions\Jetstream\CreateTeam;
-use App\Actions\Jetstream\UpdateTeamName;
 use App\Models\Team;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\ValidationException;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
+use Laravel\Jetstream\Tests\OrchestraTestCase;
 
-class UpdateTeamTest extends OrchestraTestCase
+class CreateTeamTest extends OrchestraTestCase
 {
     public function setUp(): void
     {
@@ -25,30 +25,6 @@ class UpdateTeamTest extends OrchestraTestCase
     {
         $this->migrate();
 
-        $team = $this->createTeam();
-
-        $action = new UpdateTeamName;
-
-        $action->update($team->owner, $team, ['name' => 'Test Team Updated']);
-
-        $this->assertSame('Test Team Updated', $team->fresh()->name);
-    }
-
-    public function test_name_is_required()
-    {
-        $this->expectException(ValidationException::class);
-
-        $this->migrate();
-
-        $team = $this->createTeam();
-
-        $action = new UpdateTeamName;
-
-        $action->update($team->owner, $team, ['name' => '']);
-    }
-
-    protected function createTeam()
-    {
         $action = new CreateTeam;
 
         $user = User::forceCreate([
@@ -57,7 +33,26 @@ class UpdateTeamTest extends OrchestraTestCase
             'password' => 'secret',
         ]);
 
-        return $action->create($user, ['name' => 'Test Team']);
+        $team = $action->create($user, ['name' => 'Test Team']);
+
+        $this->assertInstanceOf(Team::class, $team);
+    }
+
+    public function test_name_is_required()
+    {
+        $this->expectException(ValidationException::class);
+
+        $this->migrate();
+
+        $action = new CreateTeam;
+
+        $user = User::forceCreate([
+            'name' => 'Taylor Otwell',
+            'email' => 'taylor@laravel.com',
+            'password' => 'secret',
+        ]);
+
+        $action->create($user, ['name' => '']);
     }
 
     protected function migrate()

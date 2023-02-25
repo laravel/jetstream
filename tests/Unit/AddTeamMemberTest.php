@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Jetstream\Tests;
+namespace Laravel\Jetstream\Tests\Unit;
 
 use App\Actions\Jetstream\AddTeamMember;
 use App\Actions\Jetstream\CreateTeam;
@@ -11,6 +11,7 @@ use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Membership;
 use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
+use Laravel\Jetstream\Tests\OrchestraTestCase;
 use Laravel\Sanctum\TransientToken;
 
 class AddTeamMemberTest extends OrchestraTestCase

@@ -1,8 +1,7 @@
 <?php
 
-namespace Laravel\Jetstream\Tests;
+namespace Laravel\Jetstream\Tests\Unit;
 
-use App\Actions\Jetstream\CreateTeam;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -10,6 +9,7 @@ use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\OwnerRole;
 use Laravel\Jetstream\Role;
 use Laravel\Jetstream\Tests\Fixtures\User as UserFixture;
+use Laravel\Jetstream\Tests\OrchestraTestCase;
 
 class HasTeamsTest extends OrchestraTestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Jetstream\Tests;
+namespace Laravel\Jetstream\Tests\Unit;
 
 use App\Actions\Jetstream\CreateTeam;
 use App\Actions\Jetstream\DeleteTeam;
@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
+use Laravel\Jetstream\Tests\OrchestraTestCase;
 
 class DeleteUserWithTeamsTest extends OrchestraTestCase
 {
@@ -36,7 +37,7 @@ class DeleteUserWithTeamsTest extends OrchestraTestCase
         $this->assertSame(2, DB::table('teams')->count());
         $this->assertSame(1, DB::table('team_user')->count());
 
-        copy(__DIR__.'/../stubs/app/Actions/Jetstream/DeleteUserWithTeams.php', $fixture = __DIR__.'/Fixtures/DeleteUser.php');
+        copy(__DIR__.'/../../stubs/app/Actions/Jetstream/DeleteUserWithTeams.php', $fixture = __DIR__.'/../Fixtures/DeleteUser.php');
 
         require $fixture;
 

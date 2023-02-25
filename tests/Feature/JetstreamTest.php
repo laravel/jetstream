@@ -1,9 +1,10 @@
 <?php
 
-namespace Laravel\Jetstream\Tests;
+namespace Laravel\Jetstream\Tests\Feature;
 
-use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Jetstream;
+use Laravel\Jetstream\Tests\Fixtures;
+use Laravel\Jetstream\Tests\OrchestraTestCase;
 
 class JetstreamTest extends OrchestraTestCase
 {

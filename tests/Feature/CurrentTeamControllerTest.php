@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Jetstream\Tests;
+namespace Laravel\Jetstream\Tests\Feature;
 
 use App\Actions\Jetstream\CreateTeam;
 use App\Models\Team;
@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Gate;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
+use Laravel\Jetstream\Tests\OrchestraTestCase;
 
 class CurrentTeamControllerTest extends OrchestraTestCase
 {

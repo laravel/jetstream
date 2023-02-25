@@ -1,16 +1,18 @@
 <?php
 
-namespace Laravel\Jetstream\Tests;
+namespace Laravel\Jetstream\Tests\Unit;
 
 use App\Actions\Jetstream\CreateTeam;
+use App\Actions\Jetstream\UpdateTeamName;
 use App\Models\Team;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\ValidationException;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
+use Laravel\Jetstream\Tests\OrchestraTestCase;
 
-class CreateTeamTest extends OrchestraTestCase
+class UpdateTeamTest extends OrchestraTestCase
 {
     public function setUp(): void
     {
@@ -24,17 +26,13 @@ class CreateTeamTest extends OrchestraTestCase
     {
         $this->migrate();
 
-        $action = new CreateTeam;
+        $team = $this->createTeam();
 
-        $user = User::forceCreate([
-            'name' => 'Taylor Otwell',
-            'email' => 'taylor@laravel.com',
-            'password' => 'secret',
-        ]);
+        $action = new UpdateTeamName;
 
-        $team = $action->create($user, ['name' => 'Test Team']);
+        $action->update($team->owner, $team, ['name' => 'Test Team Updated']);
 
-        $this->assertInstanceOf(Team::class, $team);
+        $this->assertSame('Test Team Updated', $team->fresh()->name);
     }
 
     public function test_name_is_required()
@@ -43,6 +41,15 @@ class CreateTeamTest extends OrchestraTestCase
 
         $this->migrate();
 
+        $team = $this->createTeam();
+
+        $action = new UpdateTeamName;
+
+        $action->update($team->owner, $team, ['name' => '']);
+    }
+
+    protected function createTeam()
+    {
         $action = new CreateTeam;
 
         $user = User::forceCreate([
@@ -51,7 +58,7 @@ class CreateTeamTest extends OrchestraTestCase
             'password' => 'secret',
         ]);
 
-        $action->create($user, ['name' => '']);
+        return $action->create($user, ['name' => 'Test Team']);
     }
 
     protected function migrate()

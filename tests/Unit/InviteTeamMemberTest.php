@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Jetstream\Tests;
+namespace Laravel\Jetstream\Tests\Unit;
 
 use App\Actions\Jetstream\CreateTeam;
 use App\Actions\Jetstream\InviteTeamMember;
@@ -11,6 +11,7 @@ use Illuminate\Validation\ValidationException;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
+use Laravel\Jetstream\Tests\OrchestraTestCase;
 
 class InviteTeamMemberTest extends OrchestraTestCase
 {

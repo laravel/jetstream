@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Jetstream\Tests;
+namespace Laravel\Jetstream\Tests\Unit;
 
 use App\Actions\Jetstream\CreateTeam;
 use Illuminate\Support\Facades\Gate;
@@ -8,6 +8,7 @@ use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Team;
 use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
+use Laravel\Jetstream\Tests\OrchestraTestCase;
 use Laravel\Sanctum\Sanctum;
 use Laravel\Sanctum\TransientToken;
 
