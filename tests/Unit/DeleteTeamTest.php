@@ -37,7 +37,7 @@ test('team deletion can be validated', function (): void {
     $action = new ValidateTeamDeletion;
 
     expect(
-        fn() => $action->validate($team->owner, $team)
+        fn () => $action->validate($team->owner, $team)
     )
         ->not()->toThrow(ValidationException::class)
         ->and(true)->toBeTrue();
@@ -53,7 +53,7 @@ test('personal team cant be deleted', function (): void {
     $action = new ValidateTeamDeletion;
 
     expect(
-        fn() => $action->validate($team->owner, $team)
+        fn () => $action->validate($team->owner, $team)
     )->toThrow(ValidationException::class);
 });
 
@@ -65,7 +65,7 @@ test('non owner cant delete team', function (): void {
     $action = new ValidateTeamDeletion;
 
     expect(
-        fn() => $action->validate(User::forceCreate([
+        fn () => $action->validate(User::forceCreate([
             'name' => 'Adam Wathan',
             'email' => 'adam@laravel.com',
             'password' => 'secret',

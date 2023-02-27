@@ -73,7 +73,6 @@ test('team relationship methods', function (): void {
         ->and($otherUser->hasTeamPermission($team, 'bar'))->toBeFalse()
         ->and($team->userHasPermission($otherUser, 'foo'))->toBeTrue()
         ->and($team->userHasPermission($otherUser, 'bar'))->toBeFalse();
-
 });
 
 test('has team permission checks token permissions', function (): void {

@@ -53,7 +53,7 @@ test('user email address must exist', function (): void {
 
     $action = new AddTeamMember;
 
-    expect(fn() => $action->add($team->owner, $team, 'missing@laravel.com', 'admin'))
+    expect(fn () => $action->add($team->owner, $team, 'missing@laravel.com', 'admin'))
         ->toThrow(ValidationException::class)
         ->and($team->fresh()->users)->toHaveCount(0);
 });
@@ -71,6 +71,6 @@ test('user cant already be on team', function (): void {
 
     $action->add($team->owner, $team, 'adam@laravel.com', 'admin');
 
-    expect(fn() => $action->add($team->owner, $team->fresh(), 'adam@laravel.com', 'admin'))
+    expect(fn () => $action->add($team->owner, $team->fresh(), 'adam@laravel.com', 'admin'))
         ->toThrow(ValidationException::class);
 });
