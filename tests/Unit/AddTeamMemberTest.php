@@ -36,38 +36,32 @@ test('team members can be added', function (): void {
 
     $team = $team->fresh();
 
-    $this->assertCount(1, $team->users);
-
-    $this->assertInstanceOf(Membership::class, $team->users[0]->membership);
-
-    $this->assertTrue($otherUser->hasTeamRole($team, 'admin'));
-    $this->assertFalse($otherUser->hasTeamRole($team, 'editor'));
-    $this->assertFalse($otherUser->hasTeamRole($team, 'foobar'));
+    expect($team->users)->toHaveCount(1)
+        ->and($team->users[0]->membership)->toBeInstanceOf(Membership::class)
+        ->and($otherUser->hasTeamRole($team, 'admin'))->toBeTrue()
+        ->and($otherUser->hasTeamRole($team, 'editor'))->toBeFalse()
+        ->and($otherUser->hasTeamRole($team, 'foobar'))->toBeFalse();
 
     $team->users->first()->withAccessToken(new TransientToken);
 
-    $this->assertTrue($team->users->first()->hasTeamPermission($team, 'foo'));
-    $this->assertFalse($team->users->first()->hasTeamPermission($team, 'bar'));
+    expect($team->users->first()->hasTeamPermission($team, 'foo'))->toBeTrue()
+        ->and($team->users->first()->hasTeamPermission($team, 'bar'))->toBeFalse();
 });
 
 test('user email address must exist', function (): void {
-    $this->expectException(ValidationException::class);
-
     $team = createTeam();
 
     $action = new AddTeamMember;
 
-    $action->add($team->owner, $team, 'missing@laravel.com', 'admin');
-
-    $this->assertCount(1, $team->fresh()->users);
+    expect(fn() => $action->add($team->owner, $team, 'missing@laravel.com', 'admin'))
+        ->toThrow(ValidationException::class)
+        ->and($team->fresh()->users)->toHaveCount(0);
 });
 
 test('user cant already be on team', function (): void {
-    $this->expectException(ValidationException::class);
-
     $team = createTeam();
 
-    $otherUser = User::forceCreate([
+    User::forceCreate([
         'name' => 'Adam Wathan',
         'email' => 'adam@laravel.com',
         'password' => 'secret',
@@ -76,6 +70,7 @@ test('user cant already be on team', function (): void {
     $action = new AddTeamMember;
 
     $action->add($team->owner, $team, 'adam@laravel.com', 'admin');
-    $this->assertTrue(true);
-    $action->add($team->owner, $team->fresh(), 'adam@laravel.com', 'admin');
+
+    expect(fn() => $action->add($team->owner, $team->fresh(), 'adam@laravel.com', 'admin'))
+        ->toThrow(ValidationException::class);
 });

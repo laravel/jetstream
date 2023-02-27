@@ -35,7 +35,7 @@ test('team members can be removed', function (): void {
 
     $team->users()->attach($otherUser, ['role' => null]);
 
-    $this->assertCount(1, $team->fresh()->users);
+    expect($team->fresh()->users)->toHaveCount(1);
 
     Auth::login($team->owner);
 
@@ -43,14 +43,12 @@ test('team members can be removed', function (): void {
 
     $action->remove($team->owner, $team, $otherUser);
 
-    $this->assertCount(0, $team->fresh()->users);
+    expect($team->fresh()->users)->toHaveCount(0);
 
     Event::assertDispatched(TeamMemberRemoved::class);
 });
 
 test('a team owner cant remove themselves', function (): void {
-    $this->expectException(ValidationException::class);
-
     Event::fake([RemovingTeamMember::class]);
 
     $team = createTeam();
@@ -59,12 +57,12 @@ test('a team owner cant remove themselves', function (): void {
 
     $action = new RemoveTeamMember;
 
-    $action->remove($team->owner, $team, $team->owner);
+    expect(
+        fn () => $action->remove($team->owner, $team, $team->owner)
+    )->toThrow(ValidationException::class);
 });
 
 test('the user must be authorized to remove team members', function (): void {
-    $this->expectException(AuthorizationException::class);
-
     $team = createTeam();
 
     $adam = User::forceCreate([
@@ -86,5 +84,7 @@ test('the user must be authorized to remove team members', function (): void {
 
     $action = new RemoveTeamMember;
 
-    $action->remove($adam, $team, $abigail);
+    expect(
+        fn () => $action->remove($adam, $team, $abigail)
+    )->toThrow(AuthorizationException::class);
 });

@@ -29,18 +29,17 @@ test('team relationship methods', function (): void {
 
     $team = $action->create($user, ['name' => 'Test Team']);
 
-    $this->assertInstanceOf(Team::class, $team);
-
-    $this->assertTrue($user->belongsToTeam($team));
-    $this->assertTrue($user->ownsTeam($team));
-    $this->assertCount(1, $user->fresh()->ownedTeams);
-    $this->assertCount(1, $user->fresh()->allTeams());
+    expect($team)->toBeInstanceOf(Team::class)
+        ->and($user->belongsToTeam($team))->toBeTrue()
+        ->and($user->ownsTeam($team))->toBeTrue()
+        ->and($user->fresh()->ownedTeams)->toHaveCount(1)
+        ->and($user->fresh()->allTeams())->toHaveCount(1);
 
     $team->forceFill(['personal_team' => true])->save();
 
-    $this->assertEquals($team->id, $user->fresh()->personalTeam()->id);
-    $this->assertEquals($team->id, $user->fresh()->currentTeam->id);
-    $this->assertTrue($user->hasTeamPermission($team, 'foo'));
+    expect($user->fresh()->personalTeam()->id)->toEqual($team->id)
+        ->and($user->fresh()->currentTeam->id)->toEqual($team->id)
+        ->and($user->hasTeamPermission($team, 'foo'))->toBeTrue();
 
     // Test with another user that isn't on the team...
     $otherUser = User::forceCreate([
@@ -49,9 +48,9 @@ test('team relationship methods', function (): void {
         'password' => 'secret',
     ]);
 
-    $this->assertFalse($otherUser->belongsToTeam($team));
-    $this->assertFalse($otherUser->ownsTeam($team));
-    $this->assertFalse($otherUser->hasTeamPermission($team, 'foo'));
+    expect($otherUser->belongsToTeam($team))->toBeFalse()
+        ->and($otherUser->ownsTeam($team))->toBeFalse()
+        ->and($otherUser->hasTeamPermission($team, 'foo'))->toBeFalse();
 
     // Add the other user to the team...
     Jetstream::role('editor', 'Editor', ['foo']);
@@ -59,25 +58,22 @@ test('team relationship methods', function (): void {
     $otherUser->teams()->attach($team, ['role' => 'editor']);
     $otherUser = $otherUser->fresh();
 
-    $this->assertTrue($otherUser->belongsToTeam($team));
-    $this->assertFalse($otherUser->ownsTeam($team));
-
-    $this->assertTrue($otherUser->hasTeamPermission($team, 'foo'));
-    $this->assertFalse($otherUser->hasTeamPermission($team, 'bar'));
-
-    $this->assertTrue($team->userHasPermission($otherUser, 'foo'));
-    $this->assertFalse($team->userHasPermission($otherUser, 'bar'));
+    expect($otherUser->belongsToTeam($team))->toBeTrue()
+        ->and($otherUser->ownsTeam($team))->toBeFalse()
+        ->and($otherUser->hasTeamPermission($team, 'foo'))->toBeTrue()
+        ->and($otherUser->hasTeamPermission($team, 'bar'))->toBeFalse()
+        ->and($team->userHasPermission($otherUser, 'foo'))->toBeTrue()
+        ->and($team->userHasPermission($otherUser, 'bar'))->toBeFalse();
 
     $otherUser->withAccessToken(new TransientToken);
 
-    $this->assertTrue($otherUser->belongsToTeam($team));
-    $this->assertFalse($otherUser->ownsTeam($team));
+    expect($otherUser->belongsToTeam($team))->toBeTrue()
+        ->and($otherUser->ownsTeam($team))->toBeFalse()
+        ->and($otherUser->hasTeamPermission($team, 'foo'))->toBeTrue()
+        ->and($otherUser->hasTeamPermission($team, 'bar'))->toBeFalse()
+        ->and($team->userHasPermission($otherUser, 'foo'))->toBeTrue()
+        ->and($team->userHasPermission($otherUser, 'bar'))->toBeFalse();
 
-    $this->assertTrue($otherUser->hasTeamPermission($team, 'foo'));
-    $this->assertFalse($otherUser->hasTeamPermission($team, 'bar'));
-
-    $this->assertTrue($team->userHasPermission($otherUser, 'foo'));
-    $this->assertFalse($team->userHasPermission($otherUser, 'bar'));
 });
 
 test('has team permission checks token permissions', function (): void {
@@ -104,7 +100,7 @@ test('has team permission checks token permissions', function (): void {
 
     $team->users()->attach($adam, ['role' => 'admin']);
 
-    $this->assertFalse($adam->hasTeamPermission($team, 'foo'));
+    expect($adam->hasTeamPermission($team, 'foo'))->toBeFalse();
 
     $john = User::forceCreate([
         'name' => 'John Doe',
@@ -117,7 +113,7 @@ test('has team permission checks token permissions', function (): void {
 
     $team->users()->attach($john, ['role' => 'admin']);
 
-    $this->assertTrue($john->hasTeamPermission($team, 'foo'));
+    expect($john->hasTeamPermission($team, 'foo'))->toBeTrue();
 });
 
 test('user does not need to refresh after switching teams', function (): void {
@@ -133,9 +129,9 @@ test('user does not need to refresh after switching teams', function (): void {
 
     $personalTeam->forceFill(['personal_team' => true])->save();
 
-    $this->assertTrue($user->isCurrentTeam($personalTeam));
+    expect($user->isCurrentTeam($personalTeam))->toBeTrue();
 
     $anotherTeam = $action->create($user, ['name' => 'Test Team']);
 
-    $this->assertTrue($user->isCurrentTeam($anotherTeam));
+    expect($user->isCurrentTeam($anotherTeam))->toBeTrue();
 });

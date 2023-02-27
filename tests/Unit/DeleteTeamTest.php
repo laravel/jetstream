@@ -26,7 +26,7 @@ test('team can be deleted', function (): void {
 
     $action->delete($team);
 
-    $this->assertNull($team->fresh());
+    expect($team->fresh())->toBeNull();
 });
 
 test('team deletion can be validated', function (): void {
@@ -36,14 +36,14 @@ test('team deletion can be validated', function (): void {
 
     $action = new ValidateTeamDeletion;
 
-    $action->validate($team->owner, $team);
-
-    $this->assertTrue(true);
+    expect(
+        fn() => $action->validate($team->owner, $team)
+    )
+        ->not()->toThrow(ValidationException::class)
+        ->and(true)->toBeTrue();
 });
 
 test('personal team cant be deleted', function (): void {
-    $this->expectException(ValidationException::class);
-
     Jetstream::useUserModel(User::class);
 
     $team = createTeam();
@@ -52,21 +52,23 @@ test('personal team cant be deleted', function (): void {
 
     $action = new ValidateTeamDeletion;
 
-    $action->validate($team->owner, $team);
+    expect(
+        fn() => $action->validate($team->owner, $team)
+    )->toThrow(ValidationException::class);
 });
 
 test('non owner cant delete team', function (): void {
-    $this->expectException(AuthorizationException::class);
-
     Jetstream::useUserModel(User::class);
 
     $team = createTeam();
 
     $action = new ValidateTeamDeletion;
 
-    $action->validate(User::forceCreate([
-        'name' => 'Adam Wathan',
-        'email' => 'adam@laravel.com',
-        'password' => 'secret',
-    ]), $team);
+    expect(
+        fn() => $action->validate(User::forceCreate([
+            'name' => 'Adam Wathan',
+            'email' => 'adam@laravel.com',
+            'password' => 'secret',
+        ]), $team)
+    )->toThrow(AuthorizationException::class);
 });

@@ -28,12 +28,10 @@ test('team name can be updated', function (): void {
 
     $team = $action->create($user, ['name' => 'Test Team']);
 
-    $this->assertInstanceOf(Team::class, $team);
+    expect($team)->toBeInstanceOf(Team::class);
 });
 
 test('name is required', function (): void {
-    $this->expectException(ValidationException::class);
-
     $action = new CreateTeam;
 
     $user = User::forceCreate([
@@ -42,5 +40,6 @@ test('name is required', function (): void {
         'password' => 'secret',
     ]);
 
-    $action->create($user, ['name' => '']);
+    expect(fn () => $action->create($user, ['name' => '']))
+        ->toThrow(ValidationException::class);
 });

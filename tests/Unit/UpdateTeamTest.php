@@ -24,15 +24,15 @@ test('team name can be updated', function (): void {
 
     $action->update($team->owner, $team, ['name' => 'Test Team Updated']);
 
-    $this->assertSame('Test Team Updated', $team->fresh()->name);
+    expect($team->fresh()->name)->toEqual('Test Team Updated');
 });
 
 test('name is required', function (): void {
-    $this->expectException(ValidationException::class);
-
     $team = createTeam();
 
     $action = new UpdateTeamName;
 
-    $action->update($team->owner, $team, ['name' => '']);
+    expect(
+        fn () => $action->update($team->owner, $team, ['name' => ''])
+    )->toThrow(ValidationException::class);
 });

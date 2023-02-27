@@ -32,8 +32,8 @@ test('user can be deleted', function (): void {
 
     $otherTeam->users()->attach($team->owner, ['role' => null]);
 
-    $this->assertSame(2, DB::table('teams')->count());
-    $this->assertSame(1, DB::table('team_user')->count());
+    expect(DB::table('teams')->get())->toHaveCount(2)
+        ->and(DB::table('team_user')->get())->toHaveCount(1);
 
     copy(__DIR__.'/../../stubs/app/Actions/Jetstream/DeleteUserWithTeams.php', $fixture = __DIR__.'/../Fixtures/DeleteUser.php');
 
@@ -43,9 +43,9 @@ test('user can be deleted', function (): void {
 
     $action->delete($team->owner);
 
-    $this->assertNull($team->owner->fresh());
-    $this->assertSame(1, DB::table('teams')->count());
-    $this->assertSame(0, DB::table('team_user')->count());
+    expect($team->owner->fresh())->toBeNull()
+        ->and(DB::table('teams')->get())->toHaveCount(1)
+        ->and(DB::table('team_user')->get())->toHaveCount(0);
 
     @unlink($fixture);
 });

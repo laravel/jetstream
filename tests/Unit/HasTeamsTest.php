@@ -22,7 +22,7 @@ beforeEach(function () {
 test('team Role returns an Owner Role for the team owner', function (): void {
     $team = Team::factory()->create();
 
-    $this->assertInstanceOf(OwnerRole::class, $team->owner->teamRole($team));
+    expect($team->owner->teamRole($team))->toBeInstanceOf(OwnerRole::class);
 });
 
 test('team Role returns the matching role', function (): void {
@@ -38,14 +38,14 @@ test('team Role returns the matching role', function (): void {
         ->create();
     $role = $team->users->first()->teamRole($team);
 
-    $this->assertInstanceOf(Role::class, $role);
-    $this->assertSame('admin', $role->key);
+    expect($role)->toBeInstanceOf(Role::class)
+        ->and($role->key)->toEqual('admin');
 });
 
 test('team Role returns null if the user does not belong to the team', function (): void {
     $team = Team::factory()->create();
 
-    $this->assertNull((new UserFixture())->teamRole($team));
+    expect((new UserFixture())->teamRole($team))->toBeNull();
 });
 
 test('team Role returns null if the user does not have a role on the site', function (): void {
@@ -53,19 +53,19 @@ test('team Role returns null if the user does not have a role on the site', func
         ->has(User::factory())
         ->create();
 
-    $this->assertNull($team->users->first()->teamRole($team));
+    expect($team->users->first()->teamRole($team))->toBeNull();
 });
 
 test('team Permissions returns all for team owners', function (): void {
     $team = Team::factory()->create();
 
-    $this->assertSame(['*'], $team->owner->teamPermissions($team));
+    expect($team->owner->teamPermissions($team))->toEqual(['*']);
 });
 
 test('team Permissions returns empty for non members', function (): void {
     $team = Team::factory()->create();
 
-    $this->assertSame([], (new UserFixture())->teamPermissions($team));
+    expect((new UserFixture())->teamPermissions($team))->toEqual([]);
 });
 
 test('team Permissions returns permissions for the users role', function (): void {
@@ -80,7 +80,7 @@ test('team Permissions returns permissions for the users role', function (): voi
         ])
         ->create();
 
-    $this->assertSame(['read', 'create'], $team->users->first()->teamPermissions($team));
+    expect($team->users->first()->teamPermissions($team))->toEqual(['read', 'create']);
 });
 
 test('team Permissions returns empty permissions for members without a defined role', function (): void {
@@ -93,5 +93,5 @@ test('team Permissions returns empty permissions for members without a defined r
         ->has(User::factory())
         ->create();
 
-    $this->assertSame([], $team->users->first()->teamPermissions($team));
+    expect($team->users->first()->teamPermissions($team))->toEqual([]);
 });

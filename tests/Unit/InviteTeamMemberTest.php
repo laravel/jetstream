@@ -25,7 +25,7 @@ test('team members can be invited', function (): void {
 
     $team = createTeam();
 
-    $otherUser = User::forceCreate([
+    User::forceCreate([
         'name' => 'Adam Wathan',
         'email' => 'adam@laravel.com',
         'password' => 'secret',
@@ -37,20 +37,18 @@ test('team members can be invited', function (): void {
 
     $team = $team->fresh();
 
-    $this->assertCount(0, $team->users);
-    $this->assertCount(1, $team->teamInvitations);
-    $this->assertEquals('adam@laravel.com', $team->teamInvitations->first()->email);
-    $this->assertEquals($team->id, $team->teamInvitations->first()->team->id);
+    expect($team->users)->toHaveCount(0)
+        ->and($team->teamInvitations)->toHaveCount(1)
+        ->and($team->teamInvitations->first()->email)->toEqual('adam@laravel.com')
+        ->and($team->teamInvitations->first()->team->id)->toEqual($team->id);
 });
 
 test('user cant already be on team', function (): void {
     Mail::fake();
 
-    $this->expectException(ValidationException::class);
-
     $team = createTeam();
 
-    $otherUser = User::forceCreate([
+    User::forceCreate([
         'name' => 'Adam Wathan',
         'email' => 'adam@laravel.com',
         'password' => 'secret',
@@ -59,6 +57,8 @@ test('user cant already be on team', function (): void {
     $action = new InviteTeamMember;
 
     $action->invite($team->owner, $team, 'adam@laravel.com', 'admin');
-    $this->assertTrue(true);
-    $action->invite($team->owner, $team->fresh(), 'adam@laravel.com', 'admin');
+
+    expect(
+        fn () => $action->invite($team->owner, $team->fresh(), 'adam@laravel.com', 'admin')
+    )->toThrow(ValidationException::class);
 });
