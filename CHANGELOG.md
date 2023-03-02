@@ -1,6 +1,11 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v3.0.1...3.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v3.0.2...3.x)
+
+## [v3.0.2](https://github.com/laravel/jetstream/compare/v3.0.1...v3.0.2) - 2023-03-01
+
+- Removes `@return $this` when returning static by @nunomaduro in https://github.com/laravel/jetstream/pull/1268
+- Use route helper in two factor authentication form by @sushantaryal in https://github.com/laravel/jetstream/pull/1276
 
 ## [v3.0.1](https://github.com/laravel/jetstream/compare/v3.0.0...v3.0.1) - 2023-02-15
 
