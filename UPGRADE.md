@@ -62,7 +62,7 @@ Next, clear your view cache:
 
 You should change all references of `$page.props.user` to `$page.props.auth.user` and `usePage().props.user` to `usePage().props.auth.user`.
 
-If you are using an Inertia version prior to 1.0, you will need to replace `usePage().props.value.user` with `userPage().props.value.auth.user`.
+If you are using an Inertia version prior to 1.0, you will need to replace `usePage().props.value.user` with `usePage().props.value.auth.user`.
 
 For example:
 
