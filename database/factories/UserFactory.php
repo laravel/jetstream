@@ -51,8 +51,6 @@ class UserFactory extends Factory
 
     /**
      * Indicate that the user should have a personal team.
-     *
-     * @return $this
      */
     public function withPersonalTeam(callable $modify = null): static
     {
