@@ -101,9 +101,9 @@ class InstallCommand extends Command
         $stubs = $this->getTestStubsPath();
 
         if ($this->option('pest')) {
-            $this->removeComposerDevPackages(['nunomaduro/collision', 'phpunit/phpunit']);
+            $this->removeComposerDevPackages(['phpunit/phpunit']);
 
-            if (! $this->requireComposerDevPackages(['nunomaduro/collision:^6.4', 'pestphp/pest:^1.22', 'pestphp/pest-plugin-laravel:^1.2'])) {
+            if (! $this->requireComposerDevPackages(['pestphp/pest:^2.0', 'pestphp/pest-plugin-laravel:^2.0'])) {
                 return 1;
             }
 
