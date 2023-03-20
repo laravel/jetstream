@@ -1,6 +1,13 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v3.0.2...3.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v3.1.0...3.x)
+
+## [v3.1.0](https://github.com/laravel/jetstream/compare/v3.0.2...v3.1.0) - 2023-03-20
+
+- Use Pest 2 by @nunomaduro in https://github.com/laravel/jetstream/pull/1280
+- Fixes typo from userPage to usePage by @john-shipp in https://github.com/laravel/jetstream/pull/1277
+- Allow modification of the personal team using an optional callable by @peterfox in https://github.com/laravel/jetstream/pull/1278
+- Get fresh user instance on two factor authentication tests by @telkins in https://github.com/laravel/jetstream/pull/1281
 
 ## [v3.0.2](https://github.com/laravel/jetstream/compare/v3.0.1...v3.0.2) - 2023-03-01
 
