@@ -1,7 +1,3 @@
-<style>
-    [x-cloak] { display: none; }
-</style>
-
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
