@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v3.1.0...3.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v3.1.1...3.x)
+
+## [v3.1.1](https://github.com/laravel/jetstream/compare/v3.1.0...v3.1.1) - 2023-04-10
+
+- Fix issue with page reload/refresh on two-factor-challenge page by @andrewdwallo in https://github.com/laravel/jetstream/pull/1291
+- Remove `v-show` directive from "user profile information form" template by @ndresx in https://github.com/laravel/jetstream/pull/1292
+- Only show "Change Teams" options if multiple teams are available by @briankiewel in https://github.com/laravel/jetstream/pull/1294
 
 ## [v3.1.0](https://github.com/laravel/jetstream/compare/v3.0.2...v3.1.0) - 2023-03-20
 
