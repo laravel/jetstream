@@ -4,7 +4,6 @@ namespace Laravel\Jetstream\Tests\Fixtures;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 
 class Admin extends Authenticatable

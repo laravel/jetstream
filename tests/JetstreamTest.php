@@ -2,7 +2,6 @@
 
 namespace Laravel\Jetstream\Tests;
 
-use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Jetstream;
 
 class JetstreamTest extends OrchestraTestCase

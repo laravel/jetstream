@@ -6,7 +6,6 @@ use Laravel\Fortify\FortifyServiceProvider;
 use Laravel\Jetstream\Features;
 use Laravel\Jetstream\JetstreamServiceProvider;
 use Livewire\LivewireServiceProvider;
-use Mockery;
 use Orchestra\Testbench\TestCase;
 
 abstract class OrchestraTestCase extends TestCase

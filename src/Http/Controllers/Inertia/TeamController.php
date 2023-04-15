@@ -5,7 +5,6 @@ namespace Laravel\Jetstream\Http\Controllers\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Gate;
-use Inertia\Inertia;
 use Laravel\Jetstream\Actions\ValidateTeamDeletion;
 use Laravel\Jetstream\Contracts\CreatesTeams;
 use Laravel\Jetstream\Contracts\DeletesTeams;
