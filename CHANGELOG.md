@@ -1,6 +1,11 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v3.1.1...3.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v3.1.2...3.x)
+
+## [v3.1.2](https://github.com/laravel/jetstream/compare/v3.1.1...v3.1.2) - 2023-04-21
+
+- Remove unused imports by @akunbeben in https://github.com/laravel/jetstream/pull/1297
+- Do not install auth service provider by @taylorotwell in https://github.com/laravel/jetstream/commit/dfac46f3ff3ba9a3866ac343d6aee1cc398ff0b4
 
 ## [v3.1.1](https://github.com/laravel/jetstream/compare/v3.1.0...v3.1.1) - 2023-04-10
 
