@@ -17,9 +17,6 @@ class InertiaManager
     /**
      * Render the given Inertia page.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $page
-     * @param  array  $data
      * @return \Inertia\Response
      */
     public function render(Request $request, string $page, array $data = [])
@@ -36,8 +33,6 @@ class InertiaManager
     /**
      * Register a rendering callback.
      *
-     * @param  string  $page
-     * @param  callable  $callback
      * @return $this
      */
     public function whenRendering(string $page, callable $callback)

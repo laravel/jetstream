@@ -7,7 +7,6 @@ class Features
     /**
      * Determine if the given feature is enabled.
      *
-     * @param  string  $feature
      * @return bool
      */
     public static function enabled(string $feature)
@@ -18,8 +17,6 @@ class Features
     /**
      * Determine if the feature is enabled and has a given option enabled.
      *
-     * @param  string  $feature
-     * @param  string  $option
      * @return bool
      */
     public static function optionEnabled(string $feature, string $option)
@@ -111,7 +108,6 @@ class Features
     /**
      * Enable the teams feature.
      *
-     * @param  array  $options
      * @return string
      */
     public static function teams(array $options = [])

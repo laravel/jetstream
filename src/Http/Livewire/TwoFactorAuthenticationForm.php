@@ -59,7 +59,6 @@ class TwoFactorAuthenticationForm extends Component
     /**
      * Enable two factor authentication for the user.
      *
-     * @param  \Laravel\Fortify\Actions\EnableTwoFactorAuthentication  $enable
      * @return void
      */
     public function enableTwoFactorAuthentication(EnableTwoFactorAuthentication $enable)
@@ -82,7 +81,6 @@ class TwoFactorAuthenticationForm extends Component
     /**
      * Confirm two factor authentication for the user.
      *
-     * @param  \Laravel\Fortify\Actions\ConfirmTwoFactorAuthentication  $confirm
      * @return void
      */
     public function confirmTwoFactorAuthentication(ConfirmTwoFactorAuthentication $confirm)
@@ -115,7 +113,6 @@ class TwoFactorAuthenticationForm extends Component
     /**
      * Generate new recovery codes for the user.
      *
-     * @param  \Laravel\Fortify\Actions\GenerateNewRecoveryCodes  $generate
      * @return void
      */
     public function regenerateRecoveryCodes(GenerateNewRecoveryCodes $generate)
@@ -132,7 +129,6 @@ class TwoFactorAuthenticationForm extends Component
     /**
      * Disable two factor authentication for the user.
      *
-     * @param  \Laravel\Fortify\Actions\DisableTwoFactorAuthentication  $disable
      * @return void
      */
     public function disableTwoFactorAuthentication(DisableTwoFactorAuthentication $disable)

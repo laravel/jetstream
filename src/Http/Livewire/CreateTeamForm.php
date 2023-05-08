@@ -21,7 +21,6 @@ class CreateTeamForm extends Component
     /**
      * Create a new team.
      *
-     * @param  \Laravel\Jetstream\Contracts\CreatesTeams  $creator
      * @return void
      */
     public function createTeam(CreatesTeams $creator)

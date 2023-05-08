@@ -40,8 +40,6 @@ class DeleteTeamForm extends Component
     /**
      * Delete the team.
      *
-     * @param  \Laravel\Jetstream\Actions\ValidateTeamDeletion  $validator
-     * @param  \Laravel\Jetstream\Contracts\DeletesTeams  $deleter
      * @return void
      */
     public function deleteTeam(ValidateTeamDeletion $validator, DeletesTeams $deleter)

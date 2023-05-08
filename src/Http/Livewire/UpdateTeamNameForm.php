@@ -38,7 +38,6 @@ class UpdateTeamNameForm extends Component
     /**
      * Update the team's name.
      *
-     * @param  \Laravel\Jetstream\Contracts\UpdatesTeamNames  $updater
      * @return void
      */
     public function updateTeamName(UpdatesTeamNames $updater)

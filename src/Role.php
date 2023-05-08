@@ -37,9 +37,6 @@ class Role implements JsonSerializable
     /**
      * Create a new role instance.
      *
-     * @param  string  $key
-     * @param  string  $name
-     * @param  array  $permissions
      * @return void
      */
     public function __construct(string $key, string $name, array $permissions)
@@ -52,7 +49,6 @@ class Role implements JsonSerializable
     /**
      * Describe the role.
      *
-     * @param  string  $description
      * @return $this
      */
     public function description(string $description)

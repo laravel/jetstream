@@ -54,8 +54,8 @@ class UserProfileControllerTest extends OrchestraTestCase
         ]);
 
         $response = $this->actingAs($user)
-                        ->withSession(['two_factor_empty_at' => time()])
-                        ->get('/user/profile');
+            ->withSession(['two_factor_empty_at' => time()])
+            ->get('/user/profile');
 
         $response->assertStatus(200);
     }
@@ -76,11 +76,11 @@ class UserProfileControllerTest extends OrchestraTestCase
         ]);
 
         $response = $this->actingAs($user)
-                        ->withSession([
-                            'two_factor_empty_at' => time(),
-                            'two_factor_confirming_at' => time() - 10,
-                        ])
-                        ->get('/user/profile');
+            ->withSession([
+                'two_factor_empty_at' => time(),
+                'two_factor_confirming_at' => time() - 10,
+            ])
+            ->get('/user/profile');
 
         $response->assertStatus(200);
     }

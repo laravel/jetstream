@@ -13,7 +13,6 @@ class TermsOfServiceController extends Controller
     /**
      * Show the terms of service for the application.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Inertia\Response
      */
     public function show(Request $request)

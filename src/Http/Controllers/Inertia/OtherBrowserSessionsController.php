@@ -14,8 +14,6 @@ class OtherBrowserSessionsController extends Controller
     /**
      * Log out from other browser sessions.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Contracts\Auth\StatefulGuard  $guard
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Request $request, StatefulGuard $guard)
@@ -40,7 +38,6 @@ class OtherBrowserSessionsController extends Controller
     /**
      * Delete the other browser session records from storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return void
      */
     protected function deleteOtherSessionRecords(Request $request)

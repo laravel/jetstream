@@ -15,8 +15,6 @@ class CurrentUserController extends Controller
     /**
      * Delete the current user.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Contracts\Auth\StatefulGuard  $guard
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, StatefulGuard $guard)

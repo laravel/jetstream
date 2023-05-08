@@ -153,10 +153,10 @@ class InstallCommand extends Command
 
         // Sanctum...
         (new Process([$this->phpBinary(), 'artisan', 'vendor:publish', '--provider=Laravel\Sanctum\SanctumServiceProvider', '--force'], base_path()))
-                ->setTimeout(null)
-                ->run(function ($type, $output) {
-                    $this->output->write($output);
-                });
+            ->setTimeout(null)
+            ->run(function ($type, $output) {
+                $this->output->write($output);
+            });
 
         // Update Configuration...
         $this->replaceInFile('inertia', 'livewire', config_path('jetstream.php'));
@@ -361,10 +361,10 @@ EOF;
 
         // Sanctum...
         (new Process([$this->phpBinary(), 'artisan', 'vendor:publish', '--provider=Laravel\Sanctum\SanctumServiceProvider', '--force'], base_path()))
-                ->setTimeout(null)
-                ->run(function ($type, $output) {
-                    $this->output->write($output);
-                });
+            ->setTimeout(null)
+            ->run(function ($type, $output) {
+                $this->output->write($output);
+            });
 
         // Tailwind Configuration...
         copy(__DIR__.'/../../stubs/inertia/tailwind.config.js', base_path('tailwind.config.js'));
@@ -726,7 +726,6 @@ EOF;
     /**
      * Update the "package.json" file.
      *
-     * @param  callable  $callback
      * @param  bool  $dev
      * @return void
      */
@@ -785,7 +784,6 @@ EOF;
     /**
      * Remove Tailwind dark classes from the given files.
      *
-     * @param  \Symfony\Component\Finder\Finder  $finder
      * @return void
      */
     protected function removeDarkClasses(Finder $finder)

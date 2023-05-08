@@ -11,7 +11,6 @@ class ApiTokenController extends Controller
     /**
      * Show the user API token screen.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Inertia\Response
      */
     public function index(Request $request)
@@ -30,7 +29,6 @@ class ApiTokenController extends Controller
     /**
      * Create a new API token.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
@@ -52,7 +50,6 @@ class ApiTokenController extends Controller
     /**
      * Update the given API token's permissions.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  string  $tokenId
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -75,7 +72,6 @@ class ApiTokenController extends Controller
     /**
      * Delete the given API token.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  string  $tokenId
      * @return \Illuminate\Http\RedirectResponse
      */

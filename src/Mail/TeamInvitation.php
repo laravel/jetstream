@@ -22,7 +22,6 @@ class TeamInvitation extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param  \Laravel\Jetstream\TeamInvitation  $invitation
      * @return void
      */
     public function __construct(TeamInvitationModel $invitation)

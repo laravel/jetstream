@@ -152,7 +152,6 @@ class TeamMemberManager extends Component
     /**
      * Save the role for the user being managed.
      *
-     * @param  \Laravel\Jetstream\Actions\UpdateTeamMemberRole  $updater
      * @return void
      */
     public function updateRole(UpdateTeamMemberRole $updater)
@@ -182,7 +181,6 @@ class TeamMemberManager extends Component
     /**
      * Remove the currently authenticated user from the team.
      *
-     * @param  \Laravel\Jetstream\Contracts\RemovesTeamMembers  $remover
      * @return void
      */
     public function leaveTeam(RemovesTeamMembers $remover)
@@ -216,7 +214,6 @@ class TeamMemberManager extends Component
     /**
      * Remove a team member from the team.
      *
-     * @param  \Laravel\Jetstream\Contracts\RemovesTeamMembers  $remover
      * @return void
      */
     public function removeTeamMember(RemovesTeamMembers $remover)

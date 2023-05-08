@@ -14,7 +14,6 @@ class TeamInvitationController extends Controller
     /**
      * Accept a team invitation.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $invitationId
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -41,7 +40,6 @@ class TeamInvitationController extends Controller
     /**
      * Cancel the given team invitation.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $invitationId
      * @return \Illuminate\Http\RedirectResponse
      */

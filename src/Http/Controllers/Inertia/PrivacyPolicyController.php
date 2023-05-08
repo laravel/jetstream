@@ -13,7 +13,6 @@ class PrivacyPolicyController extends Controller
     /**
      * Show the privacy policy for the application.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Inertia\Response
      */
     public function show(Request $request)

@@ -45,7 +45,6 @@ trait ConfirmsTwoFactorAuthentication
     /**
      * Determine if two factor authenticatoin is totally disabled.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return bool
      */
     protected function twoFactorAuthenticationDisabled(Request $request)
@@ -57,7 +56,6 @@ trait ConfirmsTwoFactorAuthentication
     /**
      * Determine if two factor authentication is just now being confirmed within the last request cycle.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return bool
      */
     protected function hasJustBegunConfirmingTwoFactorAuthentication(Request $request)
@@ -71,7 +69,6 @@ trait ConfirmsTwoFactorAuthentication
     /**
      * Determine if two factor authentication was never totally confirmed once confirmation started.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $currentTime
      * @return bool
      */

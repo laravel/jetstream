@@ -34,9 +34,9 @@ abstract class Team extends Model
     public function users()
     {
         return $this->belongsToMany(Jetstream::userModel(), Jetstream::membershipModel())
-                        ->withPivot('role')
-                        ->withTimestamps()
-                        ->as('membership');
+            ->withPivot('role')
+            ->withTimestamps()
+            ->as('membership');
     }
 
     /**
@@ -53,7 +53,6 @@ abstract class Team extends Model
     /**
      * Determine if the given email address belongs to a user on the team.
      *
-     * @param  string  $email
      * @return bool
      */
     public function hasUserWithEmail(string $email)
@@ -110,10 +109,10 @@ abstract class Team extends Model
     public function purge()
     {
         $this->owner()->where('current_team_id', $this->id)
-                ->update(['current_team_id' => null]);
+            ->update(['current_team_id' => null]);
 
         $this->users()->where('current_team_id', $this->id)
-                ->update(['current_team_id' => null]);
+            ->update(['current_team_id' => null]);
 
         $this->users()->detach();
 

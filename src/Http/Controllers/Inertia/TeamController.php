@@ -19,7 +19,6 @@ class TeamController extends Controller
     /**
      * Show the team management screen.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $teamId
      * @return \Inertia\Response
      */
@@ -46,7 +45,6 @@ class TeamController extends Controller
     /**
      * Show the team creation screen.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Inertia\Response
      */
     public function create(Request $request)
@@ -59,7 +57,6 @@ class TeamController extends Controller
     /**
      * Create a new team.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
@@ -74,7 +71,6 @@ class TeamController extends Controller
     /**
      * Update the given team's name.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $teamId
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -90,7 +86,6 @@ class TeamController extends Controller
     /**
      * Delete the given team.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $teamId
      * @return \Illuminate\Http\RedirectResponse
      */

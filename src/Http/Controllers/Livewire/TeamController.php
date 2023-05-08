@@ -12,7 +12,6 @@ class TeamController extends Controller
     /**
      * Show the team management screen.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $teamId
      * @return \Illuminate\View\View
      */
@@ -33,7 +32,6 @@ class TeamController extends Controller
     /**
      * Show the team creation screen.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\View\View
      */
     public function create(Request $request)

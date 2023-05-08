@@ -33,7 +33,6 @@ trait ConfirmsPasswords
     /**
      * Start confirming the user's password.
      *
-     * @param  string  $confirmableId
      * @return void
      */
     public function startConfirmingPassword(string $confirmableId)
