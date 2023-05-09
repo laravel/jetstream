@@ -1,6 +1,14 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v3.1.2...3.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v3.1.3...3.x)
+
+## [v3.1.3](https://github.com/laravel/jetstream/compare/v3.1.2...v3.1.3) - 2023-05-09
+
+- Update two-factor-authentication-form.blade.php by @vivante64 in https://github.com/laravel/jetstream/pull/1305
+- Add object-cover class to team member profile photo by @anamarijapapic in https://github.com/laravel/jetstream/pull/1304
+- Update Welcome.vue by @aymanatmeh in https://github.com/laravel/jetstream/pull/1302
+- Ensure email is included in state by @antja0 in https://github.com/laravel/jetstream/pull/1312
+- Lint stub files with Pint by @driesvints in https://github.com/laravel/jetstream/pull/1313
 
 ## [v3.1.2](https://github.com/laravel/jetstream/compare/v3.1.1...v3.1.2) - 2023-04-21
 
