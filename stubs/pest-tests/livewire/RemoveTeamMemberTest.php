@@ -12,8 +12,8 @@ test('team members can be removed from teams', function () {
     );
 
     $component = Livewire::test(TeamMemberManager::class, ['team' => $user->currentTeam])
-                    ->set('teamMemberIdBeingRemoved', $otherUser->id)
-                    ->call('removeTeamMember');
+        ->set('teamMemberIdBeingRemoved', $otherUser->id)
+        ->call('removeTeamMember');
 
     expect($user->currentTeam->fresh()->users)->toHaveCount(0);
 });
@@ -28,7 +28,7 @@ test('only team owner can remove team members', function () {
     $this->actingAs($otherUser);
 
     $component = Livewire::test(TeamMemberManager::class, ['team' => $user->currentTeam])
-                    ->set('teamMemberIdBeingRemoved', $user->id)
-                    ->call('removeTeamMember')
-                    ->assertStatus(403);
+        ->set('teamMemberIdBeingRemoved', $user->id)
+        ->call('removeTeamMember')
+        ->assertStatus(403);
 });
