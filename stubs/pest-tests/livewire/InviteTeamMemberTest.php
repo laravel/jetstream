@@ -13,10 +13,10 @@ test('team members can be invited to team', function () {
     $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
     $component = Livewire::test(TeamMemberManager::class, ['team' => $user->currentTeam])
-                    ->set('addTeamMemberForm', [
-                        'email' => 'test@example.com',
-                        'role' => 'admin',
-                    ])->call('addTeamMember');
+        ->set('addTeamMemberForm', [
+            'email' => 'test@example.com',
+            'role' => 'admin',
+        ])->call('addTeamMember');
 
     Mail::assertSent(TeamInvitation::class);
 
@@ -32,10 +32,10 @@ test('team member invitations can be cancelled', function () {
 
     // Add the team member...
     $component = Livewire::test(TeamMemberManager::class, ['team' => $user->currentTeam])
-                    ->set('addTeamMemberForm', [
-                        'email' => 'test@example.com',
-                        'role' => 'admin',
-                    ])->call('addTeamMember');
+        ->set('addTeamMemberForm', [
+            'email' => 'test@example.com',
+            'role' => 'admin',
+        ])->call('addTeamMember');
 
     $invitationId = $user->currentTeam->fresh()->teamInvitations->first()->id;
 

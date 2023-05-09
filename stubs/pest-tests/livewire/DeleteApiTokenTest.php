@@ -20,8 +20,8 @@ test('api tokens can be deleted', function () {
     ]);
 
     Livewire::test(ApiTokenManager::class)
-                ->set(['apiTokenIdBeingDeleted' => $token->id])
-                ->call('deleteApiToken');
+        ->set(['apiTokenIdBeingDeleted' => $token->id])
+        ->call('deleteApiToken');
 
     expect($user->fresh()->tokens)->toHaveCount(0);
 })->skip(function () {
