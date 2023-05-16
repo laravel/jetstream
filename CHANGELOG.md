@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v3.1.3...3.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v3.2.0...3.x)
+
+## [v3.2.0](https://github.com/laravel/jetstream/compare/v3.1.3...v3.2.0) - 2023-05-10
+
+- Migrate to modules by @timacdonald in https://github.com/laravel/jetstream/pull/1315
 
 ## [v3.1.3](https://github.com/laravel/jetstream/compare/v3.1.2...v3.1.3) - 2023-05-09
 
