@@ -236,7 +236,7 @@ const displayableRole = (role) => {
                             <div class="flex items-center">
                                 <!-- Manage Team Member Role -->
                                 <button
-                                    v-if="userPermissions.canAddTeamMembers && availableRoles.length"
+                                    v-if="userPermissions.canUpdateTeamMembers && availableRoles.length"
                                     class="ml-2 text-sm text-gray-400 underline"
                                     @click="manageRole(user)"
                                 >
