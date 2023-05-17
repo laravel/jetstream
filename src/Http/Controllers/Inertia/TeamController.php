@@ -39,6 +39,7 @@ class TeamController extends Controller
                 'canDeleteTeam' => Gate::check('delete', $team),
                 'canRemoveTeamMembers' => Gate::check('removeTeamMember', $team),
                 'canUpdateTeam' => Gate::check('update', $team),
+                'canUpdateTeamMembers' => Gate::check('updateTeamMember', $team),
             ],
         ]);
     }
