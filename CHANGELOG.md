@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v3.2.0...3.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v3.2.1...3.x)
+
+## [v3.2.1](https://github.com/laravel/jetstream/compare/v3.2.0...v3.2.1) - 2023-05-17
+
+- Fix gate check when updating user permissions on a team by @drewrawitz in https://github.com/laravel/jetstream/pull/1316
 
 ## [v3.2.0](https://github.com/laravel/jetstream/compare/v3.1.3...v3.2.0) - 2023-05-10
 
