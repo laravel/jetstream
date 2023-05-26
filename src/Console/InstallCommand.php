@@ -371,6 +371,9 @@ EOF;
         copy(__DIR__.'/../../stubs/inertia/postcss.config.js', base_path('postcss.config.js'));
         copy(__DIR__.'/../../stubs/inertia/vite.config.js', base_path('vite.config.js'));
 
+        // jsconfig.json...
+        copy(__DIR__.'/../../stubs/inertia/jsconfig.json', base_path('jsconfig.json'));
+
         // Directories...
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Fortify'));
         (new Filesystem)->ensureDirectoryExists(app_path('Actions/Jetstream'));
