@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v3.2.1...3.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v3.2.2...3.x)
+
+## [v3.2.2](https://github.com/laravel/jetstream/compare/v3.2.1...v3.2.2) - 2023-05-30
+
+- jsconfig.json configuration file by @aknEvrnky in https://github.com/laravel/jetstream/pull/1317
 
 ## [v3.2.1](https://github.com/laravel/jetstream/compare/v3.2.0...v3.2.1) - 2023-05-17
 
