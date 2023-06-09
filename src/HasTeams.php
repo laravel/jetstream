@@ -204,7 +204,7 @@ trait HasTeams
             $this->currentAccessToken() !== null) {
             return false;
         }
-        
+
         if ($this->ownsTeam($team)) {
             return true;
         }
