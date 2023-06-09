@@ -199,17 +199,17 @@ trait HasTeams
      */
     public function hasTeamPermission($team, string $permission)
     {
+        if (in_array(HasApiTokens::class, class_uses_recursive($this)) &&
+            ! $this->tokenCan($permission) &&
+            $this->currentAccessToken() !== null) {
+            return false;
+        }
+        
         if ($this->ownsTeam($team)) {
             return true;
         }
 
         if (! $this->belongsToTeam($team)) {
-            return false;
-        }
-
-        if (in_array(HasApiTokens::class, class_uses_recursive($this)) &&
-            ! $this->tokenCan($permission) &&
-            $this->currentAccessToken() !== null) {
             return false;
         }
 
