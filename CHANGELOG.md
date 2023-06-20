@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v3.2.2...3.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v3.2.3...3.x)
+
+## [v3.2.3](https://github.com/laravel/jetstream/compare/v3.2.2...v3.2.3) - 2023-06-07
+
+- Fix ShareInertiaData middleware for Eloquent strict mode when 2FA is disabled by @onlime in https://github.com/laravel/jetstream/pull/1319
 
 ## [v3.2.2](https://github.com/laravel/jetstream/compare/v3.2.1...v3.2.2) - 2023-05-30
 
