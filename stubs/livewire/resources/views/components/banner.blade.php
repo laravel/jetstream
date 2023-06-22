@@ -2,13 +2,13 @@
 
 <div x-data="{{ json_encode(['show' => true, 'style' => $style, 'message' => $message]) }}"
             :class="{ 'bg-indigo-500': style == 'success', 'bg-red-700': style == 'danger', 'bg-gray-500': style != 'success' && style != 'danger' }"
-            style="display: none;"
-            x-show="show && message"
-            x-init="
+            class="fixed w-full z-10" style="display: none;" x-show="show && message" x-on:click.outside="show = false"
+            x-transition.duration.500ms x-init="
                 document.addEventListener('banner-message', event => {
                     style = event.detail.style;
                     message = event.detail.message;
                     show = true;
+                    setTimeout(() => show = false, 3000);
                 });
             ">
     <div class="max-w-screen-xl mx-auto py-2 px-3 sm:px-6 lg:px-8">
