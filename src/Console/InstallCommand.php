@@ -4,14 +4,20 @@ namespace Laravel\Jetstream\Console;
 
 use Exception;
 use Illuminate\Console\Command;
+use Illuminate\Contracts\Console\PromptsForMissingInput;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use RuntimeException;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
 
-class InstallCommand extends Command
+use function Laravel\Prompts\multiselect;
+use function Laravel\Prompts\select;
+
+class InstallCommand extends Command implements PromptsForMissingInput
 {
     /**
      * The name and signature of the console command.
@@ -829,5 +835,47 @@ EOF;
         $process->run(function ($type, $line) {
             $this->output->write('    '.$line);
         });
+    }
+
+    /**
+     * Prompt for missing input arguments using the returned questions.
+     *
+     * @return array
+     */
+    protected function promptForMissingArgumentsUsing()
+    {
+        return [
+            'stack' => fn () => select(
+                label: 'Which Jetstream stack would you like to install?',
+                options: [
+                    'inertia' => 'Vue with Inertia',
+                    'livewire' => 'Livewire',
+                ]
+            ),
+        ];
+    }
+
+    /**
+     * Interact further with the user if they were prompted for missing arguments.
+     *
+     * @param  \Symfony\Component\Console\Input\InputInterface  $input
+     * @param  \Symfony\Component\Console\Output\OutputInterface  $output
+     * @return void
+     */
+    protected function afterPromptingForMissingArguments(InputInterface $input, OutputInterface $output)
+    {
+        collect(multiselect(
+            label: 'Would you like any optional extras?',
+            options: collect([
+                'teams' => 'Team support',
+                'api' => 'API support',
+                'verification' => 'Email verification',
+                'dark' => 'Dark mode',
+                'pest' => 'Pest tests instead of PHPUnit',
+            ])->when(
+                $input->getArgument('stack') === 'inertia',
+                fn ($options) => $options->put('ssr', 'Inertia SSR')
+            )->all(),
+        ))->each(fn ($option) => $input->setOption($option, true));
     }
 }
