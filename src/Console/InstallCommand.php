@@ -865,17 +865,21 @@ EOF;
     protected function afterPromptingForMissingArguments(InputInterface $input, OutputInterface $output)
     {
         collect(multiselect(
-            label: 'Would you like any optional extras?',
+            label: 'Would you like any optional features?',
             options: collect([
                 'teams' => 'Team support',
                 'api' => 'API support',
                 'verification' => 'Email verification',
                 'dark' => 'Dark mode',
-                'pest' => 'Pest tests instead of PHPUnit',
             ])->when(
                 $input->getArgument('stack') === 'inertia',
                 fn ($options) => $options->put('ssr', 'Inertia SSR')
             )->all(),
         ))->each(fn ($option) => $input->setOption($option, true));
+
+        $input->setOption('pest', select(
+            label: 'Which testing framework do you prefer?',
+            options: ['PHPUnit', 'Pest'],
+        ) === 'Pest');
     }
 }
