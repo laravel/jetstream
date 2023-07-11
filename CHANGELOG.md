@@ -1,6 +1,11 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v3.2.3...3.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v3.2.4...3.x)
+
+## [v3.2.4](https://github.com/laravel/jetstream/compare/v3.2.3...v3.2.4) - 2023-07-08
+
+- Use appName directly from .env in <title> by [@domnantas](https://github.com/domnantas) in https://github.com/laravel/jetstream/pull/1329
+- set email as required in input for UpdateUserProfileInformation by [@ordago](https://github.com/ordago) in https://github.com/laravel/jetstream/pull/1303
 
 ## [v3.2.3](https://github.com/laravel/jetstream/compare/v3.2.2...v3.2.3) - 2023-06-07
 
