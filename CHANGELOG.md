@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v3.2.4...3.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v3.2.5...3.x)
+
+## [v3.2.5](https://github.com/laravel/jetstream/compare/v3.2.4...v3.2.5) - 2023-07-13
+
+- Update HandleInertiaRequests.php with nullable return type by [@iamcarlos94](https://github.com/iamcarlos94) in https://github.com/laravel/jetstream/pull/1343
 
 ## [v3.2.4](https://github.com/laravel/jetstream/compare/v3.2.3...v3.2.4) - 2023-07-08
 
