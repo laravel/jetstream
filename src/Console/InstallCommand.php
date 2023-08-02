@@ -874,7 +874,7 @@ EOF;
             ])->when(
                 $input->getArgument('stack') === 'inertia',
                 fn ($options) => $options->put('ssr', 'Inertia SSR')
-            )->all(),
+            )->sort()->all(),
         ))->each(fn ($option) => $input->setOption($option, true));
 
         $input->setOption('pest', select(
