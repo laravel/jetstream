@@ -1,6 +1,14 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v3.2.5...3.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v3.3.0...3.x)
+
+## [v3.3.0](https://github.com/laravel/jetstream/compare/v3.2.5...v3.3.0) - 2023-08-08
+
+- [3.x] Remove unnecessary Ziggy parameter which causes ESLint errors by [@Smef](https://github.com/Smef) in https://github.com/laravel/jetstream/pull/1347
+- [3.x] Use available `ServiceProvider::callAfterResolving()` by [@crynobone](https://github.com/crynobone) in https://github.com/laravel/jetstream/pull/1350
+- [3.x] Laravel Pint fixes by [@iruoy](https://github.com/iruoy) in https://github.com/laravel/jetstream/pull/1351
+- [3.x] Prompts by [@jessarcher](https://github.com/jessarcher) in https://github.com/laravel/jetstream/pull/1337
+- [3.x] Pest detection by [@jessarcher](https://github.com/jessarcher) in https://github.com/laravel/jetstream/pull/1353
 
 ## [v3.2.5](https://github.com/laravel/jetstream/compare/v3.2.4...v3.2.5) - 2023-07-13
 
