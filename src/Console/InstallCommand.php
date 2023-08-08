@@ -106,8 +106,10 @@ class InstallCommand extends Command implements PromptsForMissingInput
         // Tests...
         $stubs = $this->getTestStubsPath();
 
-        if ($this->option('pest')) {
-            $this->removeComposerDevPackages(['phpunit/phpunit']);
+        if ($this->option('pest') || $this->isUsingPest()) {
+            if ($this->hasComposerPackage('phpunit/phpunit')) {
+                $this->removeComposerDevPackages(['phpunit/phpunit']);
+            }
 
             if (! $this->requireComposerDevPackages(['pestphp/pest:^2.0', 'pestphp/pest-plugin-laravel:^2.0'])) {
                 return 1;
@@ -730,6 +732,20 @@ EOF;
             ->run(function ($type, $output) {
                 $this->output->write($output);
             }) === 0;
+    }
+
+    /**
+     * Determine if the given Composer Package is installed.
+     *
+     * @param  string  $package
+     * @return bool
+     */
+    protected function hasComposerPackage($package)
+    {
+        $packages = json_decode(file_get_contents(base_path('composer.json')), true);
+
+        return array_key_exists($package, $packages['require'] ?? [])
+            || array_key_exists($package, $packages['require-dev'] ?? []);
     }
 
     /**
