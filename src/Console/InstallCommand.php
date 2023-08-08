@@ -907,6 +907,6 @@ EOF;
      */
     protected function isUsingPest()
     {
-        return file_exists(base_path('tests/Pest.php'));
+        return class_exists(\Pest\TestSuite::class);
     }
 }
