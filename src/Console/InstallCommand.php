@@ -657,6 +657,20 @@ EOF;
     }
 
     /**
+     * Determine if the given Composer package is installed.
+     *
+     * @param  string  $package
+     * @return bool
+     */
+    protected function hasComposerPackage($package)
+    {
+        $packages = json_decode(file_get_contents(base_path('composer.json')), true);
+
+        return array_key_exists($package, $packages['require'] ?? [])
+            || array_key_exists($package, $packages['require-dev'] ?? []);
+    }
+
+    /**
      * Installs the given Composer Packages into the application.
      *
      * @param  mixed  $packages
@@ -732,20 +746,6 @@ EOF;
             ->run(function ($type, $output) {
                 $this->output->write($output);
             }) === 0;
-    }
-
-    /**
-     * Determine if the given Composer Package is installed.
-     *
-     * @param  string  $package
-     * @return bool
-     */
-    protected function hasComposerPackage($package)
-    {
-        $packages = json_decode(file_get_contents(base_path('composer.json')), true);
-
-        return array_key_exists($package, $packages['require'] ?? [])
-            || array_key_exists($package, $packages['require-dev'] ?? []);
     }
 
     /**
