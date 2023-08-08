@@ -649,7 +649,7 @@ EOF;
      */
     protected function getTestStubsPath()
     {
-        return $this->option('pest')
+        return $this->option('pest') || $this->isUsingPest()
             ? __DIR__.'/../../stubs/pest-tests'
             : __DIR__.'/../../stubs/tests';
     }
@@ -880,6 +880,17 @@ EOF;
         $input->setOption('pest', select(
             label: 'Which testing framework do you prefer?',
             options: ['PHPUnit', 'Pest'],
+            default: $this->isUsingPest() ? 'Pest' : 'PHPUnit',
         ) === 'Pest');
+    }
+
+    /**
+     * Determine whether the project is already using Pest.
+     *
+     * @return bool
+     */
+    protected function isUsingPest()
+    {
+        return file_exists(base_path('tests/Pest.php'));
     }
 }
