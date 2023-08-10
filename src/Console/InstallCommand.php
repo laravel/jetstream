@@ -4,14 +4,20 @@ namespace Laravel\Jetstream\Console;
 
 use Exception;
 use Illuminate\Console\Command;
+use Illuminate\Contracts\Console\PromptsForMissingInput;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use RuntimeException;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
 
-class InstallCommand extends Command
+use function Laravel\Prompts\multiselect;
+use function Laravel\Prompts\select;
+
+class InstallCommand extends Command implements PromptsForMissingInput
 {
     /**
      * The name and signature of the console command.
@@ -100,8 +106,10 @@ class InstallCommand extends Command
         // Tests...
         $stubs = $this->getTestStubsPath();
 
-        if ($this->option('pest')) {
-            $this->removeComposerDevPackages(['phpunit/phpunit']);
+        if ($this->option('pest') || $this->isUsingPest()) {
+            if ($this->hasComposerPackage('phpunit/phpunit')) {
+                $this->removeComposerDevPackages(['phpunit/phpunit']);
+            }
 
             if (! $this->requireComposerDevPackages(['pestphp/pest:^2.0', 'pestphp/pest-plugin-laravel:^2.0'])) {
                 return 1;
@@ -323,7 +331,7 @@ class InstallCommand extends Command
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified'
+    'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
@@ -643,9 +651,23 @@ EOF;
      */
     protected function getTestStubsPath()
     {
-        return $this->option('pest')
+        return $this->option('pest') || $this->isUsingPest()
             ? __DIR__.'/../../stubs/pest-tests'
             : __DIR__.'/../../stubs/tests';
+    }
+
+    /**
+     * Determine if the given Composer package is installed.
+     *
+     * @param  string  $package
+     * @return bool
+     */
+    protected function hasComposerPackage($package)
+    {
+        $packages = json_decode(file_get_contents(base_path('composer.json')), true);
+
+        return array_key_exists($package, $packages['require'] ?? [])
+            || array_key_exists($package, $packages['require-dev'] ?? []);
     }
 
     /**
@@ -829,5 +851,62 @@ EOF;
         $process->run(function ($type, $line) {
             $this->output->write('    '.$line);
         });
+    }
+
+    /**
+     * Prompt for missing input arguments using the returned questions.
+     *
+     * @return array
+     */
+    protected function promptForMissingArgumentsUsing()
+    {
+        return [
+            'stack' => fn () => select(
+                label: 'Which Jetstream stack would you like to install?',
+                options: [
+                    'inertia' => 'Vue with Inertia',
+                    'livewire' => 'Livewire',
+                ]
+            ),
+        ];
+    }
+
+    /**
+     * Interact further with the user if they were prompted for missing arguments.
+     *
+     * @param  \Symfony\Component\Console\Input\InputInterface  $input
+     * @param  \Symfony\Component\Console\Output\OutputInterface  $output
+     * @return void
+     */
+    protected function afterPromptingForMissingArguments(InputInterface $input, OutputInterface $output)
+    {
+        collect(multiselect(
+            label: 'Would you like any optional features?',
+            options: collect([
+                'teams' => 'Team support',
+                'api' => 'API support',
+                'verification' => 'Email verification',
+                'dark' => 'Dark mode',
+            ])->when(
+                $input->getArgument('stack') === 'inertia',
+                fn ($options) => $options->put('ssr', 'Inertia SSR')
+            )->sort()->all(),
+        ))->each(fn ($option) => $input->setOption($option, true));
+
+        $input->setOption('pest', select(
+            label: 'Which testing framework do you prefer?',
+            options: ['PHPUnit', 'Pest'],
+            default: $this->isUsingPest() ? 'Pest' : 'PHPUnit',
+        ) === 'Pest');
+    }
+
+    /**
+     * Determine whether the project is already using Pest.
+     *
+     * @return bool
+     */
+    protected function isUsingPest()
+    {
+        return class_exists(\Pest\TestSuite::class);
     }
 }
