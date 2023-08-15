@@ -12,7 +12,7 @@ trait InteractsWithBanner
      */
     protected function banner($message)
     {
-        $this->dispatchBrowserEvent('banner-message', [
+        $this->dispatch('banner-message', [
             'style' => 'success',
             'message' => $message,
         ]);
@@ -26,7 +26,7 @@ trait InteractsWithBanner
      */
     protected function dangerBanner($message)
     {
-        $this->dispatchBrowserEvent('banner-message', [
+        $this->dispatch('banner-message', [
             'style' => 'danger',
             'message' => $message,
         ]);
