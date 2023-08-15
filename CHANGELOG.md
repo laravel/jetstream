@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v3.3.0...3.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v3.3.1...3.x)
+
+## [v3.3.1](https://github.com/laravel/jetstream/compare/v3.3.0...v3.3.1) - 2023-08-14
+
+- Improves Jetstream model factories by [@nunomaduro](https://github.com/nunomaduro) in https://github.com/laravel/jetstream/pull/1356
+- Make recovery code light when it on dark mode by [@irsyadadl](https://github.com/irsyadadl) in https://github.com/laravel/jetstream/pull/1355
+- Fix the banner not showing again after dismissed by the user if the next message contents are the same by [@tomsb](https://github.com/tomsb) in https://github.com/laravel/jetstream/pull/1352
 
 ## [v3.3.0](https://github.com/laravel/jetstream/compare/v3.2.5...v3.3.0) - 2023-08-08
 
