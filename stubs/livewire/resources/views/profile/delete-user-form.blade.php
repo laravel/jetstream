@@ -32,7 +32,7 @@
                                 autocomplete="current-password"
                                 placeholder="{{ __('Password') }}"
                                 x-ref="password"
-                                wire:model.live="password"
+                                wire:model="password"
                                 wire:keydown.enter="deleteUser" />
 
                     <x-input-error for="password" class="mt-2" />
