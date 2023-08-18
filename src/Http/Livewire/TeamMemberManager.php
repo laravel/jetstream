@@ -116,7 +116,7 @@ class TeamMemberManager extends Component
 
         $this->team = $this->team->fresh();
 
-        $this->dispatch('saved');
+        $this->dispatch('team-member-added');
     }
 
     /**

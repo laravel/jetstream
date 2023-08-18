@@ -38,7 +38,7 @@
 
     @if (Gate::check('update', $team))
         <x-slot name="actions">
-            <x-action-message class="mr-3" on="saved">
+            <x-action-message class="mr-3" on="team-name-updated">
                 {{ __('Saved.') }}
             </x-action-message>
 
