@@ -84,7 +84,7 @@
     </x-slot>
 
     <x-slot name="actions">
-        <x-action-message class="mr-3" on="profile-information-update">
+        <x-action-message class="mr-3" on="profile-information-updated">
             {{ __('Saved.') }}
         </x-action-message>
 
