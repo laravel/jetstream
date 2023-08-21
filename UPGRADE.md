@@ -18,13 +18,13 @@ Next, you should upgrade your `laravel/jetstream` dependency to `^4.0` within yo
 
 ### Jetstream 4.x Livewire Stack
 
-This upgrade guide assumes you have already upgraded your application to Livewire 3.x, and ran the `php artisan livewire:upgrade` command against your jetstream views.
+This upgrade guide assumes you have already upgraded your application to Livewire 3.x, and ran the `php artisan livewire:upgrade` command against the views published by Jetstream.
 
 #### Action Messages
 
 The `x-action-message` component's `on` attribute now accepts a global event name instead of an event name scoped to the current Livewire component. This change was made to allow the `x-action-message` component to listen for events of any Livewire component on the page.
 
-As such, you should update the views published by Jetstream to use the new event names:
+As such, you should update the views that were published by Jetstream to use the new event names:
 
 - `resources/views/api/api-token-manager.blade.php`:
 
