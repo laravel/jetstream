@@ -20,7 +20,7 @@ Next, you should upgrade your `laravel/jetstream` dependency to `^4.0` within yo
 
 This upgrade guide assumes you have already upgraded your application to Livewire 3.x, and ran the `php artisan livewire:upgrade` command against the views published by Jetstream.
 
-#### Action Messages
+#### Action Message Component
 
 The `x-action-message` component's `on` attribute now accepts a global event name instead of an event name scoped to the current Livewire component. This change was made to allow the `x-action-message` component to listen for events of any Livewire component on the page.
 
@@ -41,12 +41,10 @@ As such, you should update the views that were published by Jetstream to use the
 <div x-data="{ shown: false, timeout: null }"
 -   x-init="@this.on('{{ $on }}', () => { clearTimeout(timeout); shown = true; timeout = setTimeout(() => { shown = false }, 2000);  })"
 +   x-on:{{ $on }}.window="
-        clearTimeout(timeout);
-        shown = true;
-        timeout = setTimeout(() => { shown = false }, 2000);
-     "
-     
-     x-show.transition.out.opacity.duration.1500ms="shown"
++       clearTimeout(timeout);
++       shown = true;
++       timeout = setTimeout(() => { shown = false }, 2000);
+    "
 ```
 
 - `resources/views/components/banner.blade.php`:
@@ -59,10 +57,10 @@ As such, you should update the views that were published by Jetstream to use the
 -                   message = event.detail.message;
 -                   show = true;
 -               });
-+            x-on:banner-message.window="
-+               style = event.detail.style;
-+               message = event.detail.message;
-+               show = true;
++           x-on:banner-message.window="
++              style = event.detail.style;
++              message = event.detail.message;
++              show = true;
             ">
 ```
 
