@@ -3,7 +3,7 @@
 ## Upgrading from Jetstream 3.x to Jetstream 4.x
 
 > **Note**
-> This upgrade guide only discusses upgrading to Jetstream 4.x. Upgrading your Laravel, Tailwind, Livewire, or Inertia installations is outside the scope of this documentation and is not strictly required in order to use Jetstream 4.x. Please consult the upgrade guides for those libraries for information on their upgrade process. 
+> This upgrade guide only discusses upgrading to Jetstream 4.x. Upgrading your Laravel, Tailwind, Livewire, or Inertia installations is outside the scope of this documentation and is not strictly required in order to use Jetstream 4.x. Please consult the upgrade guides for those libraries for information on their upgrade process.
 
 - [Changes Common To Both Stacks](#jetstream-4x-changes-common-to-both-stacks)
 - [Livewire Stack Upgrade Guide](#jetstream-4x-livewire-stack)
@@ -19,96 +19,6 @@ Next, you should upgrade your `laravel/jetstream` dependency to `^4.0` within yo
 ### Jetstream 4.x Livewire Stack
 
 This upgrade guide assumes you have already upgraded your application to Livewire 3.x, and ran the `php artisan livewire:upgrade` command against the views published by Jetstream.
-
-#### Action Message Component
-
-The `x-action-message` component's `on` attribute now accepts a global event name instead of an event name scoped to the current Livewire component. This change was made to allow the `x-action-message` component to listen for events of any Livewire component on the page.
-
-As such, you should update the views that were published by Jetstream to use the new event names:
-
-- `resources/views/api/api-token-manager.blade.php`:
-
-```diff
-<x-slot name="actions">
--   <x-action-message class="mr-3" on="created">
-+   <x-action-message class="mr-3" on="api-token-created">
-        {{ __('Created.') }}
-```
-
-- `resources/views/components/action-message.blade.php`:
-
-```diff
-<div x-data="{ shown: false, timeout: null }"
--   x-init="@this.on('{{ $on }}', () => { clearTimeout(timeout); shown = true; timeout = setTimeout(() => { shown = false }, 2000);  })"
-+   x-on:{{ $on }}.window="
-+       clearTimeout(timeout);
-+       shown = true;
-+       timeout = setTimeout(() => { shown = false }, 2000);
-    "
-```
-
-- `resources/views/components/banner.blade.php`:
-
-```diff
-            x-show="show && message"
--           x-init="
--               document.addEventListener('banner-message', event => {
--                   style = event.detail.style;
--                   message = event.detail.message;
--                   show = true;
--               });
-+           x-on:banner-message.window="
-+              style = event.detail.style;
-+              message = event.detail.message;
-+              show = true;
-            ">
-```
-
-- `resources/views/profile/logout-other-browser-sessions-form.blade.php`:
-
-```diff
--   <x-jet-action-message class="mr-3" on="loggedOut">
-+   <x-jet-action-message class="mr-3" on="logged-out">
-        {{ __('Done.') }}
-    </x-jet-action-message>
-```
-
-- `resources/views/profile/update-password-form.blade.php`:
-
-```diff
--   <x-jet-action-message class="mr-3" on="saved">
-+   <x-jet-action-message class="mr-3" on="password-updated">
-        {{ __('Saved.') }}
-    </x-jet-action-message>
-```
-
-- `resources/views/profile/update-profile-information-form.blade.php`:
-
-```diff
--       <x-action-message class="mr-3" on="saved">
-+       <x-action-message class="mr-3" on="profile-information-updated">
-            {{ __('Saved.') }}
-        </x-action-message>
-```
-
-- `resources/views/teams/team-member-manager.blade.php`
-
-```diff
-                <x-slot name="actions">
-+                   <x-action-message class="mr-3" on="saved">
-+                   <x-action-message class="mr-3" on="team-member-added">
-                        {{ __('Added.') }}
-                    </x-action-message>
-```
-
-- `resources/views/teams/update-team-name-form.blade.php`:
-
-```diff
--           <x-action-message class="mr-3" on="saved">
-+           <x-action-message class="mr-3" on="team-name-updated">
-                {{ __('Saved.') }}
-            </x-action-message>
-```
 
 #### Alpine Script
 
