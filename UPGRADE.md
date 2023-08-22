@@ -28,10 +28,6 @@ As such, you should include `@livewireStyles` and `@livewireScripts` in your `re
 
 ```diff
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js']) 
-
-```diff
-        <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 +
 +       <!-- Styles -->
