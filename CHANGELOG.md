@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v3.3.1...3.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v3.3.2...3.x)
+
+## [v3.3.2](https://github.com/laravel/jetstream/compare/v3.3.1...v3.3.2) - 2023-08-21
+
+- Remove redundant v-if from menu by [@itbm](https://github.com/itbm) in https://github.com/laravel/jetstream/pull/1362
 
 ## [v3.3.1](https://github.com/laravel/jetstream/compare/v3.3.0...v3.3.1) - 2023-08-14
 
