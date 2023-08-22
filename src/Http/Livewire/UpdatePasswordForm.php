@@ -43,7 +43,7 @@ class UpdatePasswordForm extends Component
             'password_confirmation' => '',
         ];
 
-        $this->dispatch('password-updated');
+        $this->dispatch('saved');
     }
 
     /**

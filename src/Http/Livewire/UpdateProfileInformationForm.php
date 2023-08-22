@@ -67,7 +67,7 @@ class UpdateProfileInformationForm extends Component
             return redirect()->route('profile.show');
         }
 
-        $this->dispatch('profile-information-updated');
+        $this->dispatch('saved');
 
         $this->dispatch('refresh-navigation-menu');
     }

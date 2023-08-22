@@ -35,7 +35,7 @@
         </x-slot>
 
         <x-slot name="actions">
-            <x-action-message class="mr-3" on="api-token-created">
+            <x-action-message class="mr-3" on="created">
                 {{ __('Created.') }}
             </x-action-message>
 
