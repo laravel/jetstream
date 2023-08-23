@@ -14,6 +14,7 @@ const props = defineProps({
     requiresConfirmation: Boolean,
 });
 
+const page = usePage();
 const enabling = ref(false);
 const confirming = ref(false);
 const disabling = ref(false);
@@ -26,7 +27,7 @@ const confirmationForm = useForm({
 });
 
 const twoFactorEnabled = computed(
-    () => ! enabling.value && usePage().props.auth.user?.two_factor_enabled,
+    () => ! enabling.value && page.props.auth.user?.two_factor_enabled,
 );
 
 watch(twoFactorEnabled, () => {

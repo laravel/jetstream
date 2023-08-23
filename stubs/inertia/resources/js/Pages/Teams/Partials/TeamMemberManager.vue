@@ -20,6 +20,8 @@ const props = defineProps({
     userPermissions: Object,
 });
 
+const page = usePage();
+
 const addTeamMemberForm = useForm({
     email: '',
     role: null,
@@ -69,7 +71,7 @@ const confirmLeavingTeam = () => {
 };
 
 const leaveTeam = () => {
-    leaveTeamForm.delete(route('team-members.destroy', [props.team, usePage().props.auth.user]));
+    leaveTeamForm.delete(route('team-members.destroy', [props.team, page.props.auth.user]));
 };
 
 const confirmTeamMemberRemoval = (teamMember) => {
