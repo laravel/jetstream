@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v3.3.2...3.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v3.3.3...3.x)
+
+## [v3.3.3](https://github.com/laravel/jetstream/compare/v3.3.2...v3.3.3) - 2023-08-23
+
+- Fix memory leak and potential caching issue in https://github.com/laravel/jetstream/pull/1366
 
 ## [v3.3.2](https://github.com/laravel/jetstream/compare/v3.3.1...v3.3.2) - 2023-08-21
 
