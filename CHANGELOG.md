@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v3.3.3...3.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v4.0.0...4.x)
+
+## [v4.0.0](https://github.com/laravel/jetstream/compare/v3.3.3...v4.0.0) - 2023-08-24
+
+- Livewire `v3.x` support in https://github.com/laravel/jetstream/pull/1360
 
 ## [v3.3.3](https://github.com/laravel/jetstream/compare/v3.3.2...v3.3.3) - 2023-08-23
 
