@@ -4,12 +4,10 @@
             :class="{ 'bg-indigo-500': style == 'success', 'bg-red-700': style == 'danger', 'bg-gray-500': style != 'success' && style != 'danger' }"
             style="display: none;"
             x-show="show && message"
-            x-init="
-                document.addEventListener('banner-message', event => {
-                    style = event.detail.style;
-                    message = event.detail.message;
-                    show = true;
-                });
+            x-on:banner-message.window="
+                style = event.detail.style;
+                message = event.detail.message;
+                show = true;
             ">
     <div class="max-w-screen-xl mx-auto py-2 px-3 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between flex-wrap">

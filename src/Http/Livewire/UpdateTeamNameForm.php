@@ -47,9 +47,9 @@ class UpdateTeamNameForm extends Component
 
         $updater->update($this->user, $this->team, $this->state);
 
-        $this->emit('saved');
+        $this->dispatch('saved');
 
-        $this->emit('refresh-navigation-menu');
+        $this->dispatch('refresh-navigation-menu');
     }
 
     /**
