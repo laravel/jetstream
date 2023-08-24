@@ -12,19 +12,19 @@
 
 #### Dependency Versions
 
-Next, you should upgrade your `laravel/jetstream` dependency to `^4.0` within your application's `composer.json` file and run the `composer update` command:
+You should upgrade your `laravel/jetstream` dependency to `^4.0` within your application's `composer.json` file. Then, run the `composer update` command:
 
     composer update
 
 ### Jetstream 4.x Livewire Stack
 
-This upgrade guide assumes you have already upgraded your application to Livewire 3.x, and ran the `php artisan livewire:upgrade` command against the views published by Jetstream.
+This upgrade guide assumes you have already upgraded your application to Livewire 3.x and ran the `php artisan livewire:upgrade` command against the views published by Jetstream.
 
 #### Alpine Script
 
-As you may know, Livewire 3 ships with AlpineJS by default, and it's recommended to not include it your `resources/js/app.js` file.
+As you may know, Livewire 3 ships with Alpine by default, so you do not need to include it in your application's `resources/js/app.js` file.
 
-As such, you should include `@livewireStyles` and `@livewireScripts` in your `resources/views/layouts/guest.blade.php` file as AlpineJS is used by "guest" components published by Jetstream:
+You should include `@livewireStyles` and `@livewireScripts` in your application's `resources/views/layouts/guest.blade.php` file since Alpine is used by "guest" components published by Jetstream:
 
 ```diff
         <!-- Scripts -->
