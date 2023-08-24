@@ -54,7 +54,8 @@ class ShareInertiaData
                     return array_merge($user->toArray(), array_filter([
                         'all_teams' => $userHasTeamFeatures ? $user->allTeams()->values() : null,
                     ]), [
-                        'two_factor_enabled' => ! is_null($user->two_factor_secret),
+                        'two_factor_enabled' => Features::enabled(Features::twoFactorAuthentication())
+                            && ! is_null($user->two_factor_secret),
                     ]);
                 },
             ],

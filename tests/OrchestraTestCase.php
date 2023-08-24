@@ -5,7 +5,7 @@ namespace Laravel\Jetstream\Tests;
 use Laravel\Fortify\FortifyServiceProvider;
 use Laravel\Jetstream\Features;
 use Laravel\Jetstream\JetstreamServiceProvider;
-use Mockery;
+use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase;
 
 abstract class OrchestraTestCase extends TestCase
@@ -22,7 +22,11 @@ abstract class OrchestraTestCase extends TestCase
 
     protected function getPackageProviders($app)
     {
-        return [JetstreamServiceProvider::class, FortifyServiceProvider::class];
+        return [
+            LivewireServiceProvider::class,
+            JetstreamServiceProvider::class,
+            FortifyServiceProvider::class,
+        ];
     }
 
     protected function defineEnvironment($app)

@@ -21,27 +21,27 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
     }
 
     $authMiddleware = config('jetstream.guard')
-            ? 'auth:'.config('jetstream.guard')
-            : 'auth';
+        ? 'auth:'.config('jetstream.guard')
+        : 'auth';
 
     $authSessionMiddleware = config('jetstream.auth_session', false)
-            ? config('jetstream.auth_session')
-            : null;
+        ? config('jetstream.auth_session')
+        : null;
 
     Route::group(['middleware' => array_values(array_filter([$authMiddleware, $authSessionMiddleware]))], function () {
         // User & Profile...
         Route::get('/user/profile', [UserProfileController::class, 'show'])
-                    ->name('profile.show');
+            ->name('profile.show');
 
         Route::delete('/user/other-browser-sessions', [OtherBrowserSessionsController::class, 'destroy'])
-                    ->name('other-browser-sessions.destroy');
+            ->name('other-browser-sessions.destroy');
 
         Route::delete('/user/profile-photo', [ProfilePhotoController::class, 'destroy'])
-                    ->name('current-user-photo.destroy');
+            ->name('current-user-photo.destroy');
 
         if (Jetstream::hasAccountDeletionFeatures()) {
             Route::delete('/user', [CurrentUserController::class, 'destroy'])
-                        ->name('current-user.destroy');
+                ->name('current-user.destroy');
         }
 
         Route::group(['middleware' => 'verified'], function () {
@@ -66,11 +66,11 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
                 Route::delete('/teams/{team}/members/{user}', [TeamMemberController::class, 'destroy'])->name('team-members.destroy');
 
                 Route::get('/team-invitations/{invitation}', [TeamInvitationController::class, 'accept'])
-                            ->middleware(['signed'])
-                            ->name('team-invitations.accept');
+                    ->middleware(['signed'])
+                    ->name('team-invitations.accept');
 
                 Route::delete('/team-invitations/{invitation}', [TeamInvitationController::class, 'destroy'])
-                            ->name('team-invitations.destroy');
+                    ->name('team-invitations.destroy');
             }
         });
     });

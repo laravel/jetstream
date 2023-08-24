@@ -1,8 +1,91 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v3.0.0...master)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v4.0.0...master)
 
-## [v3.0.0](https://github.com/laravel/jetstream/compare/v2.16.1...v3.0.0) - 2023-02-14
+## [v3.3.3](https://github.com/laravel/jetstream/compare/v3.3.2...v3.3.3) - 2023-08-23
+
+- Fix memory leak and potential caching issue in https://github.com/laravel/jetstream/pull/1366
+
+## [v3.3.2](https://github.com/laravel/jetstream/compare/v3.3.1...v3.3.2) - 2023-08-21
+
+- Remove redundant v-if from menu by [@itbm](https://github.com/itbm) in https://github.com/laravel/jetstream/pull/1362
+
+## [v3.3.1](https://github.com/laravel/jetstream/compare/v3.3.0...v3.3.1) - 2023-08-14
+
+- Improves Jetstream model factories by [@nunomaduro](https://github.com/nunomaduro) in https://github.com/laravel/jetstream/pull/1356
+- Make recovery code light when it on dark mode by [@irsyadadl](https://github.com/irsyadadl) in https://github.com/laravel/jetstream/pull/1355
+- Fix the banner not showing again after dismissed by the user if the next message contents are the same by [@tomsb](https://github.com/tomsb) in https://github.com/laravel/jetstream/pull/1352
+
+## [v3.3.0](https://github.com/laravel/jetstream/compare/v3.2.5...v3.3.0) - 2023-08-08
+
+- [3.x] Remove unnecessary Ziggy parameter which causes ESLint errors by [@Smef](https://github.com/Smef) in https://github.com/laravel/jetstream/pull/1347
+- [3.x] Use available `ServiceProvider::callAfterResolving()` by [@crynobone](https://github.com/crynobone) in https://github.com/laravel/jetstream/pull/1350
+- [3.x] Laravel Pint fixes by [@iruoy](https://github.com/iruoy) in https://github.com/laravel/jetstream/pull/1351
+- [3.x] Prompts by [@jessarcher](https://github.com/jessarcher) in https://github.com/laravel/jetstream/pull/1337
+- [3.x] Pest detection by [@jessarcher](https://github.com/jessarcher) in https://github.com/laravel/jetstream/pull/1353
+
+## [v3.2.5](https://github.com/laravel/jetstream/compare/v3.2.4...v3.2.5) - 2023-07-13
+
+- Update HandleInertiaRequests.php with nullable return type by [@iamcarlos94](https://github.com/iamcarlos94) in https://github.com/laravel/jetstream/pull/1343
+
+## [v3.2.4](https://github.com/laravel/jetstream/compare/v3.2.3...v3.2.4) - 2023-07-08
+
+- Use appName directly from .env in <title> by [@domnantas](https://github.com/domnantas) in https://github.com/laravel/jetstream/pull/1329
+- set email as required in input for UpdateUserProfileInformation by [@ordago](https://github.com/ordago) in https://github.com/laravel/jetstream/pull/1303
+
+## [v3.2.3](https://github.com/laravel/jetstream/compare/v3.2.2...v3.2.3) - 2023-06-07
+
+- Fix ShareInertiaData middleware for Eloquent strict mode when 2FA is disabled by @onlime in https://github.com/laravel/jetstream/pull/1319
+
+## [v3.2.2](https://github.com/laravel/jetstream/compare/v3.2.1...v3.2.2) - 2023-05-30
+
+- jsconfig.json configuration file by @aknEvrnky in https://github.com/laravel/jetstream/pull/1317
+
+## [v3.2.1](https://github.com/laravel/jetstream/compare/v3.2.0...v3.2.1) - 2023-05-17
+
+- Fix gate check when updating user permissions on a team by @drewrawitz in https://github.com/laravel/jetstream/pull/1316
+
+## [v3.2.0](https://github.com/laravel/jetstream/compare/v3.1.3...v3.2.0) - 2023-05-10
+
+- Migrate to modules by @timacdonald in https://github.com/laravel/jetstream/pull/1315
+
+## [v3.1.3](https://github.com/laravel/jetstream/compare/v3.1.2...v3.1.3) - 2023-05-09
+
+- Update two-factor-authentication-form.blade.php by @vivante64 in https://github.com/laravel/jetstream/pull/1305
+- Add object-cover class to team member profile photo by @anamarijapapic in https://github.com/laravel/jetstream/pull/1304
+- Update Welcome.vue by @aymanatmeh in https://github.com/laravel/jetstream/pull/1302
+- Ensure email is included in state by @antja0 in https://github.com/laravel/jetstream/pull/1312
+- Lint stub files with Pint by @driesvints in https://github.com/laravel/jetstream/pull/1313
+
+## [v3.1.2](https://github.com/laravel/jetstream/compare/v3.1.1...v3.1.2) - 2023-04-21
+
+- Remove unused imports by @akunbeben in https://github.com/laravel/jetstream/pull/1297
+- Do not install auth service provider by @taylorotwell in https://github.com/laravel/jetstream/commit/dfac46f3ff3ba9a3866ac343d6aee1cc398ff0b4
+
+## [v3.1.1](https://github.com/laravel/jetstream/compare/v3.1.0...v3.1.1) - 2023-04-10
+
+- Fix issue with page reload/refresh on two-factor-challenge page by @andrewdwallo in https://github.com/laravel/jetstream/pull/1291
+- Remove `v-show` directive from "user profile information form" template by @ndresx in https://github.com/laravel/jetstream/pull/1292
+- Only show "Change Teams" options if multiple teams are available by @briankiewel in https://github.com/laravel/jetstream/pull/1294
+
+## [v3.1.0](https://github.com/laravel/jetstream/compare/v3.0.2...v3.1.0) - 2023-03-20
+
+- Use Pest 2 by @nunomaduro in https://github.com/laravel/jetstream/pull/1280
+- Fixes typo from userPage to usePage by @john-shipp in https://github.com/laravel/jetstream/pull/1277
+- Allow modification of the personal team using an optional callable by @peterfox in https://github.com/laravel/jetstream/pull/1278
+- Get fresh user instance on two factor authentication tests by @telkins in https://github.com/laravel/jetstream/pull/1281
+
+## [v3.0.2](https://github.com/laravel/jetstream/compare/v3.0.1...v3.0.2) - 2023-03-01
+
+- Removes `@return $this` when returning static by @nunomaduro in https://github.com/laravel/jetstream/pull/1268
+- Use route helper in two factor authentication form by @sushantaryal in https://github.com/laravel/jetstream/pull/1276
+
+## [v3.0.1](https://github.com/laravel/jetstream/compare/v3.0.0...v3.0.1) - 2023-02-15
+
+- Fixes incorrect classes for Laracasts link on Welcome.vue component by @AaronLil in https://github.com/laravel/jetstream/pull/1252
+- Removed loadViewsFrom by @sirikkoster in https://github.com/laravel/jetstream/pull/1259
+
+## [v3.0.0](https://github.com/laravel/jetstream/compare/v2.16.2...v3.0.0) - 2023-02-14
 
 ### Added
 
@@ -17,6 +100,12 @@
 - Copy Blade files on installation by @jessarcher in https://github.com/laravel/jetstream/pull/1118
 - Type Error in PHPdoc by @marvinrabe in https://github.com/laravel/jetstream/pull/1235
 - Convert Profile Photo URL attribute to newer syntax by @jrd-lewis in https://github.com/laravel/jetstream/pull/1237
+
+## [v2.16.2](https://github.com/laravel/jetstream/compare/v2.16.1...v2.16.2) - 2023-02-14
+
+### Fixed
+
+- Fixes Laravel 10 `--pest` installation by @nunomaduro in https://github.com/laravel/jetstream/pull/1246
 
 ## [v2.16.1](https://github.com/laravel/jetstream/compare/v2.16.0...v2.16.1) - 2023-02-03
 

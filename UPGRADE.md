@@ -1,8 +1,128 @@
 # Upgrade Guide
 
+## Upgrading from Jetstream 3.x to Jetstream 4.x
+
+> **Note**
+> This upgrade guide only discusses upgrading to Jetstream 4.x. Upgrading your Laravel, Tailwind, Livewire, or Inertia installations is outside the scope of this documentation and is not strictly required in order to use Jetstream 4.x. Please consult the upgrade guides for those libraries for information on their upgrade process.
+
+- [Changes Common To Both Stacks](#jetstream-4x-changes-common-to-both-stacks)
+- [Livewire Stack Upgrade Guide](#jetstream-4x-livewire-stack)
+
+### Jetstream 4.x Changes Common To Both Stacks
+
+#### Dependency Versions
+
+You should upgrade your `laravel/jetstream` dependency to `^4.0` within your application's `composer.json` file. Then, run the `composer update` command:
+
+    composer update
+
+### Jetstream 4.x Livewire Stack
+
+This upgrade guide assumes you have already upgraded your application to Livewire 3.x and ran the `php artisan livewire:upgrade` command against the views published by Jetstream.
+
+#### Alpine Script
+
+As you may know, Livewire 3 ships with Alpine by default, so you do not need to include it in your application's `resources/js/app.js` file.
+
+You should include `@livewireStyles` and `@livewireScripts` in your application's `resources/views/layouts/guest.blade.php` file since Alpine is used by "guest" components published by Jetstream:
+
+```diff
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
++
++       <!-- Styles -->
++       @livewireStyles
+    </head>
+    <body>
+        <div class="font-sans text-gray-900 dark:text-gray-100 antialiased">
+            {{ $slot }}
+        </div>
++
++       @livewireScripts
+    </body>
+```
+
+## Upgrading from Jetstream 2.x to Jetstream 3.x
+
+> **Note**
+> This upgrade guide only discusses upgrading to Jetstream 3.x. Upgrading your Laravel, Tailwind, Livewire, or Inertia installations is outside the scope of this documentation and is not strictly required in order to use Jetstream 3.x. Please consult the upgrade guides for those libraries for information on their upgrade process.
+
+- [Changes Common To Both Stacks](#jetstream-3x-changes-common-to-both-stacks)
+- [Livewire Stack Upgrade Guide](#jetstream-3x-livewire-stack)
+- [Inertia Stack Upgrade Guide](#jetstream-3x-inertia-stack)
+
+### Jetstream 3.x Changes Common To Both Stacks
+
+#### Publish Views
+
+**Before upgrading**, you should publish all of Jetstream's views using the `vendor:publish` Artisan command. You may skip this step if you have already published Jetstream's views:
+
+    php artisan vendor:publish --tag=jetstream-views
+
+#### Dependency Versions
+
+Next, you should upgrade your `laravel/jetstream` dependency to `^3.0` within your application's `composer.json` file and run the `composer update` command:
+
+    composer update
+
+### Jetstream 3.x Livewire Stack
+
+#### Views
+
+You should move the published Jetstream components from `resources/views/vendor/jetstream/components` to `resources/views/components`.
+
+You should also move the published Jetstream mail views from `resources/views/vendor/jetstream/mail` to `resources/views/emails`, taking care to note the new directory name of `emails` instead of `mail`.
+
+Next, you should remove all references to the `jet-` prefix from your views. For example:
+
+```diff
+- <x-jet-banner />
++ <x-banner />
+
+- <x-jet-switchable-team :team="$team" component="jet-responsive-nav-link" />
++ <x-switchable-team :team="$team" component="responsive-nav-link" />
+
+- @props(['team', 'component' => 'jet-dropdown-link'])
++ @props(['team', 'component' => 'dropdown-link'])
+```
+
+Finally, clear your view cache:
+
+    php artisan view:clear
+
+### Jetstream 3.x Inertia Stack
+
+#### Mail Views
+
+You should move the published Jetstream mail views from `resources/views/vendor/jetstream/mail` to `resources/views/emails`, taking care to note the new directory name of `emails` instead of `mail`.
+
+Next, clear your view cache:
+
+    php artisan view:clear
+
+#### Accessing The Authenticated User
+
+You should change all references of `$page.props.user` to `$page.props.auth.user` and `usePage().props.user` to `usePage().props.auth.user`.
+
+If you are using an Inertia version prior to 1.0, you will need to replace `usePage().props.value.user` with `usePage().props.value.auth.user`.
+
+For example:
+
+```diff
+- <DropdownLink :href="route('teams.show', $page.props.user.current_team)">
++ <DropdownLink :href="route('teams.show', $page.props.auth.user.current_team)">
+
+- leaveTeamForm.delete(route('team-members.destroy', [props.team, usePage().props.user]));
++ leaveTeamForm.delete(route('team-members.destroy', [props.team, usePage().props.auth.user]));
+
+- leaveTeamForm.delete(route('team-members.destroy', [props.team, usePage().props.value.user]));
++ leaveTeamForm.delete(route('team-members.destroy', [props.team, usePage().props.value.auth.user]));
+```
+
 ## Upgrading From Jetstream 1.x To Jetstream 2.x
 
-> **Note:** This upgrade guide only discusses upgrading to Jetstream 2.x. Upgrading your Tailwind, Livewire or Inertia installations is outside the scope of this documentation and is not strictly required in order to use Jetstream 2.x. Please consult the upgrade guides for those libraries for information on their upgrade process.
+> **Note**
+> This upgrade guide only discusses upgrading to Jetstream 2.x. Upgrading your Tailwind, Livewire or Inertia installations is outside the scope of this documentation and is not strictly required in order to use Jetstream 2.x. Please consult the upgrade guides for those libraries for information on their upgrade process.
 
 - [Changes Common To Both Stacks](#changes-common-to-both-stacks)
 - [Livewire Stack Upgrade Guide](#livewire-stack)

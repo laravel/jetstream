@@ -20,6 +20,8 @@ const props = defineProps({
     userPermissions: Object,
 });
 
+const page = usePage();
+
 const addTeamMemberForm = useForm({
     email: '',
     role: null,
@@ -69,7 +71,7 @@ const confirmLeavingTeam = () => {
 };
 
 const leaveTeam = () => {
-    leaveTeamForm.delete(route('team-members.destroy', [props.team, usePage().props.auth.user]));
+    leaveTeamForm.delete(route('team-members.destroy', [props.team, page.props.auth.user]));
 };
 
 const confirmTeamMemberRemoval = (teamMember) => {
@@ -227,7 +229,7 @@ const displayableRole = (role) => {
                     <div class="space-y-6">
                         <div v-for="user in team.users" :key="user.id" class="flex items-center justify-between">
                             <div class="flex items-center">
-                                <img class="w-8 h-8 rounded-full" :src="user.profile_photo_url" :alt="user.name">
+                                <img class="w-8 h-8 rounded-full object-cover" :src="user.profile_photo_url" :alt="user.name">
                                 <div class="ml-4 dark:text-white">
                                     {{ user.name }}
                                 </div>
@@ -236,7 +238,7 @@ const displayableRole = (role) => {
                             <div class="flex items-center">
                                 <!-- Manage Team Member Role -->
                                 <button
-                                    v-if="userPermissions.canAddTeamMembers && availableRoles.length"
+                                    v-if="userPermissions.canUpdateTeamMembers && availableRoles.length"
                                     class="ml-2 text-sm text-gray-400 underline"
                                     @click="manageRole(user)"
                                 >
