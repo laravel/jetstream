@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v4.0.0...4.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v4.0.1...4.x)
+
+## [v4.0.1](https://github.com/laravel/jetstream/compare/v4.0.0...v4.0.1) - 2023-08-27
+
+- Replace `array_merge` with spread operator in `HandleInertiaRequests` by [@osbre](https://github.com/osbre) in https://github.com/laravel/jetstream/pull/1370
 
 ## [v4.0.0](https://github.com/laravel/jetstream/compare/v3.3.3...v4.0.0) - 2023-08-24
 
