@@ -88,7 +88,7 @@ class JetstreamServiceProvider extends ServiceProvider
             ]);
         });
 
-        if (config('jetstream.stack') === 'inertia') {
+        if (config('jetstream.stack') === 'inertia' && class_exists(Inertia::class)) {
             $this->bootInertia();
         }
     }
