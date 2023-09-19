@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v4.0.1...4.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v4.0.2...4.x)
+
+## [v4.0.2](https://github.com/laravel/jetstream/compare/v4.0.1...v4.0.2) - 2023-09-19
+
+- Prevent calling Inertia before it's installed by [@jrd-lewis](https://github.com/jrd-lewis) in https://github.com/laravel/jetstream/pull/1376
 
 ## [v4.0.1](https://github.com/laravel/jetstream/compare/v4.0.0...v4.0.1) - 2023-08-27
 
