@@ -59,10 +59,9 @@ class InstallCommand extends Command implements PromptsForMissingInput
      * Execute the console command.
      *
      * @param  \Illuminate\Filesystem\Filesystem  $files
-     * @param  \Illuminate\Support\Composer  $composer
      * @return int|null
      */
-    public function handle(Filesystem $files, Composer $composer)
+    public function handle(Filesystem $files)
     {
         $this->files = $files;
         $this->composer = new Composer($files, base_path());
