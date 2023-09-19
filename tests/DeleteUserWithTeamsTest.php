@@ -18,7 +18,7 @@ use Orchestra\Testbench\Concerns\InteractsWithPublishedFiles;
 
 class DeleteUserWithTeamsTest extends OrchestraTestCase
 {
-    use RefreshDatabase, InteractsWithPublishedFiles;
+    use RefreshDatabase;
 
     protected function setUp(): void
     {

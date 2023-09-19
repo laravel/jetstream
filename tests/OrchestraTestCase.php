@@ -2,6 +2,7 @@
 
 namespace Laravel\Jetstream\Tests;
 
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Fortify\FortifyServiceProvider;
 use Laravel\Jetstream\Features;
@@ -11,6 +12,8 @@ use Orchestra\Testbench\TestCase;
 
 abstract class OrchestraTestCase extends TestCase
 {
+    use LazilyRefreshDatabase;
+
     protected function getPackageProviders($app)
     {
         return [
