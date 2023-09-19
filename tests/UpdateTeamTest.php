@@ -13,9 +13,9 @@ use Laravel\Jetstream\Tests\Fixtures\User;
 
 class UpdateTeamTest extends OrchestraTestCase
 {
-    protected function setUp(): void
+    protected function defineEnvironment($app)
     {
-        parent::setUp();
+        parent::defineEnvironment($app);
 
         Gate::policy(Team::class, TeamPolicy::class);
         Jetstream::useUserModel(User::class);

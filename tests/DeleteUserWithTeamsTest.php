@@ -19,19 +19,12 @@ class DeleteUserWithTeamsTest extends OrchestraTestCase
 {
     use RefreshDatabase;
 
-    protected function setUp(): void
+    protected function defineEnvironment($app)
     {
-        parent::setUp();
+        parent::defineEnvironment($app);
 
         Gate::policy(Team::class, TeamPolicy::class);
         Jetstream::useUserModel(User::class);
-    }
-
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        @unlink(__DIR__.'/Fixtures/DeleteUser.php');
     }
 
     public function test_user_can_be_deleted()

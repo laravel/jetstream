@@ -12,9 +12,12 @@ use Laravel\Sanctum\TransientToken;
 
 class TeamMemberControllerTest extends OrchestraTestCase
 {
-    protected function setUp(): void
+    protected function defineEnvironment($app)
     {
-        parent::setUp();
+        parent::defineEnvironment($app);
+
+        $app['config']->set('jetstream.stack', 'inertia');
+        $app['config']->set('jetstream.features', ['teams']);
 
         Gate::policy(Team::class, TeamPolicy::class);
         Jetstream::useUserModel(User::class);
@@ -79,13 +82,5 @@ class TeamMemberControllerTest extends OrchestraTestCase
         ]);
 
         return $action->create($user, ['name' => 'Test Team']);
-    }
-
-    protected function defineEnvironment($app)
-    {
-        parent::defineEnvironment($app);
-
-        $app['config']->set('jetstream.stack', 'inertia');
-        $app['config']->set('jetstream.features', ['teams']);
     }
 }

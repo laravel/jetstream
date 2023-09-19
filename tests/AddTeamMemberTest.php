@@ -18,9 +18,9 @@ class AddTeamMemberTest extends OrchestraTestCase
 {
     use RefreshDatabase;
 
-    protected function setUp(): void
+    protected function defineEnvironment($app)
     {
-        parent::setUp();
+        parent::defineEnvironment($app);
 
         Gate::policy(Team::class, TeamPolicy::class);
 

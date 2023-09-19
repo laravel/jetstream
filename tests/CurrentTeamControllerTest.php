@@ -11,9 +11,14 @@ use Laravel\Jetstream\Tests\Fixtures\User;
 
 class CurrentTeamControllerTest extends OrchestraTestCase
 {
-    protected function setUp(): void
+    protected function defineEnvironment($app)
     {
-        parent::setUp();
+        parent::defineEnvironment($app);
+
+        $app['config']->set([
+            'jetstream.stack' => 'livewire',
+            'jetstream.features' => ['teams'],
+        ]);
 
         Gate::policy(Team::class, TeamPolicy::class);
         Jetstream::useUserModel(User::class);
@@ -60,13 +65,5 @@ class CurrentTeamControllerTest extends OrchestraTestCase
         $response = $this->actingAs($otherUser)->put('/current-team', ['team_id' => $team->id]);
 
         $response->assertStatus(403);
-    }
-
-    protected function defineEnvironment($app)
-    {
-        parent::defineEnvironment($app);
-
-        $app['config']->set('jetstream.stack', 'livewire');
-        $app['config']->set('jetstream.features', ['teams']);
     }
 }
