@@ -14,7 +14,6 @@ use Illuminate\Support\Str;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
-use Orchestra\Testbench\Concerns\InteractsWithPublishedFiles;
 
 class DeleteUserWithTeamsTest extends OrchestraTestCase
 {
