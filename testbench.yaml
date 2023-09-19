@@ -1,0 +1,11 @@
+providers:
+  - Laravel\Fortify\FortifyServiceProvider
+  - Laravel\Jetstream\JetstreamServiceProvider
+  - Livewire\LivewireServiceProvider
+
+migrations:
+  - database/migrations
+  - vendor/laravel/fortify/database/migrations
+
+workbench:
+  install: false
