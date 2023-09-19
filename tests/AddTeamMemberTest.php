@@ -5,6 +5,7 @@ namespace Laravel\Jetstream\Tests;
 use App\Actions\Jetstream\AddTeamMember;
 use App\Actions\Jetstream\CreateTeam;
 use App\Models\Team;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\ValidationException;
 use Laravel\Jetstream\Jetstream;
@@ -15,9 +16,11 @@ use Laravel\Sanctum\TransientToken;
 
 class AddTeamMemberTest extends OrchestraTestCase
 {
-    public function setUp(): void
+    use RefreshDatabase;
+
+    protected function defineEnvironment($app)
     {
-        parent::setUp();
+        parent::defineEnvironment($app);
 
         Gate::policy(Team::class, TeamPolicy::class);
 
@@ -27,8 +30,6 @@ class AddTeamMemberTest extends OrchestraTestCase
     public function test_team_members_can_be_added()
     {
         Jetstream::role('admin', 'Admin', ['foo']);
-
-        $this->migrate();
 
         $team = $this->createTeam();
 
@@ -62,8 +63,6 @@ class AddTeamMemberTest extends OrchestraTestCase
     {
         $this->expectException(ValidationException::class);
 
-        $this->migrate();
-
         $team = $this->createTeam();
 
         $action = new AddTeamMember;
@@ -76,8 +75,6 @@ class AddTeamMemberTest extends OrchestraTestCase
     public function test_user_cant_already_be_on_team()
     {
         $this->expectException(ValidationException::class);
-
-        $this->migrate();
 
         $team = $this->createTeam();
 
@@ -105,10 +102,5 @@ class AddTeamMemberTest extends OrchestraTestCase
         ]);
 
         return $action->create($user, ['name' => 'Test Team']);
-    }
-
-    protected function migrate()
-    {
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
     }
 }

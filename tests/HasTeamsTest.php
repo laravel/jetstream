@@ -14,9 +14,9 @@ class HasTeamsTest extends OrchestraTestCase
 {
     use RefreshDatabase;
 
-    public function setUp(): void
+    protected function defineEnvironment($app)
     {
-        parent::setUp();
+        parent::defineEnvironment($app);
 
         Jetstream::$permissions = [];
         Jetstream::$roles = [];

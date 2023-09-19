@@ -12,9 +12,9 @@ use Laravel\Jetstream\Tests\Fixtures\User;
 
 class CreateTeamTest extends OrchestraTestCase
 {
-    public function setUp(): void
+    protected function defineEnvironment($app)
     {
-        parent::setUp();
+        parent::defineEnvironment($app);
 
         Gate::policy(Team::class, TeamPolicy::class);
         Jetstream::useUserModel(User::class);
@@ -22,8 +22,6 @@ class CreateTeamTest extends OrchestraTestCase
 
     public function test_team_name_can_be_updated()
     {
-        $this->migrate();
-
         $action = new CreateTeam;
 
         $user = User::forceCreate([
@@ -41,8 +39,6 @@ class CreateTeamTest extends OrchestraTestCase
     {
         $this->expectException(ValidationException::class);
 
-        $this->migrate();
-
         $action = new CreateTeam;
 
         $user = User::forceCreate([
@@ -52,12 +48,5 @@ class CreateTeamTest extends OrchestraTestCase
         ]);
 
         $action->create($user, ['name' => '']);
-    }
-
-    protected function migrate()
-    {
-        // $this->loadLaravelMigrations(['--database' => 'testbench']);
-
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
     }
 }

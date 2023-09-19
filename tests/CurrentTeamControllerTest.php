@@ -11,9 +11,14 @@ use Laravel\Jetstream\Tests\Fixtures\User;
 
 class CurrentTeamControllerTest extends OrchestraTestCase
 {
-    public function setUp(): void
+    protected function defineEnvironment($app)
     {
-        parent::setUp();
+        parent::defineEnvironment($app);
+
+        $app['config']->set([
+            'jetstream.stack' => 'livewire',
+            'jetstream.features' => ['teams'],
+        ]);
 
         Gate::policy(Team::class, TeamPolicy::class);
         Jetstream::useUserModel(User::class);
@@ -21,8 +26,6 @@ class CurrentTeamControllerTest extends OrchestraTestCase
 
     public function test_can_switch_to_team_the_user_belongs_to()
     {
-        $this->migrate();
-
         $action = new CreateTeam;
 
         $user = User::forceCreate([
@@ -43,8 +46,6 @@ class CurrentTeamControllerTest extends OrchestraTestCase
 
     public function test_cant_switch_to_team_the_user_does_not_belong_to()
     {
-        $this->migrate();
-
         $action = new CreateTeam;
 
         $user = User::forceCreate([
@@ -64,18 +65,5 @@ class CurrentTeamControllerTest extends OrchestraTestCase
         $response = $this->actingAs($otherUser)->put('/current-team', ['team_id' => $team->id]);
 
         $response->assertStatus(403);
-    }
-
-    protected function migrate()
-    {
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
-    }
-
-    protected function getEnvironmentSetUp($app)
-    {
-        parent::getEnvironmentSetUp($app);
-
-        $app['config']->set('jetstream.stack', 'livewire');
-        $app['config']->set('jetstream.features', ['teams']);
     }
 }

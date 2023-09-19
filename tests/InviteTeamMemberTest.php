@@ -14,9 +14,9 @@ use Laravel\Jetstream\Tests\Fixtures\User;
 
 class InviteTeamMemberTest extends OrchestraTestCase
 {
-    public function setUp(): void
+    protected function defineEnvironment($app)
     {
-        parent::setUp();
+        parent::defineEnvironment($app);
 
         Gate::policy(Team::class, TeamPolicy::class);
 
@@ -28,8 +28,6 @@ class InviteTeamMemberTest extends OrchestraTestCase
         Mail::fake();
 
         Jetstream::role('admin', 'Admin', ['foo']);
-
-        $this->migrate();
 
         $team = $this->createTeam();
 
@@ -57,8 +55,6 @@ class InviteTeamMemberTest extends OrchestraTestCase
 
         $this->expectException(ValidationException::class);
 
-        $this->migrate();
-
         $team = $this->createTeam();
 
         $otherUser = User::forceCreate([
@@ -85,10 +81,5 @@ class InviteTeamMemberTest extends OrchestraTestCase
         ]);
 
         return $action->create($user, ['name' => 'Test Team']);
-    }
-
-    protected function migrate()
-    {
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
     }
 }

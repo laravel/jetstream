@@ -18,9 +18,9 @@ use Laravel\Jetstream\Tests\Fixtures\User;
 
 class RemoveTeamMemberTest extends OrchestraTestCase
 {
-    public function setUp(): void
+    protected function defineEnvironment($app)
     {
-        parent::setUp();
+        parent::defineEnvironment($app);
 
         Gate::policy(Team::class, TeamPolicy::class);
 
@@ -30,8 +30,6 @@ class RemoveTeamMemberTest extends OrchestraTestCase
     public function test_team_members_can_be_removed()
     {
         Event::fake([TeamMemberRemoved::class]);
-
-        $this->migrate();
 
         $team = $this->createTeam();
 
@@ -62,8 +60,6 @@ class RemoveTeamMemberTest extends OrchestraTestCase
 
         Event::fake([RemovingTeamMember::class]);
 
-        $this->migrate();
-
         $team = $this->createTeam();
 
         Auth::login($team->owner);
@@ -76,8 +72,6 @@ class RemoveTeamMemberTest extends OrchestraTestCase
     public function test_the_user_must_be_authorized_to_remove_team_members()
     {
         $this->expectException(AuthorizationException::class);
-
-        $this->migrate();
 
         $team = $this->createTeam();
 
@@ -114,10 +108,5 @@ class RemoveTeamMemberTest extends OrchestraTestCase
         ]);
 
         return $action->create($user, ['name' => 'Test Team']);
-    }
-
-    protected function migrate()
-    {
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
     }
 }
