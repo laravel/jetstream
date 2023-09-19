@@ -768,11 +768,13 @@ EOF;
      */
     protected static function flushNodeModules()
     {
-        $this->files->deleteDirectory(base_path('node_modules'));
+        tap(new Filesystem(), function ($files) {
+            $files->deleteDirectory(base_path('node_modules'));
 
-        $this->files->delete(base_path('pnpm-lock.yaml'));
-        $this->files->delete(base_path('yarn.lock'));
-        $this->files->delete(base_path('package-lock.json'));
+            $files->delete(base_path('pnpm-lock.yaml'));
+            $files->delete(base_path('yarn.lock'));
+            $files->delete(base_path('package-lock.json'));
+        });
     }
 
     /**
