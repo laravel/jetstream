@@ -10,9 +10,24 @@ use Mockery as m;
 
 class UserProfileControllerTest extends OrchestraTestCase
 {
-    public function setUp(): void
+    protected function defineEnvironment($app)
     {
-        parent::setUp();
+        parent::defineEnvironment($app);
+
+        $app['config']->set([
+            'jetstream.stack' => 'inertia',
+            'fortify.features' => [
+                Features::registration(),
+                Features::resetPasswords(),
+                // Features::emailVerification(),
+                Features::updateProfileInformation(),
+                Features::updatePasswords(),
+                Features::twoFactorAuthentication([
+                    'confirm' => true,
+                    'confirmPassword' => true,
+                ]),
+            ],
+        ]);
 
         Jetstream::useUserModel(User::class);
     }
@@ -83,23 +98,5 @@ class UserProfileControllerTest extends OrchestraTestCase
                         ->get('/user/profile');
 
         $response->assertStatus(200);
-    }
-
-    protected function getEnvironmentSetUp($app)
-    {
-        parent::getEnvironmentSetUp($app);
-
-        $app['config']->set('jetstream.stack', 'inertia');
-        $app['config']->set('fortify.features', [
-            Features::registration(),
-            Features::resetPasswords(),
-            // Features::emailVerification(),
-            Features::updateProfileInformation(),
-            Features::updatePasswords(),
-            Features::twoFactorAuthentication([
-                'confirm' => true,
-                'confirmPassword' => true,
-            ]),
-        ]);
     }
 }

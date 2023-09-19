@@ -13,9 +13,9 @@ use Laravel\Sanctum\TransientToken;
 
 class TeamBehaviorTest extends OrchestraTestCase
 {
-    public function setUp(): void
+    protected function defineEnvironment($app)
     {
-        parent::setUp();
+        parent::defineEnvironment($app);
 
         Gate::policy(\App\Models\Team::class, TeamPolicy::class);
         Jetstream::useUserModel(User::class);
@@ -23,8 +23,6 @@ class TeamBehaviorTest extends OrchestraTestCase
 
     public function test_team_relationship_methods()
     {
-        $this->migrate();
-
         $action = new CreateTeam;
 
         $user = User::forceCreate([
@@ -90,8 +88,6 @@ class TeamBehaviorTest extends OrchestraTestCase
     {
         Jetstream::role('admin', 'Administrator', ['foo']);
 
-        $this->migrate();
-
         $action = new CreateTeam;
 
         $user = User::forceCreate([
@@ -131,8 +127,6 @@ class TeamBehaviorTest extends OrchestraTestCase
 
     public function test_user_does_not_need_to_refresh_after_switching_teams()
     {
-        $this->migrate();
-
         $action = new CreateTeam;
 
         $user = User::forceCreate([
@@ -150,10 +144,5 @@ class TeamBehaviorTest extends OrchestraTestCase
         $anotherTeam = $action->create($user, ['name' => 'Test Team']);
 
         $this->assertTrue($user->isCurrentTeam($anotherTeam));
-    }
-
-    protected function migrate()
-    {
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
     }
 }

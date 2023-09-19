@@ -6,6 +6,7 @@ use App\Actions\Jetstream\CreateTeam;
 use App\Actions\Jetstream\DeleteTeam;
 use App\Actions\Jetstream\DeleteUser;
 use App\Models\Team;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Schema;
@@ -16,9 +17,11 @@ use Laravel\Jetstream\Tests\Fixtures\User;
 
 class DeleteUserWithTeamsTest extends OrchestraTestCase
 {
-    public function setUp(): void
+    use RefreshDatabase;
+
+    protected function defineEnvironment($app)
     {
-        parent::setUp();
+        parent::defineEnvironment($app);
 
         Gate::policy(Team::class, TeamPolicy::class);
         Jetstream::useUserModel(User::class);
@@ -26,8 +29,6 @@ class DeleteUserWithTeamsTest extends OrchestraTestCase
 
     public function test_user_can_be_deleted()
     {
-        $this->migrate();
-
         $team = $this->createTeam();
         $otherTeam = $this->createTeam();
 
@@ -64,10 +65,8 @@ class DeleteUserWithTeamsTest extends OrchestraTestCase
         return $action->create($user, ['name' => 'Test Team']);
     }
 
-    protected function migrate()
+    protected function afterRefreshingDatabase()
     {
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
-
         Schema::create('personal_access_tokens', function ($table) {
             $table->id();
             $table->foreignId('tokenable_id');

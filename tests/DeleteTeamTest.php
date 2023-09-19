@@ -15,9 +15,9 @@ use Laravel\Jetstream\Tests\Fixtures\User;
 
 class DeleteTeamTest extends OrchestraTestCase
 {
-    public function setUp(): void
+    protected function defineEnvironment($app)
     {
-        parent::setUp();
+        parent::defineEnvironment($app);
 
         Gate::policy(Team::class, TeamPolicy::class);
         Jetstream::useUserModel(User::class);
@@ -25,8 +25,6 @@ class DeleteTeamTest extends OrchestraTestCase
 
     public function test_team_can_be_deleted()
     {
-        $this->migrate();
-
         $team = $this->createTeam();
 
         $action = new DeleteTeam;
@@ -39,8 +37,6 @@ class DeleteTeamTest extends OrchestraTestCase
     public function test_team_deletion_can_be_validated()
     {
         Jetstream::useUserModel(User::class);
-
-        $this->migrate();
 
         $team = $this->createTeam();
 
@@ -57,8 +53,6 @@ class DeleteTeamTest extends OrchestraTestCase
 
         Jetstream::useUserModel(User::class);
 
-        $this->migrate();
-
         $team = $this->createTeam();
 
         $team->forceFill(['personal_team' => true])->save();
@@ -73,8 +67,6 @@ class DeleteTeamTest extends OrchestraTestCase
         $this->expectException(AuthorizationException::class);
 
         Jetstream::useUserModel(User::class);
-
-        $this->migrate();
 
         $team = $this->createTeam();
 
@@ -98,10 +90,5 @@ class DeleteTeamTest extends OrchestraTestCase
         ]);
 
         return $action->create($user, ['name' => 'Test Team']);
-    }
-
-    protected function migrate()
-    {
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
     }
 }
