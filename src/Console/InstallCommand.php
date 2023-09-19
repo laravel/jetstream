@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Composer;
 use Illuminate\Support\Str;
 use RuntimeException;
@@ -14,7 +15,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
-
 use function Laravel\Prompts\multiselect;
 use function Laravel\Prompts\select;
 
@@ -696,7 +696,7 @@ EOF;
     {
         $composer = $this->option('composer');
 
-        return $this->composer->requirePackages($packages, false, function ($type, $output) {
+        return $this->composer->requirePackages(Arr::wrap($packages), false, function ($type, $output) {
             $this->output->write($output);
         }, $composer !== 'global' ? $composer : null);
     }
@@ -711,7 +711,7 @@ EOF;
     {
         $composer = $this->option('composer');
 
-        return $this->composer->removePackages($packages, true, function ($type, $output) {
+        return $this->composer->removePackages(Arr::wrap($packages), true, function ($type, $output) {
             $this->output->write($output);
         }, $composer !== 'global' ? $composer : null);
     }
@@ -726,7 +726,7 @@ EOF;
     {
         $composer = $this->option('composer');
 
-        return $this->composer->requirePackages($packages, true, function ($type, $output) {
+        return $this->composer->requirePackages(Arr::wrap($packages), true, function ($type, $output) {
             $this->output->write($output);
         }, $composer !== 'global' ? $composer : null);
     }
