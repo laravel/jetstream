@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Composer;
 use Illuminate\Support\Str;
 use RuntimeException;
 use Symfony\Component\Console\Input\InputInterface;
@@ -13,7 +14,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
-
 use function Laravel\Prompts\multiselect;
 use function Laravel\Prompts\select;
 
@@ -41,12 +41,31 @@ class InstallCommand extends Command implements PromptsForMissingInput
     protected $description = 'Install the Jetstream components and resources';
 
     /**
+     * The filesystem instance.
+     *
+     * @var \Illuminate\Filesystem\Filesystem
+     */
+    protected $files;
+
+    /**
+     * The composer helper instance.
+     *
+     * @var \Illuminate\Support\Composer
+     */
+    protected $composer;
+
+    /**
      * Execute the console command.
      *
+     * @param  \Illuminate\Filesystem\Filesystem  $files
+     * @param  \Illuminate\Support\Composer  $composer
      * @return int|null
      */
-    public function handle()
+    public function handle(Filesystem $files, Composer $composer)
     {
+        $this->files = $files;
+        $this->composer = new Composer($files, base_path());
+
         if (! in_array($this->argument('stack'), ['inertia', 'livewire'])) {
             $this->components->error('Invalid stack. Supported stacks are [inertia] and [livewire].');
 
@@ -65,11 +84,11 @@ class InstallCommand extends Command implements PromptsForMissingInput
         $this->callSilent('storage:link');
 
         // "Home" Route...
-        $this->replaceInFile('/home', '/dashboard', app_path('Providers/RouteServiceProvider.php'));
+        $this->files->replaceInFile('/home', '/dashboard', app_path('Providers/RouteServiceProvider.php'));
 
         if (file_exists(resource_path('views/welcome.blade.php'))) {
-            $this->replaceInFile('/home', '/dashboard', resource_path('views/welcome.blade.php'));
-            $this->replaceInFile('Home', 'Dashboard', resource_path('views/welcome.blade.php'));
+            $this->files->replaceInFile('/home', '/dashboard', resource_path('views/welcome.blade.php'));
+            $this->files->replaceInFile('Home', 'Dashboard', resource_path('views/welcome.blade.php'));
         }
 
         // Fortify Provider...
@@ -80,12 +99,12 @@ class InstallCommand extends Command implements PromptsForMissingInput
 
         // Configure API...
         if ($this->option('api')) {
-            $this->replaceInFile('// Features::api(),', 'Features::api(),', config_path('jetstream.php'));
+            $this->files->replaceInFile('// Features::api(),', 'Features::api(),', config_path('jetstream.php'));
         }
 
         // Configure Email Verification...
         if ($this->option('verification')) {
-            $this->replaceInFile('// Features::emailVerification(),', 'Features::emailVerification(),', config_path('fortify.php'));
+            $this->files->replaceInFile('// Features::emailVerification(),', 'Features::emailVerification(),', config_path('fortify.php'));
         }
 
         // Install Stack...
@@ -100,8 +119,8 @@ class InstallCommand extends Command implements PromptsForMissingInput
         }
 
         // Emails...
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/emails'));
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/resources/views/emails', resource_path('views/emails'));
+        $this->files->ensureDirectoryExists(resource_path('views/emails'));
+        $this->files->copyDirectory(__DIR__.'/../../stubs/resources/views/emails', resource_path('views/emails'));
 
         // Tests...
         $stubs = $this->getTestStubsPath();
@@ -142,9 +161,9 @@ class InstallCommand extends Command implements PromptsForMissingInput
             }
         }
 
-        $this->replaceInFile("'SESSION_DRIVER', 'file'", "'SESSION_DRIVER', 'database'", config_path('session.php'));
-        $this->replaceInFile('SESSION_DRIVER=file', 'SESSION_DRIVER=database', base_path('.env'));
-        $this->replaceInFile('SESSION_DRIVER=file', 'SESSION_DRIVER=database', base_path('.env.example'));
+        $this->files->replaceInFile("'SESSION_DRIVER', 'file'", "'SESSION_DRIVER', 'database'", config_path('session.php'));
+        $this->files->replaceInFile('SESSION_DRIVER=file', 'SESSION_DRIVER=database', base_path('.env'));
+        $this->files->replaceInFile('SESSION_DRIVER=file', 'SESSION_DRIVER=database', base_path('.env.example'));
     }
 
     /**
@@ -167,8 +186,8 @@ class InstallCommand extends Command implements PromptsForMissingInput
                 });
 
         // Update Configuration...
-        $this->replaceInFile('inertia', 'livewire', config_path('jetstream.php'));
-        // $this->replaceInFile("'guard' => 'web'", "'guard' => 'sanctum'", config_path('auth.php'));
+        $this->files->replaceInFile('inertia', 'livewire', config_path('jetstream.php'));
+        // $this->files->replaceInFile("'guard' => 'web'", "'guard' => 'sanctum'", config_path('auth.php'));
 
         // NPM Packages...
         $this->updateNodePackages(function ($packages) {
@@ -189,18 +208,18 @@ class InstallCommand extends Command implements PromptsForMissingInput
         copy(__DIR__.'/../../stubs/livewire/vite.config.js', base_path('vite.config.js'));
 
         // Directories...
-        (new Filesystem)->ensureDirectoryExists(app_path('Actions/Fortify'));
-        (new Filesystem)->ensureDirectoryExists(app_path('Actions/Jetstream'));
-        (new Filesystem)->ensureDirectoryExists(app_path('View/Components'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('css'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('markdown'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/api'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/auth'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/components'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/layouts'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/profile'));
+        $this->files->ensureDirectoryExists(app_path('Actions/Fortify'));
+        $this->files->ensureDirectoryExists(app_path('Actions/Jetstream'));
+        $this->files->ensureDirectoryExists(app_path('View/Components'));
+        $this->files->ensureDirectoryExists(resource_path('css'));
+        $this->files->ensureDirectoryExists(resource_path('markdown'));
+        $this->files->ensureDirectoryExists(resource_path('views/api'));
+        $this->files->ensureDirectoryExists(resource_path('views/auth'));
+        $this->files->ensureDirectoryExists(resource_path('views/components'));
+        $this->files->ensureDirectoryExists(resource_path('views/layouts'));
+        $this->files->ensureDirectoryExists(resource_path('views/profile'));
 
-        (new Filesystem)->deleteDirectory(resource_path('sass'));
+        $this->files->deleteDirectory(resource_path('sass'));
 
         // Terms Of Service / Privacy Policy...
         copy(__DIR__.'/../../stubs/resources/markdown/terms.md', resource_path('markdown/terms.md'));
@@ -222,14 +241,14 @@ class InstallCommand extends Command implements PromptsForMissingInput
         copy(__DIR__.'/../../stubs/app/Actions/Jetstream/DeleteUser.php', app_path('Actions/Jetstream/DeleteUser.php'));
 
         // Components...
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/components', resource_path('views/components'));
+        $this->files->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/components', resource_path('views/components'));
 
         // View Components...
         copy(__DIR__.'/../../stubs/livewire/app/View/Components/AppLayout.php', app_path('View/Components/AppLayout.php'));
         copy(__DIR__.'/../../stubs/livewire/app/View/Components/GuestLayout.php', app_path('View/Components/GuestLayout.php'));
 
         // Layouts...
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/layouts', resource_path('views/layouts'));
+        $this->files->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/layouts', resource_path('views/layouts'));
 
         // Single Blade Views...
         copy(__DIR__.'/../../stubs/livewire/resources/views/dashboard.blade.php', resource_path('views/dashboard.blade.php'));
@@ -238,15 +257,15 @@ class InstallCommand extends Command implements PromptsForMissingInput
         copy(__DIR__.'/../../stubs/livewire/resources/views/policy.blade.php', resource_path('views/policy.blade.php'));
 
         // Other Views...
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/api', resource_path('views/api'));
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/profile', resource_path('views/profile'));
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/auth', resource_path('views/auth'));
+        $this->files->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/api', resource_path('views/api'));
+        $this->files->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/profile', resource_path('views/profile'));
+        $this->files->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/auth', resource_path('views/auth'));
 
         // Routes...
-        $this->replaceInFile('auth:api', 'auth:sanctum', base_path('routes/api.php'));
+        $this->files->replaceInFile('auth:api', 'auth:sanctum', base_path('routes/api.php'));
 
         if (! Str::contains(file_get_contents(base_path('routes/web.php')), "'/dashboard'")) {
-            (new Filesystem)->append(base_path('routes/web.php'), $this->livewireRouteDefinition());
+            $this->files->append(base_path('routes/web.php'), $this->livewireRouteDefinition());
         }
 
         // Assets...
@@ -300,10 +319,10 @@ class InstallCommand extends Command implements PromptsForMissingInput
     protected function installLivewireTeamStack()
     {
         // Directories...
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/teams'));
+        $this->files->ensureDirectoryExists(resource_path('views/teams'));
 
         // Other Views...
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/teams', resource_path('views/teams'));
+        $this->files->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/teams', resource_path('views/teams'));
 
         // Tests...
         $stubs = $this->getTestStubsPath();
@@ -383,19 +402,19 @@ EOF;
         copy(__DIR__.'/../../stubs/inertia/jsconfig.json', base_path('jsconfig.json'));
 
         // Directories...
-        (new Filesystem)->ensureDirectoryExists(app_path('Actions/Fortify'));
-        (new Filesystem)->ensureDirectoryExists(app_path('Actions/Jetstream'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('css'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('js/Components'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('js/Layouts'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('js/Pages'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('js/Pages/API'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('js/Pages/Auth'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('js/Pages/Profile'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('views'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('markdown'));
+        $this->files->ensureDirectoryExists(app_path('Actions/Fortify'));
+        $this->files->ensureDirectoryExists(app_path('Actions/Jetstream'));
+        $this->files->ensureDirectoryExists(resource_path('css'));
+        $this->files->ensureDirectoryExists(resource_path('js/Components'));
+        $this->files->ensureDirectoryExists(resource_path('js/Layouts'));
+        $this->files->ensureDirectoryExists(resource_path('js/Pages'));
+        $this->files->ensureDirectoryExists(resource_path('js/Pages/API'));
+        $this->files->ensureDirectoryExists(resource_path('js/Pages/Auth'));
+        $this->files->ensureDirectoryExists(resource_path('js/Pages/Profile'));
+        $this->files->ensureDirectoryExists(resource_path('views'));
+        $this->files->ensureDirectoryExists(resource_path('markdown'));
 
-        (new Filesystem)->deleteDirectory(resource_path('sass'));
+        $this->files->deleteDirectory(resource_path('sass'));
 
         // Terms Of Service / Privacy Policy...
         copy(__DIR__.'/../../stubs/resources/markdown/terms.md', resource_path('markdown/terms.md'));
@@ -440,14 +459,14 @@ EOF;
         copy(__DIR__.'/../../stubs/inertia/resources/js/Pages/TermsOfService.vue', resource_path('js/Pages/TermsOfService.vue'));
         copy(__DIR__.'/../../stubs/inertia/resources/js/Pages/Welcome.vue', resource_path('js/Pages/Welcome.vue'));
 
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Components', resource_path('js/Components'));
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Layouts', resource_path('js/Layouts'));
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/API', resource_path('js/Pages/API'));
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Auth', resource_path('js/Pages/Auth'));
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Profile', resource_path('js/Pages/Profile'));
+        $this->files->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Components', resource_path('js/Components'));
+        $this->files->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Layouts', resource_path('js/Layouts'));
+        $this->files->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/API', resource_path('js/Pages/API'));
+        $this->files->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Auth', resource_path('js/Pages/Auth'));
+        $this->files->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Profile', resource_path('js/Pages/Profile'));
 
         // Routes...
-        $this->replaceInFile('auth:api', 'auth:sanctum', base_path('routes/api.php'));
+        $this->files->replaceInFile('auth:api', 'auth:sanctum', base_path('routes/api.php'));
 
         copy(__DIR__.'/../../stubs/inertia/routes/web.php', base_path('routes/web.php'));
 
@@ -509,10 +528,10 @@ EOF;
     protected function installInertiaTeamStack()
     {
         // Directories...
-        (new Filesystem)->ensureDirectoryExists(resource_path('js/Pages/Profile'));
+        $this->files->ensureDirectoryExists(resource_path('js/Pages/Profile'));
 
         // Pages...
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Teams', resource_path('js/Pages/Teams'));
+        $this->files->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Teams', resource_path('js/Pages/Teams'));
 
         // Tests...
         $stubs = $this->getTestStubsPath();
@@ -539,12 +558,12 @@ EOF;
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-team-migrations', '--force' => true]);
 
         // Configuration...
-        $this->replaceInFile('// Features::teams([\'invitations\' => true])', 'Features::teams([\'invitations\' => true])', config_path('jetstream.php'));
+        $this->files->replaceInFile('// Features::teams([\'invitations\' => true])', 'Features::teams([\'invitations\' => true])', config_path('jetstream.php'));
 
         // Directories...
-        (new Filesystem)->ensureDirectoryExists(app_path('Actions/Jetstream'));
-        (new Filesystem)->ensureDirectoryExists(app_path('Events'));
-        (new Filesystem)->ensureDirectoryExists(app_path('Policies'));
+        $this->files->ensureDirectoryExists(app_path('Actions/Jetstream'));
+        $this->files->ensureDirectoryExists(app_path('Events'));
+        $this->files->ensureDirectoryExists(app_path('Policies'));
 
         // Service Providers...
         copy(__DIR__.'/../../stubs/app/Providers/JetstreamWithTeamsServiceProvider.php', app_path('Providers/JetstreamServiceProvider.php'));
@@ -567,7 +586,7 @@ EOF;
         copy(__DIR__.'/../../stubs/app/Actions/Fortify/CreateNewUserWithTeams.php', app_path('Actions/Fortify/CreateNewUser.php'));
 
         // Policies...
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/app/Policies', app_path('Policies'));
+        $this->files->copyDirectory(__DIR__.'/../../stubs/app/Policies', app_path('Policies'));
 
         // Factories...
         copy(__DIR__.'/../../database/factories/UserFactory.php', base_path('database/factories/UserFactory.php'));
@@ -588,12 +607,12 @@ EOF;
         });
 
         copy(__DIR__.'/../../stubs/inertia/resources/js/ssr.js', resource_path('js/ssr.js'));
-        $this->replaceInFile("input: 'resources/js/app.js',", "input: 'resources/js/app.js',".PHP_EOL."            ssr: 'resources/js/ssr.js',", base_path('vite.config.js'));
+        $this->files->replaceInFile("input: 'resources/js/app.js',", "input: 'resources/js/app.js',".PHP_EOL."            ssr: 'resources/js/ssr.js',", base_path('vite.config.js'));
 
         copy(__DIR__.'/../../stubs/inertia/app/Http/Middleware/HandleInertiaRequests.php', app_path('Http/Middleware/HandleInertiaRequests.php'));
 
-        $this->replaceInFile('vite build', 'vite build && vite build --ssr', base_path('package.json'));
-        $this->replaceInFile('/node_modules', '/bootstrap/ssr'.PHP_EOL.'/node_modules', base_path('.gitignore'));
+        $this->files->replaceInFile('vite build', 'vite build && vite build --ssr', base_path('package.json'));
+        $this->files->replaceInFile('/node_modules', '/bootstrap/ssr'.PHP_EOL.'/node_modules', base_path('.gitignore'));
     }
 
     /**
@@ -664,10 +683,7 @@ EOF;
      */
     protected function hasComposerPackage($package)
     {
-        $packages = json_decode(file_get_contents(base_path('composer.json')), true);
-
-        return array_key_exists($package, $packages['require'] ?? [])
-            || array_key_exists($package, $packages['require-dev'] ?? []);
+        return $this->composer->hasPackage($package);
     }
 
     /**
@@ -680,20 +696,9 @@ EOF;
     {
         $composer = $this->option('composer');
 
-        if ($composer !== 'global') {
-            $command = [$this->phpBinary(), $composer, 'require'];
-        }
-
-        $command = array_merge(
-            $command ?? ['composer', 'require'],
-            is_array($packages) ? $packages : func_get_args()
-        );
-
-        return ! (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))
-            ->setTimeout(null)
-            ->run(function ($type, $output) {
-                $this->output->write($output);
-            });
+        return $this->composer->requirePackages($packages, false, function ($type, $output) {
+            $this->output->write($output);
+        }, $composer !== 'global' ? $composer : null);
     }
 
     /**
@@ -706,20 +711,9 @@ EOF;
     {
         $composer = $this->option('composer');
 
-        if ($composer !== 'global') {
-            $command = [$this->phpBinary(), $composer, 'remove', '--dev'];
-        }
-
-        $command = array_merge(
-            $command ?? ['composer', 'remove', '--dev'],
-            is_array($packages) ? $packages : func_get_args()
-        );
-
-        return (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))
-            ->setTimeout(null)
-            ->run(function ($type, $output) {
-                $this->output->write($output);
-            }) === 0;
+        return $this->composer->removePackages($packages, true, function ($type, $output) {
+            $this->output->write($output);
+        }, $composer !== 'global' ? $composer : null);
     }
 
     /**
@@ -732,20 +726,9 @@ EOF;
     {
         $composer = $this->option('composer');
 
-        if ($composer !== 'global') {
-            $command = [$this->phpBinary(), $composer, 'require', '--dev'];
-        }
-
-        $command = array_merge(
-            $command ?? ['composer', 'require', '--dev'],
-            is_array($packages) ? $packages : func_get_args()
-        );
-
-        return (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))
-            ->setTimeout(null)
-            ->run(function ($type, $output) {
-                $this->output->write($output);
-            }) === 0;
+        return $this->composer->requirePackages($packages, true, function ($type, $output) {
+            $this->output->write($output);
+        }, $composer !== 'global' ? $composer : null);
     }
 
     /**
@@ -785,26 +768,11 @@ EOF;
      */
     protected static function flushNodeModules()
     {
-        tap(new Filesystem, function ($files) {
-            $files->deleteDirectory(base_path('node_modules'));
+        $this->files->deleteDirectory(base_path('node_modules'));
 
-            $files->delete(base_path('pnpm-lock.yaml'));
-            $files->delete(base_path('yarn.lock'));
-            $files->delete(base_path('package-lock.json'));
-        });
-    }
-
-    /**
-     * Replace a given string within a given file.
-     *
-     * @param  string  $search
-     * @param  string  $replace
-     * @param  string  $path
-     * @return void
-     */
-    protected function replaceInFile($search, $replace, $path)
-    {
-        file_put_contents($path, str_replace($search, $replace, file_get_contents($path)));
+        $this->files->delete(base_path('pnpm-lock.yaml'));
+        $this->files->delete(base_path('yarn.lock'));
+        $this->files->delete(base_path('package-lock.json'));
     }
 
     /**
