@@ -29,8 +29,6 @@ class InviteTeamMemberTest extends OrchestraTestCase
 
         Jetstream::role('admin', 'Admin', ['foo']);
 
-        $this->migrate();
-
         $team = $this->createTeam();
 
         $otherUser = User::forceCreate([
@@ -56,8 +54,6 @@ class InviteTeamMemberTest extends OrchestraTestCase
         Mail::fake();
 
         $this->expectException(ValidationException::class);
-
-        $this->migrate();
 
         $team = $this->createTeam();
 
@@ -85,10 +81,5 @@ class InviteTeamMemberTest extends OrchestraTestCase
         ]);
 
         return $action->create($user, ['name' => 'Test Team']);
-    }
-
-    protected function migrate()
-    {
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
     }
 }

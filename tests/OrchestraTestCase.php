@@ -2,6 +2,7 @@
 
 namespace Laravel\Jetstream\Tests;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Fortify\FortifyServiceProvider;
 use Laravel\Jetstream\Features;
 use Laravel\Jetstream\JetstreamServiceProvider;
@@ -10,15 +11,7 @@ use Orchestra\Testbench\TestCase;
 
 abstract class OrchestraTestCase extends TestCase
 {
-    public function setUp(): void
-    {
-        parent::setUp();
-    }
-
-    public function tearDown(): void
-    {
-        parent::tearDown();
-    }
+    use RefreshDatabase;
 
     protected function getPackageProviders($app)
     {
@@ -31,13 +24,7 @@ abstract class OrchestraTestCase extends TestCase
 
     protected function defineEnvironment($app)
     {
-        $app['config']->set('database.default', 'testbench');
-
-        $app['config']->set('database.connections.testbench', [
-            'driver'   => 'sqlite',
-            'database' => ':memory:',
-            'prefix'   => '',
-        ]);
+        $app['config']->set('database.default', 'testing');
     }
 
     protected function defineDatabaseMigrations()

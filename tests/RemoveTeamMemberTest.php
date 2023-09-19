@@ -31,8 +31,6 @@ class RemoveTeamMemberTest extends OrchestraTestCase
     {
         Event::fake([TeamMemberRemoved::class]);
 
-        $this->migrate();
-
         $team = $this->createTeam();
 
         $otherUser = User::forceCreate([
@@ -62,8 +60,6 @@ class RemoveTeamMemberTest extends OrchestraTestCase
 
         Event::fake([RemovingTeamMember::class]);
 
-        $this->migrate();
-
         $team = $this->createTeam();
 
         Auth::login($team->owner);
@@ -76,8 +72,6 @@ class RemoveTeamMemberTest extends OrchestraTestCase
     public function test_the_user_must_be_authorized_to_remove_team_members()
     {
         $this->expectException(AuthorizationException::class);
-
-        $this->migrate();
 
         $team = $this->createTeam();
 
@@ -114,10 +108,5 @@ class RemoveTeamMemberTest extends OrchestraTestCase
         ]);
 
         return $action->create($user, ['name' => 'Test Team']);
-    }
-
-    protected function migrate()
-    {
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
     }
 }

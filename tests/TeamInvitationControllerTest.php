@@ -28,8 +28,6 @@ class TeamInvitationControllerTest extends OrchestraTestCase
         Jetstream::role('admin', 'Admin', ['foo', 'bar']);
         Jetstream::role('editor', 'Editor', ['baz', 'qux']);
 
-        $this->migrate();
-
         $team = $this->createTeam();
 
         $invitation = $team->teamInvitations()->create(['email' => 'adam@laravel.com', 'role' => 'admin']);
@@ -54,14 +52,9 @@ class TeamInvitationControllerTest extends OrchestraTestCase
         return $action->create($user, ['name' => 'Test Team']);
     }
 
-    protected function migrate()
+    protected function defineEnvironment($app)
     {
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
-    }
-
-    protected function getEnvironmentSetUp($app)
-    {
-        parent::getEnvironmentSetUp($app);
+        parent::defineEnvironment($app);
 
         $app['config']->set('jetstream.stack', 'inertia');
         $app['config']->set('jetstream.features', ['teams']);

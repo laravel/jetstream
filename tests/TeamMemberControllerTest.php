@@ -25,8 +25,6 @@ class TeamMemberControllerTest extends OrchestraTestCase
         Jetstream::role('admin', 'Admin', ['foo', 'bar']);
         Jetstream::role('editor', 'Editor', ['baz', 'qux']);
 
-        $this->migrate();
-
         $team = $this->createTeam();
 
         $adam = User::forceCreate([
@@ -53,8 +51,6 @@ class TeamMemberControllerTest extends OrchestraTestCase
 
     public function test_team_member_permissions_cant_be_updated_if_not_authorized()
     {
-        $this->migrate();
-
         $team = $this->createTeam();
 
         $adam = User::forceCreate([
@@ -85,14 +81,9 @@ class TeamMemberControllerTest extends OrchestraTestCase
         return $action->create($user, ['name' => 'Test Team']);
     }
 
-    protected function migrate()
+    protected function defineEnvironment($app)
     {
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
-    }
-
-    protected function getEnvironmentSetUp($app)
-    {
-        parent::getEnvironmentSetUp($app);
+        parent::defineEnvironment($app);
 
         $app['config']->set('jetstream.stack', 'inertia');
         $app['config']->set('jetstream.features', ['teams']);

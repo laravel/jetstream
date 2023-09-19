@@ -21,8 +21,6 @@ class CurrentTeamControllerTest extends OrchestraTestCase
 
     public function test_can_switch_to_team_the_user_belongs_to()
     {
-        $this->migrate();
-
         $action = new CreateTeam;
 
         $user = User::forceCreate([
@@ -43,8 +41,6 @@ class CurrentTeamControllerTest extends OrchestraTestCase
 
     public function test_cant_switch_to_team_the_user_does_not_belong_to()
     {
-        $this->migrate();
-
         $action = new CreateTeam;
 
         $user = User::forceCreate([
@@ -66,14 +62,9 @@ class CurrentTeamControllerTest extends OrchestraTestCase
         $response->assertStatus(403);
     }
 
-    protected function migrate()
+    protected function defineEnvironment($app)
     {
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
-    }
-
-    protected function getEnvironmentSetUp($app)
-    {
-        parent::getEnvironmentSetUp($app);
+        parent::defineEnvironment($app);
 
         $app['config']->set('jetstream.stack', 'livewire');
         $app['config']->set('jetstream.features', ['teams']);

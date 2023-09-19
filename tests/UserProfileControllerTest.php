@@ -85,9 +85,9 @@ class UserProfileControllerTest extends OrchestraTestCase
         $response->assertStatus(200);
     }
 
-    protected function getEnvironmentSetUp($app)
+    protected function defineEnvironment($app)
     {
-        parent::getEnvironmentSetUp($app);
+        parent::defineEnvironment($app);
 
         $app['config']->set('jetstream.stack', 'inertia');
         $app['config']->set('fortify.features', [

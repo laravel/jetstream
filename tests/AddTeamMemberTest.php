@@ -28,8 +28,6 @@ class AddTeamMemberTest extends OrchestraTestCase
     {
         Jetstream::role('admin', 'Admin', ['foo']);
 
-        $this->migrate();
-
         $team = $this->createTeam();
 
         $otherUser = User::forceCreate([
@@ -62,8 +60,6 @@ class AddTeamMemberTest extends OrchestraTestCase
     {
         $this->expectException(ValidationException::class);
 
-        $this->migrate();
-
         $team = $this->createTeam();
 
         $action = new AddTeamMember;
@@ -76,8 +72,6 @@ class AddTeamMemberTest extends OrchestraTestCase
     public function test_user_cant_already_be_on_team()
     {
         $this->expectException(ValidationException::class);
-
-        $this->migrate();
 
         $team = $this->createTeam();
 
@@ -105,10 +99,5 @@ class AddTeamMemberTest extends OrchestraTestCase
         ]);
 
         return $action->create($user, ['name' => 'Test Team']);
-    }
-
-    protected function migrate()
-    {
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
     }
 }
