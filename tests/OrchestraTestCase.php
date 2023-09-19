@@ -11,8 +11,6 @@ use Orchestra\Testbench\TestCase;
 
 abstract class OrchestraTestCase extends TestCase
 {
-    use RefreshDatabase;
-
     protected function getPackageProviders($app)
     {
         return [

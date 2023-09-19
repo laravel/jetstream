@@ -12,7 +12,7 @@ use Laravel\Sanctum\TransientToken;
 
 class TeamMemberControllerTest extends OrchestraTestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 

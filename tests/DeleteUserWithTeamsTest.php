@@ -6,6 +6,7 @@ use App\Actions\Jetstream\CreateTeam;
 use App\Actions\Jetstream\DeleteTeam;
 use App\Actions\Jetstream\DeleteUser;
 use App\Models\Team;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Schema;
@@ -13,15 +14,25 @@ use Illuminate\Support\Str;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
+use Orchestra\Testbench\Concerns\InteractsWithPublishedFiles;
 
 class DeleteUserWithTeamsTest extends OrchestraTestCase
 {
-    public function setUp(): void
+    use RefreshDatabase, InteractsWithPublishedFiles;
+
+    protected function setUp(): void
     {
         parent::setUp();
 
         Gate::policy(Team::class, TeamPolicy::class);
         Jetstream::useUserModel(User::class);
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        @unlink(__DIR__.'/Fixtures/DeleteUser.php');
     }
 
     public function test_user_can_be_deleted()

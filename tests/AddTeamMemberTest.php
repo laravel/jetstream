@@ -5,6 +5,7 @@ namespace Laravel\Jetstream\Tests;
 use App\Actions\Jetstream\AddTeamMember;
 use App\Actions\Jetstream\CreateTeam;
 use App\Models\Team;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\ValidationException;
 use Laravel\Jetstream\Jetstream;
@@ -15,7 +16,9 @@ use Laravel\Sanctum\TransientToken;
 
 class AddTeamMemberTest extends OrchestraTestCase
 {
-    public function setUp(): void
+    use RefreshDatabase;
+
+    protected function setUp(): void
     {
         parent::setUp();
 
