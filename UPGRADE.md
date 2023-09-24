@@ -24,7 +24,7 @@ This upgrade guide assumes you have already upgraded your application to Livewir
 
 As you may know, Livewire 3 ships with Alpine by default, so you do not need to include it in your application's `resources/js/app.js` file.
 
-You should include `@livewireStyles` and `@livewireScripts` in your application's `resources/views/layouts/guest.blade.php` file since Alpine is used by "guest" components published by Jetstream:
+You should include `@livewireStyles` and `@livewireScriptConfig` in your application's `resources/views/layouts/guest.blade.php` file since Alpine is used by "guest" components published by Jetstream:
 
 ```diff
         <!-- Scripts -->
@@ -38,7 +38,7 @@ You should include `@livewireStyles` and `@livewireScripts` in your application'
             {{ $slot }}
         </div>
 +
-+       @livewireScripts
++       @livewireScriptConfig
     </body>
 ```
 
