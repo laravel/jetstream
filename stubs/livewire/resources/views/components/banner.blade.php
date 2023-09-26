@@ -1,4 +1,4 @@
-@props(['style' => session('flash.bannerStyle', 'success'), 'message' => session('flash.banner')])
+@props(['style' => session('flash.bannerStyle', 'success'), 'message' => session('flash.banner'), 'href' => null , 'target' => '_self'])
 
 <div x-data="{{ json_encode(['show' => true, 'style' => $style, 'message' => $message]) }}"
             :class="{ 'bg-indigo-500': style == 'success', 'bg-red-700': style == 'danger', 'bg-gray-500': style != 'success' && style != 'danger' }"
@@ -24,7 +24,13 @@
                     </svg>
                 </span>
 
-                <p class="ml-3 font-medium text-sm text-white truncate" x-text="message"></p>
+                @if($href)
+                    <a href="{{ $href }}" target="{{ $target }}">
+                        <p class="ml-3 font-medium text-sm text-white truncate" x-text="message"></p>
+                    </a>
+                @else
+                    <p class="ml-3 font-medium text-sm text-white truncate" x-text="message"></p>
+                @endif
             </div>
 
             <div class="shrink-0 sm:ml-3">
