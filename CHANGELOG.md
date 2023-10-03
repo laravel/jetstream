@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v4.0.2...4.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v4.0.3...4.x)
+
+## [v4.0.3](https://github.com/laravel/jetstream/compare/v4.0.2...v4.0.3) - 2023-10-02
+
+- [4.x] Remove outdated session migration check by [@jessarcher](https://github.com/jessarcher) in https://github.com/laravel/jetstream/pull/1385
 
 ## [v4.0.2](https://github.com/laravel/jetstream/compare/v4.0.1...v4.0.2) - 2023-09-19
 
