@@ -1,6 +1,11 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v4.0.3...4.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v4.0.4...4.x)
+
+## [v4.0.4](https://github.com/laravel/jetstream/compare/v4.0.3...v4.0.4) - 2023-10-18
+
+- Update UpdateProfileInformationForm.vue by [@iamcarlos94](https://github.com/iamcarlos94) in https://github.com/laravel/jetstream/pull/1391
+- Fix: Livewire component premature registration by [@Omranic](https://github.com/Omranic) in https://github.com/laravel/jetstream/pull/1390
 
 ## [v4.0.3](https://github.com/laravel/jetstream/compare/v4.0.2...v4.0.3) - 2023-10-02
 
