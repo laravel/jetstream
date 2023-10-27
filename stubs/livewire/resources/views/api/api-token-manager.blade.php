@@ -26,7 +26,7 @@
                         @foreach (Laravel\Jetstream\Jetstream::$permissions as $permission)
                             <label class="flex items-center">
                                 <x-checkbox wire:model="createApiTokenForm.permissions" :value="$permission"/>
-                                <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ $permission }}</span>
+                                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ $permission }}</span>
                             </label>
                         @endforeach
                     </div>
@@ -35,7 +35,7 @@
         </x-slot>
 
         <x-slot name="actions">
-            <x-action-message class="mr-3" on="created">
+            <x-action-message class="me-3" on="created">
                 {{ __('Created.') }}
             </x-action-message>
 
@@ -68,7 +68,7 @@
                                     {{ $token->name }}
                                 </div>
 
-                                <div class="flex items-center ml-2">
+                                <div class="flex items-center ms-2">
                                     @if ($token->last_used_at)
                                         <div class="text-sm text-gray-400">
                                             {{ __('Last used') }} {{ $token->last_used_at->diffForHumans() }}
@@ -76,12 +76,12 @@
                                     @endif
 
                                     @if (Laravel\Jetstream\Jetstream::hasPermissions())
-                                        <button class="cursor-pointer ml-6 text-sm text-gray-400 underline" wire:click="manageApiTokenPermissions({{ $token->id }})">
+                                        <button class="cursor-pointer ms-6 text-sm text-gray-400 underline" wire:click="manageApiTokenPermissions({{ $token->id }})">
                                             {{ __('Permissions') }}
                                         </button>
                                     @endif
 
-                                    <button class="cursor-pointer ml-6 text-sm text-red-500" wire:click="confirmApiTokenDeletion({{ $token->id }})">
+                                    <button class="cursor-pointer ms-6 text-sm text-red-500" wire:click="confirmApiTokenDeletion({{ $token->id }})">
                                         {{ __('Delete') }}
                                     </button>
                                 </div>
@@ -129,7 +129,7 @@
                 @foreach (Laravel\Jetstream\Jetstream::$permissions as $permission)
                     <label class="flex items-center">
                         <x-checkbox wire:model="updateApiTokenForm.permissions" :value="$permission"/>
-                        <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ $permission }}</span>
+                        <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ $permission }}</span>
                     </label>
                 @endforeach
             </div>
@@ -140,7 +140,7 @@
                 {{ __('Cancel') }}
             </x-secondary-button>
 
-            <x-button class="ml-3" wire:click="updateApiToken" wire:loading.attr="disabled">
+            <x-button class="ms-3" wire:click="updateApiToken" wire:loading.attr="disabled">
                 {{ __('Save') }}
             </x-button>
         </x-slot>
@@ -161,7 +161,7 @@
                 {{ __('Cancel') }}
             </x-secondary-button>
 
-            <x-danger-button class="ml-3" wire:click="deleteApiToken" wire:loading.attr="disabled">
+            <x-danger-button class="ms-3" wire:click="deleteApiToken" wire:loading.attr="disabled">
                 {{ __('Delete') }}
             </x-danger-button>
         </x-slot>
