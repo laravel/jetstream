@@ -70,7 +70,7 @@ const closeModal = () => {
                         </svg>
                     </div>
 
-                    <div class="ml-3">
+                    <div class="ms-3">
                         <div class="text-sm text-gray-600 dark:text-gray-400">
                             {{ session.agent.platform ? session.agent.platform : 'Unknown' }} - {{ session.agent.browser ? session.agent.browser : 'Unknown' }}
                         </div>
@@ -92,7 +92,7 @@ const closeModal = () => {
                     Log Out Other Browser Sessions
                 </PrimaryButton>
 
-                <ActionMessage :on="form.recentlySuccessful" class="ml-3">
+                <ActionMessage :on="form.recentlySuccessful" class="ms-3">
                     Done.
                 </ActionMessage>
             </div>
@@ -127,7 +127,7 @@ const closeModal = () => {
                     </SecondaryButton>
 
                     <PrimaryButton
-                        class="ml-3"
+                        class="ms-3"
                         :class="{ 'opacity-25': form.processing }"
                         :disabled="form.processing"
                         @click="logoutOtherBrowserSessions"
