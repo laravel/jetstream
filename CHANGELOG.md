@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v4.0.4...4.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v4.0.5...4.x)
+
+## [v4.0.5](https://github.com/laravel/jetstream/compare/v4.0.4...v4.0.5) - 2023-10-27
+
+- Replacing left/right classes with start/end to support RTL by [@AbdullahObaid](https://github.com/AbdullahObaid) in https://github.com/laravel/jetstream/pull/1392
 
 ## [v4.0.4](https://github.com/laravel/jetstream/compare/v4.0.3...v4.0.4) - 2023-10-18
 
