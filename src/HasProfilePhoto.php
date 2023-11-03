@@ -59,7 +59,7 @@ trait HasProfilePhoto
      */
     public function profilePhotoUrl(): Attribute
     {
-        return Attribute::get(function () {
+        return Attribute::get(function (): string {
             return $this->profile_photo_path
                     ? Storage::disk($this->profilePhotoDisk())->url($this->profile_photo_path)
                     : $this->defaultProfilePhotoUrl();
