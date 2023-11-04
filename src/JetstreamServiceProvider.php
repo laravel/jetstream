@@ -171,7 +171,13 @@ class JetstreamServiceProvider extends ServiceProvider
     {
         $kernel = $this->app->make(Kernel::class);
 
-        $kernel->appendMiddlewareToGroup(config('jetstream.options.middleware', 'web'), ShareInertiaData::class);
+        $middlewareGroup = config('jetstream.middleware', 'web');
+
+        $kernel->appendMiddlewareToGroup(
+            array_key_last($middlewareGroup), 
+            ShareInertiaData::class
+        );
+
         $kernel->appendToMiddlewarePriority(ShareInertiaData::class);
 
         if (class_exists(HandleInertiaRequests::class)) {
