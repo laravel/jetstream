@@ -44,13 +44,11 @@ class Agent
         'IE' => 'MSIE|IEMobile|MSIEMobile|Trident/[.0-9]+',
         'Netscape' => 'Netscape',
         'Mozilla' => 'Mozilla',
-        'WeChat'  => 'MicroMessenger',
+        'WeChat' => 'MicroMessenger',
     ];
 
     /**
      * Construct a new agent.
-     *
-     * @param  string  $userAgent
      */
     public function __construct(
         protected string $userAgent
@@ -99,7 +97,6 @@ class Agent
     /**
      * Match a detection rule and return the matched key.
      *
-     * @param  array  $rules
      * @return string|null
      */
     protected function findDetectionRulesAgainstUserAgent(array $rules)
@@ -137,7 +134,7 @@ class Agent
                 } elseif (is_array($merged[$key])) {
                     $merged[$key][] = $value;
                 } else {
-                    $merged[$key] .= '|' . $value;
+                    $merged[$key] .= '|'.$value;
                 }
             }
         }
