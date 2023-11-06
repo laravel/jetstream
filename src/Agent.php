@@ -72,14 +72,23 @@ class Agent extends MobileDetect
     }
 
     /**
-     * Determine if request from desktop.
+     * Check if the device is a desktop computer.
      *
      * @return bool
      */
     public function isDesktop()
     {
-        return $this->isMobile() === false;
+        // Check specifically for cloudfront headers if the useragent === 'Amazon CloudFront'
+        if ($this->getUserAgent() === 'Amazon CloudFront') {
+            $cfHeaders = $this->getCfHeaders();
+            if(array_key_exists('HTTP_CLOUDFRONT_IS_DESKTOP_VIEWER', $cfHeaders)) {
+                return $cfHeaders['HTTP_CLOUDFRONT_IS_DESKTOP_VIEWER'] === 'true';
+            }
+        }
+
+        return ! $this->isMobile() && ! $this->isTablet();
     }
+
 
     /**
      * Match a detection rule and return the matched key.
@@ -88,12 +97,14 @@ class Agent extends MobileDetect
      */
     protected function findDetectionRulesAgainstUserAgent(array $rules)
     {
+        $userAgent = $this->getUserAgent();
+
         foreach ($rules as $key => $regex) {
             if (empty($regex)) {
                 continue;
             }
 
-            if ($this->match($regex, $this->userAgent)) {
+            if ($this->match($regex, $userAgent)) {
                 return $key ?: reset($this->matchesArray);
             }
         }
@@ -105,7 +116,7 @@ class Agent extends MobileDetect
      * Merge multiple rules into one array.
      *
      * @param  array  $all
-     * @return array
+     * @return array<string, string>
      */
     protected function mergeRules(...$all)
     {
