@@ -4,6 +4,9 @@ namespace Laravel\Jetstream;
 
 use Detection\MobileDetect;
 
+/**
+ * @copyright Originally created by Jens Segers: https://github.com/jenssegers/agent
+ */
 class Agent
 {
     /**
@@ -55,55 +58,28 @@ class Agent
         //
     }
 
-    public static function getPlatforms()
+    /**
+     * Get the platform name from User Agent.
+     *
+     * @return string|null
+     */
+    public function platform()
     {
-        return static::mergeRules(
-            MobileDetect::getOperatingSystems(),
-            static::$operatingSystems
+        return $this->findDetectionRulesAgainstUserAgent(
+            $this->mergeRules(MobileDetect::getOperatingSystems(), static::$operatingSystems)
         );
     }
 
     /**
-     * Merge multiple rules into one array.
+     * Get the browser name from User Agent.
      *
-     * @param  array  $all
-     * @return array
+     * @return string|null
      */
-    protected static function mergeRules(...$all)
-    {
-        $merged = [];
-
-        foreach ($all as $rules) {
-            foreach ($rules as $key => $value) {
-                if (empty($merged[$key])) {
-                    $merged[$key] = $value;
-                } elseif (is_array($merged[$key])) {
-                    $merged[$key][] = $value;
-                } else {
-                    $merged[$key] .= '|'.$value;
-                }
-            }
-        }
-
-        return $merged;
-    }
-
-    public static function getBrowsers()
-    {
-        return static::mergeRules(
-            static::$browsers,
-            MobileDetect::getBrowsers()
-        );
-    }
-
-    public function platform()
-    {
-        return $this->findDetectionRulesAgainstUserAgent(static::getPlatforms());
-    }
-
     public function browser()
     {
-        return $this->findDetectionRulesAgainstUserAgent(static::getBrowsers());
+        return $this->findDetectionRulesAgainstUserAgent(
+            $this->mergeRules(static::$browsers, MobileDetect::getBrowsers())
+        );
     }
 
     /**
@@ -124,7 +100,7 @@ class Agent
      * Match a detection rule and return the matched key.
      *
      * @param  array  $rules
-     * @return string|bool
+     * @return string|null
      */
     protected function findDetectionRulesAgainstUserAgent(array $rules)
     {
@@ -141,6 +117,31 @@ class Agent
             }
         }
 
-        return false;
+        return null;
+    }
+
+    /**
+     * Merge multiple rules into one array.
+     *
+     * @param  array  $all
+     * @return array
+     */
+    protected function mergeRules(...$all)
+    {
+        $merged = [];
+
+        foreach ($all as $rules) {
+            foreach ($rules as $key => $value) {
+                if (empty($merged[$key])) {
+                    $merged[$key] = $value;
+                } elseif (is_array($merged[$key])) {
+                    $merged[$key][] = $value;
+                } else {
+                    $merged[$key] .= '|' . $value;
+                }
+            }
+        }
+
+        return $merged;
     }
 }

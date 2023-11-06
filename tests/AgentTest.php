@@ -5,6 +5,9 @@ namespace Laravel\Jetstream\Tests;
 use Laravel\Jetstream\Agent;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @copyright Originally created by Jens Segers: https://github.com/jenssegers/agent
+ */
 class AgentTest extends TestCase
 {
     /**
