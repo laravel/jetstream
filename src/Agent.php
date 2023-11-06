@@ -79,11 +79,11 @@ class Agent extends MobileDetect
     public function isDesktop()
     {
         // Check specifically for cloudfront headers if the useragent === 'Amazon CloudFront'
-        if ($this->getUserAgent() === 'Amazon CloudFront') {
-            $cfHeaders = $this->getCfHeaders();
-            if(array_key_exists('HTTP_CLOUDFRONT_IS_DESKTOP_VIEWER', $cfHeaders)) {
-                return $cfHeaders['HTTP_CLOUDFRONT_IS_DESKTOP_VIEWER'] === 'true';
-            }
+        if (
+            $this->getUserAgent() === static::$cloudFrontUA
+            && $this->getHttpHeader('HTTP_CLOUDFRONT_IS_DESKTOP_VIEWER') === 'true'
+        ) {
+            return true;
         }
 
         return ! $this->isMobile() && ! $this->isTablet();
