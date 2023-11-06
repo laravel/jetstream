@@ -18,8 +18,9 @@
         "ext-json": "*",
         "illuminate/console": "^10.17",
         "illuminate/support": "^10.17",
-        "jenssegers/agent": "^2.6",
-        "laravel/fortify": "^1.15"
+        "laravel/fortify": "^1.15",
+        "mobiledetect/mobiledetectlib": "^4.8",
+        "whichbrowser/parser": "^2.1"
     },
     "require-dev": {
         "inertiajs/inertia-laravel": "^0.6.5",
