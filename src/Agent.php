@@ -89,7 +89,6 @@ class Agent extends MobileDetect
         return ! $this->isMobile() && ! $this->isTablet();
     }
 
-
     /**
      * Match a detection rule and return the matched key.
      *
