@@ -80,7 +80,7 @@ class Agent
                 } elseif (is_array($merged[$key])) {
                     $merged[$key][] = $value;
                 } else {
-                    $merged[$key] .= '|' . $value;
+                    $merged[$key] .= '|'.$value;
                 }
             }
         }
