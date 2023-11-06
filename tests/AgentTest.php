@@ -15,7 +15,8 @@ class AgentTest extends TestCase
      */
     public function testOperatingSystems($ua, $platform)
     {
-        $agent = new Agent($ua);
+        $agent = new Agent();
+        $agent->setUserAgent($ua);
 
         $this->assertEquals($platform, $agent->platform(), $ua);
     }
@@ -37,7 +38,8 @@ class AgentTest extends TestCase
      */
     public function testBrowsers($ua, $browser)
     {
-        $agent = new Agent($ua);
+        $agent = new Agent();
+        $agent->setUserAgent($ua);
 
         $this->assertEquals($browser, $agent->browser());
     }
@@ -66,7 +68,8 @@ class AgentTest extends TestCase
      */
     public function testDesktopDevices($ua, $expected)
     {
-        $agent = new Agent($ua);
+        $agent = new Agent();
+        $agent->setUserAgent($ua);
 
         $this->assertSame($expected, $agent->isDesktop());
     }

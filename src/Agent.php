@@ -7,14 +7,14 @@ use Detection\MobileDetect;
 /**
  * @copyright Originally created by Jens Segers: https://github.com/jenssegers/agent
  */
-class Agent
+class Agent extends MobileDetect
 {
     /**
-     * List of operating systems.
+     * List of additional operating systems.
      *
-     * @var array
+     * @var array<string, string>
      */
-    protected static $operatingSystems = [
+    protected static $additionalOperatingSystems = [
         'Windows' => 'Windows',
         'Windows NT' => 'Windows NT',
         'OS X' => 'Mac OS X',
@@ -27,11 +27,11 @@ class Agent
     ];
 
     /**
-     * List of browsers.
+     * List of additional browsers.
      *
-     * @var array
+     * @var array<string, string>
      */
-    protected static $browsers = [
+    protected static $additionalBrowsers = [
         'Opera Mini' => 'Opera Mini',
         'Opera' => 'Opera|OPR',
         'Edge' => 'Edge|Edg',
@@ -48,15 +48,6 @@ class Agent
     ];
 
     /**
-     * Construct a new agent.
-     */
-    public function __construct(
-        protected string $userAgent
-    ) {
-        //
-    }
-
-    /**
      * Get the platform name from User Agent.
      *
      * @return string|null
@@ -64,7 +55,7 @@ class Agent
     public function platform()
     {
         return $this->findDetectionRulesAgainstUserAgent(
-            $this->mergeRules(MobileDetect::getOperatingSystems(), static::$operatingSystems)
+            $this->mergeRules(MobileDetect::getOperatingSystems(), static::$additionalOperatingSystems)
         );
     }
 
@@ -76,7 +67,7 @@ class Agent
     public function browser()
     {
         return $this->findDetectionRulesAgainstUserAgent(
-            $this->mergeRules(static::$browsers, MobileDetect::getBrowsers())
+            $this->mergeRules(static::$additionalBrowsers, MobileDetect::getBrowsers())
         );
     }
 
@@ -87,11 +78,7 @@ class Agent
      */
     public function isDesktop()
     {
-        $mobileDetect = new MobileDetect();
-
-        $mobileDetect->setUserAgent($this->userAgent);
-
-        return $mobileDetect->isMobile() === false;
+        return $this->isMobile() === false;
     }
 
     /**
@@ -101,16 +88,13 @@ class Agent
      */
     protected function findDetectionRulesAgainstUserAgent(array $rules)
     {
-        $mobileDetect = new MobileDetect();
-        $mobileDetect->setUserAgent($this->userAgent);
-
         foreach ($rules as $key => $regex) {
             if (empty($regex)) {
                 continue;
             }
 
-            if ($mobileDetect->match($regex, $this->userAgent)) {
-                return $key;
+            if ($this->match($regex, $this->userAgent)) {
+                return $key ?: reset($this->matchesArray);
             }
         }
 

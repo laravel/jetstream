@@ -44,7 +44,6 @@ class LogoutOtherBrowserSessionsForm extends Component
     /**
      * Log out from other browser sessions.
      *
-     * @param  \Illuminate\Contracts\Auth\StatefulGuard  $guard
      * @return void
      */
     public function logoutOtherBrowserSessions(StatefulGuard $guard)
@@ -104,9 +103,9 @@ class LogoutOtherBrowserSessionsForm extends Component
 
         return collect(
             DB::connection(config('session.connection'))->table(config('session.table', 'sessions'))
-                    ->where('user_id', Auth::user()->getAuthIdentifier())
-                    ->orderBy('last_activity', 'desc')
-                    ->get()
+                ->where('user_id', Auth::user()->getAuthIdentifier())
+                ->orderBy('last_activity', 'desc')
+                ->get()
         )->map(function ($session) {
             return (object) [
                 'agent' => $this->createAgent($session),
@@ -125,7 +124,7 @@ class LogoutOtherBrowserSessionsForm extends Component
      */
     protected function createAgent($session)
     {
-        return new Agent($session->user_agent);
+        return tap(new Agent(), fn ($agent) => $agent->setUserAgent($session->user_agent));
     }
 
     /**
