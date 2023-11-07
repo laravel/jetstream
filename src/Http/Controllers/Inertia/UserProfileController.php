@@ -17,6 +17,7 @@ class UserProfileController extends Controller
     /**
      * Show the general profile settings screen.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Inertia\Response
      */
     public function show(Request $request)
@@ -32,6 +33,7 @@ class UserProfileController extends Controller
     /**
      * Get the current sessions.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Support\Collection
      */
     public function sessions(Request $request)
