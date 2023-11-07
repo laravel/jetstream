@@ -3,6 +3,7 @@
 namespace Laravel\Jetstream\Tests;
 
 use Laravel\Jetstream\Agent;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -10,9 +11,7 @@ use PHPUnit\Framework\TestCase;
  */
 class AgentTest extends TestCase
 {
-    /**
-     * @dataProvider operatingSystemsDataProvider
-     */
+    #[DataProvider('operatingSystemsDataProvider')]
     public function testOperatingSystems($ua, $platform)
     {
         $agent = new Agent();
@@ -33,9 +32,7 @@ class AgentTest extends TestCase
         yield ['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36', 'Windows'];
     }
 
-    /**
-     * @dataProvider browsersDataProvider
-     */
+    #[DataProvider('browsersDataProvider')]
     public function testBrowsers($ua, $browser)
     {
         $agent = new Agent();
@@ -63,9 +60,7 @@ class AgentTest extends TestCase
         yield ['Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) coc_coc_browser/86.0.180 Chrome/80.0.3987.180 Safari/537.36', 'Coc Coc'];
     }
 
-    /**
-     * @dataProvider devicesDataProvider
-     */
+    #[DataProvider('devicesDataProvider')]
     public function testDesktopDevices($ua, $expected)
     {
         $agent = new Agent();
