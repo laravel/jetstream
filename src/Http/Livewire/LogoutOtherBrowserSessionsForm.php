@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-use Jenssegers\Agent\Agent;
+use Laravel\Jetstream\Agent;
 use Livewire\Component;
 
 class LogoutOtherBrowserSessionsForm extends Component
@@ -121,13 +121,11 @@ class LogoutOtherBrowserSessionsForm extends Component
      * Create a new agent instance from the given session.
      *
      * @param  mixed  $session
-     * @return \Jenssegers\Agent\Agent
+     * @return \Laravel\Jetstream\Agent
      */
     protected function createAgent($session)
     {
-        return tap(new Agent, function ($agent) use ($session) {
-            $agent->setUserAgent($session->user_agent);
-        });
+        return tap(new Agent(), fn ($agent) => $agent->setUserAgent($session->user_agent));
     }
 
     /**
