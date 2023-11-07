@@ -51,7 +51,7 @@ class Agent extends MobileDetect
     ];
 
     /**
-     * Get the platform name from User Agent.
+     * Get the platform name from the User Agent.
      *
      * @return string|null
      */
@@ -65,7 +65,7 @@ class Agent extends MobileDetect
     }
 
     /**
-     * Get the browser name from User Agent.
+     * Get the browser name from the User Agent.
      *
      * @return string|null
      */
@@ -79,7 +79,7 @@ class Agent extends MobileDetect
     }
 
     /**
-     * Check if the device is a desktop computer.
+     * Determine if the device is a desktop computer.
      *
      * @return bool
      */
@@ -121,7 +121,7 @@ class Agent extends MobileDetect
     }
 
     /**
-     * Retrieve from cache or resolve the value.
+     * Retrieve from the given key from the cache or resolve the value.
      *
      * @param  string  $key
      * @param  \Closure():mixed  $callback
