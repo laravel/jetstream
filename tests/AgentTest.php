@@ -11,13 +11,18 @@ use PHPUnit\Framework\TestCase;
  */
 class AgentTest extends TestCase
 {
+    /**
+     * @param  string  $userAgent
+     * @param  string  $platform
+     * @return void
+     */
     #[DataProvider('operatingSystemsDataProvider')]
-    public function testOperatingSystems($ua, $platform)
+    public function testOperatingSystems($userAgent, $platform)
     {
         $agent = new Agent();
-        $agent->setUserAgent($ua);
+        $agent->setUserAgent($userAgent);
 
-        $this->assertEquals($platform, $agent->platform(), $ua);
+        $this->assertEquals($platform, $agent->platform());
     }
 
     public static function operatingSystemsDataProvider()
@@ -32,11 +37,16 @@ class AgentTest extends TestCase
         yield ['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36', 'Windows'];
     }
 
+    /**
+     * @param  string  $userAgent
+     * @param  string  $browser
+     * @return void
+     */
     #[DataProvider('browsersDataProvider')]
-    public function testBrowsers($ua, $browser)
+    public function testBrowsers($userAgent, $browser)
     {
         $agent = new Agent();
-        $agent->setUserAgent($ua);
+        $agent->setUserAgent($userAgent);
 
         $this->assertEquals($browser, $agent->browser());
     }
@@ -60,11 +70,16 @@ class AgentTest extends TestCase
         yield ['Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) coc_coc_browser/86.0.180 Chrome/80.0.3987.180 Safari/537.36', 'Coc Coc'];
     }
 
+    /**
+     * @param  string  $userAgent
+     * @param  bool  $expected
+     * @return void
+     */
     #[DataProvider('devicesDataProvider')]
-    public function testDesktopDevices($ua, $expected)
+    public function testDesktopDevices($userAgent, $expected)
     {
         $agent = new Agent();
-        $agent->setUserAgent($ua);
+        $agent->setUserAgent($userAgent);
 
         $this->assertSame($expected, $agent->isDesktop());
     }
