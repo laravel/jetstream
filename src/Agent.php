@@ -141,7 +141,7 @@ class Agent extends MobileDetect
             return tap(call_user_func($callback), function ($result) use ($cacheKey) {
                 $this->cache->set($cacheKey, $result);
             });
-        }  catch (CacheException $e) {
+        } catch (CacheException $e) {
             throw new MobileDetectException("Cache problem in for {$key}: {$e->getMessage()}");
         }
     }
