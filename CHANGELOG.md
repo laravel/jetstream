@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v4.0.5...4.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v4.1.0...4.x)
+
+## [v4.1.0](https://github.com/laravel/jetstream/compare/v4.0.5...v4.1.0) - 2023-11-07
+
+- Typehint mutator profile_photo_url attribute function return by [@potsky](https://github.com/potsky) in https://github.com/laravel/jetstream/pull/1396
+- [4.x] Use PHPUnit 10 by [@crynobone](https://github.com/crynobone) in https://github.com/laravel/jetstream/pull/1400
+- [4.x] Replace `jenssegers/agent` and use latest `mobiledetect/mobiledetectlib` by [@crynobone](https://github.com/crynobone) in https://github.com/laravel/jetstream/pull/1399
 
 ## [v4.0.5](https://github.com/laravel/jetstream/compare/v4.0.4...v4.0.5) - 2023-10-27
 
