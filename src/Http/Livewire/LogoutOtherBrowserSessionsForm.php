@@ -104,9 +104,9 @@ class LogoutOtherBrowserSessionsForm extends Component
 
         return collect(
             DB::connection(config('session.connection'))->table(config('session.table', 'sessions'))
-                ->where('user_id', Auth::user()->getAuthIdentifier())
-                ->orderBy('last_activity', 'desc')
-                ->get()
+                    ->where('user_id', Auth::user()->getAuthIdentifier())
+                    ->orderBy('last_activity', 'desc')
+                    ->get()
         )->map(function ($session) {
             return (object) [
                 'agent' => $this->createAgent($session),
