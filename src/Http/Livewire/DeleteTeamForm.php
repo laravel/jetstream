@@ -42,7 +42,7 @@ class DeleteTeamForm extends Component
      *
      * @param  \Laravel\Jetstream\Actions\ValidateTeamDeletion  $validator
      * @param  \Laravel\Jetstream\Contracts\DeletesTeams  $deleter
-     * @return void
+     * @return \Illuminate\Http\Response | \Illuminate\Http\RedirectResponse | \Livewire\Features\SupportRedirects\Redirector
      */
     public function deleteTeam(ValidateTeamDeletion $validator, DeletesTeams $deleter)
     {
