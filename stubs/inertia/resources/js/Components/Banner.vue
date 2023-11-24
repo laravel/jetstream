@@ -30,15 +30,15 @@ watchEffect(async () => {
                             </svg>
                         </span>
 
-                        <p class="ml-3 font-medium text-sm text-white truncate">
+                        <p class="ms-3 font-medium text-sm text-white truncate">
                             {{ message }}
                         </p>
                     </div>
 
-                    <div class="shrink-0 sm:ml-3">
+                    <div class="shrink-0 sm:ms-3">
                         <button
                             type="button"
-                            class="-mr-1 flex p-2 rounded-md focus:outline-none sm:-mr-2 transition"
+                            class="-me-1 flex p-2 rounded-md focus:outline-none sm:-me-2 transition"
                             :class="{ 'hover:bg-indigo-600 focus:bg-indigo-600': style == 'success', 'hover:bg-red-600 focus:bg-red-600': style == 'danger' }"
                             aria-label="Dismiss"
                             @click.prevent="show = false"

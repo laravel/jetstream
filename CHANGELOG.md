@@ -1,6 +1,37 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v4.0.0...master)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v4.1.0...master)
+
+## [v4.1.0](https://github.com/laravel/jetstream/compare/v4.0.5...v4.1.0) - 2023-11-07
+
+- Typehint mutator profile_photo_url attribute function return by [@potsky](https://github.com/potsky) in https://github.com/laravel/jetstream/pull/1396
+- [4.x] Use PHPUnit 10 by [@crynobone](https://github.com/crynobone) in https://github.com/laravel/jetstream/pull/1400
+- [4.x] Replace `jenssegers/agent` and use latest `mobiledetect/mobiledetectlib` by [@crynobone](https://github.com/crynobone) in https://github.com/laravel/jetstream/pull/1399
+
+## [v4.0.5](https://github.com/laravel/jetstream/compare/v4.0.4...v4.0.5) - 2023-10-27
+
+- Replacing left/right classes with start/end to support RTL by [@AbdullahObaid](https://github.com/AbdullahObaid) in https://github.com/laravel/jetstream/pull/1392
+
+## [v4.0.4](https://github.com/laravel/jetstream/compare/v4.0.3...v4.0.4) - 2023-10-18
+
+- Update UpdateProfileInformationForm.vue by [@iamcarlos94](https://github.com/iamcarlos94) in https://github.com/laravel/jetstream/pull/1391
+- Fix: Livewire component premature registration by [@Omranic](https://github.com/Omranic) in https://github.com/laravel/jetstream/pull/1390
+
+## [v4.0.3](https://github.com/laravel/jetstream/compare/v4.0.2...v4.0.3) - 2023-10-02
+
+- [4.x] Remove outdated session migration check by [@jessarcher](https://github.com/jessarcher) in https://github.com/laravel/jetstream/pull/1385
+
+## [v4.0.2](https://github.com/laravel/jetstream/compare/v4.0.1...v4.0.2) - 2023-09-19
+
+- Prevent calling Inertia before it's installed by [@jrd-lewis](https://github.com/jrd-lewis) in https://github.com/laravel/jetstream/pull/1376
+
+## [v4.0.1](https://github.com/laravel/jetstream/compare/v4.0.0...v4.0.1) - 2023-08-27
+
+- Replace `array_merge` with spread operator in `HandleInertiaRequests` by [@osbre](https://github.com/osbre) in https://github.com/laravel/jetstream/pull/1370
+
+## [v4.0.0](https://github.com/laravel/jetstream/compare/v3.3.3...v4.0.0) - 2023-08-24
+
+- Livewire `v3.x` support in https://github.com/laravel/jetstream/pull/1360
 
 ## [v3.3.3](https://github.com/laravel/jetstream/compare/v3.3.2...v3.3.3) - 2023-08-23
 

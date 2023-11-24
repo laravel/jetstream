@@ -44,7 +44,7 @@
                     {{ __('Cancel') }}
                 </x-secondary-button>
 
-                <x-danger-button class="ml-3" wire:click="deleteUser" wire:loading.attr="disabled">
+                <x-danger-button class="ms-3" wire:click="deleteUser" wire:loading.attr="disabled">
                     {{ __('Delete Account') }}
                 </x-danger-button>
             </x-slot>

@@ -13,9 +13,12 @@ use Laravel\Jetstream\Tests\Fixtures\User;
 
 class TeamInvitationControllerTest extends OrchestraTestCase
 {
-    public function setUp(): void
+    protected function defineEnvironment($app)
     {
-        parent::setUp();
+        parent::defineEnvironment($app);
+
+        $app['config']->set('jetstream.stack', 'inertia');
+        $app['config']->set('jetstream.features', ['teams']);
 
         Gate::policy(Team::class, TeamPolicy::class);
         Jetstream::useUserModel(User::class);
@@ -27,8 +30,6 @@ class TeamInvitationControllerTest extends OrchestraTestCase
 
         Jetstream::role('admin', 'Admin', ['foo', 'bar']);
         Jetstream::role('editor', 'Editor', ['baz', 'qux']);
-
-        $this->migrate();
 
         $team = $this->createTeam();
 
@@ -52,18 +53,5 @@ class TeamInvitationControllerTest extends OrchestraTestCase
         ]);
 
         return $action->create($user, ['name' => 'Test Team']);
-    }
-
-    protected function migrate()
-    {
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
-    }
-
-    protected function getEnvironmentSetUp($app)
-    {
-        parent::getEnvironmentSetUp($app);
-
-        $app['config']->set('jetstream.stack', 'inertia');
-        $app['config']->set('jetstream.features', ['teams']);
     }
 }

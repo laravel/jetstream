@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
-use Jenssegers\Agent\Agent;
 use Laravel\Fortify\Features;
+use Laravel\Jetstream\Agent;
 use Laravel\Jetstream\Jetstream;
 
 class UserProfileController extends Controller
@@ -67,12 +67,10 @@ class UserProfileController extends Controller
      * Create a new agent instance from the given session.
      *
      * @param  mixed  $session
-     * @return \Jenssegers\Agent\Agent
+     * @return \Laravel\Jetstream\Agent
      */
     protected function createAgent($session)
     {
-        return tap(new Agent, function ($agent) use ($session) {
-            $agent->setUserAgent($session->user_agent);
-        });
+        return tap(new Agent(), fn ($agent) => $agent->setUserAgent($session->user_agent));
     }
 }

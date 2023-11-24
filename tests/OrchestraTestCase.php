@@ -2,48 +2,21 @@
 
 namespace Laravel\Jetstream\Tests;
 
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Laravel\Fortify\FortifyServiceProvider;
 use Laravel\Jetstream\Features;
 use Laravel\Jetstream\JetstreamServiceProvider;
 use Livewire\LivewireServiceProvider;
+use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase;
 
 abstract class OrchestraTestCase extends TestCase
 {
-    public function setUp(): void
-    {
-        parent::setUp();
-    }
-
-    public function tearDown(): void
-    {
-        parent::tearDown();
-    }
-
-    protected function getPackageProviders($app)
-    {
-        return [
-            LivewireServiceProvider::class,
-            JetstreamServiceProvider::class,
-            FortifyServiceProvider::class,
-        ];
-    }
+    use LazilyRefreshDatabase, WithWorkbench;
 
     protected function defineEnvironment($app)
     {
-        $app['config']->set('database.default', 'testbench');
-
-        $app['config']->set('database.connections.testbench', [
-            'driver'   => 'sqlite',
-            'database' => ':memory:',
-            'prefix'   => '',
-        ]);
-    }
-
-    protected function defineDatabaseMigrations()
-    {
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        $this->loadMigrationsFrom(__DIR__.'/../vendor/laravel/fortify/database/migrations');
+        $app['config']->set('database.default', 'testing');
     }
 
     protected function defineHasTeamEnvironment($app)

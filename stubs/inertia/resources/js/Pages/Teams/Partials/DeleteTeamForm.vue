@@ -61,7 +61,7 @@ const deleteTeam = () => {
                     </SecondaryButton>
 
                     <DangerButton
-                        class="ml-3"
+                        class="ms-3"
                         :class="{ 'opacity-25': form.processing }"
                         :disabled="form.processing"
                         @click="deleteTeam"
