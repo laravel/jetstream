@@ -238,8 +238,7 @@ class InstallCommand extends Command implements PromptsForMissingInput
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/auth', resource_path('views/auth'));
 
         // Routes...
-        $this->callSilent('install:api');
-        $this->replaceInFile('auth:api', 'auth:sanctum', base_path('routes/api.php'));
+        $this->call('install:api');
 
         if (! Str::contains(file_get_contents(base_path('routes/web.php')), "'/dashboard'")) {
             (new Filesystem)->append(base_path('routes/web.php'), $this->livewireRouteDefinition());
@@ -445,7 +444,6 @@ EOF;
 
         // Routes...
         $this->call('install:api');
-        $this->replaceInFile('auth:api', 'auth:sanctum', base_path('routes/api.php'));
 
         copy(__DIR__.'/../../stubs/inertia/routes/web.php', base_path('routes/web.php'));
 
