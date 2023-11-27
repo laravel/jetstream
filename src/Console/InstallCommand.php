@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use RuntimeException;
 use Symfony\Component\Console\Input\InputInterface;
@@ -64,16 +65,13 @@ class InstallCommand extends Command implements PromptsForMissingInput
         // Storage...
         $this->callSilent('storage:link');
 
-        // "Home" Route...
-        $this->replaceInFile('/home', '/dashboard', app_path('Providers/RouteServiceProvider.php'));
-
         if (file_exists(resource_path('views/welcome.blade.php'))) {
             $this->replaceInFile('/home', '/dashboard', resource_path('views/welcome.blade.php'));
             $this->replaceInFile('Home', 'Dashboard', resource_path('views/welcome.blade.php'));
         }
 
         // Fortify Provider...
-        $this->installServiceProviderAfter('RouteServiceProvider', 'FortifyServiceProvider');
+        $this->installServiceProviderAfter('AppServiceProvider', 'FortifyServiceProvider');
 
         // Configure Session...
         $this->configureSession();
@@ -135,12 +133,11 @@ class InstallCommand extends Command implements PromptsForMissingInput
     protected function configureSession()
     {
         try {
-            $this->call('session:table');
+            $this->call('make:session-table');
         } catch (Exception $e) {
             //
         }
 
-        $this->replaceInFile("'SESSION_DRIVER', 'file'", "'SESSION_DRIVER', 'database'", config_path('session.php'));
         $this->replaceInFile('SESSION_DRIVER=file', 'SESSION_DRIVER=database', base_path('.env'));
         $this->replaceInFile('SESSION_DRIVER=file', 'SESSION_DRIVER=database', base_path('.env.example'));
     }
@@ -239,6 +236,7 @@ class InstallCommand extends Command implements PromptsForMissingInput
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/auth', resource_path('views/auth'));
 
         // Routes...
+        $this->callSilent('install:api');
         $this->replaceInFile('auth:api', 'auth:sanctum', base_path('routes/api.php'));
 
         if (! Str::contains(file_get_contents(base_path('routes/web.php')), "'/dashboard'")) {
@@ -344,7 +342,7 @@ EOF;
     protected function installInertiaStack()
     {
         // Install Inertia...
-        if (! $this->requireComposerPackages('inertiajs/inertia-laravel:^0.6.8', 'tightenco/ziggy:^1.0')) {
+        if (! $this->requireComposerPackages('inertiajs/inertia-laravel:dev-master', 'tightenco/ziggy:^1.0')) {
             return false;
         }
 
@@ -408,8 +406,10 @@ EOF;
                 $this->output->write($output);
             });
 
-        $this->installMiddlewareAfter('SubstituteBindings::class', '\App\Http\Middleware\HandleInertiaRequests::class');
-        $this->installMiddlewareAfter('\App\Http\Middleware\HandleInertiaRequests::class', '\Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class');
+        $this->installMiddleware([
+            '\App\Http\Middleware\HandleInertiaRequests::class',
+            '\Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class',
+        ]);
 
         // Models...
         copy(__DIR__.'/../../stubs/app/Models/User.php', app_path('Models/User.php'));
@@ -442,6 +442,7 @@ EOF;
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Profile', resource_path('js/Pages/Profile'));
 
         // Routes...
+        $this->call('install:api');
         $this->replaceInFile('auth:api', 'auth:sanctum', base_path('routes/api.php'));
 
         copy(__DIR__.'/../../stubs/inertia/routes/web.php', base_path('routes/web.php'));
@@ -600,43 +601,46 @@ EOF;
      */
     protected function installServiceProviderAfter($after, $name)
     {
-        if (! Str::contains($appConfig = file_get_contents(config_path('app.php')), 'App\\Providers\\'.$name.'::class')) {
-            file_put_contents(config_path('app.php'), str_replace(
+        $providersPath = base_path('bootstrap/providers.php');
+
+        if (! Str::contains($providersConfig = file_get_contents($providersPath), 'App\\Providers\\'.$name.'::class')) {
+            file_put_contents($providersPath, str_replace(
                 'App\\Providers\\'.$after.'::class,',
-                'App\\Providers\\'.$after.'::class,'.PHP_EOL.'        App\\Providers\\'.$name.'::class,',
-                $appConfig
+                'App\\Providers\\'.$after.'::class,'.PHP_EOL.'    App\\Providers\\'.$name.'::class,',
+                $providersConfig
             ));
         }
     }
 
     /**
-     * Install the middleware to a group in the application Http Kernel.
+     * Install the given middleware names into the application.
      *
-     * @param  string  $after
-     * @param  string  $name
+     * @param  array|string  $name
      * @param  string  $group
+     * @param  string  $modifier
      * @return void
      */
-    protected function installMiddlewareAfter($after, $name, $group = 'web')
+    protected function installMiddleware($names, $group = 'web', $modifier = 'append')
     {
-        $httpKernel = file_get_contents(app_path('Http/Kernel.php'));
+        $bootstrapApp = file_get_contents(base_path('bootstrap/app.php'));
 
-        $middlewareGroups = Str::before(Str::after($httpKernel, '$middlewareGroups = ['), '];');
-        $middlewareGroup = Str::before(Str::after($middlewareGroups, "'$group' => ["), '],');
+        $names = collect(Arr::wrap($names))
+            ->filter(fn ($name) => ! Str::contains($bootstrapApp, $name))
+            ->whenNotEmpty(function ($names) use ($bootstrapApp, $group, $modifier) {
+                $names = $names->map(fn ($name) => "$name")->implode(','.PHP_EOL.'            ');
 
-        if (! Str::contains($middlewareGroup, $name)) {
-            $modifiedMiddlewareGroup = str_replace(
-                $after.',',
-                $after.','.PHP_EOL.'            '.$name.',',
-                $middlewareGroup,
-            );
+                $bootstrapApp = str_replace(
+                    '->withMiddleware(function (Middleware $middleware) {',
+                    '->withMiddleware(function (Middleware $middleware) {'
+                        .PHP_EOL."        \$middleware->$group($modifier: ["
+                        .PHP_EOL."            $names,"
+                        .PHP_EOL.'        ]);'
+                        .PHP_EOL,
+                    $bootstrapApp,
+                );
 
-            file_put_contents(app_path('Http/Kernel.php'), str_replace(
-                $middlewareGroups,
-                str_replace($middlewareGroup, $modifiedMiddlewareGroup, $middlewareGroups),
-                $httpKernel
-            ));
-        }
+                file_put_contents(base_path('bootstrap/app.php'), $bootstrapApp);
+            });
     }
 
     /**
