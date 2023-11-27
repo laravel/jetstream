@@ -65,6 +65,8 @@ class InstallCommand extends Command implements PromptsForMissingInput
         // Storage...
         $this->callSilent('storage:link');
 
+        $this->replaceInFile('/home', '/dashboard', config_path('fortify.php'));
+
         if (file_exists(resource_path('views/welcome.blade.php'))) {
             $this->replaceInFile('/home', '/dashboard', resource_path('views/welcome.blade.php'));
             $this->replaceInFile('Home', 'Dashboard', resource_path('views/welcome.blade.php'));
