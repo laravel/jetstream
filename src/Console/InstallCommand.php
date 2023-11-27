@@ -152,9 +152,11 @@ class InstallCommand extends Command implements PromptsForMissingInput
     protected function installLivewireStack()
     {
         // Install Livewire...
-        if (! $this->requireComposerPackages('livewire/livewire:^3.0')) {
+        if (! $this->requireComposerPackages('livewire/livewire:dev-feat/l11')) {
             return false;
         }
+
+        $this->call('install:api');
 
         // Sanctum...
         (new Process([$this->phpBinary(), 'artisan', 'vendor:publish', '--provider=Laravel\Sanctum\SanctumServiceProvider', '--force'], base_path()))
@@ -236,9 +238,6 @@ class InstallCommand extends Command implements PromptsForMissingInput
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/api', resource_path('views/api'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/profile', resource_path('views/profile'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/auth', resource_path('views/auth'));
-
-        // Routes...
-        $this->call('install:api');
 
         if (! Str::contains(file_get_contents(base_path('routes/web.php')), "'/dashboard'")) {
             (new Filesystem)->append(base_path('routes/web.php'), $this->livewireRouteDefinition());
@@ -347,6 +346,8 @@ EOF;
             return false;
         }
 
+        $this->call('install:api');
+
         // Install NPM packages...
         $this->updateNodePackages(function ($packages) {
             return [
@@ -441,9 +442,6 @@ EOF;
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/API', resource_path('js/Pages/API'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Auth', resource_path('js/Pages/Auth'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Profile', resource_path('js/Pages/Profile'));
-
-        // Routes...
-        $this->call('install:api');
 
         copy(__DIR__.'/../../stubs/inertia/routes/web.php', base_path('routes/web.php'));
 
