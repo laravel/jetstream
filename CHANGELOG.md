@@ -1,6 +1,11 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v4.1.0...4.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v4.1.1...4.x)
+
+## [v4.1.1](https://github.com/laravel/jetstream/compare/v4.1.0...v4.1.1) - 2023-11-27
+
+* deleteTeam() return type by [@tanthammar](https://github.com/tanthammar) in https://github.com/laravel/jetstream/pull/1406
+* Set password in session on update for inertia by [@taylorotwell](https://github.com/taylorotwell) in https://github.com/laravel/jetstream/pull/1411
 
 ## [v4.1.0](https://github.com/laravel/jetstream/compare/v4.0.5...v4.1.0) - 2023-11-07
 
