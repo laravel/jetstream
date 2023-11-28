@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
+use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use RuntimeException;
 use Symfony\Component\Console\Input\InputInterface;
@@ -73,7 +74,7 @@ class InstallCommand extends Command implements PromptsForMissingInput
         }
 
         // Fortify Provider...
-        $this->installServiceProviderAfter('AppServiceProvider', 'FortifyServiceProvider');
+        ServiceProvider::addProviderToBootstrapFile('App\Providers\FortifyServiceProvider');
 
         // Configure Session...
         $this->configureSession();
@@ -205,7 +206,7 @@ class InstallCommand extends Command implements PromptsForMissingInput
 
         // Service Providers...
         copy(__DIR__.'/../../stubs/app/Providers/JetstreamServiceProvider.php', app_path('Providers/JetstreamServiceProvider.php'));
-        $this->installServiceProviderAfter('FortifyServiceProvider', 'JetstreamServiceProvider');
+        ServiceProvider::addProviderToBootstrapFile('App\Providers\JetstreamServiceProvider');
 
         // Models...
         copy(__DIR__.'/../../stubs/app/Models/User.php', app_path('Models/User.php'));
@@ -398,8 +399,7 @@ EOF;
 
         // Service Providers...
         copy(__DIR__.'/../../stubs/app/Providers/JetstreamServiceProvider.php', app_path('Providers/JetstreamServiceProvider.php'));
-
-        $this->installServiceProviderAfter('FortifyServiceProvider', 'JetstreamServiceProvider');
+        ServiceProvider::addProviderToBootstrapFile('App\Providers\JetstreamServiceProvider');
 
         // Middleware...
         (new Filesystem)->ensureDirectoryExists(app_path('Http/Middleware'));
@@ -590,26 +590,6 @@ EOF;
 
         $this->replaceInFile('vite build', 'vite build && vite build --ssr', base_path('package.json'));
         $this->replaceInFile('/node_modules', '/bootstrap/ssr'.PHP_EOL.'/node_modules', base_path('.gitignore'));
-    }
-
-    /**
-     * Install the service provider in the application configuration file.
-     *
-     * @param  string  $after
-     * @param  string  $name
-     * @return void
-     */
-    protected function installServiceProviderAfter($after, $name)
-    {
-        $providersPath = base_path('bootstrap/providers.php');
-
-        if (! Str::contains($providersConfig = file_get_contents($providersPath), 'App\\Providers\\'.$name.'::class')) {
-            file_put_contents($providersPath, str_replace(
-                'App\\Providers\\'.$after.'::class,',
-                'App\\Providers\\'.$after.'::class,'.PHP_EOL.'    App\\Providers\\'.$name.'::class,',
-                $providersConfig
-            ));
-        }
     }
 
     /**
