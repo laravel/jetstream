@@ -51,6 +51,13 @@ class Agent extends MobileDetect
     ];
 
     /**
+     * Key value store for resolved strings
+     *
+     * @var array<string: mixed>
+     */
+    protected $store = [];
+
+    /**
      * Get the platform name from the User Agent.
      *
      * @return string|null
@@ -134,12 +141,12 @@ class Agent extends MobileDetect
         try {
             $cacheKey = $this->createCacheKey($key);
 
-            if (! is_null($cacheItem = $this->cache->get($cacheKey))) {
-                return $cacheItem->get();
+            if (! is_null($cacheItem = $this->store[$cacheKey] ?? null)) {
+                return $cacheItem;
             }
 
             return tap(call_user_func($callback), function ($result) use ($cacheKey) {
-                $this->cache->set($cacheKey, $result);
+                $this->store[$cacheKey] = $result;
             });
         } catch (CacheException $e) {
             throw new MobileDetectException("Cache problem in for {$key}: {$e->getMessage()}");
