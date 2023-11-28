@@ -6,10 +6,13 @@ use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
 use Inertia\Inertia;
+use Laravel\Fortify\Events\PasswordUpdatedViaController;
 use Laravel\Fortify\Fortify;
 use Laravel\Jetstream\Http\Livewire\ApiTokenManager;
 use Laravel\Jetstream\Http\Livewire\CreateTeamForm;
@@ -177,6 +180,12 @@ class JetstreamServiceProvider extends ServiceProvider
         if (class_exists(HandleInertiaRequests::class)) {
             $kernel->appendToMiddlewarePriority(HandleInertiaRequests::class);
         }
+
+        Event::listen(function (PasswordUpdatedViaController $event) {
+            if (request()->hasSession()) {
+                request()->session()->put(['password_hash_sanctum' => Auth::user()->getAuthPassword()]);
+            }
+        });
 
         Fortify::loginView(function () {
             return Inertia::render('Auth/Login', [
