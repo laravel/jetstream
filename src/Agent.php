@@ -3,8 +3,6 @@
 namespace Laravel\Jetstream;
 
 use Closure;
-use Detection\Cache\CacheException;
-use Detection\Exception\MobileDetectException;
 use Detection\MobileDetect;
 
 /**
@@ -49,6 +47,13 @@ class Agent extends MobileDetect
         'Mozilla' => 'Mozilla',
         'WeChat' => 'MicroMessenger',
     ];
+
+    /**
+     * Key value store for resolved strings.
+     *
+     * @var array<string, mixed>
+     */
+    protected $store = [];
 
     /**
      * Get the platform name from the User Agent.
@@ -126,24 +131,18 @@ class Agent extends MobileDetect
      * @param  string  $key
      * @param  \Closure():mixed  $callback
      * @return mixed
-     *
-     * @throws \Detection\Exception\MobileDetectException
      */
     protected function retrieveUsingCacheOrResolve(string $key, Closure $callback)
     {
-        try {
-            $cacheKey = $this->createCacheKey($key);
+        $cacheKey = $this->createCacheKey($key);
 
-            if (! is_null($cacheItem = $this->cache->get($cacheKey))) {
-                return $cacheItem->get();
-            }
-
-            return tap(call_user_func($callback), function ($result) use ($cacheKey) {
-                $this->cache->set($cacheKey, $result);
-            });
-        } catch (CacheException $e) {
-            throw new MobileDetectException("Cache problem in for {$key}: {$e->getMessage()}");
+        if (! is_null($cacheItem = $this->store[$cacheKey] ?? null)) {
+            return $cacheItem;
         }
+
+        return tap(call_user_func($callback), function ($result) use ($cacheKey) {
+            $this->store[$cacheKey] = $result;
+        });
     }
 
     /**
