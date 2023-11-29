@@ -22,7 +22,10 @@ class AgentTest extends TestCase
         $agent = new Agent();
         $agent->setUserAgent($userAgent);
 
-        $this->assertEquals($platform, $agent->platform());
+        $this->assertSame($platform, $agent->platform());
+
+        // Test cached value return the same output.
+        $this->assertSame($platform, $agent->platform());
     }
 
     public static function operatingSystemsDataProvider()
@@ -48,7 +51,10 @@ class AgentTest extends TestCase
         $agent = new Agent();
         $agent->setUserAgent($userAgent);
 
-        $this->assertEquals($browser, $agent->browser());
+        $this->assertSame($browser, $agent->browser());
+
+        // Test cached value return the same output.
+        $this->assertSame($browser, $agent->browser());
     }
 
     public static function browsersDataProvider()
