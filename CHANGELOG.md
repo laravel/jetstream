@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v4.1.1...4.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v4.1.2...4.x)
+
+## [v4.1.2](https://github.com/laravel/jetstream/compare/v4.1.1...v4.1.2) - 2023-11-29
+
+* Fix Browser Sessions not showing platform and browser by [@olumby](https://github.com/olumby) in https://github.com/laravel/jetstream/pull/1412
 
 ## [v4.1.1](https://github.com/laravel/jetstream/compare/v4.1.0...v4.1.1) - 2023-11-27
 
