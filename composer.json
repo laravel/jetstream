@@ -22,7 +22,7 @@
         "mobiledetect/mobiledetectlib": "^4.8"
     },
     "require-dev": {
-        "inertiajs/inertia-laravel": "^0.6.5",
+        "inertiajs/inertia-laravel": "^0.6.11",
         "laravel/sanctum": "^3.0",
         "livewire/livewire": "^3.0",
         "mockery/mockery": "^1.0",
