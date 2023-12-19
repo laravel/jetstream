@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v4.1.2...4.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v4.2.0...4.x)
+
+## [v4.2.0](https://github.com/laravel/jetstream/compare/v4.1.2...v4.2.0) - 2023-12-19
+
+* [4.x] Vite 5 by [@timacdonald](https://github.com/timacdonald) in https://github.com/laravel/jetstream/pull/1418
 
 ## [v4.1.2](https://github.com/laravel/jetstream/compare/v4.1.1...v4.1.2) - 2023-11-29
 
