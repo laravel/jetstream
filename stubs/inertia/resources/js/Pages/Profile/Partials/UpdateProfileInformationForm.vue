@@ -151,7 +151,7 @@ const clearPhotoFileInput = () => {
                     type="email"
                     class="mt-1 block w-full"
                     required
-                    autocomplete="username"
+                    autocomplete="email"
                 />
                 <InputError :message="form.errors.email" class="mt-2" />
 
