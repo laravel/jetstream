@@ -15,8 +15,6 @@ class TwoFactorAuthenticationSettingsTest extends TestCase
     {
         if (! Features::canManageTwoFactorAuthentication()) {
             $this->markTestSkipped('Two factor authentication is not enabled.');
-
-            return;
         }
 
         $this->actingAs($user = User::factory()->create());
@@ -33,8 +31,6 @@ class TwoFactorAuthenticationSettingsTest extends TestCase
     {
         if (! Features::canManageTwoFactorAuthentication()) {
             $this->markTestSkipped('Two factor authentication is not enabled.');
-
-            return;
         }
 
         $this->actingAs($user = User::factory()->create());
@@ -56,8 +52,6 @@ class TwoFactorAuthenticationSettingsTest extends TestCase
     {
         if (! Features::canManageTwoFactorAuthentication()) {
             $this->markTestSkipped('Two factor authentication is not enabled.');
-
-            return;
         }
 
         $this->actingAs($user = User::factory()->create());
