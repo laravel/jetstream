@@ -19,8 +19,6 @@ class InviteTeamMemberTest extends TestCase
     {
         if (! Features::sendsTeamInvitations()) {
             $this->markTestSkipped('Team invitations not enabled.');
-
-            return;
         }
 
         Mail::fake();
@@ -42,8 +40,6 @@ class InviteTeamMemberTest extends TestCase
     {
         if (! Features::sendsTeamInvitations()) {
             $this->markTestSkipped('Team invitations not enabled.');
-
-            return;
         }
 
         Mail::fake();
