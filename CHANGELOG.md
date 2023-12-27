@@ -1,6 +1,11 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v4.2.0...4.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v4.2.1...4.x)
+
+## [v4.2.1](https://github.com/laravel/jetstream/compare/v4.2.0...v4.2.1) - 2023-12-27
+
+* [4.x] Remove Unreachable `return` in PHPUnit test stubs by [@nathanheffley](https://github.com/nathanheffley) in https://github.com/laravel/jetstream/pull/1423
+* [4.x] Fix PHPDoc for `UpdateUserProfileInformation::update` by [@rstefanic](https://github.com/rstefanic) in https://github.com/laravel/jetstream/pull/1424
 
 ## [v4.2.0](https://github.com/laravel/jetstream/compare/v4.1.2...v4.2.0) - 2023-12-19
 
