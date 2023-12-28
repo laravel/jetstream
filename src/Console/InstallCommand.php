@@ -156,10 +156,6 @@ class InstallCommand extends Command implements PromptsForMissingInput
         // Update Configuration...
         $this->replaceInFile('inertia', 'livewire', config_path('jetstream.php'));
 
-        // Update Environment Variables...
-        $this->replaceInFile('BROADCAST_CONNECTION=log', 'AUTH_GUARD=sanctum'.PHP_EOL.'BROADCAST_CONNECTION=log', base_path('.env'));
-        $this->replaceInFile('BROADCAST_CONNECTION=log', 'AUTH_GUARD=sanctum'.PHP_EOL.'BROADCAST_CONNECTION=log', base_path('.env.example'));
-
         // NPM Packages...
         $this->updateNodePackages(function ($packages) {
             return [
