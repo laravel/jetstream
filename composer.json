@@ -22,8 +22,8 @@
         "mobiledetect/mobiledetectlib": "^4.8"
     },
     "require-dev": {
-        "inertiajs/inertia-laravel": "dev-master",
-        "laravel/sanctum": "dev-master",
+        "inertiajs/inertia-laravel": "^1.0",
+        "laravel/sanctum": "^4.0",
         "livewire/livewire": "dev-feat/l11",
         "mockery/mockery": "^1.0",
         "orchestra/testbench": "^9.0",
