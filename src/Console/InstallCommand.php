@@ -6,6 +6,8 @@ use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Arr;
+use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use RuntimeException;
 use Symfony\Component\Console\Input\InputInterface;
@@ -64,8 +66,7 @@ class InstallCommand extends Command implements PromptsForMissingInput
         // Storage...
         $this->callSilent('storage:link');
 
-        // "Home" Route...
-        $this->replaceInFile('/home', '/dashboard', app_path('Providers/RouteServiceProvider.php'));
+        $this->replaceInFile('/home', '/dashboard', config_path('fortify.php'));
 
         if (file_exists(resource_path('views/welcome.blade.php'))) {
             $this->replaceInFile('/home', '/dashboard', resource_path('views/welcome.blade.php'));
@@ -73,7 +74,7 @@ class InstallCommand extends Command implements PromptsForMissingInput
         }
 
         // Fortify Provider...
-        $this->installServiceProviderAfter('RouteServiceProvider', 'FortifyServiceProvider');
+        ServiceProvider::addProviderToBootstrapFile('App\Providers\FortifyServiceProvider');
 
         // Configure Session...
         $this->configureSession();
@@ -134,15 +135,8 @@ class InstallCommand extends Command implements PromptsForMissingInput
      */
     protected function configureSession()
     {
-        try {
-            $this->call('session:table');
-        } catch (Exception $e) {
-            //
-        }
-
-        $this->replaceInFile("'SESSION_DRIVER', 'file'", "'SESSION_DRIVER', 'database'", config_path('session.php'));
-        $this->replaceInFile('SESSION_DRIVER=file', 'SESSION_DRIVER=database', base_path('.env'));
-        $this->replaceInFile('SESSION_DRIVER=file', 'SESSION_DRIVER=database', base_path('.env.example'));
+        $this->replaceInFile('SESSION_DRIVER=cookie', 'SESSION_DRIVER=database', base_path('.env'));
+        $this->replaceInFile('SESSION_DRIVER=cookie', 'SESSION_DRIVER=database', base_path('.env.example'));
     }
 
     /**
@@ -153,29 +147,23 @@ class InstallCommand extends Command implements PromptsForMissingInput
     protected function installLivewireStack()
     {
         // Install Livewire...
-        if (! $this->requireComposerPackages('livewire/livewire:^3.0')) {
+        if (! $this->requireComposerPackages('livewire/livewire:dev-feat/l11')) {
             return false;
         }
 
-        // Sanctum...
-        (new Process([$this->phpBinary(), 'artisan', 'vendor:publish', '--provider=Laravel\Sanctum\SanctumServiceProvider', '--force'], base_path()))
-                ->setTimeout(null)
-                ->run(function ($type, $output) {
-                    $this->output->write($output);
-                });
+        $this->call('install:api');
 
         // Update Configuration...
         $this->replaceInFile('inertia', 'livewire', config_path('jetstream.php'));
-        // $this->replaceInFile("'guard' => 'web'", "'guard' => 'sanctum'", config_path('auth.php'));
 
         // NPM Packages...
         $this->updateNodePackages(function ($packages) {
             return [
-                '@tailwindcss/forms' => '^0.5.2',
-                '@tailwindcss/typography' => '^0.5.0',
-                'autoprefixer' => '^10.4.7',
-                'postcss' => '^8.4.14',
-                'tailwindcss' => '^3.1.0',
+                '@tailwindcss/forms' => '^0.5.7',
+                '@tailwindcss/typography' => '^0.5.10',
+                'autoprefixer' => '^10.4.16',
+                'postcss' => '^8.4.32',
+                'tailwindcss' => '^3.4.0',
             ] + $packages;
         });
 
@@ -204,7 +192,7 @@ class InstallCommand extends Command implements PromptsForMissingInput
 
         // Service Providers...
         copy(__DIR__.'/../../stubs/app/Providers/JetstreamServiceProvider.php', app_path('Providers/JetstreamServiceProvider.php'));
-        $this->installServiceProviderAfter('FortifyServiceProvider', 'JetstreamServiceProvider');
+        ServiceProvider::addProviderToBootstrapFile('App\Providers\JetstreamServiceProvider');
 
         // Models...
         copy(__DIR__.'/../../stubs/app/Models/User.php', app_path('Models/User.php'));
@@ -237,9 +225,6 @@ class InstallCommand extends Command implements PromptsForMissingInput
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/api', resource_path('views/api'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/profile', resource_path('views/profile'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/livewire/resources/views/auth', resource_path('views/auth'));
-
-        // Routes...
-        $this->replaceInFile('auth:api', 'auth:sanctum', base_path('routes/api.php'));
 
         if (! Str::contains(file_get_contents(base_path('routes/web.php')), "'/dashboard'")) {
             (new Filesystem)->append(base_path('routes/web.php'), $this->livewireRouteDefinition());
@@ -344,30 +329,25 @@ EOF;
     protected function installInertiaStack()
     {
         // Install Inertia...
-        if (! $this->requireComposerPackages('inertiajs/inertia-laravel:^0.6.8', 'tightenco/ziggy:^1.0')) {
+        if (! $this->requireComposerPackages('inertiajs/inertia-laravel:^1.0', 'tightenco/ziggy:^1.0')) {
             return false;
         }
+
+        $this->call('install:api');
 
         // Install NPM packages...
         $this->updateNodePackages(function ($packages) {
             return [
-                '@inertiajs/vue3' => '^1.0.0',
-                '@tailwindcss/forms' => '^0.5.2',
-                '@tailwindcss/typography' => '^0.5.2',
-                '@vitejs/plugin-vue' => '^4.0.0',
-                'autoprefixer' => '^10.4.7',
-                'postcss' => '^8.4.14',
-                'tailwindcss' => '^3.1.0',
-                'vue' => '^3.2.31',
+                '@inertiajs/vue3' => '^1.0.14',
+                '@tailwindcss/forms' => '^0.5.7',
+                '@tailwindcss/typography' => '^0.5.10',
+                '@vitejs/plugin-vue' => '^5.0.0',
+                'autoprefixer' => '^10.4.16',
+                'postcss' => '^8.4.32',
+                'tailwindcss' => '^3.4.0',
+                'vue' => '^3.3.13',
             ] + $packages;
         });
-
-        // Sanctum...
-        (new Process([$this->phpBinary(), 'artisan', 'vendor:publish', '--provider=Laravel\Sanctum\SanctumServiceProvider', '--force'], base_path()))
-                ->setTimeout(null)
-                ->run(function ($type, $output) {
-                    $this->output->write($output);
-                });
 
         // Tailwind Configuration...
         copy(__DIR__.'/../../stubs/inertia/tailwind.config.js', base_path('tailwind.config.js'));
@@ -398,18 +378,20 @@ EOF;
 
         // Service Providers...
         copy(__DIR__.'/../../stubs/app/Providers/JetstreamServiceProvider.php', app_path('Providers/JetstreamServiceProvider.php'));
-
-        $this->installServiceProviderAfter('FortifyServiceProvider', 'JetstreamServiceProvider');
+        ServiceProvider::addProviderToBootstrapFile('App\Providers\JetstreamServiceProvider');
 
         // Middleware...
+        (new Filesystem)->ensureDirectoryExists(app_path('Http/Middleware'));
         (new Process([$this->phpBinary(), 'artisan', 'inertia:middleware', 'HandleInertiaRequests', '--force'], base_path()))
             ->setTimeout(null)
             ->run(function ($type, $output) {
                 $this->output->write($output);
             });
 
-        $this->installMiddlewareAfter('SubstituteBindings::class', '\App\Http\Middleware\HandleInertiaRequests::class');
-        $this->installMiddlewareAfter('\App\Http\Middleware\HandleInertiaRequests::class', '\Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class');
+        $this->installMiddleware([
+            '\App\Http\Middleware\HandleInertiaRequests::class',
+            '\Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class',
+        ]);
 
         // Models...
         copy(__DIR__.'/../../stubs/app/Models/User.php', app_path('Models/User.php'));
@@ -440,9 +422,6 @@ EOF;
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/API', resource_path('js/Pages/API'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Auth', resource_path('js/Pages/Auth'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/inertia/resources/js/Pages/Profile', resource_path('js/Pages/Profile'));
-
-        // Routes...
-        $this->replaceInFile('auth:api', 'auth:sanctum', base_path('routes/api.php'));
 
         copy(__DIR__.'/../../stubs/inertia/routes/web.php', base_path('routes/web.php'));
 
@@ -578,13 +557,14 @@ EOF;
     {
         $this->updateNodePackages(function ($packages) {
             return [
-                '@vue/server-renderer' => '^3.2.31',
+                '@vue/server-renderer' => '^3.3.13',
             ] + $packages;
         });
 
         copy(__DIR__.'/../../stubs/inertia/resources/js/ssr.js', resource_path('js/ssr.js'));
         $this->replaceInFile("input: 'resources/js/app.js',", "input: 'resources/js/app.js',".PHP_EOL."            ssr: 'resources/js/ssr.js',", base_path('vite.config.js'));
 
+        (new Filesystem)->ensureDirectoryExists(app_path('Http/Middleware'));
         copy(__DIR__.'/../../stubs/inertia/app/Http/Middleware/HandleInertiaRequests.php', app_path('Http/Middleware/HandleInertiaRequests.php'));
 
         $this->replaceInFile('vite build', 'vite build && vite build --ssr', base_path('package.json'));
@@ -592,51 +572,34 @@ EOF;
     }
 
     /**
-     * Install the service provider in the application configuration file.
+     * Install the given middleware names into the application.
      *
-     * @param  string  $after
-     * @param  string  $name
-     * @return void
-     */
-    protected function installServiceProviderAfter($after, $name)
-    {
-        if (! Str::contains($appConfig = file_get_contents(config_path('app.php')), 'App\\Providers\\'.$name.'::class')) {
-            file_put_contents(config_path('app.php'), str_replace(
-                'App\\Providers\\'.$after.'::class,',
-                'App\\Providers\\'.$after.'::class,'.PHP_EOL.'        App\\Providers\\'.$name.'::class,',
-                $appConfig
-            ));
-        }
-    }
-
-    /**
-     * Install the middleware to a group in the application Http Kernel.
-     *
-     * @param  string  $after
-     * @param  string  $name
+     * @param  array|string  $name
      * @param  string  $group
+     * @param  string  $modifier
      * @return void
      */
-    protected function installMiddlewareAfter($after, $name, $group = 'web')
+    protected function installMiddleware($names, $group = 'web', $modifier = 'append')
     {
-        $httpKernel = file_get_contents(app_path('Http/Kernel.php'));
+        $bootstrapApp = file_get_contents(base_path('bootstrap/app.php'));
 
-        $middlewareGroups = Str::before(Str::after($httpKernel, '$middlewareGroups = ['), '];');
-        $middlewareGroup = Str::before(Str::after($middlewareGroups, "'$group' => ["), '],');
+        $names = collect(Arr::wrap($names))
+            ->filter(fn ($name) => ! Str::contains($bootstrapApp, $name))
+            ->whenNotEmpty(function ($names) use ($bootstrapApp, $group, $modifier) {
+                $names = $names->map(fn ($name) => "$name")->implode(','.PHP_EOL.'            ');
 
-        if (! Str::contains($middlewareGroup, $name)) {
-            $modifiedMiddlewareGroup = str_replace(
-                $after.',',
-                $after.','.PHP_EOL.'            '.$name.',',
-                $middlewareGroup,
-            );
+                $bootstrapApp = str_replace(
+                    '->withMiddleware(function (Middleware $middleware) {',
+                    '->withMiddleware(function (Middleware $middleware) {'
+                        .PHP_EOL."        \$middleware->$group($modifier: ["
+                        .PHP_EOL."            $names,"
+                        .PHP_EOL.'        ]);'
+                        .PHP_EOL,
+                    $bootstrapApp,
+                );
 
-            file_put_contents(app_path('Http/Kernel.php'), str_replace(
-                $middlewareGroups,
-                str_replace($middlewareGroup, $modifiedMiddlewareGroup, $middlewareGroups),
-                $httpKernel
-            ));
-        }
+                file_put_contents(base_path('bootstrap/app.php'), $bootstrapApp);
+            });
     }
 
     /**
