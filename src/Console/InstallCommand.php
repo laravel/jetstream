@@ -153,25 +153,21 @@ class InstallCommand extends Command implements PromptsForMissingInput
 
         $this->call('install:api');
 
-        // Sanctum...
-        (new Process([$this->phpBinary(), 'artisan', 'vendor:publish', '--provider=Laravel\Sanctum\SanctumServiceProvider', '--force'], base_path()))
-                ->setTimeout(null)
-                ->run(function ($type, $output) {
-                    $this->output->write($output);
-                });
-
         // Update Configuration...
         $this->replaceInFile('inertia', 'livewire', config_path('jetstream.php'));
-        // $this->replaceInFile("'guard' => 'web'", "'guard' => 'sanctum'", config_path('auth.php'));
+
+        // Update Environment Variables...
+        $this->replaceInFile('BROADCAST_CONNECTION=log', 'AUTH_GUARD=sanctum'.PHP_EOL.'BROADCAST_CONNECTION=log', base_path('.env'));
+        $this->replaceInFile('BROADCAST_CONNECTION=log', 'AUTH_GUARD=sanctum'.PHP_EOL.'BROADCAST_CONNECTION=log', base_path('.env.example'));
 
         // NPM Packages...
         $this->updateNodePackages(function ($packages) {
             return [
-                '@tailwindcss/forms' => '^0.5.2',
-                '@tailwindcss/typography' => '^0.5.0',
-                'autoprefixer' => '^10.4.7',
-                'postcss' => '^8.4.14',
-                'tailwindcss' => '^3.1.0',
+                '@tailwindcss/forms' => '^0.5.7',
+                '@tailwindcss/typography' => '^0.5.10',
+                'autoprefixer' => '^10.4.16',
+                'postcss' => '^8.4.32',
+                'tailwindcss' => '^3.4.0',
             ] + $packages;
         });
 
@@ -346,23 +342,16 @@ EOF;
         // Install NPM packages...
         $this->updateNodePackages(function ($packages) {
             return [
-                '@inertiajs/vue3' => '^1.0.0',
-                '@tailwindcss/forms' => '^0.5.2',
-                '@tailwindcss/typography' => '^0.5.2',
-                '@vitejs/plugin-vue' => '^4.0.0',
-                'autoprefixer' => '^10.4.7',
-                'postcss' => '^8.4.14',
-                'tailwindcss' => '^3.1.0',
-                'vue' => '^3.2.31',
+                '@inertiajs/vue3' => '^1.0.14',
+                '@tailwindcss/forms' => '^0.5.7',
+                '@tailwindcss/typography' => '^0.5.10',
+                '@vitejs/plugin-vue' => '^5.0.0',
+                'autoprefixer' => '^10.4.16',
+                'postcss' => '^8.4.32',
+                'tailwindcss' => '^3.4.0',
+                'vue' => '^3.3.13',
             ] + $packages;
         });
-
-        // Sanctum...
-        (new Process([$this->phpBinary(), 'artisan', 'vendor:publish', '--provider=Laravel\Sanctum\SanctumServiceProvider', '--force'], base_path()))
-                ->setTimeout(null)
-                ->run(function ($type, $output) {
-                    $this->output->write($output);
-                });
 
         // Tailwind Configuration...
         copy(__DIR__.'/../../stubs/inertia/tailwind.config.js', base_path('tailwind.config.js'));
@@ -572,7 +561,7 @@ EOF;
     {
         $this->updateNodePackages(function ($packages) {
             return [
-                '@vue/server-renderer' => '^3.2.31',
+                '@vue/server-renderer' => '^3.3.13',
             ] + $packages;
         });
 
