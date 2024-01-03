@@ -147,7 +147,7 @@ class InstallCommand extends Command implements PromptsForMissingInput
     protected function installLivewireStack()
     {
         // Install Livewire...
-        if (! $this->requireComposerPackages('livewire/livewire:dev-feat/l11')) {
+        if (! $this->requireComposerPackages('livewire/livewire:^3.0')) {
             return false;
         }
 
