@@ -11,18 +11,10 @@ use Laravel\Jetstream\Contracts\DeletesUsers;
 class DeleteUser implements DeletesUsers
 {
     /**
-     * The team deleter implementation.
-     *
-     * @var \Laravel\Jetstream\Contracts\DeletesTeams
-     */
-    protected $deletesTeams;
-
-    /**
      * Create a new action instance.
      */
-    public function __construct(DeletesTeams $deletesTeams)
+    public function __construct(protected DeletesTeams $deletesTeams)
     {
-        $this->deletesTeams = $deletesTeams;
     }
 
     /**
