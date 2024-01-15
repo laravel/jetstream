@@ -24,9 +24,9 @@ watch(() => props.show, () => {
         document.body.style.overflow = 'hidden';
         dialog.value?.showModal();
     } else {
+        document.body.style.overflow = null;
         setTimeout(() => {
             dialog.value?.close();
-            document.body.style.overflow = null;
         }, 200);
     }
 });
