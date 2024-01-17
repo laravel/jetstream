@@ -66,6 +66,7 @@ class InstallCommand extends Command implements PromptsForMissingInput
 
         // "Home" Route...
         $this->replaceInFile('/home', '/dashboard', app_path('Providers/RouteServiceProvider.php'));
+        $this->replaceInFile('/home', '/dashboard', config_path('fortify.php'));
 
         if (file_exists(resource_path('views/welcome.blade.php'))) {
             $this->replaceInFile('/home', '/dashboard', resource_path('views/welcome.blade.php'));
