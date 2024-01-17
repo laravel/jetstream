@@ -83,7 +83,7 @@ class ShareInertiaData
                 }
             }
         }
-        
+
         return false;
     }
 }
