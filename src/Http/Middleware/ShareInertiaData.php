@@ -71,9 +71,9 @@ class ShareInertiaData
     protected function twoFactorEnabled($user)
     {
         if (Features::enabled(Features::twoFactorAuthentication())) {
-            if (!is_null($user->two_factor_secret)) {
+            if (! is_null($user->two_factor_secret)) {
                 if (Features::enabled(Features::twoFactorAuthentication(['confirm']))) {
-                    if (!is_null($user->two_factor_confirmed_at)) {
+                    if (! is_null($user->two_factor_confirmed_at)) {
                         return true;
                     } else {
                         return false;
