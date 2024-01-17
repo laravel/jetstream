@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v4.2.1...4.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v4.2.2...4.x)
+
+## [v4.2.2](https://github.com/laravel/jetstream/compare/v4.2.1...v4.2.2) - 2024-01-17
+
+* [4.x] Fix home route by [@jessarcher](https://github.com/jessarcher) in https://github.com/laravel/jetstream/pull/1432
 
 ## [v4.2.1](https://github.com/laravel/jetstream/compare/v4.2.0...v4.2.1) - 2023-12-27
 
