@@ -54,8 +54,7 @@ class ShareInertiaData
                     return array_merge($user->toArray(), array_filter([
                         'all_teams' => $userHasTeamFeatures ? $user->allTeams()->values() : null,
                     ]), [
-                        'two_factor_enabled' => Features::enabled(Features::twoFactorAuthentication())
-                            && ! is_null($user->two_factor_secret),
+                        'two_factor_enabled' => $this->twoFactorEnabled($user),
                     ]);
                 },
             ],
@@ -67,5 +66,23 @@ class ShareInertiaData
         ]));
 
         return $next($request);
+    }
+
+    protected function twoFactorEnabled($user)
+    {
+        if (Features::enabled(Features::twoFactorAuthentication())) {
+            if (!is_null($user->two_factor_secret)) {
+                if (Features::enabled(Features::twoFactorAuthentication(['confirm']))) {
+                    if (!is_null($user->two_factor_confirmed_at)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
