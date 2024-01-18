@@ -18,7 +18,7 @@
         "ext-json": "*",
         "illuminate/console": "^11.0",
         "illuminate/support": "^11.0",
-        "laravel/fortify": "dev-develop",
+        "laravel/fortify": "^1.20",
         "mobiledetect/mobiledetectlib": "^4.8"
     },
     "require-dev": {
