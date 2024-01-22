@@ -126,15 +126,6 @@ class InstallCommand extends Command implements PromptsForMissingInput
         copy($stubs.'/PasswordConfirmationTest.php', base_path('tests/Feature/PasswordConfirmationTest.php'));
         copy($stubs.'/PasswordResetTest.php', base_path('tests/Feature/PasswordResetTest.php'));
         copy($stubs.'/RegistrationTest.php', base_path('tests/Feature/RegistrationTest.php'));
-
-        // Migrations
-        if ($this->components->confirm('Do you wish to re-run the database migrations?', true)) {
-            (new Process([$this->phpBinary(), 'artisan', 'migrate:refresh', '--force'], base_path()))
-                ->setTimeout(null)
-                ->run(function ($type, $output) {
-                    $this->output->write($output);
-                });
-        }
     }
 
     /**
@@ -274,6 +265,8 @@ class InstallCommand extends Command implements PromptsForMissingInput
         } else {
             $this->runCommands(['npm install', 'npm run build']);
         }
+
+        $this->runDatabaseMigrations();
 
         $this->line('');
         $this->components->info('Livewire scaffolding installed successfully.');
@@ -474,6 +467,8 @@ EOF;
         } else {
             $this->runCommands(['npm install', 'npm run build']);
         }
+
+        $this->runDatabaseMigrations();
 
         $this->line('');
         $this->components->info('Inertia scaffolding installed successfully.');
@@ -740,6 +735,19 @@ EOF;
             base_path('package.json'),
             json_encode($packages, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT).PHP_EOL
         );
+    }
+
+    /**
+     * Run the database migrations.
+     *
+     * @return void
+     */
+    protected function runDatabaseMigrations()
+    {
+        // Migrations
+        if ($this->components->confirm('Do you wish to re-run the database migrations?', true)) {
+            $this->call('migrate:refresh', ['--force' => true]);
+        }
     }
 
     /**
