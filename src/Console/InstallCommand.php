@@ -16,6 +16,7 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
 
+use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\multiselect;
 use function Laravel\Prompts\select;
 
@@ -267,6 +268,8 @@ class InstallCommand extends Command implements PromptsForMissingInput
         }
 
         $this->line('');
+        $this->runDatabaseMigrations();
+
         $this->components->info('Livewire scaffolding installed successfully.');
 
         return true;
@@ -467,6 +470,8 @@ EOF;
         }
 
         $this->line('');
+        $this->runDatabaseMigrations();
+
         $this->components->info('Inertia scaffolding installed successfully.');
 
         return true;
@@ -731,6 +736,18 @@ EOF;
             base_path('package.json'),
             json_encode($packages, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT).PHP_EOL
         );
+    }
+
+    /**
+     * Run the database migrations.
+     *
+     * @return void
+     */
+    protected function runDatabaseMigrations()
+    {
+        if (confirm('New database migrations were added. Would you like to re-run your migrations?', true)) {
+            $this->call('migrate:fresh', ['--force' => true]);
+        }
     }
 
     /**
