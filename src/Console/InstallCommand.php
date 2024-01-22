@@ -267,6 +267,7 @@ class InstallCommand extends Command implements PromptsForMissingInput
             $this->runCommands(['npm install', 'npm run build']);
         }
 
+        $this->line('');
         $this->runDatabaseMigrations();
 
         $this->components->info('Livewire scaffolding installed successfully.');
@@ -468,6 +469,7 @@ EOF;
             $this->runCommands(['npm install', 'npm run build']);
         }
 
+        $this->line('');
         $this->runDatabaseMigrations();
 
         $this->components->info('Inertia scaffolding installed successfully.');
