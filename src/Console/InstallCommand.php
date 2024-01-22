@@ -745,10 +745,8 @@ EOF;
      */
     protected function runDatabaseMigrations()
     {
-        if (confirm('New migrations were added. Would you like to wipe and migrate your database?', true)) {
-            $this->call('db:wipe');
-
-            $this->call('migrate', ['--force' => true]);
+        if (confirm('New migrations were added. Would you like to re-run your database migrations?', true)) {
+            $this->call('migrate:fresh', ['--force' => true]);
         }
     }
 
