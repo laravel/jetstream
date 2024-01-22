@@ -126,6 +126,15 @@ class InstallCommand extends Command implements PromptsForMissingInput
         copy($stubs.'/PasswordConfirmationTest.php', base_path('tests/Feature/PasswordConfirmationTest.php'));
         copy($stubs.'/PasswordResetTest.php', base_path('tests/Feature/PasswordResetTest.php'));
         copy($stubs.'/RegistrationTest.php', base_path('tests/Feature/RegistrationTest.php'));
+
+        // Migrations
+        if ($this->components->confirm('Do you wish to re-run the database migrations?', true)) {
+            (new Process([$this->phpBinary(), 'artisan', 'migrate:refresh', '--force'], base_path()))
+                ->setTimeout(null)
+                ->run(function ($type, $output) {
+                    $this->output->write($output);
+                });
+        }
     }
 
     /**
