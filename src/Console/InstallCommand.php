@@ -16,6 +16,7 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
 
+use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\multiselect;
 use function Laravel\Prompts\select;
 
@@ -744,7 +745,7 @@ EOF;
      */
     protected function runDatabaseMigrations()
     {
-        if ($this->components->confirm('Do you wish to wipe the database, and re-run the database migrations?', true)) {
+        if (confirm('New migrations were added. Would you like to re-create your database?', true)) {
             $this->call('db:wipe');
 
             $this->call('migrate', ['--force' => true]);
