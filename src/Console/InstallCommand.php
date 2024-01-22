@@ -744,9 +744,10 @@ EOF;
      */
     protected function runDatabaseMigrations()
     {
-        // Migrations
-        if ($this->components->confirm('Do you wish to re-run the database migrations?', true)) {
-            $this->call('migrate:refresh', ['--force' => true]);
+        if ($this->components->confirm('Do you wish to wipe the database, and re-run the database migrations?', true)) {
+            $this->call('db:wipe');
+
+            $this->call('migrate', ['--force' => true]);
         }
     }
 
