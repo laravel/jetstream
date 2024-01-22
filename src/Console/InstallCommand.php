@@ -266,6 +266,7 @@ class InstallCommand extends Command implements PromptsForMissingInput
             $this->runCommands(['npm install', 'npm run build']);
         }
 
+        $this->line('');
         $this->runDatabaseMigrations();
 
         $this->line('');
@@ -468,6 +469,7 @@ EOF;
             $this->runCommands(['npm install', 'npm run build']);
         }
 
+        $this->line('');
         $this->runDatabaseMigrations();
 
         $this->line('');
