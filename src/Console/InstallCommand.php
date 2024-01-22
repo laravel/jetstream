@@ -745,7 +745,7 @@ EOF;
      */
     protected function runDatabaseMigrations()
     {
-        if (confirm('New migrations were added. Would you like to re-run your database migrations?', true)) {
+        if (confirm('New database migrations were added. Would you like to re-run your migrations?', true)) {
             $this->call('migrate:fresh', ['--force' => true]);
         }
     }
