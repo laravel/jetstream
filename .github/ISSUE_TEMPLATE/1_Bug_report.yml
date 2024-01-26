@@ -3,8 +3,8 @@ description: "Report something that's broken."
 body:
   - type: markdown
     attributes:
-
       value: "Please read [our full contribution guide](https://laravel.com/docs/contributions#bug-reports) before submitting bug reports. If you notice improper DocBlock, PHPStan, or IDE warnings while using Laravel, do not create a GitHub issue. Instead, please submit a pull request to fix the problem."  - type: input
+   - type: input
     attributes:
       label: Jetstream Version
       description: Provide the Jetstream version that you are using.
