@@ -1,0 +1,155 @@
+<?php
+
+namespace Tests\Feature;
+
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
+
+class UserInputValidationTest extends TestCase
+{
+    use RefreshDatabase;
+
+    public function test_valid_required_fields(): void
+    {
+        $this->actingAs($user = User::factory()->create());
+
+        $response = $this->put('/user/profile-information', [
+            'name' => '',
+            'email' => '',
+        ]);
+
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors();
+
+        $errors = session('errors')->getBag('updateProfileInformation');
+
+        $this->assertTrue($errors->has('name'));
+        $this->assertEquals(['The name field is required.'], $errors->get('name'));
+
+        $this->assertTrue($errors->has('email'));
+        $this->assertEquals(['The email field is required.'], $errors->get('email'));
+    }
+
+    public function test_fields_max_length(): void
+    {
+        $this->actingAs($user = User::factory()->create());
+
+        $response = $this->put('/user/profile-information', [
+            'name' => 'This is a very long name that exceeds the limit of 255 characters. This is just a dummy example to illustrate a name longer than 255 characters. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+            'email' => 'ThisIsAVeryLongEmailAddressThatExceedsTheLimitOf255CharactersThisIsJustADummyExampleToIllustrateAnEmailAddressLongerThan255CharactersLoremIpsumDolorSitAmetConsecteturAdipiscingElitSedDoEiusmodTemporIncididuntUtLaboreEtDoloreMagnaAliquaUtEnimAdMinimVeniamQuisNostrudExercitationUllamcoLaborisNisiUtAliquipExEaCommodoConsequat@example.com',
+        ]);
+
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors();
+
+        $errors = session('errors')->getBag('updateProfileInformation');
+
+        $this->assertTrue($errors->has('name'));
+        $this->assertEquals(['The name field must not be greater than 255 characters.'], $errors->get('name'));
+
+        $this->assertTrue($errors->has('email'));
+        $this->assertEquals(['The email field must not be greater than 255 characters.'], $errors->get('email'));
+    }
+
+    public function test_valid_email_field(): void
+    {
+        $this->actingAs($user = User::factory()->create());
+
+        $invalidEmails = [
+            'test',
+            'test@',
+            // 'test@example', // It shold be an invalid email address, but it's not.
+            'test@example.',
+        ];
+
+        foreach ($invalidEmails as $invalidEmail) {
+            $response = $this->put('/user/profile-information', [
+                'name' => 'test',
+                'email' => $invalidEmail,
+            ]);
+
+            $response->assertStatus(302);
+            $response->assertSessionHasErrors();
+
+            $errors = session('errors')->getBag('updateProfileInformation');
+
+            $this->assertTrue($errors->has('email'));
+            $this->assertEquals(['The email field must be a valid email address.'], $errors->get('email'));
+        }
+    }
+
+    public function test_valid_email_unique(): void
+    {
+        $this->actingAs(User::factory()->create());
+        $user = User::factory()->create();
+        var_dump($user->email);
+
+        $response = $this->put('/user/profile-information', [
+            'name' => 'test',
+            'email' => $user->email,
+        ]);
+
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors();
+
+        $errors = session('errors')->getBag('updateProfileInformation');
+
+        $this->assertTrue($errors->has('email'));
+        $this->assertEquals(['The email has already been taken.'], $errors->get('email'));
+    }
+
+    public function test_photo_field_mimes(): void
+    {
+        $this->actingAs($user = User::factory()->create());
+
+        $response = $this->put('/user/profile-information', [
+            'name' => 'test',
+            'email' => 'test@laravel.com',
+            'photo' => \Illuminate\Http\Testing\File::image('photo.gif'),
+        ]);
+
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors();
+
+        $errors = session('errors')->getBag('updateProfileInformation');
+
+        $this->assertTrue($errors->has('photo'));
+        $this->assertEquals(['The photo field must be a file of type: jpg, jpeg, png.'], $errors->get('photo'));
+    }
+
+    public function test_photo_field_max_size(): void
+    {
+        $this->actingAs($user = User::factory()->create());
+
+        $response = $this->put('/user/profile-information', [
+            'name' => 'test',
+            'email' => 'test@laravel.com',
+            'photo' => \Illuminate\Http\Testing\File::image('photo.jpg')->size(1025),
+        ]);
+
+        $response->assertStatus(302);
+
+        $response->assertSessionHasErrors();
+
+        $errors = session('errors')->getBag('updateProfileInformation');
+
+        $this->assertTrue($errors->has('photo'));
+        $this->assertEquals(['The photo field must not be greater than 1024 kilobytes.'], $errors->get('photo'));
+    }
+
+    public function test_valids_inputs(): void
+    {
+        $this->actingAs($user = User::factory()->create());
+
+        $response = $this->put('/user/profile-information', [
+            'name' => 'test',
+            'email' => 'test@laravel.com',
+            'photo' => \Illuminate\Http\Testing\File::image('photo.jpg'),
+        ]);
+
+        $response->assertStatus(302);
+        $response->assertSessionHasNoErrors();
+    }
+}
