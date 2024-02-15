@@ -18,15 +18,18 @@ const props = defineProps({
 
 const emit = defineEmits(['close']);
 const dialog = ref();
+const showSlot = ref(props.show);
 
 watch(() => props.show, () => {
     if (props.show) {
         document.body.style.overflow = 'hidden';
+        showSlot.value = true;
         dialog.value?.showModal();
     } else {
         document.body.style.overflow = null;
         setTimeout(() => {
             dialog.value?.close();
+            showSlot.value = false;
         }, 200);
     }
 });
@@ -87,7 +90,7 @@ const maxWidthClass = computed(() => {
                 leave-to-class="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
                 <div v-show="show" class="mb-6 bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full sm:mx-auto" :class="maxWidthClass">
-                    <slot v-if="show"/>
+                    <slot v-if="showSlot"/>
                 </div>
             </transition>
         </div>
