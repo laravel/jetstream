@@ -1,6 +1,11 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v4.2.2...4.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v4.3.0...4.x)
+
+## [v4.3.0](https://github.com/laravel/jetstream/compare/v4.2.2...v4.3.0) - 2024-02-23
+
+* Update to Ziggy v2 by [@bakerkretzmar](https://github.com/bakerkretzmar) in https://github.com/laravel/jetstream/pull/1442
+* [4.x] Change Inertia Modal.vue component to use a native <dialog>  by [@Smef](https://github.com/Smef) in https://github.com/laravel/jetstream/pull/1431
 
 ## [v4.2.2](https://github.com/laravel/jetstream/compare/v4.2.1...v4.2.2) - 2024-01-17
 
