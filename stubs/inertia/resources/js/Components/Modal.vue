@@ -37,7 +37,6 @@ watch(() => props.show, () => {
 const close = () => {
     if (props.closeable) {
         emit('close');
-        e.preventDefault();
     }
 };
 
