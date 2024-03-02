@@ -1,5 +1,20 @@
 # Upgrade Guide
 
+## Upgrading from Jetstream 4.x to Jetstream 5.x
+
+> **Note**
+> This upgrade guide only discusses upgrading to Jetstream 5.x. Upgrading your Laravel, Tailwind, Livewire, or Inertia installations is outside the scope of this documentation and may not be strictly required in order to use Jetstream 5.x. Please consult the upgrade guides for those libraries for information on their upgrade process.
+
+- [Changes Common To Both Stacks](#jetstream-5x-changes-common-to-both-stacks)
+
+### Jetstream 5.x Changes Common To Both Stacks
+
+#### Dependency Versions
+
+You should upgrade your `laravel/jetstream` dependency to `^5.0` within your application's `composer.json` file. Then, run the `composer update` command:
+
+    composer update
+
 ## Upgrading from Jetstream 3.x to Jetstream 4.x
 
 > **Note**
