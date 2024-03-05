@@ -1,6 +1,15 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v4.2.2...master)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v4.3.1...master)
+
+## [v4.3.1](https://github.com/laravel/jetstream/compare/v4.3.0...v4.3.1) - 2024-02-29
+
+* [4.x] Remove unnecessary e.preventDefault on modal close  by [@Smef](https://github.com/Smef) in https://github.com/laravel/jetstream/pull/1444
+
+## [v4.3.0](https://github.com/laravel/jetstream/compare/v4.2.2...v4.3.0) - 2024-02-23
+
+* Update to Ziggy v2 by [@bakerkretzmar](https://github.com/bakerkretzmar) in https://github.com/laravel/jetstream/pull/1442
+* [4.x] Change Inertia Modal.vue component to use a native <dialog>  by [@Smef](https://github.com/Smef) in https://github.com/laravel/jetstream/pull/1431
 
 ## [v4.2.2](https://github.com/laravel/jetstream/compare/v4.2.1...v4.2.2) - 2024-01-17
 
