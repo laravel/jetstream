@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v4.3.0...4.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v4.3.1...4.x)
+
+## [v4.3.1](https://github.com/laravel/jetstream/compare/v4.3.0...v4.3.1) - 2024-02-29
+
+* [4.x] Remove unnecessary e.preventDefault on modal close  by [@Smef](https://github.com/Smef) in https://github.com/laravel/jetstream/pull/1444
 
 ## [v4.3.0](https://github.com/laravel/jetstream/compare/v4.2.2...v4.3.0) - 2024-02-23
 
