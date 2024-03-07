@@ -153,7 +153,7 @@ class InstallCommand extends Command implements PromptsForMissingInput
         }
 
         $this->call('install:api', [
-            '--ignore-migrate-prompt' => true,
+            '--without-migration-prompt' => true,
         ]);
 
         // Update Configuration...
@@ -339,7 +339,7 @@ EOF;
         }
 
         $this->call('install:api', [
-            '--ignore-migrate-prompt' => true,
+            '--without-migration-prompt' => true,
         ]);
 
         // Install NPM packages...
