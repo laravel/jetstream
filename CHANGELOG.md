@@ -1,6 +1,15 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v4.3.1...5.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v5.0.0...5.x)
+
+## [v5.0.0](https://github.com/laravel/jetstream/compare/v4.3.1...v5.0.0) - 2024-03-12
+
+* [5.x] Adds L11 support by [@nunomaduro](https://github.com/nunomaduro) in https://github.com/laravel/jetstream/pull/1410
+* [5.x] Uses property promotion on `DeleteUser` by [@nunomaduro](https://github.com/nunomaduro) in https://github.com/laravel/jetstream/pull/1429
+* [5.x] Re-runs database migrations on Jetstream by [@nunomaduro](https://github.com/nunomaduro) in https://github.com/laravel/jetstream/pull/1436
+* [5.x] Use `[@session](https://github.com/session)` Blade Directive by [@jrd-lewis](https://github.com/jrd-lewis) in https://github.com/laravel/jetstream/pull/1441
+* Implement new welcome page design by [@jasonlbeggs](https://github.com/jasonlbeggs) in https://github.com/laravel/jetstream/pull/1443
+* [5.x] Fixes double migrate-prompt by [@nunomaduro](https://github.com/nunomaduro) in https://github.com/laravel/jetstream/pull/1447
 
 ## [v4.3.1](https://github.com/laravel/jetstream/compare/v4.3.0...v4.3.1) - 2024-02-29
 
