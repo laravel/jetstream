@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Fortify\Features;
 use Laravel\Jetstream\Http\Livewire\UpdatePasswordForm;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -15,6 +16,10 @@ class UpdatePasswordTest extends TestCase
 
     public function test_password_can_be_updated(): void
     {
+        if (!Features::enabled(Features::updatePasswords())) {
+            $this->markTestSkipped('Password updates are not enabled.');
+        }
+
         $this->actingAs($user = User::factory()->create());
 
         Livewire::test(UpdatePasswordForm::class)
@@ -30,6 +35,10 @@ class UpdatePasswordTest extends TestCase
 
     public function test_current_password_must_be_correct(): void
     {
+        if (!Features::enabled(Features::updatePasswords())) {
+            $this->markTestSkipped('Password updates are not enabled.');
+        }
+
         $this->actingAs($user = User::factory()->create());
 
         Livewire::test(UpdatePasswordForm::class)
@@ -46,6 +55,10 @@ class UpdatePasswordTest extends TestCase
 
     public function test_new_passwords_must_match(): void
     {
+        if (!Features::enabled(Features::updatePasswords())) {
+            $this->markTestSkipped('Password updates are not enabled.');
+        }
+
         $this->actingAs($user = User::factory()->create());
 
         Livewire::test(UpdatePasswordForm::class)

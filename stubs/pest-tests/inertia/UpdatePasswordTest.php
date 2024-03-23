@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Fortify\Features;
 
 test('password can be updated', function () {
     $this->actingAs($user = User::factory()->create());
@@ -13,7 +14,9 @@ test('password can be updated', function () {
     ]);
 
     expect(Hash::check('new-password', $user->fresh()->password))->toBeTrue();
-});
+})->skip(function () {
+    return ! Features::enabled(Features::resetPasswords());
+}, 'Password updates are not enabled.');
 
 test('current password must be correct', function () {
     $this->actingAs($user = User::factory()->create());
@@ -27,7 +30,9 @@ test('current password must be correct', function () {
     $response->assertSessionHasErrors();
 
     expect(Hash::check('password', $user->fresh()->password))->toBeTrue();
-});
+})->skip(function () {
+    return ! Features::enabled(Features::resetPasswords());
+}, 'Password updates are not enabled.');
 
 test('new passwords must match', function () {
     $this->actingAs($user = User::factory()->create());
@@ -41,4 +46,6 @@ test('new passwords must match', function () {
     $response->assertSessionHasErrors();
 
     expect(Hash::check('password', $user->fresh()->password))->toBeTrue();
-});
+})->skip(function () {
+    return ! Features::enabled(Features::resetPasswords());
+}, 'Password updates are not enabled.');
