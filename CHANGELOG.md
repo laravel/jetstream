@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v5.0.0...5.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v5.0.1...5.x)
+
+## [v5.0.1](https://github.com/laravel/jetstream/compare/v5.0.0...v5.0.1) - 2024-03-19
+
+* [5.x] Make commands lazy by [@timacdonald](https://github.com/timacdonald) in https://github.com/laravel/jetstream/pull/1455
 
 ## [v5.0.0](https://github.com/laravel/jetstream/compare/v4.3.1...v5.0.0) - 2024-03-12
 
