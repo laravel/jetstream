@@ -154,11 +154,9 @@ class InstallCommand extends Command implements PromptsForMissingInput
             return false;
         }
 
-        if ($this->option('api')) {
-            $this->call('install:api', [
-                '--without-migration-prompt' => true,
-            ]);
-        }
+        $this->call('install:api', [
+            '--without-migration-prompt' => true,
+        ]);
 
         // Update Configuration...
         $this->replaceInFile('inertia', 'livewire', config_path('jetstream.php'));
@@ -342,11 +340,9 @@ EOF;
             return false;
         }
 
-        if ($this->option('api')) {
-            $this->call('install:api', [
-                '--without-migration-prompt' => true,
-            ]);
-        }
+        $this->call('install:api', [
+            '--without-migration-prompt' => true,
+        ]);
 
         // Install NPM packages...
         $this->updateNodePackages(function ($packages) {
