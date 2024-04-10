@@ -804,6 +804,12 @@ EOF;
             replace: '',
             path: app_path('Models/User.php')
         );
+
+        $this->replaceInFile(
+            search: "'guard' => 'sanctum',",
+            replace: "'guard' => null,",
+            path: config_path('jetstream.php')
+        );
     }
 
     /**
