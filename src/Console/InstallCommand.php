@@ -82,11 +82,6 @@ class InstallCommand extends Command implements PromptsForMissingInput
         // Configure Session...
         $this->configureSession();
 
-        // Configure API...
-        if ($this->option('api')) {
-            $this->replaceInFile('// Features::api(),', 'Features::api(),', config_path('jetstream.php'));
-        }
-
         // Configure Email Verification...
         if ($this->option('verification')) {
             $this->replaceInFile('// Features::emailVerification(),', 'Features::emailVerification(),', config_path('fortify.php'));
@@ -101,6 +96,13 @@ class InstallCommand extends Command implements PromptsForMissingInput
             if (! $this->installInertiaStack()) {
                 return 1;
             }
+        }
+
+        // Configure API...
+        if ($this->option('api')) {
+            $this->replaceInFile('// Features::api(),', 'Features::api(),', config_path('jetstream.php'));
+        } else {
+            $this->removeSanctum();
         }
 
         // Emails...
@@ -766,8 +768,8 @@ EOF;
     /**
      * Replace a given string within a given file.
      *
-     * @param  string  $search
-     * @param  string  $replace
+     * @param  string|array  $search
+     * @param  string|array  $replace
      * @param  string  $path
      * @return void
      */
@@ -787,6 +789,21 @@ EOF;
         foreach ($finder as $file) {
             file_put_contents($file->getPathname(), preg_replace('/\sdark:[^\s"\']+/', '', $file->getContents()));
         }
+    }
+
+    /**
+     * Remove Sanctum from User.
+     */
+    protected function removeSanctum(): void
+    {
+        $this->replaceInFile(
+            search: [
+                'use Laravel\Sanctum\HasApiTokens;'.PHP_EOL,
+                '    use HasApiTokens;'.PHP_EOL,
+            ],
+            replace: '',
+            path: app_path('Models/User.php')
+        );
     }
 
     /**
