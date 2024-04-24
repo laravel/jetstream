@@ -16,9 +16,9 @@ class ProfileInformationTest extends TestCase
         if (! Features::canUpdateProfileInformation()) {
             $this->markTestSkipped('Profile information update is not enabled');
         }
-        
+
         $this->actingAs($user = User::factory()->create());
-        
+
         $response = $this->put('/user/profile-information', [
             'name' => 'Test Name',
             'email' => 'test@example.com',
