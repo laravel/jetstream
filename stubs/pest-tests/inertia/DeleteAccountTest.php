@@ -6,7 +6,7 @@ use Laravel\Jetstream\Features;
 test('user accounts can be deleted', function () {
     $this->actingAs($user = User::factory()->create());
 
-    $response = $this->delete('/user', [
+    $this->delete('/user', [
         'password' => 'password',
     ]);
 
@@ -18,7 +18,7 @@ test('user accounts can be deleted', function () {
 test('correct password must be provided before account can be deleted', function () {
     $this->actingAs($user = User::factory()->create());
 
-    $response = $this->delete('/user', [
+    $this->delete('/user', [
         'password' => 'wrong-password',
     ]);
 

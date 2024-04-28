@@ -20,7 +20,7 @@ class LeaveTeamTest extends TestCase
 
         $this->actingAs($otherUser);
 
-        $response = $this->delete('/teams/'.$user->currentTeam->id.'/members/'.$otherUser->id);
+        $this->delete('/teams/'.$user->currentTeam->id.'/members/'.$otherUser->id);
 
         $this->assertCount(0, $user->currentTeam->fresh()->users);
     }

@@ -21,7 +21,7 @@ class TwoFactorAuthenticationSettingsTest extends TestCase
 
         $this->withSession(['auth.password_confirmed_at' => time()]);
 
-        $response = $this->post('/user/two-factor-authentication');
+        $this->post('/user/two-factor-authentication');
 
         $this->assertNotNull($user->fresh()->two_factor_secret);
         $this->assertCount(8, $user->fresh()->recoveryCodes());

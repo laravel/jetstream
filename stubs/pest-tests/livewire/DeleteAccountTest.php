@@ -8,7 +8,7 @@ use Livewire\Livewire;
 test('user accounts can be deleted', function () {
     $this->actingAs($user = User::factory()->create());
 
-    $component = Livewire::test(DeleteUserForm::class)
+    Livewire::test(DeleteUserForm::class)
         ->set('password', 'password')
         ->call('deleteUser');
 

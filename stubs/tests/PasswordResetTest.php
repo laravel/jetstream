@@ -34,7 +34,7 @@ class PasswordResetTest extends TestCase
 
         $user = User::factory()->create();
 
-        $response = $this->post('/forgot-password', [
+        $this->post('/forgot-password', [
             'email' => $user->email,
         ]);
 
@@ -51,7 +51,7 @@ class PasswordResetTest extends TestCase
 
         $user = User::factory()->create();
 
-        $response = $this->post('/forgot-password', [
+        $this->post('/forgot-password', [
             'email' => $user->email,
         ]);
 
@@ -74,7 +74,7 @@ class PasswordResetTest extends TestCase
 
         $user = User::factory()->create();
 
-        $response = $this->post('/forgot-password', [
+        $this->post('/forgot-password', [
             'email' => $user->email,
         ]);
 

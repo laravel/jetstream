@@ -10,7 +10,7 @@ test('team members can be invited to team', function () {
 
     $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
-    $response = $this->post('/teams/'.$user->currentTeam->id.'/members', [
+    $this->post('/teams/'.$user->currentTeam->id.'/members', [
         'email' => 'test@example.com',
         'role' => 'admin',
     ]);
@@ -32,7 +32,7 @@ test('team member invitations can be cancelled', function () {
         'role' => 'admin',
     ]);
 
-    $response = $this->delete('/team-invitations/'.$invitation->id);
+    $this->delete('/team-invitations/'.$invitation->id);
 
     expect($user->currentTeam->fresh()->teamInvitations)->toHaveCount(0);
 })->skip(function () {

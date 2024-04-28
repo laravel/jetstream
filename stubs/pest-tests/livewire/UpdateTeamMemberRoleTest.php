@@ -11,7 +11,7 @@ test('team member roles can be updated', function () {
         $otherUser = User::factory()->create(), ['role' => 'admin']
     );
 
-    $component = Livewire::test(TeamMemberManager::class, ['team' => $user->currentTeam])
+    Livewire::test(TeamMemberManager::class, ['team' => $user->currentTeam])
         ->set('managingRoleFor', $otherUser)
         ->set('currentRole', 'editor')
         ->call('updateRole');
@@ -30,7 +30,7 @@ test('only team owner can update team member roles', function () {
 
     $this->actingAs($otherUser);
 
-    $component = Livewire::test(TeamMemberManager::class, ['team' => $user->currentTeam])
+    Livewire::test(TeamMemberManager::class, ['team' => $user->currentTeam])
         ->set('managingRoleFor', $otherUser)
         ->set('currentRole', 'editor')
         ->call('updateRole')

@@ -16,7 +16,7 @@ test('teams can be deleted', function () {
         $otherUser = User::factory()->create(), ['role' => 'test-role']
     );
 
-    $component = Livewire::test(DeleteTeamForm::class, ['team' => $team->fresh()])
+    Livewire::test(DeleteTeamForm::class, ['team' => $team->fresh()])
         ->call('deleteTeam');
 
     expect($team->fresh())->toBeNull();
@@ -26,7 +26,7 @@ test('teams can be deleted', function () {
 test('personal teams cant be deleted', function () {
     $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
-    $component = Livewire::test(DeleteTeamForm::class, ['team' => $user->currentTeam])
+    Livewire::test(DeleteTeamForm::class, ['team' => $user->currentTeam])
         ->call('deleteTeam')
         ->assertHasErrors(['team']);
 

@@ -14,7 +14,7 @@ class CreateTeamTest extends TestCase
     {
         $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
-        $response = $this->post('/teams', [
+        $this->post('/teams', [
             'name' => 'Test Team',
         ]);
 

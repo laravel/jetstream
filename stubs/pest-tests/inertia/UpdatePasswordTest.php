@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Hash;
 test('password can be updated', function () {
     $this->actingAs($user = User::factory()->create());
 
-    $response = $this->put('/user/password', [
+    $this->put('/user/password', [
         'current_password' => 'password',
         'password' => 'new-password',
         'password_confirmation' => 'new-password',

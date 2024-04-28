@@ -8,7 +8,7 @@ test('two factor authentication can be enabled', function () {
 
     $this->withSession(['auth.password_confirmed_at' => time()]);
 
-    $response = $this->post('/user/two-factor-authentication');
+    $this->post('/user/two-factor-authentication');
 
     expect($user->fresh()->two_factor_secret)->not->toBeNull();
     expect($user->fresh()->recoveryCodes())->toHaveCount(8);

@@ -18,7 +18,7 @@ class RemoveTeamMemberTest extends TestCase
             $otherUser = User::factory()->create(), ['role' => 'admin']
         );
 
-        $response = $this->delete('/teams/'.$user->currentTeam->id.'/members/'.$otherUser->id);
+        $this->delete('/teams/'.$user->currentTeam->id.'/members/'.$otherUser->id);
 
         $this->assertCount(0, $user->currentTeam->fresh()->users);
     }

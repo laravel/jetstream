@@ -23,7 +23,7 @@ class DeleteTeamTest extends TestCase
             $otherUser = User::factory()->create(), ['role' => 'test-role']
         );
 
-        $response = $this->delete('/teams/'.$team->id);
+        $this->delete('/teams/'.$team->id);
 
         $this->assertNull($team->fresh());
         $this->assertCount(0, $otherUser->fresh()->teams);
@@ -33,7 +33,7 @@ class DeleteTeamTest extends TestCase
     {
         $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
-        $response = $this->delete('/teams/'.$user->currentTeam->id);
+        $this->delete('/teams/'.$user->currentTeam->id);
 
         $this->assertNotNull($user->currentTeam->fresh());
     }

@@ -11,7 +11,7 @@ test('users can leave teams', function () {
 
     $this->actingAs($otherUser);
 
-    $response = $this->delete('/teams/'.$user->currentTeam->id.'/members/'.$otherUser->id);
+    $this->delete('/teams/'.$user->currentTeam->id.'/members/'.$otherUser->id);
 
     expect($user->currentTeam->fresh()->users)->toHaveCount(0);
 });

@@ -12,7 +12,7 @@ test('team members can be invited to team', function () {
 
     $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
-    $component = Livewire::test(TeamMemberManager::class, ['team' => $user->currentTeam])
+    Livewire::test(TeamMemberManager::class, ['team' => $user->currentTeam])
         ->set('addTeamMemberForm', [
             'email' => 'test@example.com',
             'role' => 'admin',

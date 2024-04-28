@@ -5,7 +5,7 @@ use App\Models\User;
 test('teams can be created', function () {
     $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
-    $response = $this->post('/teams', [
+    $this->post('/teams', [
         'name' => 'Test Team',
     ]);
 

@@ -9,7 +9,7 @@ test('team members can be removed from teams', function () {
         $otherUser = User::factory()->create(), ['role' => 'admin']
     );
 
-    $response = $this->delete('/teams/'.$user->currentTeam->id.'/members/'.$otherUser->id);
+    $this->delete('/teams/'.$user->currentTeam->id.'/members/'.$otherUser->id);
 
     expect($user->currentTeam->fresh()->users)->toHaveCount(0);
 });

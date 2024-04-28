@@ -19,7 +19,7 @@ class DeleteAccountTest extends TestCase
 
         $this->actingAs($user = User::factory()->create());
 
-        $response = $this->delete('/user', [
+        $this->delete('/user', [
             'password' => 'password',
         ]);
 
@@ -34,7 +34,7 @@ class DeleteAccountTest extends TestCase
 
         $this->actingAs($user = User::factory()->create());
 
-        $response = $this->delete('/user', [
+        $this->delete('/user', [
             'password' => 'wrong-password',
         ]);
 
