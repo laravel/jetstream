@@ -61,18 +61,18 @@ class JetstreamServiceProvider extends ServiceProvider
             ]);
         });
 
-        RedirectResponse::macro('dangerBanner', function ($message) {
-            /** @var \Illuminate\Http\RedirectResponse $this */
-            return $this->with('flash', [
-                'bannerStyle' => 'danger',
-                'banner' => $message,
-            ]);
-        });
-
         RedirectResponse::macro('warningBanner', function ($message) {
             /** @var \Illuminate\Http\RedirectResponse $this */
             return $this->with('flash', [
                 'bannerStyle' => 'warning',
+                'banner' => $message,
+            ]);
+        });
+
+        RedirectResponse::macro('dangerBanner', function ($message) {
+            /** @var \Illuminate\Http\RedirectResponse $this */
+            return $this->with('flash', [
+                'bannerStyle' => 'danger',
                 'banner' => $message,
             ]);
         });
