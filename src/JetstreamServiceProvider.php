@@ -69,6 +69,14 @@ class JetstreamServiceProvider extends ServiceProvider
             ]);
         });
 
+        RedirectResponse::macro('warningBanner', function ($message) {
+            /** @var \Illuminate\Http\RedirectResponse $this */
+            return $this->with('flash', [
+                'bannerStyle' => 'warning',
+                'banner' => $message,
+            ]);
+        });
+
         if (config('jetstream.stack') === 'inertia' && class_exists(Inertia::class)) {
             $this->bootInertia();
         }

@@ -31,4 +31,18 @@ trait InteractsWithBanner
             message: $message,
         );
     }
+
+    /**
+     * Update the banner message with an warning message.
+     *
+     * @param  string  $message
+     * @return void
+     */
+    protected function warningBanner($message)
+    {
+        $this->dispatch('banner-message',
+            style: 'warning',
+            message: $message,
+        );
+    }
 }
