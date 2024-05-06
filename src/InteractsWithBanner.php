@@ -19,21 +19,7 @@ trait InteractsWithBanner
     }
 
     /**
-     * Update the banner message with an danger / error message.
-     *
-     * @param  string  $message
-     * @return void
-     */
-    protected function dangerBanner($message)
-    {
-        $this->dispatch('banner-message',
-            style: 'danger',
-            message: $message,
-        );
-    }
-
-    /**
-     * Update the banner message with an warning message.
+     * Update the banner message with a warning message.
      *
      * @param  string  $message
      * @return void
@@ -42,6 +28,20 @@ trait InteractsWithBanner
     {
         $this->dispatch('banner-message',
             style: 'warning',
+            message: $message,
+        );
+    }
+
+    /**
+     * Update the banner message with a danger / error message.
+     *
+     * @param  string  $message
+     * @return void
+     */
+    protected function dangerBanner($message)
+    {
+        $this->dispatch('banner-message',
+            style: 'danger',
             message: $message,
         );
     }
