@@ -44,7 +44,7 @@ const updatePassword = () => {
         </template>
 
         <template #description>
-            Ensure your account is using a long, random password to stay secure.
+            Ensure your account is using a long, random passphrase to stay secure.
         </template>
 
         <template #form>
