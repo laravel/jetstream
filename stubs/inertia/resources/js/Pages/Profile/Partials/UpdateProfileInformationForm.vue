@@ -14,7 +14,6 @@ const props = defineProps({
 });
 
 const form = useForm({
-    _method: 'PUT',
     name: props.user.name,
     email: props.user.email,
     photo: null,
@@ -29,7 +28,7 @@ const updateProfileInformation = () => {
         form.photo = photoInput.value.files[0];
     }
 
-    form.post(route('user-profile-information.update'), {
+    form.put(route('user-profile-information.update'), {
         errorBag: 'updateProfileInformation',
         preserveScroll: true,
         onSuccess: () => clearPhotoFileInput(),
