@@ -493,7 +493,7 @@ class Jetstream
         return new static;
     }
 
-       /**
+    /**
      * Specify which view should be used as the API index view.
      *
      * @param  callable|string  $view
@@ -532,7 +532,7 @@ class Jetstream
         });
     }
 
-        /**
+    /**
      * Specify which view should be used as the teams show view.
      *
      * @param  callable|string  $view

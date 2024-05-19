@@ -27,7 +27,7 @@ class JetstreamServiceProviderTest extends OrchestraTestCase
             'name' => 'Taylor Otwell',
             'email' => 'taylor@laravel.com',
             'password' => 'secret',
-            'email_verified_at' => now()
+            'email_verified_at' => now(),
         ]);
 
         $response = $this->actingAs($user)->get('/user/api-tokens');
@@ -53,7 +53,7 @@ class JetstreamServiceProviderTest extends OrchestraTestCase
             'name' => 'Taylor Otwell',
             'email' => 'taylor@laravel.com',
             'password' => 'secret',
-            'email_verified_at' => now()
+            'email_verified_at' => now(),
         ]);
 
         $response = $this->actingAs($user)->get('/user/api-tokens');
@@ -73,7 +73,7 @@ class JetstreamServiceProviderTest extends OrchestraTestCase
             'name' => 'Taylor Otwell',
             'email' => 'taylor@laravel.com',
             'password' => 'secret',
-            'email_verified_at' => now()
+            'email_verified_at' => now(),
         ]);
 
         $response = $this->actingAs($user)->get('/user/profile');
@@ -99,7 +99,7 @@ class JetstreamServiceProviderTest extends OrchestraTestCase
             'name' => 'Taylor Otwell',
             'email' => 'taylor@laravel.com',
             'password' => 'secret',
-            'email_verified_at' => now()
+            'email_verified_at' => now(),
         ]);
 
         $response = $this->actingAs($user)->get('/user/profile');
@@ -123,7 +123,7 @@ class JetstreamServiceProviderTest extends OrchestraTestCase
             'name' => 'Taylor Otwell',
             'email' => 'taylor@laravel.com',
             'password' => 'secret',
-            'email_verified_at' => now()
+            'email_verified_at' => now(),
         ]);
 
         $response = $this->actingAs($user)->get('/teams/create');
@@ -132,7 +132,7 @@ class JetstreamServiceProviderTest extends OrchestraTestCase
 
         $this->assertSame('foo', $response->content());
 
-        $team = ( new CreateTeam() )->create($user, ['name' => 'Test Team']);
+        $team = (new CreateTeam())->create($user, ['name' => 'Test Team']);
 
         $response = $this->actingAs($user)->get('/teams/'.$team->id);
 
@@ -167,7 +167,7 @@ class JetstreamServiceProviderTest extends OrchestraTestCase
             'name' => 'Taylor Otwell',
             'email' => 'taylor@laravel.com',
             'password' => 'secret',
-            'email_verified_at' => now()
+            'email_verified_at' => now(),
         ]);
 
         $response = $this->actingAs($user)->get('/teams/create');
@@ -176,7 +176,7 @@ class JetstreamServiceProviderTest extends OrchestraTestCase
 
         $response->assertExactJson(['foo' => 'bar']);
 
-        $team = ( new CreateTeam() )->create($user, ['name' => 'Test Team']);
+        $team = (new CreateTeam())->create($user, ['name' => 'Test Team']);
 
         $response = $this->actingAs($user)->get('/teams/'.$team->id);
 

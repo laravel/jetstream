@@ -44,7 +44,7 @@ class UserProfileController extends Controller
                     ->orderBy('last_activity', 'desc')
                     ->get()
         )->map(function ($session) use ($request) {
-            $agent = $this->createAgent($session);
+            $agent = self::createAgent($session);
 
             return (object) [
                 'agent' => [
@@ -65,7 +65,7 @@ class UserProfileController extends Controller
      * @param  mixed  $session
      * @return \Laravel\Jetstream\Agent
      */
-    protected function createAgent($session)
+    protected static function createAgent($session)
     {
         return tap(new Agent(), fn ($agent) => $agent->setUserAgent($session->user_agent));
     }
