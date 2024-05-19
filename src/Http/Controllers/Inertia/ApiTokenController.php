@@ -4,6 +4,7 @@ namespace Laravel\Jetstream\Http\Controllers\Inertia;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Laravel\Jetstream\Contracts\ApiIndexViewResponse;
 use Laravel\Jetstream\Jetstream;
 
 class ApiTokenController extends Controller
@@ -12,19 +13,11 @@ class ApiTokenController extends Controller
      * Show the user API token screen.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Inertia\Response
+     * @return \Laravel\Jetstream\Contracts\ApiIndexViewResponse
      */
-    public function index(Request $request)
+    public function index(Request $request): ApiIndexViewResponse
     {
-        return Jetstream::inertia()->render($request, 'API/Index', [
-            'tokens' => $request->user()->tokens->map(function ($token) {
-                return $token->toArray() + [
-                    'last_used_ago' => optional($token->last_used_at)->diffForHumans(),
-                ];
-            }),
-            'availablePermissions' => Jetstream::$permissions,
-            'defaultPermissions' => Jetstream::$defaultPermissions,
-        ]);
+        return app(ApiIndexViewResponse::class);
     }
 
     /**

@@ -5,12 +5,17 @@ namespace Laravel\Jetstream;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
+use Laravel\Jetstream\Contracts\ApiIndexViewResponse;
 use Laravel\Jetstream\Contracts\CreatesTeams;
 use Laravel\Jetstream\Contracts\DeletesTeams;
 use Laravel\Jetstream\Contracts\DeletesUsers;
 use Laravel\Jetstream\Contracts\InvitesTeamMembers;
+use Laravel\Jetstream\Contracts\ProfileShowViewResponse;
 use Laravel\Jetstream\Contracts\RemovesTeamMembers;
+use Laravel\Jetstream\Contracts\TeamsCreateViewResponse;
+use Laravel\Jetstream\Contracts\TeamsShowViewResponse;
 use Laravel\Jetstream\Contracts\UpdatesTeamNames;
+use Laravel\Jetstream\Http\Responses\SimpleViewResponse;
 
 class Jetstream
 {
@@ -486,5 +491,57 @@ class Jetstream
         static::$registersRoutes = false;
 
         return new static;
+    }
+
+       /**
+     * Specify which view should be used as the API index view.
+     *
+     * @param  callable|string  $view
+     * @return void
+     */
+    public static function apiIndexView($view)
+    {
+        app()->singleton(ApiIndexViewResponse::class, function () use ($view) {
+            return new SimpleViewResponse($view);
+        });
+    }
+
+    /**
+     * Specify which view should be used as the profile show view.
+     *
+     * @param  callable|string  $view
+     * @return void
+     */
+    public static function profileShowView($view)
+    {
+        app()->singleton(ProfileShowViewResponse::class, function () use ($view) {
+            return new SimpleViewResponse($view);
+        });
+    }
+
+    /**
+     * Specify which view should be used as the teams create view.
+     *
+     * @param  callable|string  $view
+     * @return void
+     */
+    public static function teamsCreateView($view)
+    {
+        app()->singleton(TeamsCreateViewResponse::class, function () use ($view) {
+            return new SimpleViewResponse($view);
+        });
+    }
+
+        /**
+     * Specify which view should be used as the teams show view.
+     *
+     * @param  callable|string  $view
+     * @return void
+     */
+    public static function teamsShowView($view)
+    {
+        app()->singleton(TeamsShowViewResponse::class, function () use ($view) {
+            return new SimpleViewResponse($view);
+        });
     }
 }

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Gate;
 use Laravel\Jetstream\Actions\ValidateTeamDeletion;
 use Laravel\Jetstream\Contracts\CreatesTeams;
 use Laravel\Jetstream\Contracts\DeletesTeams;
+use Laravel\Jetstream\Contracts\TeamsCreateViewResponse;
+use Laravel\Jetstream\Contracts\TeamsShowViewResponse;
 use Laravel\Jetstream\Contracts\UpdatesTeamNames;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\RedirectsActions;
@@ -21,40 +23,28 @@ class TeamController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $teamId
-     * @return \Inertia\Response
+     * @return \Laravel\Jetstream\Contracts\TeamsShowViewResponse
      */
-    public function show(Request $request, $teamId)
+    public function show(Request $request, $teamId): TeamsShowViewResponse
     {
         $team = Jetstream::newTeamModel()->findOrFail($teamId);
 
         Gate::authorize('view', $team);
 
-        return Jetstream::inertia()->render($request, 'Teams/Show', [
-            'team' => $team->load('owner', 'users', 'teamInvitations'),
-            'availableRoles' => array_values(Jetstream::$roles),
-            'availablePermissions' => Jetstream::$permissions,
-            'defaultPermissions' => Jetstream::$defaultPermissions,
-            'permissions' => [
-                'canAddTeamMembers' => Gate::check('addTeamMember', $team),
-                'canDeleteTeam' => Gate::check('delete', $team),
-                'canRemoveTeamMembers' => Gate::check('removeTeamMember', $team),
-                'canUpdateTeam' => Gate::check('update', $team),
-                'canUpdateTeamMembers' => Gate::check('updateTeamMember', $team),
-            ],
-        ]);
+        return app(TeamsShowViewResponse::class);
     }
 
     /**
      * Show the team creation screen.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Inertia\Response
+     * @return \Laravel\Jetstream\Contracts\TeamsCreateViewResponse
      */
-    public function create(Request $request)
+    public function create(Request $request): TeamsCreateViewResponse
     {
         Gate::authorize('create', Jetstream::newTeamModel());
 
-        return Jetstream::inertia()->render($request, 'Teams/Create');
+        return app(TeamsCreateViewResponse::class);
     }
 
     /**

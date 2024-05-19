@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
-use Laravel\Fortify\Features;
 use Laravel\Jetstream\Agent;
-use Laravel\Jetstream\Jetstream;
+use Laravel\Jetstream\Contracts\ProfileShowViewResponse;
 
 class UserProfileController extends Controller
 {
@@ -18,16 +17,13 @@ class UserProfileController extends Controller
      * Show the general profile settings screen.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Inertia\Response
+     * @return \Laravel\Jetstream\Contracts\ProfileShowViewResponse
      */
-    public function show(Request $request)
+    public function show(Request $request): ProfileShowViewResponse
     {
         $this->validateTwoFactorAuthenticationState($request);
 
-        return Jetstream::inertia()->render($request, 'Profile/Show', [
-            'confirmsTwoFactorAuthentication' => Features::optionEnabled(Features::twoFactorAuthentication(), 'confirm'),
-            'sessions' => $this->sessions($request)->all(),
-        ]);
+        return app(ProfileShowViewResponse::class);
     }
 
     /**
@@ -36,7 +32,7 @@ class UserProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Support\Collection
      */
-    public function sessions(Request $request)
+    public static function sessions(Request $request)
     {
         if (config('session.driver') !== 'database') {
             return collect();

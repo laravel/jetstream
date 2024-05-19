@@ -8,12 +8,15 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
 use Inertia\Inertia;
 use Laravel\Fortify\Events\PasswordUpdatedViaController;
+use Laravel\Fortify\Features as FortifyFeatures;
 use Laravel\Fortify\Fortify;
+use Laravel\Jetstream\Http\Controllers\Inertia\UserProfileController;
 use Laravel\Jetstream\Http\Livewire\ApiTokenManager;
 use Laravel\Jetstream\Http\Livewire\CreateTeamForm;
 use Laravel\Jetstream\Http\Livewire\DeleteTeamForm;
@@ -231,6 +234,47 @@ class JetstreamServiceProvider extends ServiceProvider
 
         Fortify::confirmPasswordView(function () {
             return Inertia::render('Auth/ConfirmPassword');
+        });
+
+        Jetstream::apiIndexView(function (Request $request) {
+            return Jetstream::inertia()->render($request, 'API/Index', [
+                'tokens' => $request->user()->tokens->map(function ($token) {
+                    return $token->toArray() + [
+                        'last_used_ago' => optional($token->last_used_at)->diffForHumans(),
+                    ];
+                }),
+                'availablePermissions' => Jetstream::$permissions,
+                'defaultPermissions' => Jetstream::$defaultPermissions,
+            ]);
+        });
+
+        Jetstream::profileShowView(function (Request $request) {
+            return Jetstream::inertia()->render($request, 'Profile/Show', [
+                'confirmsTwoFactorAuthentication' => Features::optionEnabled(FortifyFeatures::twoFactorAuthentication(), 'confirm'),
+                'sessions' => UserProfileController::sessions($request)->all(),
+            ]);
+        });
+
+        Jetstream::teamsCreateView(function (Request $request) {
+            return Jetstream::inertia()->render($request, 'Teams/Create');
+        });
+
+        Jetstream::teamsShowView(function (Request $request, $teamId) {
+            $team = Jetstream::newTeamModel()->findOrFail($teamId);
+
+            return Jetstream::inertia()->render($request, 'Teams/Show', [
+                'team' => $team->load('owner', 'users', 'teamInvitations'),
+                'availableRoles' => array_values(Jetstream::$roles),
+                'availablePermissions' => Jetstream::$permissions,
+                'defaultPermissions' => Jetstream::$defaultPermissions,
+                'permissions' => [
+                    'canAddTeamMembers' => Gate::check('addTeamMember', $team),
+                    'canDeleteTeam' => Gate::check('delete', $team),
+                    'canRemoveTeamMembers' => Gate::check('removeTeamMember', $team),
+                    'canUpdateTeam' => Gate::check('update', $team),
+                    'canUpdateTeamMembers' => Gate::check('updateTeamMember', $team),
+                ],
+            ]);
         });
     }
 }
