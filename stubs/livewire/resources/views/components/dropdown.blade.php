@@ -1,18 +1,16 @@
 @props(['align' => 'right', 'width' => '48', 'contentClasses' => 'py-1 bg-white dark:bg-gray-700', 'dropdownClasses' => ''])
 
 @php
-    $alignmentClasses = match ($align) {
-        'left' => 'ltr:origin-top-left rtl:origin-top-right start-0',
-        'top' => 'origin-top',
-        'none', 'false' => '',
-        'right' => 'ltr:origin-top-right rtl:origin-top-left end-0',
-        // Add more options as you like
-    };
+$alignmentClasses = match ($align) {
+    'left' => 'ltr:origin-top-left rtl:origin-top-right start-0',
+    'top' => 'origin-top',
+    'none', 'false' => '',
+    default => 'ltr:origin-top-right rtl:origin-top-left end-0',
+};
 
-    $width = match ($width) {
-        '48' => 'w-48',
-        // Add more options as you like
-    };
+$width = match ($width) {
+    '48' => 'w-48',
+};
 @endphp
 
 <div class="relative" x-data="{ open: false }" @click.away="open = false" @close.stop="open = false">
