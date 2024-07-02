@@ -1,28 +1,18 @@
 @props(['align' => 'right', 'width' => '48', 'contentClasses' => 'py-1 bg-white dark:bg-gray-700', 'dropdownClasses' => ''])
 
 @php
-switch ($align) {
-    case 'left':
-        $alignmentClasses = 'ltr:origin-top-left rtl:origin-top-right start-0';
-        break;
-    case 'top':
-        $alignmentClasses = 'origin-top';
-        break;
-    case 'none':
-    case 'false':
-        $alignmentClasses = '';
-        break;
-    case 'right':
-    default:
-        $alignmentClasses = 'ltr:origin-top-right rtl:origin-top-left end-0';
-        break;
-}
+    $alignmentClasses = match ($align) {
+        'left' => 'ltr:origin-top-left rtl:origin-top-right start-0',
+        'top' => 'origin-top',
+        'none', 'false' => '',
+        'right' => 'ltr:origin-top-right rtl:origin-top-left end-0',
+        default => 'ltr:origin-top-right rtl:origin-top-left end-0',
+    };
 
-switch ($width) {
-    case '48':
-        $width = 'w-48';
-        break;
-}
+    $width = match ($width) {
+        '48' => 'w-48',
+        // Add more options as you like
+    };
 @endphp
 
 <div class="relative" x-data="{ open: false }" @click.away="open = false" @close.stop="open = false">
