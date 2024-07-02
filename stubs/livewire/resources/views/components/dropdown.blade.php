@@ -6,7 +6,7 @@
         'top' => 'origin-top',
         'none', 'false' => '',
         'right' => 'ltr:origin-top-right rtl:origin-top-left end-0',
-        default => 'ltr:origin-top-right rtl:origin-top-left end-0',
+        // Add more options as you like
     };
 
     $width = match ($width) {
