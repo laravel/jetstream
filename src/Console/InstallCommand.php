@@ -196,7 +196,11 @@ class InstallCommand extends Command implements PromptsForMissingInput
         copy(__DIR__.'/../../stubs/resources/markdown/policy.md', resource_path('markdown/policy.md'));
 
         // Service Providers...
-        copy(__DIR__.'/../../stubs/app/Providers/JetstreamServiceProvider.php', app_path('Providers/JetstreamServiceProvider.php'));
+        copy(__DIR__.'/../../stubs/app/Providers/JetstreamServiceProvider.php', $provider = app_path('Providers/JetstreamServiceProvider.php'));
+        $this->replaceInFile([
+            PHP_EOL.'use Illuminate\Support\Facades\Vite;',
+            PHP_EOL.PHP_EOL.'        Vite::prefetch(concurrency: 3);',
+        ], '', $provider);
         ServiceProvider::addProviderToBootstrapFile('App\Providers\JetstreamServiceProvider');
 
         // Models...
@@ -766,8 +770,8 @@ EOF;
     /**
      * Replace a given string within a given file.
      *
-     * @param  string  $search
      * @param  string  $replace
+     * @param  string|array  $search
      * @param  string  $path
      * @return void
      */
