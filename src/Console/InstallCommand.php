@@ -197,10 +197,12 @@ class InstallCommand extends Command implements PromptsForMissingInput
 
         // Service Providers...
         copy(__DIR__.'/../../stubs/app/Providers/JetstreamServiceProvider.php', $provider = app_path('Providers/JetstreamServiceProvider.php'));
+
         $this->replaceInFile([
             PHP_EOL.'use Illuminate\Support\Facades\Vite;',
             PHP_EOL.PHP_EOL.'        Vite::prefetch(concurrency: 3);',
         ], '', $provider);
+
         ServiceProvider::addProviderToBootstrapFile('App\Providers\JetstreamServiceProvider');
 
         // Models...
