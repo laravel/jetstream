@@ -17,7 +17,6 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
 
-use function Illuminate\Support\php_binary;
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\multiselect;
 use function Laravel\Prompts\select;
@@ -804,7 +803,7 @@ EOF;
     protected function phpBinary()
     {
         if (function_exists('Illuminate\Support\php_binary')) {
-            return php_binary();
+            return \Illuminate\Support\php_binary();
         }
 
         return (new PhpExecutableFinder())->find(false) ?: 'php';
