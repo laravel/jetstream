@@ -70,7 +70,7 @@ jobs:
           composer config repositories.jetstream '{"type": "path", "url": "jetstream"}' --file composer.json
 
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: 'jetstream'
 
