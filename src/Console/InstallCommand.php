@@ -17,6 +17,7 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
 
+use function Illuminate\Support\php_binary;
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\multiselect;
 use function Laravel\Prompts\select;
@@ -397,7 +398,7 @@ EOF;
 
         // Middleware...
         (new Filesystem)->ensureDirectoryExists(app_path('Http/Middleware'));
-        (new Process([$this->phpBinary(), 'artisan', 'inertia:middleware', 'HandleInertiaRequests', '--force'], base_path()))
+        (new Process([php_binary(), 'artisan', 'inertia:middleware', 'HandleInertiaRequests', '--force'], base_path()))
             ->setTimeout(null)
             ->run(function ($type, $output) {
                 $this->output->write($output);
@@ -656,12 +657,13 @@ EOF;
         $composer = $this->option('composer');
 
         if ($composer !== 'global') {
-            $command = [$this->phpBinary(), $composer, 'require'];
+            $command = [php_binary(), $composer, 'require'];
         }
 
         $command = array_merge(
             $command ?? ['composer', 'require'],
-            is_array($packages) ? $packages : func_get_args()
+            is_array($packages) ? $packages : func_get_args(),
+            ['--update-with-dependencies'],
         );
 
         return ! (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))
@@ -682,7 +684,7 @@ EOF;
         $composer = $this->option('composer');
 
         if ($composer !== 'global') {
-            $command = [$this->phpBinary(), $composer, 'remove', '--dev'];
+            $command = [php_binary(), $composer, 'remove', '--dev'];
         }
 
         $command = array_merge(
@@ -708,7 +710,7 @@ EOF;
         $composer = $this->option('composer');
 
         if ($composer !== 'global') {
-            $command = [$this->phpBinary(), $composer, 'require', '--dev'];
+            $command = [php_binary(), $composer, 'require', '--dev'];
         }
 
         $command = array_merge(
@@ -761,7 +763,7 @@ EOF;
     protected function runDatabaseMigrations()
     {
         if (confirm('New database migrations were added. Would you like to re-run your migrations?', true)) {
-            (new Process([$this->phpBinary(), 'artisan', 'migrate:fresh', '--force'], base_path()))
+            (new Process([php_binary(), 'artisan', 'migrate:fresh', '--force'], base_path()))
                 ->setTimeout(null)
                 ->run(function ($type, $output) {
                     $this->output->write($output);
@@ -793,16 +795,6 @@ EOF;
         foreach ($finder as $file) {
             file_put_contents($file->getPathname(), preg_replace('/\sdark:[^\s"\']+/', '', $file->getContents()));
         }
-    }
-
-    /**
-     * Get the path to the appropriate PHP binary.
-     *
-     * @return string
-     */
-    protected function phpBinary()
-    {
-        return (new PhpExecutableFinder())->find(false) ?: 'php';
     }
 
     /**
