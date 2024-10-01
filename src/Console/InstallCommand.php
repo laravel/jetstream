@@ -398,7 +398,7 @@ EOF;
 
         // Middleware...
         (new Filesystem)->ensureDirectoryExists(app_path('Http/Middleware'));
-        (new Process([php_binary(), 'artisan', 'inertia:middleware', 'HandleInertiaRequests', '--force'], base_path()))
+        (new Process([$this->phpBinary(), 'artisan', 'inertia:middleware', 'HandleInertiaRequests', '--force'], base_path()))
             ->setTimeout(null)
             ->run(function ($type, $output) {
                 $this->output->write($output);
@@ -657,7 +657,7 @@ EOF;
         $composer = $this->option('composer');
 
         if ($composer !== 'global') {
-            $command = [php_binary(), $composer, 'require'];
+            $command = [$this->phpBinary(), $composer, 'require'];
         }
 
         $command = array_merge(
@@ -683,7 +683,7 @@ EOF;
         $composer = $this->option('composer');
 
         if ($composer !== 'global') {
-            $command = [php_binary(), $composer, 'remove', '--dev'];
+            $command = [$this->phpBinary(), $composer, 'remove', '--dev'];
         }
 
         $command = array_merge(
@@ -709,7 +709,7 @@ EOF;
         $composer = $this->option('composer');
 
         if ($composer !== 'global') {
-            $command = [php_binary(), $composer, 'require', '--dev'];
+            $command = [$this->phpBinary(), $composer, 'require', '--dev'];
         }
 
         $command = array_merge(
@@ -762,7 +762,7 @@ EOF;
     protected function runDatabaseMigrations()
     {
         if (confirm('New database migrations were added. Would you like to re-run your migrations?', true)) {
-            (new Process([php_binary(), 'artisan', 'migrate:fresh', '--force'], base_path()))
+            (new Process([$this->phpBinary(), 'artisan', 'migrate:fresh', '--force'], base_path()))
                 ->setTimeout(null)
                 ->run(function ($type, $output) {
                     $this->output->write($output);
@@ -803,7 +803,7 @@ EOF;
      */
     protected function phpBinary()
     {
-        if (function_exists(php_binary::class)) {
+        if (function_exists('Illuminate\Support\php_binary')) {
             return php_binary();
         }
 
