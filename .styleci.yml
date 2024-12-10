@@ -1,5 +1,7 @@
 php:
   preset: laravel
+  enabled:
+    - nullable_type_declarations
   disabled:
     - no_unused_imports
 js:
