@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/jetstream/compare/v5.3.2...5.x)
+## [Unreleased](https://github.com/laravel/jetstream/compare/v5.3.3...5.x)
+
+## [v5.3.3](https://github.com/laravel/jetstream/compare/v5.3.2...v5.3.3) - 2024-11-13
+
+* Convert same height & width to size utility by [@fotrino](https://github.com/fotrino) in https://github.com/laravel/jetstream/pull/1549
 
 ## [v5.3.2](https://github.com/laravel/jetstream/compare/v5.3.1...v5.3.2) - 2024-11-11
 

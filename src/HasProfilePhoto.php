@@ -57,7 +57,7 @@ trait HasProfilePhoto
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    public function profilePhotoUrl(): Attribute
+    protected function profilePhotoUrl(): Attribute
     {
         return Attribute::get(function (): string {
             return $this->profile_photo_path

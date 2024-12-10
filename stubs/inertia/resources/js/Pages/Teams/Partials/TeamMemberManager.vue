@@ -147,7 +147,7 @@ const displayableRole = (role) => {
                                             {{ role.name }}
                                         </div>
 
-                                        <svg v-if="addTeamMemberForm.role == role.key" class="ms-2 h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <svg v-if="addTeamMemberForm.role == role.key" class="ms-2 size-5 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
                                     </div>
@@ -229,7 +229,7 @@ const displayableRole = (role) => {
                     <div class="space-y-6">
                         <div v-for="user in team.users" :key="user.id" class="flex items-center justify-between">
                             <div class="flex items-center">
-                                <img class="w-8 h-8 rounded-full object-cover" :src="user.profile_photo_url" :alt="user.name">
+                                <img class="size-8 rounded-full object-cover" :src="user.profile_photo_url" :alt="user.name">
                                 <div class="ms-4 dark:text-white">
                                     {{ user.name }}
                                 </div>
@@ -297,7 +297,7 @@ const displayableRole = (role) => {
                                         {{ role.name }}
                                     </div>
 
-                                    <svg v-if="updateRoleForm.role == role.key" class="ms-2 h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <svg v-if="updateRoleForm.role == role.key" class="ms-2 size-5 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                 </div>
