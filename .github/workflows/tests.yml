@@ -49,7 +49,7 @@ jobs:
       fail-fast: true
       matrix:
         stack: [inertia, livewire]
-        laravel: ['11.x']
+        laravel: ['11.x-dev']
 
     name: Test Stubs - Laravel ${{ matrix.laravel }} - ${{ matrix.stack }}
 
