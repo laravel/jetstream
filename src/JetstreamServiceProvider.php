@@ -25,6 +25,7 @@ use Laravel\Jetstream\Http\Livewire\TwoFactorAuthenticationForm;
 use Laravel\Jetstream\Http\Livewire\UpdatePasswordForm;
 use Laravel\Jetstream\Http\Livewire\UpdateProfileInformationForm;
 use Laravel\Jetstream\Http\Livewire\UpdateTeamNameForm;
+use Laravel\Jetstream\Http\Middleware\RedisSessionsMiddleware;
 use Laravel\Jetstream\Http\Middleware\ShareInertiaData;
 use Livewire\Livewire;
 
@@ -183,6 +184,7 @@ class JetstreamServiceProvider extends ServiceProvider
         $kernel = $this->app->make(Kernel::class);
 
         $kernel->appendMiddlewareToGroup('web', ShareInertiaData::class);
+        $kernel->appendMiddlewareToGroup('web', RedisSessionsMiddleware::class);
         $kernel->appendToMiddlewarePriority(ShareInertiaData::class);
 
         if (class_exists(HandleInertiaRequests::class)) {
