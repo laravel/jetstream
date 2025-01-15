@@ -100,7 +100,7 @@
                                     @if (Gate::check('removeTeamMember', $team))
                                         <!-- Cancel Team Invitation -->
                                         <button class="cursor-pointer ms-6 text-sm text-red-500 focus:outline-none"
-                                                            wire:click="cancelTeamInvitation({{ $invitation->id }})">
+                                                            wire:click="cancelTeamInvitation('{{ $invitation->id }}')">
                                             {{ __('Cancel') }}
                                         </button>
                                     @endif
