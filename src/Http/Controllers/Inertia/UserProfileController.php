@@ -24,7 +24,7 @@ class UserProfileController extends Controller
     {
         $this->validateTwoFactorAuthenticationState($request);
 
-        return Jetstream::inertia()->render($request, 'Profile/Show', [
+        return Jetstream::inertia()->render($request, config('jetstream.page_prefix').'Profile/Show', [
             'confirmsTwoFactorAuthentication' => Features::optionEnabled(Features::twoFactorAuthentication(), 'confirm'),
             'sessions' => $this->sessions($request)->all(),
         ]);

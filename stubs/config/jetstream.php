@@ -67,6 +67,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Page Prefix
+    |--------------------------------------------------------------------------
+    |
+    | This configuration value determines the default location of the inertia
+    | pages inside the "resources/js/Pages" directory. Typically this will
+    | be "" but you adjust this so they are in a subdirectory "Members".
+    |
+    */
+
+    'page_prefix' => '',
+
+    /*
+    |--------------------------------------------------------------------------
     | Profile Photo Disk
     |--------------------------------------------------------------------------
     |

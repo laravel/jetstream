@@ -29,7 +29,7 @@ class TeamController extends Controller
 
         Gate::authorize('view', $team);
 
-        return Jetstream::inertia()->render($request, 'Teams/Show', [
+        return Jetstream::inertia()->render($request, config('jetstream.page_prefix').'Teams/Show', [
             'team' => $team->load('owner', 'users', 'teamInvitations'),
             'availableRoles' => array_values(Jetstream::$roles),
             'availablePermissions' => Jetstream::$permissions,
@@ -54,7 +54,7 @@ class TeamController extends Controller
     {
         Gate::authorize('create', Jetstream::newTeamModel());
 
-        return Jetstream::inertia()->render($request, 'Teams/Create');
+        return Jetstream::inertia()->render($request, config('jetstream.page_prefix').'Teams/Create');
     }
 
     /**
