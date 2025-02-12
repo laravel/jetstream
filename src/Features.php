@@ -49,6 +49,16 @@ class Features
     }
 
     /**
+     * Determine if the application is using any OAuth features.
+     *
+     * @return bool
+     */
+    public static function hasOAuthFeatures()
+    {
+        return static::enabled(static::oauth());
+    }
+
+    /**
      * Determine if the application is using any team features.
      *
      * @return bool
@@ -106,6 +116,16 @@ class Features
     public static function api()
     {
         return 'api';
+    }
+
+    /**
+     * Enable the OAuth feature.
+     *
+     * @return string
+     */
+    public static function oauth()
+    {
+        return 'oauth';
     }
 
     /**

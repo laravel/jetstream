@@ -36,6 +36,11 @@ class JetstreamServiceProvider extends ServiceProvider
         Jetstream::removeTeamMembersUsing(RemoveTeamMember::class);
         Jetstream::deleteTeamsUsing(DeleteTeam::class);
         Jetstream::deleteUsersUsing(DeleteUser::class);
+
+        if (Jetstream::hasOAuthFeatures()) {
+            Jetstream::createOAuthClientsUsing(\App\Actions\Passport\CreateClient::class);
+            Jetstream::updateOAuthClientsUsing(\App\Actions\Passport\UpdateClient::class);
+        }
     }
 
     /**

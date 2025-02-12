@@ -108,6 +108,12 @@
                                 </x-dropdown-link>
                             @endif
 
+                            @if (Laravel\Jetstream\Jetstream::hasOAuthFeatures())
+                                <x-dropdown-link href="{{ route('oauth-apps.index') }}">
+                                    {{ __('OAuth Apps') }}
+                                </x-dropdown-link>
+                            @endif
+
                             <div class="border-t border-gray-200 dark:border-gray-600"></div>
 
                             <!-- Authentication -->
@@ -168,6 +174,12 @@
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                     <x-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
                         {{ __('API Tokens') }}
+                    </x-responsive-nav-link>
+                @endif
+
+                @if (Laravel\Jetstream\Jetstream::hasOAuthFeatures())
+                    <x-responsive-nav-link href="{{ route('oauth-apps.index') }}" :active="request()->routeIs('oauth-apps.index')">
+                        {{ __('OAuth Apps') }}
                     </x-responsive-nav-link>
                 @endif
 

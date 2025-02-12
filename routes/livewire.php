@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Laravel\Jetstream\Http\Controllers\CurrentTeamController;
 use Laravel\Jetstream\Http\Controllers\Livewire\ApiTokenController;
+use Laravel\Jetstream\Http\Controllers\Livewire\OAuthAppController;
 use Laravel\Jetstream\Http\Controllers\Livewire\PrivacyPolicyController;
 use Laravel\Jetstream\Http\Controllers\Livewire\TeamController;
 use Laravel\Jetstream\Http\Controllers\Livewire\TermsOfServiceController;
@@ -32,6 +33,11 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
             // API...
             if (Jetstream::hasApiFeatures()) {
                 Route::get('/user/api-tokens', [ApiTokenController::class, 'index'])->name('api-tokens.index');
+            }
+
+            // OAuth...
+            if (Jetstream::hasOAuthFeatures()) {
+                Route::get('/user/oauth-apps', [OAuthAppController::class, 'index'])->name('oauth-apps.index');
             }
 
             // Teams...

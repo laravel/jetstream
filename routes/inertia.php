@@ -2,9 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use Laravel\Jetstream\Http\Controllers\CurrentTeamController;
-use Laravel\Jetstream\Http\Controllers\Inertia\ApiTokenController;
+use Laravel\Jetstream\Http\Controllers\Inertia\ApiTokenController as SanctumApiTokenController;
 use Laravel\Jetstream\Http\Controllers\Inertia\CurrentUserController;
+use Laravel\Jetstream\Http\Controllers\Inertia\OAuthAppController;
+use Laravel\Jetstream\Http\Controllers\Inertia\OAuthConnectionController;
 use Laravel\Jetstream\Http\Controllers\Inertia\OtherBrowserSessionsController;
+use Laravel\Jetstream\Http\Controllers\Inertia\PassportApiTokenController;
 use Laravel\Jetstream\Http\Controllers\Inertia\PrivacyPolicyController;
 use Laravel\Jetstream\Http\Controllers\Inertia\ProfilePhotoController;
 use Laravel\Jetstream\Http\Controllers\Inertia\TeamController;
@@ -47,10 +50,26 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
         Route::group(['middleware' => 'verified'], function () {
             // API...
             if (Jetstream::hasApiFeatures()) {
-                Route::get('/user/api-tokens', [ApiTokenController::class, 'index'])->name('api-tokens.index');
-                Route::post('/user/api-tokens', [ApiTokenController::class, 'store'])->name('api-tokens.store');
-                Route::put('/user/api-tokens/{token}', [ApiTokenController::class, 'update'])->name('api-tokens.update');
-                Route::delete('/user/api-tokens/{token}', [ApiTokenController::class, 'destroy'])->name('api-tokens.destroy');
+                if (Jetstream::hasOAuthFeatures()) {
+                    Route::get('/user/api-tokens', [PassportApiTokenController::class, 'index'])->name('api-tokens.index');
+                    Route::post('/user/api-tokens', [PassportApiTokenController::class, 'store'])->name('api-tokens.store');
+                    Route::delete('/user/api-tokens/{token}', [PassportApiTokenController::class, 'destroy'])->name('api-tokens.destroy');
+                } else {
+                    Route::get('/user/api-tokens', [SanctumApiTokenController::class, 'index'])->name('api-tokens.index');
+                    Route::post('/user/api-tokens', [SanctumApiTokenController::class, 'store'])->name('api-tokens.store');
+                    Route::put('/user/api-tokens/{token}', [SanctumApiTokenController::class, 'update'])->name('api-tokens.update');
+                    Route::delete('/user/api-tokens/{token}', [SanctumApiTokenController::class, 'destroy'])->name('api-tokens.destroy');
+                }
+            }
+
+            // OAuth...
+            if (Jetstream::hasOAuthFeatures()) {
+                Route::get('/user/oauth-apps', [OAuthAppController::class, 'index'])->name('oauth-apps.index');
+                Route::post('/user/oauth-apps', [OAuthAppController::class, 'store'])->name('oauth-apps.store');
+                Route::put('/user/oauth-apps/{app}', [OAuthAppController::class, 'update'])->name('oauth-apps.update');
+                Route::delete('/user/oauth-apps/{app}', [OAuthAppController::class, 'destroy'])->name('oauth-apps.destroy');
+
+                Route::delete('/user/oauth-connections/{app}', [OAuthConnectionController::class, 'destroy'])->name('oauth-connections.destroy');
             }
 
             // Teams...

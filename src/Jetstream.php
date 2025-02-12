@@ -5,11 +5,13 @@ namespace Laravel\Jetstream;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
+use Laravel\Jetstream\Contracts\CreatesOAuthClients;
 use Laravel\Jetstream\Contracts\CreatesTeams;
 use Laravel\Jetstream\Contracts\DeletesTeams;
 use Laravel\Jetstream\Contracts\DeletesUsers;
 use Laravel\Jetstream\Contracts\InvitesTeamMembers;
 use Laravel\Jetstream\Contracts\RemovesTeamMembers;
+use Laravel\Jetstream\Contracts\UpdatesOAuthClients;
 use Laravel\Jetstream\Contracts\UpdatesTeamNames;
 
 class Jetstream
@@ -184,6 +186,16 @@ class Jetstream
     public static function hasApiFeatures()
     {
         return Features::hasApiFeatures();
+    }
+
+    /**
+     * Determine if Jetstream is supporting OAuth features.
+     *
+     * @return bool
+     */
+    public static function hasOAuthFeatures()
+    {
+        return Features::hasOAuthFeatures();
     }
 
     /**
@@ -442,6 +454,26 @@ class Jetstream
     public static function deleteUsersUsing(string $class)
     {
         return app()->singleton(DeletesUsers::class, $class);
+    }
+
+    /**
+     * Register a class / callback that should be used to create OAuth clients.
+     *
+     * @param  class-string<\Laravel\Jetstream\Contracts\CreatesOAuthClients>  $class
+     */
+    public static function createOAuthClientsUsing(string $class): void
+    {
+        app()->singleton(CreatesOAuthClients::class, $class);
+    }
+
+    /**
+     * Register a class / callback that should be used to update OAuth clients.
+     *
+     * @param  class-string<\Laravel\Jetstream\Contracts\UpdatesOAuthClients>  $class
+     */
+    public static function updateOAuthClientsUsing(string $class): void
+    {
+        app()->singleton(UpdatesOAuthClients::class, $class);
     }
 
     /**

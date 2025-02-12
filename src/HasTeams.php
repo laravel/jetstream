@@ -3,7 +3,8 @@
 namespace Laravel\Jetstream;
 
 use Illuminate\Support\Str;
-use Laravel\Sanctum\HasApiTokens;
+use Laravel\Passport\HasApiTokens as PassportHasApiTokens;
+use Laravel\Sanctum\HasApiTokens as SanctumHasApiTokens;
 
 trait HasTeams
 {
@@ -207,7 +208,8 @@ trait HasTeams
             return false;
         }
 
-        if (in_array(HasApiTokens::class, class_uses_recursive($this)) &&
+        if ((in_array(SanctumHasApiTokens::class, $traits = class_uses_recursive($this)) ||
+            in_array(PassportHasApiTokens::class, $traits)) &&
             ! $this->tokenCan($permission) &&
             $this->currentAccessToken() !== null) {
             return false;

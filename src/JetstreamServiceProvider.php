@@ -14,18 +14,22 @@ use Illuminate\View\Compilers\BladeCompiler;
 use Inertia\Inertia;
 use Laravel\Fortify\Events\PasswordUpdatedViaController;
 use Laravel\Fortify\Fortify;
-use Laravel\Jetstream\Http\Livewire\ApiTokenManager;
+use Laravel\Jetstream\Http\Livewire\ApiTokenManager as SanctumApiTokenManager;
 use Laravel\Jetstream\Http\Livewire\CreateTeamForm;
 use Laravel\Jetstream\Http\Livewire\DeleteTeamForm;
 use Laravel\Jetstream\Http\Livewire\DeleteUserForm;
 use Laravel\Jetstream\Http\Livewire\LogoutOtherBrowserSessionsForm;
 use Laravel\Jetstream\Http\Livewire\NavigationMenu;
+use Laravel\Jetstream\Http\Livewire\OAuthAppManager;
+use Laravel\Jetstream\Http\Livewire\OAuthConnectionManager;
+use Laravel\Jetstream\Http\Livewire\PassportApiTokenManager;
 use Laravel\Jetstream\Http\Livewire\TeamMemberManager;
 use Laravel\Jetstream\Http\Livewire\TwoFactorAuthenticationForm;
 use Laravel\Jetstream\Http\Livewire\UpdatePasswordForm;
 use Laravel\Jetstream\Http\Livewire\UpdateProfileInformationForm;
 use Laravel\Jetstream\Http\Livewire\UpdateTeamNameForm;
 use Laravel\Jetstream\Http\Middleware\ShareInertiaData;
+use Laravel\Passport\Passport;
 use Livewire\Livewire;
 
 class JetstreamServiceProvider extends ServiceProvider
@@ -48,6 +52,10 @@ class JetstreamServiceProvider extends ServiceProvider
     public function boot()
     {
         Fortify::viewPrefix('auth.');
+
+        if (class_exists(Passport::class)) {
+            Passport::viewPrefix('auth.oauth.');
+        }
 
         $this->configurePublishing();
         $this->configureRoutes();
@@ -90,7 +98,14 @@ class JetstreamServiceProvider extends ServiceProvider
             Livewire::component('profile.delete-user-form', DeleteUserForm::class);
 
             if (Features::hasApiFeatures()) {
-                Livewire::component('api.api-token-manager', ApiTokenManager::class);
+                Livewire::component('api.api-token-manager',
+                    Features::hasOAuthFeatures() ? PassportApiTokenManager::class : SanctumApiTokenManager::class
+                );
+            }
+
+            if (Features::hasOAuthFeatures()) {
+                Livewire::component('oauth.oauth-app-manager', OAuthAppManager::class);
+                Livewire::component('oauth.oauth-connection-manager', OAuthConnectionManager::class);
             }
 
             if (Features::hasTeamFeatures()) {
@@ -232,5 +247,11 @@ class JetstreamServiceProvider extends ServiceProvider
         Fortify::confirmPasswordView(function () {
             return Inertia::render('Auth/ConfirmPassword');
         });
+
+        if (class_exists(Passport::class)) {
+            Passport::authorizationView(fn ($params) => Inertia::render('Auth/OAuth/Authorize', $params));
+            // Passport::deviceAuthorizationView(fn ($params) => Inertia::render('Auth/OAuth/Device/Authorize', $params));
+            // Passport::deviceUserCodeView(fn ($params) => Inertia::render('Auth/OAuth/Device/UserCode', $params));
+        }
     }
 }

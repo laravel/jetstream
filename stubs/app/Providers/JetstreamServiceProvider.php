@@ -27,6 +27,11 @@ class JetstreamServiceProvider extends ServiceProvider
         Jetstream::deleteUsersUsing(DeleteUser::class);
 
         Vite::prefetch(concurrency: 3);
+
+        if (Jetstream::hasOAuthFeatures()) {
+            Jetstream::createOAuthClientsUsing(\App\Actions\Passport\CreateClient::class);
+            Jetstream::updateOAuthClientsUsing(\App\Actions\Passport\UpdateClient::class);
+        }
     }
 
     /**

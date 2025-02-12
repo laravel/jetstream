@@ -146,6 +146,10 @@ const logout = () => {
                                             API Tokens
                                         </DropdownLink>
 
+                                        <DropdownLink v-if="$page.props.jetstream.hasOAuthFeatures" :href="route('oauth-apps.index')">
+                                            OAuth Apps
+                                        </DropdownLink>
+
                                         <div class="border-t border-gray-200 dark:border-gray-600" />
 
                                         <!-- Authentication -->
@@ -220,6 +224,10 @@ const logout = () => {
 
                             <ResponsiveNavLink v-if="$page.props.jetstream.hasApiFeatures" :href="route('api-tokens.index')" :active="route().current('api-tokens.index')">
                                 API Tokens
+                            </ResponsiveNavLink>
+
+                            <ResponsiveNavLink v-if="$page.props.jetstream.hasOAuthFeatures" :href="route('oauth-apps.index')" :active="route().current('oauth-apps.index')">
+                                OAuth Apps
                             </ResponsiveNavLink>
 
                             <!-- Authentication -->

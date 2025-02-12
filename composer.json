@@ -24,6 +24,7 @@
     },
     "require-dev": {
         "inertiajs/inertia-laravel": "^1.0",
+        "laravel/passport": "13.x-dev",
         "laravel/sanctum": "^4.0",
         "livewire/livewire": "^3.3",
         "mockery/mockery": "^1.0",

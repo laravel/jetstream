@@ -34,6 +34,7 @@ class ShareInertiaData
                     'flash' => $request->session()->get('flash', []),
                     'hasAccountDeletionFeatures' => Jetstream::hasAccountDeletionFeatures(),
                     'hasApiFeatures' => Jetstream::hasApiFeatures(),
+                    'hasOAuthFeatures' => Jetstream::hasOAuthFeatures(),
                     'hasTeamFeatures' => Jetstream::hasTeamFeatures(),
                     'hasTermsAndPrivacyPolicyFeature' => Jetstream::hasTermsAndPrivacyPolicyFeature(),
                     'managesProfilePhotos' => Jetstream::managesProfilePhotos(),
