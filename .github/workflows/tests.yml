@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-      - *.x
+      - '*.x'
   pull_request:
   schedule:
     - cron: '0 0 * * *'
@@ -18,16 +18,13 @@ jobs:
       fail-fast: true
       matrix:
         php: [8.2, 8.3, 8.4]
-        laravel: [11, '12']
-
+        laravel: [11, 12]
 
     name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }}
-
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -38,12 +35,10 @@ jobs:
           tools: composer:v2
           coverage: none
 
-
       - name: Install dependencies
         run: |
           composer require "illuminate/contracts=^${{ matrix.laravel }}" --dev --no-update
           composer update --prefer-dist --no-interaction --no-progress
-
 
       - name: Execute tests
         run: vendor/bin/phpunit --display-deprecations --fail-on-deprecation
@@ -51,16 +46,13 @@ jobs:
   stub-tests:
     runs-on: ubuntu-22.04
 
-
     strategy:
       fail-fast: true
       matrix:
         stack: [inertia, livewire]
         laravel: [11.x-dev, 12.x]
 
-
     name: Test Stubs - Laravel ${{ matrix.laravel }} - ${{ matrix.stack }}
-
 
     steps:
       - name: Setup PHP
@@ -72,33 +64,27 @@ jobs:
           tools: composer:v2
           coverage: none
 
-
       - name: Setup Laravel
         run: |
           composer create-project laravel/laravel:^${{ matrix.laravel }} .
           composer require laravel/jetstream:@dev --no-interaction --no-update
           composer config repositories.jetstream '{"type": "path", "url": "jetstream"}' --file composer.json
 
-
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           path: jetstream
-
 
       - name: Install Jetstream
         run: |
           composer update "laravel/jetstream" --prefer-dist --no-interaction --no-progress -W
           php artisan jetstream:install ${{ matrix.stack }} --teams --api --verification --pest
 
-
       - name: Install NPM dependencies
         run: npm i
 
-
       - name: Compile assets
         run: npm run build
-
 
       - name: Execute tests
         run: vendor/bin/pest
