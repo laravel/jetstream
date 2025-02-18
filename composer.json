@@ -1,11 +1,7 @@
 {
     "name": "laravel/jetstream",
     "description": "Tailwind scaffolding for the Laravel framework.",
-    "keywords": [
-        "laravel",
-        "tailwind",
-        "auth"
-    ],
+    "keywords": ["laravel", "tailwind", "auth"],
     "license": "MIT",
     "support": {
         "issues": "https://github.com/laravel/jetstream/issues",
