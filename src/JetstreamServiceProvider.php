@@ -53,7 +53,7 @@ class JetstreamServiceProvider extends ServiceProvider
         $this->configureRoutes();
         $this->configureCommands();
 
-        RedirectResponse::macro('banner', function ($message) {
+        RedirectResponse::macro('banner', function ($message): RedirectResponse {
             /** @var \Illuminate\Http\RedirectResponse $this */
             return $this->with('flash', [
                 'bannerStyle' => 'success',
@@ -61,7 +61,7 @@ class JetstreamServiceProvider extends ServiceProvider
             ]);
         });
 
-        RedirectResponse::macro('warningBanner', function ($message) {
+        RedirectResponse::macro('warningBanner', function ($message): RedirectResponse {
             /** @var \Illuminate\Http\RedirectResponse $this */
             return $this->with('flash', [
                 'bannerStyle' => 'warning',
@@ -69,7 +69,7 @@ class JetstreamServiceProvider extends ServiceProvider
             ]);
         });
 
-        RedirectResponse::macro('dangerBanner', function ($message) {
+        RedirectResponse::macro('dangerBanner', function ($message): RedirectResponse {
             /** @var \Illuminate\Http\RedirectResponse $this */
             return $this->with('flash', [
                 'bannerStyle' => 'danger',
