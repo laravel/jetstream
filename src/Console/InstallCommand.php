@@ -344,7 +344,7 @@ EOF;
     protected function installInertiaStack()
     {
         // Install Inertia...
-        if (! $this->requireComposerPackages('inertiajs/inertia-laravel:^1.0', 'tightenco/ziggy:^2.0')) {
+        if (! $this->requireComposerPackages('inertiajs/inertia-laravel:^2.0', 'tightenco/ziggy:^2.0')) {
             return false;
         }
 
@@ -355,7 +355,7 @@ EOF;
         // Install NPM packages...
         $this->updateNodePackages(function ($packages) {
             return [
-                '@inertiajs/vue3' => '^1.0.14',
+                '@inertiajs/vue3' => '^2.0',
                 '@tailwindcss/forms' => '^0.5.7',
                 '@tailwindcss/typography' => '^0.5.10',
                 '@vitejs/plugin-vue' => '^5.0.0',
