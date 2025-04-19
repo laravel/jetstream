@@ -202,8 +202,8 @@ const disableTwoFactorAuthentication = () => {
                             v-if="confirming"
                             type="button"
                             class="me-3"
-                            :class="{ 'opacity-25': enabling }"
-                            :disabled="enabling"
+                            :class="{ 'opacity-25': enabling || confirmationForm.processing }"
+                            :disabled="enabling || confirmationForm.processing"
                         >
                             Confirm
                         </PrimaryButton>
