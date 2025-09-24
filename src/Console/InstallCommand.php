@@ -60,11 +60,15 @@ class InstallCommand extends Command implements PromptsForMissingInput
 
         // Publish...
         $this->callSilent('vendor:publish', ['--tag' => 'jetstream-config', '--force' => true]);
-        $this->callSilent('vendor:publish', ['--tag' => 'jetstream-migrations', '--force' => true]);
 
         $this->callSilent('vendor:publish', ['--tag' => 'fortify-config', '--force' => true]);
         $this->callSilent('vendor:publish', ['--tag' => 'fortify-support', '--force' => true]);
-        $this->callSilent('vendor:publish', ['--tag' => 'fortify-migrations', '--force' => true]);
+
+        $jetstreamMigrationPath = base_path('vendor/laravel/jetstream/database/migrations');
+        $this->publishMigrationsIfMissing($jetstreamMigrationPath);
+
+        $fortifyMigrationPath = base_path('vendor/laravel/fortify/database/migrations');
+        $this->publishMigrationsIfMissing($fortifyMigrationPath);
 
         // Storage...
         $this->callSilent('storage:link');
@@ -140,6 +144,60 @@ class InstallCommand extends Command implements PromptsForMissingInput
     {
         $this->replaceInFile('SESSION_DRIVER=cookie', 'SESSION_DRIVER=database', base_path('.env'));
         $this->replaceInFile('SESSION_DRIVER=cookie', 'SESSION_DRIVER=database', base_path('.env.example'));
+    }
+
+
+    /**
+     * Publish Jetstream migration files to the application's migrations directory
+     * if they do not already exist.
+     *
+     * This method ensures that migrations are published in the correct order
+     * and avoids overwriting any existing migration files.
+     *
+     * @param $jetstreamMigrationPath
+     * @return void
+     */
+    protected function publishMigrationsIfMissing($jetstreamMigrationPath): void
+    {
+        // Selectively publish Jetstream migrations (without glob)
+        $migrationPath = database_path('migrations');
+
+        $this->components->info('Checking Jetstream migrations…');
+
+        // Collect all PHP files manually
+        $stubFiles = [];
+        $directory = new \DirectoryIterator($jetstreamMigrationPath);
+
+        foreach ($directory as $fileinfo) {
+            if ($fileinfo->isFile() && $fileinfo->getExtension() === 'php') {
+                $stubFiles[] = $fileinfo->getRealPath();
+            }
+        }
+
+        // Sort by filename to preserve order as in the folder
+        usort($stubFiles, function ($a, $b) {
+            return strcmp(basename($a), basename($b));
+        });
+
+        $startTimestamp = time(); // current time
+
+        foreach ($stubFiles as $index => $stubPath) {
+            $stubFilename = basename($stubPath);
+            $baseName = preg_replace('/^\d{4}_\d{2}_\d{2}_\d{6}_/', '', $stubFilename);
+
+            $existing = array_filter(scandir($migrationPath), fn ($f) => str_ends_with($f, $baseName));
+
+            if (empty($existing)) {
+                // Add $index seconds to preserve order
+                $newName = date('Y_m_d_His', $startTimestamp + $index) . '_' . $baseName;
+                $target = $migrationPath . '/' . $newName;
+
+                copy($stubPath, $target);
+                $this->components->info("Published Jetstream migration: {$newName}");
+            } else {
+                $this->components->warn("Skipped existing Jetstream migration: {$baseName}");
+            }
+        }
     }
 
     /**
