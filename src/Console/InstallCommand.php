@@ -146,7 +146,6 @@ class InstallCommand extends Command implements PromptsForMissingInput
         $this->replaceInFile('SESSION_DRIVER=cookie', 'SESSION_DRIVER=database', base_path('.env.example'));
     }
 
-
     /**
      * Publish Jetstream migration files to the application's migrations directory
      * if they do not already exist.
