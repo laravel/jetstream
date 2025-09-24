@@ -154,7 +154,7 @@ class InstallCommand extends Command implements PromptsForMissingInput
      * This method ensures that migrations are published in the correct order
      * and avoids overwriting any existing migration files.
      *
-     * @param $jetstreamMigrationPath
+     * @param  $jetstreamMigrationPath
      * @return void
      */
     protected function publishMigrationsIfMissing($jetstreamMigrationPath): void
@@ -189,8 +189,8 @@ class InstallCommand extends Command implements PromptsForMissingInput
 
             if (empty($existing)) {
                 // Add $index seconds to preserve order
-                $newName = date('Y_m_d_His', $startTimestamp + $index) . '_' . $baseName;
-                $target = $migrationPath . '/' . $newName;
+                $newName = date('Y_m_d_His', $startTimestamp + $index).'_'.$baseName;
+                $target = $migrationPath.'/'.$newName;
 
                 copy($stubPath, $target);
                 $this->components->info("Published Jetstream migration: {$newName}");
