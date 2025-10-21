@@ -108,4 +108,13 @@ class HasTeamsTest extends OrchestraTestCase
 
         $this->assertSame([], $team->users->first()->teamPermissions($team));
     }
+
+    public function test_hasTeamRole_returns_false_when_member_pivot_role_is_null(): void
+    {
+        $team = Team::factory()->create();
+        $user = UserFixture::find(User::factory()->create()->id);
+        $user->teams()->attach($team);
+
+        $this->assertFalse($user->hasTeamRole($team, 'admin'));
+    }
 }
