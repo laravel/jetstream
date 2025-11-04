@@ -131,7 +131,7 @@ class TeamMemberManager extends Component
             $model = Jetstream::teamInvitationModel();
 
             $model::whereKey($invitationId)
-                ->where('team_id', $team->id)
+                ->where('team_id', $this->team->id)
                 ->delete();
         }
 
