@@ -8,18 +8,16 @@ use Illuminate\Support\Facades\Gate;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
+use Orchestra\Testbench\Attributes\WithConfig;
 
+#[WithConfig('jetstream.stack', 'livewire')]
+#[WithConfig('jetstream.features', ['teams'])]
 class CurrentTeamControllerTest extends OrchestraTestCase
 {
+    /** {@inheritdoc} */
+    #[\Override]
     protected function defineEnvironment($app)
     {
-        parent::defineEnvironment($app);
-
-        $app['config']->set([
-            'jetstream.stack' => 'livewire',
-            'jetstream.features' => ['teams'],
-        ]);
-
         Gate::policy(Team::class, TeamPolicy::class);
         Jetstream::useUserModel(User::class);
     }

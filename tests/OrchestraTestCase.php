@@ -7,17 +7,14 @@ use Laravel\Fortify\FortifyServiceProvider;
 use Laravel\Jetstream\Features;
 use Laravel\Jetstream\JetstreamServiceProvider;
 use Livewire\LivewireServiceProvider;
+use Orchestra\Testbench\Attributes\WithConfig;
 use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase;
 
+#[WithConfig('database.default', 'testing')]
 abstract class OrchestraTestCase extends TestCase
 {
     use LazilyRefreshDatabase, WithWorkbench;
-
-    protected function defineEnvironment($app)
-    {
-        $app['config']->set('database.default', 'testing');
-    }
 
     protected function defineHasTeamEnvironment($app)
     {

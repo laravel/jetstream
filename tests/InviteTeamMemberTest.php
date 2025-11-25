@@ -14,10 +14,10 @@ use Laravel\Jetstream\Tests\Fixtures\User;
 
 class InviteTeamMemberTest extends OrchestraTestCase
 {
+    /** {@inheritdoc} */
+    #[\Override]
     protected function defineEnvironment($app)
     {
-        parent::defineEnvironment($app);
-
         Gate::policy(Team::class, TeamPolicy::class);
 
         Jetstream::useUserModel(User::class);

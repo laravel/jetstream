@@ -14,10 +14,10 @@ class HasTeamsTest extends OrchestraTestCase
 {
     use RefreshDatabase;
 
+    /** {@inheritdoc} */
+    #[\Override]
     protected function defineEnvironment($app)
     {
-        parent::defineEnvironment($app);
-
         Jetstream::$permissions = [];
         Jetstream::$roles = [];
 

@@ -3,6 +3,7 @@
 namespace Laravel\Jetstream\Tests;
 
 use Laravel\Jetstream\Jetstream;
+use Orchestra\Testbench\Attributes\DefineEnvironment;
 
 class JetstreamTest extends OrchestraTestCase
 {
@@ -57,9 +58,7 @@ class JetstreamTest extends OrchestraTestCase
         $this->assertFalse(Jetstream::userHasTeamFeatures(new Fixtures\Admin));
     }
 
-    /**
-     * @define-env defineHasTeamEnvironment
-     */
+    #[DefineEnvironment('defineHasTeamEnvironment')]
     public function test_has_team_feature_can_be_determined_when_team_is_enabled()
     {
         $this->assertTrue(Jetstream::hasTeamFeatures());

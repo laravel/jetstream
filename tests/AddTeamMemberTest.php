@@ -18,10 +18,10 @@ class AddTeamMemberTest extends OrchestraTestCase
 {
     use RefreshDatabase;
 
+    /** {@inheritdoc} */
+    #[\Override]
     protected function defineEnvironment($app)
     {
-        parent::defineEnvironment($app);
-
         Gate::policy(Team::class, TeamPolicy::class);
 
         Jetstream::useUserModel(User::class);

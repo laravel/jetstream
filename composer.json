@@ -27,9 +27,8 @@
         "laravel/sanctum": "^4.0",
         "livewire/livewire": "^3.3",
         "mockery/mockery": "^1.0",
-        "orchestra/testbench": "^9.0|^10.0",
-        "phpstan/phpstan": "^1.10",
-        "phpunit/phpunit": "^11.0"
+        "orchestra/testbench": "^9.15|^10.8",
+        "phpstan/phpstan": "^1.10"
     },
     "autoload": {
         "psr-4": {
@@ -51,6 +50,9 @@
         }
     },
     "config": {
+        "audit": {
+            "block-insecure": false
+        },
         "sort-packages": true
     },
     "minimum-stability": "dev",

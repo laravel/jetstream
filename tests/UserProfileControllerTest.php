@@ -7,27 +7,30 @@ use Laravel\Fortify\Features;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Tests\Fixtures\User;
 use Mockery as m;
+use Orchestra\Testbench\Attributes\WithConfig;
 
+#[WithConfig('jetstream.stack', 'inertia')]
 class UserProfileControllerTest extends OrchestraTestCase
 {
+    /** {@inheritdoc} */
+    #[\Override]
     protected function defineEnvironment($app)
     {
-        parent::defineEnvironment($app);
-
-        $app['config']->set([
-            'jetstream.stack' => 'inertia',
-            'fortify.features' => [
-                Features::registration(),
-                Features::resetPasswords(),
-                // Features::emailVerification(),
-                Features::updateProfileInformation(),
-                Features::updatePasswords(),
-                Features::twoFactorAuthentication([
-                    'confirm' => true,
-                    'confirmPassword' => true,
-                ]),
-            ],
-        ]);
+        tap($app->make('config'), function ($config) {
+            $config->set([
+                'fortify.features' => [
+                    Features::registration(),
+                    Features::resetPasswords(),
+                    // Features::emailVerification(),
+                    Features::updateProfileInformation(),
+                    Features::updatePasswords(),
+                    Features::twoFactorAuthentication([
+                        'confirm' => true,
+                        'confirmPassword' => true,
+                    ]),
+                ],
+            ]);
+        });
 
         Jetstream::useUserModel(User::class);
     }

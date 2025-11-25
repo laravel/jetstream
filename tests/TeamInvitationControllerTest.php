@@ -10,16 +10,16 @@ use Laravel\Jetstream\Contracts\AddsTeamMembers;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
+use Orchestra\Testbench\Attributes\WithConfig;
 
+#[WithConfig('jetstream.stack', 'inertia')]
+#[WithConfig('jetstream.features', ['teams'])]
 class TeamInvitationControllerTest extends OrchestraTestCase
 {
+    /** {@inheritdoc} */
+    #[\Override]
     protected function defineEnvironment($app)
     {
-        parent::defineEnvironment($app);
-
-        $app['config']->set('jetstream.stack', 'inertia');
-        $app['config']->set('jetstream.features', ['teams']);
-
         Gate::policy(Team::class, TeamPolicy::class);
         Jetstream::useUserModel(User::class);
     }

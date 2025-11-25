@@ -13,10 +13,10 @@ use Laravel\Sanctum\TransientToken;
 
 class TeamBehaviorTest extends OrchestraTestCase
 {
+    /** {@inheritdoc} */
+    #[\Override]
     protected function defineEnvironment($app)
     {
-        parent::defineEnvironment($app);
-
         Gate::policy(\App\Models\Team::class, TeamPolicy::class);
         Jetstream::useUserModel(User::class);
     }
