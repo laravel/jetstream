@@ -19,7 +19,6 @@ class InviteTeamMemberTest extends OrchestraTestCase
     protected function defineEnvironment($app)
     {
         Gate::policy(Team::class, TeamPolicy::class);
-
         Jetstream::useUserModel(User::class);
     }
 
