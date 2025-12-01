@@ -108,4 +108,66 @@ class HasTeamsTest extends OrchestraTestCase
 
         $this->assertSame([], $team->users->first()->teamPermissions($team));
     }
+
+    public function test_hasTeamRole_returns_false_when_role_is_null(): void
+    {
+        Jetstream::role('admin', 'Admin', [
+            'read',
+            'create',
+        ])->description('Admin Description');
+
+        $team = Team::factory()->create();
+        $user = UserFixture::find(User::factory()->create()->id);
+        $user->teams()->attach($team, ['role' => null]);
+
+        $this->assertFalse($user->hasTeamRole($team, 'admin'));
+    }
+
+    public function test_hasTeamRole_returns_true_for_team_owner(): void
+    {
+        Jetstream::role('admin', 'Admin', [
+            'read',
+            'create',
+        ])->description('Admin Description');
+
+        $team = Team::factory()->create();
+
+        $this->assertTrue($team->owner->hasTeamRole($team, 'admin'));
+    }
+
+    public function test_hasTeamRole_returns_true_when_user_has_matching_role(): void
+    {
+        Jetstream::role('admin', 'Admin', [
+            'read',
+            'create',
+        ])->description('Admin Description');
+
+        $team = Team::factory()
+            ->hasAttached(User::factory(), [
+                'role' => 'admin',
+            ])
+            ->create();
+
+        $this->assertTrue($team->users->first()->hasTeamRole($team, 'admin'));
+    }
+
+    public function test_hasTeamRole_returns_false_when_user_has_different_role(): void
+    {
+        Jetstream::role('admin', 'Admin', [
+            'read',
+            'create',
+        ])->description('Admin Description');
+
+        Jetstream::role('editor', 'Editor', [
+            'read',
+        ])->description('Editor Description');
+
+        $team = Team::factory()
+            ->hasAttached(User::factory(), [
+                'role' => 'editor',
+            ])
+            ->create();
+
+        $this->assertFalse($team->users->first()->hasTeamRole($team, 'admin'));
+    }
 }
