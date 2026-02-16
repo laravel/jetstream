@@ -358,7 +358,7 @@ EOF;
                 '@inertiajs/vue3' => '^2.0',
                 '@tailwindcss/forms' => '^0.5.7',
                 '@tailwindcss/typography' => '^0.5.10',
-                '@vitejs/plugin-vue' => '^5.0.0',
+                '@vitejs/plugin-vue' => '^6.0.4',
                 'autoprefixer' => '^10.4.16',
                 'postcss' => '^8.4.32',
                 'tailwindcss' => '^3.4.0',
