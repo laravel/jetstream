@@ -16,8 +16,8 @@
     "require": {
         "php": "^8.2.0",
         "ext-json": "*",
-        "illuminate/console": "^11.0|^12.0",
-        "illuminate/support": "^11.0|^12.0",
+        "illuminate/console": "^11.0|^12.0|^13.0",
+        "illuminate/support": "^11.0|^12.0|^13.0",
         "laravel/fortify": "^1.20",
         "mobiledetect/mobiledetectlib": "^4.8.08",
         "symfony/console": "^7.0"
@@ -27,7 +27,7 @@
         "laravel/sanctum": "^4.0",
         "livewire/livewire": "^3.3",
         "mockery/mockery": "^1.0",
-        "orchestra/testbench": "^9.15|^10.8",
+        "orchestra/testbench": "^9.15|^10.8|^11.0",
         "phpstan/phpstan": "^1.10"
     },
     "autoload": {
