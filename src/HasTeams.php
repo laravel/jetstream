@@ -166,9 +166,11 @@ trait HasTeams
             return true;
         }
 
-        return $this->belongsToTeam($team) && optional(Jetstream::findRole($team->users->where(
-            'id', $this->id
-        )->first()->membership->role))->key === $role;
+        $memberRole = $this->belongsToTeam($team)
+            ? $team->users->where('id', $this->id)->first()->membership->role
+            : null;
+
+        return $memberRole && optional(Jetstream::findRole($memberRole))->key === $role;
     }
 
     /**
