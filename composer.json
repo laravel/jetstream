@@ -20,7 +20,7 @@
         "illuminate/support": "^11.0|^12.0|^13.0",
         "laravel/fortify": "^1.20",
         "mobiledetect/mobiledetectlib": "^4.8.08",
-        "symfony/console": "^7.0"
+        "symfony/console": "^7.0|^8.0"
     },
     "require-dev": {
         "inertiajs/inertia-laravel": "^2.0",
