@@ -430,6 +430,7 @@ EOF;
 
         // Inertia Pages...
         copy(__DIR__.'/../../stubs/inertia/resources/js/Pages/Dashboard.vue', resource_path('js/Pages/Dashboard.vue'));
+        copy(__DIR__.'/../../stubs/inertia/resources/js/Pages/PageContainer.vue', resource_path('js/Pages/PageContainer.vue'));
         copy(__DIR__.'/../../stubs/inertia/resources/js/Pages/PrivacyPolicy.vue', resource_path('js/Pages/PrivacyPolicy.vue'));
         copy(__DIR__.'/../../stubs/inertia/resources/js/Pages/TermsOfService.vue', resource_path('js/Pages/TermsOfService.vue'));
         copy(__DIR__.'/../../stubs/inertia/resources/js/Pages/Welcome.vue', resource_path('js/Pages/Welcome.vue'));
