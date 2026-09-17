@@ -75,7 +75,7 @@ jobs:
 
       - name: Setup Laravel
         run: |
-          composer create-project laravel/laravel:${{ matrix.laravel }} .
+          composer create-project laravel/laravel:${{ matrix.laravel }} . --no-blocking
           composer require laravel/jetstream:@dev --no-interaction --no-update
           composer config repositories.jetstream '{"type": "path", "url": "jetstream"}' --file composer.json
 
@@ -87,7 +87,7 @@ jobs:
 
       - name: Install Jetstream
         run: |
-          composer update "laravel/jetstream" --prefer-dist --no-interaction --no-progress -W
+          composer update "laravel/jetstream" --prefer-dist --no-interaction --no-progress -W --no-blocking
           php artisan jetstream:install ${{ matrix.stack }} --teams --api --verification --pest
 
       - name: Install NPM dependencies

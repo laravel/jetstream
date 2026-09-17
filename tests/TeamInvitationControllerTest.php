@@ -12,8 +12,8 @@ use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
 use Orchestra\Testbench\Attributes\WithConfig;
 
-#[WithConfig('jetstream.stack', 'inertia')]
-#[WithConfig('jetstream.features', ['teams'])]
+#[WithConfig('jetstream.stack', 'inertia', defer: false)]
+#[WithConfig('jetstream.features', ['teams'], defer: false)]
 class TeamInvitationControllerTest extends OrchestraTestCase
 {
     /** {@inheritdoc} */

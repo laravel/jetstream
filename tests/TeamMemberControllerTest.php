@@ -11,8 +11,8 @@ use Laravel\Jetstream\Tests\Fixtures\User;
 use Laravel\Sanctum\TransientToken;
 use Orchestra\Testbench\Attributes\WithConfig;
 
-#[WithConfig('jetstream.stack', 'inertia')]
-#[WithConfig('jetstream.features', ['teams'])]
+#[WithConfig('jetstream.stack', 'inertia', defer: false)]
+#[WithConfig('jetstream.features', ['teams'], defer: false)]
 class TeamMemberControllerTest extends OrchestraTestCase
 {
     /** {@inheritdoc} */

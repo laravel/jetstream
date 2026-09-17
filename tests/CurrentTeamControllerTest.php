@@ -10,8 +10,8 @@ use Laravel\Jetstream\Tests\Fixtures\TeamPolicy;
 use Laravel\Jetstream\Tests\Fixtures\User;
 use Orchestra\Testbench\Attributes\WithConfig;
 
-#[WithConfig('jetstream.stack', 'livewire')]
-#[WithConfig('jetstream.features', ['teams'])]
+#[WithConfig('jetstream.stack', 'livewire', defer: false)]
+#[WithConfig('jetstream.features', ['teams'], defer: false)]
 class CurrentTeamControllerTest extends OrchestraTestCase
 {
     /** {@inheritdoc} */
