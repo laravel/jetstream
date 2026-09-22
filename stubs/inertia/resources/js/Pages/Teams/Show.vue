@@ -4,6 +4,11 @@ import DeleteTeamForm from '@/Pages/Teams/Partials/DeleteTeamForm.vue';
 import SectionBorder from '@/Components/SectionBorder.vue';
 import TeamMemberManager from '@/Pages/Teams/Partials/TeamMemberManager.vue';
 import UpdateTeamNameForm from '@/Pages/Teams/Partials/UpdateTeamNameForm.vue';
+import PageContainer from "@/Pages/PageContainer.vue";
+
+defineOptions({
+    layout: AppLayout,
+})
 
 defineProps({
     team: Object,
@@ -13,7 +18,7 @@ defineProps({
 </script>
 
 <template>
-    <AppLayout title="Team Settings">
+    <PageContainer title="Team Settings">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 Team Settings
@@ -38,5 +43,5 @@ defineProps({
                 </template>
             </div>
         </div>
-    </AppLayout>
+    </PageContainer>
 </template>
