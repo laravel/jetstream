@@ -20,10 +20,8 @@ jobs:
       fail-fast: true
       matrix:
         php: [8.2, 8.3, 8.4, 8.5]
-        laravel: [11, 12, 13]
+        laravel: [12, 13]
         exclude:
-          - php: 8.5
-            laravel: 11
           - php: 8.2
             laravel: 13
 
@@ -59,7 +57,7 @@ jobs:
       fail-fast: true
       matrix:
         stack: [inertia, livewire]
-        laravel: ['11.x-dev', '12.x-dev', '13.x-dev']
+        laravel: ['12.x-dev', '13.x-dev']
 
     name: Test Stubs - Laravel ${{ matrix.laravel }} - ${{ matrix.stack }}
 
